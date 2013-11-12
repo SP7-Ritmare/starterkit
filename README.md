@@ -1,4 +1,0 @@
-geosk
-=====
-
-Geo Starter Kit
