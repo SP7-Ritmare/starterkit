@@ -36,15 +36,15 @@ WSGI_APPLICATION = "geosk.wsgi.application"
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = os.path.join(LOCAL_ROOT, "uploaded")
+# MEDIA_ROOT = os.path.join(LOCAL_ROOT, "uploaded")
 
 # Absolute path to the directory that holds static files like app media.
 # Example: "/home/media/media.lawrence.com/apps/"
-STATIC_ROOT = os.path.join(LOCAL_ROOT, "static_root")
+# STATIC_ROOT = os.path.join(LOCAL_ROOT, "static_root")
 
 # Additional directories which hold static files
 STATICFILES_DIRS.append(
-    os.path.join(LOCAL_ROOT, "static"),
+   os.path.join(LOCAL_ROOT, "static"),
 )
 
 # Note that Django automatically includes the "templates" dir in all the
@@ -55,6 +55,8 @@ TEMPLATE_DIRS = (
 
 # Location of url mappings
 ROOT_URLCONF = 'geosk.urls'
+
+
 
 # Load more settings from a file called local_settings.py if it exists
 try:
