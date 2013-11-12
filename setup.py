@@ -6,7 +6,7 @@ def read(*rnames):
 
 setup(
     name="geosk",
-    version="0.2",
+    version="0.1",
     author="",
     author_email="",
     description="geosk, based on GeoNode",
@@ -16,9 +16,9 @@ setup(
     classifiers=[
         'Development Status :: 1 - Planning',
     ],
-    license="BSD",
+    license="GPL2",
     keywords="geosk geonode django",
-    url='https://github.com/geosk/geosk',
+    url='https://github.com/SP7-Ritmare/geosk',
     packages=['geosk',],
     include_package_data=True,
     zip_safe=False,
