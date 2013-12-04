@@ -1,0 +1,94 @@
+<script>
+$('.form-horizontal').before('\
+  <div class="well span3" style="position: absolute; right: 160px;">\
+  <form>\
+  <fieldset>\
+  <legend>Import metadata</legend>\
+    {# csrf_token #}\
+    <label>Copy from another resource</label>\
+    <input id="searchTemplate" type="text" name="q"/>\
+    <label class="checkbox">\
+      <input id="import-metadata-non-blank" type="checkbox" value="">\
+      replace non-blank values\
+    </label>\
+    <button id="import-metadata-import" type="button" class="btn-block btn btn-primary">Import</button>\
+  </form>\
+  </fieldset>\
+  </div>\
+');
+
+$("#searchTemplate").select2({
+    minimumInputLength: 1,
+    placeholder: 'Search...',
+    width: 'element',     
+    ajax: {
+        url: '{% url "search_api" %}',
+        data: function(term,page){
+            page = (page - 1) * 10;
+            return {
+		type: 'all',
+		limit: 10,
+		sort: 'none',
+		start: page,
+		q: term
+            }
+        },
+        results: function(data, page) {
+            var more = (page * 10) < data.total;
+            return {
+		results: $.map(data.results,function(object){
+                    return {id: object.id, text: object.title, object: object};
+		}),
+		more: more
+            }
+        }          
+    },
+    createSearchChoice:function(term, data) { if ($(data).filter(function() { return this.text.localeCompare(term)===0; }).length===0) {return {id:term, text:term};} 
+					    }
+});
+
+$('#import-metadata-import').on('click', function (e) {
+    var item = $('#searchTemplate').select2('data');
+    var request = $.ajax({
+    	dataType: "json",
+    	url: '{% url "mdtools_getdata" %}',
+    	type: "POST",
+    	data: { 
+    	    rtype : item.object._type,
+    	    id: item.object.id
+    	},
+    	success: function(rdata) {
+	    var non_blank = $('#import-metadata-non-blank').is(':checked');
+    	    $.each(rdata.data, function(i,item){		
+		var id = "id_layer-" + i;
+		var id_group = "div_" + id;
+		var id_help = "help_" + id;
+		var oldval = $("#" + id).val();
+		if($("#" + id).length > 0 && (non_blank || (!oldval || $.trim(oldval) == ''))){
+		    if(item && item != ''){
+			var htmlEl = $("#" + id)[0];
+			if(typeof htmlEl.oldval === "undefined"){
+			    htmlEl.oldval = oldval;
+			}
+			$("#" + id).val(item);
+			$('#' + id_group).addClass('info');
+			if(!$('#'+id_help).length){
+    				$("#" + id).after(
+				    $(' <span class="help-inline"> Imported </span>')
+					.append($('<button  type="button" class="btn">  Undo <i class="icon-repeat"></i></button>')
+						.on('click', function(e){
+						    $("#" + id).val(htmlEl.oldval);
+						    $('#' + id_group).removeClass('info');
+						    $('#' + id_help).remove();
+						})
+					       ).attr('id', id_help)
+				);
+			}
+		    }
+		}
+	    });
+	}
+    });
+});
+			 
+</script>
