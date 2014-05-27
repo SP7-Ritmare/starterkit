@@ -56,7 +56,15 @@ TEMPLATE_DIRS = (
 # Location of url mappings
 ROOT_URLCONF = 'geosk.urls'
 
+LOCALE_PATHS = (
+    os.path.join(LOCAL_ROOT, 'locale'),
+    ) + LOCALE_PATHS
 
+
+LANGUAGES = (
+    ('en', 'English'),
+    ('it', 'Italiano'),
+)
 
 # Load more settings from a file called local_settings.py if it exists
 try:

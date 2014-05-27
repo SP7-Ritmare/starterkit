@@ -1,18 +1,25 @@
 <script>
 $('.form-horizontal').before('\
   <div class="well span3" style="position: absolute; right: 160px;">\
-  <form>\
   <fieldset>\
-  <legend>Import metadata</legend>\
-    {# csrf_token #}\
-    <label>Copy from another resource</label>\
-    <input id="searchTemplate" type="text" name="q"/>\
-    <label class="checkbox">\
-      <input id="import-metadata-non-blank" type="checkbox" value="">\
-      replace non-blank values\
-    </label>\
-    <button id="import-metadata-import" type="button" class="btn-block btn btn-primary">Import</button>\
-  </form>\
+    <legend>Import metadata</legend>\
+    <form>\
+      {# csrf_token #}\
+      <label>Copy from another resource</label>\
+      <input id="searchTemplate" type="text" name="q"/>\
+      <label class="checkbox">\
+	<input id="import-metadata-non-blank" type="checkbox" value="">\
+	replace non-blank values\
+      </label>\
+      <button id="import-metadata-import" type="button" class="btn-block btn btn-primary">Import</button>\
+    </form>\
+    <hr/>\
+    <form id="file-uploader" method="post" enctype="multipart/form-data">\
+      {# csrf_token #}\
+      <label>Import ISO/INSPIRE/RNDT</label>\
+      <input class="btn" id="file-input" type="file" multiple="multiple">\
+      <button id="import-iso-import" type="button" class="btn-block btn btn-primary">Import</button>\
+    </form>\
   </fieldset>\
   </div>\
 ');

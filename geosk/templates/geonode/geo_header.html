@@ -7,6 +7,10 @@
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}geoexplorer/theme/app/geoexplorer.css " />
 <!--[if IE]><link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}geoexplorer/theme/app/ie.css"/><![endif]-->
 <script src="{{STATIC_URL}}geoexplorer/script/GeoExplorer.js" type="text/javascript"></script>
+
+<script src="{{STATIC_URL}}geosk/js/openlayers_sos.js" type="text/javascript"></script>
+<script src="{{STATIC_URL}}geosk/js/geosk_sos.js" type="text/javascript"></script>
+
 <script type="text/javascript">
 OpenLayers.ImgPath = "{{ STATIC_URL }}geoexplorer/externals/openlayers/theme/default/img";
 OpenLayers.Request.DEFAULT_CONFIG.headers = {
@@ -45,54 +49,3 @@ GeoExplorer.Viewer.prototype.loadConfig = function(config) {
 }
 </style>
 <script src="{{STATIC_URL}}geosk/js/OpenSeaMapSource.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-// add "EPSG:3395" to equivalent codes for web mercator
-// https://github.com/openlayers/openlayers/blob/master/lib/OpenLayers/Projection.js
-(function() {
-
-    var pole = 20037508.34;
-
-    function inverseMercator(xy) {
-        xy.x = 180 * xy.x / pole;
-        xy.y = 180 / Math.PI * (2 * Math.atan(Math.exp((xy.y / pole) * Math.PI)) - Math.PI / 2);
-        return xy;
-    }
-
-    function forwardMercator(xy) {
-        xy.x = xy.x * pole / 180;
-        var y = Math.log(Math.tan((90 + xy.y) * Math.PI / 360)) / Math.PI * pole;
-        xy.y = Math.max(-20037508.34, Math.min(y, 20037508.34));
-        return xy;
-    }
-
-    function map(base, codes) {
-        var add = OpenLayers.Projection.addTransform;
-        var same = OpenLayers.Projection.nullTransform;
-        var i, len, code, other, j;
-        for (i=0, len=codes.length; i<len; ++i) {
-            code = codes[i];
-            add(base, code, forwardMercator);
-            add(code, base, inverseMercator);
-            for (j=i+1; j<len; ++j) {
-                other = codes[j];
-                add(code, other, same);
-                add(other, code, same);
-            }
-        }
-    }
-    
-    // list of equivalent codes for web mercator
-    var mercator = ["EPSG:900913", "EPSG:3395", "EPSG:3857", "EPSG:102113", "EPSG:102100", "OSGEO:41001"],
-        geographic = ["CRS:84", "urn:ogc:def:crs:EPSG:6.6:4326", "EPSG:4326"],
-        i;
-    for (i=mercator.length-1; i>=0; --i) {
-        map(mercator[i], geographic);
-    }
-    for (i=geographic.length-1; i>=0; --i) {
-        map(geographic[i], mercator);
-    }
-
-})();
-
-</script>

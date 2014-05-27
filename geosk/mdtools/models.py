@@ -17,12 +17,47 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 #########################################################################
+from datetime import datetime
+from rdflib import Graph, Literal, BNode, Namespace, RDF, URIRef
+from rdflib.namespace import  Namespace, DC, FOAF
+
 from django.db import models
+from django.forms import model_to_dict
+from annoying.fields import AutoOneToOneField
+from django.utils.translation import ugettext, ugettext_lazy as _
 
 from geonode.base.models import ResourceBase, ResourceBaseManager, Link, \
     resourcebase_post_save, resourcebase_post_delete
 
+from geonode.base.enumerations import ALL_LANGUAGES, \
+    HIERARCHY_LEVELS, UPDATE_FREQUENCIES, \
+    DEFAULT_SUPPLEMENTAL_INFORMATION, LINK_TYPES
+
+from geonode.layers.models import Layer
+
 EXCLUDE = "bbox_x1, bbox_y0, bbox_y1, csw_typename, csw_schema, csw_mdsource, csw_insert_date, csw_type, csw_anytext, csw_wkt_geometry, metadata_uploaded, metadata_xml, thumbnail"
+
+
+def model_to_rdf(self):
+    return ''
+
+Layer.to_rdf = model_to_rdf
+
+class MdExtension(models.Model):
+    resource     = AutoOneToOneField(ResourceBase, primary_key=True)
+    elements_xml = models.TextField(null=True, blank=True)
+    rndt_xml     = models.TextField(null=True, blank=True)
+    fileid       = models.IntegerField(null=True, blank=True)
+    
+    md_language  = models.CharField(_('language'), max_length=3, choices=ALL_LANGUAGES, default='ita', help_text=_('language used for metadata'))
+    md_date = models.DateTimeField(_('metadata date'), default = datetime.now, help_text=_('metadata date'))
+    
+
+    @property
+    def rndt_xml_clean(self):
+        if self.rndt_xml and self.rndt_xml !='':
+            return self.rndt_xml.replace('<?xml version="1.0" encoding="UTF-8"?>','')
+        return None
 
 @property
 def completeness(self):
@@ -57,16 +92,29 @@ ResourceBase.completeness = completeness
 
 
 
-# class MetadataTemplate(ResourceBase):
-#     """
-#     MetadataTemplate (inherits ResourceBase fields)
-#     """
+class ServicesMetadata(models.Model):
+    """Model for storing Metadata about services
+       (CS-W, WMS, WFS, WCS)
+    """
+    node_name                      = models.CharField(_('node title'), max_length=200, help_text="Short name", default="Starter Kit")
+    node_title                     = models.CharField(_('node title'), max_length=200)
+    node_abstract                  = models.TextField(_('node abastract'), null=True, blank=True)
+    node_keywords                  = models.CharField(_('keywords'), max_length=200, null=True, blank=True)
 
+    provider_name                  = models.CharField(_('organization name'), max_length=200, null=True, blank=True)
+    provider_url                   = models.URLField(_('provider url'), max_length=200, null=True, blank=True)
+    contact_name                   = models.CharField(_('contact name'), max_length=200, null=True, blank=True)
+    contact_position               = models.CharField(_('contact position'), max_length=200, null=True, blank=True)
+    contact_address                = models.CharField(_('contact address'), max_length=200, null=True, blank=True)
+    contact_city                   = models.CharField(_('contact city'), max_length=200, null=True, blank=True)
+    contact_stateprovince          = models.CharField(_('contact state or province'), max_length=200, null=True, blank=True)
+    contact_postalcode             = models.CharField(_('contact postalcode'), max_length=200, null=True, blank=True)
+    contact_country                = models.CharField(_('contact country'), max_length=200, null=True, blank=True)
+    contact_phone                  = models.CharField(_('contact phone'), max_length=20, null=True, blank=True)
+    contact_fax                    = models.CharField(_('contact fax'), max_length=20, null=True, blank=True)
+    contact_email                  = models.CharField(_('contact email'), max_length=20, null=True, blank=True)
+    contact_url                    = models.URLField(_('contact url'), max_length=200, null=True, blank=True)
+    contact_hours                  = models.CharField(_('contact hours'), max_length=200, help_text="Hours of Service", null=True, blank=True)
+    contact_instructions           = models.CharField(_('contact instructions'), max_length=200, help_text='During hours of service', null=True, blank=True)
+    contact_role                   = models.CharField(_('contact instructions'), max_length=200, default="pointOfContact", null=True, blank=True)
 
-#     def __str__(self):
-#         return "%s Layer" % self.typename.encode('utf-8')
-
-
-#     @property
-#     def class_name(self):
-#         return self.__class__.__name__
