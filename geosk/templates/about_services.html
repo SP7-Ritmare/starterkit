@@ -8,9 +8,9 @@
 
 {% block body %}
   <header class="jumbotron subhead" id="overview">
-    <h1>{% trans "GeoSK Web Services" %}</h1>
+    <h1>{% trans "SK Web Services" %}</h1>
     <p class="lead">
-      {% blocktrans %}GeoSK provides <a href="http://www.opengeospatial.org/">OGC</a> compliant web services to discover, view and download geospatial datasets.
+      {% blocktrans %}SK provides <a href="http://www.opengeospatial.org/">OGC</a> compliant web services to discover, view and download geospatial datasets.
 {% endblocktrans %}
     </p>
   </header>
@@ -25,6 +25,7 @@
     <li><a href="#wcs" data-toggle="tab">WCS</a></li>
     <li><a href="#csw" data-toggle="tab">CSW</a></li>
     <li><a href="#wmts" data-toggle="tab">WMTS</a></li>
+    <li><a href="#sos" data-toggle="tab">SOS</a></li>
   </ul>
   <div class="tab-content">
     <div class="tab-pane active" id="wms">
@@ -83,18 +84,22 @@
       </div>
     </div>
     <div class="tab-pane" id="wmts">
-       <p></p>
+      <p></p>
       <p>Lo standard Web Map Tile Service (WMTS) dell'<a target="_blank"  href="http://www.opengeospatial.org/standards/wmts">OGC</a> fornisce le specifiche internazionali per servire dati geografici sul web attraverso "cached image tiles".</p>
       <p></p>
-     <div class="alert alert-info">
+      <div class="alert alert-info">
         <h4>URL:</h4>
-         http://geosk.ve.ismar.cnr.it/geoserver/gwc/service/wmts?
-     </div>
-     <div class="alert alert-success">
-      <a target="_blank"  href="{{GEOSERVER_BASE_URL}}gwc/service/wmts?service=WMTS&version=1.0.0&request=GetCapabilities"><h4>Capabilities Link</h4></a>
-     </div>
+        http://geosk.ve.ismar.cnr.it/geoserver/gwc/service/wmts?
+      </div>
+      <div class="alert alert-success">
+	<a target="_blank"  href="{{GEOSERVER_BASE_URL}}gwc/service/wmts?service=WMTS&version=1.0.0&request=GetCapabilities"><h4>Capabilities Link</h4></a>
+      </div>
     </div>
-
+    <div class="tab-pane" id="sos">
+      <p></p>
+      <p>Il supporto per lo standard SOS verrà rilasciato nella prossima versione dell Starter Kit</p>
+    </div>
+    
   </div>
 </div>
 {% endblock %}

@@ -1,0 +1,193 @@
+{% extends "layers/layer_base.html" %}
+{% load i18n %}
+{% load bootstrap_tags %}
+
+{% block title %}Editing RNDT{% endblock %}
+
+{% block body_class %}data{% endblock %}
+
+{% block extra_head %}
+<style>
+/* debug */
+  #results, #debug {
+    display: none;
+    overflow: auto;
+  }
+
+  .info {
+    display: none;
+  }
+
+  .duplicator {
+      margin-bottom: 40px;
+  }
+ 
+  .btn-danger {
+      margin-left: 15px;
+  }
+
+  .duplicate-block{
+      background:#eff0ef;
+      margin-bottom:10px;
+      padding:5px;
+      border:1px dashed #bbb;
+      text-align:center;
+      margin-left: 100px; 
+      margin-right: 100px; 
+      margin-bottom: 50px;
+  }
+  
+  .duplicate-block h2{
+      color:#bbb;
+      margin:20px 0;
+      text-align:center
+  }
+
+  .duplicate-block h2 i{
+      font-size:2em
+  }
+
+ .mandatory {
+   font-weight: bold;
+ }
+</style>
+
+<link href="/static/geosk/css/mdeditor.css" rel="stylesheet"/>
+{{ block.super }}
+{% endblock %}
+
+{% block extra_script %}
+<script>
+// $(document).ready(function() {
+//     $.ajaxSetup({
+// 	beforeSend:function(){
+//             // show gif here, eg:
+//             $("#loading-modal").modal('show');
+// 	},
+// 	complete:function(){
+//             // hide gif here, eg:
+//             $("#loading-modal").modal('hide');
+// 	}
+//     });
+// });
+var ediUrl = '/mdtools/rndt/{{ layername }}/';
+queryStringValues = {{ queryStringValues }} 
+
+</script>
+
+<script src="/static/geosk/js/xml2json.js"></script>
+<script src="/static/geosk/js/json2xml.js"></script>
+<script src="/static/geosk/js/langs.js"></script>
+<script src="/static/geosk/js/spin.js"></script>
+<script src="/static/geosk/js/rndtCallbacks.js"></script>
+<script src="/static/geosk/js/mdeditor.js"></script>
+
+
+<script>
+
+var edimlUrl = "/proxy/?url=http%3A%2F%2Fsp7.irea.cnr.it%2Fjboss%2FMDService%2Frest%2Fediml%2F";
+    
+function beforeSend(jqXHR, settings){
+    // show gif here, eg:
+    if(settings.url == 'postMetadata'){
+	$("#loading-modal").modal({
+	    keyboard: false,
+	    backdrop: 'static'
+	});
+    }
+}
+function complete(jqXHR, settings){
+    // hide gif here, eg:
+    if(settings.url == 'postMetadata'){
+	$("#loading-modal").modal('hide');
+    }
+}
+
+$.ajaxSetup({
+    beforeSend: beforeSend,
+    complete: complete
+});
+
+    // side bar
+    $('body').scrollspy(); //function(){offset:{top: 10}}
+    setTimeout(function () {
+	$('.bs-docs-sidenav').affix({
+            offset: {
+		top: 10,
+		bottom: 270
+            }
+	})
+    }, 100)
+</script>
+
+<script language="javascript">                    
+// var  pars = {{ pars|default:"{}" }}
+// function set_defaults(){
+//     var par;
+//     $("input[querystringparameter!=''],textarea[querystringparameter!='']").each(function() {
+//         par = eval("pars." + $(this).attr("querystringparameter"));
+//         if (par && par != "undefined" && par != "") {
+// 	    if($(this).attr('datatype')=='date'){
+// 		// il datepicker e' agganciato al parent
+// 		var parsedDate = $.datepicker.parseDate('yy-mm-dd', par);
+// 		$(this).parent().datepicker( "setDate", parsedDate );
+// 	    } else {
+// 		$(this).val(par);
+// 	    }
+//         }
+//     });
+
+//     $("select[querystringparameter!='']").each(function() {
+//         par = eval("pars." + $(this).attr("querystringparameter"));
+//         if (par && par != "undefined" && par != "") {
+// 	    $(this).find("option[language_neutral='"+par+"']").attr("selected","selected");
+// 	    // patch provvisoria che utilizza il testo dell'elemento	    
+// 	    console.log(par);
+// 	    $(this).find("option:contains('"+par+"')").attr("selected","selected");
+//         }
+//     });
+// }
+
+// $(document).ready(function() {
+//     set_defaults();
+//     setTimeout(set_defaults, 3000);
+// });
+
+ $(document).ready(function() {
+     $('.mandatory').addClass('text-info');
+ });
+
+</script>
+{% endblock %}
+
+
+
+{% block body_outer %}  
+
+{% include 'mdtools/edi_block.html' %}
+
+  <div id="loading-modal" class="modal hide fade">
+    <div class="modal-header">
+      <h3>Salvataggio metadati ...</h3>
+    </div>
+    <div class="modal-body">
+      <div class="progress progress-striped active">
+	<div class="bar" style="width: 100%;"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="loading-alert" class="modal hide fade">
+    <div class="alert alert-error">
+      <button type="button" class="close" data-dismiss="modal">×</button>
+      <h4  id="myModalLabel">Oh snap! You got an error!</h4>
+    </div>
+    <div class="alert alert-error">
+      <p id="error-message"></p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Close</button>
+    </div>
+  </div>
+
+{% endblock %}
