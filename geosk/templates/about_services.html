@@ -1,0 +1,100 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block title %} {% trans "Descrizione servizi" %} — {{ block.super }}{% endblock %}
+
+{% block body_class %}services{% endblock %}
+
+{% block body %}
+  <header class="jumbotron subhead" id="overview">
+    <h1>{% trans "GeoSK Web Services" %}</h1>
+    <p class="lead">
+      {% blocktrans %}GeoSK provides <a href="http://www.opengeospatial.org/">OGC</a> compliant web services to discover, view and download geospatial datasets.
+{% endblocktrans %}
+    </p>
+  </header>
+
+
+  
+
+<div class="tabbable"> <!-- Only required for left/right tabs -->
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#wms" data-toggle="tab">WMS</a></li>
+    <li><a href="#wfs" data-toggle="tab">WFS</a></li>
+    <li><a href="#wcs" data-toggle="tab">WCS</a></li>
+    <li><a href="#csw" data-toggle="tab">CSW</a></li>
+    <li><a href="#wmts" data-toggle="tab">WMTS</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="wms">
+      <p></p>
+      <p>Per Web Map Service (WMS) si intende una specifica tecnica definita dall'<a target="_blank" href="http://www.opengeospatial.org/standards/wms">OGC</a>, che produce dinamicamente mappe di dati spazialmente riferiti a partire da informazioni geografiche. Questo standard internazionale definisce una "mappa" come rappresentazione di informazioni geografiche restituendo un'immagine digitale idonea ad essere visualizzata su browser web.</p>
+      <p>Generalmente un Web Map Service non &egrave; invocato direttamente; vengono utilizzate applicazioni client come <u>GIS-Desktop o WEB-GIS</u> che forniscono all'utente controlli interattivi.</p>
+      <p>
+      <p>
+      <p>
+      <p>
+      <p>
+      <div class="alert alert-info">
+        <h4>URL:</h4>
+          http://geosk.ve.ismar.cnr.it:80/geoserver/wms?
+      </div>
+      <div class="alert alert-success">
+        <a target="_blank"  href="{{GEOSERVER_BASE_URL}}ows?service=WMS&version=1.1.1&request=GetCapabilities"><h4>Capabilities Link</h4></a>
+      </div>
+    </div>
+    <div class="tab-pane" id="wfs">
+      <p></p>
+      <p>L'Interfaccia Standard <a target="_blank" href="http://www.opengeospatial.org/standards/wfs">OGC</a> Web Feature Service (WFS) permette la richiesta e l'importazione da parte di un client di oggetti geografici attraverso il Web, usando chiamate indipendenti dalla piattaforma.</p>
+      <p>Generalmente un Web Feature Service non &egrave; invocato direttamente; vengono utilizzate applicazioni client come <u>GIS-Desktop o WEB-GIS</u> che forniscono all'utente controlli interattivi.</p>
+      <p></p>
+      <div class="alert alert-info">
+        <h4>URL:</h4>
+         http://geosk.ve.ismar.cnr.it:80/geoserver/wfs
+      </div>
+     <div class="alert alert-success">
+      <a target="_blank"  href="{{GEOSERVER_BASE_URL}}ows?service=WFS&version=1.1.0&request=GetCapabilities"><h4>Capabilities Link<h4></a>
+     </div>
+    </div>
+    <div class="tab-pane" id="wcs">
+      <p></p>
+      <p>Lo standard <a target="_blank" href="http://www.opengeospatial.org/standards/wcs">OGC</a> Web Coverage Service (WCS) definisce un'interfaccia standard e le operazioni che consentono l'accesso interoperabile alle coperture (coverages) geografiche. Il termine "grigliato di copertura" (grid coverage) tipicamente si riferisce a contenuti quali immagini satellitari, foto aeree digitali, dati digitali di elevazione, ed altri fenomeni rappresentati attraverso valori in ciascun punto di misura.</p>
+      <p>Generalmente un Web Coverage Service non &egrave; invocato direttamente; vengono utilizzate applicazioni client come <u>GIS-Desktop o WEB-GIS</u> che forniscono all'utente controlli interattivi.</p>
+      <p></p>
+      <div class="alert alert-info">
+        <h4>URL:</h4>
+       http://geosk.ve.ismar.cnr.it:80/geoserver/wcs?
+      </div>
+       <div class="alert alert-success">
+      <a target="_blank" href="{{GEOSERVER_BASE_URL}}ows?service=WCS&version=1.1.1&request=GetCapabilities"><h4>Capabilities Link</h4></a>
+      </div>
+    </div>
+    <div class="tab-pane" id="csw">
+     <p></p>
+      <p>Lo standard Catalog Service for the Web (CSW) dell'<a target="_blank"  href="http://www.opengeospatial.org/standards/specifications/catalog">OGC</a> che definisce un'interfaccia per servizi di ricerca, di navigazione e di interrogazione di metadati su dati, servizi, a altre risorse potenziali. Si riferisce alla pubblicazione Internet-based di informazioni su applicazioni spaziali, di geo-servizi e di dati spaziali (metadati) in un'infrastruttura di dati territoriali.</p>
+      <p></p>
+      <div class="alert alert-info">
+        <h4>URL:</h4>
+        http://geosk.ve.ismar.cnr.it/catalogue/csw
+      </div>
+      <div class="alert alert-success">
+       <a target="_blank"  href="{{CATALOGUE_BASE_URL}}?service=CSW&version=2.0.2&request=GetCapabilities"><h4>Capabilities Link</h4></a>
+      </div>
+    </div>
+    <div class="tab-pane" id="wmts">
+       <p></p>
+      <p>Lo standard Web Map Tile Service (WMTS) dell'<a target="_blank"  href="http://www.opengeospatial.org/standards/wmts">OGC</a> fornisce le specifiche internazionali per servire dati geografici sul web attraverso "cached image tiles".</p>
+      <p></p>
+     <div class="alert alert-info">
+        <h4>URL:</h4>
+         http://geosk.ve.ismar.cnr.it/geoserver/gwc/service/wmts?
+     </div>
+     <div class="alert alert-success">
+      <a target="_blank"  href="{{GEOSERVER_BASE_URL}}gwc/service/wmts?service=WMTS&version=1.0.0&request=GetCapabilities"><h4>Capabilities Link</h4></a>
+     </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

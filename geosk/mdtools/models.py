@@ -117,4 +117,6 @@ class ServicesMetadata(models.Model):
     contact_hours                  = models.CharField(_('contact hours'), max_length=200, help_text="Hours of Service", null=True, blank=True)
     contact_instructions           = models.CharField(_('contact instructions'), max_length=200, help_text='During hours of service', null=True, blank=True)
     contact_role                   = models.CharField(_('contact instructions'), max_length=200, default="pointOfContact", null=True, blank=True)
+    class Meta:
+        verbose_name_plural = _("Services metadata")
 

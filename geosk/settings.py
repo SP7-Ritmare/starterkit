@@ -25,8 +25,6 @@ from geonode.settings import *
 # General Django development settings
 #
 
-SITENAME = 'geosk'
-
 # Defines the directory that contains the settings file as the LOCAL_ROOT
 # It is used for relative settings elsewhere.
 LOCAL_ROOT = os.path.abspath(os.path.dirname(__file__))
@@ -65,6 +63,113 @@ LANGUAGES = (
     ('en', 'English'),
     ('it', 'Italiano'),
 )
+
+INSTALLED_APPS = (
+    # GeoSK
+    # 'geosk.rndt',
+    'geosk.osk',
+    'geosk.mdtools',
+    'geosk.geoskbase',
+    'geosk.search',
+    'geosk.patches',
+    'geosk.skregistration',
+    'overextends', # https://github.com/stephenmcd/django-overextends
+    'rosetta',
+    'grappelli.dashboard',
+    'grappelli',
+
+    # Apps bundled with Django
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.admin',
+    'django.contrib.sitemaps',
+    'django.contrib.staticfiles',
+    'django.contrib.messages',
+    'django.contrib.humanize',
+
+    # Third party apps
+
+    # Utility
+    'pagination',
+    'taggit',
+    'taggit_templatetags',
+    'south',
+    'friendlytagloader',
+    'geoexplorer',
+    'django_extensions',
+
+    # Theme
+    "pinax_theme_bootstrap_account",
+    "pinax_theme_bootstrap",
+    'django_forms_bootstrap',
+
+    # Social
+    'account',
+    'avatar',
+    'dialogos',
+    'agon_ratings',
+    'notification',
+    'announcements',
+    'actstream',
+    'user_messages',
+
+    # GeoNode internal apps
+    'geonode.people',
+    'geonode.base',
+    'geonode.layers',
+    'geonode.upload',
+    'geonode.maps',
+    'geonode.proxy',
+    'geonode.security',
+    'geonode.search',
+    'geonode.social',
+    'geonode.catalogue',
+    'geonode.documents',
+
+)
+
+METADATA_DEFAULT_VALUES = {
+    'category': 'environment',
+    'language': 'ita',
+    'regions': ['ITA']
+}
+
+
+DEFAULT_TOPICCATEGORY = METADATA_DEFAULT_VALUES['category']
+
+# rosetta
+ROSETTA_WSGI_AUTO_RELOAD = True
+# ROSETTA_EXCLUDED_APPLICATIONS = ('geonode',)
+
+# grappelli
+GRAPPELLI_ADMIN_TITLE = "Starter Kit - Admin"
+GRAPPELLI_INDEX_DASHBOARD = 'geosk.dashboard.CustomIndexDashboard'
+
+# add skregistration context processor
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    "django.core.context_processors.tz",
+    'django.core.context_processors.media',
+    "django.core.context_processors.static",
+    'django.core.context_processors.request',
+    'django.contrib.messages.context_processors.messages',
+    'account.context_processors.account',
+    'pinax_theme_bootstrap_account.context_processors.theme',
+    # The context processor below adds things like SITEURL
+    # and GEOSERVER_BASE_URL to all pages that use a RequestContext
+    'geonode.context_processors.resource_urls',
+    # skregistraion
+    'geosk.skregistration.context_processors.skregistration',
+)
+
+#RITMARE services
+RITMARE = {
+    'MDSERVICE': 'https://sp7.irea.cnr.it/jboss/MDService/rest/' # postMetadata, auth/register, auth/verify
+    }
 
 # Load more settings from a file called local_settings.py if it exists
 try:

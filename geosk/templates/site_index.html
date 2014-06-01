@@ -10,6 +10,12 @@ This is where you can override the hero area block. You can simply modify the co
 {% endcomment %}
   {% block hero %}
   <div class="hero-unit">
+    {% if user.is_superuser and not skregistration %}
+    <div class="alert">
+      <strong>Warning!</strong> The Starter Kit is not registered to RITMARE infrastructure. Please complete the
+      <a class="" href="{% url 'skregistration_registration' %}">registration</a>
+    </div>
+    {% endif %}
     <h1>{% trans "Starter Kit - Demo" %}</h1>
 
     <div class="hero-unit-content">

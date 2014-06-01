@@ -1,0 +1,414 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-05-31 15:58-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: dashboard.py:26
+msgid "Metadata Configuration & Registration"
+msgstr ""
+
+#: dashboard.py:35
+msgid "Administration & Applications"
+msgstr ""
+
+#: dashboard.py:40
+msgid "Administration"
+msgstr ""
+
+#: dashboard.py:46
+msgid "Applications"
+msgstr ""
+
+#: dashboard.py:56
+msgid "AppList: Applications"
+msgstr ""
+
+#: dashboard.py:64 skregistration/templates/skregistration/registration.html:5
+msgid "SK Registration"
+msgstr ""
+
+#: dashboard.py:68
+msgid "Register or check registration"
+msgstr ""
+
+#: dashboard.py:77
+msgid "Translations"
+msgstr ""
+
+#: dashboard.py:81
+msgid "Update translations"
+msgstr ""
+
+#: dashboard.py:84
+msgid "Update the translations for your languages"
+msgstr ""
+
+#: dashboard.py:87
+msgid "Rosetta Documentation"
+msgstr ""
+
+#: dashboard.py:96
+msgid "Recent Actions"
+msgstr ""
+
+#: dashboard.py:103
+msgid "SK Front end"
+msgstr ""
+
+#: dashboard.py:107
+msgid "Home"
+msgstr ""
+
+#: dashboard.py:112
+msgid "Layers"
+msgstr ""
+
+#: dashboard.py:117
+msgid "Maps"
+msgstr ""
+
+#: dashboard.py:122
+msgid "Documents"
+msgstr ""
+
+#: dashboard.py:127
+msgid "People"
+msgstr ""
+
+#: dashboard.py:132
+msgid "Search"
+msgstr ""
+
+#: dashboard.py:137 templates/site_base.html:14
+msgid "Services"
+msgstr ""
+
+#: dashboard.py:142
+msgid "Sos"
+msgstr ""
+
+#: mdtools/models.py:52
+msgid "language"
+msgstr ""
+
+#: mdtools/models.py:52
+msgid "language used for metadata"
+msgstr ""
+
+#: mdtools/models.py:53
+msgid "metadata date"
+msgstr ""
+
+#: mdtools/models.py:99 mdtools/models.py:100
+msgid "node title"
+msgstr ""
+
+#: mdtools/models.py:101
+msgid "node abastract"
+msgstr ""
+
+#: mdtools/models.py:102
+msgid "keywords"
+msgstr ""
+
+#: mdtools/models.py:104
+msgid "organization name"
+msgstr ""
+
+#: mdtools/models.py:105
+msgid "provider url"
+msgstr ""
+
+#: mdtools/models.py:106
+msgid "contact name"
+msgstr ""
+
+#: mdtools/models.py:107
+msgid "contact position"
+msgstr ""
+
+#: mdtools/models.py:108
+msgid "contact address"
+msgstr ""
+
+#: mdtools/models.py:109
+msgid "contact city"
+msgstr ""
+
+#: mdtools/models.py:110
+msgid "contact state or province"
+msgstr ""
+
+#: mdtools/models.py:111
+msgid "contact postalcode"
+msgstr ""
+
+#: mdtools/models.py:112
+msgid "contact country"
+msgstr ""
+
+#: mdtools/models.py:113
+msgid "contact phone"
+msgstr ""
+
+#: mdtools/models.py:114
+msgid "contact fax"
+msgstr ""
+
+#: mdtools/models.py:115
+msgid "contact email"
+msgstr ""
+
+#: mdtools/models.py:116
+msgid "contact url"
+msgstr ""
+
+#: mdtools/models.py:117
+msgid "contact hours"
+msgstr ""
+
+#: mdtools/models.py:118 mdtools/models.py:119
+msgid "contact instructions"
+msgstr ""
+
+#: mdtools/models.py:121
+msgid "Services metadata"
+msgstr ""
+
+#: mdtools/templates/layers/_layer_list_item.html:18
+#: mdtools/templates/layers/geonode__layer_list_item.html:18
+msgid "from"
+msgstr ""
+
+#: mdtools/templates/layers/_layer_list_item.html:18
+#: mdtools/templates/layers/geonode__layer_list_item.html:18
+msgid "ago"
+msgstr ""
+
+#: mdtools/templates/layers/_layer_list_item.html:21
+#: mdtools/templates/layers/geonode__layer_list_item.html:21
+msgid "view"
+msgstr ""
+
+#: mdtools/templates/layers/_layer_list_item.html:22
+#: mdtools/templates/layers/geonode__layer_list_item.html:22
+msgid "Average rating"
+msgstr ""
+
+#: mdtools/templates/layers/_layer_list_item.html:22
+#: mdtools/templates/layers/geonode__layer_list_item.html:22
+msgid "votes"
+msgstr ""
+
+#: mdtools/templates/layers/_layer_list_item.html:35
+#: mdtools/templates/layers/geonode__layer_list_item.html:27
+msgid "Download"
+msgstr ""
+
+#: mdtools/templates/layers/_layer_list_item.html:36
+#: mdtools/templates/layers/geonode__layer_list_item.html:28
+msgid "Create a map"
+msgstr ""
+
+#: mdtools/templates/layers/_layer_list_item.html:46
+#: mdtools/templates/layers/geonode__layer_list_item.html:38
+msgid "Download Layer"
+msgstr ""
+
+#: mdtools/templates/layers/geonode_layer_metadata.html:12
+#, python-format
+msgid ""
+"\n"
+"        Editing details for %(layer_title)s\n"
+"      "
+msgstr ""
+
+#: mdtools/templates/layers/geonode_layer_metadata.html:17
+msgid ""
+"Note: this layer's orginal metadata was populated by importing a metadata "
+"XML file.\n"
+"        GeoNode's metadata import supports a subset of ISO, FGDC, and Dublin "
+"Core metadata elements.\n"
+"        Some of your original metadata may have been lost."
+msgstr ""
+
+#: mdtools/templates/layers/geonode_layer_metadata.html:23
+msgid "Error updating metadata.  Please check the following fields: "
+msgstr ""
+
+#: mdtools/templates/layers/geonode_layer_metadata.html:32
+#: mdtools/templates/layers/geonode_layer_metadata.html:47
+msgid "Attributes"
+msgstr ""
+
+#: mdtools/templates/layers/geonode_layer_metadata.html:49
+msgid "Attribute"
+msgstr ""
+
+#: mdtools/templates/layers/geonode_layer_metadata.html:49
+msgid "Label"
+msgstr ""
+
+#: mdtools/templates/layers/geonode_layer_metadata.html:49
+msgid "Description"
+msgstr ""
+
+#: mdtools/templates/layers/geonode_layer_metadata.html:49
+msgid "Display Order"
+msgstr ""
+
+#: mdtools/templates/layers/geonode_layer_metadata.html:57
+msgid "Point of Contact"
+msgstr ""
+
+#: mdtools/templates/layers/geonode_layer_metadata.html:62
+msgid "Metadata Provider"
+msgstr ""
+
+#: mdtools/templates/layers/geonode_layer_metadata.html:67
+msgid "Update"
+msgstr ""
+
+#: osk/templates/osk/osk_base.html:12 osk/templates/osk/osk_list.html:7
+#: osk/templates/osk/osk_list.html.py:14
+msgid "Explore SOS"
+msgstr ""
+
+#: osk/templates/osk/osk_base.html:13
+#: osk/templates/osk/osk_registration.html:13
+msgid "Sensor Registration"
+msgstr ""
+
+#: osk/templates/osk/osk_base.html:14 osk/templates/osk/osk_upload.html:13
+msgid "Upload Observations"
+msgstr ""
+
+#: osk/templates/osk/osk_list.html:85
+msgid "Describe sensor"
+msgstr ""
+
+#: osk/templates/osk/osk_registration.html:7
+#: osk/templates/osk/osk_upload.html:7
+msgid "Explore Documents"
+msgstr ""
+
+#: skregistration/models.py:22 skregistration/models.py:23
+msgid "Starter Kit registration"
+msgstr ""
+
+#: skregistration/templates/skregistration/registration.html:10
+msgid "Registration status"
+msgstr ""
+
+#: skregistration/templates/skregistration/registration.html:40
+msgid "Please check the information is correct prior to registering the SK"
+msgstr ""
+
+#: templates/_about.html:4 templates/_about.html.py:8 templates/about.html:4
+#: templates/about_services_3.html:4
+msgid "About GeoNode"
+msgstr ""
+
+#: templates/_about.html:9
+msgid "About GeoNode."
+msgstr ""
+
+#: templates/about.html:8
+msgid "A proposito del Geo Starter Kit"
+msgstr ""
+
+#: templates/about_services.html:5
+msgid "Descrizione servizi"
+msgstr ""
+
+#: templates/about_services.html:11 templates/about_services_3.html:8
+msgid "GeoSK Web Services"
+msgstr ""
+
+#: templates/about_services.html:13
+msgid ""
+"GeoSK provides <a href=\"http://www.opengeospatial.org/\">OGC</a> compliant "
+"web services to discover, view and download geospatial datasets.\n"
+msgstr ""
+
+#: templates/about_services_3.html:13
+msgid "GeoNode's Web Services"
+msgstr ""
+
+#: templates/about_services_3.html:14
+msgid "GeoNode's Web Services are available from the following URLs:"
+msgstr ""
+
+#: templates/about_services_3.html:49
+msgid "Raster data via WCS:"
+msgstr ""
+
+#: templates/about_services_3.html:54
+msgid "Metadata search via CSW:"
+msgstr ""
+
+#: templates/about_services_3.html:59
+msgid "Cached tiles via WMTS:"
+msgstr ""
+
+#: templates/site_base.html:17
+msgid "Sensors"
+msgstr ""
+
+#: templates/site_index.html:19
+msgid "Starter Kit - Demo"
+msgstr ""
+
+#: templates/site_index.html:24
+msgid ""
+"Upload your layers, create your maps and join the RITMARE interoperable "
+"Infrastructure."
+msgstr ""
+
+#: templates/site_index.html:26
+msgid ""
+" \n"
+"\tSK is developed under the umbrella of the RITMARE project (<a href="
+"\"http://www.ritmare.it/\">www.ritmare.it</a>) in the <a href=\"http://sp7."
+"irea.cnr.it/\">Sub-Project 7</a> framework and it is based upon <a href="
+"\"http://geonode.org/\">GeoNode</a>.\n"
+"\t"
+msgstr ""
+
+#: templates/site_index.html:30
+msgid "Need help"
+msgstr ""
+
+#: templates/site_index.html:30
+msgid "Getting Started?"
+msgstr ""
+
+#: templates/site_index.html:34
+msgid "Explore Layers"
+msgstr ""
+
+#: templates/site_index.html:37
+msgid "Explore Maps"
+msgstr ""
+
+#: templates/search/_general_filters.html:5
+msgid "Date"
+msgstr ""
+
+#: templates/search/_general_filters.html:16
+msgid "Keywords"
+msgstr ""

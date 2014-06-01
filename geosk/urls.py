@@ -24,9 +24,13 @@ urlpatterns = patterns('',
     # mdtools views
     (r'^mdtools/', include('geosk.mdtools.urls')),
 
+    # skregistration views
+    (r'^skregistration/', include('geosk.skregistration.urls')),
+
     # OSK views
     (r'^osk/', include('geosk.osk.urls')),
 
+    (r'^grappelli/', include('grappelli.urls')), # grappelli URLS                       
  ) + urlpatterns
 
 if 'rosetta' in settings.INSTALLED_APPS:

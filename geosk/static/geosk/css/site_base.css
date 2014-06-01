@@ -105,6 +105,9 @@ body.osk #subnav-tabs li {
 .navbar-text {
   color: #023b7e;
 }
+nav.main-nav ul li a {
+    font-size: 15px;
+}
 /* {
 border-top-color: #fff;
 border-bottom-color: #fff;

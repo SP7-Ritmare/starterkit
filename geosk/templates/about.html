@@ -1,0 +1,13 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% block title %} {% trans "About GeoNode" %} — {{ block.super }} {% endblock %}
+
+{% block body %}
+  <header class="jumbotron subhead" id="overview">
+    <h1>{% trans "A proposito del Geo Starter Kit" %}</h1>
+    <p class="lead">La documentazione aggiornata è disponibile presso il wiki del SottoProgetto 7 di RITMARE:
+      <a href="http://sp7.irea.cnr.it/wiki/index.php/Getting_Started">Starter Kit - Getting Started</a>
+  </header>
+
+{% endblock %}

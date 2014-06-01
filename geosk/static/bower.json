@@ -1,0 +1,16 @@
+{
+    "name": "geosk",
+    "version": "1.0.0",
+    "homepage": "https://github.com/SP7-Ritmare/geosk",
+    "authors": [
+	"Stefano Menegon <stefano.menegon@ve.ismar.cnr.it>"
+    ],
+    "main": "geosk/css/site_base.css",
+    "license": "GPL v.3",
+    "componentsDirectory": ".components",
+    "dependencies": {
+	"openlayers": "2.13.1",
+	"float": "https://github.com/flot/flot/archive/v0.8.2.tar.gz",
+	"momentjs": "2.5.1"
+    }
+}
