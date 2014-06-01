@@ -14,8 +14,8 @@ Install geonode with::
 
     $ sudo apt-get install geonode
 
-Install GeoSK from archive file
-    $ sudo pip install https://github.com/SP7-Ritmare/geosk/archive/master.zip
+Install SK from archive file
+    $ sudo pip install https://github.com/SP7-Ritmare/starterkit/archive/master.zip
 
 
 Usage
@@ -29,7 +29,7 @@ Edit the file /etc/apache2/sites-available/geonode and change the following dire
 
 to:
 
-    WSGIScriptAlias / /path/to/geosk/geosk/wsgi.py
+    WSGIScriptAlias / /path/to/starterkit/geosk/wsgi.py
 
 Restart apache::
 
