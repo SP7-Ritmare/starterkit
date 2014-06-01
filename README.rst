@@ -1,4 +1,4 @@
-RITMARE - SP7 - Geo Starter Kit
+RITMARE - SP7 - Starter Kit
 ========================
 
 You should write some docs, it's good for the soul.
