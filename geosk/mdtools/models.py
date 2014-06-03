@@ -18,8 +18,8 @@
 #
 #########################################################################
 from datetime import datetime
-from rdflib import Graph, Literal, BNode, Namespace, RDF, URIRef
-from rdflib.namespace import  Namespace, DC, FOAF
+# from rdflib import Graph, Literal, BNode, Namespace, RDF, URIRef
+# from rdflib.namespace import  Namespace, DC, FOAF
 
 from django.db import models
 from django.forms import model_to_dict
