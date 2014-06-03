@@ -1,0 +1,116 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block title %} {% trans "SK Registration" %} — {{ block.super }}{% endblock %}
+
+{% block body_class %}services{% endblock %}
+
+{% block body %}
+    <h1>{% trans "Registration status" %}</h1>
+    
+    <div class="status status-registered alert alert-success">
+    <i class="icon-ok"></i>
+    <b>SK Registered and validated</b>
+    </div>
+    <div class="status status-invalid alert alert-warning">
+      <i class="icon-warning-sign"></i>
+      <b>SK Registered - waiting for validation</b>
+    </div>
+    <div class="status status-unregistered alert alert-error">
+      <i class="icon-warning-sign"></i>
+      <b>SK Unregistered</b>
+    </div>
+
+    <h2>Site information</h2>
+    <table class="table">
+      <tr>
+	<td class="muted">Domain</td><td>{{ SITE_DOMAIN }}</td>
+      </tr>
+      <tr>
+	<td class="muted">Site URL</td><td>{{ SETTINGS_SITEURL }}</td>
+      </tr>
+      <tr>
+	<td class="muted">Web Title/Name</td><td>{{ SITE_NAME }}</td>
+      </tr>
+    </table>
+    
+    <button id="btn-check-validation" class="status status-invalid btn btn-small">Check validation</button>
+
+    <p class="status status-unregistered">{% blocktrans %}Please check the information is correct prior to registering the SK{% endblocktrans %}</p>
+    <button id="btn-register" class="status status-unregistered btn">Register</button>
+    
+    <div id="messages-modal" class="modal hide fade">
+      <div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal">×</button>
+	<h4  id="messages-modal-title"></h4>
+      </div>
+      <div class="modal-body">
+	<p id="messages-modal-body"></p>
+      </div>
+      <div class="modal-footer">
+	<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Close</button>
+      </div>
+    </div>
+
+
+{% endblock %}
+
+{% block extra_script %}
+{{ block.super }}
+<script>
+  var skStatus = '{{ status }}';
+  setStatus = function(status){
+      var cls = 'status-'+status;
+      $('.status').hide();
+      $('.'+cls).show();
+  };
+  setStatus(skStatus);
+
+  setModal = function(title, body){
+      $('#messages-modal-title').text(title);
+      $('#messages-modal-body').text(body);
+      $('#messages-modal').modal({
+          keyboard: false,
+          backdrop: 'static'
+      });
+  };
+
+  //setStatus('unregistered');
+  $('#btn-check-validation').click(function(event) {
+      var btn=$(this);
+      btn.button('loading');
+      $.ajax( "{% url 'skregistration_verify' %}")
+	  .done(function (data) {
+	      if(data.success){
+		  setStatus('registered');
+	      }
+	      btn.button('reset');
+	  })
+	  .fail(function (jqXHR, textStatus, errorThrown) { 
+	      setModal('Validation result', 'Invalid registration. Please try again later.');
+	  })
+          .always(function(){
+	      btn.button('reset');
+	  })
+  });
+
+  $('#btn-register').click(function(event) {
+      var btn=$(this);
+      btn.button('loading');
+      $.ajax( "{% url 'skregistration_register' %}")
+	  .done(function (data) {
+	      if(data.success){
+		  setStatus('invalid');
+	      }
+	      btn.button('reset');
+	  })
+	  .fail(function (jqXHR, textStatus, errorThrown) { 
+	      setModal('Registration result', 'Registration not allowed');
+	  })
+          .always(function(){
+	      btn.button('reset');
+	  })
+  });
+</script>
+{% endblock extra_script %}
