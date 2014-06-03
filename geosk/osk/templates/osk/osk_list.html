@@ -1,0 +1,116 @@
+{% extends "osk/osk_base.html" %}
+{% load i18n %}
+{% load pagination_tags %}
+{% load staticfiles %}
+{% load url from future %}
+
+{% block title %} {% trans "Explore SOS" %} - {{ block.super }} {% endblock %}
+
+{% block body_class %}osk osk-list explore{% endblock %}
+
+{% block body %}
+    <div class="span12">
+      <div class="row">
+	<h2 class="page-title span7">{% trans "Explore SOS" %}</h2>
+	<div class="span2">
+	  <a class="btn btn-small" target="_blank" href="{{ cap.capabilities_url }}">Capabilities &raquo;</a>
+	</div>
+	<div class="span3 input-append">
+	  <form  method="GET" action"/osk/">
+	    <input class="span2 input-small"  type="text" name="sosurl" placeholder="Remote SOS">
+	    <button class="btn" type="submit">Load</button>
+	  </form>
+	</div>
+      </div>
+    </div>
+    <div class="span12">
+      <div class="row" id="contain-slider">
+
+	<article class="description tab-pane active" id="info">
+          <div class="span4">
+            <h2>Identification</h2>
+	    <dl>
+	      <dt>Title</dt>
+	      <dd>{{ cap.identification.title }}</dd>
+	      <dt>Abstract</dt>
+	      <dd>{{ cap.identification.abstract }}</dd>
+	      <dt>Keywords</dt>
+	      <dd>{{ cap.identification.keywords|join:", " }}</dd>
+	    </dl>
+            <h2>Provider</h2>
+	    <p>{{ cap.provider.name }}</p>
+	    <dl>
+	      <dt>Name</dt>
+	      <dd>{{ cap.provider.contact.name }}</dd>
+	      <dt>Organization</dt>
+	      <dd>{{ cap.provider.contact.organization }}</dd>
+	      <dt>Position</dt>
+	      <dd>{{ cap.provider.contact.position }}</dd>
+	      <dt>Address</dt>
+	      <dd>{{ cap.provider.contact.address }}</dd>
+	      <dt>Postcode</dt>
+	      <dd>{{ cap.provider.contact.postcode }}</dd>
+	      <dt>City</dt>
+	      <dd>{{ cap.provider.contact.city }}</dd>
+	      <dt>Region</dt>
+	      <dd>{{ cap.provider.contact.region }}</dd>
+	      <dt>Country</dt>
+	      <dd>{{ cap.provider.contact.country }}</dd>
+	      <dt>Email</dt>
+	      <dd>{{ cap.provider.contact.email }}</dd>
+	      <dt>Phone</dt>
+	      <dd>{{ cap.provider.contact.phone }}</dd>
+	      <dt>Fax</dt>
+	      <dd>{{ cap.provider.contact.fax }}</dd>
+	      <dt>Site</dt>
+	      <dd>{{ cap.provider.contact.site }}</dd>
+	    </dl>
+	  </div>
+
+          <div class="span8">
+            <h2>Sensors / Procedures</h2>
+	    {% for sensor in sensors %}
+	    <article>
+	      <div class="content">
+		<div class="item-header">
+		  <h3><i class="icon-unchecked icon-rotate-45"></i> <a href="{% url "osk_browse" %}">{{ sensor.name }}</a></h3>
+		</div>
+		<div class="details">
+		  <div class="meta">
+		    <p class="abstract">{{ sensor.sensor.description|default:'No abstract provided.' }}</p>
+		    <p class="Keywords">{{ sensor.sensor.keywords|join:', '|default:'No keywords provided' }}</p>
+		  </div> <!-- /.meta -->
+		  <div class="tools">
+		    <p>
+		      <a href="{% url "osk_describe_sensor" %}?sensor_id={{sensor.id|urlencode }}" target="_blank" data-toggle="modal" class="btn btn-mini">{% trans "Describe sensor" %}</a>
+		    </p>
+		  </div>
+		  <div>
+		    <ul>
+		      {% for op in sensor.observable_properties %}
+		      <li>{{ op }} <button class="btn btn-small">Upload</button> </li>
+		      {% endfor %}
+		    </ul>
+		  </div>
+		</div> <!-- /.details -->  
+	      </div> <!-- /.content -->
+	    </article>
+
+	    <!--
+  	        <dt>{{ sensor.name }}</dt>		
+	        <dd>{{ sensor.id }}
+		  <ul>
+		  {% for op in sensor.observable_properties %}
+		  <li>{{ op }} <button class="btn btn-small">Upload</button> </li>
+		  {% endfor %}
+		  </li>
+		</dd>
+-->
+	      {% endfor %}
+	    </dl>
+          </div>
+	</article>
+      </div>      
+    </div>
+{% endblock %}
+

@@ -1,0 +1,19 @@
+{% extends "site_base.html" %}
+{% load i18n %}
+{% load url from future %}
+
+{% block title %} {{ block.super }} {% endblock %}
+
+{% block body_class %}osk{% endblock %}
+
+{% block body_outer %}
+    <div class="span12">
+      <ul class="nav nav-tabs" id="subnav-tabs">
+            <li><a href="{% url "osk_browse" %}" class="explore">{% trans "Explore SOS" %}</a></li>
+            <li><a href="{% url "osk_registration" %}" class="registration">{% trans "Sensor Registration" %}</a></li>
+            <li><a href="{% url "osk_upload" %}" class="upload">{% trans "Upload Observations" %}</a></li>
+      </ul>
+    </div>
+    {% block body %}{% endblock body %}
+    {% block sidebar %}{% endblock sidebar %}
+{% endblock body_outer %}

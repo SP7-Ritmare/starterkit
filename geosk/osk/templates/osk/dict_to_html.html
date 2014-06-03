@@ -1,0 +1,25 @@
+{% if value %}
+  {% if "[" == value|pprint|slice:":1" %}
+    <ul>
+    {% for subvalue in value %}
+      <li>
+        {% with value=subvalue template_name="osk/dict_to_html.html" %}
+          {% include template_name %}
+        {% endwith %}
+      </li>
+    {% endfor %}
+    </ul>
+  {% elif value.items|length  %}
+    <ul>
+    {% for key, subvalue in value.items %}
+      <li><strong>{{ key|capfirst }}:</strong>
+        {% with value=subvalue template_name="osk/dict_to_html.html" %}
+          {% include template_name %}
+        {% endwith %}
+      </li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    {{ value }}
+  {% endif %}
+{% endif %}
