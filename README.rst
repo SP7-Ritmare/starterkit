@@ -46,8 +46,10 @@ Restart apache::
 
 Edit the templates in geosk/templates, the css and images to match your needs.
 
-In the geosk folder run::
+Syncdb and collectstatic::
 
-    $ python manage.py collectstatic
+    $ django-admin syncdb  --settings=geosk.settings
+
+    $ django-admin  collectstatic --settings=geosk.settings
 
 
