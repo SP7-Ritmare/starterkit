@@ -43,6 +43,7 @@ def model_to_rdf(self):
 
 Layer.to_rdf = model_to_rdf
 
+
 class MdExtension(models.Model):
     resource     = AutoOneToOneField(ResourceBase, primary_key=True)
     elements_xml = models.TextField(null=True, blank=True)
@@ -96,15 +97,17 @@ class ServicesMetadata(models.Model):
     """Model for storing Metadata about services
        (CS-W, WMS, WFS, WCS)
     """
-    node_name                      = models.CharField(_('node title'), max_length=200, help_text="Short name", default="Starter Kit")
-    node_title                     = models.CharField(_('node title'), max_length=200)
+    node_name                      = models.CharField(_('node name'), max_length=200, help_text=_("shorter than the title: e.g. acronym. This field is required"), default="Starter Kit")
+    node_title                     = models.CharField(_('node title'), max_length=200, help_text=_("This field is required"))
     node_abstract                  = models.TextField(_('node abastract'), null=True, blank=True)
     node_keywords                  = models.CharField(_('keywords'), max_length=200, null=True, blank=True)
 
-    provider_name                  = models.CharField(_('organization name'), max_length=200, null=True, blank=True)
+    provider_name                  = models.CharField(_('organization name'), max_length=200, help_text=_("This field is required"))
     provider_url                   = models.URLField(_('provider url'), max_length=200, null=True, blank=True)
-    contact_name                   = models.CharField(_('contact name'), max_length=200, null=True, blank=True)
+    contact_name                   = models.CharField(_('contact name'), max_length=200, help_text=_("This field is required"))
     contact_position               = models.CharField(_('contact position'), max_length=200, null=True, blank=True)
+    contact_email                  = models.EmailField(_('contact email'), help_text=_("This field is required"))
+    contact_url                    = models.URLField(_('contact url'), max_length=200, null=True, blank=True)
     contact_address                = models.CharField(_('contact address'), max_length=200, null=True, blank=True)
     contact_city                   = models.CharField(_('contact city'), max_length=200, null=True, blank=True)
     contact_stateprovince          = models.CharField(_('contact state or province'), max_length=200, null=True, blank=True)
@@ -112,11 +115,9 @@ class ServicesMetadata(models.Model):
     contact_country                = models.CharField(_('contact country'), max_length=200, null=True, blank=True)
     contact_phone                  = models.CharField(_('contact phone'), max_length=20, null=True, blank=True)
     contact_fax                    = models.CharField(_('contact fax'), max_length=20, null=True, blank=True)
-    contact_email                  = models.CharField(_('contact email'), max_length=20, null=True, blank=True)
-    contact_url                    = models.URLField(_('contact url'), max_length=200, null=True, blank=True)
     contact_hours                  = models.CharField(_('contact hours'), max_length=200, help_text="Hours of Service", null=True, blank=True)
     contact_instructions           = models.CharField(_('contact instructions'), max_length=200, help_text='During hours of service', null=True, blank=True)
-    contact_role                   = models.CharField(_('contact instructions'), max_length=200, default="pointOfContact", null=True, blank=True)
+    contact_role                   = models.CharField(_('contact role'), max_length=200, null=True, blank=True)
     class Meta:
         verbose_name_plural = _("Services metadata")
 

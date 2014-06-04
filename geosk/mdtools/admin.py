@@ -4,11 +4,34 @@ import logging
 from django.conf import settings
 from django.contrib import admin
 from django.core.files import locks
+from django.utils.translation import ugettext, ugettext_lazy as _
 
 from geosk.mdtools.models import ServicesMetadata
 
 class ServicesMetadataAdmin(admin.ModelAdmin):
     list_display = ('node_title', 'provider_name', 'provider_url')
+    fieldsets = (
+        (None, {
+                'fields': (('node_name', 'node_title'), 'node_abstract', 'node_keywords')
+                }
+         ),
+        (_('Provider'), {
+                'fields': (('provider_name', 'provider_url'),)
+                }
+         ),
+        (_('Contact'), {
+                'fields': (
+                    ('contact_name', 'contact_position'),
+                    ('contact_email', 'contact_url'),
+                    ('contact_address',),
+                    ('contact_city', 'contact_stateprovince',), 
+                    ('contact_postalcode', 'contact_country'),
+                    ('contact_phone', 'contact_fax',),
+                    ('contact_hours', 'contact_instructions',),
+                    )
+                }
+         ),
+        )
     def save_model(self, request, obj, form, change):
         obj.save()
         post_save_nodeconfiguration(request, obj)
