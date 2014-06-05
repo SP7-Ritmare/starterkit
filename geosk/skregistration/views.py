@@ -7,8 +7,11 @@ from django.conf import settings
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib.auth.decorators import user_passes_test
+from django.forms.models import model_to_dict
+from django.utils import simplejson as json
 
 from geonode.utils import http_client, _get_basic_auth_info, json_response
+from geosk.mdtools.models import ServicesMetadata
 
 from models import SkRegistration
 
@@ -20,11 +23,18 @@ def registration(request, template='skregistration/registration.html'):
         status = 'registered'
     elif sk is not None and not sk.verified:
         status = 'invalid'
+    # check for services metadata
+    if ServicesMetadata.objects.count() == 1:
+        services_metadata = ServicesMetadata.objects.all()[0]
+    else:
+        status = 'missing-metadata'
+        services_metadata = None
 
     return render_to_response(template, RequestContext(request, {
                 'SETTINGS_SITENAME': getattr(settings, 'SITENAME', 'GeoNode'),
                 'SETTINGS_SITEURL':  getattr(settings, 'SITEURL'),
                 'status': status,
+                'services_metadata': services_metadata,
     }))
 
 @user_passes_test(lambda u: u.is_superuser)
@@ -43,8 +53,14 @@ def register(request):
         return json_response(errors='URI already presents in the local catalog', status=500)
     except SkRegistration.DoesNotExist:
         pass
+
+    # check for services metadata 
+    if ServicesMetadata.objects.count() == 1:
+        services_metadata = ServicesMetadata.objects.all()[0]
+    else:
+        return json_response(errors='Missing metadata', status=500)
         
-    status, api_key = _register(uri = domain)
+    status, api_key = _register(uri = domain, md=json.dumps(model_to_dict(services_metadata)))
     if status is True:
         skr = SkRegistration(api_key = api_key, site = current_site)
         skr.save()
@@ -52,7 +68,7 @@ def register(request):
     else:
         return json_response(errors=api_key, status=500)
 
-def _register(uri=None):
+def _register(uri=None, md=None):
     if uri is None:
         uri = Site.objects.get_current().domain
 
@@ -61,7 +77,8 @@ def _register(uri=None):
 
     data = {
         'uri': uri,
-        'xmlMetadata': '<elements></elements>'
+        'xmlMetadata': '<elements></elements>',
+        'jsonMedata': md
         }
 
     r = requests.post(url_register, data=data, verify=False)

@@ -21,6 +21,10 @@
       <i class="icon-warning-sign"></i>
       <b>SK Unregistered</b>
     </div>
+    <div class="status status-missing-metadata alert alert-error">
+      <i class="icon-warning-sign"></i>
+      <b>Missing metadata</b>
+    </div>
 
     <h2>Site information</h2>
     <table class="table">
@@ -33,12 +37,18 @@
       <tr>
 	<td class="muted">Web Title/Name</td><td>{{ SITE_NAME }}</td>
       </tr>
+      <tr>
+	<td class="muted">Metadata</td><td>{{ services_metadata }}</td>
+      </tr>
     </table>
     
     <button id="btn-check-validation" class="status status-invalid btn btn-small">Check validation</button>
 
     <p class="status status-unregistered">{% blocktrans %}Please check the information is correct prior to registering the SK{% endblocktrans %}</p>
     <button id="btn-register" class="status status-unregistered btn">Register</button>
+
+    <p class="status status-missing-metadata">{% blocktrans %}Please add more information about your SK implementation. Fill the Services Metadata form.{% endblocktrans %}</p>
+    <button id="btn-missing-metadata" class="status status-missing-metadata btn">Insert metadata</button>
     
     <div id="messages-modal" class="modal hide fade">
       <div class="modal-header">
@@ -111,6 +121,11 @@
           .always(function(){
 	      btn.button('reset');
 	  })
+  });
+
+  $('#btn-missing-metadata').click(function(event) {
+      window.location.href = "{% url 'admin:mdtools_servicesmetadata_add' %}";
+      return false;
   });
 </script>
 {% endblock extra_script %}
