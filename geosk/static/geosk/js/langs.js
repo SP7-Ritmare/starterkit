@@ -418,3 +418,34 @@ var iso639 = [
 ["zxx", "zxx", "zxx", "S", "S", "No linguistic content"],
 ["zza", "zza", "zza", "M", "L", "Zaza"]
 ];
+
+function lookupLanguage(code) {
+    var i;
+    for ( i = 0; i < iso639.length; i++ ) {
+            if ( iso639[i][1] == code ) {
+                    return iso639[i][3];
+            }
+    }
+    return "en";
+}
+function reverseLookupLanguage(code) {
+    var i;
+    for ( i = 0; i < iso639.length; i++ ) {
+            // doDebug(iso639[i][1]);
+            if ( iso639[i][3] == code ) {
+                    return iso639[i][1];
+            }
+    }
+    return "en";
+}
+function getLanguageName(code) {
+    // 2-letter code
+    var i;
+    for ( i = 0; i < iso639.length; i++ ) {
+            // doDebug(iso639[i][1]);
+            if ( iso639[i][3] == code ) {
+                    return iso639[i][6];
+            }
+    }
+    return "No linguistic content";
+}

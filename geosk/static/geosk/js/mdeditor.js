@@ -2,6 +2,27 @@ String.prototype.replaceAll = function (find, replace) {
     var str = this;
     return str.replace(new RegExp(find, 'g'), replace);
 };
+
+if (!String.prototype.encodeHTML) {
+  String.prototype.encodeHTML = function () {
+    return this.replace(/&/g, '&amp;')
+               .replace(/</g, '&lt;')
+               .replace(/>/g, '&gt;')
+               .replace(/"/g, '&quot;')
+               .replace(/'/g, '&apos;');
+  };
+}
+if (!String.prototype.decodeHTML) {
+  String.prototype.decodeHTML = function () {
+    return this.replace(/&apos;/g, "'")
+               .replace(/&quot;/g, '"')
+               .replace(/&gt;/g, '>')
+               .replace(/&lt;/g, '<')
+               .replace(/&amp;/g, '&');
+  };
+}
+
+
 var userUri = "http://ritmare.it/rdfdata/project#AlessandroOggioniIREA";
 var virtuosoUrl = "http://sp7.irea.cnr.it:8890/sparql";
 var currentLanguage = "it";
@@ -9,9 +30,69 @@ var cloneSuffix = "_XritX";
 var edimlUrl = "ediml/";
 var ediMl = "";
 var debugToDiv = false;
-var debugToConsole = true;
+var debugToConsole = false;
 var ediUrl = "";
 // var ediUrl = "http://sp7.irea.cnr.it/mdedit/proxy.php?url=http://10.0.1.254:8080/MDService/rest/";
+
+var currentlyValidating = false;
+
+function addValidation() {
+    $(".dateRange").find("[id$=start]").change( function(event){
+	debugToConsole = true;
+	if ( currentlyValidating ) {
+	    return;
+	} else {
+	    currentlyValidating = true;
+	}
+	doDebug("checking start");
+	var counterPart = $(this).attr("id").replace("_start", "_end");
+	if ( $(this).val() > $("#" + counterPart).val() ) {
+	    var temp = $(this).val();
+	    var temp2 = $("#" + counterPart).val();
+	    $("#" + counterPart).addClass("dateRangeError");
+	    // $("#" + counterPart).parent().datepicker("update");
+
+	    $(this).addClass("dateRangeError");
+	    // $(this).parent().datepicker("update");
+	} else {
+	    $("#" + counterPart).removeClass("dateRangeError");
+	    // $("#" + counterPart).parent().datepicker("update");
+
+	    $(this).removeClass("dateRangeError");
+	    // $(this).parent().datepicker("update");
+	}
+	currentlyValidating = false;
+	debugToConsole = false;
+	event.preventDefault();
+	return false;
+    });
+    $(".dateRange").find("[id$=end]").change( function(){
+	var counterPart = $(this).attr("id").replace("_end", "_start");
+	$("#" + counterPart).trigger("change");
+	/*
+	debugToConsole = true;
+	if ( currentlyValidating ) {
+	    return;
+	} else {
+	    currentlyValidating = true;
+	}
+	doDebug("checking end");
+	var counterPart = $(this).attr("id").replace("_end", "_start");
+	if ( $(this).val() < $("#" + counterPart).val() ) {
+	    var temp = $(this).val();
+	    $(this).val($("#" + counterPart).val());
+	    $("#" + counterPart).val(temp);
+	}
+	currentlyValidating = false;
+	debugToConsole = false;
+	*/
+    });
+}
+
+function setLanguage(language) {
+    currentLanguage = lookupLanguage(language);
+    $("select[languageselector='true']").val(currentLanguage);
+}
 
 function doDebug(args) {
     var i;
@@ -23,6 +104,31 @@ function doDebug(args) {
 	    console.log(arguments[i]);
 	}
     }
+}
+
+function isEmpty(element) {
+    var i = 0;
+    var items = element.items.item;
+    var result = true;
+    debugToConsole = true;
+    
+    doDebug("isEmpty()");
+    doDebug(element);
+    
+    // checks whether all user-defined items in element are empty
+    for ( i = 0; i < items.length; i++ ) {
+	doDebug(items[i]);
+	if ( (items[i].fixed == "false") && items[i].value && items[i].value.trim() != "" ) {
+	    result = false;
+	    doDebug("false");
+	    debugToConsole = false;
+	    return result;
+	}
+    }
+    doDebug("true");
+    debugToConsole = false;
+
+    return result;
 }
 
 function Observation() {
@@ -162,11 +268,12 @@ var duplicateElement = function(element, as) {
     // $(this).attr("duplicates", div.attr("represents_element"));
 
     newDiv.find(".datepicker").datepicker({
-				    format: "yyyy-mm-dd"
-			    }).on('changeDate', function(ev) {
-				    
+				    format: "yyyy-mm-dd",
+				    autoclose: true
+			    }); /*.on('changeDate', function(ev) {
+				    $(this).datepicker('hide');
 				    // doDebug("data: " + ev.date.valueOf());
-			    });
+			    }); */
     var button = newDiv.prepend("<button removes='" + as + "' id='" + as + "_remover' type='button' class='btn btn-mini btn-danger'>X</button>").children("button[removes]");
     div.after(newDiv);
 
@@ -186,6 +293,8 @@ var duplicateElement = function(element, as) {
 	    }
 	    // doDebug(elements);
     });
+    newDiv.find("[id$=_uri]").val("");
+    newDiv.find("[id$=_urn]").val("");
     // $(this).detach().appendTo(newDiv);
     // find element in array
     // doDebug(elements);
@@ -259,7 +368,15 @@ var defaultPostSuccessCallback = function(msg){
                                         			}
                                 			});
 						} else {
-							var newWindow = window.open("data:text/xml," + encodeURIComponent(xmlString),"_blank");
+							// var newWindow = window.open("data:text/xml," + encodeURIComponent(xmlString),"_blank");
+							/*
+							xmlString = replaceAll(xmlString, "&", "&amp;");
+							xmlString = replaceAll(xmlString, "<", "&lt;");
+							xmlString = replaceAll(xmlString, ">", "&gt;");
+							*/
+							$("#mdcontent").prepend("<pre class='prettyprint lang-html'>" + xmlString.encodeHTML() + "</pre>");
+							prettyPrint();
+							// prettyPrintOne('<root><node1><root>', 'xml')
 						}
 						/*
 						newWindow.document.open();
@@ -340,6 +457,9 @@ function autoCompletionKeyUp(textbox) {
 			query = replaceAll(query, '$search_param', $(this).val()); 
 			doDebug('launch query: ' + query); 
 			
+			$( '#' + id + '_uri' ).val( "" );
+			$( '#' + id + '_urn' ).val( "" ); 
+
 			$.getJSON( virtuosoUrl, { 
 				query: query, 
 				format: 'application/sparql-results+json', 
@@ -360,8 +480,9 @@ function autoCompletionKeyUp(textbox) {
 					select: function( event, ui ) {
 						doDebug("autocomp: " + ui.item.id + " -> " + ui.item.value);
 						$( '#' + id ).val( ui.item.value );
+						$( '#' + id + '_uri' ).val( ui.item.id );
+						$( '#' + id + '_urn' ).val( ui.item.urn ); 
 						$( '#' + id ).trigger('change');
-						$( '#' + id + '_uri' ).val( ui.item.id ); 
 						return false; 
 					} 
 				}); 
@@ -891,6 +1012,8 @@ function setAutocompletions() {
 					}
 			    	});
 			    }
+			    $('input[validateas="real"]').attr("step", "any");
+			    $('input[validateas="int"]').attr("step", "1");
 			    // $('.btn-info').popover();
 			    $('a[data-toggle=popover]').popover();
 
@@ -982,6 +1105,18 @@ function setAutocompletions() {
 			    
 			    prepareDependents();
 			    
+			    addValidation();
+			    
+			    $("#mdcontent").prepend("<button id='en'>en</button><button id='it'>it</button>");
+			    $("#en").click(function() {
+				setLanguage('en');
+			    });
+				
+			    $("#it").click(function() {
+				setLanguage('it');
+			    });
+				
+			    
                             $("#postButton").click(function() {
                             	var document = jQuery.parseXML("<ritmare></ritmare>");
 				var version = querystring("version");
@@ -1065,7 +1200,10 @@ function setAutocompletions() {
                             			};
                             			theElement.element.items.item.push(item);
                             		});
-					c.push(theElement.element);
+					// if ( !isEmpty(theElement.element) ) {
+					    c.push(theElement.element);
+					// }
+					
 					// doDebug(content);
                             	}
                             	// $("#debug").append("elements: " + JSON.stringify(elements));
@@ -1089,7 +1227,9 @@ function setAutocompletions() {
 				    var x2js = new X2JS();
 				    var xml = /* '<?xml version="1.0" encoding="UTF-8"?>' + */ (x2js.json2xml_str(content));
 				    if ( querystring("debug") == "on" ) {
-					    var newWindow1 = window.open("data:text/xml," + encodeURIComponent(xml),"_blank");
+					//    var newWindow1 = window.open("data:text/xml," + encodeURIComponent(xml),"_blank");
+					    $("#mdcontent").prepend("<pre class='prettyprint lang-json'>" + JSON.stringify(content) + "</pre>");
+					    prettyPrint();
 				    }
 								    
 				    
