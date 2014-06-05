@@ -121,3 +121,5 @@ class ServicesMetadata(models.Model):
     class Meta:
         verbose_name_plural = _("Services metadata")
 
+    def __unicode__(self):
+        return "%s - %s - %s" % (self.node_name, self.provider_name, self.contact_name)
