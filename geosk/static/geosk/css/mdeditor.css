@@ -1,3 +1,54 @@
+/* debug */
+  #results, #debug {
+    display: none;
+    overflow: auto;
+  }
+
+  .info {
+    display: none;
+  }
+
+  .duplicator {
+      margin-bottom: 40px;
+  }
+ 
+  .btn-danger {
+      margin-left: 15px;
+  }
+
+  .duplicate-block{
+      background:#eff0ef;
+      margin-bottom:10px;
+      padding:5px;
+      border:1px dashed #bbb;
+      text-align:center;
+      margin-left: 100px; 
+      margin-right: 100px; 
+      margin-bottom: 50px;
+  }
+  
+  .duplicate-block h2{
+      color:#bbb;
+      margin:20px 0;
+      text-align:center
+  }
+
+  .duplicate-block h2 i{
+      font-size:2em
+  }
+
+ .mandatory {
+   font-weight: bold;
+ }
+
+ /* hide setLanguage buttons */
+ #en, #it {
+   display: none;
+ }
+
+
+
+
 #mdcontent section {
 /*    margin-top: -100px; */
 }

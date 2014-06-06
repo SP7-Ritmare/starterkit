@@ -65,7 +65,7 @@ def setup_edi(options):
         dest = download_dir / os.path.basename(urlparse.urlparse(src).path)
         grab(src, dest, dest)
         
-    edi_dest = download_dir / 'edi_block.html'
+    edi_dest = download_dir / 'rndt_block.html'
     grab(EDI_BLOCK, edi_dest, 'edi')
     _clean_edi_block(edi_dest)
 
