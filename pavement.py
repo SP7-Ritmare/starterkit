@@ -61,18 +61,22 @@ def setup_edi(options):
     if not download_dir.exists():
         download_dir.makedirs()
     for src in EDI_STATICS:
-        
-        dest = download_dir / os.path.basename(urlparse.urlparse(src).path)
+        # get version (if defined)
+        u = urlparse.urlparse(src)
+        version = urlparse.parse_qs(u.query).get('version',['1.00'])[0]
+        dest = download_dir / version / os.path.basename(u.path)
         grab(src, dest, dest)
         
     edi_dest = download_dir / 'rndt_block.html'
     grab(EDI_BLOCK, edi_dest, 'edi')
     _clean_edi_block(edi_dest)
 
-    static_dir = path('geosk/static/geosk/js/')
+    static_dir = path('geosk/static/edi/js/')
     for src in EDI_STATICS:
-        srcfile = download_dir / os.path.basename(urlparse.urlparse(src).path)
-        justcopy(srcfile, static_dir)
+        u = urlparse.urlparse(src)
+        version = urlparse.parse_qs(u.query).get('version',['1.00'])[0]
+        srcfile = download_dir / version / os.path.basename(u.path)
+        justcopy(srcfile, static_dir / version )
 
     # custom mdeditor.js
     #  justcopy(path('modified') / "mdeditor.js", static_dir)
