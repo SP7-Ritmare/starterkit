@@ -1,6 +1,7 @@
 # coding=utf-8
 import sys
 import json
+import requests
 from lxml import etree
 from owslib.iso import MD_Metadata
 from django.conf import settings
@@ -10,15 +11,14 @@ from django.template import RequestContext
 from django.core.serializers.json import DjangoJSONEncoder
 from django.core.urlresolvers import reverse
 from django.utils.safestring import mark_safe
-from httplib import HTTPConnection,HTTPSConnection
-from urlparse import urlsplit
-import httplib2
 
 from geonode.base.models import SpatialRepresentationType, TopicCategory
-from geonode.layers.metadata import set_metadata
+from geonode.layers.metadata import set_metadata, sniff_date
 from geonode.layers.models import Layer
 from geonode.layers.views import _resolve_layer, _PERMISSION_MSG_METADATA, layer_detail
 from geonode.utils import http_client, _get_basic_auth_info, json_response
+
+from geosk.skregistration.views import get_key
 
 from .forms import UploadMetadataFileForm
 
@@ -115,53 +115,33 @@ def rndteditor(request, layername):
                 })
         )
     
-from geosk.skregistration.views import get_key
-
 def rndtproxy(request, layername):
     layer = _resolve_layer(request, layername, 'layers.change_layer', _PERMISSION_MSG_METADATA)
 
     service = settings.RITMARE['MDSERVICE'] + 'postMetadata'
 
-    url = urlsplit(service)
+    headers = {'api_key': get_key(),
+               'Content-Type': 'application/xml',
+               }
 
-    locator = url.path
-    if url.query != "":
-        locator += '?' + url.query
-    if url.fragment != "":
-        locator += '#' + url.fragment
+    r = requests.post(service, data=request.raw_post_data,  headers=headers, verify=False)
+    if r.status_code == 200:
+        rndt = r.text.encode('utf8')
+        # extract fileid
+        ediml = etree.fromstring(request.raw_post_data)
+        fileid = ediml.find('fileId').text
 
-    headers = {'api_key': get_key()}
-    if request.method in ("POST", "PUT") and "CONTENT_TYPE" in request.META:
-        headers["Content-Type"] = request.META["CONTENT_TYPE"]
-
-    if url.scheme =='https':
-        conn = HTTPSConnection(url.hostname, url.port)
+        # new fileid must be equal to the old one
+        if layer.mdextension.fileid is not None:
+            if int(layer.mdextension.fileid) != int(fileid):
+                return json_response(errors='New fileid (%s) is different from the old one (%s)' % (fileid, layer.mdextension.fileid), 
+                                     status=500)
+        else:
+            layer.mdextension.fileid = fileid
     else:
-        conn = HTTPConnection(url.hostname, url.port)
-    conn.request(request.method, locator, request.raw_post_data, headers)
-    result = conn.getresponse()
-    rndt = result.read()
-    # print >> sys.stderr, 'START'
-    # print >> sys.stderr, rndt
-    # print >> sys.stderr, 'END'
-    # response = HttpResponse(
-    #         rndt,
-    #         status=result.status,
-    #         content_type=result.getheader("Content-Type", "text/plain")
-    #         )
-    # return response
+        return json_response(errors='Cannot create RNDT', 
+                             status=500)
 
-    # extract fileid
-    ediml = etree.fromstring(request.raw_post_data)
-    fileid = ediml.find('fileId').text
-    # new fileid must be equal to the old one
-    if layer.mdextension.fileid is not None:
-        if int(layer.mdextension.fileid) != int(fileid):
-            return json_response(errors='New fileid (%s) is different from the old one (%s)' % (fileid, layer.mdextension.fileid), 
-                                 status=500)
-    else:
-        layer.mdextension.fileid = fileid
-    
     try:
         vals, keywords = rndt2dict(etree.fromstring(rndt))
         errors = _post_validate(vals)
@@ -257,15 +237,6 @@ def _mdimport(layer, vals, keywords, xml):
     layer.save()
     return layer
 
-
-# def test():
-#     filename = '/home/menegon/geosk/geosk/mdtools/tmp/esempio_edi_rndt.xml'
-#     f = open(filename, 'r')
-#     xml = f.read()
-#     return etree.fromstring(xml)
-    
-
-from geonode.layers.metadata import sniff_date
 
 def rndt2dict(exml):
     """generate dict of properties from gmd:MD_Metadata (INSPIRE - RNDT)"""
