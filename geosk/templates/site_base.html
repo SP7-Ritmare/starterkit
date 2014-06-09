@@ -9,8 +9,6 @@
 <link rel="icon" href="/static/geosk/img/favicon.ico" />
 {% endblock %}
 
-
-
 {% block header %}
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
@@ -156,3 +154,35 @@
 }
 </style>
 {% endblock extra_script %}
+
+
+{% block footer %}
+<footer class="footer">
+  <div class="container">
+    <div class="pull-left">
+      <i class="icon-arrow-right"></i> 
+      {% trans "SK is a project of the StarterKit Development Team" %} | <a href="{% url "about" %}">{% trans "About" %} </a>
+      | <i class="icon-arrow-right"></i> 
+      {% trans "Based on" %} <a href="http://geonode.org">{% trans "GeoNode" %}</a> |
+      <a href="{% url "developer" %}">{% trans "Info" %}</a>
+      </a>
+    </div>
+    <div class="pull-right">
+      {% if csrf_token != "NOTPROVIDED" %}
+      {% get_current_language as LANGUAGE %}
+      <form class="form-inline" action="/i18n/setlang/" method="post">
+        {% csrf_token %}
+        <label>{% trans "Language" %}</label>
+        <select class="input span2" name="language" onchange="javascript:form.submit()">
+          {% for lang in LANGUAGES %}
+          <option value="{{ lang.0 }}" {% ifequal LANGUAGE_CODE lang.0 %} selected="selected"{% endifequal %}>
+            {{ lang.1 }}
+          </option>
+          {% endfor %}
+        </select>
+      </form>
+      {% endif %}
+    </div> <!-- /.pull-right -->
+  </div> <!-- /.container -->
+</footer>
+{% endblock footer %}
