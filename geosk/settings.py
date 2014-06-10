@@ -144,7 +144,7 @@ ROSETTA_WSGI_AUTO_RELOAD = True
 # ROSETTA_EXCLUDED_APPLICATIONS = ('geonode',)
 
 # grappelli
-GRAPPELLI_ADMIN_TITLE = "Starter Kit - Admin"
+GRAPPELLI_ADMIN_TITLE = "Home - Starter Kit"
 GRAPPELLI_INDEX_DASHBOARD = 'geosk.dashboard.CustomIndexDashboard'
 
 # add skregistration context processor
@@ -162,6 +162,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     # The context processor below adds things like SITEURL
     # and GEOSERVER_BASE_URL to all pages that use a RequestContext
     'geonode.context_processors.resource_urls',
+    # Add things like SOS_APP
+    'geosk.context_processors.sk',
     # skregistraion
     'geosk.skregistration.context_processors.skregistration',
 )

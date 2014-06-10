@@ -103,17 +103,19 @@
                   <li id="nav_data">
                     <a href="{% url "layer_browse" %}">{% trans "Layers" %}</a>
                   </li>
-                  <li id="nav_maps">
-                    <a href="{% url "maps_browse" %}">{% trans "Maps" %}</a>
-                  </li>
+                  {% if SOS_APP %}
 		  <li id="nav_osk">
 		    <a href="{% url "osk_browse" %}">{% trans "Sensors" %}</a>
 		  </li>
+                  {% endif %}
                   {% if DOCUMENTS_APP %}
                   <li id="nav_documents">
                     <a href="{% url "documents_browse" %}">{% trans "Documents" %}</a>
                   </li>
                   {% endif %}
+                  <li id="nav_maps">
+                    <a href="{% url "maps_browse" %}">{% trans "Maps" %}</a>
+                  </li>
                   <li id="nav_people">
                     <a href="{% url "profile_browse" %}">{% trans "People" %}</a>
                   </li>
