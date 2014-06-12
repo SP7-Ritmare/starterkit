@@ -29,6 +29,8 @@ from django.utils.translation import ugettext, ugettext_lazy as _
 from geonode.base.models import ResourceBase, ResourceBaseManager, Link, \
     resourcebase_post_save, resourcebase_post_delete
 
+from geonode.people.models import Profile, Role
+
 from geonode.base.enumerations import ALL_LANGUAGES, \
     HIERARCHY_LEVELS, UPDATE_FREQUENCIES, \
     DEFAULT_SUPPLEMENTAL_INFORMATION, LINK_TYPES
@@ -43,15 +45,36 @@ def model_to_rdf(self):
 
 Layer.to_rdf = model_to_rdf
 
+SCOPE_VALUES = (
+    ('md_contact', _('Metadata responsible party')),
+    ('citation_contact', _('Responsible party')),
+    ('identification_contact', _('Point of contact'))
+    )
+
+
+class ResponsiblePartyScope(models.Model):
+    value = models.CharField(_('Scope'), max_length=100, choices=SCOPE_VALUES, unique=True)
+    def __unicode__(self):
+        return self.get_value_display()
+
+
+class MultiContactRole(models.Model):
+    resource = models.ForeignKey('MdExtension')
+    contact  = models.ForeignKey(Profile)
+    role     = models.ForeignKey(Role)
+    scope    = models.ForeignKey(ResponsiblePartyScope)
+
 
 class MdExtension(models.Model):
     resource     = AutoOneToOneField(ResourceBase, primary_key=True)
     elements_xml = models.TextField(null=True, blank=True)
     rndt_xml     = models.TextField(null=True, blank=True)
     fileid       = models.IntegerField(null=True, blank=True)
-    
+
     md_language  = models.CharField(_('language'), max_length=3, choices=ALL_LANGUAGES, default='ita', help_text=_('language used for metadata'))
-    md_date = models.DateTimeField(_('metadata date'), default = datetime.now, help_text=_('metadata date'))
+    md_date      = models.DateTimeField(_('metadata date'), default = datetime.now, help_text=_('metadata date'))
+
+    contacts     = models.ManyToManyField(Profile, through='MultiContactRole')    
     
 
     @property

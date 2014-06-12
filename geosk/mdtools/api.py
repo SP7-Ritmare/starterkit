@@ -2,8 +2,10 @@
 import sys
 import json
 import requests
+import re
 from lxml import etree
-from owslib.iso import MD_Metadata
+from email.utils import parseaddr
+from owslib.iso import MD_Metadata, CI_ResponsibleParty, util, namespaces
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
@@ -17,10 +19,13 @@ from geonode.layers.metadata import set_metadata, sniff_date
 from geonode.layers.models import Layer
 from geonode.layers.views import _resolve_layer, _PERMISSION_MSG_METADATA, layer_detail
 from geonode.utils import http_client, _get_basic_auth_info, json_response
+from geonode.people.enumerations import ROLE_VALUES
+from geonode.people.models import Profile, Role
 
 from geosk.skregistration.views import get_key
 
-from .forms import UploadMetadataFileForm
+from geosk.mdtools.forms import UploadMetadataFileForm
+from geosk.mdtools.models import ResponsiblePartyScope, MultiContactRole, SCOPE_VALUES
 
 def get_datetype(ita):
     DATETYPE = {
@@ -231,20 +236,88 @@ def _mdimport(layer, vals, keywords, xml):
             value = TopicCategory.objects.get(identifier=get_topic_category(value.encode('utf8')))
         elif key == 'supplemental_information' and value is None:
             value = ' '
+        elif key in ['md_contact', 'citation_contact', 'identification_contact']:
+            _set_contact_role_scope(key, value, layer.mdextension)
         setattr(layer, key, value)
-
 
     layer.save()
     return layer
 
+def _set_contact_role_scope(scope, contacts, resource):
+    scope = _get_or_create_scope(scope)
+    MultiContactRole.objects.filter(resource=resource, scope=scope).delete()
+    for c in contacts:
+        profile = _get_or_create_profile(c)
+        if profile is not None:
+            role = _get_or_create_role(c)
+            MultiContactRole.objects.create(resource=resource,
+                                            contact=profile,
+                                            role=role,
+                                            scope=scope)
+
+def _get_or_create_scope(_scope):
+    scopes = dict(SCOPE_VALUES)
+    scope, is_created = ResponsiblePartyScope.objects.get_or_create(value=_scope)
+    return scope
+
+def _get_or_create_role(contact, default='pointOfContact'):
+    _role = contact['role']
+    roles = dict(ROLE_VALUES)
+    if roles.get(_role) is None:
+        _role = default
+    role, is_created = Role.objects.get_or_create(value=_role)
+    return role
+
+def _get_or_create_profile(contact):
+    _name = contact['name']
+    _email = parseaddr(contact['email'])[1] # removing the mailto: prefix
+    if _email is None or _email.strip() == '':
+        return None
+    #guess name
+    if _name is None or _name.strip() == '':
+        contact['name'] = _guess_name(_email)
+    # some cleaning
+    fields = Profile._meta.get_all_field_names()
+    _defaults= {k:v for k, v in contact.items() if k in fields}
+    del(_defaults['email']) # 
+    # create profile
+    profile, is_created = Profile.objects.get_or_create(defaults=_defaults, email=_email)
+    return profile
+
+split_email_regexp = re.compile(r'[ .-_]')
+def _guess_name(email):
+    parts = []
+    _email = email.split('@')[0]
+    for s in re.split(split_email_regexp, _email):
+        s = s.strip()
+        if s:
+            if len(s)>1:
+                parts.append(s.capitalize())
+            else:
+                parts.append(s.capitalize()+'.')
+    name = ' '.join(parts)
+    if len(name) > 1:
+        return name
+    else:
+        return email
+
+# extend MD_Metadata
+class EDI_Metadata(MD_Metadata):
+    def __init__(self, md):
+        super( EDI_Metadata, self ).__init__(md)
+        # get additional elements
+        self.identification.cited = []
+        for i in md.findall(util.nspath_eval('gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:citedResponsibleParty/gmd:CI_ResponsibleParty', namespaces)):
+            o = CI_ResponsibleParty(i)
+            self.identification.cited.append(o)
 
 def rndt2dict(exml):
-    """generate dict of properties from gmd:MD_Metadata (INSPIRE - RNDT)"""
+    """generate dict of properties from EDI_Metadata (INSPIRE - RNDT)"""
 
     vals = {}
     keywords = []
 
-    mdata = MD_Metadata(exml)
+    mdata = EDI_Metadata(exml)
 
     # metadata 
     vals['uuid'] = mdata.identifier
@@ -293,6 +366,22 @@ def rndt2dict(exml):
                 mdata.identification.otherconstraints[0]
 
         vals['purpose'] = mdata.identification.purpose
+
+        citation_contact = []
+        for c in mdata.identification.cited:
+            c = c.__dict__
+            if c['onlineresource'] is not None:
+                c['onlineresource'] = c['onlineresource'].__dict__
+            citation_contact.append(c)
+        vals['citation_contact'] = citation_contact
+                
+        md_contact = []
+        for c in mdata.contact:
+            c = c.__dict__
+            if c['onlineresource'] is not None:
+                c['onlineresource'] = c['onlineresource'].__dict__
+            md_contact.append(c)
+        vals['md_contact'] = md_contact
 
     if mdata.dataquality is not None:
         vals['data_quality_statement'] = mdata.dataquality.lineage
