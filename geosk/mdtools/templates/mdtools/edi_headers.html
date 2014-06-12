@@ -1,0 +1,53 @@
+<script>
+// set global variables
+var ediUrl = '/mdtools/rndt/{{ layername }}/';
+queryStringValues = {{ queryStringValues }} 
+</script>
+<script type="text/javascript" src="{{ STATIC_URL }}edi/js/1.00/xml2json.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}edi/js/1.00/json2xml.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}edi/js/1.00/langs.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}edi/js/1.00/spin.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}geosk/js/rndtCallbacks.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}edi/js/2.00/mdeditor.js"></script>
+
+<script type="text/javascript">
+
+var edimlUrl = "/proxy/?url=http%3A%2F%2Fsp7.irea.cnr.it%2Fjboss%2FMDService%2Frest%2Fediml%2F";
+
+function beforeSend(jqXHR, settings){
+    // show gif here, eg:
+    if(settings.url == 'postMetadata'){
+	$("#loading-modal").modal({
+	    keyboard: false,
+	    backdrop: 'static'
+	});
+    }
+}
+function complete(jqXHR, settings){
+    // hide gif here, eg:
+    if(settings.url == 'postMetadata'){
+	$("#loading-modal").modal('hide');
+    }
+}
+
+$.ajaxSetup({
+    beforeSend: beforeSend,
+    complete: complete
+});
+
+// side bar
+$('body').scrollspy(); //function(){offset:{top: 10}}
+setTimeout(function () {
+    $('.bs-docs-sidenav').affix({
+        offset: {
+	    top: 10,
+	    bottom: 270
+        }
+	})
+}, 100)
+
+$(document).ready(function() {
+     $('.mandatory').addClass('text-info');
+});
+</script>
+    
