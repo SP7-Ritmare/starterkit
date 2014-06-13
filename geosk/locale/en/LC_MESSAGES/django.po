@@ -8,14 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-31 15:58-0500\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2014-06-13 08:19-0500\n"
+"PO-Revision-Date: 2014-06-13 07:54-0600\n"
+"Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Translated-Using: django-rosetta 0.7.4\n"
 
 #: dashboard.py:26
 msgid "Metadata Configuration & Registration"
@@ -69,31 +70,31 @@ msgstr ""
 msgid "SK Front end"
 msgstr ""
 
-#: dashboard.py:107
+#: dashboard.py:107 templates/site_base.html:101
 msgid "Home"
 msgstr ""
 
-#: dashboard.py:112
+#: dashboard.py:112 templates/site_base.html:104
 msgid "Layers"
 msgstr ""
 
-#: dashboard.py:117
+#: dashboard.py:117 templates/site_base.html:117
 msgid "Maps"
 msgstr ""
 
-#: dashboard.py:122
+#: dashboard.py:122 templates/site_base.html:113
 msgid "Documents"
 msgstr ""
 
-#: dashboard.py:127
+#: dashboard.py:127 templates/site_base.html:120
 msgid "People"
 msgstr ""
 
-#: dashboard.py:132
+#: dashboard.py:132 templates/site_base.html:123
 msgid "Search"
 msgstr ""
 
-#: dashboard.py:137 templates/site_base.html:14
+#: dashboard.py:137 templates/site_base.html:126
 msgid "Services"
 msgstr ""
 
@@ -101,186 +102,245 @@ msgstr ""
 msgid "Sos"
 msgstr ""
 
-#: mdtools/models.py:52
+#: mdtools/admin.py:18
+msgid "Provider"
+msgstr ""
+
+#: mdtools/admin.py:22
+msgid "Contact"
+msgstr ""
+
+#: mdtools/models.py:49
+msgid "Metadata responsible party"
+msgstr ""
+
+#: mdtools/models.py:50
+msgid "Responsible party"
+msgstr ""
+
+#: mdtools/models.py:51
+msgid "Point of contact"
+msgstr ""
+
+#: mdtools/models.py:56
+msgid "Scope"
+msgstr ""
+
+#: mdtools/models.py:74
 msgid "language"
 msgstr ""
 
-#: mdtools/models.py:52
+#: mdtools/models.py:74
 msgid "language used for metadata"
-msgstr ""
+msgstr "Lingua dei metadati"
 
-#: mdtools/models.py:53
+#: mdtools/models.py:75
 msgid "metadata date"
 msgstr ""
 
-#: mdtools/models.py:99 mdtools/models.py:100
+#: mdtools/models.py:123
+msgid "node name"
+msgstr ""
+
+#: mdtools/models.py:123
+msgid "shorter than the title: e.g. acronym. This field is required"
+msgstr ""
+
+#: mdtools/models.py:124
 msgid "node title"
 msgstr ""
 
-#: mdtools/models.py:101
+#: mdtools/models.py:124 mdtools/models.py:128 mdtools/models.py:130
+#: mdtools/models.py:132
+msgid "This field is required"
+msgstr ""
+
+#: mdtools/models.py:125
 msgid "node abastract"
 msgstr ""
 
-#: mdtools/models.py:102
+#: mdtools/models.py:126
 msgid "keywords"
 msgstr ""
 
-#: mdtools/models.py:104
+#: mdtools/models.py:128
 msgid "organization name"
 msgstr ""
 
-#: mdtools/models.py:105
+#: mdtools/models.py:129
 msgid "provider url"
 msgstr ""
 
-#: mdtools/models.py:106
+#: mdtools/models.py:130
 msgid "contact name"
 msgstr ""
 
-#: mdtools/models.py:107
+#: mdtools/models.py:131
 msgid "contact position"
 msgstr ""
 
-#: mdtools/models.py:108
-msgid "contact address"
-msgstr ""
-
-#: mdtools/models.py:109
-msgid "contact city"
-msgstr ""
-
-#: mdtools/models.py:110
-msgid "contact state or province"
-msgstr ""
-
-#: mdtools/models.py:111
-msgid "contact postalcode"
-msgstr ""
-
-#: mdtools/models.py:112
-msgid "contact country"
-msgstr ""
-
-#: mdtools/models.py:113
-msgid "contact phone"
-msgstr ""
-
-#: mdtools/models.py:114
-msgid "contact fax"
-msgstr ""
-
-#: mdtools/models.py:115
+#: mdtools/models.py:132
 msgid "contact email"
 msgstr ""
 
-#: mdtools/models.py:116
+#: mdtools/models.py:133
 msgid "contact url"
 msgstr ""
 
-#: mdtools/models.py:117
+#: mdtools/models.py:134
+msgid "contact address"
+msgstr ""
+
+#: mdtools/models.py:135
+msgid "contact city"
+msgstr ""
+
+#: mdtools/models.py:136
+msgid "contact state or province"
+msgstr ""
+
+#: mdtools/models.py:137
+msgid "contact postalcode"
+msgstr ""
+
+#: mdtools/models.py:138
+msgid "contact country"
+msgstr ""
+
+#: mdtools/models.py:139
+msgid "contact phone"
+msgstr ""
+
+#: mdtools/models.py:140
+msgid "contact fax"
+msgstr ""
+
+#: mdtools/models.py:141
 msgid "contact hours"
 msgstr ""
 
-#: mdtools/models.py:118 mdtools/models.py:119
+#: mdtools/models.py:142
 msgid "contact instructions"
 msgstr ""
 
-#: mdtools/models.py:121
+#: mdtools/models.py:143
+msgid "contact role"
+msgstr ""
+
+#: mdtools/models.py:145
 msgid "Services metadata"
 msgstr ""
 
+#: mdtools/templates/base/resourcebase_info_panel.html:7
+msgid "Title"
+msgstr ""
+
+#: mdtools/templates/base/resourcebase_info_panel.html:14
+msgid "Abstract"
+msgstr ""
+
+#: mdtools/templates/base/resourcebase_info_panel.html:21
+#: templates/search/_general_filters.html:5
+msgid "Date"
+msgstr ""
+
+#: mdtools/templates/base/resourcebase_info_panel.html:28
+msgid "Type"
+msgstr ""
+
+#: mdtools/templates/base/resourcebase_info_panel.html:35
+#: templates/search/_general_filters.html:16
+msgid "Keywords"
+msgstr ""
+
+#: mdtools/templates/base/resourcebase_info_panel.html:44
+msgid "Category"
+msgstr ""
+
+#: mdtools/templates/base/resourcebase_info_panel.html:51
+msgid "Regions"
+msgstr ""
+
+#: mdtools/templates/base/resourcebase_info_panel.html:58
+msgid "License"
+msgstr ""
+
+#: mdtools/templates/base/resourcebase_info_panel.html:80
+#: mdtools/templates/base/resourcebase_info_panel.html:88
+msgid "SK User"
+msgstr ""
+
+#: mdtools/templates/base/resourcebase_info_panel.html:95
+msgid "Point of Contact"
+msgstr ""
+
+#: mdtools/templates/base/resourcebase_info_panel.html:108
+msgid "Maintenance Frequency"
+msgstr ""
+
+#: mdtools/templates/base/resourcebase_info_panel.html:115
+msgid "Restrictions"
+msgstr ""
+
+#: mdtools/templates/base/resourcebase_info_panel.html:126
+msgid "Edition"
+msgstr ""
+
+#: mdtools/templates/base/resourcebase_info_panel.html:133
+msgid "Purpose"
+msgstr ""
+
+#: mdtools/templates/base/resourcebase_info_panel.html:140
+#: templates/site_base.html:177
+msgid "Language"
+msgstr ""
+
+#: mdtools/templates/base/resourcebase_info_panel.html:147
+msgid "Temporal Extent"
+msgstr ""
+
+#: mdtools/templates/base/resourcebase_info_panel.html:154
+msgid "Data Quality"
+msgstr ""
+
+#: mdtools/templates/base/resourcebase_info_panel.html:161
+msgid "Supplemental Information"
+msgstr ""
+
+#: mdtools/templates/base/resourcebase_info_panel.html:168
+msgid "Spatial Representation Type"
+msgstr ""
+
 #: mdtools/templates/layers/_layer_list_item.html:18
-#: mdtools/templates/layers/geonode__layer_list_item.html:18
 msgid "from"
 msgstr ""
 
 #: mdtools/templates/layers/_layer_list_item.html:18
-#: mdtools/templates/layers/geonode__layer_list_item.html:18
 msgid "ago"
 msgstr ""
 
 #: mdtools/templates/layers/_layer_list_item.html:21
-#: mdtools/templates/layers/geonode__layer_list_item.html:21
 msgid "view"
 msgstr ""
 
 #: mdtools/templates/layers/_layer_list_item.html:22
-#: mdtools/templates/layers/geonode__layer_list_item.html:22
 msgid "Average rating"
 msgstr ""
 
 #: mdtools/templates/layers/_layer_list_item.html:22
-#: mdtools/templates/layers/geonode__layer_list_item.html:22
 msgid "votes"
 msgstr ""
 
 #: mdtools/templates/layers/_layer_list_item.html:35
-#: mdtools/templates/layers/geonode__layer_list_item.html:27
 msgid "Download"
 msgstr ""
 
 #: mdtools/templates/layers/_layer_list_item.html:36
-#: mdtools/templates/layers/geonode__layer_list_item.html:28
 msgid "Create a map"
 msgstr ""
 
 #: mdtools/templates/layers/_layer_list_item.html:46
-#: mdtools/templates/layers/geonode__layer_list_item.html:38
 msgid "Download Layer"
-msgstr ""
-
-#: mdtools/templates/layers/geonode_layer_metadata.html:12
-#, python-format
-msgid ""
-"\n"
-"        Editing details for %(layer_title)s\n"
-"      "
-msgstr ""
-
-#: mdtools/templates/layers/geonode_layer_metadata.html:17
-msgid ""
-"Note: this layer's orginal metadata was populated by importing a metadata "
-"XML file.\n"
-"        GeoNode's metadata import supports a subset of ISO, FGDC, and Dublin "
-"Core metadata elements.\n"
-"        Some of your original metadata may have been lost."
-msgstr ""
-
-#: mdtools/templates/layers/geonode_layer_metadata.html:23
-msgid "Error updating metadata.  Please check the following fields: "
-msgstr ""
-
-#: mdtools/templates/layers/geonode_layer_metadata.html:32
-#: mdtools/templates/layers/geonode_layer_metadata.html:47
-msgid "Attributes"
-msgstr ""
-
-#: mdtools/templates/layers/geonode_layer_metadata.html:49
-msgid "Attribute"
-msgstr ""
-
-#: mdtools/templates/layers/geonode_layer_metadata.html:49
-msgid "Label"
-msgstr ""
-
-#: mdtools/templates/layers/geonode_layer_metadata.html:49
-msgid "Description"
-msgstr ""
-
-#: mdtools/templates/layers/geonode_layer_metadata.html:49
-msgid "Display Order"
-msgstr ""
-
-#: mdtools/templates/layers/geonode_layer_metadata.html:57
-msgid "Point of Contact"
-msgstr ""
-
-#: mdtools/templates/layers/geonode_layer_metadata.html:62
-msgid "Metadata Provider"
-msgstr ""
-
-#: mdtools/templates/layers/geonode_layer_metadata.html:67
-msgid "Update"
 msgstr ""
 
 #: osk/templates/osk/osk_base.html:12 osk/templates/osk/osk_list.html:7
@@ -289,7 +349,7 @@ msgid "Explore SOS"
 msgstr ""
 
 #: osk/templates/osk/osk_base.html:13
-#: osk/templates/osk/osk_registration.html:13
+#: osk/templates/osk/osk_registration.html:7
 msgid "Sensor Registration"
 msgstr ""
 
@@ -301,7 +361,6 @@ msgstr ""
 msgid "Describe sensor"
 msgstr ""
 
-#: osk/templates/osk/osk_registration.html:7
 #: osk/templates/osk/osk_upload.html:7
 msgid "Explore Documents"
 msgstr ""
@@ -314,59 +373,277 @@ msgstr ""
 msgid "Registration status"
 msgstr ""
 
-#: skregistration/templates/skregistration/registration.html:40
+#: skregistration/templates/skregistration/registration.html:47
 msgid "Please check the information is correct prior to registering the SK"
 msgstr ""
 
-#: templates/_about.html:4 templates/_about.html.py:8 templates/about.html:4
-#: templates/about_services_3.html:4
-msgid "About GeoNode"
+#: skregistration/templates/skregistration/registration.html:50
+msgid ""
+"Please add more information about your SK implementation. Fill the Services "
+"Metadata form."
 msgstr ""
 
-#: templates/_about.html:9
-msgid "About GeoNode."
+#: templates/about.html:4 templates/about.html.py:8
+msgid "About RITMARE Starter Kit"
 msgstr ""
 
-#: templates/about.html:8
-msgid "A proposito del Geo Starter Kit"
+#: templates/about.html:10
+msgid ""
+"\n"
+"      The updated documentation is available at the RITMARE SP7 Wiki:\n"
+"      <a href=\"http://sp7.irea.cnr.it/wiki/index.php/Getting_Started"
+"\">Starter Kit - Getting Started</a>\n"
+"      "
 msgstr ""
 
 #: templates/about_services.html:5
 msgid "Descrizione servizi"
 msgstr ""
 
-#: templates/about_services.html:11 templates/about_services_3.html:8
-msgid "GeoSK Web Services"
+#: templates/about_services.html:11
+msgid "SK Web Services"
 msgstr ""
 
 #: templates/about_services.html:13
 msgid ""
-"GeoSK provides <a href=\"http://www.opengeospatial.org/\">OGC</a> compliant "
-"web services to discover, view and download geospatial datasets.\n"
+"SK provides <a href=\"http://www.opengeospatial.org/\">OGC</a> compliant web "
+"services to discover, view and download geospatial datasets.\n"
 msgstr ""
 
-#: templates/about_services_3.html:13
-msgid "GeoNode's Web Services"
+#: templates/help.html:4
+msgid "User Guide"
 msgstr ""
 
-#: templates/about_services_3.html:14
-msgid "GeoNode's Web Services are available from the following URLs:"
+#: templates/help.html:8
+msgid "GeoNode Help"
 msgstr ""
 
-#: templates/about_services_3.html:49
-msgid "Raster data via WCS:"
+#: templates/help.html:9
+msgid ""
+"This page provides helpful information about how to use the GeoNode. You can "
+"use the sidebar links to navigate to what you want to know."
 msgstr ""
 
-#: templates/about_services_3.html:54
-msgid "Metadata search via CSW:"
+#: templates/help.html:12
+msgid ""
+"\n"
+"  <p>The GeoNode provides access to data sets and a map editing application "
+"allows users to browse existing maps and contribute their own.</p>\n"
+"\n"
+"  <h4 id=\"upload-layers\">Creating Layers</h4>\n"
+"  <p>The \"UPLOAD LAYER\" tab in <a href=\"/layers\">Layers</a> page allows "
+"you to upload new layers to this Starterkit and, after the upload, to "
+"compile metadata.</p>\n"
+"  <p>We invite you if you need help to consult the official <a href=\"http://"
+"docs.geonode.org/en/latest/tutorials/users/layers/upload.html\">Geonode "
+"Documentation</a> or the SK help page for <a href=\"upload_layers"
+"\">uploading data</a>.</p>\n"
+"\n"
+"  <h4 id=\"browsing-data\">Browsing Layers</h4>\n"
+"  <p>The <a href=\"/layers\">Layers</a> tab allows you to browse data "
+"uploaded to this GeoNode.</p>\n"
+"  <p>All data can be downloaded in a variety of formats, for use in other "
+"applications.</p>\n"
+"\n"
+"  <h4 id=\"developer-access\">Developer Access</h4>\n"
+"  <p>The <a href=\"/developer\"> Developer</a> page is the place for "
+"developers to get started building applications against the GeoNode. It "
+"includes instructions on using the web services, links to the source code of "
+"the GeoNode, and information about the open source projects used to create "
+"it.</p>\n"
+"\n"
+"  <h4 id=\"browsing-maps\">Browsing Maps</h4>\n"
+"  <p>The GeoNode allows users to create and share maps with one another.</"
+"p>\n"
+"  <p>The <a href=\"/maps\">Maps</a> tab is a gateway to map exploration on "
+"GeoNode.  From here you can <strong>search for a map</strong> or "
+"<strong>create a map</strong>, which will open the <a href=\"/maps/new\">Map "
+"Composer</a>.</p>\n"
+"  <h5>Google Earth Mode</h5>\n"
+"  <p>Any map viewed in the interactive map editor can be seen in 3D mode "
+"with the Google Earth plugin. To switch to 3D mode select the Google Earth "
+"globe logo, the rightmost button on top toolbar. If you do not have the "
+"Google Earth plugin installed you will be prompted to install it.</p>\n"
+"\n"
+"  <h4 id=\"creating-a-map\">Creating a Map</h4>\n"
+"  <p>To create a new map go to the <a href=\"/maps\">Contributed Maps</a> "
+"tab and click the <a href=\"/maps/new\">create your own map</a> link.</p>\n"
+"  <p>This will take you to the <a href=\"/maps/new\">Map Composer</a> with a "
+"base layer loaded.</p>\n"
+"  <p>To add data layers from the GeoNode click on the green plus button "
+"located below the layers tab on the left hand side of the screen. This will "
+"open a dialog listing all the layers available on the GeoNode.</p>\n"
+"  <p>To add layers to your map select them and hit the <strong>Add Layers</"
+"strong> button. When finished you may hit <strong>Done</strong> to close the "
+"dialog and go back to the map.</p>\n"
+"\n"
+"  <h5>Reordering and Removing Layers</h5>\n"
+"  <p>Change the display order of the layers listed in the data tab by simply "
+"dragging and dropping their names. The order in the map will be updated to "
+"reflect that. To turn a layer's visibility off simply uncheck it, and to "
+"remove it entirely select it and hit the red minus button.</p>\n"
+"\n"
+"  <h5>Saving your map</h5>\n"
+"  <p>Once a suitable set of layers and zoom level has been found it's time "
+"to save it so others can see it.  Click the Save button--the left most icon "
+"on the top toolbar, an image of a map with a disk--on the top menu and fill "
+"out the title and abstract of the map.</p>\n"
+"\n"
+"  <h4 id=\"exporting-a-map\">Exporting a Map</h4>\n"
+"  <p>Any map from the GeoNode can be embedded for use in another site or "
+"blog. To export a map:</p>\n"
+"  <ol>\n"
+"    <li>Select the from the list of maps on the community or map page and "
+"then hit the 'export map' button.</li> \n"
+"    <li>Choose your desired height and width for the widget in the wizard.</"
+"li> \n"
+"    <li>Copy the HTML snippet provided in the wizard to any HTML page or "
+"iFrame-supporting blog post.</li>\n"
+"  </ol>\n"
+"  <p>This will put an interactive widget showing you map in your web page or "
+"blog post.</p>\n"
+"  <p>Note that the <a href=\"/maps/new\">Map Composer</a> also has a button "
+"to export the map. Just be sure to save the map before exporting if there "
+"are changes that you want others to see. It exports the last saved version, "
+"not the last viewed version.</p>\n"
+"\n"
+"  <h4 id=\"remixing-a-map\">Remixing a Map</h4>\n"
+"  <p>Any map available can serve as a starting point for a new map.</p>\n"
+"  <ol>\n"
+"    <li>Open the map in the Map Composer.</li>\n"
+"    <li>Add and remove layers as you like.</li>\n"
+"    <li>Pan and zoom to highlight the area of interest.</li>\n"
+"    <li><strong>IMPORTANT:</strong> Update the title, abstract, contact info "
+"and tags to reflect the new map.</li>\n"
+"    <li>Save the map.</li>\n"
+"  </ol>\n"
+"  <p>You will be able to see your new map when you search for it from the <a "
+"href=\"/maps\">Maps</a> tab.</p> \n"
+"  "
 msgstr ""
 
-#: templates/about_services_3.html:59
-msgid "Cached tiles via WMTS:"
+#: templates/help.html:69
+msgid "Sections"
 msgstr ""
 
-#: templates/site_base.html:17
+#: templates/help.html:70
+msgid "Creating Layers"
+msgstr ""
+
+#: templates/help.html:71
+msgid "Browsing Layers"
+msgstr ""
+
+#: templates/help.html:72
+msgid "Developer Access"
+msgstr ""
+
+#: templates/help.html:73
+msgid "Browsing Maps"
+msgstr ""
+
+#: templates/help.html:74
+msgid "Creating a Map"
+msgstr ""
+
+#: templates/help.html:75
+msgid "Exporting a Map"
+msgstr ""
+
+#: templates/help.html:76
+msgid "Remixing a Map"
+msgstr ""
+
+#: templates/site_base.html:35
+msgid "Profile"
+msgstr ""
+
+#: templates/site_base.html:36
+msgid "Inbox"
+msgstr ""
+
+#: templates/site_base.html:38
+msgid "Admin"
+msgstr ""
+
+#: templates/site_base.html:41
+msgid "Announcements"
+msgstr ""
+
+#: templates/site_base.html:44
+msgid "GeoServer"
+msgstr ""
+
+#: templates/site_base.html:46
+msgid "Recent Activity"
+msgstr ""
+
+#: templates/site_base.html:48
+msgid "Log out"
+msgstr ""
+
+#: templates/site_base.html:53
+msgid "Notifications"
+msgstr ""
+
+#: templates/site_base.html:54
+msgid "Messages"
+msgstr ""
+
+#: templates/site_base.html:55
+msgid "Upload"
+msgstr ""
+
+#: templates/site_base.html:56
+msgid "Help"
+msgstr ""
+
+#: templates/site_base.html:60 templates/site_base.html.py:73
+msgid "Sign in"
+msgstr ""
+
+#: templates/site_base.html:65
+msgid "Username"
+msgstr ""
+
+#: templates/site_base.html:67
+msgid "Password"
+msgstr ""
+
+#: templates/site_base.html:71
+msgid "Remember Me"
+msgstr ""
+
+#: templates/site_base.html:79
+msgid "or"
+msgstr ""
+
+#: templates/site_base.html:80
+msgid "Register"
+msgstr ""
+
+#: templates/site_base.html:108
 msgid "Sensors"
+msgstr ""
+
+#: templates/site_base.html:166
+msgid "SK is a project of the StarterKit Development Team"
+msgstr ""
+
+#: templates/site_base.html:166
+msgid "About"
+msgstr ""
+
+#: templates/site_base.html:168
+msgid "Based on"
+msgstr ""
+
+#: templates/site_base.html:168
+msgid "GeoNode"
+msgstr ""
+
+#: templates/site_base.html:169
+msgid "Info"
 msgstr ""
 
 #: templates/site_index.html:19
@@ -382,10 +659,10 @@ msgstr ""
 #: templates/site_index.html:26
 msgid ""
 " \n"
-"\tSK is developed under the umbrella of the RITMARE project (<a href="
-"\"http://www.ritmare.it/\">www.ritmare.it</a>) in the <a href=\"http://sp7."
-"irea.cnr.it/\">Sub-Project 7</a> framework and it is based upon <a href="
-"\"http://geonode.org/\">GeoNode</a>.\n"
+"\tThe Starter Kit is developed in the context of <a href=\"http://sp7.irea."
+"cnr.it/\">Sub-Project 7</a> of RITMARE (<a href=\"http://www.ritmare.it/"
+"\">www.ritmare.it</a>). It is based upon <a href=\"http://geonode.org/"
+"\">GeoNode</a>.\n"
 "\t"
 msgstr ""
 
@@ -405,10 +682,18 @@ msgstr ""
 msgid "Explore Maps"
 msgstr ""
 
-#: templates/search/_general_filters.html:5
-msgid "Date"
+#: templates/upload_layers.html:5
+msgid "Upload Layers"
 msgstr ""
 
-#: templates/search/_general_filters.html:16
-msgid "Keywords"
+#: templates/upload_layers.html:11
+msgid "Uploading layers in K"
+msgstr ""
+
+#: templates/upload_layers.html:13
+msgid ""
+"SK provides a user friendly tool to upload easilly spatial data such as "
+"Rasters (GeoTIFF) and vector data (shapefiles).\n"
+"      For different type of spatial data, consult the <a href=\"http://docs."
+"geoserver.org/2.4.x/en/user/\">Geoserver manual</a>       \n"
 msgstr ""
