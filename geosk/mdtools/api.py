@@ -110,7 +110,7 @@ def rndteditor(request, layername):
             'southlat': layer.bbox_y0,
             'northlat': layer.bbox_y1,
             'resource': '%s%s' % (settings.SITEURL[:-1], layer.get_absolute_url()),
-            'referencesystem': l.srid,
+            'referencesystem': layer.srid,
             }
 
     
