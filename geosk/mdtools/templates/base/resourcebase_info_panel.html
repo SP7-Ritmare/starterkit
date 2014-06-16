@@ -77,7 +77,7 @@
 
     {% if resourcebase.owner %}
     <li>
-      <strong>{% trans "SK User" %}:</strong>
+      <strong>{% trans "StarterKit User" %}:</strong>
       <a href="{{ resourcebase.owner.get_profile.get_absolute_url }}">{{ resourcebase.owner.username }}</a>
     </li>
     {% endif %}
@@ -85,7 +85,7 @@
   {% else %}
     {% if resourcebase.owner %}
     <li>
-      <strong>{% trans "SK User" %}:</strong>
+      <strong>{% trans "StarterKit User" %}:</strong>
       <a href="{{ resourcebase.owner.get_profile.get_absolute_url }}">{{ resourcebase.owner.username }}</a>
     </li>
     {% endif %}
