@@ -1,0 +1,5 @@
+{% overextends "admin/base.html" %}
+{% load admin_static %}{% load url from future %}{% load i18n grp_tags %}
+{% block admin_title %}
+<h1 id="grp-admin-title"><a href="/">{% if grappelli_admin_title %}{{ grappelli_admin_title }}{% else %}{% get_admin_title %}{% endif %}</a></h1>
+{% endblock %}
