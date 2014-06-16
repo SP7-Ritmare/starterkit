@@ -60,7 +60,9 @@ def register(request):
     else:
         return json_response(errors='Missing metadata', status=500)
         
-    status, api_key = _register(uri = domain, md=json.dumps(model_to_dict(services_metadata)))
+    _md = model_to_dict(services_metadata)
+    _md['base_url'] = settings.SITEURL
+    status, api_key = _register(domain = domain, md=json.dumps(_md))
     if status is True:
         skr = SkRegistration(api_key = api_key, site = current_site)
         skr.save()
@@ -68,15 +70,15 @@ def register(request):
     else:
         return json_response(errors=api_key, status=500)
 
-def _register(uri=None, md=None):
-    if uri is None:
-        uri = Site.objects.get_current().domain
+def _register(domain=None, md=None):
+    if domain is None:
+        domain = Site.objects.get_current().domain
 
     service = settings.RITMARE['MDSERVICE']
     url_register = os.path.join(service,'auth','register')
 
     data = {
-        'uri': uri,
+        'uri': 'http://%s' % domain,
         'xmlMetadata': '<elements></elements>',
         'jsonMedata': md
         }
