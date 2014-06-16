@@ -14,6 +14,20 @@ queryStringValues = {{ queryStringValues }}
 
 var edimlUrl = "/proxy/?url=http%3A%2F%2Fsp7.irea.cnr.it%2Fjboss%2FMDService%2Frest%2Fediml%2F";
 
+
+function preValidate(){
+    var i=0; 
+    var n=0; 
+    $("[required='required'][type!='hidden']").each(
+	function(id, el){
+	    if($(el).val() && $(el).val()){ 
+		i++ 
+	    } 
+	    n++
+	}
+    );
+}
+
 function beforeSend(jqXHR, settings){
     // show gif here, eg:
     if(settings.url == 'postMetadata'){
