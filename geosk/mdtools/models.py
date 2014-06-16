@@ -37,8 +37,6 @@ from geonode.base.enumerations import ALL_LANGUAGES, \
 
 from geonode.layers.models import Layer
 
-EXCLUDE = "bbox_x1, bbox_y0, bbox_y1, csw_typename, csw_schema, csw_mdsource, csw_insert_date, csw_type, csw_anytext, csw_wkt_geometry, metadata_uploaded, metadata_xml, thumbnail"
-
 
 def model_to_rdf(self):
     return ''
@@ -85,15 +83,17 @@ class MdExtension(models.Model):
 
 @property
 def completeness(self):
+    EXCLUDE = "bbox_x1, bbox_y0, bbox_y1, csw_typename, csw_schema, csw_mdsource, csw_insert_date, csw_type, csw_anytext, csw_wkt_geometry, metadata_uploaded, metadata_xml, thumbnail"
+    INCLUDE = ['title', 'abstract', 'date', 'date_type', 'keywords', 'language','category', 'supplemental_information','distribution_url','distribution_description','data_quality_statement']
     count = 0
     filled = 0
     for f in ResourceBase._meta.fields:
-        if f.name not in EXCLUDE:
+        if f.name in INCLUDE:
             count += 1
             if getattr(self, f.name):
                 filled += 1
     for f in ResourceBase._meta.many_to_many:
-        if f.name not in EXCLUDE:
+        if f.name in INCLUDE:
             count += 1            
             if getattr(self, f.name).all().count() > 0:
                 filled += 1

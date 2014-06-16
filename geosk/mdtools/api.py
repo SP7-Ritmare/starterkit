@@ -21,11 +21,20 @@ from geonode.layers.views import _resolve_layer, _PERMISSION_MSG_METADATA, layer
 from geonode.utils import http_client, _get_basic_auth_info, json_response
 from geonode.people.enumerations import ROLE_VALUES
 from geonode.people.models import Profile, Role
+from geonode.base.enumerations import ALL_LANGUAGES, \
+    HIERARCHY_LEVELS, UPDATE_FREQUENCIES, \
+    DEFAULT_SUPPLEMENTAL_INFORMATION, LINK_TYPES
 
 from geosk.skregistration.views import get_key
 
 from geosk.mdtools.forms import UploadMetadataFileForm
 from geosk.mdtools.models import ResponsiblePartyScope, MultiContactRole, SCOPE_VALUES
+
+EDI_MAP_SPATIALREPRESENTATIONTYPE = {
+    'dataStore': 'http://www.rndt.gov.it/codelists/MD_SpatialRepresentationTypeCode/items/001',
+    'coverageStore': 'http://www.rndt.gov.it/codelists/MD_SpatialRepresentationTypeCode/items/002',
+}
+
 
 def get_datetype(ita):
     DATETYPE = {
@@ -95,15 +104,13 @@ def rndteditor(request, layername):
             'data': layer.date,
             'tipo_di_data': layer.date_type,
             'abstract': layer.abstract,
-            'spatialrepresentationtype': ({
-                    "dataStore" : "vector",
-                    "coverageStore": "grid",
-                    }).get(layer.storeType),
+            'spatialrepresentationtype': (EDI_MAP_SPATIALREPRESENTATIONTYPE).get(layer.storeType),
             'westlon': layer.bbox_x0,
             'eastlon': layer.bbox_x1,
             'southlat': layer.bbox_y0,
             'northlat': layer.bbox_y1,
             'resource': '%s%s' % (settings.SITEURL[:-1], layer.get_absolute_url()),
+            'referencesystem': l.srid,
             }
 
     
@@ -157,6 +164,8 @@ def rndtproxy(request, layername):
         return json_response(exception=e, status=500)
         
     # save rndt & edi xml
+    layer.mdextension.md_date = vals['md_language']
+    layer.mdextension.md_date = vals['md_date']
     layer.mdextension.rndt_xml = rndt
     layer.mdextension.elements_xml = request.raw_post_data
     layer.mdextension.save()
@@ -229,6 +238,7 @@ def _mdimport(layer, vals, keywords, xml):
     # set model properties
     for (key, value) in vals.items():
         # print >>sys.stderr, key, unicode(value).encode('utf8')
+        # EDI_Metadata e MD_Metadata non riesco a leggerlo, inoltre EDI può averlo multiplo mentre GeoNode no
         if key == 'spatial_representation_type':
             value = SpatialRepresentationType(identifier=value)
         elif key == 'topic_category':
@@ -339,9 +349,7 @@ def rndt2dict(exml):
         vals['title'] = mdata.identification.title
         vals['abstract'] = mdata.identification.abstract
         vals['purpose'] = mdata.identification.purpose
-        if mdata.identification.supplementalinformation is not None:
-            vals['supplemental_information'] = \
-                mdata.identification.supplementalinformation
+        vals['supplemental_information'] = mdata.identification.supplementalinformation if mdata.identification.supplementalinformation is not None else DEFAULT_SUPPLEMENTAL_INFORMATION
 
         # vals['temporal_extent_start'] = \
         #     mdata.identification.temporalextent_start
@@ -382,6 +390,14 @@ def rndt2dict(exml):
                 c['onlineresource'] = c['onlineresource'].__dict__
             md_contact.append(c)
         vals['md_contact'] = md_contact
+
+        identification_contact = []
+        for c in mdata.identification.contact:
+            c = c.__dict__
+            if c['onlineresource'] is not None:
+                c['onlineresource'] = c['onlineresource'].__dict__
+            identification_contact.append(c)
+        vals['identification_contact'] = identification_contact
 
     if mdata.dataquality is not None:
         vals['data_quality_statement'] = mdata.dataquality.lineage
