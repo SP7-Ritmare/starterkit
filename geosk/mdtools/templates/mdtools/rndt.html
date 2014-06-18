@@ -22,17 +22,20 @@
 {% include 'mdtools/rndt_block.html' %}
 <div id="fields-legend">
   <blockquote>
-    <h3>RNDT/INSPIRE compliance</h3>
+    <h3>{% trans "RNDT/INSPIRE compliance" %}</h3>
+    <br/>
+    <ul>
     <!--p class="text-error"><strong>Required (to save the form)</strong></p-->
-    <p class="text-info"><strong>Mandatory</strong></p>
-    <p class=""><strong>Optional<strong></p>
+    <li><p class="text-info"><strong>{% trans "Mandatory" %}</strong></p>
+    <li><p class=""><strong>{% trans "Optional" %}<strong></p>
+    </ul>
   </blockquote>
 </div>
 
 
   <div id="loading-modal" class="modal hide fade">
     <div class="modal-header">
-      <h3>Salvataggio metadati ...</h3>
+      <h3>{% trans "Uploading ... " %}</h3>
     </div>
     <div class="modal-body">
       <div class="progress progress-striped active">
@@ -44,7 +47,7 @@
   <div id="loading-alert" class="modal hide fade">
     <div class="alert alert-error">
       <button type="button" class="close" data-dismiss="modal">×</button>
-      <h4  id="myModalLabel">Oh snap! You got an error!</h4>
+      <h4  id="myModalLabel">{% trans "Oh snap! You got an error!" %}</h4>
     </div>
     <div class="alert alert-error">
       <p id="error-message"></p>

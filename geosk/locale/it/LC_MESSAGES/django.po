@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: STARTER KIT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-18 16:30-0500\n"
+"POT-Creation-Date: 2014-06-18 17:56-0500\n"
 "PO-Revision-Date: 2014-06-18 16:21+0100\n"
 "Last-Translator: <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1279,7 +1279,7 @@ msgstr ""
 "dopo essere stati prodotti la prima volta"
 
 #: _locale_geonode/base/models.py:250 _locale_geonode/people/models.py:59
-#: mdtools/models.py:134
+#: mdtools/models.py:135
 msgid "keywords"
 msgstr "keywords"
 
@@ -1320,7 +1320,7 @@ msgstr ""
 "altre restrizioni e requisiti legali per l'accesso e l'uso della risorsa o "
 "dei metadati"
 
-#: _locale_geonode/base/models.py:258 mdtools/models.py:72
+#: _locale_geonode/base/models.py:258 mdtools/models.py:73
 msgid "language"
 msgstr "lingua"
 
@@ -4631,113 +4631,118 @@ msgstr "Soggetto responsabile"
 msgid "Point of contact"
 msgstr "Modifica contatto"
 
-#: mdtools/models.py:54
+#: mdtools/models.py:50
+#, fuzzy
+msgid "Distributor"
+msgstr "URL di distribuzione"
+
+#: mdtools/models.py:55
 msgid "Scope"
 msgstr "Scopo"
 
-#: mdtools/models.py:72
+#: mdtools/models.py:73
 msgid "language used for metadata"
 msgstr "lingua utilizzata per il metadato"
 
-#: mdtools/models.py:73
+#: mdtools/models.py:74
 msgid "metadata date"
 msgstr "data del metadato"
 
-#: mdtools/models.py:131
+#: mdtools/models.py:132
 #, fuzzy
 msgid "node name"
 msgstr "Stile del nome"
 
-#: mdtools/models.py:131
+#: mdtools/models.py:132
 msgid "shorter than the title: e.g. acronym. This field is required"
 msgstr ""
 "pi&ugrave; breve del titolo: e.g. acronimo. Questo campo &egrave; "
 "obbligatorio"
 
-#: mdtools/models.py:132
+#: mdtools/models.py:133
 #, fuzzy
 msgid "node title"
 msgstr "titolo"
 
-#: mdtools/models.py:132 mdtools/models.py:136 mdtools/models.py:138
-#: mdtools/models.py:140
+#: mdtools/models.py:133 mdtools/models.py:137 mdtools/models.py:139
+#: mdtools/models.py:141
 msgid "This field is required"
 msgstr "Questo campo &egrave; obbligatorio"
 
-#: mdtools/models.py:133
+#: mdtools/models.py:134
 #, fuzzy
 msgid "node abastract"
 msgstr "abstract"
 
-#: mdtools/models.py:136
+#: mdtools/models.py:137
 msgid "organization name"
 msgstr "Nome dell'organizzazione"
 
-#: mdtools/models.py:137
+#: mdtools/models.py:138
 msgid "provider url"
 msgstr "url del fornitore di dati"
 
-#: mdtools/models.py:138
+#: mdtools/models.py:139
 #, fuzzy
 msgid "contact name"
 msgstr "codename"
 
-#: mdtools/models.py:139
+#: mdtools/models.py:140
 msgid "contact position"
 msgstr "inquadramento contatto"
 
-#: mdtools/models.py:140
+#: mdtools/models.py:141
 msgid "contact email"
 msgstr "email contatto"
 
-#: mdtools/models.py:141
+#: mdtools/models.py:142
 msgid "contact url"
 msgstr "url contatto"
 
-#: mdtools/models.py:142
+#: mdtools/models.py:143
 msgid "contact address"
 msgstr "indirizzo contatto"
 
-#: mdtools/models.py:143
+#: mdtools/models.py:144
 #, fuzzy
 msgid "contact city"
 msgstr "opacità"
 
-#: mdtools/models.py:144
+#: mdtools/models.py:145
 msgid "contact state or province"
 msgstr "stato o provincia del contatto"
 
-#: mdtools/models.py:145
+#: mdtools/models.py:146
 #, fuzzy
 msgid "contact postalcode"
 msgstr "indirizzo postale"
 
-#: mdtools/models.py:146
+#: mdtools/models.py:147
 msgid "contact country"
 msgstr "paese del contatto"
 
-#: mdtools/models.py:147
+#: mdtools/models.py:148
 msgid "contact phone"
 msgstr "telefono del contatto"
 
-#: mdtools/models.py:148
+#: mdtools/models.py:149
 msgid "contact fax"
 msgstr "fax del contatto"
 
-#: mdtools/models.py:149
+#: mdtools/models.py:150
 msgid "contact hours"
 msgstr "orari "
 
-#: mdtools/models.py:150
+#: mdtools/models.py:151
 msgid "contact instructions"
 msgstr "istruzioni per il contatto"
 
-#: mdtools/models.py:151
+#: mdtools/models.py:152
 #, fuzzy
 msgid "contact role"
 msgstr "codename"
 
-#: mdtools/models.py:153
+#: mdtools/models.py:154
 msgid "Services metadata"
 msgstr "Metadati dei Servizi"
 
@@ -4750,6 +4755,34 @@ msgstr "Registrazione Starter Kit"
 #: mdtools/templates/layers/_layer_list_item.html:28
 msgid "Metadata Completeness"
 msgstr "Completezza dei metadati"
+
+#: mdtools/templates/mdtools/edi_headers.html:67
+msgid ""
+"Some of the Mandatory fields are not filled.  Please verify your data and "
+"try again."
+msgstr ""
+"Alcuni campi obbligatori non sono stati compilati. Verificate le "
+"informazioni prima di procedere nuovamente con l'aggiornameto."
+
+#: mdtools/templates/mdtools/rndt.html:25
+msgid "RNDT/INSPIRE compliance"
+msgstr "Conformità RNDT/INSPIRE"
+
+#: mdtools/templates/mdtools/rndt.html:27
+msgid "Mandatory"
+msgstr "Obbligatorio"
+
+#: mdtools/templates/mdtools/rndt.html:28
+msgid "Optional"
+msgstr "Opzionale"
+
+#: mdtools/templates/mdtools/rndt.html:35
+msgid "Uploading ... "
+msgstr "Aggiornamento ..."
+
+#: mdtools/templates/mdtools/rndt.html:47
+msgid "Oh snap! You got an error!"
+msgstr "Attenzione, si è verificato un errore!"
 
 #: osk/templates/osk/osk_base.html:12 osk/templates/osk/osk_list.html:7
 #: osk/templates/osk/osk_list.html.py:14
@@ -5077,6 +5110,9 @@ msgstr ""
 "cnr.it/\">Sotto-Progetto 7</a> di RITMARE (<a href=\"http://www.ritmare.it/"
 "\">www.ritmare.it</a>). Il sofware &egrave; basato su <a href=\"http://"
 "geonode.org/\">StarterKit</a>."
+
+#~ msgid "Upload metadata"
+#~ msgstr "Aggiorna metadati"
 
 #, fuzzy
 #~ msgid "SK User"

@@ -1,3 +1,4 @@
+{% load i18n %}
 <script>
 // set global variables
 var ediUrl = '/mdtools/rndt/{{ layername }}/';
@@ -63,7 +64,7 @@ function beforeSend(jqXHR, settings){
         var errors = checkMandatory();
         if(errors){
 	    closeModal();
-	    $("#error-message").text('Some of the Mandatory fields are not filled.  Please verify your data and try again.')
+	    $("#error-message").text("{% trans 'Some of the Mandatory fields are not filled.  Please verify your data and try again.' %}")
 	    $("#loading-alert").modal('show');
 	    jqXHR.abort();
         }

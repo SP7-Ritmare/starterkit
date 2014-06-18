@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-18 16:30-0500\n"
+"POT-Creation-Date: 2014-06-18 17:56-0500\n"
 "PO-Revision-Date: 2014-06-18 02:48-0600\n"
 "Last-Translator: <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1270,7 +1270,7 @@ msgid ""
 msgstr ""
 
 #: _locale_geonode/base/models.py:250 _locale_geonode/people/models.py:59
-#: mdtools/models.py:134
+#: mdtools/models.py:135
 msgid "keywords"
 msgstr ""
 
@@ -1306,7 +1306,7 @@ msgid ""
 "resource or metadata"
 msgstr ""
 
-#: _locale_geonode/base/models.py:258 mdtools/models.py:72
+#: _locale_geonode/base/models.py:258 mdtools/models.py:73
 msgid "language"
 msgstr ""
 
@@ -4480,104 +4480,108 @@ msgstr ""
 msgid "Point of contact"
 msgstr ""
 
-#: mdtools/models.py:54
+#: mdtools/models.py:50
+msgid "Distributor"
+msgstr ""
+
+#: mdtools/models.py:55
 msgid "Scope"
 msgstr ""
 
-#: mdtools/models.py:72
+#: mdtools/models.py:73
 msgid "language used for metadata"
 msgstr "Lingua dei metadati"
 
-#: mdtools/models.py:73
+#: mdtools/models.py:74
 msgid "metadata date"
 msgstr ""
 
-#: mdtools/models.py:131
+#: mdtools/models.py:132
 msgid "node name"
 msgstr ""
 
-#: mdtools/models.py:131
+#: mdtools/models.py:132
 msgid "shorter than the title: e.g. acronym. This field is required"
 msgstr ""
 
-#: mdtools/models.py:132
+#: mdtools/models.py:133
 msgid "node title"
 msgstr ""
 
-#: mdtools/models.py:132 mdtools/models.py:136 mdtools/models.py:138
-#: mdtools/models.py:140
+#: mdtools/models.py:133 mdtools/models.py:137 mdtools/models.py:139
+#: mdtools/models.py:141
 msgid "This field is required"
 msgstr ""
 
-#: mdtools/models.py:133
+#: mdtools/models.py:134
 msgid "node abastract"
 msgstr ""
 
-#: mdtools/models.py:136
+#: mdtools/models.py:137
 msgid "organization name"
 msgstr ""
 
-#: mdtools/models.py:137
+#: mdtools/models.py:138
 msgid "provider url"
 msgstr ""
 
-#: mdtools/models.py:138
+#: mdtools/models.py:139
 msgid "contact name"
 msgstr ""
 
-#: mdtools/models.py:139
+#: mdtools/models.py:140
 msgid "contact position"
 msgstr ""
 
-#: mdtools/models.py:140
+#: mdtools/models.py:141
 msgid "contact email"
 msgstr ""
 
-#: mdtools/models.py:141
+#: mdtools/models.py:142
 msgid "contact url"
 msgstr ""
 
-#: mdtools/models.py:142
+#: mdtools/models.py:143
 msgid "contact address"
 msgstr ""
 
-#: mdtools/models.py:143
+#: mdtools/models.py:144
 msgid "contact city"
 msgstr ""
 
-#: mdtools/models.py:144
+#: mdtools/models.py:145
 msgid "contact state or province"
 msgstr ""
 
-#: mdtools/models.py:145
+#: mdtools/models.py:146
 msgid "contact postalcode"
 msgstr ""
 
-#: mdtools/models.py:146
+#: mdtools/models.py:147
 msgid "contact country"
 msgstr ""
 
-#: mdtools/models.py:147
+#: mdtools/models.py:148
 msgid "contact phone"
 msgstr ""
 
-#: mdtools/models.py:148
+#: mdtools/models.py:149
 msgid "contact fax"
 msgstr ""
 
-#: mdtools/models.py:149
+#: mdtools/models.py:150
 msgid "contact hours"
 msgstr ""
 
-#: mdtools/models.py:150
+#: mdtools/models.py:151
 msgid "contact instructions"
 msgstr ""
 
-#: mdtools/models.py:151
+#: mdtools/models.py:152
 msgid "contact role"
 msgstr ""
 
-#: mdtools/models.py:153
+#: mdtools/models.py:154
 msgid "Services metadata"
 msgstr ""
 
@@ -4588,6 +4592,32 @@ msgstr ""
 
 #: mdtools/templates/layers/_layer_list_item.html:28
 msgid "Metadata Completeness"
+msgstr ""
+
+#: mdtools/templates/mdtools/edi_headers.html:67
+msgid ""
+"Some of the Mandatory fields are not filled.  Please verify your data and "
+"try again."
+msgstr ""
+
+#: mdtools/templates/mdtools/rndt.html:25
+msgid "RNDT/INSPIRE compliance"
+msgstr ""
+
+#: mdtools/templates/mdtools/rndt.html:27
+msgid "Mandatory"
+msgstr ""
+
+#: mdtools/templates/mdtools/rndt.html:28
+msgid "Optional"
+msgstr ""
+
+#: mdtools/templates/mdtools/rndt.html:35
+msgid "Uploading ... "
+msgstr ""
+
+#: mdtools/templates/mdtools/rndt.html:47
+msgid "Oh snap! You got an error!"
 msgstr ""
 
 #: osk/templates/osk/osk_base.html:12 osk/templates/osk/osk_list.html:7
