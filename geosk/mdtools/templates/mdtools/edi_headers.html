@@ -14,18 +14,43 @@ queryStringValues = {{ queryStringValues }}
 
 var edimlUrl = "/proxy/?url=http%3A%2F%2Fsp7.irea.cnr.it%2Fjboss%2FMDService%2Frest%2Fediml%2F";
 
+function checkRequired(){
+    var messages = [];
+    var errors = false;
+    var required = $(['ling_md_1', 'resp_md_1', 'resp_md_2', 'tit_1', 'data_1', 'data_2'])
+    $(required).each(
+	function(i, val){
+	    var el = $("#" + val);
+	    if(!el.val()){
+		errors = true;
+		el.closest('.control-group').addClass('error');
+		el.attr("placeholder", "This field is required");
+	    }
+	}
+    );   
 
-function preValidate(){
-    var i=0; 
-    var n=0; 
+    return errors;
+}
+
+function checkMandatory(){
+    var i=0;
+    var n=0;
+    var warnings = false;
     $("[required='required'][type!='hidden']").each(
 	function(id, el){
-	    if($(el).val() && $(el).val()){ 
-		i++ 
-	    } 
-	    n++
+	    if($(el).css('display') != 'none'){
+		if($(el).val() && $(el).val()){ 
+		    i++ 
+		} else {
+		    console.log('REQUIRED');
+		    console.log(el);
+		    warnings = true;
+		}
+		n++
+	    }
 	}
     );
+    return warnings
 }
 
 function beforeSend(jqXHR, settings){
@@ -35,6 +60,14 @@ function beforeSend(jqXHR, settings){
 	    keyboard: false,
 	    backdrop: 'static'
 	});
+        var errors = checkMandatory();
+        if(errors){
+	    closeModal();
+	    $("#error-message").text('Some of the Mandatory fields are not filled.  Please verify your data and try again.')
+	    $("#loading-alert").modal('show');
+	    jqXHR.abort();
+        }
+
     }
 }
 function complete(jqXHR, settings){
@@ -61,7 +94,15 @@ setTimeout(function () {
 }, 100)
 
 $(document).ready(function() {
-     $('.mandatory').addClass('text-info');
+    $('.mandatory').addClass('text-info');
+    // var required = $(['ling_md_1', 'resp_md_1', 'resp_md_2', 'tit_1', 'data_1', 'data_2'])
+    // $(required).each(
+    // 	function(i, val){
+    // 	    var el = $("#" + val);
+    // 	    el.closest('.control-group').find('label').removeClass('text-info').addClass('text-error');
+    // 	}
+    // );   
+
 });
 </script>
     
