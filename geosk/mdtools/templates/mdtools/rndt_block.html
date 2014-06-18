@@ -113,7 +113,7 @@
       var ling_md_1_labels = [];
      </script>
      <p class="controls">
-      <select class="mandatory_forAll" datatype="code" defaultvalue="http://inspire-registry.jrc.ec.europa.eu/registers/Languages/items/13" element_id="ling_md" fixed="false" id="ling_md_1" islanguageneutral="true" languageselector="true" lookup="http://inspire-registry.jrc.ec.europa.eu/registers/Languages/items" mandatory="forAll" outindex="" path="/gmd:MD_Metadata/gmd:language/gmd:LanguageCode" querystringparameter="" required="required">
+      <select class="mandatory_forAll" datatype="code" defaultvalue="http://inspire-registry.jrc.ec.europa.eu/registers/Languages/items/13" element_id="ling_md" fixed="false" id="ling_md_1" islanguageneutral="true" lookup="http://inspire-registry.jrc.ec.europa.eu/registers/Languages/items" mandatory="forAll" outindex="" path="/gmd:MD_Metadata/gmd:language/gmd:LanguageCode" querystringparameter="" required="required">
       </select>
      </p>
      <input class="mandatory_forAll" datatype="string" element_id="ling_md" fixed="true" id="ling_md_2" islanguageneutral="" mandatory="forAll" name="/gmd:MD_Metadata/gmd:language/gmd:LanguageCode/@codeList" outindex="" path="/gmd:MD_Metadata/gmd:language/gmd:LanguageCode/@codeList" prova="http://www.loc.gov/standards/iso639-2/" querystringparameter="" required="required" type="hidden" usecode="" useurn="" value="http://www.loc.gov/standards/iso639-2/"/>
@@ -909,9 +909,9 @@
       </span>
       <span class="help-inline">
        <script language="javascript">
-        var vinc_acc_help = []; vinc_acc_help.push( { lang: "en", label: "foo" } ); vinc_acc_help.push( { lang: "it", label: "Vincoli di accesso ai dati (o risorse) per assicurarne le protezioni        necessarie (privacy, proprietà intellettuali,...), tenendo presente che con accesso al        dato si comprendono la sua visualizzazione, stampa o riproduzione; NON vi è compresa la        sua elaborazione (vedi vincoli di fruibilità). I vincoli sono da selezionare da una        lista predefinita da RNDT (menù a tendina). Esiste la possibilità di esprimere il        valore \"Altri vincoli\" (default). Per il dato pubblico (o OpenData) va espresso il        valore \"Altri vincoli\"." } );
+        var vinc_acc_help = []; vinc_acc_help.push( { lang: "en", label: "foo" } ); vinc_acc_help.push( { lang: "it", label: "Vincoli di accesso ai dati (o risorse) per assicurarne le protezioni        necessarie (privacy, proprietà intellettuali,...), tenendo presente che con accesso al        dato si comprendono la sua visualizzazione, stampa o riproduzione; NON vi è compresa la        sua elaborazione (vedi vincoli di fruibilità). I vincoli sono da selezionare da una        lista predefinita da RNDT (menù a tendina). Esiste la possibilità di esprimere il        valore \"        \" (default). Per il dato pubblico (o OpenData) va espresso il        valore \"Altri vincoli\"." } );
        </script>
-       <a data-content='Vincoli di accesso ai dati (o risorse) per assicurarne le protezioni        necessarie (privacy, proprietà intellettuali,...), tenendo presente che con accesso al        dato si comprendono la sua visualizzazione, stampa o riproduzione; NON vi è compresa la        sua elaborazione (vedi vincoli di fruibilità). I vincoli sono da selezionare da una        lista predefinita da RNDT (menù a tendina). Esiste la possibilità di esprimere il        valore "Altri vincoli" (default). Per il dato pubblico (o OpenData) va espresso il        valore "Altri vincoli".' data-original-title="Vincoli di accesso (visualizzazione, stampa o riproduzione del        dato)" data-toggle="popover" data-trigger="hover" for="vinc_acc" href="javascript:void(0)">
+       <a data-content='Vincoli di accesso ai dati (o risorse) per assicurarne le protezioni        necessarie (privacy, proprietà intellettuali,...), tenendo presente che con accesso al        dato si comprendono la sua visualizzazione, stampa o riproduzione; NON vi è compresa la        sua elaborazione (vedi vincoli di fruibilità). I vincoli sono da selezionare da una        lista predefinita da RNDT (menù a tendina). Esiste la possibilità di esprimere il        valore "        " (default). Per il dato pubblico (o OpenData) va espresso il        valore "Altri vincoli".' data-original-title="Vincoli di accesso (visualizzazione, stampa o riproduzione del        dato)" data-toggle="popover" data-trigger="hover" for="vinc_acc" href="javascript:void(0)">
         <i class="icon-question-sign">
         </i>
        </a>
@@ -983,8 +983,9 @@
       var altr_vinc_1_labels = [];
      </script>
      <p class="controls">
-      <select class="mandatory_NA" datatype="code" defaultvalue="http://www.rndt.gov.it/codelists/constraints/items/001" element_id="altr_vinc" fixed="false" id="altr_vinc_1" islanguageneutral="" lookup="http://www.rndt.gov.it/codelists/constraints/items" mandatory="NA" outindex="" path="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:otherConstraints/gco:CharacterString" querystringparameter="">
-      </select>
+      <textarea class="mandatory_NA" cols="20" datatype="text" element_id="altr_vinc" fixed="false" id="altr_vinc_1" islanguageneutral="" mandatory="NA" name="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:otherConstraints/gco:CharacterString" outindex="" path="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:otherConstraints/gco:CharacterString" querystringparameter="" rows="10">
+       L'accesso e la fruibilità del dato sono pubblici (access and fruition of data is open)
+      </textarea>
      </p>
     </div>
     <button class="btn btn-mini duplicator" duplicates="altr_vinc" type="button">
