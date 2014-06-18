@@ -22,6 +22,36 @@ if (!String.prototype.decodeHTML) {
   };
 }
 
+function formatXml(xml) {
+    var formatted = '';
+    var reg = /(>)(<)(\/*)/g;
+    xml = xml.replace(reg, '$1\r\n$2$3');
+    var pad = 0;
+    jQuery.each(xml.split('\r\n'), function(index, node) {
+        var indent = 0;
+        if (node.match( /.+<\/\w[^>]*>$/ )) {
+            indent = 0;
+        } else if (node.match( /^<\/\w/ )) {
+            if (pad != 0) {
+                pad -= 1;
+            }
+        } else if (node.match( /^<\w[^>]*[^\/]>.*$/ )) {
+            indent = 1;
+        } else {
+            indent = 0;
+        }
+
+        var padding = '';
+        for (var i = 0; i < pad; i++) {
+            padding += '  ';
+        }
+
+        formatted += padding + node + '\r\n';
+        pad += indent;
+    });
+
+    return formatted;
+}
 
 var userUri = "http://ritmare.it/rdfdata/project#AlessandroOggioniIREA";
 var virtuosoUrl = "http://sp7.irea.cnr.it:8890/sparql";
@@ -30,7 +60,7 @@ var cloneSuffix = "_XritX";
 var edimlUrl = "ediml/";
 var ediMl = "";
 var debugToDiv = false;
-var debugToConsole = false;
+var debugToConsole = true;
 var ediUrl = "";
 // var ediUrl = "http://sp7.irea.cnr.it/mdedit/proxy.php?url=http://10.0.1.254:8080/MDService/rest/";
 
@@ -90,8 +120,22 @@ function addValidation() {
 }
 
 function setLanguage(language) {
-    currentLanguage = lookupLanguage(language);
-    $("select[languageselector='true']").val(currentLanguage);
+    currentLanguage = language; // reverseLookupLanguage(language);
+    doDebug("setting language to: " + language);
+    doDebug("currentLanguage: " + currentLanguage);
+//    $("select[languageselector='true'] option[language_neutral='" + currentLanguage + "']").attr("selected", "selected");
+//    $("select[languageselector='true']").trigger('change');
+    // var selectedLanguage =  $("#" + $(this).attr("id") + " option:selected").attr("languageNeutral");
+//  var optionSelected = $(this).find("option:selected");
+//    var selectedLanguage =  optionSelected.attr("language_neutral");
+    // doDebug("html: " + optionSelected.html());
+    // doDebug("selected language is " + selectedLanguage);
+//    currentLanguage = lookupLanguage(selectedLanguage);
+    // alert("changing language to " + currentLanguage);
+    uriBasedLookups();
+    translateLabels();
+    translateHelpTexts();
+
 }
 
 function doDebug(args) {
@@ -180,13 +224,13 @@ function prepareDependent(which) {
     var query = thisOne.attr("query");
     var regex = "";
     var principal = thisOne.attr("element_id") + "_" + query.match(/\$(.*)\$/i)[1];
-    thisOne.attr("dependsOn", principal);
+    thisOne.attr("dependsOn", principal);	
     
     doDebug("dependent item " + thisOne.attr("id") + "depending on " + principal + ", query: " + query);
     // doDebug("item " + $(this).attr("id") + " -> " + regex.test(query));
     doDebug("item " + "_" + thisOne.attr("id") + " -> " + thisOne.attr("element_id") + "_" + query.match(/\$(.*)\$/i)[1]);
     // $("#" + principal).unbind("change");
-    $("#" + principal).live("change", function() {
+    $("#" + principal + "_uri").live("change", function() {
 	doDebug("scatta: " + thisOne.attr("id"));
 	var originalQuery = query;
 	var queryInstance = replaceAll(query, /\$(.*)\$/i, $("#" + principal + "_uri").val() );
@@ -323,6 +367,10 @@ var defaultPostSuccessCallback = function(msg){
 						// doDebug("Ricevuto: " + xmlToString(msg));
 						var xmlString = xmlToString(msg);
 						if ( xmlString.indexOf("sml:SensorML") >= 0 ) {
+							xmlString = formatXml(xmlString);
+							$("#mdcontent").prepend("<pre class='prettyprint lang-html linenums:1'>" + xmlString.encodeHTML() + "</pre>");
+							prettyPrint();
+						
 							$.ajax({
                                         			type     : "POST",
                                         			url      : "sos/registerSensor",
@@ -374,7 +422,9 @@ var defaultPostSuccessCallback = function(msg){
 							xmlString = replaceAll(xmlString, "<", "&lt;");
 							xmlString = replaceAll(xmlString, ">", "&gt;");
 							*/
-							$("#mdcontent").prepend("<pre class='prettyprint lang-html'>" + xmlString.encodeHTML() + "</pre>");
+							
+							xmlString = formatXml(xmlString);
+							$("#mdcontent").prepend("<pre class='prettyprint lang-html linenums:1'>" + xmlString.encodeHTML() + "</pre>");
 							prettyPrint();
 							// prettyPrintOne('<root><node1><root>', 'xml')
 						}
@@ -445,20 +495,22 @@ var autoCompleteHandler = function() {
 function autoCompletionKeyUp(textbox) {
 			var id = $(this).attr("id");
 			// doDebug('length: ' + $(this).val().length);
-			if ( $(this).val().length < 3 ) {
+			if ( $(this).val().length < 2 ) {
 			    return;
 			}
 			doDebug("keyup on " + $(this).attr("id"));
 			if ( $(this).val().length <= 0 ) { 
-				$('#' + id + '_uri').val(''); 
+				$('#' + id + '_uri').val('');
+				$( '#' + id + '_uri' ).trigger("change");
+
 			} 
 			doDebug('autocomp1 ' + $(this).val()); 
 			query = $(this).attr('query'); 
 			query = replaceAll(query, '$search_param', $(this).val()); 
 			doDebug('launch query: ' + query); 
 			
-			$( '#' + id + '_uri' ).val( "" );
-			$( '#' + id + '_urn' ).val( "" ); 
+			// $( '#' + id + '_uri' ).val( "" );
+			// $( '#' + id + '_urn' ).val( "" ); 
 
 			$.getJSON( virtuosoUrl, { 
 				query: query, 
@@ -467,11 +519,17 @@ function autoCompletionKeyUp(textbox) {
 				fname : undefined 
 			}, function( data ) {
 				labels = new Array(); 
-				dati = data.results.bindings; 
+				dati = data.results.bindings;
+				if ( dati.length <= 0 ) {
+				    $( '#' + id + '_uri' ).val( "" );
+				    $( '#' + id + '_urn' ).val( "" );
+				    $( '#' + id + '_uri' ).trigger("change");
+				    return;
+				}
 				doDebug('autocomp2: ' + JSON.stringify(data)); 
 				for ( i = 0; i < dati.length; i++ ) { 
-					labels.push({ id: dati[i].c.value, value: (dati[i].a ? dati[i].a.value : dati[i].l.value) }); 
-					doDebug({ id: dati[i].c.value, value: (dati[i].a ? dati[i].a.value : dati[i].l.value) }); 
+					labels.push({ id: dati[i].c.value, value: (dati[i].a ? dati[i].a.value : dati[i].l.value), urn: (dati[i].urn ? dati[i].urn.value : "") }); 
+					doDebug({ id: dati[i].c.value, value: (dati[i].a ? dati[i].a.value : dati[i].l.value), urn: (dati[i].urn ? dati[i].urn.value : "") }); 
 				}
 				doDebug(labels);
 				$( '#' + id ).autocomplete({ 
@@ -483,6 +541,8 @@ function autoCompletionKeyUp(textbox) {
 						$( '#' + id + '_uri' ).val( ui.item.id );
 						$( '#' + id + '_urn' ).val( ui.item.urn ); 
 						$( '#' + id ).trigger('change');
+						$( '#' + id + '_uri' ).trigger("change");
+
 						return false; 
 					} 
 				}); 
@@ -506,21 +566,13 @@ function setAutocompletions() {
 }
 
                         // $user_uri
-			function lookupLanguage(code) {
-				// doDebug("searching for " + code);
-				for ( i = 0; i < iso639.length; i++ ) {
-					// doDebug(iso639[i][1]);
-					if ( iso639[i][1] == code ) {
-						return iso639[i][3];
-					}
-				}
-				return "en";
-			}
+
 			function translateHelpTexts() {
 				var labels = $("a[data-toggle='popover']");
 				labels.each(function() {
 					var labelFor = $(this).attr("for");
 					var arrayName;
+					var i;
 
 					// doDebug("help for " + labelFor);
 
@@ -549,7 +601,8 @@ function setAutocompletions() {
 				$('a[data-toggle=popover]').popover();
 			}
 			function translateLabels() {
-				var labels = $("label[for],h2[for],span[for]");
+				var labels = $("label[for],h2[for]");
+				var i;
 				labels.each(function() {
 					var labelFor = $(this).attr("for").replaceAll(cloneSuffix, "");
 					var arrayName;
@@ -898,7 +951,7 @@ function setAutocompletions() {
 					feedSelect(select, values);
 					// doDebug("default value: " + select.attr("defaultValue"));
 					// doDebug("backup value: " + backupValue);
-                                        if ( typeof select.attr("defaultValue") != "undefined" ) {
+                                        if ( typeof select.attr("defaultValue") != "undefined" && select.attr("defaultValue") != "" ) {
                                             select.val(select.attr("defaultValue"));
                                         } else if ( select.attr("mandatory") == "forAll" || select.attr("mandatory") == querystring("context") ) {
                                                // doDebug("set default to first option");
@@ -907,6 +960,17 @@ function setAutocompletions() {
 					} else {
                                             select.val([]);
                                         }
+					
+					var pars = decodeURIComponent(querystring("parameters"));
+					var par;
+					console.log("pars: " + pars);
+					if ( select.attr("querystringparameter") && pars != "" ) {
+					    pars = JSON.parse(pars);
+					    console.log("pars." + select.attr("querystringparameter"));
+					    par = eval("pars." + select.attr("querystringparameter"));
+					    console.log("par = '" + par + "'");
+					    select.val(par);
+					}
 
 					if ( backupValue != null ) {
 						select.val(backupValue);
@@ -927,6 +991,12 @@ function setAutocompletions() {
                         }
 			
                         $( document ).ready(function() {
+			    $.getScript("jquery.xslt.js", function(){
+
+				// alert("Script loaded and executed.");
+				// Here you can use anything you defined in the loaded script
+			    });
+			    
 			    if ( debugToDiv ) {
 				$(".row").prepend("<div id='debug'></div>");
 				$("#debug").css("display", "block");
@@ -986,8 +1056,9 @@ function setAutocompletions() {
                             $(".datepicker").datepicker({
     								format: "yyyy-mm-dd"
 							}).on('changeDate', function(ev) {
-								
+								// $("#" + $(this).attr("textbox")).val(ev.date.valueOf());
 								// doDebug("data: " + ev.date.valueOf());
+								$(this).datepicker('hide');
 							});
 			    // Fix strange bug
 			    $("*[prova]").each(function() {
@@ -1035,8 +1106,9 @@ function setAutocompletions() {
 				newDiv.find(".datepicker").datepicker({
     								format: "yyyy-mm-dd"
 							}).on('changeDate', function(ev) {
-								
+								// $("#" + $(this).attr("textbox")).val(ev.date.valueOf());
 								// doDebug("data: " + ev.date.valueOf());
+								$(this).datepicker('hide');
 							});
 				
 				newDiv.find("*[datatype='autoCompletion']").unbind();
@@ -1162,6 +1234,7 @@ function setAutocompletions() {
                             		
                             		$("*[element_id='" + elementId + "']").each(function() {
 						var type = $(this).attr("datatype");
+						var urnValue = "";
 						if ( type == "code" || type == "query" ) {
 							// doDebug($(this) + " is a select");
 							// doDebug($(this).attr("id") + " option:selected");
@@ -1171,14 +1244,21 @@ function setAutocompletions() {
 						} else if ( type == "autoCompletion" ) {
 							value = $(this).val();
 							codeValue = $("#" + $(this).attr("id") + "_uri").val();
+							urnValue = $("#" + $(this).attr("id") + "_urn").val();
 							languageNeutralValue = codeValue;
 							if ( $(this).attr("useCode") == "true" ) {
 								value = codeValue;
+							}
+							if ( $(this).attr("useURN") == "true" ) {
+								value = urnValue;
 							}
 						} else if ( type == "boolean" ) {
 							value = $(this).is(":checked");
 							codeValue = value;
 							languageNeutralValue = codeValue;
+						} else if ( type == "date" || type == "dateRange" ) {
+							console.log("data: " + $(this).val());
+							value = $(this).val(); 
 						} else {
 							value = $(this).val();
 							codeValue = "";
@@ -1193,13 +1273,42 @@ function setAutocompletions() {
                             						path: $(this).attr("path"),
 									datatype: $(this).attr("datatype"),
 									fixed: $(this).attr("fixed"),
+									useCode: $(this).attr("useCode"),
+									useURN: $(this).attr("useURN"),
+									outIndex: $(this).attr("outIndex"),
                             						value: value,
 									codeValue: codeValue,
+									urnValue: urnValue,
 									languageNeutral: languageNeutralValue,
 									isLanguageNeutral :  ( $(this).attr("isLanguageNeutral") != "undefined" ?  $(this).attr("isLanguageNeutral") : "" )
                             			};
                             			theElement.element.items.item.push(item);
                             		});
+					    if (theElement.element.id == "loc_geo" ) {
+						console.log(theElement.element.items.item);
+					    }
+					    // sort items based on outIndex
+					    theElement.element.items.item.sort(function (a, b) {
+
+						// convert to integers from strings
+						a = $(a).attr("outIndex");
+						b = $(b).attr("outIndex");
+						if ( a && b ) {
+						    // compare
+						    if(a > b) {
+							return 1;
+						    } else if(a < b) {
+							return -1;
+						    } else {
+							return 0;
+						    }
+						} else {
+						    return 0;
+						}
+					    });
+					    if (theElement.element.id == "loc_geo" ) {
+						console.log(theElement.element.items.item);
+					    }
 					// if ( !isEmpty(theElement.element) ) {
 					    c.push(theElement.element);
 					// }

@@ -7,10 +7,6 @@ function successCallback(msg){
 }
 
 function errorCallback(jqXHR, textStatus, errorThrown){
-    console.log('ERRORCALLBACK');
-    console.log(jqXHR);
-    console.log(textStatus);
-    console.log(errorThrown);
     closeModal();
     $("#error-message").text(jqXHR.responseText)
     $("#loading-alert").modal('show');

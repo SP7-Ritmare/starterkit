@@ -46,7 +46,13 @@
    display: none;
  }
 
-
+#fields-legend {
+    position: absolute; 
+    top: 220px; 
+    right: 100px; 
+    width:300px;
+    background-color: white;
+}
 
 
 #mdcontent section {
