@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-18 17:56-0500\n"
+"POT-Creation-Date: 2014-06-18 18:14-0500\n"
 "PO-Revision-Date: 2014-06-18 02:48-0600\n"
 "Last-Translator: <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2740,6 +2740,8 @@ msgid ""
 msgstr ""
 
 #: _locale_geonode/maps/templates/maps/map_metadata.html:26
+#: mdtools/templates/mdtools/rndt_block.html:1671
+#: osk/templates/osk/sensorml_block.html:1884
 msgid "Update metadata"
 msgstr ""
 
@@ -4604,19 +4606,19 @@ msgstr ""
 msgid "RNDT/INSPIRE compliance"
 msgstr ""
 
-#: mdtools/templates/mdtools/rndt.html:27
+#: mdtools/templates/mdtools/rndt.html:29
 msgid "Mandatory"
 msgstr ""
 
-#: mdtools/templates/mdtools/rndt.html:28
+#: mdtools/templates/mdtools/rndt.html:30
 msgid "Optional"
 msgstr ""
 
-#: mdtools/templates/mdtools/rndt.html:35
+#: mdtools/templates/mdtools/rndt.html:38
 msgid "Uploading ... "
 msgstr ""
 
-#: mdtools/templates/mdtools/rndt.html:47
+#: mdtools/templates/mdtools/rndt.html:50
 msgid "Oh snap! You got an error!"
 msgstr ""
 

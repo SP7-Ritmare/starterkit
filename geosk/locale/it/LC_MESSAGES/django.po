@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: STARTER KIT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-18 17:56-0500\n"
+"POT-Creation-Date: 2014-06-18 18:14-0500\n"
 "PO-Revision-Date: 2014-06-18 16:21+0100\n"
 "Last-Translator: <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2798,6 +2798,8 @@ msgstr ""
 "        "
 
 #: _locale_geonode/maps/templates/maps/map_metadata.html:26
+#: mdtools/templates/mdtools/rndt_block.html:1671
+#: osk/templates/osk/sensorml_block.html:1884
 msgid "Update metadata"
 msgstr "Aggiorna metadati"
 
@@ -4768,19 +4770,19 @@ msgstr ""
 msgid "RNDT/INSPIRE compliance"
 msgstr "Conformità RNDT/INSPIRE"
 
-#: mdtools/templates/mdtools/rndt.html:27
+#: mdtools/templates/mdtools/rndt.html:29
 msgid "Mandatory"
 msgstr "Obbligatorio"
 
-#: mdtools/templates/mdtools/rndt.html:28
+#: mdtools/templates/mdtools/rndt.html:30
 msgid "Optional"
 msgstr "Opzionale"
 
-#: mdtools/templates/mdtools/rndt.html:35
+#: mdtools/templates/mdtools/rndt.html:38
 msgid "Uploading ... "
 msgstr "Aggiornamento ..."
 
-#: mdtools/templates/mdtools/rndt.html:47
+#: mdtools/templates/mdtools/rndt.html:50
 msgid "Oh snap! You got an error!"
 msgstr "Attenzione, si è verificato un errore!"
 
