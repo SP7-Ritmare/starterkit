@@ -46,7 +46,8 @@ Layer.to_rdf = model_to_rdf
 SCOPE_VALUES = (
     ('md_contact', _('Metadata responsible party')),
     ('citation_contact', _('Responsible party')),
-    ('identification_contact', _('Point of contact'))
+    ('identification_contact', _('Point of contact')),
+    ('distributor_contact', _('Distributor'))
     )
 
 

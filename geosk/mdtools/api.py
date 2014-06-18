@@ -247,7 +247,7 @@ def _mdimport(layer, vals, keywords, xml):
             value = TopicCategory.objects.get(identifier=get_topic_category(value.encode('utf8')))
         elif key == 'supplemental_information' and value is None:
             value = ' '
-        elif key in ['md_contact', 'citation_contact', 'identification_contact']:
+        elif key in ['md_contact', 'citation_contact', 'identification_contact', 'distributor_contact']:
             _set_contact_role_scope(key, value, layer.mdextension)
         setattr(layer, key, value)
 
@@ -399,6 +399,16 @@ def rndt2dict(exml):
                 c['onlineresource'] = c['onlineresource'].__dict__
             identification_contact.append(c)
         vals['identification_contact'] = identification_contact
+
+        distributor_contact = []
+        for d in mdata.distribution.distributor:
+            c = d.contact
+            c = c.__dict__
+            if c['onlineresource'] is not None:
+                c['onlineresource'] = c['onlineresource'].__dict__
+            distributor_contact.append(c)
+        vals['distributor_contact'] = distributor_contact
+
 
     if mdata.dataquality is not None:
         vals['data_quality_statement'] = mdata.dataquality.lineage
