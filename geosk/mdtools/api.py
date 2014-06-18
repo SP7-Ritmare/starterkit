@@ -93,6 +93,7 @@ def rndteditor(request, layername):
             'eastlon': layer.bbox_x1,
             'southlat': layer.bbox_y0,
             'northlat': layer.bbox_y1,
+            'referencesystem': layer.srid.split(':')[1],
         }
 
     else:
@@ -100,8 +101,8 @@ def rndteditor(request, layername):
             'uid': layer.uuid,
             # inserire data_md
             'title': layer.title,
-            'data_md': layer.mdextension.md_date.date().isoformat(),
-            'data': layer.date,
+            # 'data_md': layer.date.date().isoformat(), # layer.mdextension.md_date.date().isoformat(),
+            'data': layer.date.date().isoformat(),
             'tipo_di_data': layer.date_type,
             'abstract': layer.abstract,
             'spatialrepresentationtype': (EDI_MAP_SPATIALREPRESENTATIONTYPE).get(layer.storeType),
@@ -110,7 +111,7 @@ def rndteditor(request, layername):
             'southlat': layer.bbox_y0,
             'northlat': layer.bbox_y1,
             'resource': '%s%s' % (settings.SITEURL[:-1], layer.get_absolute_url()),
-            'referencesystem': layer.srid,
+            'referencesystem': layer.srid.split(':')[1],
             }
 
     
@@ -164,8 +165,8 @@ def rndtproxy(request, layername):
         return json_response(exception=e, status=500)
         
     # save rndt & edi xml
-    layer.mdextension.md_date = vals['md_language']
-    layer.mdextension.md_date = vals['md_date']
+    layer.mdextension.md_language = vals['md_language']
+    layer.mdextension.md_date = vals['md_date'] if vals['md_date'] is not None else layer.date 
     layer.mdextension.rndt_xml = rndt
     layer.mdextension.elements_xml = request.raw_post_data
     layer.mdextension.save()
@@ -332,15 +333,15 @@ def rndt2dict(exml):
     # metadata 
     vals['uuid'] = mdata.identifier
     vals['md_language'] = mdata.languagecode
-    vals['md_date'] = sniff_date(mdata.datestamp)
+    vals['md_date'] = sniff_date(mdata.datestamp) if mdata.datestamp is not None else None
 
     vals['spatial_representation_type'] = mdata.hierarchy
 
     if hasattr(mdata, 'identification'):
         # 
         if len(mdata.identification.date) > 0:
-            vals['date'] = sniff_date(mdata.identification.date[0].date)
-            vals['date_type'] = get_datetype(mdata.identification.date[0].type)
+            vals['date'] = sniff_date(mdata.identification.date[0].date) if mdata.identification.date[0].date is not None else None
+            vals['date_type'] = get_datetype(mdata.identification.date[0].type) if mdata.identification.date[0].type is not None else None
 
         # ci sono problemi nei nella mappatura dei codici delle lingue es. grc e gree per il greco
         if len(mdata.identification.resourcelanguage) > 0:
