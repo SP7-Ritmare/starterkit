@@ -101,7 +101,7 @@ msgstr "o aggiungi un nuovo server."
 
 #: templates/lang.js:23
 msgid "Map Layers"
-msgstr "Tematismi della mappa"
+msgstr "Tematismi della vista"
 
 #: templates/lang.js:24
 msgid "View available data from:"
@@ -125,11 +125,11 @@ msgstr "Lunghezza"
 
 #: templates/lang.js:29
 msgid "Loading Map..."
-msgstr "Caricamento della mappa..."
+msgstr "Caricamento della vista..."
 
 #: templates/lang.js:30 templates/lang.js.c:113
 msgid "Map Size"
-msgstr "Dimensioni della mappa"
+msgstr "Dimensioni della vista"
 
 #: templates/lang.js:31
 msgid "Measure"
@@ -137,7 +137,7 @@ msgstr "Misura"
 
 #: templates/lang.js:32
 msgid "About this Map"
-msgstr "Riguardo a questa mappa"
+msgstr "Riguardo a questa vista"
 
 #: templates/lang.js:33 templates/lang.js.c:86 templates/lang.js.c:155
 msgid "Abstract"
@@ -174,7 +174,7 @@ msgstr "Mini"
 
 #: templates/lang.js:41
 msgid "Pan Map"
-msgstr "Pan della mappa"
+msgstr "Pan della vista"
 
 #: templates/lang.js:42
 msgid "Zoom to Next Extent"
@@ -186,7 +186,7 @@ msgstr "Zoom all'Estensione Precedente"
 
 #: templates/lang.js:44
 msgid "This map has not yet been saved."
-msgstr "Questa mappa non è stata ancora salvata."
+msgstr "Questa vista non è stata ancora salvata."
 
 #: templates/lang.js:46 templates/lang.js.c:115
 msgid "Premium"
@@ -194,7 +194,7 @@ msgstr "Premium"
 
 #: templates/lang.js:47
 msgid "Print Map"
-msgstr "Stampa Mappa"
+msgstr "Stampa Vista"
 
 #: templates/lang.js:48
 msgid "Print Preview"
@@ -206,7 +206,7 @@ msgstr "Proprietà"
 
 #: templates/lang.js:50 templates/lang.js.c:116
 msgid "Publish Map"
-msgstr "Puppblica la Mappa"
+msgstr "Puppblica la Vista"
 
 #: templates/lang.js:51 templates/lang.js.c:52
 msgid "Remove Layer"
@@ -214,7 +214,7 @@ msgstr "Rimuovi il layer"
 
 #: templates/lang.js:53
 msgid "Sorry, your map could not be saved."
-msgstr "Mi spiace, la mappa non può essere salvata."
+msgstr "Mi spiace, la vista non può essere salvata."
 
 #: templates/lang.js:54
 msgid "Error While Saving"
@@ -222,11 +222,11 @@ msgstr "Errore durante il salvataggio"
 
 #: templates/lang.js:55
 msgid "Save Map"
-msgstr "Salva la mappa"
+msgstr "Salva la vista"
 
 #: templates/lang.js:56
 msgid "You must be logged in to save this map."
-msgstr "Devi essere registrato per salvare questa mappa."
+msgstr "Devi essere registrato per salvare questa vista."
 
 #: templates/lang.js:57 templates/lang.js.c:118
 msgid "Small"
@@ -236,7 +236,9 @@ msgstr "Piccola"
 msgid ""
 "Error contacting server.\n"
 " Please check the url and try again."
-msgstr "Errore nella connessione con il server.\nPer favore, verifica l'URL e prova ancora."
+msgstr ""
+"Errore nella connessione con il server.\n"
+"Per favore, verifica l'URL e prova ancora."
 
 #: templates/lang.js:59
 msgid "Layer Properties"
@@ -262,11 +264,12 @@ msgstr "Cambiare in Google Earth Viewer 3D"
 msgid ""
 "The map that you are trying to load does not exist.  Creating a new map "
 "instead."
-msgstr "La mappa che stai cercando di caricare non esiste. Crea una nuova mappa."
+msgstr ""
+"La vista che stai cercando di caricare non esiste. Crea una nuova vista."
 
 #: templates/lang.js:65
 msgid "Unknown Map"
-msgstr "Mappa sconosciuta"
+msgstr "Vista sconosciuta"
 
 #: templates/lang.js:66 templates/lang.js.c:119
 msgid "Width"
@@ -302,23 +305,23 @@ msgstr "Livello di zoom {zoom}"
 
 #: templates/lang.js:84
 msgid "Create Map"
-msgstr "Crea Mappa"
+msgstr "Crea Vista"
 
 #: templates/lang.js:85
 msgid "Export Map"
-msgstr "Esporta mappa "
+msgstr "Esporta vista "
 
 #: templates/lang.js:88
 msgid "Map"
-msgstr "Mappa"
+msgstr "Vista"
 
 #: templates/lang.js:89 templates/lang.js.c:156
 msgid "View this Map"
-msgstr "Visualizza questa mappa"
+msgstr "Visualizza questa vista"
 
 #: templates/lang.js:91
 msgid "Open Map"
-msgstr "Apri mappa"
+msgstr "Apri vista"
 
 #: templates/lang.js:97 templates/lang.js.c:173
 msgid "Name"
@@ -336,7 +339,9 @@ msgstr "Nessuno sfondo"
 msgid ""
 "Your map is ready to be published to the web!  Simply copy the following "
 "HTML to embed the map in your website:"
-msgstr "La tua mappa è pronta per essere pubblicata sul Web! Copia semplicemente il seguente codice HTML per includere la mappa nel tuo sito web:"
+msgstr ""
+"La tua vista è pronta per essere pubblicata sul Web! Copia semplicemente il "
+"seguente codice HTML per includere la vista nel tuo sito web:"
 
 #: templates/lang.js:126 templates/lang.js.c:192
 msgid "Abstract:"
@@ -420,7 +425,7 @@ msgstr "La tua ricerca non ha prodotto risultati."
 
 #: templates/lang.js:161
 msgid "Search Maps"
-msgstr "Cerca Mappe"
+msgstr "Cerca Viste"
 
 #: templates/lang.js:162 templates/lang.js.c:182
 msgid "Search"

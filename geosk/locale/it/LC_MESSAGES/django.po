@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-06-14 11:24-0500\n"
-"PO-Revision-Date: 2014-06-16 05:49-0600\n"
+"PO-Revision-Date: 2014-06-18 02:57-0600\n"
 "Last-Translator:   <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -83,7 +83,7 @@ msgstr "Layer"
 
 #: dashboard.py:117 templates/site_base.html:117
 msgid "Maps"
-msgstr "Mappe"
+msgstr "Viste"
 
 #: dashboard.py:122 templates/site_base.html:113
 msgid "Documents"
@@ -117,9 +117,8 @@ msgid "Contact"
 msgstr "codename"
 
 #: mdtools/models.py:49
-#, fuzzy
 msgid "Metadata responsible party"
-msgstr "funzione svolta dalla parte responsabile"
+msgstr "Responsabile dei Metadati"
 
 #: mdtools/models.py:50
 msgid "Responsible party"
@@ -140,12 +139,11 @@ msgstr "lingua"
 
 #: mdtools/models.py:74
 msgid "language used for metadata"
-msgstr ""
+msgstr "lingua utilizzata per il metadato"
 
 #: mdtools/models.py:75
-#, fuzzy
 msgid "metadata date"
-msgstr "Fornitore dei metadati"
+msgstr "data del metadato"
 
 #: mdtools/models.py:123
 #, fuzzy
@@ -245,9 +243,8 @@ msgid "contact role"
 msgstr "codename"
 
 #: mdtools/models.py:145
-#, fuzzy
 msgid "Services metadata"
-msgstr "Servizi"
+msgstr "Metadati dei Servizi"
 
 #: mdtools/templates/base/resourcebase_info_panel.html:7
 msgid "Title"
@@ -359,7 +356,7 @@ msgstr "Scarica"
 
 #: mdtools/templates/layers/_layer_list_item.html:36
 msgid "Create a map"
-msgstr "Crea una mappa"
+msgstr "Crea una vista"
 
 #: mdtools/templates/layers/_layer_list_item.html:46
 msgid "Download Layer"
@@ -405,10 +402,12 @@ msgid ""
 "Please add more information about your SK implementation. Fill the Services "
 "Metadata form."
 msgstr ""
+"Aggiungi maggiori informazioni relativamente alla tua installazione di "
+"StarterKit. Compila il modulo di Metadati dei Servizi."
 
 #: templates/about.html:4 templates/about.html.py:8
 msgid "About RITMARE Starter Kit"
-msgstr ""
+msgstr "A proposito di RITMARER StarterKit"
 
 #: templates/about.html:10
 msgid ""
@@ -417,24 +416,26 @@ msgid ""
 "      <a href=\"http://sp7.irea.cnr.it/wiki/index.php/Getting_Started\">Starter Kit - Getting Started</a>\n"
 "      "
 msgstr ""
+"\n"
+"La documentazione aggiornata &egrave: disponibile su Wiki RITMARE SP7 :\n"
+"<a href=\"http://sp7.irea.cnr.it/wiki/index.php/Getting_Started\">Starter Kit - Getting Started</a>"
 
 #: templates/about_services.html:5
 msgid "Descrizione servizi"
-msgstr ""
+msgstr "Descrizione servizi"
 
 #: templates/about_services.html:11
 msgid "SK Web Services"
 msgstr "Web Services di StarterKit"
 
 #: templates/about_services.html:13
-#, fuzzy
 msgid ""
 "SK provides <a href=\"http://www.opengeospatial.org/\">OGC</a> compliant web"
 " services to discover, view and download geospatial datasets.\n"
 msgstr ""
-"GeoSK fornisce I SEGUENTI servizi web interoperabili per la ricerca, la "
-"visualizzazione ed il download dei datasets geografici seguendo gli standard"
-" <a href='http://www.opengeospatial.org/'> OGC.</a>\n"
+"StarterKit fornisce i seguenti servizi web interoperabili per la ricerca, la"
+" visualizzazione ed il download dei datasets geografici seguendo gli "
+"standard <a href='http://www.opengeospatial.org/'> OGC.</a>\n"
 
 #: templates/about_upload_layers.html:5
 msgid "Upload Layers"
@@ -449,6 +450,8 @@ msgid ""
 "SK provides a user friendly tool to upload easilly spatial data such as Rasters (GeoTIFF) and vector data (shapefiles).\n"
 "      For different type of spatial data, consult the <a href=\"http://docs.geoserver.org/2.4.x/en/user/\">Geoserver manual</a>       \n"
 msgstr ""
+"StarterKit fornisce uno strumento di facile utilizzo per caricare agevolmente dati spaziali come file raster (GeoTIFF) e file vettori (shapefiles).\n"
+"Per formati diversi di dati spaziali consulta il <a href=\"http://docs.geoserver.org/2.4.x/en/user/\">Manuale Geoserver</a> \n"
 
 #: templates/help.html:4
 msgid "User Guide"
@@ -527,54 +530,46 @@ msgid ""
 "  "
 msgstr ""
 "\n"
-"  <p>StarterKit consente di accedere a set di dati e ad un'applicazione per l'editing di mappe che permette agli utenti di consultare le mappe esistenti e contribuire alla piattaforma con le proprie.</p>\n"
-"\n"
-"  <h4 id=\"browsing-data\">Navigazione dei Layer</h4>\n"
-"  <p>La scheda <a href=\"/data\">Layer</a> ti permette di navigare i dati caricati su GeoNode.</p>\n"
-"  <p>Tutti i dati possono essere scaricati in vari formati, per utilizzarli in altre applicazioni.</p>\n"
-"\n"
-"  <h4 id=\"developer-access\">Accesso sviluppatori</h4>\n"
-"  <p>La pagina <a href=\"/developer\"> Sviluppatore</a> è il posto da cui gli sviluppatori possono iniziare a creare applicazioni basate su StarterKit. Esso comprende le istruzioni sull'utilizzo dei web service, i link al codice sorgente di StarterKit e informazioni sui progetti open source utilizzati per crearlo.</p>\n"
-"\n"
-"  <h4 id=\"browsing-maps\">Navigazione delle Mappe</h4>\n"
-"  <p>StarterKit consente agli utenti di creare e consividere mappe con gli altri.</p>\n"
-"  <p>La scheda <a href=\"maps\">Mappe</a> è il punto di accesso per l'esplorazione delle mappe su StarterKit. Da qui puoi <strong>cercare una mappa</strong> o <strong>creare una mappa</strong>, che aprirà il <a href=\"maps/new\">Map Compositore di mappe</a>.</p>\n"
-"  <h5>Modalità Google Earth</h5>\n"
-"  <p>Ogni mappa visualizzata su un editor di mappe interattivo può essere visualizzata in modalità 3D attraverso il plugin Google Earth. Per passare dalla modalità 3D seleziona il logo di Google Earth, il pulsante più a destra sulla barra degli strumenti in alto. Se non hai installato il plugin di Google Earth, verrà richiesto di farlo.</p>\n"
-"\n"
-"  <h4 id=\"creating-a-map\">Creazione di una Mappa</h4>\n"
-"  <p>Per creare una nuova mappa vai su <a href=\"maps\">Mappe Contribuite</a> e clicca su <a href=\"maps/new\">Crea la tua mappa</a> link.</p>\n"
-"  <p>Quest'azione di manderà al <a href=\"maps/new\">Compositore di mappe</a> con un layer di base caricato.</p>\n"
-"  <p>Per aggiungere i Layer da StarterKit clicca sul pulsante verde presente sotto la scheda Layer sulla sinistra dello schermo. Quest'azione aprirà una finestra di dialogo con la lista di tutti i Layer disponibili su StarterKit.</p>\n"
-"  <p>Per aggiungere Layer alla Mappa selezionali e premi il pulsante <strong>Aggiungi Livelli</strong>. Una volta terminato clicca <strong>Fatto</strong> per chiudere la finestra di dialogo e tornare indietro sulla Mappa.</p>\n"
-"\n"
-"  <h5>Riordino e Rimozione Layer</h5>\n"
-"  <p>Cambia l'ordine di visualizzazione dei Layer elencati nella scheda Dati semplicemente trascinando e rilasciando i loro nomi. L'ordine nella mappa verrà aggiornato di conseguenza. Per disattivare la visibilità di un Layer è sufficiente deselezionarlo, e per rimuoverlo completamente selezionalo e premi il pulsante rosso.</p>\n"
-"\n"
-"  <h5>Salvare la tua mappa</h5>\n"
-"  <p>Una volta trovato un opportuno insieme di Layer e un livello di zoom, è il momento di salvarlo in modo che gli altri possano vederlo. Fare clic sul pulsante Salva - l'icona più a sinistra nella barra degli strumenti in alto, l'immagine di una mappa con un disco - nel menu in alto e compila i campi con il titolo e l'abstract della mappa.</p>\n"
-"\n"
-"  <h4 id=\"exporting-a-map\">Esportare una mappa</h4>\n"
-"  <p>Ogni mappa di StarterKit può essere inserita all'interno di un altro sito o blog. Per esportare una mappa:</p>\n"
-"  <ol>\n"
-"    <li>Seleziona la mappa dalla lista delle mappe e clicca il bottone \"Esporta mappa\".</li> \n"
-"    <li>Scegli l'altezza e la lunghezza desiderate dallo strumento durante la procedura guidata.</li> \n"
-"    <li>Copia il codice HTML fornito dalla procedura guidata in qualsiasi pagina HTML o blog che supportino gli i-frame.</li>\n"
-"  </ol>\n"
-"  <p>L'azione creerà un widget interattivo che mostra la tua mappa nella tua pagina web o sul post del blog.</p>\n"
-"  <p>Nota che il <a href=\"maps/new\">Compositore Mappe</a> ha anche un bottone per esportare la mappa. Attento a salvare la mappa prima di esportare se ci sono cambiamenti che vuoi che gli altri vedano. Esso esporta l'ultima versione salvata, non l'ultima versione visualizzata.</p>\n"
-"\n"
-"  <h4 id=\"remixing-a-map\">Riutilizzo di una mappa</h4>\n"
-"  <p>Ogni mappa disponibile può servire come punto di partenza per una nuova mappa.</p>\n"
-"  <ol>\n"
-"    <li>Apri la mappa sul Compositore mappe.</li>\n"
-"    <li>Aggiungi e rimuovi i livelli che vuoi.</li>\n"
-"    <li>Sposta e centra la mappa sull'area di tuo interesse.</li>\n"
-"    <li><strong>IMPORTANTE:</strong> Aggiorna il titolo, l'abstract, le informazioni di contatto e i tag come riferimento alla nuova mappa.</li>\n"
-"    <li>Salva la mappa.</li>\n"
-"  </ol>\n"
-"  <p>Potrai vedere la tua nuova mappa cercando nella sezione <a href=\"maps\">Mappe</a>. </p> \n"
-"  "
+"<p>StarterKit consente di accedere a set di dati e ad un'applicazione per l'editing di viste che permette agli utenti di consultare le viste esistenti e contribuire alla piattaforma con le proprie.</p>\n"
+"<h4 id=\"browsing-data\">Navigazione dei Layer</h4>\n"
+"<p>La scheda <a href=\"/data\">Layer</a> ti permette di navigare i dati caricati su StarterKit.</p>\n"
+"<p>Tutti i dati possono essere scaricati in vari formati, per utilizzarli in altre applicazioni.</p>\n"
+"<h4 id=\"developer-access\">Accesso sviluppatori</h4>\n"
+"<p>La pagina <a href=\"/developer\"> Sviluppatore</a> è il posto da cui gli sviluppatori possono iniziare a creare applicazioni basate su StarterKit. Esso comprende le istruzioni sull'utilizzo dei web service, i link al codice sorgente di StarterKit e informazioni sui progetti open source utilizzati per crearlo.</p>\n"
+"<h4 id=\"browsing-maps\">Navigazione delle Viste</h4>\n"
+"<p>StarterKit consente agli utenti di creare e consividere viste con gli altri.</p>\n"
+"<p>La scheda <a href=\"maps\">Viste</a> è il punto di accesso per l'esplorazione delle viste su StarterKit. Da qui puoi <strong>cercare una vista</strong> o <strong>creare una vista</strong>, che aprirà il <a href=\"maps/new\"> Compositore di viste</a>.</p>\n"
+"<h5>Modalità Google Earth</h5>\n"
+"<p>Ogni vista visualizzata su un editor di viste interattivo può essere visualizzata in modalità 3D attraverso il plugin Google Earth. Per passare dalla modalità 3D seleziona il logo di Google Earth, il pulsante più a destra sulla barra degli strumenti in alto. Se non hai installato il plugin di Google Earth, verrà richiesto di farlo.</p>\n"
+"<h4 id=\"creating-a-map\">Creazione di una Vista</h4>\n"
+"<p>Per creare una nuova vista vai su <a href=\"maps\">Viste Contribuite</a> e clicca su <a href=\"maps/new\">Crea la tua vista</a> link.</p>\n"
+"<p>Quest'azione di manderà al <a href=\"maps/new\">Compositore di viste</a> con un layer di base caricato.</p>\n"
+"<p>Per aggiungere i Layer da StarterKit clicca sul pulsante verde presente sotto la scheda Layer sulla sinistra dello schermo. Quest'azione aprirà una finestra di dialogo con la lista di tutti i Layer disponibili su StarterKit.</p>\n"
+"<p>Per aggiungere Layer alla Vista selezionali e premi il pulsante <strong>Aggiungi Livelli</strong>. Una volta terminato clicca <strong>Fatto</strong> per chiudere la finestra di dialogo e tornare indietro sulla Vista.</p>\n"
+"<h5>Riordino e Rimozione Layer</h5>\n"
+"<p>Cambia l'ordine di visualizzazione dei Layer elencati nella scheda Dati semplicemente trascinando e rilasciando i loro nomi. L'ordine nella vista verrà aggiornato di conseguenza. Per disattivare la visibilità di un Layer è sufficiente deselezionarlo, e per rimuoverlo completamente selezionalo e premi il pulsante rosso.</p>\n"
+"<h5>Salvare la tua vista</h5>\n"
+"<p>Una volta trovato un opportuno insieme di Layer e un livello di zoom, è il momento di salvarlo in modo che gli altri possano vederlo. Fare clic sul pulsante Salva - l'icona più a sinistra nella barra degli strumenti in alto, l'immagine di una vista con un disco - nel menu in alto e compila i campi con il titolo e l'abstract della vista.</p>\n"
+"<h4 id=\"exporting-a-map\">Esportare una vista</h4>\n"
+"<p>Ogni vista di StarterKit può essere inserita all'interno di un altro sito o blog. Per esportare una vista:</p>\n"
+"<ol>\n"
+"<li>Seleziona la vista dalla lista delle viste e clicca il bottone \"Esporta vista\".</li>\n"
+"<li>Scegli l'altezza e la lunghezza desiderate dallo strumento durante la procedura guidata.</li>\n"
+"<li>Copia il codice HTML fornito dalla procedura guidata in qualsiasi pagina HTML o blog che supportino gli i-frame.</li>\n"
+"</ol>\n"
+"<p>L'azione creerà un widget interattivo che mostra la tua vista nella tua pagina web o sul post del blog.</p>\n"
+"<p>Nota che il <a href=\"maps/new\">Compositore Viste</a> ha anche un bottone per esportare la vista. Attento a salvare la vista prima di esportare se ci sono cambiamenti che vuoi che gli altri vedano. Esso esporta l'ultima versione salvata, non l'ultima versione visualizzata.</p>\n"
+"<h4 id=\"remixing-a-map\">Riutilizzo di una vista</h4>\n"
+"<p>Ogni vista disponibile può servire come punto di partenza per una nuova vista.</p>\n"
+"<ol>\n"
+"<li>Apri la vista sul Compositore viste.</li>\n"
+"<li>Aggiungi e rimuovi i livelli che vuoi.</li>\n"
+"<li>Sposta e centra la vista sull'area di tuo interesse.</li>\n"
+"<li><strong>IMPORTANTE:</strong> Aggiorna il titolo, l'abstract, le informazioni di contatto e i tag come riferimento alla nuova vista.</li>\n"
+"<li>Salva la vista.</li>\n"
+"</ol>\n"
+"<p>Potrai vedere la tua nuova vista cercando nella sezione <a href=\"maps\">Viste</a>. </p>\n"
+" "
 
 #: templates/help.html:72
 #, fuzzy
@@ -596,7 +591,7 @@ msgstr "Accesso sviluppatori"
 
 #: templates/help.html:76
 msgid "Browsing Maps"
-msgstr "Consultare mappe"
+msgstr "Consultare viste"
 
 #: templates/help.html:77
 #, fuzzy
@@ -605,15 +600,15 @@ msgstr "Servizi"
 
 #: templates/help.html:78
 msgid "Creating a Map"
-msgstr "Creare una mappa"
+msgstr "Creare una vista"
 
 #: templates/help.html:79
 msgid "Exporting a Map"
-msgstr "Esportare una mappa"
+msgstr "Esportare una vista"
 
 #: templates/help.html:80
 msgid "Remixing a Map"
-msgstr "Modificare una mappa"
+msgstr "Modificare una vista"
 
 #: templates/site_base.html:35
 msgid "Profile"
@@ -705,7 +700,7 @@ msgstr "i dati vengono aggiornati ogni mese"
 
 #: templates/site_base.html:168
 msgid "GeoNode"
-msgstr "StarterKit"
+msgstr ""
 
 #: templates/site_base.html:169
 msgid "Info"
@@ -720,7 +715,7 @@ msgid ""
 "Upload your layers, create your maps and join the RITMARE interoperable "
 "Infrastructure."
 msgstr ""
-"Carica i tuoi layer, crea le tue mappe e contribuisci all'Infrastruttura "
+"Carica i tuoi layer, crea le tue viste e contribuisci all'Infrastruttura "
 "Interoperabile di RITMARE."
 
 #: templates/site_index.html:26
@@ -748,7 +743,7 @@ msgstr "Esplora layer"
 
 #: templates/site_index.html:37
 msgid "Explore Maps"
-msgstr "Esplora mappe"
+msgstr "Esplora viste"
 
 msgid "About GeoNode."
 msgstr "A proposito di StarterKit."
@@ -1689,7 +1684,7 @@ msgid "CSW insert date"
 msgstr "CSW insert date"
 
 msgid "CSW type"
-msgstr "CSW type"
+msgstr "tipo di CSW"
 
 msgid "CSW anytext"
 msgstr "CSW anytext"
@@ -1800,7 +1795,7 @@ msgid "This document is related to a "
 msgstr "Questo documento è correlato a "
 
 msgid "This document is not related to any maps or layers"
-msgstr "Il presente documento non è correlato ad alcuna mappa o livello"
+msgstr "Il presente documento non è correlato ad alcuna vista o livello"
 
 msgid "Permissions"
 msgstr "Permessi"
@@ -1871,10 +1866,10 @@ msgid "title of attribute as displayed in GeoNode"
 msgstr "titolo dell'attributo visualizzato in StarterKit"
 
 msgid "attribute type"
-msgstr "tipo di attributo"
+msgstr "tipologia di attributo"
 
 msgid "the data type of the attribute (integer, string, geometry, etc)"
-msgstr "tipo di dato dell'attributo (integro, stringa, geometrico, etc.)"
+msgstr "tipologia dell'attributo (intero, stringa, geometria, etc.)"
 
 msgid "visible?"
 msgstr "visibile?"
@@ -2062,13 +2057,13 @@ msgid "Rate this layer"
 msgstr "Giudica questo Layer"
 
 msgid "Maps using this layer"
-msgstr "Mappe che usano questo layer"
+msgstr "Viste che usano questo layer"
 
 msgid "List of maps using this layer:"
-msgstr "Elenco di mappe che usano questo layer"
+msgstr "Elenco di viste che usano questo layer"
 
 msgid "This layer is not currently used in any maps."
-msgstr "Questo layer non è al momento utilizzato da alcuna mappa."
+msgstr "Questo layer non è al momento utilizzato da alcuna vista."
 
 msgid "Documents related to this layer"
 msgstr "Documenti correlati a questo livello"
@@ -2077,15 +2072,15 @@ msgid "List of documents related to this layer:"
 msgstr "Elenco di documenti correlati a questo livello:"
 
 msgid "Create a map using this layer"
-msgstr "Crea una mappa usando questo layer"
+msgstr "Crea una vista usando questo layer"
 
 msgid "Click the button below to generate a new map based on this layer."
 msgstr ""
-"Clicca il pulsante qui sotto per generare una nuova mappa basata su questo "
+"Clicca il pulsante qui sotto per generare una nuova vista basata su questo "
 "livello."
 
 msgid "Create a Map"
-msgstr "Crea una mappa"
+msgstr "Crea una vista"
 
 msgid "Click the button below to change the permissions of this layer."
 msgstr ""
@@ -2102,13 +2097,13 @@ msgid ""
 "it in the preview map."
 msgstr ""
 "I seguenti stili sono associati a questo Layer. Scegli uno stile da "
-"visualizzare nell'anteprima della mappa.  "
+"visualizzare nell'anteprima della vista.  "
 
 msgid "No styles associated with this layer"
 msgstr "Nessuno stile associato a questo Layer"
 
 msgid "Layer Owner"
-msgstr "Proprietario del layer"
+msgstr "Proprietario del Layer"
 
 msgid ""
 "\n"
@@ -2120,13 +2115,13 @@ msgstr ""
 "        "
 
 msgid "This action affects the following maps:"
-msgstr "Questa azione avrà effetto sulle seguenti mappe:"
+msgstr "Questa azione avrà effetto sulle seguenti viste:"
 
 msgid "No maps are using this layer"
-msgstr "Nessuna mappa utilizza questo layer"
+msgstr "Nessuna vista utilizza questo layer"
 
 msgid "Replace Layer"
-msgstr "Sostituisci Livello"
+msgstr "Sostituisci Layer"
 
 msgid "Delete"
 msgstr "Cancella"
@@ -2190,91 +2185,91 @@ msgid "source params"
 msgstr "parametri sorgente"
 
 msgid "You are not permitted to delete this map."
-msgstr "Non hai il permesso di eliminare questa mappa."
+msgstr "Non hai il permesso di eliminare questa vista."
 
 msgid "You do not have permissions for this map."
-msgstr "Non hai i permessi per questa mappa."
+msgstr "Non hai i permessi per questa vista."
 
 msgid "You must be logged in to save this map"
-msgstr "Devi entrare per salvare questa mappa"
+msgstr "Devi entrare per salvare questa vista"
 
 msgid "You are not allowed to modify this map's metadata."
-msgstr "Non hai il permesso di modificare i metadati di questa mappa."
+msgstr "Non hai il permesso di modificare i metadati di questa vista."
 
 msgid "You are not allowed to view this map."
-msgstr "Non hai il permesso di visualizzare questa mappa."
+msgstr "Non hai il permesso di visualizzare questa vista."
 
 msgid "Map Created"
-msgstr "Mappa creata"
+msgstr "Vista creata"
 
 msgid "A Map was created"
-msgstr "Una mappa è stata creata"
+msgstr "Una vista è stata creata"
 
 msgid "Comment on Map"
-msgstr "Commenta la mappa"
+msgstr "Commenta la vista"
 
 msgid "A map was commented on"
-msgstr "Una mappa è stata commentata"
+msgstr "Una vista è stata commentata"
 
 msgid "Rating for Map"
-msgstr "Valuta mappa"
+msgstr "Valuta vista"
 
 msgid "A rating was given to a map"
-msgstr "Una valutazione è stata data ad una mappa"
+msgstr "Una valutazione è stata data ad una vista"
 
 msgid "Download Map"
-msgstr "Scarica la mappa"
+msgstr "Scarica la vista"
 
 msgid "Download Data Layers"
 msgstr "Scarica i dati dei Layer"
 
 msgid "Download Web Map Context"
-msgstr "Scarica Web Map Context"
+msgstr "Scarica Web View Context"
 
 msgid "Edit Map"
-msgstr "Modifica Mappa"
+msgstr "Modifica Vista"
 
 msgid "Remove this Map"
-msgstr "Rimuovi questa Mappa"
+msgstr "Rimuovi questa Vista"
 
 msgid "View Map"
-msgstr "Visualizza mappa"
+msgstr "Visualizza vista"
 
 msgid "Rate this Map"
-msgstr "Valuta questa mappa"
+msgstr "Valuta questa vista"
 
 msgid "Share This Map"
-msgstr "Condividi questa mappa"
+msgstr "Condividi questa vista"
 
 msgid "Map Layers"
-msgstr "Layer della mappa"
+msgstr "Layer della vista"
 
 msgid "This map uses the following layers:"
-msgstr "Questa mappa utilizza i seguenti Layer:"
+msgstr "Questa vista utilizza i seguenti Layer:"
 
 msgid "Documents related to this map"
-msgstr "Documenti correlati a questa mappa"
+msgstr "Documenti correlati a questa vista"
 
 msgid "List of documents related to this map:"
-msgstr "Elenco di documenti correlati a questa mappa:"
+msgstr "Elenco di documenti correlati a questa vista:"
 
 msgid "Specify which users can view or modify this map"
-msgstr "Specifica quali utenti possono visualizzare o modificare questa mappa"
+msgstr "Specifica quali utenti possono visualizzare o modificare questa vista"
 
 msgid "Change Permissions of this Map"
-msgstr "Cambia i permessi di questa mappa"
+msgstr "Cambia i permessi di questa vista"
 
 msgid "Copy this map"
-msgstr "Copia questa mappa"
+msgstr "Copia questa vista"
 
 msgid "Duplicate this map and modify it for your own purposes"
-msgstr "Duplica questa mappa e modificala in base ai tuoi obiettivi"
+msgstr "Duplica questa vista e modificala in base ai tuoi obiettivi"
 
 msgid "Create a New Map"
-msgstr "Crea una nuova mappa"
+msgstr "Crea una nuova vista"
 
 msgid "Map Owner"
-msgstr "Proprietario Mappa"
+msgstr "Proprietario Vista"
 
 msgid ""
 "\n"
@@ -2283,7 +2278,7 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"    Qui puoi scaricare tutti i layer di questa mappa che \n"
+"    Qui puoi scaricare tutti i layer di questa vista che \n"
 "    sono gestiti su questo StarterKit.    I seguenti layer saranno scaricati:\n"
 "    "
 
@@ -2294,7 +2289,7 @@ msgid ""
 "      "
 msgstr ""
 "\n"
-"    Inoltre, la mappa contiene questi layer che non possono essere scaricati\n"
+"    Inoltre, la vista contiene questi layer che non possono essere scaricati\n"
 "    per vincoli di sicurezza:\n"
 "    "
 
@@ -2305,7 +2300,7 @@ msgid ""
 "      "
 msgstr ""
 "\n"
-"    Infine, la mappa contiene questi layer che non possono essere scaricati\n"
+"    Infine, la vista contiene questi layer che non possono essere scaricati\n"
 "    perchè non sono disponibili direttamente da questo StarterKit:\n"
 "    "
 
@@ -2314,7 +2309,7 @@ msgid "Downloading"
 msgstr "Scarica"
 
 msgid "Start downloading this map"
-msgstr "Avvia il download di questa mappa"
+msgstr "Avvia il download di questa vista"
 
 #, fuzzy
 msgid "Download Complete"
@@ -2530,7 +2525,7 @@ msgid "Change password"
 msgstr "Cambia password"
 
 msgid "Create a new map"
-msgstr "Crea una nuova mappa"
+msgstr "Crea una nuova vista"
 
 msgid "Edit Your Profile"
 msgstr "Modifica il tuo profilo"
@@ -2553,9 +2548,8 @@ msgstr "Z - A"
 msgid "Relevance"
 msgstr "Rilevanza"
 
-#, fuzzy
 msgid "Rasters"
-msgstr "Registrati"
+msgstr "Raster"
 
 #, fuzzy
 msgid "Users"
@@ -2577,7 +2571,7 @@ msgid "All categories"
 msgstr "Tutte le categorie"
 
 msgid "Maps only"
-msgstr "Solo le mappe"
+msgstr "Solo le viste"
 
 msgid "Layers only"
 msgstr "Solo i layer"
@@ -2732,7 +2726,7 @@ msgid "Choose one or more users..."
 msgstr "Scegli uno o più utenti..."
 
 msgid "View by"
-msgstr "Visualizzata da"
+msgstr "Visualizza per"
 
 msgid "Grid"
 msgstr "Griglia"
@@ -2747,7 +2741,7 @@ msgid "Useful information for developers interested in GeoNode."
 msgstr "Informazioni utili per gli sviluppatori interessati a StarterKit."
 
 msgid "Dynamic tiles via WMS:"
-msgstr "Piastrelle dinamico via WMS"
+msgstr "Tassellamento dinamico via WMS"
 
 msgid "Vector data via WFS:"
 msgstr "I dati vettoriali via WFS"
@@ -2764,7 +2758,7 @@ msgid ""
 "          "
 msgstr ""
 "\n"
-"            StarterKit è una piattaforma open source per condividere dati geospaziali e viste. Se hai domande sul software o sul servizio, iscriviti alla nostra <a href=\"https://groups.google.com/d/forum/geonode-users\">mailing list</a>.\n"
+"            StarterKit è una piattaforma open source per condividere dati geospaziali e viste. Se hai domande sul software o sul servizio, scrivi al nostro <a href=\"mailto:help.skritmare@irea.cnr.it\">help desk RITMARE StarterKit</a>.\n"
 "          "
 
 msgid "Latest Layers"
@@ -2788,11 +2782,11 @@ msgid ""
 "            "
 msgstr ""
 "\n"
-"              StarterKit ti permette di creare e condividere viste. Crea una vista con il nostro strumento cartografico, oppure consulta le mappe condivise da altri utenti. \n"
+"              StarterKit ti permette di creare e condividere viste. Crea una vista con il nostro strumento cartografico, oppure consulta le viste condivise da altri utenti. \n"
 "            "
 
 msgid "Latest Maps"
-msgstr "Ultime mappe"
+msgstr "Ultime viste"
 
 msgid "Log in"
 msgstr "Entra"
@@ -3078,7 +3072,7 @@ msgid ""
 "        Some of your original metadata may have been lost."
 msgstr ""
 "Note: I metadati originali di questo Layer sono stati popolati importando un file di metadati XML.\n"
-"        L'import dei metadati di StarterKit supporta un sottinsieme di elementi di metadata Dublin Core, ISO e FGDC.\n"
+"        L'import dei metadati di StarterKit supporta un sottinsieme di elementi di metadata ISO secondo RNDT (INSPIRE).\n"
 "        Alcuni dei tuoi metadati originali potrebbero essere andati persi."
 
 msgid "Attribute"
@@ -3190,57 +3184,617 @@ msgid ""
 "  "
 msgstr ""
 "\n"
-"  <p>StarterKit consente di accedere a set di dati e ad un'applicazione per l'editing di viste che permette agli utenti di consultare le viste esistenti e contribuire alla piattaforma con le proprie.</p>\n"
-"\n"
-"  <h4 id=\"browsing-data\">Navigazione dei Layer</h4>\n"
-"  <p>La scheda <a href=\"/data\">Layer</a> ti permette di navigare i dati caricati su StarterKit.</p>\n"
-"  <p>Tutti i dati possono essere scaricati in vari formati, per utilizzarli in altre applicazioni.</p>\n"
-"\n"
-"  <h4 id=\"developer-access\">Accesso sviluppatori</h4>\n"
-"  <p>La pagina <a href=\"/developer\"> Sviluppatore</a> è il posto da cui gli sviluppatori possono iniziare a creare applicazioni basate su StarterKit. Esso comprende le istruzioni sull'utilizzo dei web service, i link al codice sorgente di StarterKit e informazioni sui progetti open source utilizzati per crearlo.</p>\n"
-"\n"
-"  <h4 id=\"browsing-maps\">Navigazione delle Mappe</h4>\n"
-"  <p>StarterKit consente agli utenti di creare e consividere viste con gli altri.</p>\n"
-"  <p>La scheda <a href=\"maps\">Viste</a> è il punto di accesso per l'esplorazione delle viste su StarterKit. Da qui puoi <strong>cercare una viste</strong> o <strong>creare una vista</strong>, che aprirà il <a href=\"maps/new\">Map Compositore di viste</a>.</p>\n"
-"  <h5>Modalità Google Earth</h5>\n"
-"  <p>Ogni vista visualizzata su un editor di mappe interattivo può essere visualizzata in modalità 3D attraverso il plugin Google Earth. Per passare dalla modalità 3D seleziona il logo di Google Earth, il pulsante più a destra sulla barra degli strumenti in alto. Se non hai installato il plugin di Google Earth, verrà richiesto di farlo.</p>\n"
-"\n"
-"  <h4 id=\"creating-a-map\">Creazione di una Mappa</h4>\n"
-"  <p>Per creare una nuova mappa vai su <a href=\"maps\">Mappe Contribuite</a> e clicca su <a href=\"maps/new\">Crea la tua mappa</a> link.</p>\n"
-"  <p>Quest'azione di manderà al <a href=\"maps/new\">Compositore di mappe</a> con un layer di base caricato.</p>\n"
-"  <p>Per aggiungere i Layer da StarterKit clicca sul pulsante verde presente sotto la scheda Layer sulla sinistra dello schermo. Quest'azione aprirà una finestra di dialogo con la lista di tutti i Layer disponibili su StarterKit.</p>\n"
-"  <p>Per aggiungere Layer alla Mappa selezionali e premi il pulsante <strong>Aggiungi Livelli</strong>. Una volta terminato clicca <strong>Fatto</strong> per chiudere la finestra di dialogo e tornare indietro sulla Vista.</p>\n"
-"\n"
-"  <h5>Riordino e Rimozione Layer</h5>\n"
-"  <p>Cambia l'ordine di visualizzazione dei Layer elencati nella scheda Dati semplicemente trascinando e rilasciando i loro nomi. L'ordine nella vista verrà aggiornato di conseguenza. Per disattivare la visibilità di un Layer è sufficiente deselezionarlo, e per rimuoverlo completamente selezionalo e premi il pulsante rosso.</p>\n"
-"\n"
-"  <h5>Salvare la tua vista</h5>\n"
-"  <p>Una volta trovato un opportuno insieme di Layer e un livello di zoom, è il momento di salvarlo in modo che gli altri possano vederlo. Fare clic sul pulsante Salva - l'icona più a sinistra nella barra degli strumenti in alto, l'immagine di una vista con un disco - nel menu in alto e compila i campi con il titolo e l'abstract della vista.</p>\n"
-"\n"
-"  <h4 id=\"exporting-a-map\">Esportare una vista</h4>\n"
-"  <p>Ogni vista di StarterKit può essere inserita all'interno di un altro sito o blog. Per esportare una vista:</p>\n"
-"  <ol>\n"
-"    <li>Seleziona la vista dalla lista delle viste e clicca il bottone \"Esporta vista\".</li> \n"
-"    <li>Scegli l'altezza e la lunghezza desiderate dallo strumento durante la procedura guidata.</li> \n"
-"    <li>Copia il codice HTML fornito dalla procedura guidata in qualsiasi pagina HTML o blog che supportino gli i-frame.</li>\n"
-"  </ol>\n"
-"  <p>L'azione creerà un widget interattivo che mostra la tua vista nella tua pagina web o sul post del blog.</p>\n"
-"  <p>Nota che il <a href=\"maps/new\">Compositore Viste</a> ha anche un bottone per esportare la vista. Attento a salvare la vista prima di esportare se ci sono cambiamenti che vuoi che gli altri vedano. Esso esporta l'ultima versione salvata, non l'ultima versione visualizzata.</p>\n"
-"\n"
-"  <h4 id=\"remixing-a-map\">Riutilizzo di una vista</h4>\n"
-"  <p>Ogni vista disponibile può servire come punto di partenza per una nuova vista.</p>\n"
-"  <ol>\n"
-"    <li>Apri la vista sul Compositore viste.</li>\n"
-"    <li>Aggiungi e rimuovi i livelli che vuoi.</li>\n"
-"    <li>Sposta e centra la vista sull'area di tuo interesse.</li>\n"
-"    <li><strong>IMPORTANTE:</strong> Aggiorna il titolo, l'abstract, le informazioni di contatto e i tag come riferimento alla nuova vista.</li>\n"
-"    <li>Salva la vista.</li>\n"
-"  </ol>\n"
-"  <p>Potrai vedere la tua nuova vista cercando nella sezione <a href=\"maps\">Viste</a>. </p> \n"
-"  "
+"<p>StarterKit consente di accedere a set di dati e ad un'applicazione per l'editing di viste che permette agli utenti di consultare le viste esistenti e contribuire alla piattaforma con le proprie.</p>\n"
+"<h4 id=\"browsing-data\">Navigazione dei Layer</h4>\n"
+"<p>La scheda <a href=\"/data\">Layer</a> ti permette di navigare i dati caricati su StarterKit.</p>\n"
+"<p>Tutti i dati possono essere scaricati in vari formati, per utilizzarli in altre applicazioni.</p>\n"
+"<h4 id=\"developer-access\">Accesso sviluppatori</h4>\n"
+"<p>La pagina <a href=\"/developer\"> Sviluppatore</a> è il posto da cui gli sviluppatori possono iniziare a creare applicazioni basate su StarterKit. Esso comprende le istruzioni sull'utilizzo dei web service, i link al codice sorgente di StarterKit e informazioni sui progetti open source utilizzati per crearlo.</p>\n"
+"<h4 id=\"browsing-maps\">Navigazione delle Viste</h4>\n"
+"<p>StarterKit consente agli utenti di creare e consividere viste con gli altri.</p>\n"
+"<p>La scheda <a href=\"maps\">Viste</a> è il punto di accesso per l'esplorazione delle viste su StarterKit. Da qui puoi <strong>cercare una viste</strong> o <strong>creare una vista</strong>, che aprirà il <a href=\"maps/new\">View Compositore di viste</a>.</p>\n"
+"<h5>Modalità Google Earth</h5>\n"
+"<p>Ogni vista visualizzata su un editor di viste interattivo può essere visualizzata in modalità 3D attraverso il plugin Google Earth. Per passare dalla modalità 3D seleziona il logo di Google Earth, il pulsante più a destra sulla barra degli strumenti in alto. Se non hai installato il plugin di Google Earth, verrà richiesto di farlo.</p>\n"
+"<h4 id=\"creating-a-map\">Creazione di una Vista</h4>\n"
+"<p>Per creare una nuova vista vai su <a href=\"maps\">Viste Contribuite</a> e clicca su <a href=\"maps/new\">Crea la tua vista</a> link.</p>\n"
+"<p>Quest'azione di manderà al <a href=\"maps/new\">Compositore di viste</a> con un layer di base caricato.</p>\n"
+"<p>Per aggiungere i Layer da StarterKit clicca sul pulsante verde presente sotto la scheda Layer sulla sinistra dello schermo. Quest'azione aprirà una finestra di dialogo con la lista di tutti i Layer disponibili su StarterKit.</p>\n"
+"<p>Per aggiungere Layer alla Vista selezionali e premi il pulsante <strong>Aggiungi Livelli</strong>. Una volta terminato clicca <strong>Fatto</strong> per chiudere la finestra di dialogo e tornare indietro sulla Vista.</p>\n"
+"<h5>Riordino e Rimozione Layer</h5>\n"
+"<p>Cambia l'ordine di visualizzazione dei Layer elencati nella scheda Dati semplicemente trascinando e rilasciando i loro nomi. L'ordine nella vista verrà aggiornato di conseguenza. Per disattivare la visibilità di un Layer è sufficiente deselezionarlo, e per rimuoverlo completamente selezionalo e premi il pulsante rosso.</p>\n"
+"<h5>Salvare la tua vista</h5>\n"
+"<p>Una volta trovato un opportuno insieme di Layer e un livello di zoom, è il momento di salvarlo in modo che gli altri possano vederlo. Fare clic sul pulsante Salva - l'icona più a sinistra nella barra degli strumenti in alto, l'immagine di una vista con un disco - nel menu in alto e compila i campi con il titolo e l'abstract della vista.</p>\n"
+"<h4 id=\"exporting-a-map\">Esportare una vista</h4>\n"
+"<p>Ogni vista di StarterKit può essere inserita all'interno di un altro sito o blog. Per esportare una vista:</p>\n"
+"<ol>\n"
+"<li>Seleziona la vista dalla lista delle viste e clicca il bottone \"Esporta vista\".</li>\n"
+"<li>Scegli l'altezza e la lunghezza desiderate dallo strumento durante la procedura guidata.</li>\n"
+"<li>Copia il codice HTML fornito dalla procedura guidata in qualsiasi pagina HTML o blog che supportino gli i-frame.</li>\n"
+"</ol>\n"
+"<p>L'azione creerà un widget interattivo che mostra la tua vista nella tua pagina web o sul post del blog.</p>\n"
+"<p>Nota che il <a href=\"maps/new\">Compositore Viste</a> ha anche un bottone per esportare la vista. Attento a salvare la vista prima di esportare se ci sono cambiamenti che vuoi che gli altri vedano. Esso esporta l'ultima versione salvata, non l'ultima versione visualizzata.</p>\n"
+"<h4 id=\"remixing-a-map\">Riutilizzo di una vista</h4>\n"
+"<p>Ogni vista disponibile può servire come punto di partenza per una nuova vista.</p>\n"
+"<ol>\n"
+"<li>Apri la vista sul Compositore viste.</li>\n"
+"<li>Aggiungi e rimuovi i livelli che vuoi.</li>\n"
+"<li>Sposta e centra la vista sull'area di tuo interesse.</li>\n"
+"<li><strong>IMPORTANTE:</strong> Aggiorna il titolo, l'abstract, le informazioni di contatto e i tag come riferimento alla nuova vista.</li>\n"
+"<li>Salva la vista.</li>\n"
+"</ol>\n"
+"<p>Potrai vedere la tua nuova vista cercando nella sezione <a href=\"maps\">Viste</a>. </p>\n"
+" "
 
 msgid "Notification Type"
-msgstr "Tipo di notifica"
+msgstr "Tipologia di notifica"
 
 msgid "Provide CRS for "
 msgstr "Fornisci CRS per"
+
+#: views.py:105
+msgid "You are not permitted to modify this object"
+msgstr ""
+
+#: base/models.py:242
+msgid "restrictions"
+msgstr ""
+
+#: base/models.py:242
+msgid "limitation(s) placed upon the access or use of the data."
+msgstr ""
+
+#: base/models.py:243
+msgid "restrictions other"
+msgstr ""
+
+#: base/models.py:249
+msgid "method used to represent geographic information in the dataset."
+msgstr ""
+
+#: documents/templates/documents/document_detail.html:148
+#: layers/templates/layers/layer_detail.html:227
+msgid "Metadata Author"
+msgstr "Autore del Metadato"
+
+#: documents/templates/documents/document_list.html:29
+#: maps/templates/maps/map_list.html:30
+msgid "Clear all"
+msgstr ""
+
+#: documents/templates/documents/document_replace.html:27
+#: documents/templates/documents/document_upload.html:30
+msgid "Choose a file"
+msgstr ""
+
+#: documents/templates/documents/document_upload.html:28
+msgid "Type a title"
+msgstr "Assegna un titolo"
+
+#: documents/templates/documents/document_upload.html:29
+msgid "Link to"
+msgstr ""
+
+#: layers/models.py:250
+msgid "attribute description"
+msgstr "descrizione dell'attributo"
+
+#: layers/models.py:250
+msgid "description of attribute to be used in metadata"
+msgstr "descrizione dell'attributo da usare nel metadato"
+
+#: layers/models.py:265
+msgid "date when attribute statistics were last updated"
+msgstr "ultima data di aggiornamento delle statistiche degli attributi "
+
+#: layers/templates/layers/layer_metadata.html:23
+msgid "Error updating metadata.  Please check the following fields: "
+msgstr "Errore nel caricamento dei metadati. Controllare i seguenti campi:"
+
+#: layers/templates/layers/layer_metadata.html:49
+msgid "Label"
+msgstr "Etichetta"
+
+#: layers/templates/layers/layer_metadata.html:49
+msgid "Description"
+msgstr "Descrizione"
+
+#: layers/templates/layers/layer_replace.html:21
+msgid "Replace Layer: "
+msgstr "Sostituisci Layer:"
+
+#: layers/templates/layers/layer_replace.html:25
+#: upload/templates/upload/layer_upload.html:24
+msgid "Incomplete Uploads"
+msgstr "Caricamento incompleto"
+
+#: layers/templates/layers/layer_replace.html:26
+#: upload/templates/upload/layer_upload.html:25
+msgid "You have the following incomplete uploads"
+msgstr "Hai i seguenti caricamenti incompleti"
+
+#: layers/templates/layers/layer_replace.html:31
+#: upload/templates/upload/layer_upload.html:30
+msgid "Resume"
+msgstr "Ricomincia"
+
+#: layers/templates/layers/layer_replace.html:38
+#: upload/templates/upload/layer_upload.html:37
+msgid "Are you sure you want to delete this upload?"
+msgstr "Sei sicuro di voler annullare questo caricamento?"
+
+#: layers/templates/layers/layer_replace.html:43
+#: upload/templates/upload/layer_upload.html:42
+msgid "Delete, and don't ask me again."
+msgstr "Annulla, e non chiedere più"
+
+#: layers/templates/layers/layer_replace.html:56
+#: upload/templates/upload/layer_upload.html:55
+msgid "Drop files here"
+msgstr "Trascina qui i file"
+
+#: layers/templates/layers/layer_replace.html:59
+#: upload/templates/upload/layer_upload.html:58
+msgid " or select them one by one:"
+msgstr "o selezionali singolarmente:"
+
+#: layers/templates/layers/layer_replace.html:73
+#: upload/templates/upload/layer_upload.html:84
+msgid "Clear"
+msgstr "Svuota"
+
+#: layers/templates/layers/layer_style_manage.html:16
+msgid ""
+"\n"
+"      Manage Available Styles for <a href=\"/layers/%(layer_title)s\">%(layer_title)s</a>\n"
+"    "
+msgstr ""
+"\n"
+"Gestisci la Vestizione per <a href=\"/layers/%(layer_title)s\">%(layer_title)s</a>"
+
+#: layers/templates/layers/layer_style_manage.html:24
+msgid "Layer Default Style"
+msgstr "Vestizione di deafault"
+
+#: layers/templates/layers/layer_style_manage.html:41
+msgid ""
+"Click on an available style in the upper box to assign it to this layer. "
+"Selected styles appear in the lower box."
+msgstr ""
+"Seleziona una vestizione predefinita nel riquadro in alto per assegnarla a "
+"questo Layer. La legenda selezionata appare nel riquadro inferiore."
+
+#: maps/templates/maps/_map_list_item.html:27
+msgid "View"
+msgstr ""
+
+#: maps/templates/maps/map_detail.html:44
+msgid "Edit Map Metadata"
+msgstr "Edita il Metadato della Vista"
+
+#: maps/templates/maps/map_detail.html:46
+msgid "Set Map Thumbnail"
+msgstr "Set View Thumbnail"
+
+#: maps/templates/maps/map_detail.html:48
+msgid "Edit Map Permissions"
+msgstr "Edit View Permissions"
+
+#: maps/templates/maps/map_detail.html:159
+msgid "Map WMS"
+msgstr "Vista in WMS"
+
+#: maps/templates/maps/map_detail.html:161
+msgid "WMS layer group for local map layers"
+msgstr "gruppo di layer WMS per la vista corrente"
+
+#: maps/templates/maps/map_detail.html:162 social/tests.py:100
+#: social/templatetags/social_tags.py:48
+msgid "on"
+msgstr ""
+
+#: maps/templates/maps/map_detail.html:162
+msgid "local OWS"
+msgstr ""
+
+#: maps/templates/maps/map_detail.html:165
+msgid "Publish local map layers as WMS layer group"
+msgstr "Pubblica i layer della vista locale come gruppo di layer WMS"
+
+#: maps/templates/maps/map_detail.html:166
+msgid "Publish Map WMS"
+msgstr "Pubblica Vista in WMS"
+
+#: maps/templates/maps/map_download.html:22
+msgid ""
+"\n"
+"      <div class=\"alert alert-warning\">Could not find downloadable layers for this map. You can go back to  \n"
+"      "
+msgstr ""
+"\n"
+"<div class=\"alert alert-warning\">Could not find downloadable layers for this view. You can go back to  \n"
+"      </div> "
+
+#: maps/templates/maps/map_download.html:59
+msgid "Retry"
+msgstr ""
+
+#: people/templates/people/profile_base.html:12
+#: people/templates/people/profile_list.html:11
+msgid "Explore People"
+msgstr ""
+
+#: people/templates/people/profile_detail.html:103
+msgid "Shared on"
+msgstr ""
+
+#: people/templates/people/profile_detail.html:116
+msgid "No contents found."
+msgstr ""
+
+#: people/templates/people/profile_edit.html:14
+msgid "Change your avatar"
+msgstr ""
+
+#: search/templates/search/_type_filters.html:8
+msgid "Vectors"
+msgstr "Vettoriali"
+
+#: social/templates/social/activity_list.html:17
+#: social/templates/social/activity_list.html:28
+msgid "Recent activity"
+msgstr ""
+
+#: social/templatetags/social_tags.py:33
+msgid "to"
+msgstr ""
+
+#: templates/500.html:162
+msgid "There was a problem loading this page"
+msgstr ""
+
+#: templates/500.html:163
+msgid ""
+"\n"
+"      Please contact your GeoNode administrator (he may have received an email automatically if he configured it properly).\n"
+"      If you are the site administrator, enable debug mode to see the actual error and fix it or file an issue in <a href=\"http://github.com/GeoNode/geonode/issues\">GeoNode's issue tracker</a>\n"
+"  "
+msgstr ""
+"\n"
+"      Please contact your StarterKit administrator (he may have received an email automatically if he configured it properly).\n"
+"      If you are the site administrator, enable debug mode to see the actual error and fix it or file an issue in <a href=\"http://github.com/GeoNode/geonode/issues\">StarterKit's issue tracker</a>\n"
+" "
+
+#: templates/_comments.html:21
+msgid "Log in to add a comment"
+msgstr ""
+
+#: templates/_comments.html:34
+msgid "By"
+msgstr ""
+
+#: templates/developer.html:12
+msgid ""
+"\n"
+"  <p><a href=\"http://geonode.org/\">GeoNode</a> is an open service built on open source software. We encourage you to build new applications using the components and resources it provides. This page is a starting point for developers interesting in taking full advantage of GeoNode. It also includes links to the project's source code so anyone can build and customize their own GeoNode. </p>\n"
+"\n"
+"  <h4>GeoNode Software</h4>\n"
+"\n"
+"  <p>All the code that runs GeoNode is open source. The code is available at <a href=\"http://github.com/GeoNode/geonode\">http://github.com/GeoNode/geonode/</a>. The issue tracker for the project is at <a href=\"http://github.com/GeoNode/geonode/issues\">http://github.com/GeoNode/geonode/issues</a>.</p>\n"
+"\n"
+"  <p>GeoNode is built using several open source projects, each with its own community. If you are interested in contributing new features to the GeoNode, we encourage you to do so by contributing to one of the projects on which it is built:</p>\n"
+"  <ul>\n"
+"    <li><a href=\"http://geoext.org\">GeoExt</a> - The JavaScript toolkit for rich web mapping applications</li>\n"
+"    <li><a href=\"http://geoserver.org\">GeoServer</a> - Standards based server for geospatial information</li>\n"
+"    <li><a href=\"http://geowebcache.org\">GeoWebCache</a> - Cache engine for WMS Tiles</li><li><a href=\"http://openlayers.org\">OpenLayers</a> - Pure JavaScript library powering the maps of GeoExt</li>\n"
+"    <li><a href=\"http://pycsw.org\">pycsw</a> - CSW metadata catalogue server</li>\n"
+"  </ul>\n"
+"\n"
+"  <h4>What are OGC Services?</h4>\n"
+"  <p>The data in this application is served using open standards endorsed by the <a href=\"http://opengeospatial.org/\">Open Geospatial Consortium</a>; in particular, WMS (Web Map Service) is used for accessing maps, WFS (Web Feature Service) is used for accessing vector data, and WCS (Web Coverage Service) is used for accessing raster data.  WMC (Web Map Context Documents) is used for sharing maps. You can use these services in your own applications using libraries such as OpenLayers, GeoTools, and OGR (all of which are open-source software and available at zero cost).</p>\n"
+"\n"
+"  <h4>What is GeoWebCache?</h4>\n"
+"  <p>GeoWebCache provides mapping tiles that are compatible with a number of mapping engines, including Google Maps, Bing Maps and OpenLayers. All the data hosted by GeoNode is also available through GeoWebCache. GeoWebCache improves on WMS by caching data and providing more responsive maps.</p>\n"
+"\n"
+"  <h4>OpenLayers Example Code</h4>\n"
+"\n"
+"  <p>To include a GeoNode map layer in an OpenLayers map, first find the name for that layer. This is found in the layer's <code>name</code> field (not <code>title</code>) of the layer list. For this example, we will use the Nicaraguan political boundaries background layer, whose name is <code>risk:nicaragua_admin</code>. Then, create an instance of OpenLayers.Layer.WMS:</p>\n"
+"  <p><code>var geonodeLayer = new OpenLayers.Layer.WMS(\"GeoNode Risk Data\", \"http://demo.geonode.org/geoserver/wms\",{ layers: \"risk:nicaragua_admin\" });</code></p>\n"
+"\n"
+"  <h4>Google Maps Example Code</h4>\n"
+"  <p>To include a GeoNode map layer in a Google Map, include the layer namein the URL template.</p>\n"
+"  <p><code>var tilelayer =  new GTileLayer(null, null, null, {tileUrlTemplate: 'http://demo.geonode.org/geoserver/gwc/service/gmaps?layers=risk:nicaragua_admin&#38;zoom={Z}&#38;x={X}&#38;y={Y}', isPng:true, opacity:0.5 } );</code></p>\n"
+"\n"
+"  <h4>Shapefile/GeoJSON/GML Output</h4>\n"
+"  <p>To get data from the GeoNode web services use the WFS protocol. For example, to get the full Nicaraguan admin boundaries use:</p>\n"
+"  <p><code>http://demo.geonode.org/geoserver/wfs?request=GetFeature&#38;typeName=risk:nicaragua_admin&#38;outputformat=SHAPE-ZIP</code></p>\n"
+"  <p>Changing output format to <code>json</code>, <code>GML2</code>, <code>GML3</code>, or <code>csv</code> will get data in those formats. The WFS protocol also can handle more precise queries, specifying a bounding box or various spatial and non-spatial filters based on the attributes of the data.</p>\n"
+"\n"
+"  <h4>GeoTools Example Code</h4>\n"
+"  <p>Create a DataStore and extract a FeatureType from it, then run a Query. It is all documented on the wiki at <code>http://geotools.org/</code>.</p>\n"
+msgstr ""
+
+#: templates/account/login.html:12
+msgid "Log in to an existing account"
+msgstr ""
+
+#: templates/account/login.html:22
+msgid "Forgot your username?"
+msgstr ""
+
+#: templates/account/login.html:23
+msgid "Forgot your password?"
+msgstr ""
+
+#: templates/account/logout.html:15
+msgid "Are you sure you want to log out?"
+msgstr ""
+
+#: templates/account/password_reset.html:8
+#: templates/account/password_reset.html:14
+msgid "Password reset"
+msgstr ""
+
+#: templates/account/password_reset.html:15
+msgid ""
+"Forgotten your password? Enter your email address below, and we'll send you "
+"an email allowing you to reset it."
+msgstr ""
+
+#: templates/account/password_reset.html:20
+msgid "Reset my password"
+msgstr ""
+
+#: templates/account/password_reset.html:25
+msgid ""
+"If you have any trouble resetting your password, contact us at <a "
+"href=\"mailto:%(THEME_ACCOUNT_CONTACT_EMAIL)s\">%(THEME_ACCOUNT_CONTACT_EMAIL)s</a>."
+msgstr ""
+
+#: templates/activity/actor.html:21
+msgid "Activity Feed for"
+msgstr ""
+
+#: templates/announcements/announcement_form.html:25
+msgid "Save"
+msgstr ""
+
+#: templates/announcements/announcement_list.html:32
+msgid "Published From"
+msgstr ""
+
+#: templates/avatar/change.html:6 templates/avatar/confirm_delete.html:5
+msgid "Back to edit your profile information"
+msgstr ""
+
+#: templates/avatar/change.html:16
+msgid "Choose new Default"
+msgstr ""
+
+#: templates/avatar/change.html:21
+msgid "Upload New Image"
+msgstr ""
+
+#: templates/avatar/change.html:23
+msgid "Delete your avatars"
+msgstr ""
+
+#: templates/avatar/confirm_delete.html:6
+msgid "Please select the avatars that you would like to delete."
+msgstr ""
+
+#: templates/avatar/confirm_delete.html:9
+msgid ""
+"You have no avatars to delete. Please <a "
+"href=\"%(avatar_change_url)s\">upload one</a> now."
+msgstr ""
+
+#: templates/avatar/confirm_delete.html:15
+msgid "Delete These"
+msgstr ""
+
+#: templates/relationships/_list_connections.html:17
+msgid "No one is following this user"
+msgstr ""
+
+#: templates/relationships/relationship_list.html:26
+msgid "You're not %(status_slug)s anyone!"
+msgstr ""
+
+#: upload/templates/upload/layer_upload.html:72
+msgid "Select the charset or leave default"
+msgstr "Seleziona un set di caratteri o lascia il valore di default"
+
+#: upload/templates/upload/layer_upload.html:85
+msgid "Upload files"
+msgstr "Carica file"
+
+#: upload/templates/upload/layer_upload_crs.html:14
+msgid "Coordinate Reference System"
+msgstr "Sistema di Coordinate di Riferimento"
+
+#: upload/templates/upload/layer_upload_crs.html:17
+msgid ""
+"\n"
+"        A coordinate reference system for this layer could not be determined.\n"
+"        Locate or enter the appropriate ESPG code for this layer below.\n"
+"        One way to do this is do visit:\n"
+"        <a href=\"http://prj2epsg.org/search\" target=\"_\">prj2epsg</a>\n"
+"        and enter the following:\n"
+"    "
+msgstr ""
+
+#: upload/templates/upload/layer_upload_crs.html:35
+msgid ""
+"\n"
+"        There is a problem recognizing the projection of this data. Please\n"
+"        reproject this data to a more common projection.\n"
+"        "
+msgstr ""
+
+#: upload/templates/upload/layer_upload_csv.html:11
+msgid "Geospatial Data"
+msgstr ""
+
+#: upload/templates/upload/layer_upload_csv.html:12
+msgid ""
+"Please indicate which attributes contain the latitude and longitude "
+"coordinates in the CSV data."
+msgstr ""
+
+#: upload/templates/upload/layer_upload_csv.html:14
+msgid ""
+"With this data, GeoNode was able to guess which attributes contain the\n"
+"latitude and longitude coordinates, but please confirm that the correct\n"
+"attributes are selected below."
+msgstr ""
+"With this data, StarterKit was able to guess which attributes contain the\n"
+"latitude and longitude coordinates, but please confirm that the correct\n"
+"attributes are selected below."
+
+#: upload/templates/upload/layer_upload_csv.html:24
+msgid "Latitude"
+msgstr ""
+
+#: upload/templates/upload/layer_upload_csv.html:26
+#: upload/templates/upload/layer_upload_csv.html:39
+msgid "Select an attribute"
+msgstr ""
+
+#: upload/templates/upload/layer_upload_csv.html:37
+msgid "Longitude"
+msgstr ""
+
+#: upload/templates/upload/layer_upload_csv.html:57
+msgid ""
+"We did not detect columns that could be used for the latitude and longitude.\n"
+"Please verify that you have two columns in your csv file that can be used for\n"
+"the latitude and longitude."
+msgstr ""
+
+#: upload/templates/upload/layer_upload_invalid.html:7
+#: upload/templates/upload/no_upload.html:6
+msgid "Your upload is either complete or you haven't resumed an earlier one."
+msgstr ""
+
+#: upload/templates/upload/layer_upload_invalid.html:8
+msgid "Return to"
+msgstr ""
+
+#: upload/templates/upload/layer_upload_time.html:81
+#: upload/templates/upload/layer_upload_time.html:109
+msgid "Convert Text Attribute"
+msgstr ""
+
+#: upload/templates/upload/layer_upload_time.html:95
+#: upload/templates/upload/layer_upload_time.html:123
+msgid "Convert Number (As Year)"
+msgstr ""
+
+#: upload/templates/upload/layer_upload_time.html:131
+msgid "of all the distinct time values"
+msgstr ""
+
+#: upload/templates/upload/layer_upload_time.html:135
+msgid "Intervals"
+msgstr ""
+
+#: upload/templates/upload/layer_upload_time.html:135
+msgid "defined by the resolution"
+msgstr ""
+
+#: upload/templates/upload/layer_upload_time.html:139
+msgid "Continuous Intervals"
+msgstr ""
+
+#: upload/templates/upload/layer_upload_time.html:139
+msgid ""
+"for data that is frequently updated, resolution describes the frequency of "
+"updates"
+msgstr ""
+
+#: upload/templates/upload/layer_upload_time.html:154
+msgid "Enabling Time"
+msgstr ""
+
+#: upload/templates/upload/layer_upload_time.html:155
+msgid ""
+"A feature can currently support one or two time attributes. If a single\n"
+"    attribute is used, the feature is considered relevant at that single point in time. If two\n"
+"    attributes are used, the second attribute represents the end of a valid period for the\n"
+"    feature."
+msgstr ""
+
+#: upload/templates/upload/layer_upload_time.html:160
+msgid "A time attribute can be one of"
+msgstr ""
+
+#: upload/templates/upload/layer_upload_time.html:162
+msgid "An existing date"
+msgstr ""
+
+#: upload/templates/upload/layer_upload_time.html:163
+msgid "Text that can be converted to a timestamp"
+msgstr ""
+
+#: upload/templates/upload/layer_upload_time.html:164
+msgid "A number representing a year"
+msgstr ""
+
+#: upload/templates/upload/layer_upload_time.html:167
+msgid ""
+"\n"
+"    For text attributes, one can specify a custom format or use the 'best guess' approach.\n"
+"    The most common formatting flags are:\n"
+"    "
+msgstr ""
+
+#: upload/templates/upload/layer_upload_time.html:173
+msgid "year"
+msgstr ""
+
+#: upload/templates/upload/layer_upload_time.html:174
+msgid "month"
+msgstr ""
+
+#: upload/templates/upload/layer_upload_time.html:175
+msgid "day of month"
+msgstr ""
+
+#: upload/templates/upload/layer_upload_time.html:176
+#: upload/templates/upload/layer_upload_time.html:177
+msgid "hour of day"
+msgstr ""
+
+#: upload/templates/upload/layer_upload_time.html:178
+msgid "minute in hour"
+msgstr ""
+
+#: upload/templates/upload/layer_upload_time.html:179
+msgid "second in minute"
+msgstr ""
+
+#: upload/templates/upload/layer_upload_time.html:182
+msgid "Note that single quotes represent a literal character."
+msgstr ""
+
+#: upload/templates/upload/layer_upload_time.html:183
+msgid ""
+"To remove ambiguity, repeat a code to represent the maximum number of digits"
+" - for example yyyy"
+msgstr ""
+
+#: upload/templates/upload/layer_upload_time.html:185
+msgid "The 'best guess' will handle date and optional time variants of"
+msgstr ""
+
+#: upload/templates/upload/layer_upload_time.html:186
+msgid "In terms of the formatting flags noted above, these are"
+msgstr ""
+
+#: upload/templates/upload/no_upload.html:7
+msgid "Returning to the upload starting page in <span id=\"cnt\">5</span>seconds "
+msgstr ""
+
+#: upload/templates/upload/no_upload.html:8
+msgid " Or just go "
+msgstr ""
