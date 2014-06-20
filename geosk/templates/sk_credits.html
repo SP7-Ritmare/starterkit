@@ -1,0 +1,52 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% block title %} {% trans "Credits" %} - {{ block.super }} {% endblock %}
+
+{% block body %} 
+  <header class="jumbotron subhead" id="overview">
+    <h1>{% trans "Credits" %}</h1>
+    <p class="lead"></p>
+  </header>
+ 
+
+  <div class="row">
+    <hr/>
+    <div class="span4">
+      <h2>{% trans "Development Team" %}</h2>
+      <p>{% trans "The development team is composed by:" %}</p>
+      <ul>
+	<li>Anna Basoni - IREA CNR</li>
+	<li>Mauro Bastianini - ISMAR CNR</li>
+	<li>Cristiano Fugazza - IREA CNR</li>
+	<li>Stefano Menegon - ISMAR CNR</li>
+	<li>Tiziano Minuzzo - ISMAR CNR</li>
+	<li>Alessandro Oggioni - IREA CNR</li>
+	<li>Fabio Pavesi - IREA CNR</li>
+	<li>Monica Pepe - IREA CNR</li>
+	<li>Alessandro Sarretta - ISMAR CNR</li>
+	<li>Paolo Tagliolato - IREA CNR</li>
+	<li>Andrea Vianello - ISMAR CNR</li>
+	<li>Paola Carrara - IREA CNR</li>
+      </ul>
+    </div>
+    <div class="span4">
+      <h2>{% trans "Starter Kit software" %}</h2>
+      {% blocktrans %}StarterKit is built using several open source projects, each with its own community:{% endblocktrans %}
+      <ul> 
+	<li><a target="_blank" href="http://geonode.org/">GeoNode</a>
+	Open Source Geospatial Content Management System</li>
+	<li><a target="_blank" href="http://52north.org/">52°North SOS</a> Sensor Observation Service implementation</li>
+	<li><a target="_blank" href="https://code.google.com/p/flot/">FloatJS</a>Attractive JavaScript plotting for jQuery</li>
+	<li><a target="_blank" href="https://github.com/CIGNo-project/CIGNo">CIGNO</a> Collaborative Interoperable Geographic Node</li>
+
+	<!--li>GeoExt - The JavaScript toolkit for rich web mapping applications
+	<li>GeoServer - Standards based server for geospatial information
+	<li>GeoWebCache - Cache engine for WMS Tiles
+	<li>OpenLayers - Pure JavaScript library powering the maps of GeoExt
+	<li>pycsw - CSW metadata catalogue server-->
+      </ul>
+    </div>
+  </div>
+
+{% endblock %}

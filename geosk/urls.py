@@ -20,6 +20,9 @@ urlpatterns = patterns('',
 
     # additional pages
     url(r'^about_services/$', TemplateView.as_view(template_name='about_services.html'), name='about_services'),
+    url(r'^about_upload_layers/$', TemplateView.as_view(template_name='about_upload_layers.html'), name='about_upload_layers'),
+    url(r'^sk_license/$', TemplateView.as_view(template_name='sk_license.html'), name='sk_license'),
+    url(r'^sk_credits/$', TemplateView.as_view(template_name='sk_credits.html'), name='sk_credits'),
 
     # mdtools views
     (r'^mdtools/', include('geosk.mdtools.urls')),

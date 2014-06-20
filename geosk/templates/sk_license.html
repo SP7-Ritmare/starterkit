@@ -1,0 +1,66 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% block title %} Licenza e limitazione all’uso degli StarterKit - {{ block.super }} {% endblock %}
+
+{% block body %} 
+  <header class="jumbotron subhead" id="overview">
+    <h1>Licenza e limitazione all’uso degli StarterKit</h1>
+    <p class="lead">Grazie per utilizzare StarterKit.</p>
+  </header>
+  
+  <p>StarterKit - indicato come SK - è una suite software sviluppata
+    in RITMARE SP7_WP4_AZ2 che abilita gruppi di ricerca a diventare
+    distributori autonomi, indipendenti e decentralizzati dei dati (e
+    metadati) da essi raccolti in modalità standard, consentendone il
+    discovery e l'accesso interoperabile da parte di infrastrutture di
+    dati spaziali.
+  </p>
+
+  <p>SK è disponibile in licenza gratuita e aperta (GPL
+    v3.0<sup><a href="#ref-gpl">1</a></sup>). Nell’ambito di RITMARE
+    verrà rilasciato anche con supporto tecnico mentre per utenti
+    esterni qualunque forma di supporto sarà a discrezione
+    insindacabile del Developer Team e del gruppo RITMARE SP7_WP4_AZ2.
+  </p>
+
+  <p>In aggiunta alle regole della licenza GPL v3.0, l’utente accetta
+    di riconoscere la paternità nello sviluppo di SK e di
+    citare<sup><a href="#ref-citation-repository">2</a></sup>
+    appropriatamente il Development
+    Team<sup><a href="#ref-citation-team">3</a></sup> in tutti i
+    prodotti che presentino risultati ottenuti attraverso l’uso di
+    SK. L’utente, in più, è completamente responsabile delle
+    informazioni e dei dati che rilascia attraverso i servizi
+    contenuti nello SK.
+  </p>
+    
+  <p>NEI LIMITI PREVISTI DALLA LEGGE, GLI SVILUPPATORI E DISTRIBUTORI
+    DI STARTERKIT NON RICONOSCONO ALCUNA GARANZIA, ESPLICITA O
+    IMPLICITA, SUI SERVIZI OFFERTI CON STARTERKIT. I SERVIZI VENGONO
+    FORNITI "A SCATOLA CHIUSA", SENZA GARANZIA DI ALCUN TIPO. NON
+    RICONOSCIAMO NEPPURE ALCUNA GARANZIA DI COMMERCIABILITÀ, DI
+    IDONEITÀ AD UNO SCOPO PARTICOLARE E DI NON VIOLAZIONE. L’INTERO
+    RISCHIO RELATIVO ALLA QUALITA’ E PERFORMANCE DEL PROGRAMMA RICADE
+    SULL’UTILIZZATORE.
+  </p>
+
+  <p>NEI LIMITI PREVISTI DALLA LEGGE, IN NESSUN CASO GLI SVILUPPATORI
+    E DISTRIBUTORI SARANNO RESPONSABILI PER: (A) DANNI INDIRETTI,
+    SPECIALI, INCIDENTALI, PUNITIVI, ESEMPLARI E CONSEQUENZIALI O
+    QUALSIASI PERDITA DI ATTIVITÀ, DATI E PROFITTI, INDIPENDENTEMENTE
+    DALLA TEORIA LEGALE E DALL'EVENTUALITÀ CHE ESSI SIANO STATI
+    INFORMATI O MENO DEL POSSIBILE VERIFICARSI DI TALI DANNI E ANCHE
+    SE GLI EVENTUALI RIMEDI NON SONO IN GRADO DI RISPONDERE AL LORO
+    PROPOSITO ESSENZIALE; (B) RESPONSABILITÀ INDIRETTA PER OGNI
+    RECLAMO RELATIVO AI SERVIZI.
+  </p>
+  <hr>
+  <div>
+    <ol>
+      <li id="ref-gpl"><a href="http://www.gnu.org/licenses/gpl.html"> http://www.gnu.org/licenses/gpl.html</a></li>
+      <li id="ref-citation-repository"><a href="http://sp7.irea.cnr.it/wiki/index.php/SK_Citation_Repository">http://sp7.irea.cnr.it/wiki/index.php/SK_Citation_Repository</a></li>
+      <li id="ref-citation-team"><a href="http://sp7.irea.cnr.it/wiki/index.php/SK_Citation_Repository#Development_Team">http://sp7.irea.cnr.it/wiki/index.php/SK_Citation_Repository#Development_Team</a></li>
+    </ol>
+  </div>
+{% endblock %}
