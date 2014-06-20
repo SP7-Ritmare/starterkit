@@ -29,26 +29,37 @@
     <h2>Site information</h2>
     <table class="table">
       <tr>
-	<td class="muted">Domain</td><td>{{ SITE_DOMAIN }}</td>
+	<td class="muted">{% trans "Domain" %}</td><td>{{ SITE_DOMAIN }}</td>
       </tr>
       <tr>
-	<td class="muted">Site URL</td><td>{{ SETTINGS_SITEURL }}</td>
+	<td class="muted">{% trans "Site URL" %}</td><td>{{ SETTINGS_SITEURL }}</td>
       </tr>
       <tr>
-	<td class="muted">Web Title/Name</td><td>{{ SITE_NAME }}</td>
+	<td class="muted">{% trans "Web Title/Name" %}</td><td>{{ SITE_NAME }}</td>
       </tr>
       <tr>
-	<td class="muted">Metadata</td><td>{{ services_metadata }}</td>
+	<td class="muted">{% trans "Metadata" %}</td>
+	<td>{{ services_metadata }}  <button id="btn-modify-services-metadata" class="status status-unregistered btn btn-mini">{% trans "Modify" %}</button></td>
       </tr>
     </table>
     
-    <button id="btn-check-validation" class="status status-invalid btn btn-small">Check validation</button>
+    <button id="btn-check-validation" class="status status-invalid btn btn-small">{% trans "Check validation" %}</button>
 
     <p class="status status-unregistered">{% blocktrans %}Please check the information is correct prior to registering the SK{% endblocktrans %}</p>
-    <button id="btn-register" class="status status-unregistered btn">Register</button>
+
+    <p> 
+      <form>
+	<label class="checkbox">
+	  <input id="chk-legal-notes-accepted" type="checkbox">{% blocktrans %}I have read the legal notes and i agree to them.{% endblocktrans %} 
+	  <a target="_blank" href="{% url 'sk_license' %}">{% trans "Read it." %}
+	</label>
+      </form>
+    </p>
+    <button id="btn-register" class="status status-unregistered btn" disabled>{% trans "Register" %}</button>
+
 
     <p class="status status-missing-metadata">{% blocktrans %}Please add more information about your SK implementation. Fill the Services Metadata form.{% endblocktrans %}</p>
-    <button id="btn-missing-metadata" class="status status-missing-metadata btn">Insert metadata</button>
+    <button id="btn-missing-metadata" class="status status-missing-metadata btn">{% trans "Insert metadata" %}</button>
     
     <div id="messages-modal" class="modal hide fade">
       <div class="modal-header">
@@ -59,7 +70,7 @@
 	<p id="messages-modal-body"></p>
       </div>
       <div class="modal-footer">
-	<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Close</button>
+	<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">{% trans "Close" %}</button>
       </div>
     </div>
 
@@ -76,6 +87,7 @@
       $('.'+cls).show();
   };
   setStatus(skStatus);
+  //setStatus('unregistered');
 
   setModal = function(title, body){
       $('#messages-modal-title').text(title);
@@ -86,7 +98,6 @@
       });
   };
 
-  //setStatus('unregistered');
   $('#btn-check-validation').click(function(event) {
       var btn=$(this);
       btn.button('loading');
@@ -123,9 +134,25 @@
 	  })
   });
 
+  $('#btn-modify-services-metadata').click(function(event) {
+      window.location.href = "{% url 'admin:mdtools_servicesmetadata_change' services_metadata.id %}";
+      return false;
+  });
+
   $('#btn-missing-metadata').click(function(event) {
       window.location.href = "{% url 'admin:mdtools_servicesmetadata_add' %}";
       return false;
   });
+
+  $('#chk-legal-notes-accepted').click(function(event) {
+      var b=$('#btn-register');
+      if ($(this).is(':checked')) {
+	  b.attr("disabled", false);
+      } else {
+	  b.attr("disabled", true);
+      }
+  });
+
+  
 </script>
 {% endblock extra_script %}
