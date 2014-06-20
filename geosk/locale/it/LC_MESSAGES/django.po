@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: STARTER KIT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-18 18:14-0500\n"
-"PO-Revision-Date: 2014-06-18 16:21+0100\n"
+"POT-Creation-Date: 2014-06-20 05:13-0500\n"
+"PO-Revision-Date: 2014-06-19 18:14+0100\n"
 "Last-Translator: <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: it_IT\n"
@@ -71,7 +71,7 @@ msgstr "Sezioni"
 
 #: dashboard.py:103
 msgid "SK Front end"
-msgstr ""
+msgstr "SK Front end"
 
 #: dashboard.py:107
 #: _locale_geonode/layers/templates/layers/layer_change_poc.html:5
@@ -1250,7 +1250,7 @@ msgstr "versione della risorsa citata"
 
 #: _locale_geonode/base/models.py:241
 msgid "abstract"
-msgstr "abstract"
+msgstr "descrizione"
 
 #: _locale_geonode/base/models.py:241
 msgid "brief narrative summary of the content of the resource(s)"
@@ -1447,7 +1447,7 @@ msgstr "Titolo"
 #: _locale_geonode/base/templates/base/resourcebase_info_panel.html:14
 #: mdtools/templates/base/resourcebase_info_panel.html:14
 msgid "Abstract"
-msgstr "Abstract"
+msgstr "Descrizione"
 
 #: _locale_geonode/base/templates/base/resourcebase_info_panel.html:21
 #: _locale_geonode/search/templates/search/_general_filters.html:27
@@ -1479,7 +1479,7 @@ msgstr "Categorie"
 #: _locale_geonode/base/templates/base/resourcebase_info_panel.html:51
 #: mdtools/templates/base/resourcebase_info_panel.html:51
 msgid "Regions"
-msgstr "Regioni"
+msgstr "Regione"
 
 #: _locale_geonode/base/templates/base/resourcebase_info_panel.html:58
 #: mdtools/templates/base/resourcebase_info_panel.html:58
@@ -1496,9 +1496,8 @@ msgstr "Proprietario"
 #: _locale_geonode/layers/templates/layers/layer_detail.html:232
 #: _locale_geonode/layers/templates/layers/layer_metadata.html:57
 #: mdtools/templates/base/resourcebase_info_panel.html:95
-#, fuzzy
 msgid "Point of Contact"
-msgstr "Modifica contatto"
+msgstr "Punto di contatto"
 
 #: _locale_geonode/base/templates/base/resourcebase_info_panel.html:84
 #: mdtools/templates/base/resourcebase_info_panel.html:108
@@ -1507,9 +1506,8 @@ msgstr "Frequenza di revisione"
 
 #: _locale_geonode/base/templates/base/resourcebase_info_panel.html:91
 #: mdtools/templates/base/resourcebase_info_panel.html:115
-#, fuzzy
 msgid "Restrictions"
-msgstr "Sezioni"
+msgstr "Restrizioni"
 
 #: _locale_geonode/base/templates/base/resourcebase_info_panel.html:102
 #: mdtools/templates/base/resourcebase_info_panel.html:126
@@ -1599,19 +1597,16 @@ msgid "You are not allowed to view this document."
 msgstr "Non sei autorizzato a visualizzare questo documento"
 
 #: _locale_geonode/documents/views.py:123
-#, fuzzy
 msgid "You need to provide a document title."
-msgstr "Non sei autorizzato a visualizzare questo documento"
+msgstr "Devi fornire il titolo del documento."
 
 #: _locale_geonode/documents/views.py:125
-#, fuzzy
 msgid "This file type is not allowed."
-msgstr "Questa mappa utilizza i seguenti Layer:"
+msgstr "Questo tipo di file non è consentito."
 
 #: _locale_geonode/documents/views.py:127
-#, fuzzy
 msgid "This file is too big."
-msgstr "Questo campo &egrave; obbligatorio"
+msgstr "Questo file &egrave; troppo grande."
 
 #: _locale_geonode/documents/templates/documents/_document_filters.html:5
 #: _locale_geonode/layers/templates/layers/_layer_filters.html:5
@@ -1701,7 +1696,7 @@ msgstr "Modifica documento"
 #: _locale_geonode/documents/templates/documents/document_detail.html:50
 #: _locale_geonode/layers/templates/layers/layer_detail.html:61
 msgid "Edit Metadata"
-msgstr "Modifica metadati"
+msgstr "Modifica Metadati"
 
 #: _locale_geonode/documents/templates/documents/document_detail.html:51
 #: _locale_geonode/layers/templates/layers/layer_detail.html:63
@@ -1814,7 +1809,7 @@ msgstr "Proprietario del Documento"
 #: _locale_geonode/documents/templates/documents/document_detail.html:148
 #: _locale_geonode/layers/templates/layers/layer_detail.html:236
 msgid "Metadata Author"
-msgstr "Autore del Metadato"
+msgstr "Autore dei Metadati"
 
 #: _locale_geonode/documents/templates/documents/document_list.html:28
 #: _locale_geonode/layers/templates/layers/layer_list.html:30
@@ -1842,7 +1837,7 @@ msgstr ""
 #: _locale_geonode/documents/templates/documents/document_metadata.html:31
 #: _locale_geonode/layers/templates/layers/layer_metadata.html:62
 msgid "Metadata Provider"
-msgstr "Fornitore metadati"
+msgstr "Fornitore Metadati"
 
 #: _locale_geonode/documents/templates/documents/document_metadata.html:36
 #: _locale_geonode/layers/templates/layers/layer_metadata.html:67
@@ -2134,7 +2129,7 @@ msgstr "Valuta Layer"
 
 #: _locale_geonode/layers/management/__init__.py:32
 msgid "A rating was given to a layer"
-msgstr "Una valutazione è stata data ad un Layer"
+msgstr "Una punteggio &egrave; stato attribuito ad un Layer"
 
 #: _locale_geonode/layers/templates/layers/_actions.html:4
 #: _locale_geonode/layers/templates/layers/layer_metadata.html:32
@@ -2190,7 +2185,7 @@ msgstr "Modifica Layer"
 #: _locale_geonode/layers/templates/layers/layer_detail.html:65
 #: _locale_geonode/layers/templates/layers/layer_style_manage.html:14
 msgid "Manage Styles"
-msgstr "Gestisci Stili"
+msgstr "Gestisci gli stili"
 
 #: _locale_geonode/layers/templates/layers/layer_detail.html:66
 msgid "Edit Styles"
@@ -2234,7 +2229,7 @@ msgstr "Giudica questo Layer"
 
 #: _locale_geonode/layers/templates/layers/layer_detail.html:161
 msgid "Legend"
-msgstr ""
+msgstr "Legenda"
 
 #: _locale_geonode/layers/templates/layers/layer_detail.html:167
 msgid "Maps using this layer"
@@ -2282,15 +2277,15 @@ msgstr "Cambia i permessi del Layer"
 
 #: _locale_geonode/layers/templates/layers/layer_detail.html:207
 msgid "Styles"
-msgstr "Stili"
+msgstr "Vestizione"
 
 #: _locale_geonode/layers/templates/layers/layer_detail.html:208
 msgid ""
 "The following styles are associated with this layer. Choose a style to view "
 "it in the preview map."
 msgstr ""
-"I seguenti stili sono associati a questo Layer. Scegli uno stile da "
-"visualizzare nell'anteprima della vista.  "
+"I seguenti stili sono associati a questo layer. Scegli uno stile da "
+"visualizzare nell'anteprima della mappa.  "
 
 #: _locale_geonode/layers/templates/layers/layer_detail.html:221
 msgid "No styles associated with this layer"
@@ -2463,12 +2458,11 @@ msgstr ""
 
 #: _locale_geonode/layers/templates/layers/layer_style_manage.html:24
 msgid "Layer Default Style"
-msgstr "Vestizione di deafault"
+msgstr "Vestizione di default"
 
 #: _locale_geonode/layers/templates/layers/layer_style_manage.html:40
-#, fuzzy
 msgid "Available styles"
-msgstr "Aggiorna gli stili disponibili"
+msgstr "Stili disponibili"
 
 #: _locale_geonode/layers/templates/layers/layer_style_manage.html:41
 msgid ""
@@ -2778,9 +2772,8 @@ msgid "Start downloading this map"
 msgstr "Avvia il download di questa vista"
 
 #: _locale_geonode/maps/templates/maps/map_download.html:95
-#, fuzzy
 msgid "Download Complete"
-msgstr "Scarica la mappa"
+msgstr "Scaricamento completato"
 
 #: _locale_geonode/maps/templates/maps/map_download.html:105
 msgid "Download Failed"
@@ -2798,7 +2791,7 @@ msgstr ""
 "        "
 
 #: _locale_geonode/maps/templates/maps/map_metadata.html:26
-#: mdtools/templates/mdtools/rndt_block.html:1671
+#: mdtools/templates/mdtools/rndt_block.html:1649
 #: osk/templates/osk/sensorml_block.html:1884
 msgid "Update metadata"
 msgstr "Aggiorna metadati"
@@ -2839,13 +2832,12 @@ msgid "party who published the resource"
 msgstr "gruppo che ha pubblicato la risorsa"
 
 #: _locale_geonode/people/enumerations.py:42
-#, fuzzy
 msgid ""
 "party that accepts accountability and responsibility for the data and "
 "ensures appropriate care and maintenance of the resource"
 msgstr ""
-"parte che accetta la responsabilità dei dati e garantisce cure appropriate e "
-"la manutenzione della risorsa "
+"parte che si prende in carico la responsabilità dei dati e garantisce di "
+"occuparsene in maniera appropriata mantenendo operativa la risorsa "
 
 #: _locale_geonode/people/enumerations.py:43
 msgid ""
@@ -2906,12 +2898,11 @@ msgid "Individual Name"
 msgstr "Nome dell soggetto"
 
 #: _locale_geonode/people/models.py:47
-#, fuzzy
 msgid ""
 "name of the responsible person surname, given name, title separated by a "
 "delimiter"
 msgstr ""
-"nome del responsabile cognome, nome, titolo separato da un delimitatore"
+"nome del responsabile cognome, nome, titolo separati da un delimitatore"
 
 #: _locale_geonode/people/models.py:48
 msgid "Organization Name"
@@ -3012,7 +3003,7 @@ msgstr "Il tuo username per"
 
 #: _locale_geonode/people/views.py:156
 msgid "Your username has been emailed to you."
-msgstr "Un email con il tuo username ti è stata inviata."
+msgstr "Ti &egreve stata inviata una email con il tuo nome utente."
 
 #: _locale_geonode/people/views.py:158
 msgid "No user could be found with that email address."
@@ -3020,9 +3011,8 @@ msgstr "Nessun utente corrisponde a questo indirizzo email."
 
 #: _locale_geonode/people/templates/people/_profile_about_item.html:25
 #: _locale_geonode/people/templates/people/_profile_list_item.html:21
-#, fuzzy
 msgid "No Group"
-msgstr "gruppo"
+msgstr "Nessun gruppo"
 
 #: _locale_geonode/people/templates/people/_profile_filters.html:5
 msgid "All contents"
@@ -3056,7 +3046,7 @@ msgstr ""
 #: _locale_geonode/people/templates/people/profile_base.html:12
 #: _locale_geonode/people/templates/people/profile_list.html:11
 msgid "Explore People"
-msgstr "Scopri le persone"
+msgstr "Scopri gli utenti"
 
 #: _locale_geonode/people/templates/people/profile_create.html:8
 #: _locale_geonode/people/templates/people/profile_create.html:14
@@ -3110,7 +3100,7 @@ msgstr "Aggiorna profilo"
 
 #: _locale_geonode/search/templates/search/_extent_filter.html:3
 msgid "Extent"
-msgstr ""
+msgstr "Estensione"
 
 #: _locale_geonode/search/templates/search/_general_filters.html:5
 msgid "Categories"
@@ -3152,9 +3142,8 @@ msgid "Relevance"
 msgstr "Rilevanza"
 
 #: _locale_geonode/search/templates/search/_type_filters.html:10
-#, fuzzy
 msgid "Users"
-msgstr "Utente"
+msgstr "Utenti"
 
 #: _locale_geonode/search/templates/search/advanced_search.html:14
 msgid "Search for: "
@@ -3174,9 +3163,8 @@ msgid "Exclude words from your search"
 msgstr "Escludi parole dalla tua ricerca"
 
 #: _locale_geonode/search/templates/search/advanced_search.html:35
-#, fuzzy
 msgid "All resources"
-msgstr "Tutte le categorie"
+msgstr "Tutte le risorse"
 
 #: _locale_geonode/search/templates/search/advanced_search.html:38
 msgid "Maps only"
@@ -3191,14 +3179,12 @@ msgid "Users only"
 msgstr "Solo gli utenti"
 
 #: _locale_geonode/search/templates/search/advanced_search.html:51
-#, fuzzy
 msgid "Search All Categories"
-msgstr "Tutte le categorie"
+msgstr "Cerca tutte le categorie"
 
 #: _locale_geonode/search/templates/search/advanced_search.html:61
-#, fuzzy
 msgid "Search by Extent: "
-msgstr "Cerca:"
+msgstr "Cerca per estensione:"
 
 #: _locale_geonode/search/templates/search/advanced_search.html:75
 msgid "Type: "
@@ -3979,7 +3965,7 @@ msgstr "Entra in un account esistente"
 
 #: _locale_geonode/templates/account/login.html:22
 msgid "Forgot your username?"
-msgstr "Hai dimenticato il tuo nome?"
+msgstr "Hai dimenticato il tuo nome utente?"
 
 #: _locale_geonode/templates/account/login.html:23
 msgid "Forgot your password?"
@@ -4007,13 +3993,13 @@ msgid "Reset my password"
 msgstr "Reimposta la mia password"
 
 #: _locale_geonode/templates/account/password_reset.html:25
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "If you have any trouble resetting your password, contact us at <a href="
 "\"mailto:%(THEME_ACCOUNT_CONTACT_EMAIL)s\">%(THEME_ACCOUNT_CONTACT_EMAIL)s</"
 "a>."
 msgstr ""
-"Se hai dei problemi a reipostare la tua password, contattaci all'indirizzo "
+"Se hai dei problemi a reimpostare la tua password, contattaci all'indirizzo "
 "at <a href=\"mailto:"
 "%(THEME_ACCOUNT_Help Desk Ritmare_help.skritmare@irea.cnr.it)s\">"
 "%(THEME_ACCOUNT_Help Desk Ritmare_help.skritmare@irea.cnr.it)s</a>."
@@ -4626,7 +4612,7 @@ msgstr "Responsabile dei Metadati"
 
 #: mdtools/models.py:48
 msgid "Responsible party"
-msgstr "Soggetto responsabile"
+msgstr "Responsabile"
 
 #: mdtools/models.py:49
 #, fuzzy
@@ -4672,9 +4658,8 @@ msgid "This field is required"
 msgstr "Questo campo &egrave; obbligatorio"
 
 #: mdtools/models.py:134
-#, fuzzy
 msgid "node abastract"
-msgstr "abstract"
+msgstr "descrizione del nodo"
 
 #: mdtools/models.py:137
 msgid "organization name"
@@ -4758,7 +4743,7 @@ msgstr "Registrazione Starter Kit"
 msgid "Metadata Completeness"
 msgstr "Completezza dei metadati"
 
-#: mdtools/templates/mdtools/edi_headers.html:67
+#: mdtools/templates/mdtools/edi_headers.html:66
 msgid ""
 "Some of the Mandatory fields are not filled.  Please verify your data and "
 "try again."
@@ -5080,7 +5065,7 @@ msgstr "Sensori"
 
 #: templates/site_base.html:166
 msgid "SK is a project of the StarterKit Development Team"
-msgstr "SK è un progetto dello staff di sviluppatori StarterKit "
+msgstr "SK è un progetto dello staff di sviluppatori di SP7"
 
 #: templates/site_base.html:168
 #, fuzzy
