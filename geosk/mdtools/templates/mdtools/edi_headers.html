@@ -12,7 +12,6 @@ queryStringValues = {{ queryStringValues }}
 <script type="text/javascript" src="{{ STATIC_URL }}edi/js/2.00/mdeditor.js"></script>
 
 <script type="text/javascript">
-
 var edimlUrl = "/proxy/?url=http%3A%2F%2Fsp7.irea.cnr.it%2Fjboss%2FMDService%2Frest%2Fediml%2F";
 
 function checkRequired(){
@@ -94,7 +93,11 @@ setTimeout(function () {
 	})
 }, 100)
 
+{% get_current_language as  LANGUAGE_CODE %}
+
 $(document).ready(function() {
+    setLanguage('{{LANGUAGE_CODE}}');
+
     $('.mandatory').addClass('text-info');
     // var required = $(['ling_md_1', 'resp_md_1', 'resp_md_2', 'tit_1', 'data_1', 'data_2'])
     // $(required).each(

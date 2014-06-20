@@ -113,7 +113,7 @@
       var ling_md_1_labels = [];
      </script>
      <p class="controls">
-      <select class="mandatory_forAll" datatype="code" defaultvalue="http://inspire-registry.jrc.ec.europa.eu/registers/Languages/items/13" element_id="ling_md" fixed="false" id="ling_md_1" islanguageneutral="true" lookup="http://inspire-registry.jrc.ec.europa.eu/registers/Languages/items" mandatory="forAll" outindex="" path="/gmd:MD_Metadata/gmd:language/gmd:LanguageCode" querystringparameter="" required="required">
+      <select class="mandatory_forAll" datatype="code" defaultvalue="http://inspire-registry.jrc.ec.europa.eu/registers/Languages/items/13" element_id="ling_md" fixed="false" id="ling_md_1" islanguageneutral="true" languageselector="true" lookup="http://inspire-registry.jrc.ec.europa.eu/registers/Languages/items" mandatory="forAll" outindex="" path="/gmd:MD_Metadata/gmd:language/gmd:LanguageCode" querystringparameter="" required="required">
       </select>
      </p>
      <input class="mandatory_forAll" datatype="string" element_id="ling_md" fixed="true" id="ling_md_2" islanguageneutral="" mandatory="forAll" name="/gmd:MD_Metadata/gmd:language/gmd:LanguageCode/@codeList" outindex="" path="/gmd:MD_Metadata/gmd:language/gmd:LanguageCode/@codeList" prova="http://www.loc.gov/standards/iso639-2/" querystringparameter="" required="required" type="hidden" usecode="" useurn="" value="http://www.loc.gov/standards/iso639-2/"/>
@@ -1229,7 +1229,7 @@
          <script language="javascript">
           var loc_geo_labels = []; loc_geo_labels.push( { lang: "en", label: "N latitude" } ); loc_geo_labels.push( { lang: "it", label: "Latitudine N" } );
          </script>
-         <label class="control-label" for="loc_geo" ismandatory="forAll">
+         <label class="control-label" for="loc_geo_northLatitude" ismandatory="forAll">
           Latitudine N
          </label>
          <input class="mandatory_forAllnorthLatitude" coordinate="northLatitude" datatype="" element_id="loc_geo" fixed="" id="loc_geo_northLatitude" islanguageneutral="" mandatory="forAll" name="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox/gmd:northBoundLatitude/gco:Decimal" outindex="4" path="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox/gmd:northBoundLatitude/gco:Decimal" querystringparameter="northlat"/>
@@ -1240,7 +1240,7 @@
          <script language="javascript">
           var loc_geo_labels = []; loc_geo_labels.push( { lang: "en", label: "W longitude" } ); loc_geo_labels.push( { lang: "it", label: "Longitudine O" } );
          </script>
-         <label class="control-label" for="loc_geo" ismandatory="forAll">
+         <label class="control-label" for="loc_geo_westLongitude" ismandatory="forAll">
           Longitudine O
          </label>
          <input class="mandatory_forAllwestLongitude" coordinate="westLongitude" datatype="" element_id="loc_geo" fixed="" id="loc_geo_westLongitude" islanguageneutral="" mandatory="forAll" name="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox/gmd:westBoundLongitude/gco:Decimal" outindex="1" path="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox/gmd:westBoundLongitude/gco:Decimal" querystringparameter="westlon"/>
@@ -1251,7 +1251,7 @@
          <script language="javascript">
           var loc_geo_labels = []; loc_geo_labels.push( { lang: "en", label: "E longitude" } ); loc_geo_labels.push( { lang: "it", label: "Longitudine E" } );
          </script>
-         <label class="control-label" for="loc_geo" ismandatory="forAll">
+         <label class="control-label" for="loc_geo_eastLongitude" ismandatory="forAll">
           Longitudine E
          </label>
          <input class="mandatory_forAlleastLongitude" coordinate="eastLongitude" datatype="" element_id="loc_geo" fixed="" id="loc_geo_eastLongitude" islanguageneutral="" mandatory="forAll" name="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox/gmd:eastBoundLongitude/gco:Decimal" outindex="2" path="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox/gmd:eastBoundLongitude/gco:Decimal" querystringparameter="eastlon"/>
@@ -1264,7 +1264,7 @@
          <script language="javascript">
           var loc_geo_labels = []; loc_geo_labels.push( { lang: "en", label: "S latitude" } ); loc_geo_labels.push( { lang: "it", label: "Latitudine S" } );
          </script>
-         <label class="control-label" for="loc_geo" ismandatory="forAll">
+         <label class="control-label" for="loc_geo_southLatitude" ismandatory="forAll">
           Latitudine S
          </label>
          <input class="mandatory_forAllsouthLatitude" coordinate="southLatitude" datatype="" element_id="loc_geo" fixed="" id="loc_geo_southLatitude" islanguageneutral="" mandatory="forAll" name="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox/gmd:southBoundLatitude/gco:Decimal" outindex="3" path="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox/gmd:southBoundLatitude/gco:Decimal" querystringparameter="southlat"/>
@@ -1341,10 +1341,10 @@
          <script language="javascript">
           var est_temp_labels = []; est_temp_labels.push( { lang: "en", label: "Start date" } ); est_temp_labels.push( { lang: "it", label: "Data inizio" } );
          </script>
-         <label class="control-label" for="est_temp" ismandatory="NA">
+         <label class="control-label" for="est_temp_start" ismandatory="NA">
           Data inizio
          </label>
-         <span class="input-append date datepicker" data-date-format="yyyy-mm-dd" textbox="est_temp">
+         <span class="input-append date datepicker" data-date-format="yyyy-mm-dd" textbox="est_temp_start">
           <input class="span2 mandatory_NA" datatype="date" element_id="est_temp" fixed="false" id="est_temp_start" islanguageneutral="" mandatory="NA" outindex="" path="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:beginPosition" querystringparameter="" readonly="" type="text"/>
           <span class="add-on">
            <i class="icon-calendar">
@@ -1358,10 +1358,10 @@
          <script language="javascript">
           var est_temp_labels = []; est_temp_labels.push( { lang: "en", label: "End date" } ); est_temp_labels.push( { lang: "it", label: "Data fine" } );
          </script>
-         <label class="control-label" for="est_temp" ismandatory="NA">
+         <label class="control-label" for="est_temp_end" ismandatory="NA">
           Data fine
          </label>
-         <span class="input-append date datepicker" data-date-format="yyyy-mm-dd" textbox="est_temp">
+         <span class="input-append date datepicker" data-date-format="yyyy-mm-dd" textbox="est_temp_end">
           <input class="span2 mandatory_NA" datatype="date" element_id="est_temp" fixed="false" id="est_temp_end" islanguageneutral="" mandatory="NA" outindex="" path="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:endPosition" querystringparameter="" readonly="" type="text"/>
           <span class="add-on">
            <i class="icon-calendar">
@@ -1372,7 +1372,9 @@
        </tr>
       </table>
      </div>
-     <input class="mandatory_NA" datatype="URN" element_id="est_temp" fixed="true" id="est_temp_2" islanguageneutral="" mandatory="NA" name="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/@gml:id" outindex="" path="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/@gml:id" prova="auto" querystringparameter="" type="hidden" usecode="" useurn="" value="auto"/>
+     <input class="mandatory_NA" datatype="string" element_id="est_temp" fixed="true" id="est_temp_2" islanguageneutral="" mandatory="NA" name="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gmd:prefisso" outindex="" path="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gmd:prefisso" prova="u" querystringparameter="" type="hidden" usecode="" useurn="" value="u"/>
+     <input class="mandatory_NA" datatype="autonumber" element_id="est_temp" fixed="true" id="est_temp_3" islanguageneutral="" mandatory="NA" name="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gmd:progressivo" outindex="" path="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gmd:progressivo" prova="dummy" querystringparameter="" type="hidden" usecode="" useurn="" value="dummy"/>
+     <input class="mandatory_NA" datatype="function" element_id="est_temp" fixed="true" id="est_temp_4" islanguageneutral="" mandatory="NA" name="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/@gml:id" outindex="" path="/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/@gml:id" prova="concat(gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gmd:prefisso/text(), gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gmd:progressivo/text())" querystringparameter="" type="hidden" usecode="" useurn="" value="concat(gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gmd:prefisso/text(), gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gmd:progressivo/text())"/>
     </div>
     <button class="btn btn-mini duplicator" duplicates="est_temp" type="button">
      + Estensione temporale
@@ -1418,7 +1420,7 @@
     <script language="javascript">
      var form_distr_labels = []; form_distr_labels.push( { lang: "en", label: "Distribution format" } ); form_distr_labels.push( { lang: "it", label: "Formato di distribuzione" } );
     </script>
-    <div class="item control-group templateElement" hasroot="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution" id="form_distr" ismandatory="forAll" represents_element="form_distr">
+    <div class="item control-group templateElement" hasroot="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution" id="form_distr" ismandatory="forAll" represents_element="form_distr" style="display: none;">
      <label class="control-label" ismandatory="forAll">
       <span class="theLabel" for="form_distr">
        Formato di distribuzione
@@ -1433,30 +1435,8 @@
        </a>
       </span>
      </label>
-     <div class="offset1 control-group">
-     </div>
-     <div class="offset1 control-group">
-      <script language="javascript">
-       var form_distr_1_labels = []; form_distr_1_labels.push( { lang: "en", label: "Format" } ); form_distr_1_labels.push( { lang: "it", label: "Nome formato" } );
-      </script>
-      <label class="control-label" for="form_distr_1" ismandatory="forAll">
-       Nome formato
-      </label>
-      <p class="controls">
-       <input class="mandatory_forAll" datatype="string" element_id="form_distr" fixed="false" id="form_distr_1" islanguageneutral="" mandatory="forAll" name="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat/gmd:MD_Format/gmd:name/gco:CharacterString" outindex="" path="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat/gmd:MD_Format/gmd:name/gco:CharacterString" querystringparameter="" required="required" type="text" validateas="string" value=""/>
-      </p>
-     </div>
-     <div class="offset1 control-group">
-      <script language="javascript">
-       var form_distr_2_labels = []; form_distr_2_labels.push( { lang: "en", label: "Version" } ); form_distr_2_labels.push( { lang: "it", label: "Versione formato" } );
-      </script>
-      <label class="control-label" for="form_distr_2" ismandatory="forAll">
-       Versione formato
-      </label>
-      <p class="controls">
-       <input class="mandatory_forAll" datatype="string" element_id="form_distr" fixed="false" id="form_distr_2" islanguageneutral="" mandatory="forAll" name="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat/gmd:MD_Format/gmd:version/gco:CharacterString" outindex="" path="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat/gmd:MD_Format/gmd:version/gco:CharacterString" querystringparameter="" required="required" type="text" validateas="string" value=""/>
-      </p>
-     </div>
+     <input class="mandatory_forAll" datatype="string" element_id="form_distr" fixed="true" id="form_distr_1" islanguageneutral="" mandatory="forAll" name="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat/gmd:MD_Format/gmd:name/gco:CharacterString" outindex="" path="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat/gmd:MD_Format/gmd:name/gco:CharacterString" prova="PNG" querystringparameter="" required="required" type="hidden" usecode="" useurn="" value="PNG"/>
+     <input class="mandatory_forAll" datatype="string" element_id="form_distr" fixed="true" id="form_distr_2" islanguageneutral="" mandatory="forAll" name="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat/gmd:MD_Format/gmd:version/gco:CharacterString" outindex="" path="/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:distributionFormat/gmd:MD_Format/gmd:version/gco:CharacterString" prova="1.0" querystringparameter="" required="required" type="hidden" usecode="" useurn="" value="1.0"/>
     </div>
     <button class="btn btn-mini duplicator" duplicates="form_distr" type="button">
      + Formato di distribuzione

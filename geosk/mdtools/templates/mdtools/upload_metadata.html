@@ -1,0 +1,17 @@
+{% extends "layers/layer_base.html" %}
+{% load i18n %}
+{% load bootstrap_tags %}
+
+{% block title %}Parse Metadata{% endblock %}
+{% block body_class %}data{% endblock %}
+{% block body_outer %}  
+<form enctype="multipart/form-data" method="post" action="/mdtools/api/mdimport">
+   {% csrf_token %}   
+   <table>
+       {{form.as_table}}
+    </table>
+    <input type="submit" value="Submit" id="Save"/>
+</form>
+{% endblock %}
+
+
