@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GeoNode\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-18 18:14-0500\n"
+"POT-Creation-Date: 2014-06-20 07:31-0500\n"
 "PO-Revision-Date: 2013-09-05 02:20+0000\n"
 "Last-Translator: geonode <geonode-transifex@opengeo.org>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/geonode/language/"
@@ -20,223 +20,239 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: _locale_geonode/static/geonode/js/extjs/GeoNode.js:72
+#: _locale_external/geonode/static/geonode/js/extjs/GeoNode.js:72
 msgid "Add user..."
 msgstr "Aggiungi utente..."
 
-#: _locale_geonode/static/geonode/js/extjs/GeoNode.js:72
+#: _locale_external/geonode/static/geonode/js/extjs/GeoNode.js:72
 msgid "Who can view and download this data?"
 msgstr "Chi può visualizzare e scaricare questo dato?"
 
-#: _locale_geonode/static/geonode/js/extjs/GeoNode.js:72
+#: _locale_external/geonode/static/geonode/js/extjs/GeoNode.js:72
 msgid "Anyone"
 msgstr "Chiunque"
 
-#: _locale_geonode/static/geonode/js/extjs/GeoNode.js:72
+#: _locale_external/geonode/static/geonode/js/extjs/GeoNode.js:72
 msgid "Any registered user"
 msgstr "Qualsiasi utente registrato"
 
-#: _locale_geonode/static/geonode/js/extjs/GeoNode.js:72
+#: _locale_external/geonode/static/geonode/js/extjs/GeoNode.js:72
 msgid "Only users who can edit"
 msgstr "Solo gli utenti che possono editare"
 
-#: _locale_geonode/static/geonode/js/extjs/GeoNode.js:72
+#: _locale_external/geonode/static/geonode/js/extjs/GeoNode.js:72
 msgid "Who can edit this data?"
 msgstr "Chi può editare questo dato?"
 
-#: _locale_geonode/static/geonode/js/extjs/GeoNode.js:72
+#: _locale_external/geonode/static/geonode/js/extjs/GeoNode.js:72
 msgid "Only the following users or groups:"
 msgstr "Solo i seguenti utenti o gruppi:"
 
-#: _locale_geonode/static/geonode/js/extjs/GeoNode.js:72
+#: _locale_external/geonode/static/geonode/js/extjs/GeoNode.js:72
 msgid "Who can manage and edit this data?"
 msgstr "Chi può gestire e modificare questo dato?"
 
-#: _locale_geonode/templates/lang.js:9 _locale_geonode/templates/lang.js:236
+#: _locale_external/geonode/templates/lang.js:9
+#: _locale_external/geonode/templates/lang.js:236
 msgid "Cancel"
 msgstr "Annulla"
 
-#: _locale_geonode/templates/lang.js:10
+#: _locale_external/geonode/templates/lang.js:10
 msgid "Save as Copy"
 msgstr "Salva come copia"
 
-#: _locale_geonode/templates/lang.js:11
+#: _locale_external/geonode/templates/lang.js:11
 msgid "About this Map"
 msgstr "Riguardo a questa vista"
 
-#: _locale_geonode/templates/lang.js:12 _locale_geonode/templates/lang.js:96
-#: _locale_geonode/templates/lang.js:165
+#: _locale_external/geonode/templates/lang.js:12
+#: _locale_external/geonode/templates/lang.js:96
+#: _locale_external/geonode/templates/lang.js:165
 msgid "Abstract"
 msgstr "Abstract"
 
-#: _locale_geonode/templates/lang.js:13
+#: _locale_external/geonode/templates/lang.js:13
 msgid "Save"
 msgstr "Salva"
 
-#: _locale_geonode/templates/lang.js:14 _locale_geonode/templates/lang.js:100
-#: _locale_geonode/templates/lang.js:109 _locale_geonode/templates/lang.js:162
-#: _locale_geonode/templates/lang.js:184 _locale_geonode/templates/lang.js:219
+#: _locale_external/geonode/templates/lang.js:14
+#: _locale_external/geonode/templates/lang.js:100
+#: _locale_external/geonode/templates/lang.js:109
+#: _locale_external/geonode/templates/lang.js:162
+#: _locale_external/geonode/templates/lang.js:184
+#: _locale_external/geonode/templates/lang.js:219
 msgid "Title"
 msgstr "Titolo"
 
-#: _locale_geonode/templates/lang.js:20
+#: _locale_external/geonode/templates/lang.js:20
 msgid "Connection Error"
 msgstr "Errore di connessione"
 
-#: _locale_geonode/templates/lang.js:21
+#: _locale_external/geonode/templates/lang.js:21
 msgid "The server returned an error"
 msgstr "Il server ha risposto con un errore"
 
-#: _locale_geonode/templates/lang.js:22
+#: _locale_external/geonode/templates/lang.js:22
 msgid "Details..."
 msgstr "Dettagli..."
 
-#: _locale_geonode/templates/lang.js:28 _locale_geonode/templates/lang.js:31
+#: _locale_external/geonode/templates/lang.js:28
+#: _locale_external/geonode/templates/lang.js:31
 msgid "Add Layers"
 msgstr "Aggiungi layer"
 
-#: _locale_geonode/templates/lang.js:29
+#: _locale_external/geonode/templates/lang.js:29
 msgid "Area"
 msgstr "Area"
 
-#: _locale_geonode/templates/lang.js:30
+#: _locale_external/geonode/templates/lang.js:30
 msgid "Background"
 msgstr "Sfondo"
 
-#: _locale_geonode/templates/lang.js:32
+#: _locale_external/geonode/templates/lang.js:32
 msgid "Done"
 msgstr "Fatto"
 
-#: _locale_geonode/templates/lang.js:33
+#: _locale_external/geonode/templates/lang.js:33
 msgid "Available Layers"
 msgstr "Layer disponibili"
 
-#: _locale_geonode/templates/lang.js:35 _locale_geonode/templates/lang.js:121
+#: _locale_external/geonode/templates/lang.js:35
+#: _locale_external/geonode/templates/lang.js:121
 msgid "Height"
 msgstr "Altezza"
 
-#: _locale_geonode/templates/lang.js:36
+#: _locale_external/geonode/templates/lang.js:36
 msgid "Get Feature Info"
 msgstr "Ottieni informazioni sulla feature"
 
-#: _locale_geonode/templates/lang.js:37 _locale_geonode/templates/lang.js:122
+#: _locale_external/geonode/templates/lang.js:37
+#: _locale_external/geonode/templates/lang.js:122
 msgid "Large"
 msgstr "Grande"
 
-#: _locale_geonode/templates/lang.js:38
+#: _locale_external/geonode/templates/lang.js:38
 msgid "or add a new server."
 msgstr "o aggiungi un nuovo server."
 
-#: _locale_geonode/templates/lang.js:39
+#: _locale_external/geonode/templates/lang.js:39
 msgid "Map Layers"
 msgstr "Tematismi della vista"
 
-#: _locale_geonode/templates/lang.js:40
+#: _locale_external/geonode/templates/lang.js:40
 msgid "View available data from:"
 msgstr "Visualizza dati disponbili da:"
 
-#: _locale_geonode/templates/lang.js:41
+#: _locale_external/geonode/templates/lang.js:41
 msgid "Data"
 msgstr "Dato"
 
-#: _locale_geonode/templates/lang.js:42
+#: _locale_external/geonode/templates/lang.js:42
 msgid "Layers"
 msgstr "Tematismi"
 
-#: _locale_geonode/templates/lang.js:43
+#: _locale_external/geonode/templates/lang.js:43
 msgid "Legend"
 msgstr "Legenda"
 
-#: _locale_geonode/templates/lang.js:44
+#: _locale_external/geonode/templates/lang.js:44
 msgid "Length"
 msgstr "Lunghezza"
 
-#: _locale_geonode/templates/lang.js:45
+#: _locale_external/geonode/templates/lang.js:45
 msgid "Loading Map..."
 msgstr "Caricamento della vista..."
 
-#: _locale_geonode/templates/lang.js:46 _locale_geonode/templates/lang.js:123
+#: _locale_external/geonode/templates/lang.js:46
+#: _locale_external/geonode/templates/lang.js:123
 msgid "Map Size"
 msgstr "Dimensioni della vista"
 
-#: _locale_geonode/templates/lang.js:47
+#: _locale_external/geonode/templates/lang.js:47
 msgid "Measure"
 msgstr "Misura"
 
-#: _locale_geonode/templates/lang.js:48 _locale_geonode/templates/lang.js:97
-#: _locale_geonode/templates/lang.js:163
+#: _locale_external/geonode/templates/lang.js:48
+#: _locale_external/geonode/templates/lang.js:97
+#: _locale_external/geonode/templates/lang.js:163
 msgid "Contact"
 msgstr "Contatto"
 
-#: _locale_geonode/templates/lang.js:49 _locale_geonode/templates/lang.js:55
+#: _locale_external/geonode/templates/lang.js:49
+#: _locale_external/geonode/templates/lang.js:55
 msgid "Permalink"
 msgstr "Permalink"
 
-#: _locale_geonode/templates/lang.js:50 _locale_geonode/templates/lang.js:124
+#: _locale_external/geonode/templates/lang.js:50
+#: _locale_external/geonode/templates/lang.js:124
 msgid "Mini"
 msgstr "Mini"
 
-#: _locale_geonode/templates/lang.js:51
+#: _locale_external/geonode/templates/lang.js:51
 msgid "Pan Map"
 msgstr "Pan della vista"
 
-#: _locale_geonode/templates/lang.js:52
+#: _locale_external/geonode/templates/lang.js:52
 msgid "Zoom to Next Extent"
 msgstr "Zoom all'Estensione Seguente"
 
-#: _locale_geonode/templates/lang.js:53
+#: _locale_external/geonode/templates/lang.js:53
 msgid "Zoom to Previous Extent"
 msgstr "Zoom all'Estensione Precedente"
 
-#: _locale_geonode/templates/lang.js:54
+#: _locale_external/geonode/templates/lang.js:54
 msgid "This map has not yet been saved."
 msgstr "Questa vista non è stata ancora salvata."
 
-#: _locale_geonode/templates/lang.js:56 _locale_geonode/templates/lang.js:125
+#: _locale_external/geonode/templates/lang.js:56
+#: _locale_external/geonode/templates/lang.js:125
 msgid "Premium"
 msgstr "Premium"
 
-#: _locale_geonode/templates/lang.js:57
+#: _locale_external/geonode/templates/lang.js:57
 msgid "Print Map"
 msgstr "Stampa Vista"
 
-#: _locale_geonode/templates/lang.js:58
+#: _locale_external/geonode/templates/lang.js:58
 msgid "Print Preview"
 msgstr "Anteprima di Stampa"
 
-#: _locale_geonode/templates/lang.js:59
+#: _locale_external/geonode/templates/lang.js:59
 msgid "Properties"
 msgstr "Proprietà"
 
-#: _locale_geonode/templates/lang.js:60 _locale_geonode/templates/lang.js:126
+#: _locale_external/geonode/templates/lang.js:60
+#: _locale_external/geonode/templates/lang.js:126
 msgid "Publish Map"
 msgstr "Puppblica la Vista"
 
-#: _locale_geonode/templates/lang.js:61 _locale_geonode/templates/lang.js:62
+#: _locale_external/geonode/templates/lang.js:61
+#: _locale_external/geonode/templates/lang.js:62
 msgid "Remove Layer"
 msgstr "Rimuovi il layer"
 
-#: _locale_geonode/templates/lang.js:63
+#: _locale_external/geonode/templates/lang.js:63
 msgid "Sorry, your map could not be saved."
 msgstr "Mi spiace, la vista non può essere salvata."
 
-#: _locale_geonode/templates/lang.js:64
+#: _locale_external/geonode/templates/lang.js:64
 msgid "Error While Saving"
 msgstr "Errore durante il salvataggio"
 
-#: _locale_geonode/templates/lang.js:65
+#: _locale_external/geonode/templates/lang.js:65
 msgid "Save Map"
 msgstr "Salva la vista"
 
-#: _locale_geonode/templates/lang.js:66
+#: _locale_external/geonode/templates/lang.js:66
 msgid "You must be logged in to save this map."
 msgstr "Devi essere registrato per salvare questa vista."
 
-#: _locale_geonode/templates/lang.js:67 _locale_geonode/templates/lang.js:128
+#: _locale_external/geonode/templates/lang.js:67
+#: _locale_external/geonode/templates/lang.js:128
 msgid "Small"
 msgstr "Piccola"
 
-#: _locale_geonode/templates/lang.js:68
+#: _locale_external/geonode/templates/lang.js:68
 msgid ""
 "Error contacting server.\n"
 " Please check the url and try again."
@@ -244,102 +260,105 @@ msgstr ""
 "Errore nella connessione con il server.\n"
 "Per favore, verifica l'URL e prova ancora."
 
-#: _locale_geonode/templates/lang.js:69
+#: _locale_external/geonode/templates/lang.js:69
 msgid "Layer Properties"
 msgstr "Proprietà del layer"
 
-#: _locale_geonode/templates/lang.js:70
+#: _locale_external/geonode/templates/lang.js:70
 msgid "Change layer format and style"
 msgstr "Modifica il formato e lo stile del layer"
 
-#: _locale_geonode/templates/lang.js:71
+#: _locale_external/geonode/templates/lang.js:71
 msgid "Edit Styles"
 msgstr "Modifica gli stili"
 
-#: _locale_geonode/templates/lang.js:72
+#: _locale_external/geonode/templates/lang.js:72
 msgid "Edit layer styles"
 msgstr "Modifica gli stili del layer"
 
-#: _locale_geonode/templates/lang.js:73
+#: _locale_external/geonode/templates/lang.js:73
 msgid "Switch to Google Earth 3D Viewer"
 msgstr "Cambiare in Google Earth Viewer 3D"
 
-#: _locale_geonode/templates/lang.js:74
+#: _locale_external/geonode/templates/lang.js:74
 msgid ""
 "The map that you are trying to load does not exist.  Creating a new map "
 "instead."
 msgstr ""
 "La vista che stai cercando di caricare non esiste. Crea una nuova vista."
 
-#: _locale_geonode/templates/lang.js:75
+#: _locale_external/geonode/templates/lang.js:75
 msgid "Unknown Map"
 msgstr "Vista sconosciuta"
 
-#: _locale_geonode/templates/lang.js:76 _locale_geonode/templates/lang.js:129
+#: _locale_external/geonode/templates/lang.js:76
+#: _locale_external/geonode/templates/lang.js:129
 msgid "Width"
 msgstr "Larghezza"
 
-#: _locale_geonode/templates/lang.js:77
+#: _locale_external/geonode/templates/lang.js:77
 msgid "Zoom In"
 msgstr "Ingrandisci"
 
-#: _locale_geonode/templates/lang.js:78
+#: _locale_external/geonode/templates/lang.js:78
 msgid "Zoom Out"
 msgstr "Diminuisci"
 
-#: _locale_geonode/templates/lang.js:79
+#: _locale_external/geonode/templates/lang.js:79
 msgid "Zoom level"
 msgstr "Livello di zoom"
 
-#: _locale_geonode/templates/lang.js:80
+#: _locale_external/geonode/templates/lang.js:80
 msgid "Zoom Level"
 msgstr "Livello di zoom"
 
-#: _locale_geonode/templates/lang.js:81
+#: _locale_external/geonode/templates/lang.js:81
 msgid "Zoom to Layer Extent"
 msgstr "Zoom all'estensione del layer"
 
-#: _locale_geonode/templates/lang.js:82
+#: _locale_external/geonode/templates/lang.js:82
 msgid "Zoom to Visible Extent"
 msgstr "Zoom all'estensione visibile"
 
-#: _locale_geonode/templates/lang.js:88
+#: _locale_external/geonode/templates/lang.js:88
 msgid "Zoom Level {zoom}"
 msgstr "Livello di zoom {zoom}"
 
-#: _locale_geonode/templates/lang.js:94
+#: _locale_external/geonode/templates/lang.js:94
 msgid "Create Map"
 msgstr "Crea Vista"
 
-#: _locale_geonode/templates/lang.js:95
+#: _locale_external/geonode/templates/lang.js:95
 msgid "Export Map"
 msgstr "Esporta vista "
 
-#: _locale_geonode/templates/lang.js:98
+#: _locale_external/geonode/templates/lang.js:98
 msgid "Map"
 msgstr "Vista"
 
-#: _locale_geonode/templates/lang.js:99 _locale_geonode/templates/lang.js:166
+#: _locale_external/geonode/templates/lang.js:99
+#: _locale_external/geonode/templates/lang.js:166
 msgid "View this Map"
 msgstr "Visualizza questa vista"
 
-#: _locale_geonode/templates/lang.js:101
+#: _locale_external/geonode/templates/lang.js:101
 msgid "Open Map"
 msgstr "Apri vista"
 
-#: _locale_geonode/templates/lang.js:107 _locale_geonode/templates/lang.js:183
+#: _locale_external/geonode/templates/lang.js:107
+#: _locale_external/geonode/templates/lang.js:183
 msgid "Name"
 msgstr "Nome"
 
-#: _locale_geonode/templates/lang.js:108
+#: _locale_external/geonode/templates/lang.js:108
 msgid "Queryable"
 msgstr "Interrogabile"
 
-#: _locale_geonode/templates/lang.js:115
+#: _locale_external/geonode/templates/lang.js:115
 msgid "No background"
 msgstr "Nessuno sfondo"
 
-#: _locale_geonode/templates/lang.js:127
+#: _locale_external/geonode/templates/lang.js:127
 msgid ""
 "Your map is ready to be published to the web!  Simply copy the following "
 "HTML to embed the map in your website:"
@@ -347,170 +366,185 @@ msgstr ""
 "La tua vista è pronta per essere pubblicata sul Web! Copia semplicemente il "
 "seguente codice HTML per includere la vista nel tuo sito web:"
 
-#: _locale_geonode/templates/lang.js:136 _locale_geonode/templates/lang.js:202
+#: _locale_external/geonode/templates/lang.js:136
+#: _locale_external/geonode/templates/lang.js:202
 msgid "Abstract:"
 msgstr "Abstract:"
 
-#: _locale_geonode/templates/lang.js:137 _locale_geonode/templates/lang.js:204
+#: _locale_external/geonode/templates/lang.js:137
+#: _locale_external/geonode/templates/lang.js:204
 msgid "No attribution information is provided for this layer."
 msgstr "Nessuna attribuzione è fornita per questo layer."
 
-#: _locale_geonode/templates/lang.js:138 _locale_geonode/templates/lang.js:205
+#: _locale_external/geonode/templates/lang.js:138
+#: _locale_external/geonode/templates/lang.js:205
 msgid "Provided by:"
 msgstr "Fornito da:"
 
-#: _locale_geonode/templates/lang.js:139 _locale_geonode/templates/lang.js:206
+#: _locale_external/geonode/templates/lang.js:139
+#: _locale_external/geonode/templates/lang.js:206
 msgid "Download:"
 msgstr "Scarica:"
 
-#: _locale_geonode/templates/lang.js:140 _locale_geonode/templates/lang.js:208
+#: _locale_external/geonode/templates/lang.js:140
+#: _locale_external/geonode/templates/lang.js:208
 msgid "No keywords are listed for this layer."
 msgstr "Nessuna parola chiave elencata per questo layer."
 
-#: _locale_geonode/templates/lang.js:141 _locale_geonode/templates/lang.js:209
+#: _locale_external/geonode/templates/lang.js:141
+#: _locale_external/geonode/templates/lang.js:209
 msgid "Keywords:"
 msgstr "Parole chiave:"
 
-#: _locale_geonode/templates/lang.js:142 _locale_geonode/templates/lang.js:210
+#: _locale_external/geonode/templates/lang.js:142
+#: _locale_external/geonode/templates/lang.js:210
 msgid "No metadata URLs are defined for this layer."
 msgstr "Nessun link ai metadati è definito per questo layer."
 
-#: _locale_geonode/templates/lang.js:143 _locale_geonode/templates/lang.js:211
+#: _locale_external/geonode/templates/lang.js:143
+#: _locale_external/geonode/templates/lang.js:211
 msgid "Metadata Links:"
 msgstr "Link ai metadati:"
 
-#: _locale_geonode/templates/lang.js:149
+#: _locale_external/geonode/templates/lang.js:149
 msgid "Paper size:"
 msgstr "Formato di pagina:"
 
-#: _locale_geonode/templates/lang.js:150
+#: _locale_external/geonode/templates/lang.js:150
 msgid "Resolution:"
 msgstr "Risoluzione:"
 
-#: _locale_geonode/templates/lang.js:151
+#: _locale_external/geonode/templates/lang.js:151
 msgid "Print"
 msgstr "Stampa"
 
-#: _locale_geonode/templates/lang.js:152
+#: _locale_external/geonode/templates/lang.js:152
 msgid "Enter map title here."
 msgstr "Inserisci qui il titolo."
 
-#: _locale_geonode/templates/lang.js:153
+#: _locale_external/geonode/templates/lang.js:153
 msgid "Include legend?"
 msgstr "Includi legenda?"
 
-#: _locale_geonode/templates/lang.js:154
+#: _locale_external/geonode/templates/lang.js:154
 msgid "Enter comments here."
 msgstr "Scrivi qui i commenti."
 
-#: _locale_geonode/templates/lang.js:155
+#: _locale_external/geonode/templates/lang.js:155
 msgid "Creating PDF..."
 msgstr "Creo PDF ..."
 
-#: _locale_geonode/templates/lang.js:164
+#: _locale_external/geonode/templates/lang.js:164
 msgid "Last Modified"
 msgstr "Ultimo modificato"
 
-#: _locale_geonode/templates/lang.js:167 _locale_geonode/templates/lang.js:188
+#: _locale_external/geonode/templates/lang.js:167
+#: _locale_external/geonode/templates/lang.js:188
 msgid "Prev"
 msgstr "Precedente"
 
-#: _locale_geonode/templates/lang.js:168 _locale_geonode/templates/lang.js:189
+#: _locale_external/geonode/templates/lang.js:168
+#: _locale_external/geonode/templates/lang.js:189
 msgid "Next"
 msgstr "Prossimo"
 
-#: _locale_geonode/templates/lang.js:169 _locale_geonode/templates/lang.js:190
+#: _locale_external/geonode/templates/lang.js:169
+#: _locale_external/geonode/templates/lang.js:190
 msgid "of"
 msgstr "di"
 
-#: _locale_geonode/templates/lang.js:170 _locale_geonode/templates/lang.js:191
+#: _locale_external/geonode/templates/lang.js:170
+#: _locale_external/geonode/templates/lang.js:191
 msgid "Your search did not match any items."
 msgstr "La tua ricerca non ha prodotto risultati."
 
-#: _locale_geonode/templates/lang.js:171
+#: _locale_external/geonode/templates/lang.js:171
 msgid "Search Maps"
 msgstr "Cerca Viste"
 
-#: _locale_geonode/templates/lang.js:172 _locale_geonode/templates/lang.js:192
+#: _locale_external/geonode/templates/lang.js:172
+#: _locale_external/geonode/templates/lang.js:192
 msgid "Search"
 msgstr "Cerca"
 
-#: _locale_geonode/templates/lang.js:173 _locale_geonode/templates/lang.js:193
+#: _locale_external/geonode/templates/lang.js:173
+#: _locale_external/geonode/templates/lang.js:193
 msgid "Showing"
 msgstr "Visualizzo"
 
-#: _locale_geonode/templates/lang.js:174
+#: _locale_external/geonode/templates/lang.js:174
 msgid "Loading"
 msgstr "Carico"
 
-#: _locale_geonode/templates/lang.js:175 _locale_geonode/templates/lang.js:195
+#: _locale_external/geonode/templates/lang.js:175
+#: _locale_external/geonode/templates/lang.js:195
 msgid "permalink"
 msgstr "permalink"
 
-#: _locale_geonode/templates/lang.js:182
+#: _locale_external/geonode/templates/lang.js:182
 msgid "Select"
 msgstr "Seleziona"
 
-#: _locale_geonode/templates/lang.js:185
+#: _locale_external/geonode/templates/lang.js:185
 msgid "Select:"
 msgstr "Seleziona:"
 
-#: _locale_geonode/templates/lang.js:186
+#: _locale_external/geonode/templates/lang.js:186
 msgid "All"
 msgstr "Tutti"
 
-#: _locale_geonode/templates/lang.js:187
+#: _locale_external/geonode/templates/lang.js:187
 msgid "None"
 msgstr "Nessuno"
 
-#: _locale_geonode/templates/lang.js:194
+#: _locale_external/geonode/templates/lang.js:194
 msgid "Loading..."
 msgstr "Carico ..."
 
-#: _locale_geonode/templates/lang.js:196
+#: _locale_external/geonode/templates/lang.js:196
 msgid "You do not have permission to view this data"
 msgstr "Non hai i permessi per visualizzare questo dato"
 
-#: _locale_geonode/templates/lang.js:197
+#: _locale_external/geonode/templates/lang.js:197
 msgid "This data is stored on a remote server"
 msgstr "Questo dato è memorizzato su un server remoto"
 
-#: _locale_geonode/templates/lang.js:203
+#: _locale_external/geonode/templates/lang.js:203
 msgid "No abstract is provided for this layer."
 msgstr "Nessuna abstract è stato fornito per questo layer."
 
-#: _locale_geonode/templates/lang.js:207
+#: _locale_external/geonode/templates/lang.js:207
 msgid "No download URLs are definied for this layer."
 msgstr "Nessuna URL per il download è stata definita per questo layer"
 
-#: _locale_geonode/templates/lang.js:217
+#: _locale_external/geonode/templates/lang.js:217
 msgid "Selected Layers"
 msgstr "Layer selezionati"
 
-#: _locale_geonode/templates/lang.js:218
+#: _locale_external/geonode/templates/lang.js:218
 msgid "No Layers Selected"
 msgstr "Nessun layer seleionato"
 
-#: _locale_geonode/templates/lang.js:220
+#: _locale_external/geonode/templates/lang.js:220
 msgid "Clear Selected"
 msgstr "Pulisci i selezionati"
 
-#: _locale_geonode/templates/lang.js:221
+#: _locale_external/geonode/templates/lang.js:221
 msgid "Clear All"
 msgstr "Pulisci tutto"
 
-#: _locale_geonode/templates/lang.js:227
+#: _locale_external/geonode/templates/lang.js:227
 msgid "Operation Failed"
 msgstr "Operazione fallita"
 
-#: _locale_geonode/templates/lang.js:228
+#: _locale_external/geonode/templates/lang.js:228
 msgid "No layers are currently selected."
 msgstr "Nessun layer è attualmente selezionato"
 
-#: _locale_geonode/templates/lang.js:235
+#: _locale_external/geonode/templates/lang.js:235
 msgid "Downloading..."
 msgstr "Scarico ..."
 
-#: _locale_geonode/templates/lang.js:237
+#: _locale_external/geonode/templates/lang.js:237
 msgid "Please wait"
 msgstr "Per favore, attendi"
