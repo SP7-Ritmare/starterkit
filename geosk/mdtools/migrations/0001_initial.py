@@ -8,6 +8,23 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         
+        # Adding model 'ResponsiblePartyScope'
+        db.create_table(u'mdtools_responsiblepartyscope', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('value', self.gf('django.db.models.fields.CharField')(unique=True, max_length=100)),
+        ))
+        db.send_create_signal(u'mdtools', ['ResponsiblePartyScope'])
+
+        # Adding model 'MultiContactRole'
+        db.create_table(u'mdtools_multicontactrole', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('resource', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['mdtools.MdExtension'])),
+            ('contact', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['people.Profile'])),
+            ('role', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['people.Role'])),
+            ('scope', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['mdtools.ResponsiblePartyScope'])),
+        ))
+        db.send_create_signal(u'mdtools', ['MultiContactRole'])
+
         # Adding model 'MdExtension'
         db.create_table(u'mdtools_mdextension', (
             ('resource', self.gf('annoying.fields.AutoOneToOneField')(to=orm['base.ResourceBase'], unique=True, primary_key=True)),
@@ -37,17 +54,23 @@ class Migration(SchemaMigration):
             ('contact_stateprovince', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
             ('contact_postalcode', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
             ('contact_country', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
-            ('contact_phone', self.gf('django.db.models.fields.CharField')(max_length=20, null=True, blank=True)),
-            ('contact_fax', self.gf('django.db.models.fields.CharField')(max_length=20, null=True, blank=True)),
+            ('contact_phone', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
+            ('contact_fax', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
             ('contact_hours', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
             ('contact_instructions', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
-            ('contact_role', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
+            ('contact_role', self.gf('django.db.models.fields.CharField')(default='pointOfContact', max_length=200, null=True, blank=True)),
         ))
         db.send_create_signal(u'mdtools', ['ServicesMetadata'])
 
 
     def backwards(self, orm):
         
+        # Deleting model 'ResponsiblePartyScope'
+        db.delete_table(u'mdtools_responsiblepartyscope')
+
+        # Deleting model 'MultiContactRole'
+        db.delete_table(u'mdtools_multicontactrole')
+
         # Deleting model 'MdExtension'
         db.delete_table(u'mdtools_mdextension')
 
@@ -68,7 +91,7 @@ class Migration(SchemaMigration):
             'public': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'target_content_type': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'target'", 'null': 'True', 'to': u"orm['contenttypes.ContentType']"}),
             'target_object_id': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
-            'timestamp': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2014, 6, 4, 16, 4, 36, 275768)'}),
+            'timestamp': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2014, 6, 21, 16, 33, 9, 581850)'}),
             'verb': ('django.db.models.fields.CharField', [], {'max_length': '255'})
         },
         u'auth.group': {
@@ -86,7 +109,7 @@ class Migration(SchemaMigration):
         },
         u'auth.user': {
             'Meta': {'object_name': 'User'},
-            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2014, 6, 4, 16, 4, 36, 281139)'}),
+            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2014, 6, 21, 16, 33, 9, 578632)'}),
             'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
             'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
@@ -94,7 +117,7 @@ class Migration(SchemaMigration):
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2014, 6, 4, 16, 4, 36, 280595)'}),
+            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime(2014, 6, 21, 16, 33, 9, 578074)'}),
             'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
             'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
@@ -203,6 +226,7 @@ class Migration(SchemaMigration):
         },
         u'mdtools.mdextension': {
             'Meta': {'object_name': 'MdExtension'},
+            'contacts': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['people.Profile']", 'through': u"orm['mdtools.MultiContactRole']", 'symmetrical': 'False'}),
             'elements_xml': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'fileid': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
             'md_date': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
@@ -210,20 +234,33 @@ class Migration(SchemaMigration):
             'resource': ('annoying.fields.AutoOneToOneField', [], {'to': u"orm['base.ResourceBase']", 'unique': 'True', 'primary_key': 'True'}),
             'rndt_xml': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'})
         },
+        u'mdtools.multicontactrole': {
+            'Meta': {'object_name': 'MultiContactRole'},
+            'contact': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['people.Profile']"}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'resource': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['mdtools.MdExtension']"}),
+            'role': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['people.Role']"}),
+            'scope': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['mdtools.ResponsiblePartyScope']"})
+        },
+        u'mdtools.responsiblepartyscope': {
+            'Meta': {'object_name': 'ResponsiblePartyScope'},
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'value': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '100'})
+        },
         u'mdtools.servicesmetadata': {
             'Meta': {'object_name': 'ServicesMetadata'},
             'contact_address': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'contact_city': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'contact_country': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'contact_email': ('django.db.models.fields.EmailField', [], {'max_length': '75'}),
-            'contact_fax': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True', 'blank': 'True'}),
+            'contact_fax': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'contact_hours': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'contact_instructions': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'contact_name': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
-            'contact_phone': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True', 'blank': 'True'}),
+            'contact_phone': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'contact_position': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'contact_postalcode': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
-            'contact_role': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
+            'contact_role': ('django.db.models.fields.CharField', [], {'default': "'pointOfContact'", 'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'contact_stateprovince': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'contact_url': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
