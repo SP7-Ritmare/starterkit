@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: STARTER KIT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-20 07:31-0500\n"
+"POT-Creation-Date: 2014-06-23 10:04-0500\n"
 "PO-Revision-Date: 2014-06-19 18:14+0100\n"
 "Last-Translator: <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -124,7 +124,8 @@ msgstr "Utenti"
 #: _locale_external/geonode/search/templates/search/search.html:12
 #: _locale_external/geonode/templates/500.html:125
 #: _locale_external/geonode/templates/base.html:132
-#: templates/site_base.html:123
+#: templates/site_base.html:123 templates/search/advanced_search.html:4
+#: templates/search/advanced_search.html:10
 msgid "Search"
 msgstr "Cerca"
 
@@ -227,7 +228,7 @@ msgstr "Cancella opzioni"
 #: _locale_external/geonode/templates/500.html:190
 #: _locale_external/geonode/templates/base.html:197
 #: mdtools/templates/base/resourcebase_info_panel.html:140
-#: templates/site_base.html:177
+#: templates/site_base.html:181
 msgid "Language"
 msgstr "Lingua"
 
@@ -1794,9 +1795,6 @@ msgstr "Più condivisi"
 #: _locale_external/geonode/documents/templates/documents/_document_list_item.html:18
 #: _locale_external/geonode/layers/templates/layers/_layer_list_item.html:18
 #: _locale_external/geonode/maps/templates/maps/_map_list_item.html:17
-#: mdtools/templates/layers/_layer_list_item.html:18
-#: templates/documents/_document_list_item.html:18
-#: templates/maps/_map_list_item.html:17
 msgid "from"
 msgstr "fornito/a da"
 
@@ -1887,7 +1885,7 @@ msgstr "Rimuovi questo documento"
 #: _locale_external/geonode/layers/templates/layers/_actions.html:3
 #: _locale_external/geonode/maps/templates/maps/map_detail.html:73
 #: _locale_external/geonode/templates/_actions.html:3
-#: templates/site_base.html:169
+#: templates/site_base.html:173
 msgid "Info"
 msgstr "Informazioni"
 
@@ -2474,7 +2472,6 @@ msgstr "Proprietario del Layer"
 
 #: _locale_external/geonode/layers/templates/layers/layer_list.html:15
 #: mdtools/templates/layers/layer_list.html:15
-#, fuzzy
 msgid "Explore Layer"
 msgstr "Esplora layer"
 
@@ -3328,35 +3325,44 @@ msgid "Users"
 msgstr "Utenti"
 
 #: _locale_external/geonode/search/templates/search/advanced_search.html:14
+#: templates/search/advanced_search.html:14
 msgid "Search for: "
 msgstr "Cerca:"
 
 #: _locale_external/geonode/search/templates/search/advanced_search.html:20
+#: templates/search/advanced_search.html:20
 msgid "All of the words"
 msgstr "Tutte le parole"
 
 #: _locale_external/geonode/search/templates/search/advanced_search.html:26
 #: _locale_external/geonode/search/templates/search/advanced_search.html:134
+#: templates/search/advanced_search.html:26
+#: templates/search/advanced_search.html:124
 msgid "Search "
 msgstr "Cerca"
 
 #: _locale_external/geonode/search/templates/search/advanced_search.html:29
+#: templates/search/advanced_search.html:29
 msgid "Exclude words from your search"
 msgstr "Escludi parole dalla tua ricerca"
 
 #: _locale_external/geonode/search/templates/search/advanced_search.html:35
+#: templates/search/advanced_search.html:35
 msgid "All resources"
 msgstr "Tutte le risorse"
 
 #: _locale_external/geonode/search/templates/search/advanced_search.html:38
+#: templates/search/advanced_search.html:38
 msgid "Maps only"
 msgstr "Solo le viste"
 
 #: _locale_external/geonode/search/templates/search/advanced_search.html:41
+#: templates/search/advanced_search.html:41
 msgid "Layers only"
 msgstr "Solo i layer"
 
 #: _locale_external/geonode/search/templates/search/advanced_search.html:44
+#: templates/search/advanced_search.html:44
 msgid "Users only"
 msgstr "Solo gli utenti"
 
@@ -3365,42 +3371,52 @@ msgid "Search All Categories"
 msgstr "Cerca tutte le categorie"
 
 #: _locale_external/geonode/search/templates/search/advanced_search.html:61
+#: templates/search/advanced_search.html:51
 msgid "Search by Extent: "
 msgstr "Cerca per estensione:"
 
 #: _locale_external/geonode/search/templates/search/advanced_search.html:75
+#: templates/search/advanced_search.html:65
 msgid "Type: "
 msgstr "Tipo:"
 
 #: _locale_external/geonode/search/templates/search/advanced_search.html:80
+#: templates/search/advanced_search.html:70
 msgid "From this site/portal"
 msgstr "Da questo sito/portale"
 
 #: _locale_external/geonode/search/templates/search/advanced_search.html:86
+#: templates/search/advanced_search.html:76
 msgid "From this group"
 msgstr "Da questo gruppo"
 
 #: _locale_external/geonode/search/templates/search/advanced_search.html:92
+#: templates/search/advanced_search.html:82
 msgid "From this organization"
 msgstr "Da questa organizzazione"
 
 #: _locale_external/geonode/search/templates/search/advanced_search.html:98
+#: templates/search/advanced_search.html:88
 msgid "From this geographic region"
 msgstr "Da questa regione"
 
 #: _locale_external/geonode/search/templates/search/advanced_search.html:108
+#: templates/search/advanced_search.html:98
 msgid "Metadata: "
 msgstr "Metadata: "
 
 #: _locale_external/geonode/search/templates/search/advanced_search.html:113
+#: templates/search/advanced_search.html:103
 msgid "Since this date"
 msgstr "Da questa data"
 
 #: _locale_external/geonode/search/templates/search/advanced_search.html:122
+#: templates/search/advanced_search.html:112
 msgid "Until this date"
 msgstr "Fino a questa data"
 
 #: _locale_external/geonode/search/templates/search/advanced_search.html:135
+#: templates/search/advanced_search.html:125
 msgid "Clear Options "
 msgstr "Cancella opzioni"
 
@@ -3565,7 +3581,9 @@ msgid "or"
 msgstr "oppure"
 
 #: _locale_external/geonode/templates/500.html:86
-#: _locale_external/geonode/templates/base.html:93 templates/site_base.html:80
+#: _locale_external/geonode/templates/base.html:93
+#: skregistration/templates/skregistration/registration.html:58
+#: templates/site_base.html:80
 #, fuzzy
 msgid "Register"
 msgstr "Utenti registrati"
@@ -3599,7 +3617,7 @@ msgstr "Fornito da: "
 
 #: _locale_external/geonode/templates/500.html:181
 #: _locale_external/geonode/templates/base.html:188
-#: templates/site_base.html:168
+#: templates/site_base.html:172
 msgid "GeoNode"
 msgstr ""
 
@@ -4920,6 +4938,10 @@ msgstr "Registrazione Starter Kit"
 msgid "Show/Hide"
 msgstr "Mostra/Nascondi"
 
+#: mdtools/templates/layers/_layer_list_item.html:18
+msgid "Layer from"
+msgstr "Layer fornito da"
+
 #: mdtools/templates/layers/_layer_list_item.html:21
 #: templates/documents/_document_list_item.html:21
 #: templates/maps/_map_list_item.html:20
@@ -4987,18 +5009,61 @@ msgstr "Registrazione Starter Kit"
 msgid "Registration status"
 msgstr "Stato della registrazione"
 
-#: skregistration/templates/skregistration/registration.html:47
+#: skregistration/templates/skregistration/registration.html:32
+msgid "Domain"
+msgstr ""
+
+#: skregistration/templates/skregistration/registration.html:35
+msgid "Site URL"
+msgstr ""
+
+#: skregistration/templates/skregistration/registration.html:38
+msgid "Web Title/Name"
+msgstr ""
+
+#: skregistration/templates/skregistration/registration.html:41
+#, fuzzy
+msgid "Metadata"
+msgstr "Metadata: "
+
+#: skregistration/templates/skregistration/registration.html:42
+msgid "Modify"
+msgstr ""
+
+#: skregistration/templates/skregistration/registration.html:46
+msgid "Check validation"
+msgstr ""
+
+#: skregistration/templates/skregistration/registration.html:48
 msgid "Please check the information is correct prior to registering the SK"
 msgstr ""
 "Controllare che le informazioni siano corrette prima di registrare lo SK"
 
-#: skregistration/templates/skregistration/registration.html:50
+#: skregistration/templates/skregistration/registration.html:53
+msgid "I have read the legal notes and i agree to them."
+msgstr ""
+
+#: skregistration/templates/skregistration/registration.html:54
+#, fuzzy
+msgid "Read it."
+msgstr "Lettura/Scrittura"
+
+#: skregistration/templates/skregistration/registration.html:61
 msgid ""
 "Please add more information about your SK implementation. Fill the Services "
 "Metadata form."
 msgstr ""
 "Aggiungi maggiori informazioni relativamente alla tua installazione di "
 "StarterKit. Compila il modulo di Metadati dei Servizi."
+
+#: skregistration/templates/skregistration/registration.html:62
+#, fuzzy
+msgid "Insert metadata"
+msgstr "Metadati dei Servizi"
+
+#: skregistration/templates/skregistration/registration.html:73
+msgid "Close"
+msgstr ""
 
 #: templates/about.html:4 templates/about.html.py:8
 msgid "About RITMARE Starter Kit"
@@ -5256,7 +5321,27 @@ msgstr "Sensori"
 msgid "SK is a project of the StarterKit Development Team"
 msgstr "SK è un progetto dello staff di sviluppatori di SP7"
 
+#: templates/site_base.html:167
+msgid ""
+"SK is developed by <a target='_blank' href='http://sp7.irea.cnr.it'>SP7</a>-"
+"<a target='_blank' href='http://www.ritmare.it/'>RITMARE</a>"
+msgstr ""
+
 #: templates/site_base.html:168
+#, fuzzy
+msgid "Contacts"
+msgstr "codename"
+
+#: templates/site_base.html:169
+msgid "Legal Notes"
+msgstr ""
+
+#: templates/site_base.html:170 templates/sk_credits.html:4
+#: templates/sk_credits.html.py:8
+msgid "Credits"
+msgstr ""
+
+#: templates/site_base.html:172
 #, fuzzy
 msgid "Based on"
 msgstr "i dati vengono aggiornati ogni mese"
@@ -5285,11 +5370,35 @@ msgstr ""
 "Lo Starter Kit è stato sviluppato nell’ambito del <a href=\"http://sp7.irea."
 "cnr.it/\">Sotto-Progetto 7</a> di RITMARE (<a href=\"http://www.ritmare.it/"
 "\">www.ritmare.it</a>). Il sofware &egrave; basato su <a href=\"http://"
-"geonode.org/\">StarterKit</a>."
+"geonode.org/\">GeoNode</a>."
+
+#: templates/sk_credits.html:16
+#, fuzzy
+msgid "Development Team"
+msgstr "Accesso sviluppatori"
+
+#: templates/sk_credits.html:17
+msgid "The development team is composed by:"
+msgstr ""
+
+#: templates/sk_credits.html:34
+#, fuzzy
+msgid "Starter Kit software"
+msgstr "Registrazione Starter Kit"
+
+#: templates/sk_credits.html:35
+msgid ""
+"StarterKit is built using several open source projects, each with its own "
+"community:"
+msgstr ""
+
+#: templates/documents/_document_list_item.html:18
+msgid "Doc from"
+msgstr "Doc fornito da"
 
 #: templates/maps/_map_list_item.html:17
-msgid "Map"
-msgstr "Vista"
+msgid "Map from"
+msgstr "Vista fornita da"
 
 #: templates/pagination/pagination.html:4
 msgid "results"
@@ -5311,6 +5420,9 @@ msgstr "Minima data di inizio:"
 #: templates/search/_general_filters.html:11
 msgid "Date ends before:"
 msgstr "Massima data di fine:"
+
+#~ msgid "Map"
+#~ msgstr "Vista"
 
 #~ msgid "All categories"
 #~ msgstr "Tutte le categorie"

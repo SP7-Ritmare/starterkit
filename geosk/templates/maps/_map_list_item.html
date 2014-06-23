@@ -14,7 +14,7 @@
     </div>
     <div class="details">
       <div class="meta">
-        <p>{% trans "Map" %} {% trans "from" %} <a href="{% url "profile_detail" map.owner.username %}" rel="author">{{ map.owner }}</a>, {{ map.last_modified|timesince }} {% trans 'ago' %}</p>
+        <p>{% trans "Map from" %} <a href="{% url "profile_detail" map.owner.username %}" rel="author">{{ map.owner }}</a>, {{ map.last_modified|timesince }} {% trans 'ago' %}</p>
         <p class="abstract">{{ map.abstract }}</p>
         <ul class="nav stats">
           <li><a href="{% url "map_detail" map.id %}"><strong>{{ map.popular_count }}</strong> {% blocktrans count counter=map.popular_count %}view {% plural %}views {% endblocktrans %}</a></li>

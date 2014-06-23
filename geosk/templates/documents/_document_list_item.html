@@ -15,7 +15,7 @@
     </div>
     <div class="details">
       <div class="meta">
-        <p>Doc {% trans 'from' %} <a href="{% url "profile_detail" document.owner.username %}">{{ document.owner }}</a>, {{ document.date|timesince }} {% trans 'ago' %}</p>
+        <p>{% trans 'Doc from' %} <a href="{% url "profile_detail" document.owner.username %}">{{ document.owner }}</a>, {{ document.date|timesince }} {% trans 'ago' %}</p>
         <p class="abstract">{{ document.abstract }}</p>
         <ul class="nav stats">
           <li><a href="{% url "document_detail" document.id %}"><strong>{{ document.popular_count }}</strong> {% blocktrans count counter=document.popular_count %}view {% plural %}views {% endblocktrans %}</a></li>
