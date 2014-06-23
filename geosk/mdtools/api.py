@@ -3,6 +3,7 @@ import sys
 import json
 import requests
 import re
+import datetime
 from lxml import etree
 from email.utils import parseaddr
 from owslib.iso import MD_Metadata, CI_ResponsibleParty, util, namespaces
@@ -102,8 +103,8 @@ def rndteditor(request, layername):
             # inserire data_md
             'title': layer.title,
             # 'data_md': layer.date.date().isoformat(), # layer.mdextension.md_date.date().isoformat(),
-            'data': layer.date.date().isoformat(),
-            'tipo_di_data': layer.date_type,
+            'date': datetime.date.today().isoformat(), # layer.date.date().isoformat(),
+            # 'tipo_di_data': layer.date_type,
             'abstract': layer.abstract,
             'spatialrepresentationtype': (EDI_MAP_SPATIALREPRESENTATIONTYPE).get(layer.storeType),
             'westlon': layer.bbox_x0,
