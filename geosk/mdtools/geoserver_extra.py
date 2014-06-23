@@ -33,3 +33,11 @@ class Settings(object):
         headers = { "Content-Type": "application/json" }
         self.catalog.http.request(
             self.service_url(service), "PUT", simplejson.dumps(json), headers)
+
+    def get_service_config(self, service):
+        response, content = self.catalog.http.request(
+            self.service_url(service), "GET")
+        if response.status == 200:
+            return json.loads(content)        
+        else:
+            return None

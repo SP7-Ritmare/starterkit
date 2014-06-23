@@ -65,17 +65,24 @@ def post_save_nodeconfiguration(request, instance):
                }
 
     def get_service_json (instance, service):
-        service_base = {service: {"enabled": True, # va lasciato altrimenti lo disabilita
-                                  "name": "%s - %s " % (instance.node_name, service),
-                                  "title": "%s - %s " % (instance.node_title, service),
-                                  "maintainer": instance.provider_url,
-                                  "abstrct": instance.node_abstract,
-                                  "accessConstraints": None,  #TODO
-                                  "fees": None, #TODO
-                                  "keywords": {"string":["WFS","WMS","GEOSERVER"]}, #TODO
-                                  "citeCompliant": False,
-                                  "onlineResource":"http:\/\/geoserver.org" #TODO
-                                  }}
+        # get current values
+        service_base = gs_settings.get_service_config(service)
+        # service_base = {service: {"enabled": True, # va lasciato altrimenti lo disabilita
+        #                           "name": "%s - %s " % (instance.node_name, service),
+        #                           "title": "%s - %s " % (instance.node_title, service),
+        #                           "maintainer": instance.provider_url if instance.provider_url is not None else settings.SITEURL,
+        #                           "abstract": instance.node_abstract is instance.node_abstract is not None else '-',
+        #                           "accessConstraints": None,  #TODO
+        #                           "fees": None, #TODO
+        #                           "keywords": {"string":["WFS","WMS","GEOSERVER"]}, #TODO
+        #                           "citeCompliant": False,
+        #                           "onlineResource": settings.SITEURL,
+        #                           }}
+        service_base[service]['name']     = "%s - %s " % (instance.node_name, service)
+        service_base[service]['title']    = "%s - %s " % (instance.node_title, service)
+        service_base[service]['maintainer']    = instance.provider_url if instance.provider_url is not None and instance.provider_url else settings.SITEURL
+        service_base[service]['abstrct'] =  instance.node_abstract if instance.node_abstract is not None else '-'
+        service_base[service]['onlineResource'] = settings.SITEURL
         return service_base
 
 
@@ -111,32 +118,37 @@ def post_save_nodeconfiguration(request, instance):
 
 
 def get_pycsw_configuration(instance):
+    def getval(val, default='None'):
+        if val is None:
+            return default
+        return val
+
     PYCSW = {
         # pycsw configuration
         'CONFIGURATION': {
             'metadata:main': {
                 'identification_title': "%s - Catalog " % (instance.node_title,),
-                'identification_abstract': instance.node_abstract,
+                'identification_abstract': getval(instance.node_abstract),
                 'identification_keywords': 'sdi,catalogue,discovery,metadata,GeoNode', # TODO
                 'identification_keywords_type': 'theme',
                 'identification_fees': 'None', # TODO
                 'identification_accessconstraints': 'None', # TODO
-                'provider_name': instance.provider_name,
+                'provider_name': getval(instance.provider_name),
                 'provider_url': settings.SITEURL,
-                'contact_name': instance.contact_name,
-                'contact_position': instance.contact_position,
-                'contact_address': instance.contact_address,
-                'contact_city': instance.contact_city,
-                'contact_stateorprovince': instance.contact_stateprovince,
-                'contact_postalcode': instance.contact_postalcode,
-                'contact_country': instance.contact_country,
-                'contact_phone': instance.contact_phone,
-                'contact_fax': instance.contact_fax,
-                'contact_email': instance.contact_email,
-                'contact_url': instance.contact_url,
-                'contact_hours': instance.contact_hours,
-                'contact_instructions': instance.contact_instructions,
-                'contact_role': instance.contact_role,
+                'contact_name': getval(instance.contact_name),
+                'contact_position': getval(instance.contact_position),
+                'contact_address': getval(instance.contact_address),
+                'contact_city': getval(instance.contact_city),
+                'contact_stateorprovince': getval(instance.contact_stateprovince),
+                'contact_postalcode': getval(instance.contact_postalcode),
+                'contact_country': getval(instance.contact_country),
+                'contact_phone': getval(instance.contact_phone),
+                'contact_fax': getval(instance.contact_fax),
+                'contact_email': getval(instance.contact_email),
+                'contact_url': getval(instance.contact_url),
+                'contact_hours': getval(instance.contact_hours),
+                'contact_instructions': getval(instance.contact_instructions),
+                'contact_role': getval(instance.contact_role),
                 },
             'metadata:inspire': {
                 'enabled': 'true',
