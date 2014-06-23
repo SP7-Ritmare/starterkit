@@ -90,15 +90,14 @@ setTimeout(function () {
 	    top: 10,
 	    bottom: 270
         }
-	})
+	});
 }, 100)
 
 {% get_current_language as  LANGUAGE_CODE %}
 
 $(document).ready(function() {
-    setLanguage('{{LANGUAGE_CODE}}');
-
     $('.mandatory').addClass('text-info');
+    setLanguage('{{LANGUAGE_CODE}}');
     // var required = $(['ling_md_1', 'resp_md_1', 'resp_md_2', 'tit_1', 'data_1', 'data_2'])
     // $(required).each(
     // 	function(i, val){

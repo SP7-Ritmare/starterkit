@@ -43,7 +43,7 @@
 
  /* hide setLanguage buttons */
  #en, #it {
-   display: none;
+   display: none !important;
  }
 
 #fields-legend {

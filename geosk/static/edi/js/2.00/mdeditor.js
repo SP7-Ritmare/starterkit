@@ -56,6 +56,7 @@ function formatXml(xml) {
 var userUri = "http://ritmare.it/rdfdata/project#AlessandroOggioniIREA";
 var virtuosoUrl = "http://sp7.irea.cnr.it:8890/sparql";
 var currentLanguage = "it";
+var currentMetadataLanguage = "it";
 var cloneSuffix = "_XritX";
 var edimlUrl = "ediml/";
 var ediMl = "";
@@ -132,7 +133,7 @@ function setLanguage(language) {
     // doDebug("selected language is " + selectedLanguage);
 //    currentLanguage = lookupLanguage(selectedLanguage);
     // alert("changing language to " + currentLanguage);
-    uriBasedLookups();
+    // uriBasedLookups();
     translateLabels();
     translateHelpTexts();
 
@@ -234,6 +235,7 @@ function prepareDependent(which) {
 	doDebug("scatta: " + thisOne.attr("id"));
 	var originalQuery = query;
 	var queryInstance = replaceAll(query, /\$(.*)\$/i, $("#" + principal + "_uri").val() );
+	var queryInstance = queryInstance.replace("</http:>", "");
 	$.getJSON( virtuosoUrl, { 
 			    query: queryInstance, 
 			    format: 'application/sparql-results+json', 
@@ -578,7 +580,7 @@ function setAutocompletions() {
 
 					if ( labelFor ) {
 						arrayName = eval(labelFor + "_help");
-						// doDebug("array is " + arrayName);
+						console.log("array is " + arrayName);
 
 						if ( $.isArray( arrayName ) && arrayName.length > 1 ) {
 							// doDebug("it is an array");
@@ -601,7 +603,7 @@ function setAutocompletions() {
 				$('a[data-toggle=popover]').popover();
 			}
 			function translateLabels() {
-				var labels = $("label[for],h2[for]");
+				var labels = $("label[for],h2[for],span[for]");
 				var i;
 				labels.each(function() {
 					var labelFor = $(this).attr("for").replaceAll(cloneSuffix, "");
@@ -733,7 +735,7 @@ function setAutocompletions() {
                                 			"	} " +
                                 			"	OPTIONAL { " +
                                 			"	    ?c skos:prefLabel ?a. " + 
-                                			'	    FILTER ( LANG(?a) = "' + currentLanguage + '" ) ' +
+                                			'	    FILTER ( LANG(?a) = "' + currentMetadataLanguage + '" ) ' +
                                 			"	} " +
                                 			"	" +
                                 			"} " +
@@ -1040,11 +1042,11 @@ function setAutocompletions() {
 				var selectedLanguage =  optionSelected.attr("language_neutral");
 				// doDebug("html: " + optionSelected.html());
 				// doDebug("selected language is " + selectedLanguage);
-				currentLanguage = lookupLanguage(selectedLanguage);
+				currentMetadataLanguage = lookupLanguage(selectedLanguage);
 				// alert("changing language to " + currentLanguage);
 				uriBasedLookups();
-				translateLabels();
-				translateHelpTexts();
+				// translateLabels();
+				// translateHelpTexts();
 			    });
 
 			    // doDebug("language: " + currentLanguage);
@@ -1095,7 +1097,8 @@ function setAutocompletions() {
 
 				// doDebug("duplicating " + element_id);
 				var newDiv = div.clone();
-				newDiv.html(newDiv.html().replaceAll("\"" + element_id, "\"" + element_id + cloneSuffix));
+				var newDivString = String(newDiv.html());
+				newDiv.html(newDivString.replaceAll("\"" + element_id, "\"" + element_id + cloneSuffix));
 				newDiv.find('.duplicator').remove();
 				newDiv.find('button[removes]').remove();
 				// var label = newDiv.find('label[for="' + element_id + cloneSuffix + '"]').first();
@@ -1180,6 +1183,11 @@ function setAutocompletions() {
 			    addValidation();
 			    
 			    $("#mdcontent").prepend("<button id='en'>en</button><button id='it'>it</button>");
+			    if ( querystring("debug") == "on" ) {
+				$("#en").css("display", "inline");
+				$("#it").css("display", "inline");
+			    }
+			
 			    $("#en").click(function() {
 				setLanguage('en');
 			    });
