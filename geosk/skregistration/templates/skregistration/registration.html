@@ -48,10 +48,10 @@
     <p class="status status-unregistered">{% blocktrans %}Please check the information is correct prior to registering the SK{% endblocktrans %}</p>
 
     <p> 
-      <form>
+      <form class="status status-unregistered">
 	<label class="checkbox">
 	  <input id="chk-legal-notes-accepted" type="checkbox">{% blocktrans %}I have read the legal notes and i agree to them.{% endblocktrans %} 
-	  <a target="_blank" href="{% url 'sk_license' %}">{% trans "Read it." %}
+	  <a target="_blank" href="{% url 'sk_license' %}">{% trans "Read it." %}</a>
 	</label>
       </form>
     </p>
@@ -135,7 +135,9 @@
   });
 
   $('#btn-modify-services-metadata').click(function(event) {
+      {% if services_metadata.id %}
       window.location.href = "{% url 'admin:mdtools_servicesmetadata_change' services_metadata.id %}";
+      {% endif %}
       return false;
   });
 
