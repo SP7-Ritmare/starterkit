@@ -1,12 +1,8 @@
 #!/bin/bash
 GEOSK=`python -c'import geosk, os;  print os.path.dirname(geosk.__file__)'`
 echo "### Translating all messages..."
-django-admin  makemessages --settings=geosk.settings -a -i static/geosk/externals -i static/.components -i static/node_modules
-django-admin makemessages --settings=geosk.settings -d djangojs -a -i static/geosk/externals -i static/.components -i static/node_modules
-echo "### Removing commented-out manual messages..."
-find $GEOSK/locale -name 'django.po' -exec sed s/^\#\~\ // -i {} \;
-find $GEOSK/locale -name 'djangojs.po' -exec sed s/^\#\~\ // -i {} \;
-echo "### Compiling messages..."
-django-admin compilemessages  --settings=geosk.settings -l it -v 0
-django-admin compilemessages  --settings=geosk.settings -l en -v 0
+sk makemessages -a -i static/geosk/externals -i static/.components -i static/node_modules
+sk makemessages -d djangojs -a -i static/geosk/externals -i static/.components -i static/node_modules
+sk compilemessages -l it -v 0
+sk compilemessages -l en -v 0
 echo "### Done!"
