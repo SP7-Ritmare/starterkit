@@ -1,0 +1,20 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block title %} {% trans "Upload Layers" %} — {{ block.super }}{% endblock %}
+
+{% block body_class %}Upload Layers{% endblock %}
+
+{% block body %}
+  <header class="jumbotron subhead" id="overview">
+    <h1>{% trans "Uploading layers in SK" %}</h1>
+    <p class="lead">
+
+<h2>PAGE UNDER CONSTRUCTION</H2>
+      {% blocktrans %}SK provides a user friendly tool to upload easilly spatial data such as Rasters (GeoTIFF) and vector data (shapefiles).
+      For different type of spatial data, consult the <a href="http://docs.geoserver.org/2.4.x/en/user/">Geoserver manual</a>       
+{% endblocktrans %}
+    </p>
+  </header>
+{% endblock %}
