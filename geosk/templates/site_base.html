@@ -108,7 +108,7 @@
 		    <a href="{% url "osk_browse" %}">{% trans "Sensors" %}</a>
 		  </li>
                   {% endif %}
-                  {% if DOCUMENTS_APP %}
+                  {% if DOCUMENTS_APP or USE_DOCUMENTS %}
                   <li id="nav_documents">
                     <a href="{% url "documents_browse" %}">{% trans "Documents" %}</a>
                   </li>
