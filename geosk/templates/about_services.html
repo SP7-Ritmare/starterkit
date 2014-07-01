@@ -39,7 +39,7 @@
       <p>
       <div class="alert alert-info">
         <h4>URL:</h4>
-          http://geosk.ve.ismar.cnr.it:80/geoserver/wms?
+          {{GEOSERVER_BASE_URL}}wms?
       </div>
       <div class="alert alert-success">
         <a target="_blank"  href="{{GEOSERVER_BASE_URL}}ows?service=WMS&version=1.1.1&request=GetCapabilities"><h4>Capabilities Link</h4></a>
@@ -52,7 +52,7 @@
       <p></p>
       <div class="alert alert-info">
         <h4>URL:</h4>
-         http://geosk.ve.ismar.cnr.it:80/geoserver/wfs
+         {{GEOSERVER_BASE_URL}}wfs
       </div>
      <div class="alert alert-success">
       <a target="_blank"  href="{{GEOSERVER_BASE_URL}}ows?service=WFS&version=1.1.0&request=GetCapabilities"><h4>Capabilities Link<h4></a>
@@ -65,7 +65,7 @@
       <p></p>
       <div class="alert alert-info">
         <h4>URL:</h4>
-       http://geosk.ve.ismar.cnr.it:80/geoserver/wcs?
+       {{GEOSERVER_BASE_URL}}wcs?
       </div>
        <div class="alert alert-success">
       <a target="_blank" href="{{GEOSERVER_BASE_URL}}ows?service=WCS&version=1.1.1&request=GetCapabilities"><h4>Capabilities Link</h4></a>
@@ -77,7 +77,7 @@
       <p></p>
       <div class="alert alert-info">
         <h4>URL:</h4>
-        http://geosk.ve.ismar.cnr.it/catalogue/csw
+        {{CATALOGUE_BASE_URL}}
       </div>
       <div class="alert alert-success">
        <a target="_blank"  href="{{CATALOGUE_BASE_URL}}?service=CSW&version=2.0.2&request=GetCapabilities"><h4>Capabilities Link</h4></a>
@@ -89,7 +89,7 @@
       <p></p>
       <div class="alert alert-info">
         <h4>URL:</h4>
-        http://geosk.ve.ismar.cnr.it/geoserver/gwc/service/wmts?
+        {{GEOSERVER_BASE_URL}}gwc/service/wmts?
       </div>
       <div class="alert alert-success">
 	<a target="_blank"  href="{{GEOSERVER_BASE_URL}}gwc/service/wmts?service=WMTS&version=1.0.0&request=GetCapabilities"><h4>Capabilities Link</h4></a>
