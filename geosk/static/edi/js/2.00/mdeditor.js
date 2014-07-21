@@ -1345,7 +1345,7 @@ function setAutocompletions() {
 				    var xml = /* '<?xml version="1.0" encoding="UTF-8"?>' + */ (x2js.json2xml_str(content));
 				    if ( querystring("debug") == "on" ) {
 					//    var newWindow1 = window.open("data:text/xml," + encodeURIComponent(xml),"_blank");
-					    $("#mdcontent").prepend("<pre class='prettyprint lang-json'>" + JSON.stringify(content) + "</pre>");
+					    $("#mdcontent").prepend("<pre class='prettyprint lang-json'>" + JSON.stringify(content, undefined, 4) + "</pre>");
 					    prettyPrint();
 				    }
 								    
