@@ -14,9 +14,9 @@ except ImportError:
     from paver.easy import pushd
 
 
-def grab(src, dest, name):
+def grab(src, dest, name, force=False):
     download = True
-    if not dest.exists():
+    if not dest.exists() or force:
         print 'Downloading %s' % name
     # elif not zipfile.is_zipfile(dest):
     #    print 'Downloading %s (corrupt file)' % name
@@ -35,13 +35,12 @@ EDI_STATICS = [
     "http://sp7.irea.cnr.it/jboss/MDService/rest/mdeditor.js?version=2.00",
     ]
 
-EDI_BLOCK = "http://sp7.irea.cnr.it/jboss/MDService/rest/getEditor?template=RNDT&version=2.00&mode=block"
-
-EDI_FULL = "http://sp7.irea.cnr.it/jboss/MDService/rest/getEditor?template=RNDT&version=2.00"
+RNDT_BLOCK = "http://sp7.irea.cnr.it/jboss/MDService/rest/getEditor?template=RNDT&version=2.00&mode=block"
+SENSORML_BLOCK = "http://sp7.irea.cnr.it/jboss/MDService/rest/getEditor?template=SensorML2&version=2.00&mode=block"
 
 BUTTON = """
   <div id="bottone" class="form-actions">
-    <button id="postButton" class="btn btn-primary">Aggiorna metadati</button>
+    <button id="postButton" class="btn btn-primary">{% trans "Update metadata" %}</button>
   </div>
 """
 
@@ -55,6 +54,17 @@ DELETE_DUPLICATE_BUTTON = """
       <a href="javascript:void();"><i class="icon-remove"> Remove </i></a>
 """
 
+LEGEND = """
+<li>
+<blockquote>
+<h3>Field types</h3>
+<p class="text-error">Required (to save the form)</p>
+<p class="text-info">Mandatory (to RNDT/INSPIRE compliance)</p>
+<p class="">Optional (to RNDT/INSPIRE compliance)</p>
+</blockquote>
+</li>
+"""
+
 @task
 def setup_edi(options):
     download_dir = path('downloaded')
@@ -65,13 +75,18 @@ def setup_edi(options):
         u = urlparse.urlparse(src)
         version = urlparse.parse_qs(u.query).get('version',['1.00'])[0]
         dest = download_dir / version / os.path.basename(u.path)
-        grab(src, dest, dest)
+        grab(src, dest, dest, force=True)
         
-    edi_dest = download_dir / 'rndt_block.html'
-    grab(EDI_BLOCK, edi_dest, 'edi')
-    _clean_edi_block(edi_dest)
-
+    rndt_dest = download_dir / 'rndt_block.html'
+    grab(RNDT_BLOCK, rndt_dest, rndt_dest, force=True)
+    _clean_edi_block(rndt_dest)
     static_dir = path('geosk/static/edi/js/')
+
+    sensorml_dest = download_dir / 'sensorml_block.html'
+    grab(SENSORML_BLOCK, sensorml_dest, sensorml_dest, force=True)
+    _clean_edi_block(sensorml_dest)
+    static_dir = path('geosk/static/edi/js/')
+
     for src in EDI_STATICS:
         u = urlparse.urlparse(src)
         version = urlparse.parse_qs(u.query).get('version',['1.00'])[0]
@@ -82,7 +97,10 @@ def setup_edi(options):
     #  justcopy(path('modified') / "mdeditor.js", static_dir)
 
     template_dir = path('geosk/mdtools/templates/mdtools/')
-    justcopy(edi_dest, template_dir)
+    justcopy(rndt_dest, template_dir)
+
+    template_dir_osk = path('geosk/osk/templates/osk/')
+    justcopy(sensorml_dest, template_dir_osk)
 
 @task
 def update_statics(options):
@@ -97,11 +115,17 @@ def _clean_edi_block(src):
         s_script = s.script.prettify()
         s_div = s.div.prettify()
         f.seek(0)
+        f.write('{% load i18n %}')
         f.write(s_script.encode('utf8'))
         f.write(s_div.encode('utf8'))
         f.truncate()
 
 def _clean(s):
+    # remove the tile
+    tag = s.find('h1')
+    if tag is not None:
+        tag.extract()
+    
     # rimuovo il bottone per il Post
     tag = s.find(id='bottone')
     if tag is not None:
@@ -111,6 +135,7 @@ def _clean(s):
     # s.find_all('section')[-1].append(BUTTON)
     s.find_all('section')[-1].append(BeautifulSoup(BUTTON).button)
     # s.find_all('div', 'bs-docs-sidebar').append(BeautifulSoup(BUTTON).button)
+    # s.find(id='myTab').append(BeautifulSoup(LEGEND).li)
 
     # rimuovo il form, perche' mi da problemi di formattazione
     tag = s.find(id='theForm')
@@ -119,8 +144,10 @@ def _clean(s):
         
     # nascondo alcuni fastidiosi input hidden che occupano spazio non necessario
     for el_id in ['resp_md_4', 'resp_md_5', 'resp_md_6',]:
-        tag=s.find(id=el_id).find_parent("div")
-        tag['style']='display: none;'
+        tag=s.find(id=el_id)
+        if tag:
+            parent = tag.find_parent("div")
+            parent['style']='display: none;'
 
 
     # modifico il bottone per l'aggiunta di un nuovo blocco
