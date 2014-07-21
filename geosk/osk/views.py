@@ -40,3 +40,4 @@ def describe_sensor(request):
     xml = cap.describe_sensor(outputFormat='http://www.opengis.net/sensorML/1.0.1', procedure=sensor_id.encode(), raw=True)
     response = HttpResponse(xml, content_type='application/xml')
     return response
+

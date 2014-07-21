@@ -34,7 +34,7 @@ SensorObservationService_2_0_0.insert_observation_json = extension_sos200.insert
 
 
 class Catalog(object):
-    def __init__(self, service_url, username="admin", password="geoserver", version='2.0.0'):
+    def __init__(self, service_url, username="observations", password="observations", version='2.0.0'):
         self.service_url = service_url
         self.username = username
         self.password = password

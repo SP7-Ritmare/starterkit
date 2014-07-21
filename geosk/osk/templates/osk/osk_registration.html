@@ -4,17 +4,45 @@
 {% load staticfiles %}
 {% load url from future %}
 
-{% block title %} {% trans "Explore Documents" %} - {{ block.super }} {% endblock %}
+{% block title %} {% trans "Sensor Registration" %} - {{ block.super }} {% endblock %}
 
 {% block body_class %}osk osk-list registration{% endblock %}
 
-{% block body %}
-    <div class="span12">
-      <h2 class="page-title">{% trans "Sensor Registration" %}</h2>
-    </div>
-    <div class="span12">
-      <div class="row" id="contain-slider">
-      </div>
-    </div>
+{% block extra_head %}
+  <link href="/static/geosk/css/mdeditor.css" rel="stylesheet"/>
+  {{ block.super }}
 {% endblock %}
 
+{% block extra_script %}
+  {% include 'mdtools/edi_headers.html' %}
+{% endblock %}
+
+{% block body %}
+
+{% include 'osk/sensorml_block.html' %}
+
+  <div id="loading-modal" class="modal hide fade">
+    <div class="modal-header">
+      <h3>Salvataggio metadati ...</h3>
+    </div>
+    <div class="modal-body">
+      <div class="progress progress-striped active">
+	<div class="bar" style="width: 100%;"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="loading-alert" class="modal hide fade">
+    <div class="alert alert-error">
+      <button type="button" class="close" data-dismiss="modal">×</button>
+      <h4  id="myModalLabel">Oh snap! You got an error!</h4>
+    </div>
+    <div class="alert alert-error">
+      <p id="error-message"></p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Close</button>
+    </div>
+  </div>
+
+{% endblock %}
