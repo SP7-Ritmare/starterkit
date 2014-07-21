@@ -3,8 +3,27 @@ from django.conf.urls import patterns, url
 from django.views.generic import TemplateView
 
 from geonode.urls import *
+from djproxy.views import HttpProxy
+from django.utils.decorators import classonlymethod
+
+class ObservationsProxy(HttpProxy):
+    base_url = 'http://localhost:8080/observations/'
+    reverse_urls = [
+        ('/observations/', 'http://localhost:8080/observations/')
+        ]
+    @classonlymethod
+    def as_view(cls, **initkwargs):
+        view = super(ObservationsProxy, cls).as_view(**initkwargs)
+        view.csrf_exempt = True
+        return view
+
+
 
 urlpatterns = patterns('',
+
+    # whoami
+    url(r'^whoami$',
+        'geosk.mdtools.views.whoami', name='whoami'),
 
     # override / extend GeoNode's URLS
     url(r'^$', 'geonode.views.index', {'template': 'site_index.html'}, name='home'),
@@ -24,6 +43,9 @@ urlpatterns = patterns('',
     url(r'^sk_license/$', TemplateView.as_view(template_name='sk_license.html'), name='sk_license'),
     url(r'^sk_credits/$', TemplateView.as_view(template_name='sk_credits.html'), name='sk_credits'),
 
+    # observations
+    url(r'^observations/(?P<url>.*)$', ObservationsProxy.as_view(), name='observations'),
+
     # mdtools views
     (r'^mdtools/', include('geosk.mdtools.urls')),
 
@@ -31,7 +53,7 @@ urlpatterns = patterns('',
     (r'^skregistration/', include('geosk.skregistration.urls')),
 
     # OSK views
-    (r'^osk/', include('geosk.osk.urls')),
+    (r'^sensors/', include('geosk.osk.urls')),
 
     (r'^grappelli/', include('grappelli.urls')), # grappelli URLS                       
  ) + urlpatterns
