@@ -8,6 +8,8 @@ from django.utils.translation import ugettext, ugettext_lazy as _
 
 from geosk.mdtools.models import ServicesMetadata
 
+from geosk.osk.models import StringSettings, UriSettings
+
 class ServicesMetadataAdmin(admin.ModelAdmin):
     list_display = ('node_title', 'provider_name', 'provider_url')
     fieldsets = (
@@ -116,13 +118,16 @@ def post_save_nodeconfiguration(request, instance):
         logging.error('Error when try to save pycsw settings')
         logging.error(str(e))
 
+    # save observations settings
+    set_sensors_configuration(instance)
+
+
+def getval(val, default='None'):
+    if val is None:
+        return default
+    return val
 
 def get_pycsw_configuration(instance):
-    def getval(val, default='None'):
-        if val is None:
-            return default
-        return val
-
     PYCSW = {
         # pycsw configuration
         'CONFIGURATION': {
@@ -166,4 +171,35 @@ def get_pycsw_configuration(instance):
     return PYCSW
 
 
+def set_sensors_configuration(instance):
+    configuration_strings = {
+        'serviceProvider.name': instance.contact_name,
+        'serviceProvider.phone': instance.contact_phone,
+        'serviceProvider.individualName': instance.contact_name,
+        'serviceProvider.positionName': instance.contact_position,
+        'serviceProvider.email':  instance.contact_email,
+        'serviceProvider.address': instance.contact_address,
+        'serviceProvider.postalCode':  instance.contact_postalcode,
+        'serviceProvider.city': instance.contact_city,
+        'serviceProvider.state': instance.contact_stateprovince,
+        'serviceProvider.country': instance.contact_country,
+        'serviceIdentification.title': instance.node_title,
+        'serviceIdentification.abstract': instance.node_abstract,
+        'serviceIdentification.accessConstraints': 'None', # TODO
+        'serviceIdentification.fees': 'None', # TODO
+        'serviceIdentification.serviceType': 'OGC:SOS',
+        }
 
+    configuration_uri = {
+        'serviceProvider.site' : instance.contact_url,
+        }
+
+    for k,v in configuration_strings.iteritems():
+        el = StringSettings.objects.using('sensors').get(identifier=k)
+        el.value = getval(v)
+        el.save()
+
+    for k,v in configuration_uri.iteritems():
+        el = UriSettings.objects.using('sensors').get(identifier=k)
+        el.value = getval(v)
+        el.save()
