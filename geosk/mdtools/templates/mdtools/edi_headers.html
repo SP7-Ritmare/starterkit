@@ -39,7 +39,7 @@ function checkMandatory(){
     $("[required='required'][type!='hidden']").each(
 	function(id, el){
 	    if($(el).css('display') != 'none'){
-		if($(el).val() && $(el).val()){ 
+		if( ($(el).val() && $(el).val()) || $(el).attr('type')=='checkbox' ){ //skip checkbox 
 		    i++ 
 		} else {
 		    console.log('REQUIRED');
