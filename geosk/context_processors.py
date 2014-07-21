@@ -2,7 +2,7 @@ from django.conf import settings
 
 def sk(request):
     return {
-        'SOS_ENABLED': getattr(settings, "SOS_ENABLED", False),
+        'SOS_APP': getattr(settings, "SOS_APP", False),
         }
 
 
