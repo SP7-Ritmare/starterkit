@@ -137,3 +137,7 @@ A:hover {font-size:24; font-weight:bold; color: red;}
   height: 12px;
   font-size: 11px;
 }
+
+.x-btn .gxp-icon-addsos, .x-menu-item .gxp-icon-addsos, .x-tree-node .gxp-icon-addsos {
+    background-image: url(../img/add-sos.png);
+}

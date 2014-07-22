@@ -64,7 +64,7 @@ gxp.SOSSourceDialog = Ext.extend(Ext.Container, {
 
         if (!this.sosServices) {
             this.sosServices  = [
-		[this.addLocalSOSText, '/sos/sos'],
+		[this.addLocalSOSText, '/observations/sos/kvp'],
 		['SOS ISMAR', 'http://david.ve.ismar.cnr.it/52nSOSv3_WAR/sos?'],
 		['SOS LTER', 'http://sp7.irea.cnr.it/tomcat/SOS32/sos'],
 		['SOS ISE', 'http://sos.ise.cnr.it/sos?'],
@@ -138,7 +138,7 @@ gxp.SOSSourceDialog = Ext.extend(Ext.Container, {
 
         var submitButton =  new Ext.Button({
             text: this.addFOISText,
-            iconCls: "gxp-icon-addlayers",
+            iconCls: "gxp-icon-addsos",
             disabled: true,
             handler: function() {
                 var config = {};

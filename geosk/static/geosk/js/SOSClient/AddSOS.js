@@ -34,7 +34,7 @@ gxp.plugins.AddSOS = Ext.extend(gxp.plugins.Tool, {
     addActions: function() {
         var actions = gxp.plugins.AddSOS.superclass.addActions.apply(this, [{
             menuText: this.menuText,
-            iconCls: "gxp-icon-addlayers",
+            iconCls: "gxp-icon-addsos",
             disabled: false,
             tooltip: this.toolTip,
             handler: function() {
