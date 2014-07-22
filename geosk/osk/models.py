@@ -20,6 +20,11 @@ class Sensor(models.Model):
     ediml        = models.TextField(null=True, blank=True)
     sensorml     = models.TextField(null=True, blank=True)
     fileid       = models.IntegerField(null=True, blank=True)    
+    class Meta:
+        permissions = ( 
+            ( "admin_sos", "Can admin SOS" ),
+            ( "read_sos", "Can retrieve data from SOS" ),
+            )
 
 # using sensors database
 class StringSettings(models.Model):
@@ -27,10 +32,12 @@ class StringSettings(models.Model):
     identifier = models.TextField(primary_key=True, unique=True) # This field type is a guess.
     class Meta:
         db_table = 'string_settings'
+        managed = False
+
 
 class UriSettings(models.Model):
     value = models.TextField(blank=True) # This field type is a guess.
     identifier = models.TextField(primary_key=True, unique=True) # This field type is a guess.
     class Meta:
         db_table = 'uri_settings'
-
+        managed = False

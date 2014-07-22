@@ -3,20 +3,8 @@ from django.conf.urls import patterns, url
 from django.views.generic import TemplateView
 
 from geonode.urls import *
-from djproxy.views import HttpProxy
-from django.utils.decorators import classonlymethod
 
-class ObservationsProxy(HttpProxy):
-    base_url = 'http://localhost:8080/observations/'
-    reverse_urls = [
-        ('/observations/', 'http://localhost:8080/observations/')
-        ]
-    @classonlymethod
-    def as_view(cls, **initkwargs):
-        view = super(ObservationsProxy, cls).as_view(**initkwargs)
-        view.csrf_exempt = True
-        return view
-
+from geosk.osk.proxy import ObservationsProxy
 
 
 urlpatterns = patterns('',
