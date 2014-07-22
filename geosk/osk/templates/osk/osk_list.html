@@ -80,11 +80,11 @@
 		    <p class="abstract">{{ sensor.sensor.description|default:'No abstract provided.' }}</p>
 		    <p class="Keywords">{{ sensor.sensor.keywords|join:', '|default:'No keywords provided' }}</p>
 		  </div> <!-- /.meta -->
-		  <div class="tools">
+		  <!-- div class="tools">
 		    <p>
 		      <a href="{% url "osk_describe_sensor" %}?sensor_id={{sensor.id|urlencode }}" target="_blank" data-toggle="modal" class="btn btn-mini">{% trans "Describe sensor" %}</a>
 		    </p>
-		  </div>
+		  </div-->
 		  <div>
 		    <ul>
 		      {% for op in sensor.observable_properties %}
