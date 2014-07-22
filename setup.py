@@ -27,5 +27,6 @@ setup(
     "django-annoying",
     "django-rosetta",
     "django-grappelli==2.4.10",
+    "djproxy",
     ]
 )
