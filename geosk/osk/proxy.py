@@ -24,7 +24,7 @@ class ObservationsProxy(HttpProxy):
         if request.user.has_perm('osk.admin_sos'):
             request.META['HTTP_AUTHORIZATION'] = "%s" % settings.SOS_TRANSACTIONAL_AUTHORIZATION_TOKEN
         else:
-            request.META.pop('HTTP_AUTHORIZATION')
+            request.META.pop('HTTP_AUTHORIZATION', None)
 
         return super(ObservationsProxy, self).dispatch(request, *args, **kwargs)
 
