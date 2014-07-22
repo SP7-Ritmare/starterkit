@@ -53,8 +53,8 @@ function formatXml(xml) {
     return formatted;
 }
 
-var userUri = "http://ritmare.it/rdfdata/project#AlessandroOggioniIREA";
-var virtuosoUrl = "http://sp7.irea.cnr.it:8890/sparql";
+var userUri = "";
+var virtuosoUrl = "http://sp7.irea.cnr.it/virtuoso/sparql";
 var currentLanguage = "it";
 var currentMetadataLanguage = "it";
 var cloneSuffix = "_XritX";
@@ -368,7 +368,7 @@ var defaultPostSuccessCallback = function(msg){
         					// $( "#debug" ).html( htmlEncode(msg) );
 						// doDebug("Ricevuto: " + xmlToString(msg));
 						var xmlString = xmlToString(msg);
-						if ( xmlString.indexOf("sml:SensorML") >= 0 ) {
+						if ( false && xmlString.indexOf("sml:SensorML") >= 0 ) {
 							xmlString = formatXml(xmlString);
 							$("#mdcontent").prepend("<pre class='prettyprint lang-html linenums:1'>" + xmlString.encodeHTML() + "</pre>");
 							prettyPrint();
@@ -494,10 +494,20 @@ var autoCompleteHandler = function() {
 			}); 
 		};
 */		
-function autoCompletionKeyUp(textbox) {
+function autoCompletionKeyUp(e) {
+    console.log(e);
+	var code = e.keyCode || e.which;
+	if(code == 13 ||
+	    e.metaKey ||
+	    e.ctrlKey ||
+	    e.altKey ||
+	    e.shiftKey
+	   ) { 
+	  return;
+	}
 			var id = $(this).attr("id");
 			// doDebug('length: ' + $(this).val().length);
-			if ( $(this).val().length < 2 ) {
+			if ( $(this).val().length != 0 && $(this).val().length < 2 ) {
 			    return;
 			}
 			doDebug("keyup on " + $(this).attr("id"));
@@ -511,8 +521,8 @@ function autoCompletionKeyUp(textbox) {
 			query = replaceAll(query, '$search_param', $(this).val()); 
 			doDebug('launch query: ' + query); 
 			
-			// $( '#' + id + '_uri' ).val( "" );
-			// $( '#' + id + '_urn' ).val( "" ); 
+			$( '#' + id + '_uri' ).val( "" );
+			$( '#' + id + '_urn' ).val( "" ); 
 
 			$.getJSON( virtuosoUrl, { 
 				query: query, 
@@ -587,9 +597,11 @@ function setAutocompletions() {
 							var translationFound = false;
 							for ( i = 0; !translationFound && i < arrayName.length; i++ ) {
 								if ( arrayName[i].lang == currentLanguage ) {
+									console.log("label: " +  $("span[for='" + labelFor + "']").text());
 									$(this).attr("data-content", arrayName[i].label);
+									$(this).attr('data-original-title', $("span[for='" + labelFor + "']").text());
 									// doDebug($(this).data('popover').tip().find("popover-content"));
-									$(this).data('popover', null).popover({ title: '', content: arrayName[i].label, placement: 'right', trigger: 'manual' });
+									$(this).data('popover', null).popover({ title: $("span[for='" + labelFor + "']").text(), content: arrayName[i].label, placement: 'right', trigger: 'manual' });
 									// $(this).popover({html:true,placement:'right',title:$(this).attr("data-original-title"),content:arrayName[i].label}).popover('hide');
 /*
 									alert($(this).data('popover').tip().find('.popover-content').html());
@@ -1100,6 +1112,7 @@ function setAutocompletions() {
 				var newDivString = String(newDiv.html());
 				newDiv.html(newDivString.replaceAll("\"" + element_id, "\"" + element_id + cloneSuffix));
 				newDiv.find('.duplicator').remove();
+				
 				newDiv.find('button[removes]').remove();
 				// var label = newDiv.find('label[for="' + element_id + cloneSuffix + '"]').first();
 				newDiv.find('a[for="' + element_id + cloneSuffix + '"]').remove();
@@ -1123,7 +1136,16 @@ function setAutocompletions() {
 				
 				var button = newDiv.prepend("<button removes='" + element_id + cloneSuffix + "' id='" + element_id + cloneSuffix + "_remover' type='button' class='btn btn-mini btn-danger btn-remover'>X</button>").children("button[removes]");
 // doDebug(button);
+				// For some obscure reason it closes <http:> tag it finds in SPARQL queries
+				// quick and dirty fix:
+				
+				newDiv.find("*[query]").each(function() {
+					    $(this).attr("query", $(this).attr("query").replaceAll("></http:>", "/>"));
+				});
+				
+				// end of quick and dirty fix
 				div.after(newDiv);
+
 
 				newDiv.find("button[removes]").click(function() {
 					// alert('#' + $(this).attr("removes"));
