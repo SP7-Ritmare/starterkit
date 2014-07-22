@@ -123,7 +123,7 @@ def post_save_nodeconfiguration(request, instance):
 
 
 def getval(val, default='None'):
-    if val is None:
+    if val is None or not val:
         return default
     return val
 
@@ -173,18 +173,18 @@ def get_pycsw_configuration(instance):
 
 def set_sensors_configuration(instance):
     configuration_strings = {
-        'serviceProvider.name': instance.contact_name,
-        'serviceProvider.phone': instance.contact_phone,
-        'serviceProvider.individualName': instance.contact_name,
-        'serviceProvider.positionName': instance.contact_position,
-        'serviceProvider.email':  instance.contact_email,
-        'serviceProvider.address': instance.contact_address,
-        'serviceProvider.postalCode':  instance.contact_postalcode,
-        'serviceProvider.city': instance.contact_city,
-        'serviceProvider.state': instance.contact_stateprovince,
-        'serviceProvider.country': instance.contact_country,
-        'serviceIdentification.title': instance.node_title,
-        'serviceIdentification.abstract': instance.node_abstract,
+        'serviceProvider.name': getval(instance.contact_name),
+        'serviceProvider.phone': getval(instance.contact_phone),
+        'serviceProvider.individualName': getval(instance.contact_name),
+        'serviceProvider.positionName': getval(instance.contact_position),
+        'serviceProvider.email': getval( instance.contact_email),
+        'serviceProvider.address': getval(instance.contact_address),
+        'serviceProvider.postalCode': getval( instance.contact_postalcode),
+        'serviceProvider.city': getval(instance.contact_city),
+        'serviceProvider.state': getval(instance.contact_stateprovince),
+        'serviceProvider.country': getval(instance.contact_country),
+        'serviceIdentification.title': getval(instance.node_title),
+        'serviceIdentification.abstract': getval(instance.node_abstract),
         'serviceIdentification.accessConstraints': 'None', # TODO
         'serviceIdentification.fees': 'None', # TODO
         'serviceIdentification.serviceType': 'OGC:SOS',
