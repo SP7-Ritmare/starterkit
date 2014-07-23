@@ -168,10 +168,30 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'geosk.skregistration.context_processors.skregistration',
 )
 
-#RITMARE services
+# RITMARE services
 RITMARE = {
     'MDSERVICE': 'https://sp7.irea.cnr.it/jboss/MDService/rest/' # postMetadata, auth/register, auth/verify
     }
+
+
+# SOS
+SOS_APP = True
+SOS_PUBLIC_ACCESS = True # to read data
+SOS_URL = SITEURL + 'observations/sos'
+
+SOS_SERVER = {
+  'default' : {
+    'LOCATION' : 'http://localhost:8080/observations/sos',
+    'PUBLIC_LOCATION' : SOS_URL,
+    'KVP_LOCATION': SOS_URL + '/kvp',
+    'POX_LOCATION': SOS_URL + '/pox',
+    'VERSION': '2.0.0',
+    'TRANSACTIONAL_AUTHORIZATION_TOKEN': 'changeme',
+    'USER' : None,
+    'PASSWORD' : None,
+    }
+  }
+
 
 # Load more settings from a file called local_settings.py if it exists
 try:
