@@ -497,7 +497,10 @@ var autoCompleteHandler = function() {
 function autoCompletionKeyUp(e) {
     console.log(e);
 	var code = e.keyCode || e.which;
-	if(code == 13 ||
+//	var allowedCodes = /[A-Za-z0-9 _#/;
+	if( code == 13 ||
+	    code == 9 ||
+	    code == 224 ||
 	    e.metaKey ||
 	    e.ctrlKey ||
 	    e.altKey ||
@@ -561,19 +564,98 @@ function autoCompletionKeyUp(e) {
 			}); 
 }
 
+var checkUri = function() {
+    var textbox = $(this);
+    var id = $(this).attr("id");
+    textbox.removeClass("uriOk");
+    textbox.removeClass("noUri");
+    if ( $( '#' + id + '_uri' ).val() == "" ) {
+	if ( textbox.val() != "" ) {
+	    textbox.addClass("noUri");
+	} else {
+	}
+    } else {
+	textbox.addClass("uriOk");
+    }
+};
+		
 function setAutocompletions() {
 	var acs = $('input[datatype="autoCompletion"]');
 	doDebug("prima");
 	doDebug($(this));
 	doDebug("dopo");
+	if (querystring("debug") == "on") {
+	    $(".uris").removeClass("uris");
+	}
 	acs.each(function() {
 		var textbox = $(this);
 		doDebug($(this));
 		var query = textbox.attr('query'); 
 		var labels; 
 		var id = $(this).attr("id");
+		textbox.bind("change blur", checkUri);
+
 		// doDebug('setto l\'evento'); 
-		textbox.keyup(autoCompletionKeyUp);
+		// textbox.keyup(autoCompletionKeyUp);
+		// textbox.change(autoCompletionKeyUp);
+		if ( textbox.val() == "" ) {
+		    $( '#' + id + '_uri' ).val( "" );
+		    $( '#' + id + '_urn' ).val( "" ); 
+		}
+		textbox.trigger("change");
+		textbox.autocomplete({
+		    self: this,
+		    minLength: 3,
+		    select: function( event, ui ) {
+			    doDebug("autocomp: " + ui.item.id + " -> " + ui.item.value);
+			    $( '#' + id ).val( ui.item.value );
+			    $( '#' + id + '_uri' ).val( ui.item.id );
+			    $( '#' + id + '_urn' ).val( ui.item.urn ); 
+			    $( '#' + id ).trigger('change');
+			    $( '#' + id + '_uri' ).trigger("change");
+
+			    return false; 
+		    },
+		    change: function( event, ui ) {
+			if ( !ui.item ) {
+			    $( '#' + id + '_uri' ).val( "" );
+			    $( '#' + id + '_urn' ).val( "" ); 
+			}
+			console.log(ui);
+			textbox.trigger("change");
+		    },
+		    source: function( request, response ) {
+			query = textbox.attr('query'); 
+			query = replaceAll(query, '$search_param', textbox.val()); 
+			doDebug('launch query: ' + query);
+			
+			$( '#' + id + '_uri' ).val( "" );
+			$( '#' + id + '_urn' ).val( "" ); 
+
+			$.getJSON( virtuosoUrl, { 
+				query: query, 
+				format: 'application/sparql-results+json', 
+				save:'display', 
+				fname : undefined 
+			}, function( data ) {
+				labels = new Array(); 
+				dati = data.results.bindings;
+				if ( dati.length <= 0 ) {
+				    $( '#' + id + '_uri' ).val( "" );
+				    $( '#' + id + '_urn' ).val( "" );
+				    $( '#' + id + '_uri' ).trigger("change");
+				    return;
+				}
+				doDebug('autocomp2: ' + JSON.stringify(data)); 
+				for ( i = 0; i < dati.length; i++ ) { 
+					labels.push({ id: dati[i].c.value, value: (dati[i].a ? dati[i].a.value : dati[i].l.value), urn: (dati[i].urn ? dati[i].urn.value : "") }); 
+					doDebug({ id: dati[i].c.value, value: (dati[i].a ? dati[i].a.value : dati[i].l.value), urn: (dati[i].urn ? dati[i].urn.value : "") }); 
+				}
+				doDebug(labels);
+				response(labels);
+			});
+		    }
+		});
 	});
 }
 
