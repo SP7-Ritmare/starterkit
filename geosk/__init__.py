@@ -18,7 +18,7 @@
 #########################################################################
 
 import os
-__version__ = (1, 2, 0, 'rc', 3)
+__version__ = (1, 2, 0, 'alpha', 4)
 
 def get_version():
     import geonode.version
