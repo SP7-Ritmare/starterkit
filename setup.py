@@ -67,7 +67,7 @@ for dirpath, dirnames, filenames in os.walk(sk_dir):
 
 setup(
     name="starterkit",
-    version="1.2.0c2",
+    version=__import__('geosk').get_version(),
     author="",
     author_email="",
     description="starterkit, based on GeoNode",
