@@ -78,7 +78,7 @@ setup(
         'Development Status :: 1 - Planning',
     ],
     license="GPL3",
-    keywords="starterkit geonode django",
+    keywords="StarterKit GeoNode Django sensors SOS",
     url='https://github.com/SP7-Ritmare/starterkit',
     packages=packages,
     data_files=data_files,
