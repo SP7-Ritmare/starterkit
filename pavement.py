@@ -114,6 +114,21 @@ def _clean_edi_block(src):
         # attenzione se ci sono altri tag li ignora
         s_script = s.script.prettify()
         s_div = s.div.prettify()
+
+        s_script = unicode(s.script)
+        s_div = unicode(s.div)
+
+        # remove white spaces in textarea
+        # # Double curly brackets to avoid problems with .format()
+        # stripped_s_div = s_div.replace('{','{{').replace('}','}}')
+        # stripped_s_div = BeautifulSoup(stripped_s_div)
+        # unformatted_tag_list = []
+        # for i, tag in enumerate(stripped_s_div.div.find_all(['textarea',])):
+        #     unformatted_tag_list.append(unicode(tag))
+        #     tag.replace_with('{' + 'unformatted_tag_list[{0}]'.format(i) + '}')
+        # print unformatted_tag_list[1][100:]
+        # s_div = stripped_s_div.div.prettify().format(unformatted_tag_list=unformatted_tag_list)
+
         f.seek(0)
         f.write('{% load i18n %}')
         f.write(s_script.encode('utf8'))
