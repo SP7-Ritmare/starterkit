@@ -54,6 +54,10 @@
     background-color: white;
 }
 
+/* adjust position in Sensor Registration  */
+.osk #fields-legend {
+    top: 250px;
+}
 
 #mdcontent section {
 /*    margin-top: -100px; */

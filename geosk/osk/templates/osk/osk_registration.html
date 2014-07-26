@@ -20,6 +20,17 @@
 {% block body %}
 
 {% include 'osk/sensorml_block.html' %}
+<div id="fields-legend">
+  <blockquote>
+    <h3>{% trans "RNDT/INSPIRE compliance" %}</h3>
+    <br/>
+    <ul>
+    <!--p class="text-error"><strong>Required (to save the form)</strong></p-->
+    <li><p class="text-info"><strong>{% trans "Mandatory" %}</strong></p>
+    <li><p class=""><strong>{% trans "Optional" %}<strong></p>
+    </ul>
+  </blockquote>
+</div>
 
   <div id="loading-modal" class="modal hide fade">
     <div class="modal-header">
