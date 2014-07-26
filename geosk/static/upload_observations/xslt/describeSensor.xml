@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<swes:DescribeSensorResponse xmlns:swes="http://www.opengis.net/swes/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gml="http://www.opengis.net/gml/3.2" xsi:schemaLocation="http://www.opengis.net/swes/2.0 http://schemas.opengis.net/swes/2.0/swesDescribeSensor.xsd http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/gml.xsd http://www.opengis.net/gml http://schemas.opengis.net/gml/3.1.1/base/gml.xsd http://www.opengis.net/sensorML/1.0.1 http://schemas.opengis.net/sensorML/1.0.1/sensorML.xsd http://www.opengis.net/swe/1.0.1 http://schemas.opengis.net/sweCommon/1.0.1/swe.xsd">
+  <swes:procedureDescriptionFormat>http://www.opengis.net/sensorML/1.0.1</swes:procedureDescriptionFormat>
+  <swes:description>
+    <swes:SensorDescription>
+      <swes:validTime>
+        <gml:TimePeriod gml:id="tp_243190417DCB99064D8FECABB78992914C0CF1C0">
+          <gml:beginPosition>2014-06-07T21:00:21.511Z</gml:beginPosition>
+          <gml:endPosition indeterminatePosition="unknown"/>
+        </gml:TimePeriod>
+      </swes:validTime>
+      <swes:data>
+        <sml:SensorML xmlns:sml="http://www.opengis.net/sensorML/1.0.1" xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:swe="http://www.opengis.net/swe/1.0.1" version="1.0.1">
+          <sml:member>
+            <sml:System gml:id="Stazione-di-misura-punta-Salute-Canal-Grande">
+              <!--=================================================-->
+              <!--System Description-->
+              <!--=================================================-->
+              <gml:description>La stazione automatica SM3840 è una sofisticata unità di
+						acquisizione, elaborazione e trasmissione di dati meteorologici ed
+						ambientali. E' caratterizzata da: Modulo base (CPU) che gestisce tutte le
+						principali elaborazioni e la memorizzazione dei dati; Unità di alimentazione
+						elettrica che permette di alimentare la stazione da pannello fotovoltaico o
+						da rete elettrica pubblica; Unità di protezione elettrica che permette di
+						isolare i sensori e la stazione da interferenze elettromagnetiche esterne;
+						Unità di comunicazione che consente il collegamento diretto alla linea
+						telefonica, ad un apparato radio o al satellite; Interfaccia utente che
+						consente all'utente l'interfacciamento con la stazione al fine di
+						visualizzare dati, modificare configurazione ecc. I dati acquisiti vengono
+						trasmessi automaticamente a centri remoti di controllo. Sofisticati
+						algoritmi di validazione garantiscono la correttezza dei dati acquisiti,
+						mentre procedure automatiche di diagnostica verificano il corretto
+						funzionamento della stazione comunicando eventuali guasti al centro di
+						controllo. I dati visualizzati, aggiornati ogni 24 ore, provengono
+						automaticamente dalla stazione di rilevamento e non subiscono alcun processo
+						di validazione da parte del personale del Centro Maree. La stazione
+						automatica provvede solo ad un primo livello di controllo dei dati i quali
+						non possono pertanto essere considerati definitivi. Le altezze di marea,
+						registrate dagli strumenti della Rete Telemareografica della Laguna di
+						Venezia, sono riferite al piano fondamentale della Rete Altimetrica dello
+						Stato (1897). L'Istituzione CPSM declina ogni responsabilità sull'uso di
+						tali dati.</gml:description>
+              <gml:name>Punta Salute Canal Grande</gml:name>
+              <!--=================================================-->
+              <!--System Search Keywords-->
+              <!--=================================================-->
+              <!--=================================================-->
+              <!--System Identifiers-->
+              <!--=================================================-->
+              <sml:keywords>
+                <sml:KeywordList>
+                  <sml:keyword>http://sp7.irea.cnr.it/featureOfInterest/PuntaSaluteCanalGrande</sml:keyword>
+                  <sml:keyword>offering:http://sp7.irea.cnr.it/procedure/PuntaSaluteCanalGrande/observations</sml:keyword>
+                  <sml:keyword>http://sp7.irea.cnr.it/procedure/PuntaSaluteCanalGrande</sml:keyword>
+                  <sml:keyword>http://www.opengis.net/def/property/OGC/0/PhenomenonTime</sml:keyword>
+                  <sml:keyword>Idrometro a galleggiante</sml:keyword>
+                  <sml:keyword>http://vocab.nerc.ac.uk/collection/P02/current/TEMP/</sml:keyword>
+                  <sml:keyword>http://sp7.irea.cnr.it/ObservablePropertiesUnion?offering=offering:http://sp7.irea.cnr.it/procedure/PuntaSaluteCanalGrande/observations</sml:keyword>
+                  <sml:keyword>Termometro</sml:keyword>
+                  <sml:keyword>http://vocab.nerc.ac.uk/collection/P02/current/ASLV/</sml:keyword>
+                </sml:KeywordList>
+              </sml:keywords>
+              <sml:identification>
+                <sml:IdentifierList>
+                  <sml:identifier name="uniqueID">
+                    <sml:Term definition="urn:cnr:def:identifier:ISMAR:uniqueID">
+                      <sml:value>http://sp7.irea.cnr.it/procedure/PuntaSaluteCanalGrande</sml:value>
+                    </sml:Term>
+                  </sml:identifier>
+                  <sml:identifier name="Short Name">
+                    <sml:Term definition="">
+                      <sml:value>SM3840-PuntaSaluteCanalGrande</sml:value>
+                    </sml:Term>
+                  </sml:identifier>
+                  <sml:identifier name="Long Name">
+                    <sml:Term definition="">
+                      <sml:value>Punta Salute Canal Grande - Stazione Automatica SM3840</sml:value>
+                    </sml:Term>
+                  </sml:identifier>
+                  <sml:identifier name="Manufacturer Name">
+                    <sml:Term definition="urn:ogc:def:identifier:ogc:manufacturerName">
+                      <sml:value>SIAP + MICROS</sml:value>
+                    </sml:Term>
+                  </sml:identifier>
+                  <sml:identifier name="Model Number">
+                    <sml:Term definition="urn:ogc:def:identifier:OGC:modelNumber">
+                      <sml:value>DA9000</sml:value>
+                    </sml:Term>
+                  </sml:identifier>
+                  <sml:identifier name="shortName">
+                    <sml:Term definition="urn:ogc:def:identifier:OGC:1.0:shortname">
+                      <sml:value>http://sp7.irea.cnr.it/procedure/PuntaSaluteCanalGrande</sml:value>
+                    </sml:Term>
+                  </sml:identifier>
+                  <sml:identifier name="longName">
+                    <sml:Term definition="urn:ogc:def:identifier:OGC:1.0:longname">
+                      <sml:value>http://sp7.irea.cnr.it/procedure/PuntaSaluteCanalGrande</sml:value>
+                    </sml:Term>
+                  </sml:identifier>
+                </sml:IdentifierList>
+              </sml:identification>
+              <!--=================================================-->
+              <!--System Classifiers-->
+              <!--=================================================-->
+              <sml:classification>
+                <sml:ClassifierList>
+                  <sml:classifier name="Intended Application1">
+                    <sml:Term definition="urn:ogc:def:classifier:OGC:application">
+                      <sml:value>water temperature measurement</sml:value>
+                    </sml:Term>
+                  </sml:classifier>
+                  <sml:classifier name="Intended Application2">
+                    <sml:Term definition="urn:ogc:def:classifier:OGC:application">
+                      <sml:value>water level measurement</sml:value>
+                    </sml:Term>
+                  </sml:classifier>
+                  <sml:classifier name="Sensor Type">
+                    <sml:Term definition="urn:ogc:def:classifier:OGC:sensorType">
+                      <sml:codeSpace xlink:href="urn:cnr:dictionary:ISMAR:sensorTypes"/>
+                      <sml:value>SM3840-PuntaSaluteCanalGrande</sml:value>
+                    </sml:Term>
+                  </sml:classifier>
+                  <sml:classifier name="Deployment Role">
+                    <sml:Term definition="urn:SDN:L19::SDNKG01">
+                      <sml:codeSpace xlink:href="http://vocab.nerc.ac.uk/collection/L19/current/SDNKG01/"/>
+                      <sml:value>instrument</sml:value>
+                    </sml:Term>
+                  </sml:classifier>
+                </sml:ClassifierList>
+              </sml:classification>
+              <!--=================================================-->
+              <!--Temporal Validity of this description-->
+              <!--=================================================-->
+              <sml:validTime>
+                <gml:TimePeriod>
+                  <gml:beginPosition>2014-06-07T21:00:21.511Z</gml:beginPosition>
+                  <gml:endPosition indeterminatePosition="unknown"/>
+                </gml:TimePeriod>
+              </sml:validTime>
+              <sml:securityConstraint>
+                <sml:Security/>
+              </sml:securityConstraint>
+              <sml:legalConstraint>
+                <sml:Rights>
+                  <sml:documentation>
+                    <sml:Document>
+                      <gml:description/>
+                    </sml:Document>
+                  </sml:documentation>
+                </sml:Rights>
+              </sml:legalConstraint>
+              <!--=================================================-->
+              <!--System Capabilities-->
+              <!--=================================================-->
+              <!--======================-->
+              <!--Physical Properties-->
+              <!--======================-->
+              <!--=======================-->
+              <!--Electrical Requirements-->
+              <!--=======================-->
+              <!--=================================================-->
+              <!--System Capabilities-->
+              <!--=================================================-->
+              <!--========================-->
+              <!--Offering Capabilities-->
+              <!--========================-->
+              <!--<sml:capabilities name="offerings">
+						<!-\- Special capabilities used to specify offerings. -\->
+						<!-\- Parsed and removed during InsertSensor/UpdateSensorDescription, added during DescribeSensor. -\->
+						<!-\- Offering is generated if not specified. -\->
+						<swe:SimpleDataRecord>
+							<!-\- Field name is used for the offering's name -\->
+							<swe:field name="Rete Telemareografica">
+								<swe:Text definition="urn:ogc:def:identifier:OGC:offeringID">
+									<swe:value>http://sp7.irea.cnr.it/offering/ReteTelemareografica</swe:value>
+								</swe:Text>
+							</swe:field>
+						</swe:SimpleDataRecord>
+					</sml:capabilities>-->
+              <!--========================-->
+              <!--FOI Capabilities-->
+              <!--========================-->
+              <!--========================-->
+              <!--Status Capabilities-->
+              <!--========================-->
+              <!--sml:capabilities element has to contain status and mobility information-->
+              <!--========================-->
+              <!--Operational Capabilities-->
+              <!--========================-->
+              <!--=================================================-->
+              <!--Relevant Contacts-->
+              <!--=================================================-->
+              <sml:capabilities name="Physical Properties">
+                <swe:DataRecord>
+                  <swe:field name="length">
+                    <swe:Quantity definition="urn:ogc:def:property:length">
+                      <swe:uom code="mm"/>
+                      <swe:value>425.0</swe:value>
+                    </swe:Quantity>
+                  </swe:field>
+                  <swe:field name="width">
+                    <swe:Quantity definition="urn:ogc:def:property:width">
+                      <swe:uom code="mm"/>
+                      <swe:value>177.0</swe:value>
+                    </swe:Quantity>
+                  </swe:field>
+                  <swe:field name="height">
+                    <swe:Quantity definition="urn:ogc:def:property:height">
+                      <swe:uom code="mm"/>
+                      <swe:value>140.0</swe:value>
+                    </swe:Quantity>
+                  </swe:field>
+                  <swe:field name="material">
+                    <swe:Category definition="urn:ogc:dictionary:OGC:material">
+                      <swe:value>Plastic</swe:value>
+                    </swe:Category>
+                  </swe:field>
+                </swe:DataRecord>
+              </sml:capabilities>
+              <sml:capabilities name="Electrical Requirements">
+                <swe:DataRecord>
+                  <swe:field name="voltage">
+                    <swe:Quantity definition="urn:ogc:def:property:OGC::voltage">
+                      <swe:uom code="V"/>
+                      <swe:value>5.7</swe:value>
+                    </swe:Quantity>
+                  </swe:field>
+                  <swe:field name="Current Type">
+                    <swe:Category definition="urn:ogc:def:property:OGC::electricalCurrentType">
+                      <swe:value>DC</swe:value>
+                    </swe:Category>
+                  </swe:field>
+                  <swe:field name="Amp Range">
+                    <swe:Quantity>
+                      <swe:uom code="mA"/>
+                      <swe:value>10.0</swe:value>
+                    </swe:Quantity>
+                  </swe:field>
+                </swe:DataRecord>
+              </sml:capabilities>
+              <sml:capabilities name="featuresOfInterest">
+                <swe:SimpleDataRecord>
+                  <swe:field name="featureOfInterestID">
+                    <swe:Text>
+                      <swe:value>http://sp7.irea.cnr.it/featureOfInterest/PuntaSaluteCanalGrande</swe:value>
+                    </swe:Text>
+                  </swe:field>
+                </swe:SimpleDataRecord>
+              </sml:capabilities>
+              <sml:capabilities name="Status Capabilities">
+                <swe:SimpleDataRecord>
+                  <swe:field name="status">
+                    <swe:Boolean>
+                      <swe:value>true</swe:value>
+                    </swe:Boolean>
+                  </swe:field>
+                  <swe:field name="mobile">
+                    <swe:Boolean>
+                      <swe:value>false</swe:value>
+                    </swe:Boolean>
+                  </swe:field>
+                </swe:SimpleDataRecord>
+              </sml:capabilities>
+              <sml:capabilities name="Operational Capabilities">
+                <swe:DataRecord>
+                  <swe:field name="Storage Type">
+                    <swe:Category definition="urn:ogc:def:classifier:SBE:storageType">
+                      <swe:value>SD</swe:value>
+                    </swe:Category>
+                  </swe:field>
+                </swe:DataRecord>
+              </sml:capabilities>
+              <sml:capabilities name="observedBBOX">
+                <swe:DataRecord>
+                  <swe:field name="observedBBOX">
+                    <swe:Envelope definition="urn:ogc:def:property:OGC:1.0:observedBBOX" referenceFrame="4326">
+                      <swe:lowerCorner>
+                        <swe:Vector>
+                          <swe:coordinate name="easting">
+                            <swe:Quantity axisID="x">
+                              <swe:uom code="degree"/>
+                              <swe:value>12.3370517111111</swe:value>
+                            </swe:Quantity>
+                          </swe:coordinate>
+                          <swe:coordinate name="northing">
+                            <swe:Quantity axisID="y">
+                              <swe:uom code="degree"/>
+                              <swe:value>45.4309591916667</swe:value>
+                            </swe:Quantity>
+                          </swe:coordinate>
+                        </swe:Vector>
+                      </swe:lowerCorner>
+                      <swe:upperCorner>
+                        <swe:Vector>
+                          <swe:coordinate name="easting">
+                            <swe:Quantity axisID="x">
+                              <swe:uom code="degree"/>
+                              <swe:value>12.3370517111111</swe:value>
+                            </swe:Quantity>
+                          </swe:coordinate>
+                          <swe:coordinate name="northing">
+                            <swe:Quantity axisID="y">
+                              <swe:uom code="degree"/>
+                              <swe:value>45.4309591916667</swe:value>
+                            </swe:Quantity>
+                          </swe:coordinate>
+                        </swe:Vector>
+                      </swe:upperCorner>
+                    </swe:Envelope>
+                  </swe:field>
+                </swe:DataRecord>
+              </sml:capabilities>
+              <sml:capabilities name="offerings">
+                <swe:SimpleDataRecord>
+                  <swe:field name="Offering for sensor offering:http://sp7.irea.cnr.it/procedure/PuntaSaluteCanalGrande">
+                    <swe:Text definition="http://www.opengis.net/def/offering/identifier">
+                      <swe:value>offering:http://sp7.irea.cnr.it/procedure/PuntaSaluteCanalGrande/observations</swe:value>
+                    </swe:Text>
+                  </swe:field>
+                </swe:SimpleDataRecord>
+              </sml:capabilities>
+              <sml:contact xlink:arcrole="urn:ogc:def:classifiers:OGC:contactType:manufacturer">
+                <sml:ResponsibleParty>
+                  <sml:organizationName>SIAP + MICROS</sml:organizationName>
+                  <sml:contactInfo>
+                    <sml:phone>
+                      <sml:voice>+39 0438 491411</sml:voice>
+                    </sml:phone>
+                    <sml:address>
+                      <sml:deliveryPoint>Via del lavoro, 1</sml:deliveryPoint>
+                      <sml:city>Castello Roganzuolo di San Fior (TV)</sml:city>
+                      <sml:postalCode>31020</sml:postalCode>
+                      <sml:country>Italy</sml:country>
+                      <sml:electronicMailAddress>service@siapmicros.com</sml:electronicMailAddress>
+                    </sml:address>
+                    <sml:onlineResource xlink:href="http://www.siapmicros.com"/>
+                  </sml:contactInfo>
+                </sml:ResponsibleParty>
+              </sml:contact>
+              <sml:contact xlink:arcrole="urn:ogc:def:classifiers:OGC:contactType:owner">
+                <sml:ResponsibleParty>
+                  <sml:organizationName>Istituzione Centro Previsioni Segnalazioni Maree</sml:organizationName>
+                  <sml:contactInfo>
+                    <sml:phone>
+                      <sml:voice>+39 041 27 48 787</sml:voice>
+                    </sml:phone>
+                    <sml:address>
+                      <sml:deliveryPoint>S.Marco 4090</sml:deliveryPoint>
+                      <sml:city>Venezia</sml:city>
+                      <sml:postalCode>30124</sml:postalCode>
+                      <sml:country>Italia</sml:country>
+                      <sml:electronicMailAddress>maree@comune.venezia.it</sml:electronicMailAddress>
+                    </sml:address>
+                    <sml:onlineResource xlink:href="http://www.comune.venezia.it/maree/"/>
+                  </sml:contactInfo>
+                </sml:ResponsibleParty>
+              </sml:contact>
+              <sml:contact xlink:arcrole="urn:ogc:def:classifiers:OGC:contactType:operator">
+                <sml:ResponsibleParty>
+                  <sml:organizationName>Istituzione Centro Previsioni Segnalazioni Maree</sml:organizationName>
+                  <sml:contactInfo>
+                    <sml:phone>
+                      <sml:voice>+39 041 27 48 787</sml:voice>
+                    </sml:phone>
+                    <sml:address>
+                      <sml:deliveryPoint>S.Marco 4090</sml:deliveryPoint>
+                      <sml:city>Venezia</sml:city>
+                      <sml:postalCode>30124</sml:postalCode>
+                      <sml:country>Italia</sml:country>
+                      <sml:electronicMailAddress>maree@comune.venezia.it</sml:electronicMailAddress>
+                    </sml:address>
+                    <sml:onlineResource xlink:href="http://www.comune.venezia.it/maree/"/>
+                  </sml:contactInfo>
+                </sml:ResponsibleParty>
+              </sml:contact>
+              <!--=================================================-->
+              <!--System Documentation-->
+              <!--=================================================-->
+              <sml:documentation xlink:arcrole="urn:ogc:def:classifiers:OGC:documentType:datasheet">
+                <sml:Document>
+                  <gml:description>Documentazione Stazione dal sito ufficiale</gml:description>
+                  <sml:date>2014-04-04</sml:date>
+                  <sml:format>application/pdf</sml:format>
+                  <sml:onlineResource xlink:href="http://www.siapmicros.com/prodotti/sistemi-di-acquisizione-dati/datalogger-serie-da9000/e008a-da9010"/>
+                </sml:Document>
+              </sml:documentation>
+              <!--==========================================================-->
+              <!--History-->
+              <!--==========================================================-->
+              <sml:history>
+                <sml:EventList gml:id="smlUpdates">
+                  <!--==========================================================-->
+                  <!--======= The date the sensorML document was updated =======-->
+                  <!--==========================================================-->
+                  <sml:member name="SML20140319">
+                    <sml:Event gml:id="SML20140319">
+                      <sml:date>2014-03-19</sml:date>
+                      <gml:description>created sensorML metadata</gml:description>
+                    </sml:Event>
+                  </sml:member>
+                </sml:EventList>
+              </sml:history>
+              <!--=================================================-->
+              <!--System Location (Fixed in this case)-->
+              <!--=================================================-->
+              <sml:position name="sensorPosition">
+                <swe:Position fixed="false" referenceFrame="urn:ogc:def:crs:EPSG::4326">
+                  <swe:location>
+                    <swe:Vector>
+                      <swe:coordinate name="easting">
+                        <swe:Quantity>
+                          <swe:uom code="degree"/>
+                          <swe:value>12.33705171111111</swe:value>
+                        </swe:Quantity>
+                      </swe:coordinate>
+                      <swe:coordinate name="northing">
+                        <swe:Quantity>
+                          <swe:uom code="degree"/>
+                          <swe:value>45.43095919166667</swe:value>
+                        </swe:Quantity>
+                      </swe:coordinate>
+                      <swe:coordinate name="altitude">
+                        <swe:Quantity>
+                          <swe:uom code="m"/>
+                          <swe:value>2.56</swe:value>
+                        </swe:Quantity>
+                      </swe:coordinate>
+                    </swe:Vector>
+                  </swe:location>
+                </swe:Position>
+              </sml:position>
+              <!--=================================================-->
+              <!--System Inputs-->
+              <!--=================================================-->
+              <sml:inputs>
+                <sml:InputList>
+                  <sml:input name="Electrical resistance (of thermometer at equilibrator base) by platinum resistance thermometer">
+                    <swe:ObservableProperty definition="SDN:P01::LTEMPEQ3">
+                      <gml:description>Il sensore misura la temperatura dell'acqua
+										impiegando come elemento sensibile una termoresistenza
+										(sonda Pt100). Il valore della resistenza viene misurato
+										iniettando una corrente costante di valore molto basso in
+										modo da rendere trascurabile l'autoriscaldamento della
+										sonda: la variazione di temperatura viente pertanto
+										ricondotta ad una variazione di tensione ai capi della
+										termoresistenza stessa.</gml:description>
+                    </swe:ObservableProperty>
+                  </sml:input>
+                  <sml:input name="Sea level">
+                    <swe:ObservableProperty definition="SDN:P02::ASLV">
+                      <gml:description>Il sensore misura il livello idrometrico
+										trasformando in codice numerico la posizione di un
+										galleggiante sulla superficie del liquido. Il sensore si
+										basa sul tradizionale e fidato sistema di misura utilizzando
+										un galleggiante di 200 mm collegato ad un nastro d'acciaio,
+										una puleggia e un contrappeso che garantisce la stabilità
+										del galleggiante sulla superficie dell'acqua. La variazione
+										verticale del galleggiante fa girare la puleggia che si
+										trova solidamente collegata ad un codificatore numerico a 12
+										bit, con uscita in formato GRAY. L'entità del livello
+										idrometrico determina la posizione della puleggia e la
+										conseguente uscita elettrica in codice riflesso (GRAY)</gml:description>
+                    </swe:ObservableProperty>
+                  </sml:input>
+                </sml:InputList>
+              </sml:inputs>
+              <!--=================================================-->
+              <!--System Output-->
+              <!--=================================================-->
+              <sml:outputs>
+                <sml:OutputList>
+                  <sml:output name="Temperature of the water column">
+                    <swe:Quantity definition="urn:SDN:P01::TEMPP901">
+                      <gml:description>Il sensore misura la temperatura dell'acqua
+										impiegando come elemento sensibile una termoresistenza
+										(sonda Pt100). Il valore della resistenza viene misurato
+										iniettando una corrente costante di valore molto basso in
+										modo da rendere trascurabile l'autoriscaldamento della
+										sonda: la variazione di temperatura viente pertanto
+										ricondotta ad una variazione di tensione ai capi della
+										termoresistenza stessa.</gml:description>
+                      <swe:uom code="degC"/>
+                      <swe:quality>
+                        <swe:Quantity>
+                          <swe:uom code="degC"/>
+                          <swe:value>0.3</swe:value>
+                        </swe:Quantity>
+                      </swe:quality>
+                    </swe:Quantity>
+                  </sml:output>
+                  <sml:output name="Sea level">
+                    <swe:Quantity definition="SDN:P02::ASLV">
+                      <gml:description>Il sensore misura il livello idrometrico
+										trasformando in codice numerico la posizione di un
+										galleggiante sulla superficie del liquido. Il sensore si
+										basa sul tradizionale e fidato sistema di misura utilizzando
+										un galleggiante di 200 mm collegato ad un nastro d'acciaio,
+										una puleggia e un contrappeso che garantisce la stabilità
+										del galleggiante sulla superficie dell'acqua. La variazione
+										verticale del galleggiante fa girare la puleggia che si
+										trova solidamente collegata ad un codificatore numerico a 12
+										bit, con uscita in formato GRAY. L'entità del livello
+										idrometrico determina la posizione della puleggia e la
+										conseguente uscita elettrica in codice riflesso (GRAY)</gml:description>
+                      <swe:uom code="m"/>
+                      <swe:quality>
+                        <swe:Quantity>
+                          <swe:uom code="cm"/>
+                          <swe:value>1.0</swe:value>
+                        </swe:Quantity>
+                      </swe:quality>
+                    </swe:Quantity>
+                  </sml:output>
+                  <sml:output name="phenomenonTime">
+                    <swe:Time definition="http://www.opengis.net/def/property/OGC/0/PhenomenonTime">
+                      <gml:description>Measurement Date and Time</gml:description>
+                    </swe:Time>
+                  </sml:output>
+                </sml:OutputList>
+              </sml:outputs>
+            </sml:System>
+          </sml:member>
+        </sml:SensorML>
+      </swes:data>
+    </swes:SensorDescription>
+  </swes:description>
+</swes:DescribeSensorResponse>

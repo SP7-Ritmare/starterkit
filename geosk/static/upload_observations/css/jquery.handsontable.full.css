@@ -1,0 +1,313 @@
+
+.handsontable {
+    position: relative;
+}
+.handsontable.htAutoColumnSize {
+    left: 0;
+    position: absolute;
+    top: 0;
+    visibility: hidden;
+}
+.handsontable table, .handsontable tbody, .handsontable thead, .handsontable td, .handsontable th, .handsontable div {
+    box-sizing: content-box;
+}
+.handsontable table.htCore {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-width: 0;
+    margin: 0;
+    max-height: none;
+    max-width: none;
+    outline-width: 0;
+    position: relative;
+    table-layout: fixed;
+    width: 0;
+}
+.handsontable col {
+    width: 50px;
+}
+.handsontable col.rowHeader {
+    width: 50px;
+}
+.handsontable th, .handsontable td {
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    empty-cells: show;
+    height: 22px;
+    line-height: 21px;
+    outline-width: 0;
+    overflow: hidden;
+    padding: 0 4px;
+    vertical-align: top;
+    white-space: pre-line;
+}
+.handsontable td.htInvalid {
+    background-color: #ff4c42;
+    transition: background 0.75s ease 0s;
+}
+.handsontable th:last-child {
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+.handsontable tr:first-child th.htNoFrame, .handsontable th.htNoFrame:first-child, .handsontable th.htNoFrame {
+    background-color: white;
+    border-color: #fff;
+    border-left-width: 0;
+}
+.handsontable th:first-child, .handsontable td:first-child, .handsontable .htNoFrame + th, .handsontable .htNoFrame + td {
+    border-left: 1px solid #ccc;
+}
+.handsontable tr:first-child th, .handsontable tr:first-child td {
+    border-top: 1px solid #ccc;
+}
+.handsontable thead tr:last-child th {
+    border-bottom-width: 0;
+}
+.handsontable thead tr.lastChild th {
+    border-bottom-width: 0;
+}
+.handsontable th {
+    background-color: #eee;
+    color: #222;
+    font-weight: normal;
+    text-align: center;
+    white-space: nowrap;
+}
+.handsontable thead th {
+    padding: 0;
+}
+.handsontable th.active {
+    background-color: #ccc;
+}
+.handsontable thead th .relative {
+    padding: 2px 4px;
+    position: relative;
+}
+.handsontable .manualColumnMover {
+    background-color: transparent;
+    cursor: move;
+    height: 25px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 5px;
+    z-index: 999;
+}
+.handsontable th .manualColumnMover:hover, .handsontable th .manualColumnMover.active {
+    background-color: #88f;
+}
+.handsontable .manualColumnResizer {
+    cursor: col-resize;
+    position: absolute;
+    top: 0;
+}
+.handsontable .manualColumnResizerHandle {
+    background-color: transparent;
+    height: 25px;
+    width: 5px;
+}
+.handsontable .manualColumnResizer:hover .manualColumnResizerHandle, .handsontable .manualColumnResizer.active .manualColumnResizerHandle {
+    background-color: #aab;
+}
+.handsontable .manualColumnResizerLine {
+    background-color: #aab;
+    border-right: 1px dashed #777;
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 0;
+}
+.handsontable .manualColumnResizer.active .manualColumnResizerLine {
+    display: block;
+}
+.handsontable .columnSorting:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+.handsontable .wtBorder {
+    font-size: 0;
+    position: absolute;
+}
+.handsontable td.area {
+    background-color: #eef4ff;
+}
+.handsontable .wtBorder.corner {
+    cursor: crosshair;
+    font-size: 0;
+}
+.handsontable .htBorder.htFillBorder {
+    background: none repeat scroll 0 0 red;
+    height: 1px;
+    width: 1px;
+}
+.handsontableInput {
+    background-color: #fff;
+    border: 2px solid #5292f7;
+    border-radius: 0;
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.4);
+    color: #000;
+    display: inline-block;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: inherit;
+    line-height: 1.3em;
+    margin: 0;
+    outline-width: 0;
+    padding: 1px 4px 0 2px;
+    resize: none;
+}
+.handsontableInputHolder {
+    left: 0;
+    position: absolute;
+    top: 0;
+    z-index: 100;
+}
+.htSelectEditor {
+    position: absolute;
+}
+.handsontable .htDimmed {
+    color: #777;
+}
+.handsontable .htPlaceholder {
+    color: #999;
+}
+.handsontable .htAutocompleteArrow {
+    color: #eee;
+    cursor: default;
+    float: right;
+    font-size: 10px;
+    text-align: center;
+    width: 16px;
+}
+.handsontable td .htAutocompleteArrow:hover {
+    color: #777;
+}
+.handsontable .htCheckboxRendererInput.noValue {
+    opacity: 0.5;
+}
+.handsontable .htNumeric {
+    text-align: right;
+}
+ul.context-menu-list {
+    color: black;
+}
+ul.context-menu-list li {
+    margin-bottom: 0;
+}
+.handsontable .dragdealer {
+    background: none repeat scroll 0 0 #f8f8f8;
+    border: 1px solid #ddd;
+    height: 9px;
+    position: relative;
+    width: 9px;
+}
+.handsontable .dragdealer .handle {
+    background: none repeat scroll 0 0 #c5c5c5;
+    height: 9px;
+    position: absolute;
+    width: 9px;
+}
+.handsontable .dragdealer .disabled {
+    background: none repeat scroll 0 0 #898989;
+}
+.handsontable .handsontable .wtHider {
+    padding: 0 0 5px;
+}
+.handsontable .handsontable table {
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.4);
+}
+.handsontable.listbox {
+    margin: 0;
+}
+.handsontable.listbox table {
+    background: none repeat scroll 0 0 white;
+    border: 1px solid #ccc;
+    border-collapse: separate;
+}
+.handsontable.listbox th, .handsontable.listbox tr:first-child th, .handsontable.listbox tr:last-child th, .handsontable.listbox tr:first-child td, .handsontable.listbox td {
+    border-width: 0;
+}
+.handsontable.listbox th, .handsontable.listbox td {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.handsontable.listbox td.htDimmed {
+    color: inherit;
+    cursor: default;
+    font-style: inherit;
+}
+.handsontable.listbox .wtBorder {
+    visibility: hidden;
+}
+.handsontable.listbox tr td.current, .handsontable.listbox tr:hover td {
+    background: none repeat scroll 0 0 #eee;
+}
+.htContextMenu {
+    display: none;
+    position: absolute;
+}
+.htContextMenu table.htCore {
+    outline: 1px solid #bbb;
+}
+.htContextMenu .wtBorder {
+    visibility: hidden;
+}
+.htContextMenu table tbody tr td {
+    background: none repeat scroll 0 0 white;
+    border-width: 0;
+    cursor: pointer;
+    overflow: hidden;
+    padding: 4px 6px 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.htContextMenu table tbody tr td:first-child {
+    border: 0 none;
+}
+.htContextMenu table tbody tr td.htDimmed {
+    color: #323232;
+    font-style: normal;
+}
+.htContextMenu table tbody tr td.current {
+    background: none repeat scroll 0 0 rgb(233, 233, 233);
+}
+.htContextMenu table tbody tr td.htSeparator {
+    border-top: 1px solid #bbb;
+    height: 0;
+    padding: 0;
+}
+.htContextMenu table tbody tr td.htDisabled {
+    color: #999;
+}
+.htContextMenu table tbody tr td.htDisabled:hover {
+    background: none repeat scroll 0 0 white;
+    color: #999;
+    cursor: default;
+}
+.handsontable td.htSearchResult {
+    background: none repeat scroll 0 0 #fcedd9;
+    color: #583707;
+}
+.wtDebugHidden {
+    display: none;
+}
+.wtDebugVisible {
+    animation-duration: 0.5s;
+    animation-name: wtFadeInFromNone;
+    display: block;
+}
+@keyframes wtFadeInFromNone {
+0% {
+    display: none;
+    opacity: 0;
+}
+1% {
+    display: block;
+    opacity: 0;
+}
+100% {
+    display: block;
+    opacity: 1;
+}
+}

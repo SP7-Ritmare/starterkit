@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sos:GetFeatureOfInterestResponse xmlns:sos="http://www.opengis.net/sos/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/sos/2.0 http://schemas.opengis.net/sos/2.0/sosGetFeatureOfInterest.xsd http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/gml.xsd http://www.opengis.net/samplingSpatial/2.0 http://schemas.opengis.net/samplingSpatial/2.0/spatialSamplingFeature.xsd http://www.opengis.net/sampling/2.0 http://schemas.opengis.net/sampling/2.0/samplingFeature.xsd">
+  <sos:featureMember>
+    <sams:SF_SpatialSamplingFeature xmlns:sams="http://www.opengis.net/samplingSpatial/2.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:sf="http://www.opengis.net/sampling/2.0" xmlns:xlink="http://www.w3.org/1999/xlink" gml:id="ssf_88E3D32B130BB0ED6F1DA70D4EC6B18EEE79F286">
+      <gml:identifier codeSpace="">http://sp7.irea.cnr.it/featureOfInterest/ISMAR02</gml:identifier>
+      <gml:name>Punta Salute Canal Grande</gml:name>
+      <sf:type xlink:href="http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint"/>
+      <sf:sampledFeature xlink:href="http://www.comune.venezia.it/flex/cm/pages/ServeBLOB.php/L/IT/IDPagina/1674"/>
+      <sams:shape>
+        <gml:Point gml:id="point_ssf_88E3D32B130BB0ED6F1DA70D4EC6B18EEE79F286">
+          <gml:pos srsName="http://www.opengis.net/def/crs/EPSG/0/4326">45.43095919166667 12.33705171111111</gml:pos>
+        </gml:Point>
+      </sams:shape>
+    </sams:SF_SpatialSamplingFeature>
+  </sos:featureMember>
+  <sos:featureMember>
+    <sams:SF_SpatialSamplingFeature xmlns:sams="http://www.opengis.net/samplingSpatial/2.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:sf="http://www.opengis.net/sampling/2.0" xmlns:xlink="http://www.w3.org/1999/xlink" gml:id="ssf_A52590A1CEC1560E1CAD40251B0B5A3059C17324">
+      <gml:identifier codeSpace="">http://sp7.irea.cnr.it/featureOfInterest/PuntaSaluteCanalGrande</gml:identifier>
+      <gml:name>Punta Salute Canal Grande</gml:name>
+      <sf:type xlink:href="http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint"/>
+      <sf:sampledFeature xlink:href="http://www.comune.venezia.it/flex/cm/pages/ServeBLOB.php/L/IT/IDPagina/1674"/>
+      <sams:shape>
+        <gml:Point gml:id="point_ssf_A52590A1CEC1560E1CAD40251B0B5A3059C17324">
+          <gml:pos srsName="http://www.opengis.net/def/crs/EPSG/0/4326">45.43095919166667 12.33705171111111</gml:pos>
+        </gml:Point>
+      </sams:shape>
+    </sams:SF_SpatialSamplingFeature>
+  </sos:featureMember>
+</sos:GetFeatureOfInterestResponse>

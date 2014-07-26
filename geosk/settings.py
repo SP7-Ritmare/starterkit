@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #########################################################################
 #
-# Copyright (C) 2012 OpenPlans
+# Copyright (C) 2014 Starter Kit Development Team
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -21,9 +21,9 @@
 # Django settings for the GeoNode project.
 import os
 from geonode.settings import *
-#
-# General Django development settings
-#
+
+SITENAME = 'StarterKit'
+SITEURL = "http://geosk.ve.ismar.cnr.it/"
 
 # Defines the directory that contains the settings file as the LOCAL_ROOT
 # It is used for relative settings elsewhere.
@@ -192,6 +192,10 @@ SOS_SERVER = {
     }
   }
 
+THEME_ACCOUNT_CONTACT_EMAIL = 'help.skritmare@irea.cnr.it'
+ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = True
+REGISTRATION_OPEN = False
+PROXY_ALLOWED_HOSTS=("*",)
 
 # Load more settings from a file called local_settings.py if it exists
 try:

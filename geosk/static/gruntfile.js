@@ -12,7 +12,9 @@ module.exports = function(grunt) {
 	    openlayers_sos: {
 		src: [
 		    '.components/openlayers/lib/OpenLayers/Format/OWSCommon/v1_1_0.js',
-		    '.components/openlayers/lib/OpenLayers/Format/SOSGetFeatureOfInterest.js',
+		    // override name readers
+		    // '.components/openlayers/lib/OpenLayers/Format/SOSGetFeatureOfInterest.js',
+		    'geosk/js/SOSClient/SOSGetFeatureOfInterest.js',
 		    '.components/openlayers/lib/OpenLayers/Format/SOSCapabilities.js',
 		    '.components/openlayers/lib/OpenLayers/Format/SOSGetObservation.js',
 		    '.components/openlayers/lib/OpenLayers/Format/SOSCapabilities.js',

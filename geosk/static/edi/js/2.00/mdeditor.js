@@ -270,6 +270,10 @@ var fillInEdiMl = function(ediMl) {
 		doDebug(item);
 		if ( item.dataType == "code" || item.dataType == "query" ) {
 		    $("#" + item.id).val(item.codeValue);
+		} else if ( item.dataType == "autoCompletion" ) {
+		    $("#" + item.id).val(item.value);
+		    $("#" + item.id + "_uri").val(item.codeValue);
+		    $("#" + item.id + "_urn").val(item.urnValue);
 		} else {
 		    $("#" + item.id).val(item.value);
 		}

@@ -258,7 +258,13 @@ OpenLayers.Format.SOSGetFeatureOfInterest = OpenLayers.Class(
                 this.readChildNodes(node, feature);
             },
             "name": function(node, obj) {
-                obj.attributes.name = this.getChildValue(node);
+		// 52north bug // check server
+		if(obj.attributes.name){
+		    obj.attributes.id = obj.attributes.name;
+		    obj.attributes.name = this.getChildValue(node);
+		} else {
+                    obj.attributes.name = this.getChildValue(node);
+		}
             },
             "pos": function(node, obj) {
                 // we need to parse the srsName to get to the 
