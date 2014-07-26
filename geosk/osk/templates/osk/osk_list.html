@@ -77,6 +77,8 @@
 		</div>
 		<div class="details">
 		  <div class="meta">
+		    <p> <a href="{% url "osk_upload" %}?procedureId={{ sensor.name }}">Upload observations</a>  </p>
+
 		    <p class="abstract">{{ sensor.sensor.description|default:'No abstract provided.' }}</p>
 		    <p class="Keywords">{{ sensor.sensor.keywords|join:', '|default:'No keywords provided' }}</p>
 		  </div> <!-- /.meta -->
@@ -88,7 +90,7 @@
 		  <div>
 		    <ul>
 		      {% for op in sensor.observable_properties %}
-		      <li>{{ op }} <button class="btn btn-small">Upload</button> </li>
+		      <li>{{ op }}</li>
 		      {% endfor %}
 		    </ul>
 		  </div>
