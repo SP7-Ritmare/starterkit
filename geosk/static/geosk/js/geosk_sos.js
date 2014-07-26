@@ -2606,6 +2606,9 @@ OpenLayers.SOSClient = OpenLayers.Class({
     updateLegendTimeout: null,
     latestPosition: null,
 
+    // 52n bug on v4.0.0 and SOS1.0.0 need to check resultModel
+    resultModel: 'om:Measurement',
+
     /**
      * 
      */
@@ -2749,12 +2752,12 @@ OpenLayers.SOSClient = OpenLayers.Class({
         }
     },
 
-    getObservationRequest: function(foiId, offering_id, observedProperties, begin, end){
+    getObservationRequest: function(foiId, offering_id, observedProperties, begin, end, resultModel){
 	var foi = {objectId: foiId};
         // get a time range for chart
         var xml = this.obsformat.write({
             eventTime: 'first',
-            resultModel: 'om:Measurement',
+            resultModel: resultModel,
             responseMode: 'inline',
             procedure: foiId,     // TODO: verificare procedure
             foi: foi,
@@ -2799,17 +2802,22 @@ OpenLayers.SOSClient = OpenLayers.Class({
     },
 
     getOfferingsByFoi: function(foi){
+	var foiId = foi.attributes.id;
 	var offerings = {};
         for (var name in this.SOSCapabilities.contents.offeringList) {
+	    // console.log(foi);
             var offering = this.SOSCapabilities.contents.offeringList[name];
+	    // console.log(offering.featureOfInterestIds);
+
             // test foi in offeringList
-            if(offering.featureOfInterestIds.indexOf(foi) !== -1){
+            if(offering.featureOfInterestIds.indexOf(foiId) !== -1){
                 //problema nel loop degli array all'interno del writers perche' Ext modifica l'array base dj js ( Ext Array.prototype.indexOf)
                 //trasformo l'array in un dictionary
                 // var observedProperties = {};
                 // offering.observedProperties.forEach(function(val, i) {
                 // observedProperties[i]=val;
 		//});
+
 		offerings[name] = offering;
             }
         }
@@ -2820,7 +2828,7 @@ OpenLayers.SOSClient = OpenLayers.Class({
 	//alert(feature);
 	//console.log(feature);
 	var foiExplorer = new FoiExplorer({sosClient: this,
-					   foiId: feature.attributes.id,
+					   foi: feature,
 					   title: "SOS details: " + feature.attributes.name
 					  });
 
@@ -2845,17 +2853,29 @@ OpenLayers.SOSClient = OpenLayers.Class({
 	}
 
 
-	var xmlRequest = this.getObservationRequest(foiId, offering_id, observedProperties, begin,end);
+	var xmlRequest = this.getObservationRequest(foiId, offering_id, observedProperties, begin,end, this.resultModel);
         OpenLayers.Request.POST({
             // url: this.sosClient.urlPOST,
 	    url: this.getURL('GetObservation', 'post', 'application/xml'),
             scope: this,
             success: function(response) {
+		//console.log(response.responseText);
+		//check for exceptions
+		var xmlReader = new OpenLayers.Format.XML();
+		var doc = xmlReader.read(response.responseText);
+		if(doc && doc.documentElement.tagName == "ows:ExceptionReport"){
+		    var els = doc.documentElement.getElementsByTagName('ExceptionText');
+		    if(els.length > 0 && els[0].textContent.indexOf("om:Measurement") > -1){
+			this.resultModel = null;
+			// this.chartReload(); //TODO lanciare automaticamente il reload
+		    }
+		}
 		var output = this.obsformat.read(response.responseXML || response.responseText);		
+		//console.log(output);
 		onSuccess(offering, output);
 	    },
 	    
-            failure: function() {
+            failure: function(response) {
                 ("No data for charts...");
             },
             data: xmlRequest,
@@ -3063,7 +3083,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
 	this.interval = 3600;
 	
 	this.sosClient = config.sosClient;
-	this.foiId = config.foiId;
+	this.foiId = config.foi.attributes.id
 	
 	// add listeners
         this.addEvents({
@@ -3102,8 +3122,8 @@ FoiExplorer = Ext.extend(Ext.Window, {
 	});
 
 
-	//console.log(config.foiId);
-	var offerings = this.sosClient.getOfferingsByFoi(config.foiId);
+	//console.log(config.foi);
+	var offerings = this.sosClient.getOfferingsByFoi(config.foi);
 	//console.log(offerings);
 	for (var name in offerings) {
 	    this.addSensorRecord(offerings[name], name);
