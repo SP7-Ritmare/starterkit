@@ -60,6 +60,8 @@ setup(
     #                         # 'model': ['config.py']
     #                         },
     setup_requires = [ "setuptools_git >= 0.3", ],
-
+    scripts=['bin/sk',
+             'bin/sk-updateip',
+             ]
 )
 
