@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sos:GetResultTemplateResponse xmlns:sos="http://www.opengis.net/sos/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/swes/2.0 http://schemas.opengis.net/swes/2.0/swes.xsd http://www.opengis.net/sos/2.0 http://schemas.opengis.net/sos/2.0/sosGetResultTemplate.xsd">
+  <sos:resultStructure>
+    <swe:DataRecord xmlns:swes="http://www.opengis.net/swes/2.0" xmlns:sml="http://www.opengis.net/sensorML/1.0.1" xmlns:om="http://www.opengis.net/om/2.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:sf="http://www.opengis.net/sampling/2.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:swe="http://www.opengis.net/swe/2.0" xmlns:sams="http://www.opengis.net/samplingSpatial/2.0">
+      <swe:field name="phenomenonTime">
+        <swe:Time definition="http://www.opengis.net/def/property/OGC/0/PhenomenonTime">
+          <swe:uom xlink:href="http://www.opengis.net/def/uom/ISO-8601/0/Gregorian"/>
+        </swe:Time>
+      </swe:field>
+      <swe:field name="SeaLevel">
+        <swe:Quantity definition="SDN:P02::ASLV">
+          <swe:uom code="m"/>
+        </swe:Quantity>
+      </swe:field>
+    </swe:DataRecord>
+  </sos:resultStructure>
+  <sos:resultEncoding>
+    <swe:TextEncoding xmlns:swes="http://www.opengis.net/swes/2.0" xmlns:sml="http://www.opengis.net/sensorML/1.0.1" xmlns:om="http://www.opengis.net/om/2.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:sf="http://www.opengis.net/sampling/2.0" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:swe="http://www.opengis.net/swe/2.0" xmlns:sams="http://www.opengis.net/samplingSpatial/2.0" tokenSeparator="#" blockSeparator="@"/>
+  </sos:resultEncoding>
+</sos:GetResultTemplateResponse>

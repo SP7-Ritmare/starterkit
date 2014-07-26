@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<script src="http://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
+	<script src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="http://google-code-prettify.googlecode.com/svn/loader/skins/sunburst.css">
+
+	<link rel="stylesheet" media="screen" href="css/jquery.handsontable.full.css"/>
+	<!--link rel="stylesheet" media="screen" href="css/samples.css"/-->
+	<link rel="stylesheet" media="screen" href="css/bootstrap.min.css"/>
+	<link rel="stylesheet" media="screen" href="css/bootstrap-theme.min.css"/>
+	
+	<style type="text/css">
+	.debugInvisible{
+		display: none;
+	}
+	.handsontable{
+		margin:1em 0!important;
+	}
+	.vspaceafter{
+		margin-bottom: 1em;
+	}
+	.tab-content {    
+	    padding: 1.5em;
+	    border:1px solid #ddd;
+	    border-top:none;
+	    border-radius: 0 0 4px 4px;
+	}
+	
+	.xml{
+		width:48% !important;
+		float:left;
+		border:1px solid grey; 		
+		font-size: 10px; 
+		overflow-x: scroll; 
+		overflow-y: auto; 
+		clear: none;
+		margin:0 !important;
+		padding:0!important;
+	}
+	p.xml{overflow: auto; text-align: center;font-size: 12px; border:0 none; line-height: 1.3em;}
+	pre.xml{height: 90%; }
+	.debug,.noborder{
+		position: relative;
+		width:600px;
+		
+		clear: both;
+		padding:5px 0 0 18px; border:1px dotted grey; 
+		height: 320px;
+		min-height: 200px;
+		min-width:300px;
+	}
+	#foi.debug{width:900px;}
+	#foi.debug .xml{width:32% !important;}
+	.noborder{height: auto;border: transparent;min-height: 10px;
+		min-width:300px;}
+	#capabilities{width:100% !important;}
+	
+	#sensor{background: transparent url("img/sensordescription.png") scroll left center no-repeat;}
+	#foi{background: transparent url("img/fois.png") scroll left center no-repeat;}
+	</style>
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.handsontable.full.js"></script>
+	
+	<script language="javascript" src="js/bootstrap.min.js"></script>
+	
+	<!-- -->
+	<script src="js/config.js"></script>
+	<script src="js/ritmaresk.xsltTransformer.js"></script>
+	
+	<script src="js/ritmaresk.SOS.js"></script>
+	<!--script src="js/utils.insertResult.js"></script-->
+	<script src="js/ritmaresk.dateUtil.js"></script>
+	<script src="js/ritmaresk.utils.swe.js"></script>
+	<script src="js/ritmaresk.utils.NamingConvention.js"></script>
+	<script src="js/ritmaresk.utils.insertResultHelper.js"></script>
+	
+	
+	<!--script src="js/bootstrap.min.js"></script-->
+	<script src="js/insertResultPage.js"></script>
+</head>
+<body>	
+	<div class="content-wrap">
+	  <div>
+		<div class="vspaceafter">	
+		    <!-- Nav tabs -->
+		    <ul class="nav nav-tabs" role="tablist">
+		      <li class="active"><a href="#procedureSelect" role="tab" data-toggle="tab">Select Procedure</a></li>
+		      <li><a href="#foiSelect" role="tab" data-toggle="tab">Select Location</a></li>
+		      <li><a href="#resultInsert" role="tab" data-toggle="tab">Insert observations</a></li>		      
+		    </ul>
+		    
+		    <!-- Tab panes -->
+		    <div class="tab-content">
+		      <div class="tab-pane active" id="procedureSelect">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title">Select a procedure/sensor</h3>
+					</div>
+					<div class="panel-body">
+						<p class="controls">
+						<select class="control form-control" id="procedures"></select>
+						</p>
+					</div>
+				</div>    
+		      </div>
+
+		      <div class="tab-pane" id="foiSelect">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title">Select one of the available "feature of interest" or insert a new one</h3>
+					</div>
+					<div class="panel-body">
+						<table class="table table-bordered" id="select_foi">
+							<thead>
+							    <tr>
+								<th>Name</th>
+								<th>X coord.</th>
+								<th>Y coord.</th>
+								<th>SRS</th>
+								<th>Sampled Feature</th>
+								<th>Use</th>
+							    </tr>
+							</thead>
+							<tbody id="foi_tbody">
+								<!--form id="new_foi"-->
+							    <tr id="new_foi_tr">
+								<td><input type="text" id="foi_name" class="control form-control" required="required"></td>
+								<td><input type="text" id="foi_x" class="control form-control" required="required"></td>
+								<td><input type="text" id="foi_y" class="control form-control" required="required"><!-- required="required"--></td>
+								<td>
+									<select id="foi_srs" required="required" class="control form-control">					    	
+										<option value="http://www.opengis.net/def/crs/EPSG/0/4230">ed50</option>
+										<option value="http://www.opengis.net/def/crs/EPSG/0/23032">ed50/utm 32n</option>
+										<option value="http://www.opengis.net/def/crs/EPSG/0/23033">ed50/utm 33n</option>
+										<option value="http://www.opengis.net/def/crs/EPSG/0/4258">etrs89</option>
+										<option value="http://www.opengis.net/def/crs/EPSG/0/3035">etrs89/etrs-laea</option>
+										<option value="http://www.opengis.net/def/crs/EPSG/0/3034">etrs89/etrs-lcc</option>
+										<option value="http://www.opengis.net/def/crs/EPSG/0/3044">etrs89/etrs-tm32</option>
+										<option value="http://www.opengis.net/def/crs/EPSG/0/3045">etrs89/etrs-tm33</option>
+										<option value="http://www.opengis.net/def/crs/EPSG/0/25832">etrs89/utm-zone32N</option>
+										<option value="http://www.opengis.net/def/crs/EPSG/0/25833">etrs89/utm-zone33N</option>
+										<option value="http://www.opengis.net/def/crs/EPSG/0/4670">igm95</option>
+										<option value="http://www.opengis.net/def/crs/EPSG/0/3064">igm95/utm 32n</option>
+										<option value="http://www.opengis.net/def/crs/EPSG/0/3065">igm95/utm 33n</option>
+										<option value="http://www.opengis.net/def/crs/EPSG/0/4265">roma40</option>
+										<option value="http://www.opengis.net/def/crs/EPSG/0/3004">roma40/est</option>
+										<option value="http://www.opengis.net/def/crs/EPSG/0/3003">roma40/ovest</option>
+										<option value="http://www.opengis.net/def/crs/EPSG/0/4806">roma40/roma</option>
+										<option value="http://www.opengis.net/def/crs/EPSG/0/4326" selected="selected">wgs84</option>
+										<!--
+										<option value="http://www.opengis.net/def/crs/EPSG/0/4979">wgs84/3d</option>
+										-->
+										<option value="http://www.opengis.net/def/crs/EPSG/0/32632">wgs84/utm 32n</option>
+										<option value="http://www.opengis.net/def/crs/EPSG/0/32633">wgs84/utm 33n</option>
+										<option value="http://www.opengis.net/def/crs/EPSG/0/32634">wgs84/utm 34n</option>
+									</select>
+								</td>
+								<td><input type="text" id="foi_sf" class="control form-control"></td>
+								<td><button  class="btn btn-success" onclick="newFoi();">Use</button></td><!-- role="submit" onclick="newFoi();"-->
+							    </tr>
+								<!--/form-->
+							</tbody>
+					    </table>
+					</div>
+				    <!--form id="tab_foi" role="form"-->
+					<!--/form-->
+				</div>
+		      </div>
+
+		      <div class="tab-pane" id="resultInsert">		      	
+		      		<!--<select id="chooseInputDateFormat" class="control form-control"></select>-->
+		      		<div  class="panel panel-primary vspaceafter">
+		      			<div class="panel-heading ">
+		      				<h3 class="panel-title">Insert data</h3>
+		      			</div>
+		      			<div class="panel-body">
+		      				<p>Fill in the data manually or paste them from a spreadsheet, without headings. 
+		      					Please check the order of columns here proposed.
+		      					</p>
+		      				<div class="well well-sm">
+		      					<button class="btn btn-default btn-sm" onclick='$("#notaDate").toggleClass("hidden");'>Show accepted date-time formats.<i class="icon-question-sign"></i></button>
+					      		<div id="notaDate" class="hidden">
+					      			<br/>
+							      	<p><h4>REMARK - accepted date-time formats.</h4>
+							      	Timestamp fields (date and time) like "phenomenon time" or "result time" require values expressed in ISO 8601 format. The table in this page admits also date and time time values in one of the following formats, that will be automatically converted in the standard format. The use of different timestamps formats could lead to unexpected errors. Please check the conversion before submitting your data.
+							      	 <br/> 
+							      		<ul>
+							      		<li>YYYY-MM-DDTHH:mm:ss (standard ISO 8601)</li>
+							      		<li>DD/MM/YYYY HH:mm:ss</li>
+							      		<li>DD/MM/YYYY HH:mm</li>
+							      		<li>DD/MM/YYYY HH.mm.ss</li>
+							      		<li>DD/MM/YYYY HH.mm</li>
+							      		</ul>
+							      	</p>
+						      	</div>
+					      	</div>
+
+				      		<button role="submit" name="insertResult" class="btn btn-primary btn-sm">save data</button>
+				      		<div class="handsontable" id="insertResultTable"></div>
+				      		<button role="submit" name="insertResult" class="btn btn-primary btn-sm">save data</button>
+			      		</div>
+		      		</div>
+		      		<div  class="vspaceafter">
+		      			<div id="insertResultTableLegend" class="panel panel-default"></div>
+		      		</div>
+		      </div>
+		    </div>
+		</div>
+
+
+		<div class="clearfix debugInvisible">	
+			<!-- -->
+			<div class="tab-pane" id="resultInsert">		      	
+		  		<!--<select id="chooseInputDateFormat" class="control form-control"></select>-->
+		  		<div  class="panel panel-default vspaceafter">
+		  			<div class="panel-heading ">
+		  				<h3 class="panel-title">Sensor Observation Service - debug</h3>
+		  			</div>
+		  			<div class="panel-body">
+					    <div id="capabilitiesContainer" class="debug">
+						    <pre id="capabilities" class="xml prettyprint lang-json"></pre>			    
+					    </div>		    
+				    	<h2 id="sensorid"></h2>
+				    	<!-- <div class="container"><p class="xml" style="margin:0">json</p><p class="xml" style="margin:0">xml</p></div> -->
+				    	<div id="sensor" class="debug">
+						    <p class="xml" style="margin:0 10px;">json</p><p class="xml" style="margin:0 10px;">xml</p>
+						    <!-- <div class="verticalLabel"><p>sensorDescription</p></div> -->
+						    <pre id="sensordescription" class="xml prettyprint lang-json"></pre>
+						    <pre id="sensordescription_xml" class="xml prettyprint lang-xml"></pre>
+				    	</div>
+					    <div id="foi" class="debug">
+						    <p class="xml" style="margin:0 10px;">json</p>
+						    <p class="xml" style="margin:0 10px;">xml</p>
+						    <p class="xml" style="margin:0 10px;">json new</p>
+						    <!-- <div class="verticalLabel"><p>features of interest</p></div> -->
+						    <pre id="foi_json" class="xml prettyprint lang-json"></pre>
+						    <pre id="foi_xml" class="xml prettyprint lang-json"></pre>
+						    <pre id="foi_json_new" class="xml prettyprint lang-json"></pre>
+					    </div>
+					    <div id="insertResult" class="debug">
+					    	<p class="xml" style="width:100%!important;">prepare insert result template</p>
+						    <pre id="insertResultTemplate" class="xml prettyprint lang-xml" style="width:98%!important;"></pre>
+				    	</div>
+					</div>
+				</div>
+			</div>
+			<!-- -->
+		</div>
+
+	  </div>
+	</div>
+</body>
