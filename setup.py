@@ -17,14 +17,41 @@
 #
 #########################################################################
 
-
-from setuptools import setup, find_packages
+import os
+import stat
 from codecs import open
-from os import path
+from setuptools import setup, find_packages
+from setuptools.command.install import install
 
-here = path.abspath(path.dirname(__file__))
 
-with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
+class PostInstallCommand(install):
+    def run(self):
+        install.run(self)
+        print "Run post-installation"
+        self.set_etc()
+
+    def set_etc(self):
+        dirs = ['/etc/starterkit/templates',
+                '/etc/starterkit/media']
+        for d in dirs:
+            if not os.path.exists(d):
+                os.makedirs(d)
+        files = ['/etc/starterkit/local_settings.py',
+                 '/etc/starterkit/pycsw_settings.py']
+
+        for f in files:
+            open(f, 'a').close()
+            # make links
+            link_name = os.path.join(self.install_lib, 'geosk', os.path.basename(f))
+            print 'make link', link_name
+            os.symlink(f, link_name)
+        os.chmod('/etc/starterkit/pycsw_settings.py', stat.S_IREAD|stat.S_IRGRP|stat.S_IROTH|
+                 stat.S_IWRITE|stat.S_IWGRP|stat.S_IWOTH)
+
+
+here = os.path.abspath(os.path.dirname(__file__))
+
+with open(os.path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
@@ -61,5 +88,8 @@ setup(
     #                         },
     setup_requires = [ "setuptools_git >= 0.3", ],
 
+    cmdclass={
+        'install': PostInstallCommand,
+    },
 )
 
