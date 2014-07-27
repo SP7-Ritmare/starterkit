@@ -32,7 +32,6 @@ SensorObservationService_2_0_0.insert_observation_json = extension_sos200.insert
 
 
 
-
 class Catalog(object):
     def __init__(self, service_url, username="observations", password="observations", version='2.0.0'):
         self.service_url = service_url
@@ -40,7 +39,6 @@ class Catalog(object):
         self.password = password
         self._cache = dict()
         self.version = version 
-        self.sos_service = SensorObservationService(self.service_url, version=self.version)
 
     def get_capabilities_url(self):
         return extension_sos100.capabilities_url(None, self.service_url)
@@ -48,6 +46,7 @@ class Catalog(object):
     def get_capabilities(self):
         cap = self.get_cache('capabilities')
         if not cap:
+            self.sos_service = SensorObservationService(self.service_url, version=self.version)
             cap = self.set_cache('capabilities', self.sos_service)
         return cap
 
