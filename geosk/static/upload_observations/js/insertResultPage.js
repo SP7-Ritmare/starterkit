@@ -527,7 +527,7 @@ var
 			console.warn("performInsertResultWorkflow, cur temp:" + currentTemplate.id);
 			var alltemplates=sos.capabilities.operationMetadata.operations.InsertResult.parameters.template.allowedValues;
 
-			currentTemplate.isnew=!(alltemplates.indexOf(currentTemplate.id)>=0);			
+   		        currentTemplate.isnew=!(alltemplates && alltemplates.indexOf(currentTemplate.id)>=0);
 
 			// 1. if currentTemplate isnew : insertResultTemplate
 			// with this callback:
