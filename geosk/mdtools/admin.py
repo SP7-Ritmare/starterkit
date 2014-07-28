@@ -198,6 +198,7 @@ def set_sensors_configuration(instance):
 
     configuration_uri = {
         'serviceProvider.site' : instance.contact_url,
+        'service.sosUrl' : settings.SOS_URL,
         }
 
     for k,v in configuration_strings.iteritems():
