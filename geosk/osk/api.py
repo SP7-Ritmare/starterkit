@@ -89,7 +89,7 @@ def sensormlproxy(request):
         settings.SOS_SERVER['default']['LOCATION']
         sos_response = requests.post(
             settings.SOS_SERVER['default']['LOCATION'] + '/pox', 
-            data=sensorml,  headers=headers, 
+            data=sensorml.encode('utf8'),  headers=headers, 
             verify=False
             )
 
