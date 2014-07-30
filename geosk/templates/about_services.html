@@ -96,8 +96,37 @@
       </div>
     </div>
     <div class="tab-pane" id="sos">
-      <p></p>
-      <p>Il supporto per lo standard SOS verrà rilasciato nella prossima versione dell Starter Kit</p>
+      <p>
+	Per <a href="http://www.opengeospatial.org/standards/sos">Sensor
+	Observation Service</a> (SOS) si intende una specifica tecnica
+	definita
+	dall'<a href="http://www.opengeospatial.org/standards/wms">OGC</a>,
+	applicabile nel caso occorra che i dati raccolti da sensori
+	siano gestiti in una logica interoperabile. Questo standard
+	definisce un servizio web che permette di effettuare
+	interrogazioni sulle osservazioni (utilizzando lo schema
+	<a href="http://www.opengeospatial.org/standards/om">Observation&Measurement</a>
+	- O&M), sui metadati dei sensori (utilizzando lo schema
+	<a href="http://www.opengeospatial.org/standards/sensorml">Sensor
+	Model Language</a> - SensorML) nonché sulle caratteristiche
+	osservate; ancora permette di registrare un sensore, ma anche
+	cancellarne la registrazione, definendo anche le operazioni
+	per inserire nuove osservazioni.
+      </p>
+
+      <p>
+	Generalmente un SOS a tutte le richieste risponde con un XML,
+	ma per una visualizzazione più idonea si consiglia l'uso di
+	applicazioni client come <u>GIS-Desktop o WEB-GIS</u> che forniscono
+	all'utente controlli interattivi.
+      </p>
+      <div class="alert alert-info">
+        <h4>URL:</h4>
+        {{SOS_URL}}
+      </div>
+      <div class="alert alert-success">
+       <a target="_blank"  href="{{SOS_URL}}/kvp?service=SOS&request=GetCapabilities"><h4>Capabilities Link</h4></a>
+      </div>
     </div>
     
   </div>
