@@ -174,7 +174,7 @@ def get_pycsw_configuration(instance):
 
 def set_sensors_configuration(instance):
     configuration_strings = {
-        'serviceProvider.name': getval(instance.contact_name),
+        'serviceProvider.name': getval(instance.provider_name),
         'serviceProvider.phone': getval(instance.contact_phone),
         'serviceProvider.individualName': getval(instance.contact_name),
         'serviceProvider.positionName': getval(instance.contact_position),
