@@ -1,13 +1,16 @@
+from __future__ import absolute_import
+
 from django.conf.urls.defaults import patterns, url
-from django.views.generic import TemplateView
+
+from .api import UploadView
 
 urlpatterns = patterns(
     '',
     # osk
     url(r'^$', 'geosk.osk.views.browse', name="osk_browse"),                   
     url(r'^registration$', 'geosk.osk.api.sensormleditor', name="osk_registration"),                   
-    url(r'^upload$', TemplateView.as_view(template_name='osk/osk_upload.html'), name="osk_upload"),                   
-    url(r'^sensorml$', TemplateView.as_view(template_name='osk/sensorml.html'), name="osk_sensorml"),                   
+    url(r'^upload$', UploadView.as_view(), name="osk_upload"),                   
+    # url(r'^sensorml$', TemplateView.as_view(template_name='osk/sensorml.html'), name="osk_sensorml"),                   
     # sensors
     url(r'^sensor/cap/$', 'geosk.osk.views.get_capabilities', name="get_capabilities"),                   
     url(r'^sensor/ds/$', 'geosk.osk.views.describe_sensor', name="osk_describe_sensor"),

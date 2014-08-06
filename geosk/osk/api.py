@@ -15,6 +15,9 @@ from django.http import HttpResponse
 from django.conf import settings
 from django.core.serializers.json import DjangoJSONEncoder
 from django.utils.safestring import mark_safe
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.views.generic import TemplateView
 
 from geosk.skregistration.views import get_key
 from geonode.utils import http_client, _get_basic_auth_info, json_response
@@ -30,6 +33,13 @@ def lastsensorml(request):
     s = Sensor.objects.order_by('-id').all()[0]
     return HttpResponse(s.sensorml, mimetype='application/xml')
 
+class UploadView(TemplateView):
+    template_name = 'osk/osk_upload.html'
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(UploadView, self).dispatch(*args, **kwargs)
+
+@login_required
 def sensormleditor(request):
     queryStringValues = {
         'template': 'SensorML2',
