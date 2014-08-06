@@ -5352,10 +5352,10 @@ msgstr ""
 
 #: templates/site_index.html:24
 msgid ""
-"Upload your layers, create your maps and join the RITMARE interoperable "
+"Upload your layers, your observations, create your maps and join the RITMARE interoperable "
 "Infrastructure."
 msgstr ""
-"Carica i tuoi layer, crea le tue viste e contribuisci all'Infrastruttura "
+"Carica i tuoi layer, le tue osservazioni, crea le tue viste e contribuisci all'Infrastruttura "
 "Interoperabile di RITMARE."
 
 #: templates/site_index.html:26
