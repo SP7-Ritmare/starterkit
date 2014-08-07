@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-23 10:05-0500\n"
+"POT-Creation-Date: 2014-08-07 04:18-0500\n"
 "PO-Revision-Date: 2014-06-18 02:48-0600\n"
 "Last-Translator: <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1628,6 +1628,7 @@ msgstr ""
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:232
 #: _locale_external/geonode/layers/templates/layers/layer_metadata.html:57
 #: mdtools/templates/base/resourcebase_info_panel.html:95
+#: mdtools/templates/layers/layer_detail.html:232
 msgid "Point of Contact"
 msgstr ""
 
@@ -1823,6 +1824,7 @@ msgstr ""
 
 #: _locale_external/geonode/documents/templates/documents/document_detail.html:33
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:42
+#: mdtools/templates/layers/layer_detail.html:42
 msgid "Download Metadata"
 msgstr ""
 
@@ -1832,11 +1834,13 @@ msgstr ""
 
 #: _locale_external/geonode/documents/templates/documents/document_detail.html:50
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:61
+#: mdtools/templates/layers/layer_detail.html:61
 msgid "Edit Metadata"
 msgstr ""
 
 #: _locale_external/geonode/documents/templates/documents/document_detail.html:51
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:63
+#: mdtools/templates/layers/layer_detail.html:63
 msgid "Edit Permissions"
 msgstr ""
 
@@ -1894,6 +1898,7 @@ msgstr ""
 #: _locale_external/geonode/documents/templates/documents/document_detail.html:107
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:147
 #: _locale_external/geonode/maps/templates/maps/map_detail.html:96
+#: mdtools/templates/layers/layer_detail.html:147
 msgid "Average Rating"
 msgstr ""
 
@@ -1920,6 +1925,7 @@ msgstr "This document is not related to any views or layers"
 #: _locale_external/geonode/maps/templates/maps/map_detail.html:146
 #: _locale_external/geonode/templates/_permissions_form.html:7
 #: _locale_external/geonode/upload/templates/upload/layer_upload.html:95
+#: mdtools/templates/layers/layer_detail.html:199
 msgid "Permissions"
 msgstr ""
 
@@ -1936,7 +1942,7 @@ msgstr ""
 #: _locale_external/geonode/maps/templates/maps/map_detail.html:172
 #: _locale_external/geonode/templates/500.html:183
 #: _locale_external/geonode/templates/base.html:190
-#: templates/site_base.html:166
+#: mdtools/templates/layers/layer_detail.html:227 templates/site_base.html:166
 msgid "About"
 msgstr ""
 
@@ -1946,6 +1952,7 @@ msgstr ""
 
 #: _locale_external/geonode/documents/templates/documents/document_detail.html:148
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:236
+#: mdtools/templates/layers/layer_detail.html:236
 msgid "Metadata Author"
 msgstr ""
 
@@ -2277,6 +2284,7 @@ msgstr "Create a view"
 #: _locale_external/geonode/layers/templates/layers/_layer_list_item.html:38
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:30
 #: mdtools/templates/layers/_layer_list_item.html:46
+#: mdtools/templates/layers/layer_detail.html:30
 msgid "Download Layer"
 msgstr ""
 
@@ -2292,7 +2300,7 @@ msgstr ""
 #: _locale_external/geonode/templates/index.html:57
 #: _locale_external/geonode/upload/templates/upload/layer_upload.html:18
 #: _locale_external/geonode/upload/templates/upload/layer_upload_base.html:15
-#: templates/about_upload_layers.html:5
+#: templates/about_upload_layers.html:5 templates/site_index.html:66
 msgid "Upload Layers"
 msgstr ""
 
@@ -2311,104 +2319,129 @@ msgid "Submit"
 msgstr ""
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:56
+#: mdtools/templates/layers/layer_detail.html:56
 msgid "Edit Layer"
 msgstr ""
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:65
 #: _locale_external/geonode/layers/templates/layers/layer_style_manage.html:14
+#: mdtools/templates/layers/layer_detail.html:65
 msgid "Manage Styles"
 msgstr ""
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:66
+#: mdtools/templates/layers/layer_detail.html:66
 msgid "Edit Styles"
 msgstr ""
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:67
+#: mdtools/templates/layers/layer_detail.html:67
 msgid "Replace this Layer"
 msgstr ""
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:68
+#: mdtools/templates/layers/layer_detail.html:68
 msgid "Remove this Layer"
 msgstr ""
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:92
+#: mdtools/templates/layers/layer_detail.html:92
 msgid "Attribute Name"
 msgstr ""
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:93
+#: mdtools/templates/layers/layer_detail.html:93
 msgid "Range"
 msgstr ""
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:94
+#: mdtools/templates/layers/layer_detail.html:94
 msgid "Average"
 msgstr ""
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:95
+#: mdtools/templates/layers/layer_detail.html:95
 msgid "Median"
 msgstr ""
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:96
+#: mdtools/templates/layers/layer_detail.html:96
 msgid "Standard Deviation"
 msgstr ""
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:126
+#: mdtools/templates/layers/layer_detail.html:126
 msgid "Share This Layer"
 msgstr ""
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:143
+#: mdtools/templates/layers/layer_detail.html:143
 msgid "Rate this layer"
 msgstr ""
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:161
+#: mdtools/templates/layers/layer_detail.html:161
 msgid "Legend"
 msgstr ""
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:167
+#: mdtools/templates/layers/layer_detail.html:167
 msgid "Maps using this layer"
 msgstr "Views using this layer"
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:169
+#: mdtools/templates/layers/layer_detail.html:169
 msgid "List of maps using this layer:"
 msgstr "List of views using this layer:"
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:175
+#: mdtools/templates/layers/layer_detail.html:175
 msgid "This layer is not currently used in any maps."
 msgstr "This layer is not currently used in any views."
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:181
+#: mdtools/templates/layers/layer_detail.html:181
 msgid "Documents related to this layer"
 msgstr ""
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:182
+#: mdtools/templates/layers/layer_detail.html:182
 msgid "List of documents related to this layer:"
 msgstr ""
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:191
+#: mdtools/templates/layers/layer_detail.html:191
 msgid "Create a map using this layer"
 msgstr "Create a view using this layer"
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:192
+#: mdtools/templates/layers/layer_detail.html:192
 msgid "Click the button below to generate a new map based on this layer."
 msgstr "Click the button below to generate a new view based on this layer."
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:193
 #: _locale_external/geonode/templates/index.html:61
+#: mdtools/templates/layers/layer_detail.html:193 templates/site_index.html:74
 msgid "Create a Map"
 msgstr "Create a View"
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:200
+#: mdtools/templates/layers/layer_detail.html:200
 msgid "Click the button below to change the permissions of this layer."
 msgstr ""
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:201
+#: mdtools/templates/layers/layer_detail.html:201
 msgid "Change Layer Permissions"
 msgstr ""
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:207
+#: mdtools/templates/layers/layer_detail.html:207
 msgid "Styles"
 msgstr ""
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:208
+#: mdtools/templates/layers/layer_detail.html:208
 msgid ""
 "The following styles are associated with this layer. Choose a style to view "
 "it in the preview map."
@@ -2417,10 +2450,12 @@ msgstr ""
 "it in the preview view."
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:221
+#: mdtools/templates/layers/layer_detail.html:221
 msgid "No styles associated with this layer"
 msgstr ""
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:228
+#: mdtools/templates/layers/layer_detail.html:228
 msgid "Layer Owner"
 msgstr ""
 
@@ -2712,7 +2747,7 @@ msgstr ""
 #: _locale_external/geonode/maps/templates/maps/map_base.html:12
 #: _locale_external/geonode/maps/templates/maps/map_list.html:14
 #: _locale_external/geonode/templates/index.html:32
-#: templates/site_index.html:37
+#: templates/site_index.html:40
 msgid "Explore Maps"
 msgstr "Explore Views"
 
@@ -2908,8 +2943,8 @@ msgid ""
 msgstr ""
 
 #: _locale_external/geonode/maps/templates/maps/map_metadata.html:26
-#: mdtools/templates/mdtools/rndt_block.html:1649
-#: osk/templates/osk/sensorml_block.html:1884
+#: mdtools/templates/mdtools/rndt_block.html:1
+#: osk/templates/osk/sensorml_block.html:1
 msgid "Update metadata"
 msgstr ""
 
@@ -3999,14 +4034,17 @@ msgid "Getting Started?"
 msgstr ""
 
 #: _locale_external/geonode/templates/index.html:42
+#: templates/site_index.html:51
 msgid "Latest Layers"
 msgstr ""
 
 #: _locale_external/geonode/templates/index.html:52
+#: templates/site_index.html:61
 msgid "Contribute"
 msgstr ""
 
 #: _locale_external/geonode/templates/index.html:54
+#: templates/site_index.html:63
 msgid ""
 "\n"
 "              GeoNode enables you to upload, manage, and browse data layers. "
@@ -4019,6 +4057,7 @@ msgstr ""
 "            "
 
 #: _locale_external/geonode/templates/index.html:58
+#: templates/site_index.html:71
 msgid ""
 "\n"
 "              GeoNode enables you to compose and share maps. Create a map "
@@ -4031,6 +4070,7 @@ msgstr ""
 "            "
 
 #: _locale_external/geonode/templates/index.html:67
+#: templates/site_index.html:80
 msgid "Latest Maps"
 msgstr "Latest Views"
 
@@ -4649,11 +4689,11 @@ msgstr ""
 msgid " Or just go "
 msgstr ""
 
-#: mdtools/admin.py:18
+#: mdtools/admin.py:21
 msgid "Provider"
 msgstr ""
 
-#: mdtools/admin.py:22
+#: mdtools/admin.py:25
 msgid "Contact"
 msgstr ""
 
@@ -4811,10 +4851,12 @@ msgid "RNDT/INSPIRE compliance"
 msgstr ""
 
 #: mdtools/templates/mdtools/rndt.html:29
+#: osk/templates/osk/osk_registration.html:29
 msgid "Mandatory"
 msgstr ""
 
 #: mdtools/templates/mdtools/rndt.html:30
+#: osk/templates/osk/osk_registration.html:30
 msgid "Optional"
 msgstr ""
 
@@ -4836,12 +4878,16 @@ msgstr ""
 msgid "Sensor Registration"
 msgstr ""
 
-#: osk/templates/osk/osk_base.html:14 osk/templates/osk/osk_upload.html:13
+#: osk/templates/osk/osk_base.html:14
 msgid "Upload Observations"
 msgstr ""
 
-#: osk/templates/osk/osk_list.html:85
+#: osk/templates/osk/osk_list.html:87
 msgid "Describe sensor"
+msgstr ""
+
+#: osk/templates/osk/osk_registration.html:25
+msgid "SOS compliance"
 msgstr ""
 
 #: skregistration/models.py:22 skregistration/models.py:23
@@ -5180,9 +5226,10 @@ msgid "Starter Kit - Demo"
 msgstr ""
 
 #: templates/site_index.html:24
+#, fuzzy
 msgid ""
-"Upload your layers, create your maps and join the RITMARE interoperable "
-"Infrastructure."
+"Upload your layers, your observations, create your maps and join the RITMARE "
+"interoperable Infrastructure."
 msgstr ""
 "Upload your layers, create your views and join the RITMARE interoperable "
 "Infrastructure."
@@ -5196,6 +5243,30 @@ msgid ""
 "\">GeoNode</a>.\n"
 "\t"
 msgstr ""
+
+#: templates/site_index.html:37
+#, fuzzy
+msgid "Explore Sensors"
+msgstr "Explore Views"
+
+#: templates/site_index.html:67
+#, fuzzy
+msgid ""
+"\n"
+"              StarterKit enables you to upload, manage, and view sensors and "
+"their observations. Create a sensor or upload observations of existing "
+"sensor. \n"
+"            "
+msgstr ""
+"\n"
+"              StarterKit enables you to upload, manage, and browse data "
+"layers. Search for data that is valuable to you, or upload your own data. \n"
+"            "
+
+#: templates/site_index.html:70
+#, fuzzy
+msgid "Create a Sensor"
+msgstr "Create a view"
 
 #: templates/sk_credits.html:16
 msgid "Development Team"
@@ -5243,6 +5314,10 @@ msgstr ""
 #: templates/search/_general_filters.html:11
 msgid "Date ends before:"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Explore Observations"
+#~ msgstr "Explore Views"
 
 #, fuzzy
 #~ msgid "Map"
