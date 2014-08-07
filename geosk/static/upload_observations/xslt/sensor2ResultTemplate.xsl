@@ -227,7 +227,7 @@ Si può usare quello? (dubito: non ha la struttura adeguata a o&m 2). Ma quello 
             </sos:resultStructure>
             <sos:resultEncoding>
 <!-- COSTANTE da decidere -->           
-            	<swe:TextEncoding tokenSeparator="#" blockSeparator="@"/>
+            	<swe:TextEncoding tokenSeparator="@" blockSeparator="#"/>
             </sos:resultEncoding>
         </sos:ResultTemplate>
     </sos:proposedTemplate>
