@@ -31,8 +31,8 @@
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-          {% for link in layer.link_set.download %}
-            <li><a href="{{ link.url }}">{{ link.name }} <i class="icon-chevron-right"></i></a></li>
+          {% for link in links %}
+            <li><a href="{{ link.url }}">{% trans link.name %} <i class="icon-chevron-right"></i></a></li>
           {% endfor %}
         </ul>
       </div>
@@ -43,8 +43,8 @@
           <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-          {% for link in layer.link_set.metadata %}
-            <li><a href="{{ link.url }}">{% if layer.mdextension.rndt_xml and link.name == 'TC211' %}RNDT/INSPIRE{% else %}{{ link.name }}{% endif %} <i class="icon-chevron-right"></i></a></li>
+          {% for link in metadata %}
+            <li><a href="{{ link.url }}">{{ link.name }} <i class="icon-chevron-right"></i></a></li>
           {% endfor %}
         </ul>
       </div>
@@ -59,7 +59,7 @@
         <ul class="dropdown-menu">
           <!--li><a href="">Edit Layer Data <i class="icon-chevron-right"></i></a></li-->
           <li><a href="{% url "layer_metadata" layer.typename %}">{% trans "Edit Metadata" %} <i class="icon-chevron-right"></i></a></li>
-          {% if GS_SECURITY_ENABLED %}
+          {% if GEONODE_SECURITY_ENABLED %}
           <li><a href="#modal_perms" data-toggle="modal">{% trans "Edit Permissions" %} <i class="icon-chevron-right"></i></a></li>
           {% endif %}
           <li><a href="{% url "layer_style_manage" layer.typename %}">{% trans "Manage Styles" %} <i class="icon-chevron-right"></i></a></li>
@@ -120,15 +120,9 @@
             </table>
         {% endif %}
       </article>
-      <article id="share" class="tab-pane">
-        <!-- TODO: Move this to a reusable template snippet -->
-        <header>
-          <h3>{% trans "Share This Layer" %}</h3>
-        </header>
-          <g:plusone size="small" href="http://{{ request.get_host }}{{ request.get_full_path }}"></g:plusone>
-          <div class="fb-like" data-href="http://{{ request.get_host }}{{ request.get_full_path }}" data-send="false" data-width="50" data-layout="button_count" data-show-faces="false"></div>
-        <!-- TODO: Add more sharing options -->
-      </article>
+      {% block social_links %}
+      {% include "social_links.html" %}
+      {% endblock %}
       <!--article id="flag" class="tab-pane">
         <p>Flag this Layer</p>
       </article-->
@@ -192,7 +186,7 @@
         <p>{% trans "Click the button below to generate a new map based on this layer." %}</p>
         <a href="{% url "new_map" %}?layer={{layer.typename}}" class="btn btn-large">{% trans "Create a Map" %}</a>
     </div>
-    {% if GS_SECURITY_ENABLED %}
+    {% if GEONODE_SECURITY_ENABLED %}
     {% has_obj_perm user layer "layers.change_layer_permissions" as can_change_permissions %}
     {% if can_change_permissions %}
     <div class="well">
@@ -239,7 +233,7 @@
       {% endwith %}
     </div>
   </aside>
-  {% if GS_SECURITY_ENABLED %}   
+  {% if GEONODE_SECURITY_ENABLED %}   
   {% include "_permissions_form.html" %}
   {% endif %}
 {% endblock %}
@@ -296,7 +290,7 @@
             return false;
           });        
     </script>
-    {% if GS_SECURITY_ENABLED %}
+    {% if GEONODE_SECURITY_ENABLED %}
     {% include "_permissions_form_js.html" %}
     {% endif %}
 {% endblock extra_script %}
