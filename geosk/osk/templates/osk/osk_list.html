@@ -63,30 +63,32 @@
 	      <dt>Fax</dt>
 	      <dd>{{ cap.provider.contact.fax }}</dd>
 	      <dt>Site</dt>
-	      <dd>{{ cap.provider.contact.site }}</dd>
+	      <dd class="break-word">{{ cap.provider.contact.site|urlize }}</dd>
 	    </dl>
 	  </div>
 
           <div class="span8">
             <h2>Sensors / Procedures</h2>
+	    <div class="alert alert-info">
+	      Number of sensors: <strong>{{ sensors|length  }}</strong>
+	    </div>
 	    {% for sensor in sensors %}
 	    <article>
 	      <div class="content">
-		<div class="item-header">
-		  <h3><i class="icon-unchecked icon-rotate-45"></i> <a href="{% url "osk_browse" %}">{{ sensor.name }}</a></h3>
+		<h2>Sensor {{ forloop.counter }}</h2>
+		<p class="break-word"><small>{{ sensor.name }}</small></p>
+		<div class="btn-toolbar">
+		  <div class="btn-group">
+		    <a href="{% url "osk_describe_sensor" %}?format={{ 'text/html'|urlencode }}&sensor_id={{sensor.id|urlencode }}" target="_blank" data-toggle="modal" class="btn btn-mini">{% trans "Sensor details" %}</a>
+		    <a href="{% url "osk_upload" %}?procedureId={{ sensor.name }}" class="btn btn-mini">Upload observations</a>
+		  </div>
 		</div>
-		<div class="details">
+		<!--div class="details">
 		  <div class="meta">
 		    <p> <a href="{% url "osk_upload" %}?procedureId={{ sensor.name }}">Upload observations</a>  </p>
-
 		    <p class="abstract">{{ sensor.sensor.description|default:'No abstract provided.' }}</p>
 		    <p class="Keywords">{{ sensor.sensor.keywords|join:', '|default:'No keywords provided' }}</p>
-		  </div> <!-- /.meta -->
-		  <!-- div class="tools">
-		    <p>
-		      <a href="{% url "osk_describe_sensor" %}?sensor_id={{sensor.id|urlencode }}" target="_blank" data-toggle="modal" class="btn btn-mini">{% trans "Describe sensor" %}</a>
-		    </p>
-		  </div-->
+		  </div> 
 		  <div>
 		    <ul>
 		      {% for op in sensor.observable_properties %}
@@ -94,8 +96,9 @@
 		      {% endfor %}
 		    </ul>
 		  </div>
-		</div> <!-- /.details -->  
+		</div--> <!-- /.details -->  
 	      </div> <!-- /.content -->
+	      <hr/>
 	    </article>
 
 	    <!--
@@ -114,5 +117,6 @@
 	</article>
       </div>      
     </div>
+
 {% endblock %}
 

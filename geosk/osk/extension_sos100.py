@@ -47,6 +47,8 @@ def describe_sensor(self, outputFormat=None,
     data = ds.xml()
 
     response = openURL(base_url, data, method, username=self.username, password=self.password).read()
+    # BUG nel server SOS Ve ISMAR
+    # response.replace('sml:system', 'sml:System')
     tr = etree.fromstring(response)
 
     if tr.tag == nspath_eval("ows:ExceptionReport", namespaces):
@@ -69,9 +71,9 @@ class SosDescribeSensorResponse(object):
         self._root = element
         # self.procedure_description_format = testXMLValue(self._root.find(nspath_eval('swes:procedureDescriptionFormat', nsmap)))
         # sensor_ml = SensorML(self._root.find(nspath_eval('sml:SensorML', nsmap)))
-        sensor_ml = SensorML(element)
-        if sensor_ml.systems:
-            self.sensor = sensor_ml.systems[0]
+        self.sensor_ml = SensorML(element)
+        if hasattr(self.sensor_ml, 'systems') and self.sensor_ml.systems:
+            self.sensor = self.sensor_ml.systems[0]
             self.id = self.sensor.identifiers['uniqueID'].value
             self.name = self.sensor.identifiers['longName'].value
 

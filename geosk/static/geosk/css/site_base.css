@@ -141,3 +141,9 @@ A:hover {font-size:24; font-weight:bold; color: red;}
 .x-btn .gxp-icon-addsos, .x-menu-item .gxp-icon-addsos, .x-tree-node .gxp-icon-addsos {
     background-image: url(../img/add-sos.png);
 }
+
+/* to break log urls */
+.break-word {
+  word-wrap: break-word;
+  word-break: break-word;
+}

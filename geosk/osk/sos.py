@@ -50,7 +50,7 @@ class Catalog(object):
             cap = self.set_cache('capabilities', self.sos_service)
         return cap
 
-    def get_sensors(self):
+    def get_sensors(self, full=False):
         sensors = self.get_cache('sensors')
         if sensors:
             return sensors
@@ -61,13 +61,12 @@ class Catalog(object):
         describe_sensor = cap.get_operation_by_name('DescribeSensor')
         sensor_ids = describe_sensor.parameters['procedure']['values']
         for sensor_id in sensor_ids:
-            # problemi nel server
-            # ds = cap.describe_sensor(outputFormat='http://www.opengis.net/sensorML/1.0.1', procedure=sensor_id)
-            # ds.observable_properties = cap.get_observable_by_procedure(sensor_id)
             ds = {}
             ds["id"] = sensor_id
             ds["name"] = sensor_id
             ds["observable_properties"] = cap.get_observable_by_procedure(sensor_id)
+            if full:
+                ds['describe_sensor'] = cap.describe_sensor(outputFormat='http://www.opengis.net/sensorML/1.0.1', procedure=sensor_id)
             sensors.append(ds)
 
         return self.set_cache('sensors', sensors)

@@ -170,6 +170,40 @@ def describe_sensor(self, outputFormat=None,
         return SosDescribeSensorResponse(tr, namespaces)
 
 
+class SosDescribeSensorResponse(object):
+    def __init__(self, element, nsmap=nsmap):
+        self._root = element
+        # self.procedure_description_format = testXMLValue(self._root.find(nspath_eval('swes:procedureDescriptionFormat', nsmap)))
+        # sensor_ml = SensorML(self._root.find(nspath_eval('sml:SensorML', nsmap)))
+        self.sensor_ml = SensorML(element)
+        if hasattr(self.sensor_ml, 'systems') and self.sensor_ml.systems:
+            self.sensor = self.sensor_ml.systems[0]
+            self.id = self.sensor.identifiers['uniqueID'].value
+            self.name = self.sensor.identifiers['longName'].value
+
+    def __str__(self):
+        return 'Sensor id: %s, name: %s' % (self.id, self.name)
+
+
+class DescribeSensorRequest:
+    def __init__(self, procedure):
+        self.procedure = procedure
+        root = SOSElement('DescribeSensor', nsmap=namespaces)
+        attrs = {
+            'service' : 'SOS',
+            'version' : '1.0.0',
+            'outputFormat': 'text/xml;subtype="sensorML/1.0.1"',
+            }
+        for k, v in attrs.items():
+            root.attrib[k] = v
+
+        p = SOSElement('procedure', nsmap=namespaces)
+        p.text = procedure
+        root.append(p)
+        self._doc = root
+
+    def xml(self, pretty_print = False):
+        return etree.tostring(self._doc)
 
 
 
