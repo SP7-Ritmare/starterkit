@@ -28,59 +28,59 @@
 
 	<article class="description tab-pane active" id="info">
           <div class="span4">
-            <h2>Identification</h2>
+            <h2>{% trans "Identification" %}</h2>
 	    <dl>
-	      <dt>Title</dt>
+	      <dt>{% trans "Title" %}</dt>
 	      <dd>{{ cap.identification.title }}</dd>
-	      <dt>Abstract</dt>
+	      <dt>{% trans "Abstract" %}</dt>
 	      <dd>{{ cap.identification.abstract }}</dd>
-	      <dt>Keywords</dt>
+	      <dt>{% trans "Keywords" %}</dt>
 	      <dd>{{ cap.identification.keywords|join:", " }}</dd>
 	    </dl>
-            <h2>Provider</h2>
+            <h2>{% trans "Provider" %}</h2>
 	    <p>{{ cap.provider.name }}</p>
 	    <dl>
-	      <dt>Name</dt>
+	      <dt>{% trans "Name" %}</dt>
 	      <dd>{{ cap.provider.contact.name }}</dd>
-	      <dt>Organization</dt>
+	      <dt>{% trans "Organization" %}</dt>
 	      <dd>{{ cap.provider.contact.organization }}</dd>
-	      <dt>Position</dt>
+	      <dt>{% trans "Position" %}</dt>
 	      <dd>{{ cap.provider.contact.position }}</dd>
-	      <dt>Address</dt>
+	      <dt>{% trans "Address" %}</dt>
 	      <dd>{{ cap.provider.contact.address }}</dd>
-	      <dt>Postcode</dt>
+	      <dt>{% trans "Postcode" %}</dt>
 	      <dd>{{ cap.provider.contact.postcode }}</dd>
-	      <dt>City</dt>
+	      <dt>{% trans "City" %}</dt>
 	      <dd>{{ cap.provider.contact.city }}</dd>
-	      <dt>Region</dt>
+	      <dt>{% trans "Region" %}</dt>
 	      <dd>{{ cap.provider.contact.region }}</dd>
-	      <dt>Country</dt>
+	      <dt>{% trans "Country" %}</dt>
 	      <dd>{{ cap.provider.contact.country }}</dd>
-	      <dt>Email</dt>
+	      <dt>{% trans "Email" %}</dt>
 	      <dd>{{ cap.provider.contact.email }}</dd>
-	      <dt>Phone</dt>
+	      <dt>{% trans "Phone" %}</dt>
 	      <dd>{{ cap.provider.contact.phone }}</dd>
-	      <dt>Fax</dt>
+	      <dt>{% trans "Fax" %}</dt>
 	      <dd>{{ cap.provider.contact.fax }}</dd>
-	      <dt>Site</dt>
+	      <dt>{% trans "Site" %}</dt>
 	      <dd class="break-word">{{ cap.provider.contact.site|urlize }}</dd>
 	    </dl>
 	  </div>
 
           <div class="span8">
-            <h2>Sensors / Procedures</h2>
+            <h2>{% trans "Sensors / Procedures" %}</h2>
 	    <div class="alert alert-info">
-	      Number of sensors: <strong>{{ sensors|length  }}</strong>
+	      {% trans "Number of sensors:" %} <strong>{{ sensors|length  }}</strong>
 	    </div>
 	    {% for sensor in sensors %}
 	    <article>
 	      <div class="content">
-		<h2>Sensor {{ forloop.counter }}</h2>
+		<h2>{% trans "Sensor" %} {{ forloop.counter }}</h2>
 		<p class="break-word"><small>{{ sensor.name }}</small></p>
 		<div class="btn-toolbar">
 		  <div class="btn-group">
 		    <a href="{% url "osk_describe_sensor" %}?format={{ 'text/html'|urlencode }}&sensor_id={{sensor.id|urlencode }}" target="_blank" data-toggle="modal" class="btn btn-mini">{% trans "Sensor details" %}</a>
-		    <a href="{% url "osk_upload" %}?procedureId={{ sensor.name }}" class="btn btn-mini">Upload observations</a>
+		    <a href="{% url "osk_upload" %}?procedureId={{ sensor.name }}" class="btn btn-mini">{% trans "Upload observations" %}</a>
 		  </div>
 		</div>
 		<!--div class="details">

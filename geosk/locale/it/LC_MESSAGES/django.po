@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: STARTER KIT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-28 16:32-0600\n"
+"POT-Creation-Date: 2014-11-28 17:20-0600\n"
 "PO-Revision-Date: 2014-06-19 18:14+0100\n"
 "Last-Translator: <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -183,7 +183,7 @@ msgid "The username and/or password you specified are not correct."
 msgstr "Il nome e/o la password inserite non sono corrette."
 
 #: _locale_external/account/forms.py:106 _locale_external/account/forms.py:148
-#: _locale_external/account/forms.py:177
+#: _locale_external/account/forms.py:177 osk/templates/osk/osk_list.html:59
 msgid "Email"
 msgstr ""
 
@@ -1593,11 +1593,13 @@ msgstr "Per esempio \"text/xml\""
 #: _locale_external/geonode/base/templates/base/resourcebase_info_panel.html:7
 #: _locale_external/geonode/templates/announcements/announcement_list.html:30
 #: mdtools/templates/base/resourcebase_info_panel.html:7
+#: osk/templates/osk/osk_list.html:33
 msgid "Title"
 msgstr "Titolo"
 
 #: _locale_external/geonode/base/templates/base/resourcebase_info_panel.html:14
 #: mdtools/templates/base/resourcebase_info_panel.html:14
+#: osk/templates/osk/osk_list.html:35
 msgid "Abstract"
 msgstr "Descrizione"
 
@@ -1617,6 +1619,7 @@ msgstr "Tipo"
 #: _locale_external/geonode/base/templates/base/resourcebase_info_panel.html:35
 #: _locale_external/geonode/search/templates/search/_general_filters.html:38
 #: mdtools/templates/base/resourcebase_info_panel.html:35
+#: osk/templates/osk/osk_list.html:37
 #: templates/search/_general_filters.html:16
 msgid "Keywords"
 msgstr "Parole chiave"
@@ -3183,6 +3186,7 @@ msgstr ""
 "essere contattati"
 
 #: _locale_external/geonode/people/models.py:54
+#: osk/templates/osk/osk_list.html:53
 msgid "City"
 msgstr "Città"
 
@@ -4809,7 +4813,7 @@ msgstr ""
 msgid " Or just go "
 msgstr ""
 
-#: mdtools/admin.py:21
+#: mdtools/admin.py:21 osk/templates/osk/osk_list.html:40
 msgid "Provider"
 msgstr "Fornitore"
 
@@ -5005,9 +5009,69 @@ msgstr "Registrazione del sensore"
 msgid "Upload Observations"
 msgstr "Carica osservazioni"
 
+#: osk/templates/osk/osk_list.html:31
+msgid "Identification"
+msgstr "Identificazione"
+
+#: osk/templates/osk/osk_list.html:43
+msgid "Name"
+msgstr "Nome"
+
+#: osk/templates/osk/osk_list.html:45
+msgid "Organization"
+msgstr "Nome dell'organizzazione"
+
+#: osk/templates/osk/osk_list.html:47
+msgid "Position"
+msgstr "Ruolo"
+
+#: osk/templates/osk/osk_list.html:49
+msgid "Address"
+msgstr "Indirizzo"
+
+#: osk/templates/osk/osk_list.html:51
+msgid "Postcode"
+msgstr "Codice postale"
+
+#: osk/templates/osk/osk_list.html:55
+msgid "Region"
+msgstr "Regione"
+
+#: osk/templates/osk/osk_list.html:57
+msgid "Country"
+msgstr "Nazione"
+
+#: osk/templates/osk/osk_list.html:61
+msgid "Phone"
+msgstr "Telefono"
+
+#: osk/templates/osk/osk_list.html:63
+msgid "Fax"
+msgstr ""
+
+#: osk/templates/osk/osk_list.html:65
+msgid "Site"
+msgstr "Sito Web"
+
+#: osk/templates/osk/osk_list.html:71
+msgid "Sensors / Procedures"
+msgstr "Sensori / Procedure"
+
+#: osk/templates/osk/osk_list.html:73
+msgid "Number of sensors:"
+msgstr "Numero di sensori:"
+
+#: osk/templates/osk/osk_list.html:78
+msgid "Sensor"
+msgstr "Sensore"
+
 #: osk/templates/osk/osk_list.html:82
 msgid "Sensor details"
 msgstr "Dettagli del sensore"
+
+#: osk/templates/osk/osk_list.html:83
+msgid "Upload observations"
+msgstr "Carica osservazioni"
 
 #: osk/templates/osk/osk_registration.html:25
 msgid "SOS compliance"

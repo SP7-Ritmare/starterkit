@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-28 16:32-0600\n"
+"POT-Creation-Date: 2014-11-28 17:20-0600\n"
 "PO-Revision-Date: 2014-06-18 02:48-0600\n"
 "Last-Translator: <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -182,7 +182,7 @@ msgid "The username and/or password you specified are not correct."
 msgstr ""
 
 #: _locale_external/account/forms.py:106 _locale_external/account/forms.py:148
-#: _locale_external/account/forms.py:177
+#: _locale_external/account/forms.py:177 osk/templates/osk/osk_list.html:59
 msgid "Email"
 msgstr ""
 
@@ -1574,11 +1574,13 @@ msgstr ""
 #: _locale_external/geonode/base/templates/base/resourcebase_info_panel.html:7
 #: _locale_external/geonode/templates/announcements/announcement_list.html:30
 #: mdtools/templates/base/resourcebase_info_panel.html:7
+#: osk/templates/osk/osk_list.html:33
 msgid "Title"
 msgstr ""
 
 #: _locale_external/geonode/base/templates/base/resourcebase_info_panel.html:14
 #: mdtools/templates/base/resourcebase_info_panel.html:14
+#: osk/templates/osk/osk_list.html:35
 msgid "Abstract"
 msgstr ""
 
@@ -1598,6 +1600,7 @@ msgstr ""
 #: _locale_external/geonode/base/templates/base/resourcebase_info_panel.html:35
 #: _locale_external/geonode/search/templates/search/_general_filters.html:38
 #: mdtools/templates/base/resourcebase_info_panel.html:35
+#: osk/templates/osk/osk_list.html:37
 #: templates/search/_general_filters.html:16
 msgid "Keywords"
 msgstr ""
@@ -3120,6 +3123,7 @@ msgid ""
 msgstr ""
 
 #: _locale_external/geonode/people/models.py:54
+#: osk/templates/osk/osk_list.html:53
 msgid "City"
 msgstr ""
 
@@ -4711,7 +4715,7 @@ msgstr ""
 msgid " Or just go "
 msgstr ""
 
-#: mdtools/admin.py:21
+#: mdtools/admin.py:21 osk/templates/osk/osk_list.html:40
 msgid "Provider"
 msgstr ""
 
@@ -4904,9 +4908,70 @@ msgstr ""
 msgid "Upload Observations"
 msgstr ""
 
+#: osk/templates/osk/osk_list.html:31
+msgid "Identification"
+msgstr ""
+
+#: osk/templates/osk/osk_list.html:43
+msgid "Name"
+msgstr ""
+
+#: osk/templates/osk/osk_list.html:45
+msgid "Organization"
+msgstr ""
+
+#: osk/templates/osk/osk_list.html:47
+msgid "Position"
+msgstr ""
+
+#: osk/templates/osk/osk_list.html:49
+msgid "Address"
+msgstr ""
+
+#: osk/templates/osk/osk_list.html:51
+msgid "Postcode"
+msgstr ""
+
+#: osk/templates/osk/osk_list.html:55
+msgid "Region"
+msgstr ""
+
+#: osk/templates/osk/osk_list.html:57
+msgid "Country"
+msgstr ""
+
+#: osk/templates/osk/osk_list.html:61
+msgid "Phone"
+msgstr ""
+
+#: osk/templates/osk/osk_list.html:63
+msgid "Fax"
+msgstr ""
+
+#: osk/templates/osk/osk_list.html:65
+msgid "Site"
+msgstr ""
+
+#: osk/templates/osk/osk_list.html:71
+msgid "Sensors / Procedures"
+msgstr ""
+
+#: osk/templates/osk/osk_list.html:73
+msgid "Number of sensors:"
+msgstr ""
+
+#: osk/templates/osk/osk_list.html:78
+msgid "Sensor"
+msgstr ""
+
 #: osk/templates/osk/osk_list.html:82
 msgid "Sensor details"
 msgstr ""
+
+#: osk/templates/osk/osk_list.html:83
+#, fuzzy
+msgid "Upload observations"
+msgstr "Explore Views"
 
 #: osk/templates/osk/osk_registration.html:25
 msgid "SOS compliance"
@@ -5336,10 +5401,6 @@ msgstr ""
 #: templates/search/_general_filters.html:11
 msgid "Date ends before:"
 msgstr ""
-
-#, fuzzy
-#~ msgid "Explore Observations"
-#~ msgstr "Explore Views"
 
 #, fuzzy
 #~ msgid "Map"
