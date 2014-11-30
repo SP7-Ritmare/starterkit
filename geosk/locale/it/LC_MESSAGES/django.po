@@ -2840,11 +2840,11 @@ msgstr "Edita il Metadato della Vista"
 
 #: _locale_external/geonode/maps/templates/maps/map_detail.html:46
 msgid "Set Map Thumbnail"
-msgstr "Set View Thumbnail"
+msgstr "Imposta Thumbnail della Vista"
 
 #: _locale_external/geonode/maps/templates/maps/map_detail.html:48
 msgid "Edit Map Permissions"
-msgstr "Edit View Permissions"
+msgstr "Modifica Permessi della vista"
 
 #: _locale_external/geonode/maps/templates/maps/map_detail.html:49
 msgid "Remove this Map"
