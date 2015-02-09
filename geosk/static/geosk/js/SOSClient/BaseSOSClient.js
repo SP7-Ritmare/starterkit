@@ -259,7 +259,7 @@ OpenLayers.SOSClient = OpenLayers.Class({
         foiExplorer.show();
     },
 
-    getObservation: function(foiId, offering_id, begin, end, onSuccess){
+    getObservation: function(foiId, offering_id, observedProperty_id, begin, end, onSuccess){
         var offering = this.SOSCapabilities.contents.offeringList[offering_id];
         //c'e' un problema con array e extjs: vedi commento piu' avanti
         var observedProperties = {};
@@ -272,10 +272,12 @@ OpenLayers.SOSClient = OpenLayers.Class({
         // for(var i=0; i< offering.observedProperties.length; i++) {
 	//    observedProperties[i] = offering.observedProperties[i];
 	//}
-	if(offering.observedProperties.length>0){
-	    var observedProperties = {0: offering.observedProperties[0]}
-	}
-
+	//if(offering.observedProperties.length>0){
+	//  var observedProperties = {0: offering.observedProperties[0]}
+        //}
+	
+	// ora e' passato come parametro alla funzione
+	var observedProperties = {0: observedProperty_id}
 
 	var xmlRequest = this.getObservationRequest(foiId, offering_id, observedProperties, begin,end, this.resultModel);
         OpenLayers.Request.POST({
@@ -499,7 +501,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
     constructor: function(config){
         var today = new Date(), begin = new Date(), end = new Date();    
 	
-	this.timeRange = 5;
+	this.timeRange = 2;
         
         begin.setDate(today.getDate() - this.timeRange);
         this.dateRange = [begin, end];
@@ -548,9 +550,9 @@ FoiExplorer = Ext.extend(Ext.Window, {
 
 	//console.log(config.foi);
 	var offerings = this.sosClient.getOfferingsByFoi(config.foi);
-	//console.log(offerings);
 	for (var name in offerings) {
 	    this.addSensorRecord(offerings[name], name);
+	    //console.log(offerings[name].observedProperties);
 	}
 
 	this.enableRealTime(false);
@@ -590,7 +592,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
     },
     onSelectOffering: function(sm, rowIndex, record ){
         var offering_id = record.data.name;
-	
+	var observedProperty_id = record.data.observedProperty;
 	var begin;
 	var end;
 	if(!this.realTime){
@@ -610,10 +612,10 @@ FoiExplorer = Ext.extend(Ext.Window, {
         this.chartMask.show();
 
 	var plotDataStore = this.plotDataStore;
-	this.sosClient.getObservation(this.foiId, offering_id, begin,end, 
+	this.sosClient.getObservation(this.foiId, offering_id, observedProperty_id, begin,end, 
 				      function(offering, output){
 					  var rows = [];
-					  var label = offering.name + " = No Values";
+					  var label = observedProperty_id + " = No Values";
 					  if (output.measurements.length > 0) {
 					      // a look-up object for different time formats
 					      var timeMap = {};
@@ -690,21 +692,27 @@ FoiExplorer = Ext.extend(Ext.Window, {
     },
     addSensorRecord: function(offering, name, time, lastvalue) {        
         this.count++;
-	this.offeringsStore.add(
-	    this.getSensorRecord({
-		type: offering.name, 
-		name: name, 
-		time: time,
-		startPeriod: (offering.time && offering.time.timePeriod) ? this.getFormattedDateFromTimePos(offering.time.timePeriod.beginPosition) : '-',
-		endPeriod: (offering.time && offering.time.timePeriod) ? this.getFormattedDateFromTimePos(offering.time.timePeriod.endPosition) : '-',
-		lastvalue: lastvalue
-	    })
-	);
+	for(var i=0; i< offering.observedProperties.length; i++) {
+	    //console.log(i);
+	    //console.log(offering.observedProperties[i]);
+	    this.offeringsStore.add(
+		this.getSensorRecord({
+		    type: offering.name, 
+		    name: name,
+		    observedProperty: offering.observedProperties[i], 
+		    time: time,
+		    startPeriod: (offering.time && offering.time.timePeriod) ? this.getFormattedDateFromTimePos(offering.time.timePeriod.beginPosition) : '-',
+		    endPeriod: (offering.time && offering.time.timePeriod) ? this.getFormattedDateFromTimePos(offering.time.timePeriod.endPosition) : '-',
+		    lastvalue: lastvalue
+		})
+	    );
+        };
     },    
     getSensorRecord: function(config){
 	Ext.apply({
 	    type: null,
 	    name: null,
+	    observedProperty: null,
 	    time: null,
 	    startPeriod: null,
 	    endPeriod: null,
@@ -713,6 +721,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
 	var SensorRecord =  Ext.data.Record.create([
             {name: "type", type: "string"},
             {name: "name", type: "string"},
+            {name: "observedProperty", type: "string"},
             {name: "time", type: "string"},
             {name: "startPeriod", type: "string"},
             {name: "endPeriod", type: "string"},
@@ -721,6 +730,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
 	return new SensorRecord({
             type: config.type,
             name: config.name,
+            observedProperty: config.observedProperty,
             time: config.time,
             startPeriod: config.startPeriod,
             endPeriod: config.endPeriod,
@@ -795,6 +805,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
             fields: [
 		{name: 'type'},
 		{name: 'name'},
+		{name: 'observedProperty'},
 		{name: 'time'},
 		{name: 'startPeriod'},
 		{name: 'endPeriod'},
@@ -1031,7 +1042,8 @@ FoiExplorer = Ext.extend(Ext.Window, {
                             sortable: true
                         },
                         columns: [
-                            {id: 'type', header: 'Type', dataIndex: 'type'},
+                            //{id: 'type', header: 'Type', dataIndex: 'type'},
+			    {header: 'Observed property', dataIndex: 'observedProperty'},
                             {header: 'Start', dataIndex: 'startPeriod'},
                             {header: 'End', dataIndex: 'endPeriod'}//,
                             //{header: 'Time', dataIndex: 'time'},
