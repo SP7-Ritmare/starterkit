@@ -24,7 +24,7 @@ Setup the IP address and create a superuser::
 
 Install SK from archive file
 
-    $ sudo pip install https://github.com/SP7-Ritmare/starterkit/archive/master.zip
+    $ sudo pip install starterkit
 
 
 Usage
@@ -38,7 +38,7 @@ Edit the file /etc/apache2/sites-available/geonode and change the following dire
 
 to:
 
-    WSGIScriptAlias / /path/to/starterkit/geosk/wsgi.py
+    WSGIScriptAlias / /usr/local/lib/python2.7/dist-packages/geosk/wsgi.py # path to geosk/wsgi.py
 
 Restart apache::
 
@@ -48,8 +48,12 @@ Edit the templates in geosk/templates, the css and images to match your needs.
 
 Syncdb and collectstatic::
 
-    $ django-admin syncdb  --settings=geosk.settings
+    $ sk syncdb
 
-    $ django-admin  collectstatic --settings=geosk.settings
+    $ sk collectstatic
+
+Register a "fully qualified domain name" (FQDN), then configure the starterkit::
+
+    $ sk-updateip your-FQDN
 
 
