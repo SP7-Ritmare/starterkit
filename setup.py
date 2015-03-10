@@ -78,6 +78,7 @@ setup(
     "django-rosetta",
     "django-grappelli==2.4.10",
     "djproxy",
+    "simplejson",
     "Django==1.5.5" # required by GeoNode 2.0
     ],
     # 

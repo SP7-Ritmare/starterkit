@@ -14,6 +14,7 @@ from django.template import RequestContext
 from django.core.serializers.json import DjangoJSONEncoder
 from django.core.urlresolvers import reverse
 from django.utils.safestring import mark_safe
+from django.contrib import messages
 
 from geonode.base.models import SpatialRepresentationType, TopicCategory
 from geonode.layers.metadata import set_metadata, sniff_date
@@ -47,6 +48,7 @@ def get_datetype(ita):
         if dt.lower() == ita.lower() or neutral.lower() == ita.lower():
             return neutral
     return None
+
 
 def get_topic_category(ita):
     TOPIC_CATEGORY = {
@@ -82,7 +84,7 @@ def rndteditor(request, layername):
         'template': 'RNDT',
         'version': '2.00',
         'parameters': "{}"
-        }    
+        }
 
     fileid = layer.mdextension.fileid
     pars = {}
@@ -115,11 +117,11 @@ def rndteditor(request, layername):
             'referencesystem': layer.srid.split(':')[1],
             }
 
-    
+
     js_pars = json.dumps(pars, cls=DjangoJSONEncoder)
 
     queryStringValues['parameters'] = json.dumps(pars, cls=DjangoJSONEncoder)
-    
+
     js_queryStringValues = json.dumps(queryStringValues)
     return render_to_response(
         'mdtools/rndt.html',
@@ -128,49 +130,49 @@ def rndteditor(request, layername):
                 'queryStringValues': mark_safe(js_queryStringValues)
                 })
         )
-    
-def rndtproxy(request, layername):
-    layer = _resolve_layer(request, layername, 'layers.change_layer', _PERMISSION_MSG_METADATA)
 
+def _ediml2rndt(ediml):
     service = settings.RITMARE['MDSERVICE'] + 'postMetadata'
-
     headers = {'api_key': get_key(),
                'Content-Type': 'application/xml',
                }
 
-    r = requests.post(service, data=request.raw_post_data,  headers=headers, verify=False)
+    r = requests.post(service, data=ediml,  headers=headers, verify=False)
     if r.status_code == 200:
         rndt = r.text.encode('utf8')
-        # extract fileid
-        ediml = etree.fromstring(request.raw_post_data)
-        fileid = ediml.find('fileId').text
-
-        # new fileid must be equal to the old one
-        if layer.mdextension.fileid is not None:
-            if int(layer.mdextension.fileid) != int(fileid):
-                return json_response(errors='New fileid (%s) is different from the old one (%s)' % (fileid, layer.mdextension.fileid), 
-                                     status=500)
-        else:
-            layer.mdextension.fileid = fileid
+        return rndt
     else:
-        return json_response(errors='Cannot create RNDT', 
+        return False
+        return json_response(errors='Cannot create RNDT',
                              status=500)
 
+def _get_fileid(ediml):
+    ediml = etree.fromstring(ediml)
+    return ediml.find('fileId').text
+
+def ediml(request, layername):
+    layer = _resolve_layer(request, layername, 'layers.change_layer', _PERMISSION_MSG_METADATA)
+    ediml = layer.mdextension.elements_xml
+    return HttpResponse(ediml, mimetype="text/xml")
+
+def rndt(request, layername):
+    layer = _resolve_layer(request, layername, 'layers.change_layer', _PERMISSION_MSG_METADATA)
+    rndt = layer.mdextension.rndt_xml
+    return HttpResponse(rndt, mimetype="text/xml")
+
+
+def rndtproxy(request, layername):
+    layer = _resolve_layer(request, layername, 'layers.change_layer', _PERMISSION_MSG_METADATA)
+    ediml = request.raw_post_data
+    rndt = _ediml2rndt(ediml)
+    if not rndt:
+        return json_response(errors='Cannot create RNDT',
+                             status=500)
     try:
-        vals, keywords = rndt2dict(etree.fromstring(rndt))
-        errors = _post_validate(vals)
-        if len(errors) > 0:
-            return json_response(exception=errors, status=500)
-        _mdimport(layer, vals, keywords, rndt)
+        _savelayermd(layer, vals, keywords, rndt, ediml)
     except Exception as e:
         return json_response(exception=e, status=500)
-        
-    # save rndt & edi xml
-    layer.mdextension.md_language = vals['md_language']
-    layer.mdextension.md_date = vals['md_date'] if vals['md_date'] is not None else layer.date 
-    layer.mdextension.rndt_xml = rndt
-    layer.mdextension.elements_xml = request.raw_post_data
-    layer.mdextension.save()
+
     return json_response(body={'success':True,'redirect': reverse('layer_detail', args=(layer.typename,))})
     # return HttpResponseRedirect()
 
@@ -180,46 +182,53 @@ def _post_validate(vals):
     # check required fields
     # required = [f.name for f in Layer._meta.fields if not f.blank]
     # required = ['uuid', 'title', 'date', 'date_type', 'language', 'supplemental_information']
-    required = ['uuid', 'title', 'date', 'date_type', 'language']
+    # Uuid could be None
+    # required = ['uuid', 'title', 'date', 'date_type', 'language']
+    required = ['title', 'date', 'date_type', 'language']
     for r in required:
         if r not in vals.keys():
             errors.append(r)
     return errors
-    
 
-def mdimport(request, template='mdtools/upload_metadata.html'):
+
+def importediml(request, template='mdtools/upload_metadata.html'):
     if request.method == 'POST':
         form = UploadMetadataFileForm(request.POST, request.FILES)
         if form.is_valid():
-            # response_data = set_metadata(request.FILES['file'].read())
-            # return HttpResponse(json.dumps(response_data, 
-            #                                sort_keys=True,
-            #                                indent=4, 
-            #                                separators=(',', ': '),
-            #                                cls=DjangoJSONEncoder), 
-            #                     content_type="application/json")
-            layerid = form.cleaned_data['layerid']
-            layer = Layer.objects.get(pk=layerid)
-
-            xml = request.FILES['file'].read()
-            # response_data = _parse_metadata(xml)
-            vals, keywords = rndt2dict(etree.fromstring(xml))
-            response_data = _mdimport(layer, vals, keywords, xml)
-            
-            return HttpResponse(json.dumps(response_data, 
-                                           default=lambda o: o.__dict__, 
-                                           sort_keys=True,
-                                           indent=4, 
-                                           separators=(',', ': '),
-                                           cls=DjangoJSONEncoder), 
-                                content_type="application/json")
+            layername = Layer.objects.get(pk=form.cleaned_data['layer']).typename
+            layer = _resolve_layer(request, layername, 'layers.change_layer', _PERMISSION_MSG_METADATA)
+            ediml = request.FILES['file'].read()
+            rndt = _ediml2rndt(ediml)
+            if not rndt:
+                messages.add_message(request, messages.ERROR, 'Cannot get RNDT.')
+            try:
+                _savelayermd(layer, rndt, ediml)
+                messages.add_message(request, messages.SUCCESS, 'Metadata Uploaded')
+            except Exception as e:
+                messages.add_message(request, messages.ERROR, e)
 
     else:
         form = UploadMetadataFileForm()
     return render_to_response(template,
                               RequestContext(request, {'form': form}))
 
+def importrndt(request, template='mdtools/upload_metadata.html'):
+    if request.method == 'POST':
+        form = UploadMetadataFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            layername = Layer.objects.get(pk=form.cleaned_data['layer']).typename
+            layer = _resolve_layer(request, layername, 'layers.change_layer', _PERMISSION_MSG_METADATA)
+            rndt = request.FILES['file'].read()
+            try:
+                _savelayermd(layer, rndt, None)
+                messages.add_message(request, messages.SUCCESS, 'Metadata Uploaded')
+            except Exception as e:
+                messages.add_message(request, messages.ERROR, e)
 
+    else:
+        form = UploadMetadataFileForm()
+    return render_to_response(template,
+                              RequestContext(request, {'form': form}))
 
 def _parse_metadata(xml):
     try:
@@ -231,7 +240,20 @@ def _parse_metadata(xml):
     mdata.xml = None
     return mdata
 
-def _mdimport(layer, vals, keywords, xml):
+def _savelayermd(layer, rndt, ediml):
+    if ediml:
+        fileid = _get_fileid(ediml)
+        # new fileid must be equal to the old one
+        if layer.mdextension.fileid is not None:
+            if int(layer.mdextension.fileid) != int(fileid):
+                raise Exception('New fileid (%s) is different from the old one (%s)' % (fileid, layer.mdextension.fileid))
+        layer.mdextension.fileid = fileid
+
+    vals, keywords = rndt2dict(etree.fromstring(rndt))
+    errors = _post_validate(vals)
+    if len(errors) > 0:
+        raise Exception(errors)
+
     # print >>sys.stderr, 'VALS', vals
     # set taggit keywords
     layer.keywords.clear()
@@ -253,7 +275,16 @@ def _mdimport(layer, vals, keywords, xml):
         setattr(layer, key, value)
 
     layer.save()
-    return layer
+
+    # save rndt & edi xml
+    layer.mdextension.md_language = vals['md_language']
+    layer.mdextension.md_date = vals['md_date'] if vals['md_date'] is not None else layer.date
+    layer.mdextension.rndt_xml = rndt
+    if ediml:
+        layer.mdextension.elements_xml = ediml
+    layer.mdextension.save()
+
+    return True
 
 def _set_contact_role_scope(scope, contacts, resource):
     scope = _get_or_create_scope(scope)
@@ -291,7 +322,7 @@ def _get_or_create_profile(contact):
     # some cleaning
     fields = Profile._meta.get_all_field_names()
     _defaults= {k:v for k, v in contact.items() if k in fields}
-    del(_defaults['email']) # 
+    del(_defaults['email']) #
     # create profile
     profile, is_created = Profile.objects.get_or_create(defaults=_defaults, email=_email)
     return profile
@@ -331,15 +362,16 @@ def rndt2dict(exml):
 
     mdata = EDI_Metadata(exml)
 
-    # metadata 
-    vals['uuid'] = mdata.identifier
+    # metadata
+    if mdata.identifier is not None:
+        vals['uuid'] = mdata.identifier
     vals['md_language'] = mdata.languagecode
     vals['md_date'] = sniff_date(mdata.datestamp) if mdata.datestamp is not None else None
 
     vals['spatial_representation_type'] = mdata.hierarchy
 
     if hasattr(mdata, 'identification'):
-        # 
+        #
         if len(mdata.identification.date) > 0:
             vals['date'] = sniff_date(mdata.identification.date[0].date) if mdata.identification.date[0].date is not None else None
             vals['date_type'] = get_datetype(mdata.identification.date[0].type) if mdata.identification.date[0].type is not None else None
@@ -384,7 +416,7 @@ def rndt2dict(exml):
                 c['onlineresource'] = c['onlineresource'].__dict__
             citation_contact.append(c)
         vals['citation_contact'] = citation_contact
-                
+
         md_contact = []
         for c in mdata.contact:
             c = c.__dict__

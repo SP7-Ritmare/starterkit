@@ -18,6 +18,12 @@ urlpatterns = patterns('',
     url(r'^layers/(?P<layername>[^/]*)/metadata$',
         'geosk.mdtools.api.rndteditor',
         name="layer_metadata"),
+    url(r'^layers/(?P<layername>[^/]*)/ediml$',
+        'geosk.mdtools.api.ediml',
+        name="layer_ediml"),
+    url(r'^layers/(?P<layername>[^/]*)/rndt$',
+        'geosk.mdtools.api.rndt',
+        name="layer_rndt"),
     url(r'^layers/(?P<layername>[^/]*)/postMetadata$',
         'geosk.mdtools.api.rndtproxy', name='rndtproxy'),
     # RDF extension
@@ -43,7 +49,7 @@ urlpatterns = patterns('',
     # OSK views
     (r'^sensors/', include('geosk.osk.urls')),
 
-    (r'^grappelli/', include('grappelli.urls')), # grappelli URLS                       
+    (r'^grappelli/', include('grappelli.urls')), # grappelli URLS
  ) + urlpatterns
 
 if 'rosetta' in settings.INSTALLED_APPS:
