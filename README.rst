@@ -1,10 +1,19 @@
-RITMARE - SP7 - Starter Kit
-========================
+========================================
+Geoinformation Enabling Toolkit (GET-IT)
+========================================
+----------------------
+(formerly RITMARE StarterKit)
+----------------------
 
-You should write some docs, it's good for the soul.
+If you just want to install GET-IT, it is recommended to use Ubuntu 12.04. 
 
-Installation
-------------
+**Prerequisites:**
+
+1. GeoNode (version 2.0.x)
+2. 52 North SOS (version 4.0.0 or 4.1.0)
+
+GeoNode Installation
+--------------------
 
 Install geonode from PPA in Ubuntu 12.04::
 
@@ -21,14 +30,23 @@ Setup the IP address and create a superuser::
     $ sudo geonode-updateip 127.0.0.1
 
     $ geonode createsuperuser
+    
+52 North SOS Installation
+-------------------------
+Follow the instructions (for SOS version 4.x) at 
+https://wiki.52north.org/bin/view/SensorWeb/SensorObservationServiceIVDocumentation#Installation
+
+Just a note: GET-IT expects to find a webapp named "observations". 
+So, before "Install and configure Tomcat", 
+rename the 52n-sos-webapp.war into observations.war into observations.war
+
+
+GET-IT Installation
+-------------------
 
 Install SK from archive file
 
     $ sudo pip install starterkit
-
-
-Usage
------
 
 Rename the local_settings.py.sample to local_settings.py and edit it's content by setting the SITEURL and SITENAME.
 
