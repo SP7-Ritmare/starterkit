@@ -35,8 +35,8 @@ gxp.SOSSourceDialog = Ext.extend(Ext.Container, {
     addFOISText: "Add to Map",
     /** api: config[doneText] ``String`` i18n */
     doneText: "Done",
-    /** api: config[titleText] ``String`` i18n */
-    titleText: "Add Feeds",
+    /** api: config[emptyText] ``String`` i18n */
+    emptyText: "Select a SOS source...",
 
     /**
      * api: config[width]
@@ -88,7 +88,7 @@ gxp.SOSSourceDialog = Ext.extend(Ext.Container, {
             width: 180,
             mode: 'local',
             triggerAction: 'all',
-            emptyText:'Select a SOS source...',
+            emptyText: this.emptyText,
             selectOnFocus:true,
             listeners: {
                 "select": function(choice) {
