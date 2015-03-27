@@ -73,8 +73,8 @@ class MdExtension(models.Model):
     md_language  = models.CharField(_('language'), max_length=3, choices=ALL_LANGUAGES, default='ita', help_text=_('language used for metadata'))
     md_date      = models.DateTimeField(_('metadata date'), default = datetime.now, help_text=_('metadata date'))
 
-    contacts     = models.ManyToManyField(Profile, through='MultiContactRole')    
-    
+    contacts     = models.ManyToManyField(Profile, through='MultiContactRole')
+
 
     @property
     def rndt_xml_clean(self):
@@ -95,13 +95,13 @@ def completeness(self):
     #             filled += 1
     # for f in ResourceBase._meta.many_to_many:
     #     if f.name in INCLUDE:
-    #         count += 1            
+    #         count += 1
     #         if getattr(self, f.name).all().count() > 0:
     #             filled += 1
     # perc = int(100.0 * (float(filled) / float(count)))
 
     count = 100
-    
+
     if self.mdextension.rndt_xml is not None:
         perc = 100
         filled = 100
@@ -123,7 +123,19 @@ def completeness(self):
 
 ResourceBase.completeness = completeness
 
+SERVICE_METADATA_CACHE = None
 
+class ServicesMetadataManager(models.Manager):
+    def get_current(self):
+        global SERVICE_METADATA_CACHE
+        if SERVICE_METADATA_CACHE is not None:
+            print 'use cache'
+            return SERVICE_METADATA_CACHE
+        elif self.count() == 1:
+            print 'reset cache'
+            SERVICE_METADATA_CACHE = self.all()[0]
+            return SERVICE_METADATA_CACHE
+        return None
 
 class ServicesMetadata(models.Model):
     """Model for storing Metadata about services
@@ -150,8 +162,20 @@ class ServicesMetadata(models.Model):
     contact_hours                  = models.CharField(_('contact hours'), max_length=200, help_text="Hours of Service", null=True, blank=True)
     contact_instructions           = models.CharField(_('contact instructions'), max_length=200, help_text='During hours of service', null=True, blank=True)
     contact_role                   = models.CharField(_('contact role'), max_length=200, null=True, blank=True, default="pointOfContact")
+    objects                        = ServicesMetadataManager()
     class Meta:
         verbose_name_plural = _("Services metadata")
 
     def __unicode__(self):
         return "%s - %s - %s" % (self.node_name, self.provider_name, self.contact_name)
+
+    def save(self, *args, **kwargs):
+        super(ServicesMetadata, self).save(*args, **kwargs)
+        # Cached information will likely be incorrect now.
+        global SERVICE_METADATA_CACHE
+        SERVICE_METADATA_CACHE = None
+
+    def delete(self):
+        super(ServicesMetadata, self).delete()
+        global SERVICE_METADATA_CACHE
+        SERVICE_METADATA_CACHE = None
