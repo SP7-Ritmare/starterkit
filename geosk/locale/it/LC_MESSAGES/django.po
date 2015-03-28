@@ -4831,7 +4831,7 @@ msgstr "Responsabile"
 
 #: mdtools/models.py:49
 msgid "Point of contact"
-msgstr "Modifica contatto"
+msgstr "Punto di contatto"
 
 #: mdtools/models.py:50
 msgid "Distributor"
