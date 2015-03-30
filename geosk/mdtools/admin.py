@@ -6,6 +6,7 @@ from django.contrib import admin
 from django.core.files import locks
 from django.utils.translation import ugettext, ugettext_lazy as _
 from django.contrib.sites.models import Site
+from django.contrib import messages
 
 from geosk.mdtools.models import ServicesMetadata
 
@@ -27,7 +28,7 @@ class ServicesMetadataAdmin(admin.ModelAdmin):
                     ('contact_name', 'contact_position'),
                     ('contact_email', 'contact_url'),
                     ('contact_address',),
-                    ('contact_city', 'contact_stateprovince',), 
+                    ('contact_city', 'contact_stateprovince',),
                     ('contact_postalcode', 'contact_country'),
                     ('contact_phone', 'contact_fax',),
                     ('contact_hours', 'contact_instructions',),
@@ -116,11 +117,17 @@ def post_save_nodeconfiguration(request, instance):
             pass
 
     except Exception, e:
-        logging.error('Error when try to save pycsw settings')
+        logging.error('Error while saving pycsw settings')
         logging.error(str(e))
 
     # save observations settings
-    set_sensors_configuration(instance)
+    try:
+        set_sensors_configuration(instance)
+        messages.warning(request, "The SOS metadta were configured. You need to manually restart the SOS service in order to apply the changes.")
+    except Exception, e:
+        messages.error(request, 'An error occured while saving SOS metadata: you need to manually configure the SOS settings through admin interface.')
+        logging.error('Error while saving SOS settings')
+        logging.error(str(e))
 
 
 def getval(val, default='None'):
