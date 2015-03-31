@@ -6,17 +6,14 @@
 Welcome to GET-IT's documentation!
 ==================================
 
-Contents:
+Need Help?
+==========
+
+Having trouble? Cant find what you are looking for? We'd like to help!
+
+ * Report bugs with GET-IT in our `ticket tracker`_.
+
+.. _ticket tracker: https://github.com/SP7-Ritmare/starterkit
 
 .. toctree::
    :maxdepth: 2
-
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
