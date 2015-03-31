@@ -19,7 +19,8 @@ from django.contrib import messages
 from geonode.base.models import SpatialRepresentationType, TopicCategory
 from geonode.layers.metadata import set_metadata, sniff_date
 from geonode.layers.models import Layer
-from geonode.layers.views import _resolve_layer, _PERMISSION_MSG_METADATA, layer_detail
+from geonode.layers.views import _resolve_layer, \
+    _PERMISSION_MSG_METADATA, layer_detail
 from geonode.utils import http_client, _get_basic_auth_info, json_response
 from geonode.people.enumerations import ROLE_VALUES
 from geonode.people.models import Profile, Role
@@ -27,10 +28,13 @@ from geonode.base.enumerations import ALL_LANGUAGES, \
     HIERARCHY_LEVELS, UPDATE_FREQUENCIES, \
     DEFAULT_SUPPLEMENTAL_INFORMATION, LINK_TYPES
 
+from geosk.skregistration.models import SkRegistration
 from geosk.skregistration.views import get_key
 
 from geosk.mdtools.forms import UploadMetadataFileForm
-from geosk.mdtools.models import ResponsiblePartyScope, MultiContactRole, SCOPE_VALUES
+from geosk.mdtools.models import ResponsiblePartyScope, MultiContactRole, \
+    SCOPE_VALUES
+from geosk import UnregisteredSKException
 
 EDI_MAP_SPATIALREPRESENTATIONTYPE = {
     'dataStore': 'http://www.rndt.gov.it/codelists/MD_SpatialRepresentationTypeCode/items/001',
@@ -132,6 +136,8 @@ def rndteditor(request, layername):
         )
 
 def _ediml2rndt(ediml):
+    if SkRegistration.objects.get_current() is None:
+        raise UnregisteredSKException('You must register the GET-IT before save embedded Metadata')
     service = settings.RITMARE['MDSERVICE'] + 'postMetadata'
     headers = {'api_key': get_key(),
                'Content-Type': 'application/xml',
@@ -143,8 +149,6 @@ def _ediml2rndt(ediml):
         return rndt
     else:
         return False
-        return json_response(errors='Cannot create RNDT',
-                             status=500)
 
 def _get_fileid(ediml):
     ediml = etree.fromstring(ediml)
@@ -164,12 +168,16 @@ def rndt(request, layername):
 def rndtproxy(request, layername):
     layer = _resolve_layer(request, layername, 'layers.change_layer', _PERMISSION_MSG_METADATA)
     ediml = request.raw_post_data
-    rndt = _ediml2rndt(ediml)
+    try:
+        rndt = _ediml2rndt(ediml)
+    except UnregisteredSKException, e:
+        return json_response(errors=e.message,
+                             status=500)
     if not rndt:
         return json_response(errors='Cannot create RNDT',
                              status=500)
     try:
-        _savelayermd(layer, vals, keywords, rndt, ediml)
+        _savelayermd(layer, rndt, ediml)
     except Exception as e:
         return json_response(exception=e, status=500)
 
@@ -198,7 +206,10 @@ def importediml(request, template='mdtools/upload_metadata.html'):
             layername = Layer.objects.get(pk=form.cleaned_data['layer']).typename
             layer = _resolve_layer(request, layername, 'layers.change_layer', _PERMISSION_MSG_METADATA)
             ediml = request.FILES['file'].read()
-            rndt = _ediml2rndt(ediml)
+            try:
+                rndt = _ediml2rndt(ediml)
+            except UnregisteredSKException, e:
+                messages.add_message(request, messages.ERROR, e)
             if not rndt:
                 messages.add_message(request, messages.ERROR, 'Cannot get RNDT.')
             try:

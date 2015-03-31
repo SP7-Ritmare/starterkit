@@ -21,6 +21,9 @@ import os
 # __version__ = (1, 2, 0, 'alpha', 6)
 __version__ = (1, 2, 7, 'final', 0)
 
+class UnregisteredSKException(Exception):
+    pass
+
 def get_version():
     import geonode.version
     return geonode.version.get_version(__version__)
