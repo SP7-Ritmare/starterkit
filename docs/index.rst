@@ -6,7 +6,14 @@
 Welcome to GET-IT's documentation!
 ==================================
 
+Documentazione della versione 1.3 di GET-IT.
 Link alla precedente documentazione: http://sp7.irea.cnr.it/wiki/index.php/Category:Learning
+
+Presentation
+============
+
+:doc:`Introduzione <presentation>` alle funzionalità e architettura di GET-IT.
+
 
 Tutorials
 =========
