@@ -6,6 +6,8 @@
 Welcome to GET-IT's documentation!
 ==================================
 
+Link alla precedente documentazione: http://sp7.irea.cnr.it/wiki/index.php/Category:Learning
+
 Need Help?
 ==========
 
