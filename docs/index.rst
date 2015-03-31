@@ -8,6 +8,22 @@ Welcome to GET-IT's documentation!
 
 Link alla precedente documentazione: http://sp7.irea.cnr.it/wiki/index.php/Category:Learning
 
+Tutorials
+=========
+
+The :doc:`Tutorials <tutorials/index>` section contains step-by-step
+workshops that are oriented around performing particular sets of
+tasks, like adding data or publishing maps, setting up and maintaining
+a server, or setting up a project to extend from GET-IT. These
+tutorials are written in a workshop like format and are broken into
+three groups: Users, Administrators and Developers.
+
+.. toctree::
+    :maxdepth: 5
+
+    tutorials/index
+
+
 Need Help?
 ==========
 
