@@ -2,8 +2,6 @@ from django.db import models
 from django.utils.translation import ugettext, ugettext_lazy as _
 from django.contrib.sites.models import Site
 
-# xmC6docIKSIcbrD+9sFkpym5lTQCFjidNy+62SDeffZrnyWJuBFdBA==
-
 class SkRegistrationManager(models.Manager):
     def get_current(self):
         current_site = Site.objects.get_current()
@@ -21,4 +19,3 @@ class SkRegistration(models.Model):
     class Meta:
         verbose_name = _("Starter Kit registration")
         verbose_name_plural = _("Starter Kit registration")
-        
