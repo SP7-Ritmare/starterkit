@@ -137,12 +137,11 @@ def rndteditor(request, layername):
 
 def _ediml2rndt(ediml):
     if SkRegistration.objects.get_current() is None:
-        raise UnregisteredSKException('You must register the GET-IT before save embedded Metadata')
+        raise UnregisteredSKException('You must register the GET-IT before a Metadata')
     service = settings.RITMARE['MDSERVICE'] + 'postMetadata'
     headers = {'api_key': get_key(),
                'Content-Type': 'application/xml',
                }
-
     r = requests.post(service, data=ediml,  headers=headers, verify=False)
     if r.status_code == 200:
         rndt = r.text.encode('utf8')
@@ -396,10 +395,8 @@ def rndt2dict(exml):
         vals['purpose'] = mdata.identification.purpose
         vals['supplemental_information'] = mdata.identification.supplementalinformation if mdata.identification.supplementalinformation is not None else DEFAULT_SUPPLEMENTAL_INFORMATION
 
-        # vals['temporal_extent_start'] = \
-        #     mdata.identification.temporalextent_start
-        # vals['temporal_extent_end'] = \
-        #     mdata.identification.temporalextent_end
+        vals['temporal_extent_start'] = mdata.identification.temporalextent_start
+        vals['temporal_extent_end'] = mdata.identification.temporalextent_end
 
         if len(mdata.identification.topiccategory) > 0:
             vals['topic_category'] = get_topic_category(mdata.identification.topiccategory[0])
