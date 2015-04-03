@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: STARTER KIT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-28 17:20-0600\n"
+"POT-Creation-Date: 2015-04-03 14:38-0500\n"
 "PO-Revision-Date: 2014-06-19 18:14+0100\n"
 "Last-Translator: <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1434,7 +1434,7 @@ msgstr ""
 "dopo essere stati prodotti la prima volta"
 
 #: _locale_external/geonode/base/models.py:250
-#: _locale_external/geonode/people/models.py:59 mdtools/models.py:135
+#: _locale_external/geonode/people/models.py:59 mdtools/models.py:147
 msgid "keywords"
 msgstr "keywords"
 
@@ -2347,7 +2347,7 @@ msgstr "Scarica Layer"
 #: _locale_external/geonode/layers/templates/layers/layer_list.html:9
 #: _locale_external/geonode/templates/index.html:29
 #: _locale_external/geonode/upload/templates/upload/layer_upload_base.html:13
-#: mdtools/templates/layers/layer_list.html:9 templates/site_index.html:34
+#: mdtools/templates/layers/layer_list.html:9 templates/site_index.html:45
 msgid "Explore Layers"
 msgstr "Esplora layer"
 
@@ -2355,7 +2355,7 @@ msgstr "Esplora layer"
 #: _locale_external/geonode/templates/index.html:57
 #: _locale_external/geonode/upload/templates/upload/layer_upload.html:18
 #: _locale_external/geonode/upload/templates/upload/layer_upload_base.html:15
-#: templates/about_upload_layers.html:5 templates/site_index.html:66
+#: templates/about_upload_layers.html:5 templates/site_index.html:77
 msgid "Upload Layers"
 msgstr "Carica layer"
 
@@ -2477,7 +2477,7 @@ msgstr ""
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:193
 #: _locale_external/geonode/templates/index.html:61
-#: mdtools/templates/layers/layer_detail.html:187 templates/site_index.html:74
+#: mdtools/templates/layers/layer_detail.html:187 templates/site_index.html:85
 msgid "Create a Map"
 msgstr "Crea una vista"
 
@@ -2814,7 +2814,7 @@ msgstr "Visualizza"
 #: _locale_external/geonode/maps/templates/maps/map_base.html:12
 #: _locale_external/geonode/maps/templates/maps/map_list.html:14
 #: _locale_external/geonode/templates/index.html:32
-#: templates/site_index.html:40
+#: templates/site_index.html:51
 msgid "Explore Maps"
 msgstr "Esplora viste"
 
@@ -4133,27 +4133,26 @@ msgstr ""
 "          "
 
 #: _locale_external/geonode/templates/index.html:25
-#: templates/site_index.html:30
+#: templates/site_index.html:41
 msgid "Need help"
 msgstr "Serve aiuto?"
 
 #: _locale_external/geonode/templates/index.html:25
-#: templates/site_index.html:30
+#: templates/site_index.html:41
 msgid "Getting Started?"
 msgstr "Per iniziare"
 
 #: _locale_external/geonode/templates/index.html:42
-#: templates/site_index.html:51
+#: templates/site_index.html:62
 msgid "Latest Layers"
 msgstr "Ultimi Layer"
 
 #: _locale_external/geonode/templates/index.html:52
-#: templates/site_index.html:61
+#: templates/site_index.html:72
 msgid "Contribute"
 msgstr "Contribuisci"
 
 #: _locale_external/geonode/templates/index.html:54
-#: templates/site_index.html:63
 msgid ""
 "\n"
 "              GeoNode enables you to upload, manage, and browse data layers. "
@@ -4167,7 +4166,6 @@ msgstr ""
 "            "
 
 #: _locale_external/geonode/templates/index.html:58
-#: templates/site_index.html:71
 msgid ""
 "\n"
 "              GeoNode enables you to compose and share maps. Create a map "
@@ -4181,7 +4179,7 @@ msgstr ""
 "            "
 
 #: _locale_external/geonode/templates/index.html:67
-#: templates/site_index.html:80
+#: templates/site_index.html:91
 msgid "Latest Maps"
 msgstr "Ultime viste"
 
@@ -4813,11 +4811,11 @@ msgstr ""
 msgid " Or just go "
 msgstr ""
 
-#: mdtools/admin.py:21 osk/templates/osk/osk_list.html:40
+#: mdtools/admin.py:22 osk/templates/osk/osk_list.html:40
 msgid "Provider"
 msgstr "Fornitore"
 
-#: mdtools/admin.py:25
+#: mdtools/admin.py:26
 msgid "Contact"
 msgstr "Contatto"
 
@@ -4849,94 +4847,94 @@ msgstr "lingua utilizzata per il metadato"
 msgid "metadata date"
 msgstr "data del metadato"
 
-#: mdtools/models.py:132
+#: mdtools/models.py:144
 msgid "node name"
 msgstr "nome del nodo"
 
-#: mdtools/models.py:132
+#: mdtools/models.py:144
 msgid "shorter than the title: e.g. acronym. This field is required"
 msgstr ""
 "pi&ugrave; breve del titolo: e.g. acronimo. Questo campo &egrave; "
 "obbligatorio"
 
-#: mdtools/models.py:133
+#: mdtools/models.py:145
 msgid "node title"
 msgstr "titolo"
 
-#: mdtools/models.py:133 mdtools/models.py:137 mdtools/models.py:139
-#: mdtools/models.py:141
+#: mdtools/models.py:145 mdtools/models.py:149 mdtools/models.py:151
+#: mdtools/models.py:153
 msgid "This field is required"
 msgstr "Questo campo &egrave; obbligatorio"
 
-#: mdtools/models.py:134
+#: mdtools/models.py:146
 msgid "node abastract"
 msgstr "descrizione del nodo"
 
-#: mdtools/models.py:137
+#: mdtools/models.py:149
 msgid "organization name"
 msgstr "Nome dell'organizzazione"
 
-#: mdtools/models.py:138
+#: mdtools/models.py:150
 msgid "provider url"
 msgstr "url del fornitore di dati"
 
-#: mdtools/models.py:139
+#: mdtools/models.py:151
 msgid "contact name"
 msgstr "nome del contatto"
 
-#: mdtools/models.py:140
+#: mdtools/models.py:152
 msgid "contact position"
 msgstr "inquadramento contatto"
 
-#: mdtools/models.py:141
+#: mdtools/models.py:153
 msgid "contact email"
 msgstr "email contatto"
 
-#: mdtools/models.py:142
+#: mdtools/models.py:154
 msgid "contact url"
 msgstr "url contatto"
 
-#: mdtools/models.py:143
+#: mdtools/models.py:155
 msgid "contact address"
 msgstr "indirizzo contatto"
 
-#: mdtools/models.py:144
+#: mdtools/models.py:156
 msgid "contact city"
 msgstr "città del contatto"
 
-#: mdtools/models.py:145
+#: mdtools/models.py:157
 msgid "contact state or province"
 msgstr "stato o provincia del contatto"
 
-#: mdtools/models.py:146
+#: mdtools/models.py:158
 msgid "contact postalcode"
 msgstr "indirizzo postale"
 
-#: mdtools/models.py:147
+#: mdtools/models.py:159
 msgid "contact country"
 msgstr "paese del contatto"
 
-#: mdtools/models.py:148
+#: mdtools/models.py:160
 msgid "contact phone"
 msgstr "telefono del contatto"
 
-#: mdtools/models.py:149
+#: mdtools/models.py:161
 msgid "contact fax"
 msgstr "fax del contatto"
 
-#: mdtools/models.py:150
+#: mdtools/models.py:162
 msgid "contact hours"
 msgstr "orari "
 
-#: mdtools/models.py:151
+#: mdtools/models.py:163
 msgid "contact instructions"
 msgstr "istruzioni per il contatto"
 
-#: mdtools/models.py:152
+#: mdtools/models.py:164
 msgid "contact role"
 msgstr "ruolo del contatto"
 
-#: mdtools/models.py:154
+#: mdtools/models.py:167
 msgid "Services metadata"
 msgstr "Metadati dei Servizi"
 
@@ -5077,7 +5075,7 @@ msgstr "Carica osservazioni"
 msgid "SOS compliance"
 msgstr "Conformità SOS"
 
-#: skregistration/models.py:22 skregistration/models.py:23
+#: skregistration/models.py:20 skregistration/models.py:21
 msgid "Starter Kit registration"
 msgstr "Registrazione Starter Kit"
 
@@ -5394,8 +5392,8 @@ msgstr "SK è un progetto dello staff di sviluppatori di SP7"
 
 #: templates/site_base.html:167
 msgid ""
-"SK is developed by <a target='_blank' href='http://sp7.irea.cnr.it'>SP7</a>-"
-"<a target='_blank' href='http://www.ritmare.it/'>RITMARE</a>"
+"GET-IT is developed by <a target='_blank' href='http://sp7.irea.cnr.it'>SP7</"
+"a>-<a target='_blank' href='http://www.ritmare.it/'>RITMARE</a>"
 msgstr ""
 
 #: templates/site_base.html:168
@@ -5415,11 +5413,11 @@ msgstr ""
 msgid "Based on"
 msgstr "Basato su"
 
-#: templates/site_index.html:19
-msgid "Starter Kit - Demo"
+#: templates/site_index.html:23
+msgid "GET-IT - Demo"
 msgstr ""
 
-#: templates/site_index.html:24
+#: templates/site_index.html:33
 msgid ""
 "Upload your layers, your observations, create your maps and join the RITMARE "
 "interoperable Infrastructure."
@@ -5427,13 +5425,14 @@ msgstr ""
 "Carica i tuoi layer, le tue osservazioni, crea le tue viste e contribuisci "
 "all'Infrastruttura Interoperabile di RITMARE."
 
-#: templates/site_index.html:26
+#: templates/site_index.html:37
+#, fuzzy
 msgid ""
-" \n"
-"\tThe Starter Kit is developed in the context of <a href=\"http://sp7.irea."
-"cnr.it/\">Sub-Project 7</a> of RITMARE (<a href=\"http://www.ritmare.it/"
-"\">www.ritmare.it</a>). It is based upon <a href=\"http://geonode.org/"
-"\">GeoNode</a>.\n"
+"\n"
+"\tThe GET-IT is developed in the context of <a href=\"http://sp7.irea.cnr.it/"
+"\">Sub-Project 7</a> of RITMARE (<a href=\"http://www.ritmare.it/\">www."
+"ritmare.it</a>). It is based upon <a href=\"http://geonode.org/\">GeoNode</"
+"a>.\n"
 "\t"
 msgstr ""
 "Lo Starter Kit è stato sviluppato nell’ambito del <a href=\"http://sp7.irea."
@@ -5441,16 +5440,31 @@ msgstr ""
 "\">www.ritmare.it</a>). Il sofware &egrave; basato su <a href=\"http://"
 "geonode.org/\">GeoNode</a>."
 
-#: templates/site_index.html:37
+#: templates/site_index.html:48
 msgid "Explore Sensors"
 msgstr "Esplora Sensori"
 
-#: templates/site_index.html:67
+#: templates/site_index.html:74
+#, fuzzy
 msgid ""
 "\n"
-"              StarterKit enables you to upload, manage, and view sensors and "
+"              GeoNode enables you to upload, manage, and browse data layers. "
+"Search for data that is valuable to you, or upload your own data.\n"
+"            "
+msgstr ""
+"\n"
+"              StarterKit ti permette di caricare, gestire e navigare i "
+"Layer. Ricerca i dati che sono importanti per te o carica i dati in tuo "
+"possesso. \n"
+"            "
+
+#: templates/site_index.html:78
+#, fuzzy
+msgid ""
+"\n"
+"              GET-IT enables you to upload, manage, and view sensors and "
 "their observations. Create a sensor or upload observations of existing "
-"sensor. \n"
+"sensor.\n"
 "            "
 msgstr ""
 "\n"
@@ -5458,9 +5472,23 @@ msgstr ""
 "sensori e relative osservazioni. Crea un sensore o carica le osservazioni di "
 "un sensore già esistente."
 
-#: templates/site_index.html:70
+#: templates/site_index.html:81
 msgid "Create a Sensor"
 msgstr "Crea un Sensore"
+
+#: templates/site_index.html:82
+#, fuzzy
+msgid ""
+"\n"
+"              GeoNode enables you to compose and share maps. Create a map "
+"with our cartography tool, or explore maps shared by others.\n"
+"            "
+msgstr ""
+"\n"
+"              StarterKit ti permette di creare e condividere viste. Crea una "
+"vista con il nostro strumento cartografico, oppure consulta le viste "
+"condivise da altri utenti. \n"
+"            "
 
 #: templates/sk_credits.html:16
 msgid "Development Team"
