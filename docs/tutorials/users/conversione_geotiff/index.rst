@@ -3,6 +3,8 @@
 ========================
 Conversione Tiff-GeoTiff
 ========================
+.. toctree::
+   :maxdepth: 3
 
 I raster in formato TIFF con annesso tfw (Tiff World File) spesso non contengono le informazioni complete per permettere la corretta rappresentazione su GIS/WEBGIS. Quasi sempre manca infatti la descrizione della proiezione. E' quindi conveniente utilizzare il formato GEOTIFF, ormai molto più diffuso.
 

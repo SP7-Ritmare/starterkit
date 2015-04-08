@@ -4,8 +4,8 @@
 Compilazione Metadati
 =====================
 .. toctree::
-   :maxdepth: 2
-   
+   :maxdepth: 3
+
 I metadati delle risorse (dati geografici od osservazioni) e i metadati dei sensori sono delle descrizioni utili a permettere il ritrovamento delle risorse e dei sensori, conoscerne le caratteristiche salienti (nel tempo, nello spazio, nella tematica), ed in ultima istanza poter comprendere, almeno in parte, la loro pertinenza ai nostri scopi.
 
 Nello Starter Kit (SK) RITMARE si possono creare e gestire metadati relativi a:
