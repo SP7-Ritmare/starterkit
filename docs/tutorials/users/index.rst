@@ -13,7 +13,8 @@ Users Tutorials
 :ref:`conversione_geotiff`
          you will learn how to create a geotiff raster.
 
-* Editing Metadati
+:ref:`editing_metadati`
+         you will learn how to compile metadata information
 * Editing metadati sensori
 * File .prj
 * Servizi web JRC
