@@ -1,9 +1,9 @@
-Breve presentazione di SK e sue funzionalità
+	Breve presentazione di GETI-T e sue funzionalità
 ============================================
 
-SK è un pacchetto software sviluppato dai ricercatori di SP7 -provenienti da diversi istituti del CNR- esperti nella realizzazione di Infrastrutture di dati e servizi geospaziali, nell’ambito del progetto RITMARE SP7.
+GET-IT è un pacchetto software sviluppato dai ricercatori di SP7 -provenienti da diversi istituti del CNR- esperti nella realizzazione di Infrastrutture di dati e servizi geospaziali, nell’ambito del progetto RITMARE SP7.
 Questa guida ha l'obiettivo di supportare i ricercatori ad abilitare servizi [[Interoperabilità|interoperabili]] per la condivisione di dati geospaziali e/o osservativi conformi agli standard nazionali ed internazionali.
-In particolare, SK è rivolto principalmente ai gruppi di ricerca e/o istituti del progetto RITMARE che non dispongono di strumenti idonei allo scopo.
+In particolare è rivolto principalmente ai gruppi di ricerca e/o istituti del progetto RITMARE che non dispongono di strumenti idonei allo scopo.
 
 L'applicazione è stata sviluppata partendo da prodotti open source con l'aggiunta di alcuni moduli creati appositamente per meglio rispondere alle esigenze del progetto.
 La suite offre **un ambiente per  la gestione, la pubblicazione e la visualizzazione di dati** (ed eventuale download) attraverso servizi web standard dell'`OGC <http://www.opengeospatial.org/>`_ dell' per le seguenti macro-categorie di dati:
