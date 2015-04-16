@@ -12,13 +12,13 @@ La suite offre **un ambiente per  la gestione, la pubblicazione e la visualizzaz
 #. **osservazioni** provenienti da sensori di varia natura (boe, glider, mooring,stazioni meteo, etc.). Utilizza una soluzione open-source basata sulle specifiche Sensor Web Enablement (SWE), come implementate dall'iniziativa denominata 52°North (52N). Essa supporta le principali operazioni per: caricamento dei dati osservativi, archiviazione e gestione dati in un Data Base Management System, esposizione delle osservazioni su web (secondo interfaccia standard SOS).
 #. **documenti** (file di testo, fogli di calcolo, immagini ecc.).
 
-Una delle funzionalità cruciali di SK è l'**ambiente per la metadatazione** denominato [[EDI]] che da la possibilità di creare, modificare e consultare i metadati relativi ai dati inseriti (risorse geografiche, dati osservativi  e documenti) che ne permettano la descrizione secondo standard nazionali e internazionali (Repertorio Nazionale dei Dati Territoriali – [[RNDT]], [[INSPIRE]] e [[SensorML]]).
+Una delle funzionalità cruciali di GET-IT è l'**ambiente per la metadatazione** denominato [[EDI]] che da la possibilità di creare, modificare e consultare i metadati relativi ai dati inseriti (risorse geografiche, dati osservativi  e documenti) che ne permettano la descrizione secondo standard nazionali e internazionali (Repertorio Nazionale dei Dati Territoriali – [[RNDT]], [[INSPIRE]] e [[SensorML]]).
 I metadati, compilati attraverso questo modulo, sono semanticamente arricchiti 	per potenziare le funzioni di discovery successive e il loro reperimento da parte del ricercatore stesso o altri utenti abilitati (per approfondimenti: vedi [[EDI|pagina relativa]]).	
 
-Inoltre SK permette di gestire (per ogni dato inserito) i permessi consentendo/non consentendo agli utenti registrati di:
+Inoltre GET-IT permette di gestire (per ogni dato inserito) i permessi consentendo/non consentendo agli utenti registrati di:
 * visualizzare	
 * editare
 * scaricare i dati
 
 
-Lo SK viene rilasciato con licenza open source (GPL v.3.0) e distribuito in forma di macchina virtuale pronta per l’uso. Il prodotto, una volta installato mette a disposizione, con un'interfaccia utente facile ed intuitiva, gli strumenti e i servizi che costituiscono un nodo locale di [[Infrastruttura_di_Dati_Spaziali|Infrastruttura di Dati Spaziali]], con le caratteristiche sopra descritte.
+Lo GET-IT viene rilasciato con licenza open source (GPL v.3.0) e distribuito in forma di macchina virtuale pronta per l’uso. Il prodotto, una volta installato mette a disposizione, con un'interfaccia utente facile ed intuitiva, gli strumenti e i servizi che costituiscono un nodo locale di [[Infrastruttura_di_Dati_Spaziali|Infrastruttura di Dati Spaziali]], con le caratteristiche sopra descritte.
