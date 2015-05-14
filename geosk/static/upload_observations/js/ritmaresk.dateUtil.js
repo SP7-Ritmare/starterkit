@@ -14,6 +14,10 @@ var ritmaresk=ritmaresk || {};
 
 ritmaresk.DateUtil=( function () {
 
+    /**
+     *
+     * @constructor
+     */
 	var DateUtil=function(){
 		var self=this;
 		// strings for construct RE
@@ -26,55 +30,60 @@ ritmaresk.DateUtil=( function () {
 			ss="([0-5]?\\d)",
 			ss_opt="(?:[\\.:]([0-5]?\\d))?",
 			ss_ssss="([0-5]?\\d(\\.\\d{1,4})?)",
-			_="\\s",
-			start="^",
-			end="$",
-			or="|"
+			_space_="\\s",
+			_start_="^",
+			_end_="$",
+			_or_="|";
 
 		self.formats={
 			"I feel lucky":{
 				shortName:"guess"
 			},
 			"DD/MM/YY[YY] HH.mm[.ss]":{
-				regexp:new RegExp(start+[DD,MM,YY_YY].join("\\/")+_+[HH,mm].join("\\.")+ss_opt+end),
-				permYMDHms:[3,2,1,4,5,6],// l'array restituisce la posizione risp. di YYYY, MM, DD, HH, mm, ss nella regexp
-				shortName:"ITA-1 (excel)",
+				regexp:new RegExp(_start_+[DD,MM,YY_YY].join("\\/")+_space_+[HH,mm].join("\\.")+ss_opt+_end_),
+				permYMDHms:[3,2,1,4,5,6],// the array returns the positions of YYYY, MM, DD, HH, mm, ss within the regexp
+				shortName:"ITA-1 (excel)"
 			},
 			"DD/MM/YY[YY] HH:mm[:ss]":{
-				regexp:new RegExp(start+[DD,MM,YY_YY].join("\\/")+_+[HH,mm].join(":")+ss_opt+end),
+				regexp:new RegExp(_start_+[DD,MM,YY_YY].join("\\/")+_space_+[HH,mm].join(":")+ss_opt+_end_),
 				permYMDHms:[3,2,1,4,5,6],// l'array restituisce la posizione risp. di YYYY, MM, DD, HH, mm, ss nella regexp
-				shortName:"ITA-2 (excel)",
+				shortName:"ITA-2 (excel)"
 			},
 			"DD/MM/YY[YY] HH:mm:ss":{
-				regexp:new RegExp(start+[DD,MM,YY_YY].join("\\/")+_+[HH,mm,ss].join(":")+end),
-				permYMDHms:[3,2,1,4,5,6],// l'array restituisce la posizione risp. di YYYY, MM, DD, HH, mm, ss nella regexp
-				shortName:"ITA-3 (excel)",
+				regexp:new RegExp(_start_+[DD,MM,YY_YY].join("\\/")+_space_+[HH,mm,ss].join(":")+_end_),
+				permYMDHms:[3,2,1,4,5,6],// the array returns the positions of YYYY, MM, DD, HH, mm, ss within the regexp
+				shortName:"ITA-3 (excel)"
 			},
 			"DD/MM/YY[YY] HH:mm":{
-				regexp:new RegExp(start+[DD,MM,YY_YY].join("\\/")+_+[HH,mm].join(":")+end),
-				permYMDHms:[3,2,1,4,5,6],// l'array restituisce la posizione risp. di YYYY, MM, DD, HH, mm, ss nella regexp
-				shortName:"ITA-4 (excel)",
+				regexp:new RegExp(_start_+[DD,MM,YY_YY].join("\\/")+_space_+[HH,mm].join(":")+_end_),
+				permYMDHms:[3,2,1,4,5,6],// the array returns the positions of YYYY, MM, DD, HH, mm, ss within the regexp
+				shortName:"ITA-4 (excel)"
 			},
 			"DD/MM/YY[YY] HH*mm[*ss]":{
-				regexp:new RegExp(start+[DD,MM,YY_YY].join("\\/")+_+[HH,mm].join("[\\.:]")+ss_opt+end),
-				permYMDHms:[3,2,1,4,5,6],// l'array restituisce la posizione risp. di YYYY, MM, DD, HH, mm, ss nella regexp
-				shortName:"ITA-3 (all)",
+				regexp:new RegExp(_start_+[DD,MM,YY_YY].join("\\/")+_space_+[HH,mm].join("[\\.:]")+ss_opt+_end_),
+				permYMDHms:[3,2,1,4,5,6],// the array returns the positions of YYYY, MM, DD, HH, mm, ss within the regexp
+				shortName:"ITA-3 (all)"
 			},
 			"DD/MM/YYYY HH*mm[*ss]":{
-				regexp:new RegExp(start+[DD,MM,YYYY].join("\\/")+_+[HH,mm].join("[\\.:]")+ss_opt+end),
-				permYMDHms:[3,2,1,4,5,6],// l'array restituisce la posizione risp. di YYYY, MM, DD, HH, mm, ss nella regexp
-				shortName:"ITA-3 (all)",
+				regexp:new RegExp(_start_+[DD,MM,YYYY].join("\\/")+_space_+[HH,mm].join("[\\.:]")+ss_opt+_end_),
+				permYMDHms:[3,2,1,4,5,6],// the array returns the positions of YYYY, MM, DD, HH, mm, ss within the regexp
+				shortName:"ITA-3 (all)"
 			},
 			"MM/DD/YY[YY] HH:mm[:ss]":{
-				regexp:new RegExp(start+[MM,DD,YY_YY].join("\\/")+_+[HH,mm].join(":")+ss_opt+end),
-				permYMDHms:[2,3,1,4,5,6],// l'array restituisce la posizione risp. di YYYY, MM, DD, HH, mm, ss nella regexp
-				shortName:"USA (excel)",
+				regexp:new RegExp(_start_+[MM,DD,YY_YY].join("\\/")+_space_+[HH,mm].join(":")+ss_opt+_end_),
+				permYMDHms:[2,3,1,4,5,6],// the array returns the positions of YYYY, MM, DD, HH, mm, ss within the regexp
+				shortName:"USA (excel)"
 			},
+            "DD/MM/YY[YY]":{
+                regexp:new RegExp(_start_+[DD,MM,YY_YY].join("\\/")+_end_),
+                permYMDHms:[3,2,1,4,5,6],// the array returns the positions of YYYY, MM, DD, HH, mm, ss within the regexp
+                shortName:"ITA-3 (no HH:MM:ss)"
+            },
 			"ISO":{
 				regexp:/^(\d{4})-([01]\d)-([0-3]\d)T([0-2]\d):([0-5]\d):([0-5]\d)$/,
 				permYMDHms:[1,2,3,4,5,6],
 				shortName:"ISO 8601"
-			},
+			}
 		};
 		
 		self.isIso=function(sdate){
@@ -82,7 +91,7 @@ ritmaresk.DateUtil=( function () {
 			var res=false;
 			if(match){res=true;}
 			return(res);
-		}
+		};
 
 		/** returns an array with the matched formats (objects)
 		 *
@@ -94,7 +103,7 @@ ritmaresk.DateUtil=( function () {
 					matchedFormats.push(f);
 				}
 			}
-		}
+		};
 
 		self.convertToDate=function(sdate,formatName){
 			var output=null;
@@ -139,7 +148,7 @@ ritmaresk.DateUtil=( function () {
 		        return '0' + number;
 		      }
 		      return number;
-		    } 
+		    };
 		    
 		    return d.getFullYear() +
 		        '-' + pad( d.getMonth() + 1 ) +
@@ -151,7 +160,7 @@ ritmaresk.DateUtil=( function () {
 
 		self.convertStringToISO_noTZ=function(sdate,formatName){
 			return self.convertDateToISO_noTZ(self.convertToDate(sdate,formatName));
-		}
+		};
 	//end of DateUtil constructor
 	};
 
