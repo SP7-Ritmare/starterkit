@@ -289,14 +289,15 @@ ritmaresk.utils.namingConvention = (function () {
 
 
         xsl = xslt.loadXMLDoc(filenameXsl);
-
+        //workaround...intercept xslt issue for querystring "&" sep
+        var sampledFeature_workaround=foi.sampledFeature.replace("&","%_%26_%");
         var params = {
             // TODO: sostituire l'endpoint con il VERO URI dello SK
             SK_DOMAIN_NAME: sk_dns,//endpoint.replace(/http[s]*:\/\//, ""),
             SPATIAL_SAMPLING_POINT_X: foi.geometry.coordinates[0],
             SPATIAL_SAMPLING_POINT_Y: foi.geometry.coordinates[1],
             SRS_NAME: foi.geometry.crs.properties.srsName,
-            SAMPLED_FEATURE_URL: foi.sampledFeature,
+            SAMPLED_FEATURE_URL: sampledFeature_workaround,
             FOI_NAME: foi.name,
             PHENOMENON_TIME_BEGIN: phenomenonTimeMin,
             PHENOMENON_TIME_END: phenomenonTimeMax,
@@ -318,7 +319,7 @@ ritmaresk.utils.namingConvention = (function () {
 
         //return(xmlRTemplate);
 
-        return (stringInsertObservation);
+        return (stringInsertObservation.replace(sampledFeature_workaround,foi.sampledFeature));
 
     }
 

@@ -236,10 +236,12 @@ http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/gml.xsd"
                                 <xsl:value-of select="$FOI_NAME"/>
                             </gml:name>
                             <sf:type xlink:href="http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint"/>
-                            <xsl:text disable-output-escaping="yes">&lt;</xsl:text>
-                            <!--xsl:value-of select="'<'" disable-output-escaping="yes"/-->
-                                <xsl:value-of select="'sf:sampledFeature xlink:href='"/>"<xsl:value-of select="$SAMPLED_FEATURE_URL" disable-output-escaping="yes"/>"<xsl:value-of select="'/>'" disable-output-escaping="yes"/>
-
+<!-- PLEASE NOTE! THE ISSUE HERE IS OF XSLT processor in the browser does not implement disable-output-escaping
+    We resolve the problem in javascript (subs all & before processing, then subs again the opposite way)-->
+                            <!--<xsl:text disable-output-escaping="yes">&lt;</xsl:text>-->
+                            <!--<xsl:value-of select="'<'" disable-output-escaping="yes"/>-->
+                            <!--    <xsl:value-of select="'sf:sampledFeature xlink:href='"/>"<xsl:value-of select="$SAMPLED_FEATURE_URL" disable-output-escaping="yes"/>"<xsl:value-of select="'/>'" disable-output-escaping="yes"/>-->
+                            <sf:sampledFeature xlink:href="{$SAMPLED_FEATURE_URL}"/>
                             <sams:shape>
                                 <gml:Point gml:id="p1">
                                     <gml:pos srsName="{$SRS_NAME}">
