@@ -21,6 +21,8 @@ http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/gml.xsd"
 
                 exclude-result-prefixes="swe1 sp7"
         >
+    <!-- Created By: Paolo Tagliolato - CNR ISMAR, CNR IREA in Milano - 2015-05-01T00:00:00Z -->
+    <!-- Licence GPL 3 -->
     <xsl:output
             method="xml"
             version="1.0"

@@ -16,7 +16,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	exclude-result-prefixes="swe1"
 >
         <!-- Created By: Paolo Tagliolato & Alessandro Oggioni- CNR IREA in Milano - 2014-06-07T00:00:00Z -->
-        <!-- Licence CC By SA 3.0  http://creativecommon.org/licences/by-SA/3.0 -->
+        <!-- Licence GPL 3 -->
 <xsl:output
 	method="xml"
 	version="1.0"

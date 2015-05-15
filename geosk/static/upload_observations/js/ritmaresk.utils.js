@@ -1,6 +1,15 @@
 /**
- * Created by paolo on 11/05/15.
+ * *
+ *  author: Paolo Tagliolato - CNR IREA in Milano - www.irea.cnr.it
+ *            paolo.tagliolato@gmail.com
+ *  created on on 11/05/15.
+ *
+ *  version: 1.1 beta
+ *
+ *
+ *
  */
+
 
 var ritmaresk=ritmaresk || {};
 
