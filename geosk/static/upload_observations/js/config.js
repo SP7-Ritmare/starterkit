@@ -1,3 +1,10 @@
+/**
+ *  config file for get-it starterkit upload_observations
+ *  author: Paolo Tagliolato - CNR IREA in Milano - www.irea.cnr.it
+ *            paolo.tagliolato@gmail.com
+ *  created on on 11/05/15.
+ *
+ */
 var baseurl_sp7="http://sp7.irea.cnr.it",
     app_name="sensors",
     uri_sk="sk.test.irea.cnr.it";
@@ -5,15 +12,16 @@ var baseurl_sp7="http://sp7.irea.cnr.it",
 
 var endpoint = "/observations/sos";
 var geoserveruri="/geoserver/ows";
-//var endpoint = "http://10.0.0.36:8080/52n-sos-webapp410/service";
+
 var documentUrl = document.URL;
-//alert(window.location.host);
 
 
 var baseUrlSK="//"+window.location.host;
-// TODO: per debug carico da file statico locale in percorso relativo... rivedere percorso ed eliminare
-//baseUrlSK="test";
-console.warn("ripristinare config.js per la produzione: attualmente carica whoami da percorso relativo");
+
+/**
+ * @note uncomment the following lines for local tests
+ */
+//baseUrlSK="test";console.warn("file config.js is set for local tests, please comment this line for production");
 
 
 console.log("loading whoami from: "+ baseUrlSK+"/whoami");
