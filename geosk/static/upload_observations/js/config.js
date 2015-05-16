@@ -7,7 +7,7 @@
  */
 var baseurl_sp7="http://sp7.irea.cnr.it",
     app_name="sensors",
-    uri_sk="sk.test.irea.cnr.it";
+    uri_sk="test-sk.irea.cnr.it";
 
 
 var endpoint = "/observations/sos";
@@ -24,10 +24,10 @@ var baseUrlSK="//"+window.location.host;
 //baseUrlSK="test";console.warn("file config.js is set for local tests, please comment this line for production");
 
 
-console.log("loading whoami from: "+ baseUrlSK+"/whoami");
+console.log("loading whoami from: "+ baseUrlSK+"/whoami"+(baseUrlSK==="test")?".js":"");
 var whoami=JSON.parse($.ajax({
     type:"get",
-    url: baseUrlSK+"/whoami",
+    url: baseUrlSK+"/whoami"+((baseUrlSK==="test")?".js":""),
     async:false,
     dataType: "application/json"
 }).responseText);
