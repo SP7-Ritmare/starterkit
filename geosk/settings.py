@@ -67,6 +67,7 @@ LANGUAGES = (
 INSTALLED_APPS = (
     # GeoSK
     # 'geosk.rndt',
+    'geosk.inspireworkshop',
     'geosk.osk',
     'geosk.mdtools',
     'geosk.geoskbase',

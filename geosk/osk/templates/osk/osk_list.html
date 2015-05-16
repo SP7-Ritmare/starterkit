@@ -9,114 +9,153 @@
 {% block body_class %}osk osk-list explore{% endblock %}
 
 {% block body %}
-    <div class="span12">
-      <div class="row">
-	<h2 class="page-title span7">{% trans "Explore SOS" %}</h2>
-	<div class="span2">
-	  <a class="btn btn-small" target="_blank" href="{{ cap.capabilities_url }}">Capabilities &raquo;</a>
-	</div>
-	<!--div class="span3 input-append">
-	  <form  method="GET" action"/osk/">
-	    <input class="span2 input-small"  type="text" name="sosurl" placeholder="Remote SOS">
-	    <button class="btn" type="submit">Load</button>
-	  </form>
-	</div-->
-      </div>
+<div class="span12">
+    <div class="row">
+        <div class="span6">
+            <h2 class="page-title span7">{% trans "Explore SOS" %}</h2>
+        </div>
+        <div class="span6">
+            <a  id="open_ediclient_btn" href="#ediclient_container"
+                class="btn btn-large btn-primary" href="">{% trans "Register a new  Sensor" %}</a>
+            <a class="btn btn-large btn-info" target="_blank" href="{{ cap.capabilities_url }}">{% trans "Capabilities &raquo;" %}</a>
+        </div>
+        <!--div class="span3 input-append">
+        <form  method="GET" action"/osk/">
+        <input class="span2 input-small"  type="text" name="sosurl" placeholder="Remote SOS">
+        <button class="btn" type="submit">Load</button>
+        </form>
+        </div-->
     </div>
-    <div class="span12">
-      <div class="row" id="contain-slider">
+</div>
 
-	<article class="description tab-pane active" id="info">
-          <div class="span4">
-            <h2>{% trans "Identification" %}</h2>
-	    <dl>
-	      <dt>{% trans "Title" %}</dt>
-	      <dd>{{ cap.identification.title }}</dd>
-	      <dt>{% trans "Abstract" %}</dt>
-	      <dd>{{ cap.identification.abstract }}</dd>
-	      <dt>{% trans "Keywords" %}</dt>
-	      <dd>{{ cap.identification.keywords|join:", " }}</dd>
-	    </dl>
-            <h2>{% trans "Provider" %}</h2>
-	    <p>{{ cap.provider.name }}</p>
-	    <dl>
-	      <dt>{% trans "Name" %}</dt>
-	      <dd>{{ cap.provider.contact.name }}</dd>
-	      <dt>{% trans "Organization" %}</dt>
-	      <dd>{{ cap.provider.contact.organization }}</dd>
-	      <dt>{% trans "Position" %}</dt>
-	      <dd>{{ cap.provider.contact.position }}</dd>
-	      <dt>{% trans "Address" %}</dt>
-	      <dd>{{ cap.provider.contact.address }}</dd>
-	      <dt>{% trans "Postcode" %}</dt>
-	      <dd>{{ cap.provider.contact.postcode }}</dd>
-	      <dt>{% trans "City" %}</dt>
-	      <dd>{{ cap.provider.contact.city }}</dd>
-	      <dt>{% trans "Region" %}</dt>
-	      <dd>{{ cap.provider.contact.region }}</dd>
-	      <dt>{% trans "Country" %}</dt>
-	      <dd>{{ cap.provider.contact.country }}</dd>
-	      <dt>{% trans "Email" %}</dt>
-	      <dd>{{ cap.provider.contact.email }}</dd>
-	      <dt>{% trans "Phone" %}</dt>
-	      <dd>{{ cap.provider.contact.phone }}</dd>
-	      <dt>{% trans "Fax" %}</dt>
-	      <dd>{{ cap.provider.contact.fax }}</dd>
-	      <dt>{% trans "Site" %}</dt>
-	      <dd class="break-word">{{ cap.provider.contact.site|urlize }}</dd>
-	    </dl>
-	  </div>
+<div class="span12">
+    <div class="row" id="contain-slider">
 
-          <div class="span8">
-            <h2>{% trans "Sensors / Procedures" %}</h2>
-	    <div class="alert alert-info">
-	      {% trans "Number of sensors:" %} <strong>{{ sensors|length  }}</strong>
-	    </div>
-	    {% for sensor in sensors %}
-	    <article>
-	      <div class="content">
-		<h2>{% trans "Sensor" %} {{ forloop.counter }}</h2>
-		<p class="break-word"><small>{{ sensor.name }}</small></p>
-		<div class="btn-toolbar">
-		  <div class="btn-group">
-		    <a href="{% url "osk_describe_sensor" %}?format={{ 'text/html'|urlencode }}&sensor_id={{sensor.id|urlencode }}" target="_blank" data-toggle="modal" class="btn btn-mini">{% trans "Sensor details" %}</a>
-		    <a href="{% url "osk_upload" %}?procedureId={{ sensor.name }}" class="btn btn-mini">{% trans "Upload observations" %}</a>
-		  </div>
-		</div>
-		<!--div class="details">
-		  <div class="meta">
-		    <p> <a href="{% url "osk_upload" %}?procedureId={{ sensor.name }}">Upload observations</a>  </p>
-		    <p class="abstract">{{ sensor.sensor.description|default:'No abstract provided.' }}</p>
-		    <p class="Keywords">{{ sensor.sensor.keywords|join:', '|default:'No keywords provided' }}</p>
-		  </div> 
-		  <div>
-		    <ul>
-		      {% for op in sensor.observable_properties %}
-		      <li>{{ op }}</li>
-		      {% endfor %}
-		    </ul>
-		  </div>
-		</div--> <!-- /.details -->  
-	      </div> <!-- /.content -->
-	      <hr/>
-	    </article>
+        <article class="description tab-pane active" id="info">
+            <div class="span4">
+                <h2><i class="icon-info-sign"></i> {% trans "Identification" %}</h2>
+                <dl>
+                    <dt>{% trans "Title" %}</dt>
+                    <dd>{{ cap.identification.title }}</dd>
+                    <dt>{% trans "Abstract" %}</dt>
+                    <dd>{{ cap.identification.abstract }}</dd>
+                    <dt>{% trans "Keywords" %}</dt>
+                    <dd>{{ cap.identification.keywords|join:", " }}</dd>
+                </dl>
+                <h2><i class="icon-user"></i> {% trans "Provider" %}</h2>
+                <p>{{ cap.provider.name }}</p>
+                <dl>
+                    <dt>{% trans "Name" %}</dt>
+                    <dd>{{ cap.provider.contact.name }}</dd>
+                    <dt>{% trans "Organization" %}</dt>
+                    <dd>{{ cap.provider.contact.organization }}</dd>
+                    <dt>{% trans "Position" %}</dt>
+                    <dd>{{ cap.provider.contact.position }}</dd>
+                    <dt>{% trans "Address" %}</dt>
+                    <dd>{{ cap.provider.contact.address }}</dd>
+                    <dt>{% trans "Postcode" %}</dt>
+                    <dd>{{ cap.provider.contact.postcode }}</dd>
+                    <dt>{% trans "City" %}</dt>
+                    <dd>{{ cap.provider.contact.city }}</dd>
+                    <dt>{% trans "Region" %}</dt>
+                    <dd>{{ cap.provider.contact.region }}</dd>
+                    <dt>{% trans "Country" %}</dt>
+                    <dd>{{ cap.provider.contact.country }}</dd>
+                    <dt>{% trans "Email" %}</dt>
+                    <dd>{{ cap.provider.contact.email }}</dd>
+                    <dt>{% trans "Phone" %}</dt>
+                    <dd>{{ cap.provider.contact.phone }}</dd>
+                    <dt>{% trans "Fax" %}</dt>
+                    <dd>{{ cap.provider.contact.fax }}</dd>
+                    <dt>{% trans "Site" %}</dt>
+                    <dd class="break-word">{{ cap.provider.contact.site|urlize }}</dd>
+                </dl>
+            </div>
 
-	    <!--
-  	        <dt>{{ sensor.name }}</dt>		
-	        <dd>{{ sensor.id }}
-		  <ul>
-		  {% for op in sensor.observable_properties %}
-		  <li>{{ op }} <button class="btn btn-small">Upload</button> </li>
-		  {% endfor %}
-		  </li>
-		</dd>
--->
-	      {% endfor %}
-	    </dl>
-          </div>
-	</article>
-      </div>      
+            <div class="span8">
+                <h2><i class="icon-map-marker"></i> {% trans "Sensors / Procedures" %}</h2>
+                <div class="row">
+                    <div class="span3">
+                        <div class="alert alert-info">
+                            {% trans "Number of sensors:" %} <strong>{{ sensors|length  }}</strong>
+                        </div>
+                    </div>
+                </div>
+                {% for sensor in sensors %}
+                <article>
+                    <div class="content">
+                        <h2>{% trans "Sensor" %} {{ forloop.counter }}</h2>
+                        <p class="break-word"><small>{{ sensor.name }}</small></p>
+                        <div class="btn-toolbar">
+                            <div class="btn-group">
+                                <a href="{% url "osk_describe_sensor" %}?format={{ 'text/html'|urlencode }}&sensor_id={{sensor.id|urlencode }}" target="_blank" data-toggle="modal" class="btn btn-mini">{% trans "Sensor details" %}</a>
+                                <a href="{% url "osk_upload" %}?procedureId={{ sensor.name }}" class="btn btn-mini">{% trans "Upload observations" %}</a>
+                            </div>
+                        </div>
+                        <!--div class="details">
+                        <div class="meta">
+                        <p> <a href="{% url "osk_upload" %}?procedureId={{ sensor.name }}">Upload observations</a>  </p>
+                        <p class="abstract">{{ sensor.sensor.description|default:'No abstract provided.' }}</p>
+                        <p class="Keywords">{{ sensor.sensor.keywords|join:', '|default:'No keywords provided' }}</p>
+                        </div>
+                        <div>
+                        <ul>
+                        {% for op in sensor.observable_properties %}
+                        <li>{{ op }}</li>
+                        {% endfor %}
+                        </ul>
+                        </div>
+                        </div--> <!-- /.details -->
+                    </div> <!-- /.content -->
+                    <hr/>
+                </article>
+
+                <!--
+                <dt>{{ sensor.name }}</dt>
+                <dd>{{ sensor.id }}
+                <ul>
+                {% for op in sensor.observable_properties %}
+                <li>{{ op }} <button class="btn btn-small">Upload</button> </li>
+                {% endfor %}
+                </li>
+                </dd>
+                -->
+                {% endfor %}
+                </dl>
+            </div>
+        </article>
     </div>
+</div>
 
 {% endblock %}
 
+{% block extra_script %}
+<script src="{{STATIC_URL}}geosk/js/EdiProxy.js" type="text/javascript"></script>
+{{ block.super }}
+<script>
+    {% get_current_language as  LANGUAGE_CODE %}
+    var ediml_current_language = '{{ LANGUAGE_CODE }}';
+    var ediml_client_url = "{{ STATIC_URL }}EDI-NG_client/SensorML101.html?";
+    var ediml_proxy_url = '{% url "osk_ediproxy_importmd" %}';
+    var ediml_edimlId = '';
+
+    var parameters = {};
+    if(parseInt(ediml_edimlId)){
+        parameters = {
+            edit: ediml_edimlId
+        }
+    } else {
+    }
+
+    var ediProxyConfig = {
+        id_open_btn: 'open_ediclient_btn',
+        id_container: 'ediclient_container',
+        ediml_client_url: ediml_client_url,
+        ediml_proxy_url: ediml_proxy_url,
+        parameters: parameters
+    }
+
+    var ediProxy = new EdiProxy(ediProxyConfig);
+
+</script>
+{% endblock extra_script %}

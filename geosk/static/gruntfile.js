@@ -3,11 +3,6 @@ module.exports = function(grunt) {
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        uglify: {
-            options: {
-                banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-            }
-        },
         concat: {
             gxp_extr: {
                 src: [
@@ -72,12 +67,39 @@ module.exports = function(grunt) {
                     }
                 ]
             }
+        },
+        processhtml: {
+            options: {
+                data: {
+                    message: 'Hello world!'
+                }
+            },
+            dist: {
+                files: {
+                    'dest/index.html': ['.components/EDI-NG_client/INSPIRE_dataset.html']
+                }
+            }
+        },
+        useminPrepare: {
+            html: '.components/EDI-NG_client/INSPIRE_dataset.html',
+            options: {
+                dest: 'EDI-NG_client'
+            }
+        },
+        usemin:{
+            html:['EDI-NG_client/INSPIRE_dataset.html']
+        },
+        copy:{
+            html: {
+                expand: true,
+                cwd: '.components/EDI-NG_client/',
+                src: '**',
+                dest: 'EDI-NG_client/'
+            }
         }
-
     });
 
 
-    // Load the plugin that provides the "uglify" task.
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-copy');
@@ -86,9 +108,20 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-text-replace');
+    grunt.loadNpmTasks('grunt-processhtml');
+    grunt.loadNpmTasks('grunt-usemin');
+    grunt.loadNpmTasks('grunt-filerev');
 
 
     // Default task(s).
-    grunt.registerTask('default', ['uglify']);
+    grunt.registerTask('default',[
+        //'copy',
+        //'concat',
+        'copy',
+        'useminPrepare',
+        'concat',
+        'uglify',
+        'usemin',
+    ]);
 
 };

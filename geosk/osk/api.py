@@ -20,8 +20,10 @@ from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 
 from geosk.skregistration.views import get_key
+from geosk.skregistration.models import SkRegistration
 from geonode.utils import http_client, _get_basic_auth_info, json_response
 from geosk.osk.models import Sensor
+from geosk import UnregisteredSKException
 
 namespaces = Namespaces().get_namespaces('ows110')
 
@@ -45,16 +47,16 @@ def sensormleditor(request):
         'template': 'SensorML2',
         'version': '2.00',
         'parameters': "{}"
-        }    
+        }
 
     # fileid = layer.mdextension.fileid
     pars = {}
 
-    
+
     js_pars = json.dumps(pars, cls=DjangoJSONEncoder)
 
     queryStringValues['parameters'] = json.dumps(pars, cls=DjangoJSONEncoder)
-    
+
     js_queryStringValues = json.dumps(queryStringValues)
     return render_to_response(
         'osk/osk_registration.html',
@@ -66,26 +68,28 @@ def sensormleditor(request):
 def _get_register_sensor(xml):
     service = settings.RITMARE['MDSERVICE'] + 'sos/registerSensor'
     headers = {
-        'api_key': get_key(), 
+        'api_key': get_key(),
         'Content-Type': 'application/xml'
         }
     r = requests.post(service, data=xml,  headers=headers, verify=False)
     if r.status_code == 200:
         return r.text
     return None
-    
+
 
 def sensormlproxy(request):
+    if SkRegistration.objects.get_current() is None:
+        return json_response(errors='You must register the GET-IT before save a Metadata',
+                             status=500)
     service = settings.RITMARE['MDSERVICE'] + 'postMetadata'
     headers = {
-        'api_key': get_key(), 
+        'api_key': get_key(),
         'Content-Type': 'application/xml'
         }
 
     r = requests.post(service, data=request.raw_post_data,  headers=headers, verify=False)
     if r.status_code == 200:
         sensorml = r.text
-
         # get fileid
         ediml = etree.fromstring(request.raw_post_data)
         fileid = ediml.find('fileId').text
@@ -98,12 +102,12 @@ def sensormlproxy(request):
 
         settings.SOS_SERVER['default']['LOCATION']
         sos_response = requests.post(
-            settings.SOS_SERVER['default']['LOCATION'] + '/pox', 
-            data=sensorml.encode('utf8'),  headers=headers, 
+            settings.SOS_SERVER['default']['LOCATION'] + '/pox',
+            data=sensorml.encode('utf8'),  headers=headers,
             verify=False
             )
 
-        
+
         if sos_response.status_code == 200:
             tr = etree.fromstring(sos_response.content)
             if tr.tag == nspath_eval("ows110:ExceptionReport", namespaces):
@@ -111,15 +115,52 @@ def sensormlproxy(request):
 
             # save sensorml & edi xml
             sensor = Sensor(fileid=fileid)
-    
+
             sensor.sensorml = sensorml
             sensor.ediml = request.raw_post_data
             sensor.save()
             return json_response(body={'success':True,'redirect': reverse('osk_browse')})
-        
+
         else:
             return json_response(exception=sos_response.text.encode('utf8'), status=500)
 
-    return json_response(errors='Cannot create SensorML', 
+    return json_response(errors='Cannot create SensorML',
                          status=500)
 
+# TODO: move on ediproxy app
+# ediml version 2
+@login_required
+def ediproxy_importmd(request):
+    if SkRegistration.objects.get_current() is None:
+        return json_response(errors='You must register the GET-IT before save a Metadata',
+                             status=500)
+    insertsensor = request.POST.get('generatedXml').encode('utf8')
+    ediml = request.POST.get('ediml').encode('utf8')
+    edimlid = request.POST.get('edimlid')
+
+    headers = {
+        'Accept': 'application/xml',
+        'Content-Type': 'application/xml',
+        'Authorization': "%s" % settings.SOS_SERVER['default']['TRANSACTIONAL_AUTHORIZATION_TOKEN']
+    }
+    sos_response = requests.post(
+        settings.SOS_SERVER['default']['LOCATION'] + '/pox',
+        data=insertsensor,  headers=headers,
+        verify=False
+        )
+
+
+    if sos_response.status_code == 200:
+        tr = etree.fromstring(sos_response.content)
+        if tr.tag == nspath_eval("ows110:ExceptionReport", namespaces):
+            return json_response(exception=sos_response.text.encode('utf8'), status=500)
+
+        # save sensorml & edi xml
+        sensor = Sensor(fileid=fileid)
+
+        sensor.sensorml = sensorml
+        sensor.ediml = request.raw_post_data
+        sensor.save()
+        return json_response(body={'success':True,'redirect': reverse('osk_browse')})
+    else:
+        return json_response(exception=sos_response.text.encode('utf8'), status=500)
