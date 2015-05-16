@@ -1,0 +1,19 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block title %} {% trans "INSPIRE Workshop" %} — {{ block.super }}{% endblock %}
+
+{% block body_class %}inspireworkshop{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="span12">
+        <h2 class="page-title">{% trans "INSPIRE Workshop" %}</h2>
+            <h3>
+                {% trans "Demo dataset" %}
+                <a href="{% url "inspireworkshop_demodataset" %}">Download</a>
+            </h3>
+    </div>
+</div>
+{% endblock %}
