@@ -35,7 +35,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 <xsl:param name="FOI_NAME"/>
 
 
-<xsl:include href="ritmareSosIdConvention.xsl"/>
+<!--<xsl:include href="ritmareSosIdConvention.xsl"/>-->
 
 <xsl:param name="PHENOMENON_TIME"/><!-- es. momento in cui prelevo campione -->
 <!-- SE NON SPECIFICATO LO SI DEVE TROVARE COME FIELD NEL RESULT
@@ -212,7 +212,7 @@ Si può usare quello? (dubito: non ha la struttura adeguata a o&m 2). Ma quello 
 								</swe:field>
 								-->
 								<swe:field> 
-									<xsl:attribute name="name"> <xsl:value-of select="@name"/></xsl:attribute> 
+									<xsl:attribute name="name"> <xsl:value-of select="translate(@name,' ','_')"/></xsl:attribute>
 									<swe:Quantity>
 										<xsl:attribute name="definition"> <xsl:value-of select="./swe1:Quantity/@definition"/></xsl:attribute> 
 										<swe:uom>
@@ -227,7 +227,7 @@ Si può usare quello? (dubito: non ha la struttura adeguata a o&m 2). Ma quello 
             </sos:resultStructure>
             <sos:resultEncoding>
 <!-- COSTANTE da decidere -->           
-            	<swe:TextEncoding tokenSeparator="@" blockSeparator="#"/>
+            	<swe:TextEncoding tokenSeparator="#" blockSeparator="@"/>
             </sos:resultEncoding>
         </sos:ResultTemplate>
     </sos:proposedTemplate>
