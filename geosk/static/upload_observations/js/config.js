@@ -5,6 +5,9 @@
  *  created on on 11/05/15.
  *
  */
+/**
+ * @todo deprecate uri_sk: replace all usages with sk_domain_name
+ */
 var baseurl_sp7="http://sp7.irea.cnr.it",
     app_name="sensors",
     uri_sk="test-sk.irea.cnr.it";
@@ -34,6 +37,10 @@ var whoami=JSON.parse($.ajax({
 
 //uri_sk= (whoami.uriSK) ? whoami.uriSK : whoami.uri.replace(/http[s]*:\/\//, "");
 sk_domain_name=(whoami.sk_domain_name) ? whoami.sk_domain_name : whoami.uri.replace(/http[s]*:\/\//, "");
+/**
+ * @todo deprecate uri_sk: replace all usages with sk_domain_name
+ */
+uri_sk=sk_domain_name;
 endpoint=(whoami.endpoint_SOS_url) ? whoami.endpoint_SOS_url : endpoint;
 geoserveruri=whoami.uri?whoami.uri+"/geoserver/ows":geoserveruri;
 
