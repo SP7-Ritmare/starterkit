@@ -63,7 +63,7 @@ ritmaresk.XsltTransformer = (function () {
          * @returns {HTMLDocument}
          */
         self.loadXMLDoc = function (/**String*/urlOrPath, async, overrideMimeTypeToXml) {
-            asynch=asynch||false;
+            async=async||false;
             /*
             xhttp.open("GET", filename, false);
             try {
