@@ -108,9 +108,9 @@ ritmaresk.utils.swe = (function () {
 
         var xslt = ritmaresk.XsltTransformer.getInstance();
 
-        var capDoc = xslt.loadXMLDoc(wmsUrl + "?SERVICE=WMS&REQUEST=GetCapabilities&TILED=true&VERSION=1.1.1");
+        var capDoc = xslt.loadXMLDoc(wmsUrl + "?SERVICE=WMS&REQUEST=GetCapabilities&TILED=true&VERSION=1.1.1",false,true);
 
-        console.log(capDoc.innerHTML);
+        //console.log(capDoc.innerHTML);
         var layers = capDoc.getElementsByTagName("Layer")[0].getElementsByTagName("Layer");
         var oLNT = {},//dictionary layerName:layerTitle
             layersNameTitle = [];
