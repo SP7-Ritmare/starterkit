@@ -15,8 +15,10 @@
             <h2 class="page-title span7">{% trans "Explore SOS" %}</h2>
         </div>
         <div class="span6">
+            {% if request.user.is_authenticated %}
             <a  id="open_ediclient_btn" href="#ediclient_container"
                 class="btn btn-large btn-primary" href="">{% trans "Register a new  Sensor" %}</a>
+            {% endif %}
             <a class="btn btn-large btn-info" target="_blank" href="{{ cap.capabilities_url }}">{% trans "Capabilities &raquo;" %}</a>
         </div>
         <!--div class="span3 input-append">
