@@ -54,12 +54,16 @@ ritmaresk.XsltTransformer = (function () {
         }
 
 
+
         /**
          *
-         * @param {string} filename relative or absolute document URL
+         * @param {String} urlOrPath
+         * @param {boolean} async perform an async request (default=false)
+         * @param {boolean} overrideMimeTypeToXml force application/xml mimeType on the response
          * @returns {HTMLDocument}
          */
-        self.loadXMLDoc = function (/**String*/filename) {
+        self.loadXMLDoc = function (/**String*/urlOrPath, async, overrideMimeTypeToXml) {
+            async=async||false;
             /*
             xhttp.open("GET", filename, false);
             try {
@@ -69,8 +73,10 @@ ritmaresk.XsltTransformer = (function () {
             xhttp.send("");
             return xhttp.responseXML;
             */
-
-            xhttp.open("GET", filename, false);
+            console.log("loadingXMLDoc: "+urlOrPath);
+            xhttp.open("GET", urlOrPath, async);
+            //xhttp.setRequestHeader ("Accept", "text/xml");
+            if(overrideMimeTypeToXml)xhttp.overrideMimeType("application/xml; charset=UTF-8");
             xhttp.send();
             return xhttp.responseXML;
         };

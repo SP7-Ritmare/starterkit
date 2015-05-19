@@ -108,6 +108,11 @@
             text-overflow: ellipsis;
         }
 
+    /* cf. https://github.com/Leaflet/Leaflet/issues/845 */
+    .leaflet-control-layers-expanded {
+        max-height: 300px;/*less than map height! */
+        overflow: auto;
+    }
 
 	</style>
 
