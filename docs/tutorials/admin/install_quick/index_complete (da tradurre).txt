@@ -1,0 +1,113 @@
+.. _install_quick:
+
+==============================
+GET-IT quick installation
+==============================
+
+Lo starterkit viene distribuito come applicazione virtuale (virtual appliance) in formato ''vmdk'' (virtual machine disk).<br />
+Una demo '''video per l'installazione''' è visualizzabile 
+`QUI <http://youtu.be/q-QDU-WxRRc>`_ for info.
+
+
+ QUI] (modificare le impostazioni di risoluzione su youtube per vedere il video più nitidamente).
+
+
+I file di installazione necessari è il seguente ''starterkit.vmdk.gz'' reperibile al seguente [http://geosk.ve.ismar.cnr.it/static/vm-sk-1.2-213243242/ indirizzo].
+
+La procedura di installazione è articolata nelle seguenti fasi:
+
+Download ed installazione della macchina virtuale nell'ambiente di virtualizzazione
+===================================================================================
+Scaricare il file ''starterkit.vmdk.gz'' reperibile al seguente [http://geosk.ve.ismar.cnr.it/static/vm-sk-1.2-213243242/ indirizzo], consigliamo naturalmente di avere il file scaricato direttamente sulla macchina su cui è installato l'ambiente di virtualizzazione. Genericamente è utilizzabile il comando wget seguito dall'url.::
+
+  wget http://geosk.ve.ismar.cnr.it/static/vm-sk-1.2-213243242/starterkit.vmdk.gz
+
+Estrarre il file con il comando gunzip::
+
+  gunzip starterkit.vmdk.gz
+
+
+Pubblicazione della macchina virtuale e dei relativi servizi 
+============================================================
+Questa fase è relativa alle operazioni preliminari di tipo sistemistico per abilitare il nuovo nodo all'offerta di servizi web. '''NB Generalmente tali operazioni sono eseguite dall'amministratore di sistema'''
+
+Importare il file starterkit.vmdk.gz nell'ambiente di virtualizzazione del proprio Istituto
+===========================================================================================
+L'ambiente di virtualizzazione è scelto dal sistemista del nodo, nella demo si è preferito utilizzare [http://www.linux-kvm.org/ KVM]. <br />
+Le caratteristiche del server sono elencate in [[Caratteristiche_server|questa pagina]].
+[http://sp7.irea.cnr.it/svn/SP7/Shared/videos/import_VM.mov A questo indirizzo] è possibile vedere un video con una demo di installazione di SK in KVM.<br />
+Le credenziali dello SK di default verranno comunicate all'utente interessato dall'Help Desk RITMARE.
+
+Configurare l'interfaccia di rete 
+=================================
+Parametri quali IP address, subnet, dhcp ecc. si modificano editando il file /etc/network/interfaces. Questo file contiene informazioni di configurazione dell'interfaccia di rete per sistemi Ubuntu e Debian Linux.
+Aprire ed editare il file di configurazione di rete (interface) editando: ::
+
+  $ sudo vi /etc/network/interfaces
+
+Cercare e rimuovere l'attivazione del dhcp: ::
+
+  iface eth0 inet dhcp
+
+Aggiungere le nuove impostazioni di configurazione con i parametri della propria rete, assegnando IP e DNS (es: 150.178.42.24 - geosk.ve.ismar.cnr.it). Di seguito un esempio di compilazione: ::
+
+  iface eth0 inet static
+  address 192.168.1.100
+  netmask 255.255.255.0
+  network 192.168.1.0
+  broadcast 192.168.1.255
+  gateway 192.168.1.1
+  dns-nameservers 192.168.1.1
+
+il parametro address corrisponderà all'IP che sarà assegnato alla macchina virtuale dedicata a StarterKit,
+il parametro dns-nameserver dovrà esser corrispondente a un indirizzo internet al quale risponde un servizio DNS (esempio geosk.ve.ismar.cnr.it).
+
+Salvare e chiudere il file, successivamente riavviare per attivare la configurazione impostata: ::
+
+  $ sudo /etc/init.d/networking stop
+  $ sudo /etc/init.d/networking start
+
+nel caso questo comando non dovesse funzionare riavviare la macchina virtuale.
+
+Configurazione di base
+======================
+La seconda fase è relativa alla configurazione di base del software Starter Kit.
+
+1. Configurazioni base
+-----------------------
+
+Aprire in scrittura il file: /home/starterkit/geosk/local_settings.py ::
+
+  $ sudo vi /home/starterkit/geosk/local_settings.py
+
+e settare i parametri:
+* SITENAME: nome del sito (es. StarterKit ISMAR) che verrà utilizzato all'interno delle pagine. 
+* ADMINS: indirizzi email delle persone abilitate alla ricezione delle notifiche di errore
+
+2. Registrazione del DNS
+-------------------------
+
+Affinchè vi possa essere un corretto accesso al portale, la cosa migliore è registrare un DNS pubblico (e non utilizzare direttamente l'IP per accedere alla macchina). Una volta scelto e registrato il DNS, come amministratore va eseguito il seguente comando: ::
+
+  sudo sk-updateip 'il_tuo_nuovo_dns' 
+
+A titolo esemplificativo: ::
+
+  sudo sk-updateip http://sk.mi.irea.cnr.it/
+
+il nuovo indirizzo DNS della macchina SK è quello indicato precedentemente con il parametro "dns-nameservers" nella configurazione dell'interfaccia di rete.
+
+Il comando registrerà il DNS prescelto e configurerà correttamente i servizi di erogazione di SK.
+
+A questo punto il nodo è configurato correttamente ed è possibile raggiungerlo via web: http://il_tuo_nuovo_dns/
+
+Metadatazione dei servizi e registrazione del nodo 
+==================================================
+Lo StarterKit viene rilasciato con un utente amministratore già abilitato ('''le credenziali di accesso ti verranno comunicate al momento della consegna delle starterkit''').
+
+Dopo il primo login, l'utente sarà invitato a completare la registrazione attraverso una procedura guidata (web) articolata in due fasi:
+*Metadatazione dei servizi
+*Registrazione del nodo
+
+Al primo accesso ricordarsi di modificare le credenziali di accesso.
+

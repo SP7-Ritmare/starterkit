@@ -14,7 +14,7 @@ and are broken into two groups *Users* and *Administrators*.
 
 .. toctree::
    :hidden:
-   :maxdepth: 3
+   :maxdepth: 4
 
-   users/index
+   users/index 
    admin/index
