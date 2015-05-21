@@ -9,11 +9,16 @@
 {% block body %}
 <div class="container">
     <div class="span12">
-        <h2 class="page-title">{% trans "INSPIRE Workshop" %}</h2>
-            <h3>
+        <div class="hero-unit">
+            <h2 class="page-title">{% trans "INSPIRE Workshop" %}</h2>
+            <p>
+                {% trans "Please follow the link below to download the sample datasets you can use for thesting the GET-IT suite" %}
+            </p>
+            <b>
                 {% trans "Demo dataset" %}
                 <a href="{% url "inspireworkshop_demodataset" %}">Download</a>
-            </h3>
+            </b>
+        </div>
     </div>
 </div>
 {% endblock %}
