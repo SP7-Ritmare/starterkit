@@ -4,20 +4,22 @@
 GET-IT quick installation
 ==============================
 
-Lo starterkit viene distribuito come applicazione virtuale (virtual appliance) in formato ''vmdk'' (virtual machine disk).
+GET-IT is distributed as virtual appliance in "vmdk"(virtual machine disk) format.
 
-Una demo '''video per l'installazione''' è visualizzabile `QUI <http://youtu.be/q-QDU-WxRRc>`_ (modificare le impostazioni di risoluzione su youtube per vedere il video più nitidamente).
+A video demo is available `HERE <http://youtu.be/q-QDU-WxRRc>`_ (change resolution settings in youtube to better see the video). 
+
+Download and installation of the Virtual Machine
+=================================================
+
+Download the file ''starterkit.vmdk.gz'' using the following `LINK <http://geosk.ve.ismar.cnr.it/static/vm-sk-1.2-213243242/>`_ , we council to download the file in the machine where the virtualizer is present.
+
+Normally you can use the "wget" command followed by the url: ::
+
+ wget http://geosk.ve.ismar.cnr.it/static/vm-sk-1.2-213243242/starterkit.vmdk.gz
+
+Extract the file with "gunzip" command: ::
+
+gunzip starterkit.vmdk.gz
 
 
-I file di installazione necessari è il seguente ''starterkit.vmdk.gz'' reperibile al seguente `indirizzo <http://geosk.ve.ismar.cnr.it/static/vm-sk-1.2-213243242/>`_.
-
-Download ed installazione della macchina virtuale nell'ambiente di virtualizzazione
-===================================================================================
-Scaricare il file ''starterkit.vmdk.gz'' reperibile al seguente `indirizzo <http://geosk.ve.ismar.cnr.it/static/vm-sk-1.2-213243242/>`_ , consigliamo naturalmente di avere il file scaricato direttamente sulla macchina su cui è installato l'ambiente di virtualizzazione. Genericamente è utilizzabile il comando wget seguito dall'url: ::
-
-  wget http://geosk.ve.ismar.cnr.it/static/vm-sk-1.2-213243242/starterkit.vmdk.gz
-
-Estrarre il file con il comando gunzip::
-
-  gunzip starterkit.vmdk.gz
 
