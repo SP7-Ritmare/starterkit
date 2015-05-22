@@ -1,24 +1,26 @@
-	Breve presentazione di GETI-T e sue funzionalità
-============================================
+Short presentation of GET-IT and its features
+==============================================
 
-GET-IT è un pacchetto software sviluppato dai ricercatori di SP7 -provenienti da diversi istituti del CNR- esperti nella realizzazione di Infrastrutture di dati e servizi geospaziali, nell’ambito del progetto RITMARE SP7.
-Questa guida ha l'obiettivo di supportare i ricercatori ad abilitare servizi [[Interoperabilità|interoperabili]] per la condivisione di dati geospaziali e/o osservativi conformi agli standard nazionali ed internazionali.
-In particolare è rivolto principalmente ai gruppi di ricerca e/o istituti del progetto RITMARE che non dispongono di strumenti idonei allo scopo.
+GET-IT is a software package developed by SP7 researchers - working in different CNR Institutes - expert in Data infrastructure and geospatial services. The software was developed for RITMARE SP7 project.
+This documentation wants to help researchers to provide web services to share spatial and observation data following national and international standards.
+In particular the documentation is usefull for researcher team and/or institutes of RITMARE project that don't have an adequate data infrastructure.
 
-L'applicazione è stata sviluppata partendo da prodotti open source con l'aggiunta di alcuni moduli creati appositamente per meglio rispondere alle esigenze del progetto.
-La suite offre **un ambiente per  la gestione, la pubblicazione e la visualizzazione di dati** (ed eventuale download) attraverso servizi web standard dell'`OGC <http://www.opengeospatial.org/>`_ dell' per le seguenti macro-categorie di dati:
+The apllication was developed starting from open source packages with the addition of packages developed for project needs.
+It offers an interface for **data management, sharing, visualisation and** (optionaly) **download** through `OGC <http://www.opengeospatial.org/>`_ standard web services for the following data categories:
+
 	
-#. **mappe o layer** (strati informativi geografici). Permettendo di pubblicare, visualizzare i dati geografici, siano essi vettoriali, raster o coverage. Utilizza una soluzione open-source basata sulla piattaforma GeoNode, appositamente personalizzata per le esigenze di progetto. Essa supporta le principali operazioni per: caricamento dati, archiviazione dati, vestizione ed esposizione web (visualizzazione e/o accesso/download secondo interfacce standard WMS, WFS, WCS).	
-#. **osservazioni** provenienti da sensori di varia natura (boe, glider, mooring,stazioni meteo, etc.). Utilizza una soluzione open-source basata sulle specifiche Sensor Web Enablement (SWE), come implementate dall'iniziativa denominata 52°North (52N). Essa supporta le principali operazioni per: caricamento dei dati osservativi, archiviazione e gestione dati in un Data Base Management System, esposizione delle osservazioni su web (secondo interfaccia standard SOS).
-#. **documenti** (file di testo, fogli di calcolo, immagini ecc.).
+#. **maps or layers** (spatial data). It permits to public and visualize spatial data (vector or raster). It use the web application GeoNode with customization for project needs. It provides the principal operations: upload data, data storing, styling and sharing data through standard services (WMS, WFS, WCS).
+#. **observations** coming from different sensor types (buoys, glider, mooring, meteorological sensors, etc.). It uses an open-source solution based on Sensor Web Enablement (SWE) specifications, like implemented by 52° North (52N) project. It provides the operations to upload observation data, data storing and data management on a Data Base Management System, sharing observation on the web (through standard SOS interface). 
+#. **documents** (text files, spreadsheet, images, etc.).
 
-Una delle funzionalità cruciali di GET-IT è l'**ambiente per la metadatazione** denominato [[EDI]] che da la possibilità di creare, modificare e consultare i metadati relativi ai dati inseriti (risorse geografiche, dati osservativi  e documenti) che ne permettano la descrizione secondo standard nazionali e internazionali (Repertorio Nazionale dei Dati Territoriali – [[RNDT]], [[INSPIRE]] e [[SensorML]]).
-I metadati, compilati attraverso questo modulo, sono semanticamente arricchiti 	per potenziare le funzioni di discovery successive e il loro reperimento da parte del ricercatore stesso o altri utenti abilitati (per approfondimenti: vedi [[EDI|pagina relativa]]).	
+One of the main function of GET-IT is the **metadata editing tool** named :doc:`EDI <glossary/edi>` that permits to create, edit and read metadata about uploaded data (spatial data, observation data and documents) to describe data in a national and international standard way (Repetorio Nazionale dei Dati Territoriali -RNDT-, INSPIRE and SensorML).
+Metadata (compiled by this tool) are improved in semantic to increase discovery operations.
+	
+GET-IT also permits to manage (for every data type uploaded) permission for registered users to:
 
-Inoltre GET-IT permette di gestire (per ogni dato inserito) i permessi consentendo/non consentendo agli utenti registrati di:
-* visualizzare	
-* editare
-* scaricare i dati
+* visualize	
+* edit
+* download data
 
+GET-IT is distributed with an open-source license ( `GPL v.3.0 <http://www.gnu.org/copyleft/gpl.html>`_ ) and distributed through a ready to use virtual machine. After installation it provides a user friendly interface, the tools and services that compose a local infrastructure with above-mentioned features.
 
-Lo GET-IT viene rilasciato con licenza open source (GPL v.3.0) e distribuito in forma di macchina virtuale pronta per l’uso. Il prodotto, una volta installato mette a disposizione, con un'interfaccia utente facile ed intuitiva, gli strumenti e i servizi che costituiscono un nodo locale di [[Infrastruttura_di_Dati_Spaziali|Infrastruttura di Dati Spaziali]], con le caratteristiche sopra descritte.

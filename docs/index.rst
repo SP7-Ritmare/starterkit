@@ -6,13 +6,13 @@
 Welcome to GET-IT's documentation!
 ==================================
 
-Documentazione della versione 1.3 di GET-IT.
-Link alla precedente documentazione: http://sp7.irea.cnr.it/wiki/index.php/Category:Learning
+Documentation of 1.3 GET-IT version.
+Link to the old documentation pages: http://sp7.irea.cnr.it/wiki/index.php/Category:Learning
 
 Presentation
 ============
 
-:doc:`Introduzione <presentation>` alle funzionalità e architettura di GET-IT.
+:doc:`Introduction <presentation>` to GET-IT features and architecture.
 
 
 Tutorials
@@ -41,4 +41,4 @@ Having trouble? Cant find what you are looking for? We'd like to help!
 .. _ticket tracker: https://github.com/SP7-Ritmare/starterkit
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 5
