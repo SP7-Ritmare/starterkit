@@ -156,9 +156,12 @@ def ediproxy_importmd(request):
             return json_response(exception=sos_response.text.encode('utf8'), status=500)
 
         # save sensorml & edi xml
+        _ediml = etree.fromstring(ediml)
+        fileid = _ediml.find('fileId').text
+
         sensor = Sensor(fileid=fileid)
 
-        sensor.sensorml = sensorml
+        sensor.sensorml = sos_response
         sensor.ediml = request.raw_post_data
         sensor.save()
         return json_response(body={'success':True,'redirect': reverse('osk_browse')})
