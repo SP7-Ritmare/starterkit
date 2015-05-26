@@ -17,4 +17,6 @@ Welcome to the GET-IT Administrators Workshop!
   Learn how to install GET-IT by virtual machine.
 :ref:`install_scratch`
   Learn how to install GET-IT from scratch step by step.
+:ref:`caratteristiche_server`
+   minimum server requirements.
 
