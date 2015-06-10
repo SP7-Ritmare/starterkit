@@ -115,13 +115,13 @@ module.exports = function(grunt) {
 
     // Default task(s).
     grunt.registerTask('default',[
-        //'copy',
-        //'concat',
         'copy',
-        'useminPrepare',
         'concat',
-        'uglify',
-        'usemin',
+        // 'copy',
+        // 'useminPrepare',
+        // 'concat',
+        // 'uglify',
+        // 'usemin',
     ]);
 
 };

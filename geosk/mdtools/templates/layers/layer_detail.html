@@ -172,7 +172,7 @@
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-        <button id="save_metadata_btn" data-loading-text="Saving..." class="btn btn-primary">Register</button>
+        <button id="save_metadata_btn" data-loading-text="Saving..." class="btn btn-primary">Save metadata</button>
     </div>
 </div>
 
@@ -333,29 +333,28 @@
     var ediml_proxy_url = '{% url "ediproxy_importmd" layer.typename %}';
 
     var parameters;
-    if(parseInt(ediml_edimlId)){
-        parameters = {
-            edit: ediml_edimlId
-        }
-    } else {
-        var _parameters = {
-            'uid': '{{ layer.uuid }}',
-            'title': '{{ layer.title }}', //TODO
-            'abstract': '{{ layer.abstract }}', //TODO
-            'resource': '{{ layer.mdextension.ediml_resource }}',
-            'westlon': {{ layer.bbox_x0 }},
-            'eastlon': {{ layer.bbox_x1 }},
-            'southlat': {{ layer.bbox_y0 }},
-            'northlat': {{ layer.bbox_y1 }},
-            'referencesystem': '{{ layer.mdextension.ediml_referencesystem  }}'
-            //
-            //'spatialreferencesystem': 'http://www.opengis.net/def/crs/EPSG/0/4326'
-            // 'date': datetime.date.today().isoformat(), # layer.date.date().isoformat(),
-            // 'spatialrepresentationtype': (EDI_MAP_SPATIALREPRESENTATIONTYPE).get(layer.storeType),
-            // 'referencesystem': layer.srid.split(':')[1], ????????
-        }
-        parameters = {'parameters': JSON.stringify(_parameters)}
+    {% if layer.mdextension.fileid > 0 %}
+    parameters = {
+        edit: ediml_edimlId
     }
+    {% else %}
+    var _parameters = {
+        'uid': '{{ layer.uuid }}',
+        'title': '{{ layer.title }}',
+        'resource': '{{ layer.mdextension.ediml_resource }}',
+        'westlon': {{ layer.bbox_x0 }},
+        'eastlon': {{ layer.bbox_x1 }},
+        'southlat': {{ layer.bbox_y0 }},
+        'northlat': {{ layer.bbox_y1 }},
+        'referencesystem': '{{ layer.mdextension.ediml_referencesystem  }}'
+        //
+        //'spatialreferencesystem': 'http://www.opengis.net/def/crs/EPSG/0/4326'
+        // 'date': datetime.date.today().isoformat(), # layer.date.date().isoformat(),
+        // 'spatialrepresentationtype': (EDI_MAP_SPATIALREPRESENTATIONTYPE).get(layer.storeType),
+        // 'referencesystem': layer.srid.split(':')[1], ????????
+    }
+    parameters = {'parameters': JSON.stringify(_parameters)}
+    {% endif %}
 
     var ediProxyConfig = {
         id_open_btn: 'open_ediclient_btn',
