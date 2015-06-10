@@ -290,7 +290,7 @@ ritmaresk.utils.namingConvention = (function () {
 
         xsl = xslt.loadXMLDoc(filenameXsl);
         //workaround...intercept xslt issue for querystring "&" sep
-        var sampledFeature_workaround=foi.sampledFeature.replace("&","%_%26_%");
+        var sampledFeature_workaround=foi.sampledFeature.replace(/&/g,"%_%26_%");
         var params = {
             // TODO: sostituire l'endpoint con il VERO URI dello SK
             SK_DOMAIN_NAME: sk_dns,//endpoint.replace(/http[s]*:\/\//, ""),
