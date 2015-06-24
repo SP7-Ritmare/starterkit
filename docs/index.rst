@@ -14,6 +14,10 @@ Presentation
 
 :doc:`Introduction <presentation>` to GET-IT features and architecture.
 
+.. toctree::
+    :maxdepth: 2
+
+    presentation/index
 
 Tutorials
 =========
@@ -40,5 +44,6 @@ Having trouble? Cant find what you are looking for? We'd like to help!
 
 .. _ticket tracker: https://github.com/SP7-Ritmare/starterkit
 
-.. toctree::
-   :maxdepth: 5
+
+   
+
