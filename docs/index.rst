@@ -17,7 +17,7 @@ Presentation
 .. toctree::
     :maxdepth: 2
 
-    presentation/index
+    presentation
 
 Tutorials
 =========
