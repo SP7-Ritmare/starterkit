@@ -5,58 +5,33 @@ Pubblication by SP7 team
 Here is a list of pubblications by the SP7 project team, if interestead you can read it and make references in your pubblications.
 
 
-Pubblicazione su rivista internazionale ISI
+Pubblications on internationl magazine
 ===========================================
 
-Bordogna et al. (2014)"On predicting and improving the quality of Volunteer Geographic Information projects". International Journal of Digital Earth, November 2014, p. 1-22 DOI:10.1080/17538947.2014.976774
+* C. Fugazza, A. Oggioni, P. Carrara, “RITMARE: Linked Open Data for Italian Marine Research”, ERCIM-News (Issn: 0926-4981), No. 96 (January 2014), pp. 17-18, [Online] http://ercim-news.ercim.eu/en96/special/ritmare-linked-open-data-for-italian-marine-research
 
 
-Pubblicazione su rivista internazionale non ISI
-================================================
+International Congresses
+=========================
 
-Fugazza et al., RITMARE: Linked Open Data for Italian Marine Research, ERCIMnews, vol.96, Gennaio 2014
+* P. Carrara, A. Sarretta, A. Giorgetti, M. Ribera D'Alcalà, A. Oggioni, E. Partescano, An interoperable infrastructure for the Italian Marine Research, IMDIS 2013 (Int. Conf. on Marine Data and Information Systems), ISSN 0006-6729, Lucca (Italia), September 23-25, 2013, pp. 186-190
+ 
+* C. Fugazza, A. Basoni, S. Menegon, A. Oggioni, F. Pavesi, M. Pepe, A. Sarretta, P. Carrara, RITMARE: Semantics-aware Harmonisation of Data in Italian Marine Research, Current Research Information Systems 2014 (CRIS2014), Rome 13-15 May 2014, Proceedings published in Procedia Computer Science 33 ( 2014 ) 261 – 265,  doi: 10.1016/j.procs.2014.06.041, available online at www.sciencedirect.com
 
+* C. Fugazza,  S. Menegon, A., Oggioni, F. Pavesi, M. Pepe, P. Carrara, The RITMARE Starter Kit: Bottom-up capacity building for geospatial data providers, ICSOFT 2014 (9th International Conference on Software Paradigm Trends), Vienna 29-31 August 2014
 
-Convegni internazionali
-=======================
+* A. Basoni , Bastianini M., Fugazza C., Menegon S., Minuzzo T., Oggioni A., Pavesi F., Pepe M., Sarretta A., Tagliolato P., and Carrara P., Fostering bottom-up capacity in managing and sharing marine observations: the RITMARE StarterKit, accepted at EuroGOOS 2014, Lisbon 28-30 October 2014 (poster session)
 
-Carrara et al., An interoperable infrastructure for the Italian Marine Research, IMDIS, Lucca, 23-25 settembre 2013
+* C. Fugazza et al., Sensor metadata blueprints and computer-aided editing for disciplined SensorML, accepted at Digital Earth 2015 / 9th ISDE Symposium in Halifax, NS, Canada
 
+* M. Bastianini, Bernardi Aubry F., Bianchi F., Boldrin A., Camatti C., Carrara P., Delazzari A., Guerzoni S., Menegon S., Oggioni A., Pugnetti A., Sarretta A., Socal G., Tagliolato P., Vianello A., The LTER site Gulf of Venice and the project RITMARE: a case study for the recovery, search, view and sharing of long term ecological marine research data, submitted at XXII AIOL Congress
 
-Partescano et al., (Near) Real-time Validation and Standardization System Tested for MAMBO1 Meteo-marine Fixed Station, SENSORNETS 2014, Proceedings of the 3rd International Conference on Sensor Networks, Lisbona, 7 - 9 January, 2014
+* A. Oggioni, Basoni A., Bastianini M., Fugazza C., Menegon S., Pavesi F., Pepe M., Sarretta A., Carrara P., Lo StarterKit RITMARE: uno strumento abilitante per la costruzione bottom-up di un'infrastruttura di dati marini. 18a Conf. Naz. ASITA, Firenze 14-16ottobre 2014, pp. 921-922, ISBN 978-88-903132-9-5
 
-
-Oggioni et al., Sensing Real-Time observatories in marine sites: a proof-of-concept, Proceedings of the 3rd International Conference on Sensor Networks 2014, 7-9 Jan 2014, Lisbona
-
-
-Pepe et al., Bottom-up capacity building for data providers in RITMARE, EGU, Vienna, 27 aprile – 02 maggio 2014 RIT-SP7 31-10-2014 Page 8
-
-
-Carrara et al., The RITMARE coastal radar network and applications to monitor marine transport infrastructures, EGU, Vienna, 27 aprile – 02 maggio 2014
+* M. Pepe, A. Basoni, M. Bastianini, C. Fugazza, S. Menegon, A. Oggioni, F. Pavesi, A. Sarretta, P. Carrara, “Bottom-up capacity building for data providers in RITMARE”, Geophysical Research Abstracts, Vol. 16, EGU2014-10536, 2014, EGU General Assembly 28-30 April 2014, ESSI1.2, 30 April 2014
 
 
-Fugazza et al., RITMARE: Semantics-aware Harmonisation of Data in Italian Marine Research, CRIS 2014, Roma, 15 maggio 2014
-
-
-Basoni et al., Personalization and Contextualization of Access to Spatial Data Infrastructures, GIT 2014, Montefalco (PG), 16-18 giugno 2014
-
-
-Fugazza et al., A holistic, semantics-aware approach to Spatial Data Infrastructures, Proc. of 3rd International Conference on Data Management Technologies and Applications, 29-31 August 2014, Vienna
-
-
-Fugazza et al., The RITMARE Starter Kit: Bottom-up capacity building for geospatial data providers, Proc. of 9th International Conference on Software Paradigm Trends 29-31 August 2014, Vienna
-
-
-Criscuolo et al., A web 2.0 platform for a century of glaciological observations in the Italian Alps, poster at the International Symposium on The Future of the Glaciers, 18th-21st September 2014,  Turin, Italy DOI: 10.6084/m9.figshare.1180110
-
-
-Oggioni et al., Bottom-up capacity building for observations and measurements providers in RITMARE, TERENO Conference, Bonn, 29 settembre - 2 ottobre 2014
-
-
-Basoni et al., Bottom-up capacity building for data providers in RITMARE, EuroGOOS 2014, Lisbon, 28-30 October 2014
-
-
-Brevetti
+Patent
 ========
 
 Azione per la salvaguardia della IPR della suite software GET-IT Starter Kit a beneficio degli sviluppatori in RITMARE SP7.
