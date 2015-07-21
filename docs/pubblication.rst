@@ -1,11 +1,11 @@
 =========================
-Pubblication by SP7 team
+Publication by SP7 team
 =========================
 
 Here is a list of pubblications by the SP7 project team, if interestead you can read it and make references in your pubblications.
 
 
-Pubblications on internationl magazine
+Publications on international magazine
 ===========================================
 
 C. Fugazza, A. Oggioni, P. Carrara, “RITMARE: Linked Open Data for Italian Marine Research”, ERCIM-News (Issn: 0926-4981), No. 96 (January 2014), pp. 17-18, [Online] http://ercim-news.ercim.eu/en96/special/ritmare-linked-open-data-for-italian-marine-research
@@ -31,7 +31,7 @@ A. Oggioni, A. Basoni, M. Bastianini, C. Fugazza, S. Menegon, F. Pavesi, M. Pepe
 M. Pepe, A. Basoni, M. Bastianini, C. Fugazza, S. Menegon, A. Oggioni, F. Pavesi, A. Sarretta, P. Carrara, “Bottom-up capacity building for data providers in RITMARE”, Geophysical Research Abstracts, Vol. 16, EGU2014-10536, 2014, EGU General Assembly 28-30 April 2014, ESSI1.2, 30 April 2014
 
 
-Patent
+IPR Protection
 ========
 
 Azione per la salvaguardia della IPR della suite software GET-IT Starter Kit a beneficio degli sviluppatori in RITMARE SP7.
