@@ -27,11 +27,7 @@ tasks, like adding data or publishing maps, setting up and maintaining
 a server, or setting up a project to extend from GET-IT. These
 tutorials are written in a workshop like format and are broken into
 three groups: Users, Administrators and Developers.
-..
-   .. toctree::
-   ..    :maxdepth: 5
 
-       .. tutorials/index
 
 
 Need Help?
