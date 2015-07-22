@@ -1,0 +1,29 @@
+.. _quick:
+
+
+==========================
+GET-IT quick installation
+==========================
+
+GET-IT is distributed as virtual appliance in "vmdk"(virtual machine disk) format.
+
+A video demo is available `HERE <http://youtu.be/q-QDU-WxRRc>`_ (change resolution settings in youtube to better see the video). 
+
+Download and installation of the Virtual Machine
+=================================================
+
+Download the file ''starterkit.vmdk.gz'' using the following `LINK <http://geosk.ve.ismar.cnr.it/static/vm-sk-1.2-213243242/>`_ , we council to download the file in the machine where the virtualizer is present.
+
+Normally you can use the "wget" command followed by the url: ::
+
+ wget http://geosk.ve.ismar.cnr.it/static/vm-sk-1.2-213243242/starterkit.vmdk.gz
+
+Extract the file with "gunzip" command: ::
+
+gunzip starterkit.vmdk.gz
+
+
+
+
+
+

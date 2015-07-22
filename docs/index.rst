@@ -10,17 +10,28 @@ Documentation of 1.3 GET-IT version.
 Link to the old documentation pages: http://sp7.irea.cnr.it/wiki/index.php/Category:Learning
 
 Presentation
-=============
+============
 
 .. toctree::
-   :maxdepth: 5
-
+   :hidden:
+      
    presentation
    publication
 
 
+:ref:`presentation`
+
+:ref:`publication`
+  
+
 Tutorials
 =========
+
+.. toctree::
+   :hidden:
+      
+   tutorials/index
+
 
 ``This section is on working``
 
@@ -31,6 +42,7 @@ a server, or setting up a project to extend from GET-IT. These
 tutorials are written in a workshop like format and are broken into
 three groups: Users, Administrators and Developers.
 
+:ref:`tutorials`
 
 
 Need Help?
@@ -44,4 +56,7 @@ Having trouble? Cant find what you are looking for? We'd like to help!
 
 .. _ticket tracker: https://github.com/SP7-Ritmare/starterkit
 
+
+
+   
 

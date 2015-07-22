@@ -6,17 +6,17 @@ Administrators Tutorials
 
 Welcome to the GET-IT Administrators Workshop!
 
+:ref:`quick`
+     Learn how to install GET-IT by virtual machine.
+:ref:`scratch`
+     Learn how to install GET-IT from scratch step by step.
+:ref:`server`
+     Minimum server requirements.
+
+
 .. toctree::
-   :maxdepth: 5
    :hidden:
 
-   install/index
-
-
-:ref:`install_quick`
-  Learn how to install GET-IT by virtual machine.
-:ref:`install_scratch`
-  Learn how to install GET-IT from scratch step by step.
-:ref:`caratteristiche_server`
-   minimum server requirements.
-
+   quick
+   scratch
+   server

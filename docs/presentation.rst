@@ -1,3 +1,5 @@
+.. _presentation:
+
 Short presentation to GET-IT features and its architecture
 ===========================================================
 
@@ -23,4 +25,5 @@ GET-IT also permits to manage (for every data type uploaded) permission for regi
 * download data
 
 GET-IT is distributed with an open-source license ( `GPL v.3.0 <http://www.gnu.org/copyleft/gpl.html>`_ ) and distributed through a ready to use virtual machine. After installation it provides a user friendly interface, the tools and services that compose a local infrastructure with above-mentioned features.
+
 
