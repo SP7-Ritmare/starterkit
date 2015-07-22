@@ -8,7 +8,7 @@ Here is a list of pubblications by the SP7 project team, if interestead you can 
 Publications on Journals
 ===========================================
 
-C. Fugazza, A. Oggioni, P. Carrara, “RITMARE: Linked Open Data for Italian Marine Research”, ERCIM-News (Issn: 0926-4981), No. 96 (January 2014), pp. 17-18, [Online] http://ercim-news.ercim.eu/en96/special/ritmare-linked-open-data-for-italian-marine-research
+* C.Fugazza, A. Oggioni, P. Carrara, “RITMARE: Linked Open Data for Italian Marine Research”, ERCIM-News (Issn: 0926-4981), No. 96 (January 2014), pp. 17-18, [Online] http://ercim-news.ercim.eu/en96/special/ritmare-linked-open-data-for-italian-marine-research
 
 
 International Conferences
