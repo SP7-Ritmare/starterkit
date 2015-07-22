@@ -4,13 +4,13 @@
    contain the root `toctree` directive.
 
 Welcome to GET-IT's documentation!
-==================================
+===================================
 
 Documentation of 1.3 GET-IT version.
 Link to the old documentation pages: http://sp7.irea.cnr.it/wiki/index.php/Category:Learning
 
 Presentation
-============
+=============
 
 :doc:`Introduction <presentation>` to GET-IT features and architecture.
 
