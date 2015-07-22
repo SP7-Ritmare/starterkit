@@ -1,8 +1,8 @@
 =========================
-Publications by SP7 team
+Activities by SP7 team
 =========================
 
-Here is a list of pubblications by the SP7 project team, if interestead you can read it and make references in your pubblications.
+Here is a list of pubblications and other activities by the SP7 project team, if interestead you can read it and make references in your pubblications.
 
 
 Publications on Journals
