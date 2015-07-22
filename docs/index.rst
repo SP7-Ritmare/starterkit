@@ -12,10 +12,11 @@ Link to the old documentation pages: http://sp7.irea.cnr.it/wiki/index.php/Categ
 Presentation
 =============
 
-:doc:`Introduction <presentation>` to GET-IT features and architecture.
+.. toctree::
+   :maxdepth: 5
 
-
-:doc:`Publication <publication>` by SP7 team.
+   presentation
+   publication
 
 
 Tutorials
@@ -41,5 +42,4 @@ Having trouble? Cant find what you are looking for? We'd like to help!
 
 .. _ticket tracker: https://github.com/SP7-Ritmare/starterkit
 
-.. toctree::
-   :maxdepth: 5
+
