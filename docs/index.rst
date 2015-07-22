@@ -15,7 +15,7 @@ Presentation
 :doc:`Introduction <presentation>` to GET-IT features and architecture.
 
 
-:doc:`Pubblication <pubblication>` by SP7 team.
+:doc:`Publication <publication>` by SP7 team.
 
 
 Tutorials
