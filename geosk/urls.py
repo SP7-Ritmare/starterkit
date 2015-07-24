@@ -49,6 +49,9 @@ urlpatterns = patterns('',
     # OSK views
     (r'^sensors/', include('geosk.osk.urls')),
 
+    # INSPIRE workshop
+    (r'^inspireworkshop/', include('geosk.inspireworkshop.urls')),
+
     (r'^grappelli/', include('grappelli.urls')), # grappelli URLS
  ) + urlpatterns
 

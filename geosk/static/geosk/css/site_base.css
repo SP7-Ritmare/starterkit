@@ -147,3 +147,23 @@ A:hover {font-size:24; font-weight:bold; color: red;}
   word-wrap: break-word;
   word-break: break-word;
 }
+
+/* modal window for EDIClient */
+#ediclient_container {
+  width: 100%;
+  left: 0;
+  margin-left: 0;
+  top: 0;
+  margin-top: 0!important;
+  height: 100%;
+}
+#ediclient_container .modal-body {
+  height: 90%;
+  max-height: none;
+}
+#ediclient_container .modal-footer{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}

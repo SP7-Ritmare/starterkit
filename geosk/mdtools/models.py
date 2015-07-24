@@ -21,6 +21,7 @@ from datetime import datetime
 # from rdflib import Graph, Literal, BNode, Namespace, RDF, URIRef
 # from rdflib.namespace import  Namespace, DC, FOAF
 
+from django.conf import settings
 from django.db import models
 from django.forms import model_to_dict
 from annoying.fields import AutoOneToOneField
@@ -67,6 +68,7 @@ class MultiContactRole(models.Model):
 class MdExtension(models.Model):
     resource     = AutoOneToOneField(ResourceBase, primary_key=True)
     elements_xml = models.TextField(null=True, blank=True)
+    ediversion = models.CharField(max_length=100, null=True, blank=True)
     rndt_xml     = models.TextField(null=True, blank=True)
     fileid       = models.IntegerField(null=True, blank=True)
 
@@ -75,6 +77,13 @@ class MdExtension(models.Model):
 
     contacts     = models.ManyToManyField(Profile, through='MultiContactRole')
 
+    @property
+    def ediml_referencesystem(self):
+        return self.resource.srid.split(':')[1]
+
+    @property
+    def ediml_resource(self):
+        return '{}{}'.format(settings.SITEURL[:-1], self.resource.get_absolute_url())
 
     @property
     def rndt_xml_clean(self):
