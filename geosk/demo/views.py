@@ -9,7 +9,7 @@ from django.views.generic import TemplateView
 from django.http import HttpResponse
 
 class WorkshopView(TemplateView):
-    template_name = 'inspireworkshop/index.html'
+    template_name = 'demo/index.html'
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
