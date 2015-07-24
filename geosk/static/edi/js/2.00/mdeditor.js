@@ -1305,7 +1305,8 @@ function setAutocompletions() {
 			    });
 				
 			    
-                            $("#postButton").click(function() {
+                            $("#postButton").click(function(event) {
+				event.preventDefault();
                             	var document = jQuery.parseXML("<ritmare></ritmare>");
 				var version = querystring("version");
 				if ( !version ) {
@@ -1351,6 +1352,10 @@ function setAutocompletions() {
                             		$("*[element_id='" + elementId + "']").each(function() {
 						var type = $(this).attr("datatype");
 						var urnValue = "";
+						var codeValue = "";
+						var value = "";
+						var languageNeutralValue = "";
+						
 						if ( type == "code" || type == "query" ) {
 							// doDebug($(this) + " is a select");
 							// doDebug($(this).attr("id") + " option:selected");
