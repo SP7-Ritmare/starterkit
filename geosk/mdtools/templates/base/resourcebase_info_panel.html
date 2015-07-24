@@ -5,14 +5,14 @@
   {% if resourcebase.title%}
     <li>
       <strong>{% trans "Title" %}:</strong>
-      {{ resourcebase.title|truncatechars:80 }}
+      {{ resourcebase.title }}
     </li>
   {% endif %}
 
   {% if resourcebase.abstract %}
     <li>
       <strong>{% trans "Abstract" %}:</strong>
-      {{ resourcebase.abstract|escape|urlize|linebreaks|safe|truncatechars:160 }}
+      {{ resourcebase.abstract|escape|urlize|linebreaks|safe }}
     </li>
   {% endif %}
 
@@ -131,7 +131,7 @@
     {% if resourcebase.purpose %}
       <li>
         <strong>{% trans "Purpose" %}:</strong>
-        {{ resourcebase.purpose|escape|urlize|linebreaks|safe|truncatechars:160 }}
+        {{ resourcebase.purpose|escape|urlize|linebreaks|safe }}
       </li>
     {% endif %}
 
@@ -159,7 +159,7 @@
     {% if resourcebase.supplemental_information %}
       <li>
         <strong>{% trans "Supplemental Information" %}:</strong> 
-        {{ resourcebase.supplemental_information|truncatechars:160|escape|urlize|linebreaks|safe }}
+        {{ resourcebase.supplemental_information|escape|urlize|linebreaks|safe }}
       </li>
     {% endif %}
 

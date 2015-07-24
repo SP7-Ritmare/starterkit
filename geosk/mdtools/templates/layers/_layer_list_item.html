@@ -11,7 +11,7 @@
   <div class="content">
     <div class="item-header">
       <a href="{% url "layer_detail" layer.typename %}"><img class="thumb" src="{{ layer.get_thumbnail_url }}" /></a>
-      <h3><i class="icon-unchecked icon-rotate-45"></i> <a href="{% url "layer_detail" layer.typename %}">{{ layer.title }}</a></h3>   
+      <h3><i class="icon-unchecked icon-rotate-45"></i> <a href="{% url "layer_detail" layer.typename %}">{{ layer.title }}</a></h3>
     </div>
     <div class="details">
       <div class="meta">
@@ -21,7 +21,11 @@
           <li><a href="{% url "layer_detail" layer.typename %}"><strong>{{ layer.popular_count }}</strong> {% blocktrans count counter=layer.popular_count %}view {% plural %}views {% endblocktrans %}</a></li>
           <li><a href="{% url "layer_detail" layer.typename %}#rate"><strong><span class="avg_rating" data-rating="{{ layer_rating }}"> <span class="overall_rating"></span></span></strong> {% trans "Average rating" %} ({{num_votes}} {% trans "votes" %})</a></li>
 	  <li>
+            {% if layer.mdextension.ediversion == '1' %}
 	    <a href="{% url "layer_metadata" layer.typename %}">
+            {% else %}
+            <a href="{% url "layer_detail" layer.typename %}#ediclient_container">
+            {% endif %}
 	    <div class="progress" style="height: 12px; padding: 0px; margin-bottom: 7px;">
 	      <div class="bar bar-{{ layer.completeness.class }}" style="width: {{ layer.completeness.perc }}%;"></div>
 	    </div>
@@ -36,10 +40,10 @@
           <a href="{% url "new_map" %}?layer={{ layer.typename }}" class="btn btn-mini">{% trans "Create a map" %}</a>
         </p>
       </div>
-    </div> <!-- /.details -->  
+    </div> <!-- /.details -->
   </div> <!-- /.content -->
 
-  
+
   <div class="modal custom hide" id="download-{{layer.id}}">
     <div class="modal-header">
       <button class="close" data-dismiss="modal">×</button>
@@ -63,10 +67,10 @@
         {% else %}
             <li><a href="{{ link.url }}">{{ link.name }}</a></li>
         {% endif %}
-        {% endfor %} 
+        {% endfor %}
         </ul>
       </div>
-    {% endif %} 
+    {% endif %}
     </div>
   </div>
 </article>

@@ -15,7 +15,6 @@
 {{ block.super }}
 {% endblock %}
 
-
 {% block body_class %}data{% endblock %}
 
 {% block body_outer %}
@@ -58,7 +57,11 @@
         </a>
         <ul class="dropdown-menu">
           <!--li><a href="">Edit Layer Data <i class="icon-chevron-right"></i></a></li-->
+          {% if layer.mdextension.ediversion == '1' %}
           <li><a href="{% url "layer_metadata" layer.typename %}">{% trans "Edit Metadata" %} <i class="icon-chevron-right"></i></a></li>
+          {% else %}
+          <li><a id="open_ediclient_btn" href="#ediclient_container">{% trans "Edit Metadata (INSPIRE)" %}<i class="icon-chevron-right"></i></a></li>
+          {% endif %}
           {% if GEONODE_SECURITY_ENABLED %}
           <li><a href="#modal_perms" data-toggle="modal">{% trans "Edit Permissions" %} <i class="icon-chevron-right"></i></a></li>
           {% endif %}
@@ -142,16 +145,44 @@
         {% overall_rating layer "layer" as layer_rating %}
         {% num_ratings layer as num_votes %}
         <div class="overall_rating" style="float:left" data-rating="{{ layer_rating }}"></div> ({{num_votes}})
-        
+
         <!-- TODO: Add display of who gave what rating based -->
       </article>
     </div>
   </div>
+
+<div id="ediclient_container" class="modal hide fade" tabindex="-1" role="dialog">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h1>Edit metadata {{ layer.title|default:layer.typename }}</h1>
+    </div>
+    <div class="modal-body">
+        <div class="alert alert-block alert-info hide">
+            <h4 class="alert-heading loading-message"></h4>
+            <div class="progress progress-striped active">
+                <div class="bar" style="width: 100%;"></div>
+            </div>
+        </div>
+        <div class="alert alert-block alert-error hide">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <h4 class="alert-heading">Oh snap! You got an error!</h4>
+            <p class="error-message"></p>
+        </div>
+        <iframe id="ediclient_container_iframe" src="" style="zoom:0.60" width="99.6%" height="90%" frameborder="0"></iframe>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+        <button id="save_metadata_btn" data-loading-text="Saving..." class="btn btn-primary">Save metadata</button>
+    </div>
+</div>
+
+
+
   <aside class="span4">
-    
+
 <div class="well">
 	<!-- Need to make this based on a listener -->
-	
+
 	<h2>{%trans "Legend" %}</h2>
 	<p>{{ style.sld_title }}</p>
 	<p><img src="{{ GEOSERVER_BASE_URL }}/wms?request=GetLegendGraphic&format=image/png&WIDTH=20&HEIGHT=20&LAYER=
@@ -163,7 +194,7 @@
         <p>{% trans "List of maps using this layer:" %}</p>
         {% endif %}
         <ul class="unstyled space">
-          {% for maplayer in layer.maps %} 
+          {% for maplayer in layer.maps %}
             <li><a href="{{ maplayer.map.get_absolute_url }}">{{ maplayer.map.title }}</a></li>
           {% empty %}
             <li>{% trans "This layer is not currently used in any maps." %}</li>
@@ -175,7 +206,7 @@
         <h2>{% trans "Documents related to this layer" %}</h2>
         <p>{% trans "List of documents related to this layer:" %}</p>
         <ul class="unstyled space">
-          {% for document in documents %} 
+          {% for document in documents %}
             <li><a href="{{ document.get_absolute_url }}">{{ document.title }}</a></li>
           {% endfor %}
         </ul>
@@ -233,7 +264,7 @@
       {% endwith %}
     </div>
   </aside>
-  {% if GEONODE_SECURITY_ENABLED %}   
+  {% if GEONODE_SECURITY_ENABLED %}
   {% include "_permissions_form.html" %}
   {% endif %}
 {% endblock %}
@@ -283,14 +314,64 @@
               data: $("#form_post_comment").serialize(),
               success: function() {
                 $('#form_post_comment_div').modal('hide');
-                $('#comments_section').load(window.location.pathname + ' #comments_section', 
+                $('#comments_section').load(window.location.pathname + ' #comments_section',
                 		function(){$(this).children().unwrap()})
               }
             });
             return false;
-          });        
+          });
     </script>
     {% if GEONODE_SECURITY_ENABLED %}
     {% include "_permissions_form_js.html" %}
     {% endif %}
+    <script src="{{STATIC_URL}}geosk/js/EdiProxy.js" type="text/javascript"></script>
+    <script>
+    {% get_current_language as  LANGUAGE_CODE %}
+    var ediml_current_language = '{{ LANGUAGE_CODE }}';
+    var ediml_edimlId = '{{ layer.mdextension.fileid }}';
+    var ediml_client_url = "{{ STATIC_URL }}EDI-NG_client/INSPIRE_dataset.html?";
+    var ediml_proxy_url = '{% url "ediproxy_importmd" layer.typename %}';
+
+    var parameters;
+    {% if layer.mdextension.fileid > 0 %}
+    parameters = {
+        edit: ediml_edimlId
+    }
+    {% else %}
+    var _parameters = {
+        'uid': '{{ layer.uuid }}',
+        'title': '{{ layer.title }}',
+        'resource': '{{ layer.mdextension.ediml_resource }}',
+        'westlon': {{ layer.bbox_x0 }},
+        'eastlon': {{ layer.bbox_x1 }},
+        'southlat': {{ layer.bbox_y0 }},
+        'northlat': {{ layer.bbox_y1 }},
+        'referencesystem': '{{ layer.mdextension.ediml_referencesystem  }}'
+        //
+        //'spatialreferencesystem': 'http://www.opengis.net/def/crs/EPSG/0/4326'
+        // 'date': datetime.date.today().isoformat(), # layer.date.date().isoformat(),
+        // 'spatialrepresentationtype': (EDI_MAP_SPATIALREPRESENTATIONTYPE).get(layer.storeType),
+        // 'referencesystem': layer.srid.split(':')[1], ????????
+    }
+    parameters = {'parameters': JSON.stringify(_parameters)}
+    {% endif %}
+
+    var ediProxyConfig = {
+        id_open_btn: 'open_ediclient_btn',
+        id_container: 'ediclient_container',
+        ediml_client_url: ediml_client_url,
+        ediml_proxy_url: ediml_proxy_url,
+        ediml_current_language: ediml_current_language,
+        parameters: parameters
+    }
+
+    var ediProxy = new EdiProxy(ediProxyConfig);
+
+    //open modal
+    var hash = window.location.hash
+    if(hash=='#ediclient_container'){
+        $(hash).modal('show');
+    }
+
+</script>
 {% endblock extra_script %}

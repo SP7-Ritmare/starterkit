@@ -41,8 +41,8 @@ WSGI_APPLICATION = "geosk.wsgi.application"
 # STATIC_ROOT = os.path.join(LOCAL_ROOT, "static_root")
 
 # Additional directories which hold static files
-STATICFILES_DIRS.append(
-   os.path.join(LOCAL_ROOT, "static"),
+STATICFILES_DIRS.insert(
+    0,os.path.join(LOCAL_ROOT, "static")
 )
 
 # Note that Django automatically includes the "templates" dir in all the
@@ -67,6 +67,7 @@ LANGUAGES = (
 INSTALLED_APPS = (
     # GeoSK
     # 'geosk.rndt',
+    'geosk.inspireworkshop',
     'geosk.osk',
     'geosk.mdtools',
     'geosk.geoskbase',

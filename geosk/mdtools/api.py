@@ -14,6 +14,7 @@ from django.template import RequestContext
 from django.core.serializers.json import DjangoJSONEncoder
 from django.core.urlresolvers import reverse
 from django.utils.safestring import mark_safe
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 from geonode.base.models import SpatialRepresentationType, TopicCategory
@@ -183,7 +184,6 @@ def rndtproxy(request, layername):
     return json_response(body={'success':True,'redirect': reverse('layer_detail', args=(layer.typename,))})
     # return HttpResponseRedirect()
 
-
 def _post_validate(vals):
     errors = []
     # check required fields
@@ -196,7 +196,6 @@ def _post_validate(vals):
         if r not in vals.keys():
             errors.append(r)
     return errors
-
 
 def importediml(request, template='mdtools/upload_metadata.html'):
     if request.method == 'POST':
@@ -250,7 +249,7 @@ def _parse_metadata(xml):
     mdata.xml = None
     return mdata
 
-def _savelayermd(layer, rndt, ediml):
+def _savelayermd(layer, rndt, ediml, version='1'):
     if ediml:
         fileid = _get_fileid(ediml)
         # new fileid must be equal to the old one
@@ -290,6 +289,7 @@ def _savelayermd(layer, rndt, ediml):
     layer.mdextension.md_language = vals['md_language']
     layer.mdextension.md_date = vals['md_date'] if vals['md_date'] is not None else layer.date
     layer.mdextension.rndt_xml = rndt
+    layer.mdextension.ediversion = version
     if ediml:
         layer.mdextension.elements_xml = ediml
     layer.mdextension.save()
@@ -442,16 +442,48 @@ def rndt2dict(exml):
         vals['identification_contact'] = identification_contact
 
         distributor_contact = []
-        for d in mdata.distribution.distributor:
-            c = d.contact
-            c = c.__dict__
-            if c['onlineresource'] is not None:
-                c['onlineresource'] = c['onlineresource'].__dict__
-            distributor_contact.append(c)
-        vals['distributor_contact'] = distributor_contact
+        if hasattr(mdata.distribution, 'distributor'):
+            for d in mdata.distribution.distributor:
+                c = d.contact
+                c = c.__dict__
+                if c['onlineresource'] is not None:
+                    c['onlineresource'] = c['onlineresource'].__dict__
+                distributor_contact.append(c)
+            vals['distributor_contact'] = distributor_contact
 
 
     if mdata.dataquality is not None:
         vals['data_quality_statement'] = mdata.dataquality.lineage
 
     return [vals, keywords]
+
+# TODO: move on ediproxy app
+# ediml version 2
+@login_required
+def ediproxy_importmd(request, layername):
+    layer = _resolve_layer(request, layername, 'layers.change_layer', _PERMISSION_MSG_METADATA)
+    isoml = request.POST.get('generatedXml').encode('utf8')
+    ediml = request.POST.get('ediml').encode('utf8')
+    edimlid = request.POST.get('edimlid')
+    try:
+        _savelayermd(layer, isoml, ediml, version='2')
+    except Exception as e:
+        return json_response(exception=e, status=500)
+    return json_response(body={'success':True})
+
+# fare una class base view
+# e spostare in una nuova funzione rest
+# def load_isoedimlid(request, layername):
+
+# def load_isoediml(request, layername):
+#     layer = _resolve_layer(request, layername, 'layers.change_layer', _PERMISSION_MSG_METADATA)
+#     ediml = request.raw_post_data
+
+#         _savelayermd(layer, rndt, ediml)
+#     except Exception as e:
+#         return json_response(exception=e, status=500)
+
+#     return json_response(body={'success':True,'redirect': reverse('layer_detail', args=(layer.typename,))})
+#     # return HttpResponseRedirect()
+
+# # def load_
