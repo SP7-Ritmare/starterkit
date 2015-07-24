@@ -1,5 +1,5 @@
 // override read function adding X-CSRFToken header
-OpenLayers.Protocol.SOS.v1_0_0.prototype.read = function(options) {    
+OpenLayers.Protocol.SOS.v1_0_0.prototype.read = function(options) {
     options = OpenLayers.Util.extend({}, options);
     OpenLayers.Util.applyDefaults(options, this.options || {});
     var response = new OpenLayers.Protocol.Response({requestType: "read"});
@@ -34,7 +34,7 @@ OpenLayers.SOSClient = OpenLayers.Class({
     resultModel: 'om:Measurement',
 
     /**
-     * 
+     *
      */
     initialize: function (options) {
         OpenLayers.Util.extend(this, options);
@@ -42,11 +42,11 @@ OpenLayers.SOSClient = OpenLayers.Class({
         var paramString = OpenLayers.Util.getParameterString(params);
         url = OpenLayers.Util.urlAppend(this.url, paramString);
         OpenLayers.Request.GET({url: url,
-                                success: this.parseSOSCaps, 
+                                success: this.parseSOSCaps,
 				scope: this,
 				async: false // metto async false altrimenti non riesco a controllare il caricamento da GXP
 			       });
-	
+
 
     },
     getRandomColor: function () {
@@ -116,8 +116,8 @@ OpenLayers.SOSClient = OpenLayers.Class({
 	    }
 	}
 	return elements[0].url;
-    }, 
-    
+    },
+
     parseSOSCaps: function(response) {
         // cache capabilities for future use
         this.SOSCapabilities = this.capsformat.read(response.responseXML || response.responseText);
@@ -129,9 +129,9 @@ OpenLayers.SOSClient = OpenLayers.Class({
         // this.map.addControl(this.ctrl);
         // this.ctrl.activate();
     },
-    
+
     /**
-     * 
+     *
      */
     getFois: function() {
         var result = [];
@@ -149,7 +149,7 @@ OpenLayers.SOSClient = OpenLayers.Class({
         }
         return result;
     },
-    
+
     getTitleForObservedProperty: function(property) {
         for (var name in this.SOSCapabilities.contents.offeringList) {
             var offering = this.SOSCapabilities.contents.offeringList[name];
@@ -189,9 +189,9 @@ OpenLayers.SOSClient = OpenLayers.Class({
             observedProperties: observedProperties,
             responseFormat: this.getResponseFormat()
         });
-        
+
         var timeperiodXml = this.getGmlTimeperiod(begin, end);
-        
+
         // a little rework due to missing timeperiod in OL-Format
         xml = xml.replace("xmlns:ogc=\"http://www.opengis.net/ogc\"", "xmlns:ogc=\"http://www.opengis.net/ogc\" xmlns:gml=\"http://www.opengis.net/gml\"");
         xml = xml.replace("<eventTime/>", timeperiodXml);
@@ -199,20 +199,20 @@ OpenLayers.SOSClient = OpenLayers.Class({
     },
 
     getGmlTimeperiod: function(begin, end) {
-        var timeperiod = "<eventTime>" + 
-                "<ogc:TM_During>" + 
-                "<ogc:PropertyName>om:samplingTime</ogc:PropertyName>" + 
-                "<gml:TimePeriod>" + 
-                "<gml:beginPosition>" + moment(begin).format() + "</gml:beginPosition>" + 
-                "<gml:endPosition>" + moment(end).format() + "</gml:endPosition>" + 
-                "</gml:TimePeriod>" + 
-                "</ogc:TM_During>" + 
+        var timeperiod = "<eventTime>" +
+                "<ogc:TM_During>" +
+                "<ogc:PropertyName>om:samplingTime</ogc:PropertyName>" +
+                "<gml:TimePeriod>" +
+                "<gml:beginPosition>" + moment(begin).format() + "</gml:beginPosition>" +
+                "<gml:endPosition>" + moment(end).format() + "</gml:endPosition>" +
+                "</gml:TimePeriod>" +
+                "</ogc:TM_During>" +
                 "</eventTime>";
-        
+
         return timeperiod;
     },
 
-    
+
     getResponseFormat: function(){
         if (!this.responseFormat) {
             for (format in this.SOSCapabilities.operationsMetadata.GetObservation.parameters.responseFormat.allowedValues) {
@@ -247,7 +247,7 @@ OpenLayers.SOSClient = OpenLayers.Class({
         }
 	return offerings;
     },
-    
+
     onFeatureSelect: function(feature) {
 	//alert(feature);
 	//console.log(feature);
@@ -275,7 +275,7 @@ OpenLayers.SOSClient = OpenLayers.Class({
 	//if(offering.observedProperties.length>0){
 	//  var observedProperties = {0: offering.observedProperties[0]}
         //}
-	
+
 	// ora e' passato come parametro alla funzione
 	var observedProperties = {0: observedProperty_id}
 
@@ -296,11 +296,11 @@ OpenLayers.SOSClient = OpenLayers.Class({
 			// this.chartReload(); //TODO lanciare automaticamente il reload
 		    }
 		}
-		var output = this.obsformat.read(response.responseXML || response.responseText);		
+		var output = this.obsformat.read(response.responseXML || response.responseText);
 		//console.log(output);
 		onSuccess(offering, output);
 	    },
-	    
+
             failure: function(response) {
                 ("No data for charts...");
             },
@@ -310,19 +310,19 @@ OpenLayers.SOSClient = OpenLayers.Class({
     },
 
 
-    
+
     /**
-     * 
+     *
      */
     destroy: function () {
     },
 
     /**
-     * 
+     *
      */
     CLASS_NAME: "OpenLayers.SOSClient"
 });
-    
+
     PlotDataStore = Ext.extend(Ext.util.Observable, {
 	constructor: function(config){
 	    this.dataSeries = [];
@@ -333,7 +333,7 @@ OpenLayers.SOSClient = OpenLayers.Class({
             });
 
             this.listeners = config.listeners;
-	    
+
             PlotDataStore.superclass.constructor.call(this, config)
 	},
 	addSerie: function(data){
@@ -342,7 +342,7 @@ OpenLayers.SOSClient = OpenLayers.Class({
 	},
 	removeAll: function(){
 	    this.dataSeries = [];
-	    this.fireEvent('reload', this.dataSeries);	    
+	    this.fireEvent('reload', this.dataSeries);
 	},
 	removeSerie: function(serie_id){
             for(var i=0; i< this.dataSeries.length; i++) {
@@ -358,15 +358,15 @@ OpenLayers.SOSClient = OpenLayers.Class({
 	download: function(){
 	    // console.log(this.dataSeries);
 	    var de = new DataExporter();
-	    de.exportGrid(this.dataSeries);	    
+	    de.exportGrid(this.dataSeries);
 	}
-	
+
     });
 
 
 DataExporter = Ext.extend(Object, {
     dateFormat : 'Y-m-d g:i',
-    
+
     exportGrid: function(grid) {
         if (Ext.isIE) {
             this._ieToExcel(grid);
@@ -479,7 +479,7 @@ DataExporter = Ext.extend(Object, {
         if (window.ActiveXObject){
             var  xlApp, xlBook;
             try {
-                xlApp = new ActiveXObject("Excel.Application"); 
+                xlApp = new ActiveXObject("Excel.Application");
                 xlBook = xlApp.Workbooks.Add();
             } catch (e) {
                 Ext.Msg.alert('Error', 'For the export to work in IE, you have to enable a security setting called "Initialize and script ActiveX control not marked as safe" from Internet Options -> Security -> Custom level..."');
@@ -488,10 +488,10 @@ DataExporter = Ext.extend(Object, {
 
             xlBook.worksheets("Sheet1").activate;
             var XlSheet = xlBook.activeSheet;
-            xlApp.visible = true; 
+            xlApp.visible = true;
 
             this._ieGetGridData(grid, XlSheet);
-            XlSheet.columns.autofit; 
+            XlSheet.columns.autofit;
         }
     }
 });
@@ -499,18 +499,18 @@ DataExporter = Ext.extend(Object, {
 
 FoiExplorer = Ext.extend(Ext.Window, {
     constructor: function(config){
-        var today = new Date(), begin = new Date(), end = new Date();    
-	
+        var today = new Date(), begin = new Date(), end = new Date();
+
 	this.timeRange = 2;
-        
+
         begin.setDate(today.getDate() - this.timeRange);
         this.dateRange = [begin, end];
 	this.frequency = 10;
 	this.interval = 3600;
-	
+
 	this.sosClient = config.sosClient;
 	this.foiId = config.foi.attributes.id
-	
+
 	// add listeners
         this.addEvents({
             //"addSerie" : true,
@@ -518,10 +518,10 @@ FoiExplorer = Ext.extend(Ext.Window, {
 	    //"reload": true
         });
         this.listeners = config.listeners;
-	
+
 	// configure window
         this.count = 0;
-        
+
         //reinit
         this.offeringsGridId = Ext.id();
         this.placeholderId = Ext.id();
@@ -531,7 +531,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
 	var defaultConfig = this.configureSOSWindow();
 	Ext.apply(defaultConfig, config);
 	FoiExplorer.superclass.constructor.call(this, defaultConfig);
-	
+
 
 	// lo creo qui per avere lo scope: this
 	// create stores
@@ -556,11 +556,11 @@ FoiExplorer = Ext.extend(Ext.Window, {
 	}
 
 	this.enableRealTime(false);
-	
+
     },
     plot: null,
     chartOptions: {
-        series: { 
+        series: {
             lines: { show: true },
             points: { show: true, radius: 2 } ,
             stack: false
@@ -604,7 +604,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
 	    end = new Date();
             begin.setTime(now.getTime() - this.interval * 1000);
 	}
-	
+
 	//console.log(moment(begin).format());
 	//console.log(moment(end).format());
 
@@ -612,7 +612,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
         this.chartMask.show();
 
 	var plotDataStore = this.plotDataStore;
-	this.sosClient.getObservation(this.foiId, offering_id, observedProperty_id, begin,end, 
+	this.sosClient.getObservation(this.foiId, offering_id, observedProperty_id, begin,end,
 				      function(offering, output){
 					  var rows = [];
 					  var label = observedProperty_id + " = No Values";
@@ -625,7 +625,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
 						  var timestamp = timePosObj.getTime();
 						  rows.push([timestamp, parseFloat(output.measurements[i].result.value)]);
 					      }
-		    
+
 					      function sortfunction(a, b){
 						  if(a[0] > b[0]) {
 						      return 1;
@@ -643,8 +643,8 @@ FoiExplorer = Ext.extend(Ext.Window, {
 	var grid = Ext.getCmp(this.offeringsGridId);
 	this.plotDataStore.removeAll();
 
-	var selection= grid.getSelectionModel(); 
-	for(i=0;i < grid.store.getCount();i++){  
+	var selection= grid.getSelectionModel();
+	for(i=0;i < grid.store.getCount();i++){
             if(selection.isSelected(i)){
 		this.onSelectOffering(1, 1, grid.store.getAt(i));
 	    }
@@ -690,16 +690,16 @@ FoiExplorer = Ext.extend(Ext.Window, {
 	var a = date.format("YYYY-MM-DD HH:mm");
         return a;
     },
-    addSensorRecord: function(offering, name, time, lastvalue) {        
+    addSensorRecord: function(offering, name, time, lastvalue) {
         this.count++;
 	for(var i=0; i< offering.observedProperties.length; i++) {
 	    //console.log(i);
 	    //console.log(offering.observedProperties[i]);
 	    this.offeringsStore.add(
 		this.getSensorRecord({
-		    type: offering.name, 
+		    type: offering.name,
 		    name: name,
-		    observedProperty: offering.observedProperties[i], 
+		    observedProperty: offering.observedProperties[i],
 		    time: time,
 		    startPeriod: (offering.time && offering.time.timePeriod) ? this.getFormattedDateFromTimePos(offering.time.timePeriod.beginPosition) : '-',
 		    endPeriod: (offering.time && offering.time.timePeriod) ? this.getFormattedDateFromTimePos(offering.time.timePeriod.endPosition) : '-',
@@ -707,7 +707,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
 		})
 	    );
         };
-    },    
+    },
     getSensorRecord: function(config){
 	Ext.apply({
 	    type: null,
@@ -760,12 +760,12 @@ FoiExplorer = Ext.extend(Ext.Window, {
         $("#"+this.placeholderId).bind('plotpan', function (event, plot) {
             sos.initLegends();
         });
-        
+
         $("#"+this.placeholderId).bind('plotzoom', function (event, plot) {
             sos.initLegends();
         });
-        
-    },    
+
+    },
     updateLegend: function(){
         this.updateLegendTimeout = null;
         var pos = this.latestPosition;
@@ -782,7 +782,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
             for (j = 0; j < series.data.length; ++j)
                 if (series.data[j][0] > pos.x)
                     break;
-            
+
             // now interpolate
             var y, p1 = series.data[j - 1], p2 = series.data[j];
             if (p1 == null)
@@ -791,7 +791,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
                 y = p1[1];
             else
                 y = p1[1] + (p2[1] - p1[1]) * (pos.x - p1[0]) / (p2[0] - p1[0]);
-            
+
             this.legends.eq(i).text(series.label.replace(/=.*/, "= " + y.toFixed(3)));
         }
     },
@@ -801,7 +801,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
             // store configs
             // autoDestroy: true,
             // reader configs
-            idIndex: 0,  
+            idIndex: 0,
             fields: [
 		{name: 'type'},
 		{name: 'name'},
