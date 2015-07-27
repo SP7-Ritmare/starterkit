@@ -1,3 +1,18 @@
+function ValidURL(str) {
+      var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+  '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+  '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+  '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+  '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+  '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+  if(!pattern.test(str)) {
+          return false;
+
+  } else {
+          return true;
+
+  }
+}
 // override read function adding X-CSRFToken header
 OpenLayers.Protocol.SOS.v1_0_0.prototype.read = function(options) {
     options = OpenLayers.Util.extend({}, options);
@@ -694,12 +709,17 @@ FoiExplorer = Ext.extend(Ext.Window, {
         this.count++;
 	for(var i=0; i< offering.observedProperties.length; i++) {
 	    //console.log(i);
-	    //console.log(offering.observedProperties[i]);
+            //exclude phenomenonTime
+            if(offering.observedProperties[i] == 'http://www.opengis.net/def/property/OGC/0/PhenomenonTime'){
+                continue;
+            }
+            observedPropertyLabel = offering.observedProperties[i];
 	    this.offeringsStore.add(
 		this.getSensorRecord({
 		    type: offering.name,
 		    name: name,
 		    observedProperty: offering.observedProperties[i],
+		    observedPropertyLabel: observedPropertyLabel,
 		    time: time,
 		    startPeriod: (offering.time && offering.time.timePeriod) ? this.getFormattedDateFromTimePos(offering.time.timePeriod.beginPosition) : '-',
 		    endPeriod: (offering.time && offering.time.timePeriod) ? this.getFormattedDateFromTimePos(offering.time.timePeriod.endPosition) : '-',
@@ -713,6 +733,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
 	    type: null,
 	    name: null,
 	    observedProperty: null,
+	    observedPropertyLabel: null,
 	    time: null,
 	    startPeriod: null,
 	    endPeriod: null,
@@ -722,6 +743,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
             {name: "type", type: "string"},
             {name: "name", type: "string"},
             {name: "observedProperty", type: "string"},
+            {name: "observedPropertyLabel", type: "string"},
             {name: "time", type: "string"},
             {name: "startPeriod", type: "string"},
             {name: "endPeriod", type: "string"},
@@ -731,6 +753,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
             type: config.type,
             name: config.name,
             observedProperty: config.observedProperty,
+            observedPropertyLabel: config.observedPropertyLabel,
             time: config.time,
             startPeriod: config.startPeriod,
             endPeriod: config.endPeriod,
@@ -806,12 +829,39 @@ FoiExplorer = Ext.extend(Ext.Window, {
 		{name: 'type'},
 		{name: 'name'},
 		{name: 'observedProperty'},
+		{name: 'observedPropertyLabel'},
 		{name: 'time'},
 		{name: 'startPeriod'},
 		{name: 'endPeriod'},
 		{name: 'lastvalue'}
             ]
 	});
+        this.offeringsStore.addListener('add', function(store, records, index){
+            var record = records[0];
+            var op = record.get('observedProperty');
+            if(ValidURL(op)){
+                var request = OpenLayers.Request.GET({
+                    url: op,
+                    success: function(request){
+                        var doc = null;
+                        if(!request.responseXML.documentElement) {
+                            var format = new OpenLayers.Format.XML();
+                            doc = format.read(request.responseText);
+                        } else {
+                            doc = request.responseXML;
+                        }
+                        var label = doc.getElementsByTagNameNS('http://www.w3.org/2004/02/skos/core#', 'altLabel');
+                        if(label){
+                            label = label[0].textContent;
+                        }
+                        if(label && label != ''){
+                            record.set('observedPropertyLabel', label);
+                        }
+                    },
+                    failure: function(request){}
+                });
+            }
+        }, this.offeringsStore);
         return {
             maximizable: true,
             width: 1000,
@@ -1043,7 +1093,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
                         },
                         columns: [
                             //{id: 'type', header: 'Type', dataIndex: 'type'},
-			    {header: 'Observed property', dataIndex: 'observedProperty'},
+			    {header: 'Observed property', dataIndex: 'observedPropertyLabel'},
                             {header: 'Start', dataIndex: 'startPeriod'},
                             {header: 'End', dataIndex: 'endPeriod'}//,
                             //{header: 'Time', dataIndex: 'time'},
