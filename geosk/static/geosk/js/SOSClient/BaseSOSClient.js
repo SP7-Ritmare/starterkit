@@ -608,6 +608,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
     onSelectOffering: function(sm, rowIndex, record ){
         var offering_id = record.data.name;
 	var observedProperty_id = record.data.observedProperty;
+	var observedProperty_label = record.data.observedPropertyLabel;
 	var begin;
 	var end;
 	if(!this.realTime){
@@ -630,7 +631,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
 	this.sosClient.getObservation(this.foiId, offering_id, observedProperty_id, begin,end,
 				      function(offering, output){
 					  var rows = [];
-					  var label = observedProperty_id + " = No Values";
+                                          var uom = "-";
 					  if (output.measurements.length > 0) {
 					      // a look-up object for different time formats
 					      var timeMap = {};
@@ -640,6 +641,11 @@ FoiExplorer = Ext.extend(Ext.Window, {
 						  var timestamp = timePosObj.getTime();
 						  rows.push([timestamp, parseFloat(output.measurements[i].result.value)]);
 					      }
+
+                                              // get uom from first record
+                                              if(output.measurements.length > 0){
+                                                  uom = output.measurements[0].result.uom;
+                                              }
 
 					      function sortfunction(a, b){
 						  if(a[0] > b[0]) {
@@ -651,6 +657,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
 					      }
 					      rows.sort(sortfunction);
 					  }
+					  var label = observedProperty_label + " (" + uom + ") = No Values";
 					  plotDataStore.addSerie({data: rows, label: label, serie_id: offering_id});
 				      });
     },
