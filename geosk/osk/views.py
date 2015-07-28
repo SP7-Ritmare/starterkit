@@ -14,12 +14,12 @@ def browse(request):
     cat = models.Sensor.objects.sos_catalog
     cap = cat.get_capabilities()
     cap = utils.todict(cap)
-    sensors = cat.get_sensors()
+    sensors = cat.get_sensors(full=True)
 
 
     cap['capabilities_url'] = cat.get_capabilities_url()
     return render_to_response('osk/osk_list.html',
-                              RequestContext(request, {'cap': cap, 
+                              RequestContext(request, {'cap': cap,
                                                        'sensors': sensors
                                                        }))
 
@@ -57,5 +57,3 @@ def describe_sensor(request):
         newdom = transform(dom)
         # return HttpResponse(etree.tostring(newdom, pretty_print=True))
         return HttpResponse(str(newdom))
-
-

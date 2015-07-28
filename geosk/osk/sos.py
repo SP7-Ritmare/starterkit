@@ -38,7 +38,7 @@ class Catalog(object):
         self.username = username
         self.password = password
         self._cache = dict()
-        self.version = version 
+        self.version = version
 
     def get_capabilities_url(self):
         return extension_sos100.capabilities_url(None, self.service_url)
@@ -63,10 +63,14 @@ class Catalog(object):
         for sensor_id in sensor_ids:
             ds = {}
             ds["id"] = sensor_id
-            ds["name"] = sensor_id
             ds["observable_properties"] = cap.get_observable_by_procedure(sensor_id)
             if full:
-                ds['describe_sensor'] = cap.describe_sensor(outputFormat='http://www.opengis.net/sensorML/1.0.1', procedure=sensor_id)
+                try:
+                    ds['describe_sensor'] = cap.describe_sensor(outputFormat='http://www.opengis.net/sensorML/1.0.1', procedure=sensor_id)
+                    ds['name'] = ds['describe_sensor'].sensor_ml.members[0].name
+                    ds['description'] = ds['describe_sensor'].sensor_ml.members[0].description
+                except AttributeError, IndexError:
+                    pass
             sensors.append(ds)
 
         return self.set_cache('sensors', sensors)
@@ -80,4 +84,3 @@ class Catalog(object):
     def set_cache(self, uri, content):
         self._cache[uri] = (datetime.now(), content)
         return content
-

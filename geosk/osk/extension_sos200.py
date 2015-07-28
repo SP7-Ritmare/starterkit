@@ -18,8 +18,8 @@ def get_feature_of_interest_json(self,
                                  ):
     base_url = 'http://sp7.irea.cnr.it/tomcat/MareeVe/sos/json'
     request = {
-        'service': 'SOS', 
-        'version': self.version, 
+        'service': 'SOS',
+        'version': self.version,
         'request': 'GetFeatureOfInterest'
         }
     if featureOfInterest is not None:
@@ -36,20 +36,20 @@ def get_feature_of_interest_json(self,
             request[kw]=kwargs[kw]
 
     data = json.dumps(request)
-    
+
     response = openURL(base_url, data, method, username=self.username, password=self.password).read()
     return json.loads(response)
 
 
 
-def insert_observation_json(self, 
+def insert_observation_json(self,
                        time,
                        value,
                        offering = None,
                        procedure = None,
                        observedProperty = None,
                        featureOfInterest = None,
-                       method = 'Post',                       
+                       method = 'Post',
                        **kwargs):
 
     _foi = self.get_feature_of_interest_json(featureOfInterest = featureOfInterest,
@@ -60,11 +60,11 @@ def insert_observation_json(self,
         raise Exception("Foi not found")
 
     foi = _foi['featureOfInterest'][0]
-      
+
     base_url = 'http://sp7.irea.cnr.it/tomcat/MareeVe/sos/json'
     request = {
-        'service': 'SOS', 
-        'version': self.version, 
+        'service': 'SOS',
+        'version': self.version,
         'request': 'InsertObservation',
         "offering": offering,
         "observation": {
@@ -92,7 +92,7 @@ def insert_observation_json(self,
     #return request
 
     data = json.dumps(request)
-    
+
     # print data
 
     response = openURL(base_url, data, method, username=self.username, password=self.password).read()
@@ -100,25 +100,25 @@ def insert_observation_json(self,
 
 
 
-def get_result_template(self, 
+def get_result_template(self,
                         offering=None,
                         observedProperty=None,
                         method='Post',
                         **kwargs):
 
     base_url = 'http://sp7.irea.cnr.it/tomcat/MareeVe/sos/json'
-    request = {'service': 'SOS', 
-               'version': self.version, 
+    request = {'service': 'SOS',
+               'version': self.version,
                'request': 'GetResultTemplate'}
     request['offering'] = offering
     request['observedProperty'] = observedProperty
-    
+
     if kwargs:
         for kw in kwargs:
             request[kw]=kwargs[kw]
 
     data = json.dumps(request)
-    
+
     print data
 
     response = openURL(base_url, data, method, username=self.username, password=self.password).read()
@@ -139,7 +139,7 @@ def describe_sensor(self, outputFormat=None,
                           **kwargs):
 
     try:
-        base_url = self.get_operation_by_name('DescribeSensor').methods[method]['url']        
+        base_url = self.get_operation_by_name('DescribeSensor').methods[method]['url']
     except:
         base_url = self.url
     request = {'service': 'SOS', 'version': self.version, 'request': 'DescribeSensor'}
@@ -155,8 +155,8 @@ def describe_sensor(self, outputFormat=None,
     if kwargs:
         for kw in kwargs:
             request[kw]=kwargs[kw]
-   
-    data = urlencode(request)        
+
+    data = urlencode(request)
 
     response = openURL(base_url, data, method, username=self.username, password=self.password).read()
     tr = etree.fromstring(response)
@@ -173,8 +173,7 @@ def describe_sensor(self, outputFormat=None,
 class SosDescribeSensorResponse(object):
     def __init__(self, element, nsmap=nsmap):
         self._root = element
-        # self.procedure_description_format = testXMLValue(self._root.find(nspath_eval('swes:procedureDescriptionFormat', nsmap)))
-        # sensor_ml = SensorML(self._root.find(nspath_eval('sml:SensorML', nsmap)))
+        element = element.find('.//' + nspath_eval('sml:SensorML', nsmap))
         self.sensor_ml = SensorML(element)
         if hasattr(self.sensor_ml, 'systems') and self.sensor_ml.systems:
             self.sensor = self.sensor_ml.systems[0]
@@ -213,7 +212,7 @@ def get_feature_of_interest(self,
                           **kwargs):
 
     try:
-        base_url = self.get_operation_by_name('GetFeatureOfInterest').methods[method]['url']        
+        base_url = self.get_operation_by_name('GetFeatureOfInterest').methods[method]['url']
     except:
         base_url = self.url
     request = {'service': 'SOS', 'version': self.version, 'request': 'GetFeatureOfInterest'}
@@ -226,8 +225,8 @@ def get_feature_of_interest(self,
     if kwargs:
         for kw in kwargs:
             request[kw]=kwargs[kw]
-   
-    data = urlencode(request)        
+
+    data = urlencode(request)
 
     response = openURL(base_url, data, method, username=self.username, password=self.password).read()
     tr = etree.fromstring(response)
@@ -328,7 +327,7 @@ class SosInsertObservation:
         time.attrib['definition'] = 'http://www.opengis.net/def/property/OGC/0/PhenomenonTime'
         uom = SWEElement('uom', nsmap=namespaces_io)
         uom.attrib["{%s}" % namespaces_io['xlink'] + 'href'] = 'http://www.opengis.net/def/uom/ISO-8601/0/Gregorian'
-        
+
         field2 = SWEElement('field', nsmap=namespaces_io)
         field2.attrib['name'] = 'observable_property'
         quantity = SWEElement('Quantity', nsmap=namespaces_io)
@@ -341,7 +340,7 @@ class SosInsertObservation:
         text_encoding = SWEElement('TextEncoding', nsmap=namespaces_io)
         text_encoding.attrib['tokenSeparator'] = '#'
         text_encoding.attrib['blockSeparator'] = '@'
-        
+
         values = SWEElement('values', nsmap=namespaces_io)
         tokenSeparator = '#'
         blockSeparator = '@'
@@ -354,32 +353,32 @@ class SosInsertObservation:
         #     print values_text
         #     values_text += tokenSeparator.join()
 
-                
+
 
 
         count.append(value)
         element_count.append(count)
-        
+
         time.append(uom)
-        
+
         field.append(time)
-        
+
         quantity.append(uom2)
-        
+
         field2.append(quantity)
-        
+
         data_record.append(field)
         data_record.append(field2)
-        
+
         element_type.append(data_record)
-        
+
         encoding.append(text_encoding)
-        
+
         array.append(element_count)
         array.append(element_type)
         array.append(encoding)
         array.append(values)
-        
+
         result.append(array)
         return result
 
@@ -396,7 +395,7 @@ class SosInsertObservation:
         tp.append(begin)
         tp.append(end)
         st.append(tp)
-        
+
         return st
 
     def _getResultTimeElement(self):
@@ -410,7 +409,7 @@ class SosInsertObservation:
         ti.append(tp)
 
         rt.append(ti)
-        
+
         return rt
 
     def xml(self):
@@ -505,7 +504,7 @@ class SosInsertObservation100:
         time.attrib['definition'] = 'http://www.opengis.net/def/property/OGC/0/PhenomenonTime'
         uom = SWEElement('uom', nsmap=namespaces_io)
         uom.attrib["{%s}" % namespaces_io['xlink'] + 'href'] = 'http://www.opengis.net/def/uom/ISO-8601/0/Gregorian'
-        
+
         field2 = SWEElement('field', nsmap=namespaces_io)
         field2.attrib['name'] = 'observable_property'
         quantity = SWEElement('Quantity', nsmap=namespaces_io)
@@ -518,7 +517,7 @@ class SosInsertObservation100:
         text_encoding = SWEElement('TextEncoding', nsmap=namespaces_io)
         text_encoding.attrib['tokenSeparator'] = '#'
         text_encoding.attrib['blockSeparator'] = '@'
-        
+
         values = SWEElement('values', nsmap=namespaces_io)
         tokenSeparator = '#'
         blockSeparator = '@'
@@ -531,32 +530,32 @@ class SosInsertObservation100:
         #     print values_text
         #     values_text += tokenSeparator.join()
 
-                
+
 
 
         count.append(value)
         element_count.append(count)
-        
+
         time.append(uom)
-        
+
         field.append(time)
-        
+
         quantity.append(uom2)
-        
+
         field2.append(quantity)
-        
+
         data_record.append(field)
         data_record.append(field2)
-        
+
         element_type.append(data_record)
-        
+
         encoding.append(text_encoding)
-        
+
         array.append(element_count)
         array.append(element_type)
         array.append(encoding)
         array.append(values)
-        
+
         result.append(array)
         return result
 
@@ -573,7 +572,7 @@ class SosInsertObservation100:
         tp.append(begin)
         tp.append(end)
         st.append(tp)
-        
+
         return st
 
     def _getResultTimeElement(self):
@@ -587,7 +586,7 @@ class SosInsertObservation100:
         ti.append(tp)
 
         rt.append(ti)
-        
+
         return rt
 
     def xml(self):
