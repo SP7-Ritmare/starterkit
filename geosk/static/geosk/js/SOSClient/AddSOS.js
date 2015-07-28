@@ -1,10 +1,10 @@
 Ext.namespace("gxp.plugins");
 
 gxp.plugins.AddSOS = Ext.extend(gxp.plugins.Tool, {
-    
+
     /** api: ptype = gxp_layerproperties */
     ptype: "gxp_addsos",
-    
+
     /** api: config[menuText]
      *  ``String``
      *  Text for layer properties menu item (i18n).
@@ -18,7 +18,7 @@ gxp.plugins.AddSOS = Ext.extend(gxp.plugins.Tool, {
      *  Text for layer properties action tooltip (i18n).
      */
     toolTip: "Add SOS",
-    
+
     constructor: function(config) {
         gxp.plugins.AddSOS.superclass.constructor.apply(this, arguments);
         if (!this.outputConfig) {
@@ -28,7 +28,7 @@ gxp.plugins.AddSOS = Ext.extend(gxp.plugins.Tool, {
             };
         }
     },
-        
+
     /** api: method[addActions]
      */
     addActions: function() {
@@ -81,7 +81,7 @@ gxp.plugins.AddSOS = Ext.extend(gxp.plugins.Tool, {
 	this.sosDialog = output;
         return output;
     }
-        
+
 });
 
 Ext.preg(gxp.plugins.AddSOS.prototype.ptype, gxp.plugins.AddSOS);

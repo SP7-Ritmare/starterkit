@@ -44,6 +44,7 @@ OpenLayers.SOSClient = OpenLayers.Class({
     legends: null,
     updateLegendTimeout: null,
     latestPosition: null,
+    events: null,
 
     // 52n bug on v4.0.0 and SOS1.0.0 need to check resultModel
     resultModel: 'om:Measurement',
@@ -53,6 +54,7 @@ OpenLayers.SOSClient = OpenLayers.Class({
      */
     initialize: function (options) {
         OpenLayers.Util.extend(this, options);
+        this.events = new OpenLayers.Events(this);
         var params = {'service': 'SOS', 'request': 'GetCapabilities', 'acceptVersions': '1.0.0'};
         var paramString = OpenLayers.Util.getParameterString(params);
         url = OpenLayers.Util.urlAppend(this.url, paramString);
@@ -143,6 +145,8 @@ OpenLayers.SOSClient = OpenLayers.Class({
         //                               {scope: this, onSelect: this.onFeatureSelect});
         // this.map.addControl(this.ctrl);
         // this.ctrl.activate();
+        this.events.triggerEvent("loaded",
+                         {"capabilities": this.SOSCapabilities});
     },
 
     /**

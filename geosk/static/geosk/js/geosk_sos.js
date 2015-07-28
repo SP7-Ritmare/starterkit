@@ -2574,6 +2574,21 @@ function Mydownload(strData, strFileName, strMimeType) {
     }, 333);
     return true;
 } /* end download() */
+function ValidURL(str) {
+      var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+  '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+  '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+  '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+  '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+  '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+  if(!pattern.test(str)) {
+          return false;
+
+  } else {
+          return true;
+
+  }
+}
 // override read function adding X-CSRFToken header
 OpenLayers.Protocol.SOS.v1_0_0.prototype.read = function(options) {
     options = OpenLayers.Util.extend({}, options);
@@ -2605,6 +2620,7 @@ OpenLayers.SOSClient = OpenLayers.Class({
     legends: null,
     updateLegendTimeout: null,
     latestPosition: null,
+    events: null,
 
     // 52n bug on v4.0.0 and SOS1.0.0 need to check resultModel
     resultModel: 'om:Measurement',
@@ -2614,6 +2630,7 @@ OpenLayers.SOSClient = OpenLayers.Class({
      */
     initialize: function (options) {
         OpenLayers.Util.extend(this, options);
+        this.events = new OpenLayers.Events(this);
         var params = {'service': 'SOS', 'request': 'GetCapabilities', 'acceptVersions': '1.0.0'};
         var paramString = OpenLayers.Util.getParameterString(params);
         url = OpenLayers.Util.urlAppend(this.url, paramString);
@@ -2704,6 +2721,8 @@ OpenLayers.SOSClient = OpenLayers.Class({
         //                               {scope: this, onSelect: this.onFeatureSelect});
         // this.map.addControl(this.ctrl);
         // this.ctrl.activate();
+        this.events.triggerEvent("loaded",
+                         {"capabilities": this.SOSCapabilities});
     },
 
     /**
@@ -3169,6 +3188,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
     onSelectOffering: function(sm, rowIndex, record ){
         var offering_id = record.data.name;
 	var observedProperty_id = record.data.observedProperty;
+	var observedProperty_label = record.data.observedPropertyLabel;
 	var begin;
 	var end;
 	if(!this.realTime){
@@ -3191,7 +3211,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
 	this.sosClient.getObservation(this.foiId, offering_id, observedProperty_id, begin,end,
 				      function(offering, output){
 					  var rows = [];
-					  var label = observedProperty_id + " = No Values";
+                                          var uom = "-";
 					  if (output.measurements.length > 0) {
 					      // a look-up object for different time formats
 					      var timeMap = {};
@@ -3201,6 +3221,11 @@ FoiExplorer = Ext.extend(Ext.Window, {
 						  var timestamp = timePosObj.getTime();
 						  rows.push([timestamp, parseFloat(output.measurements[i].result.value)]);
 					      }
+
+                                              // get uom from first record
+                                              if(output.measurements.length > 0){
+                                                  uom = output.measurements[0].result.uom;
+                                              }
 
 					      function sortfunction(a, b){
 						  if(a[0] > b[0]) {
@@ -3212,6 +3237,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
 					      }
 					      rows.sort(sortfunction);
 					  }
+					  var label = observedProperty_label + " (" + uom + ") = No Values";
 					  plotDataStore.addSerie({data: rows, label: label, serie_id: offering_id});
 				      });
     },
@@ -3270,12 +3296,17 @@ FoiExplorer = Ext.extend(Ext.Window, {
         this.count++;
 	for(var i=0; i< offering.observedProperties.length; i++) {
 	    //console.log(i);
-	    //console.log(offering.observedProperties[i]);
+            //exclude phenomenonTime
+            if(offering.observedProperties[i] == 'http://www.opengis.net/def/property/OGC/0/PhenomenonTime'){
+                continue;
+            }
+            observedPropertyLabel = offering.observedProperties[i];
 	    this.offeringsStore.add(
 		this.getSensorRecord({
 		    type: offering.name,
 		    name: name,
 		    observedProperty: offering.observedProperties[i],
+		    observedPropertyLabel: observedPropertyLabel,
 		    time: time,
 		    startPeriod: (offering.time && offering.time.timePeriod) ? this.getFormattedDateFromTimePos(offering.time.timePeriod.beginPosition) : '-',
 		    endPeriod: (offering.time && offering.time.timePeriod) ? this.getFormattedDateFromTimePos(offering.time.timePeriod.endPosition) : '-',
@@ -3289,6 +3320,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
 	    type: null,
 	    name: null,
 	    observedProperty: null,
+	    observedPropertyLabel: null,
 	    time: null,
 	    startPeriod: null,
 	    endPeriod: null,
@@ -3298,6 +3330,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
             {name: "type", type: "string"},
             {name: "name", type: "string"},
             {name: "observedProperty", type: "string"},
+            {name: "observedPropertyLabel", type: "string"},
             {name: "time", type: "string"},
             {name: "startPeriod", type: "string"},
             {name: "endPeriod", type: "string"},
@@ -3307,6 +3340,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
             type: config.type,
             name: config.name,
             observedProperty: config.observedProperty,
+            observedPropertyLabel: config.observedPropertyLabel,
             time: config.time,
             startPeriod: config.startPeriod,
             endPeriod: config.endPeriod,
@@ -3382,12 +3416,39 @@ FoiExplorer = Ext.extend(Ext.Window, {
 		{name: 'type'},
 		{name: 'name'},
 		{name: 'observedProperty'},
+		{name: 'observedPropertyLabel'},
 		{name: 'time'},
 		{name: 'startPeriod'},
 		{name: 'endPeriod'},
 		{name: 'lastvalue'}
             ]
 	});
+        this.offeringsStore.addListener('add', function(store, records, index){
+            var record = records[0];
+            var op = record.get('observedProperty');
+            if(ValidURL(op)){
+                var request = OpenLayers.Request.GET({
+                    url: op,
+                    success: function(request){
+                        var doc = null;
+                        if(!request.responseXML.documentElement) {
+                            var format = new OpenLayers.Format.XML();
+                            doc = format.read(request.responseText);
+                        } else {
+                            doc = request.responseXML;
+                        }
+                        var label = doc.getElementsByTagNameNS('http://www.w3.org/2004/02/skos/core#', 'altLabel');
+                        if(label){
+                            label = label[0].textContent;
+                        }
+                        if(label && label != ''){
+                            record.set('observedPropertyLabel', label);
+                        }
+                    },
+                    failure: function(request){}
+                });
+            }
+        }, this.offeringsStore);
         return {
             maximizable: true,
             width: 1000,
@@ -3619,7 +3680,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
                         },
                         columns: [
                             //{id: 'type', header: 'Type', dataIndex: 'type'},
-			    {header: 'Observed property', dataIndex: 'observedProperty'},
+			    {header: 'Observed property', dataIndex: 'observedPropertyLabel'},
                             {header: 'Start', dataIndex: 'startPeriod'},
                             {header: 'End', dataIndex: 'endPeriod'}//,
                             //{header: 'Time', dataIndex: 'time'},
@@ -3655,10 +3716,10 @@ FoiExplorer = Ext.extend(Ext.Window, {
 Ext.namespace("gxp.plugins");
 
 gxp.plugins.AddSOS = Ext.extend(gxp.plugins.Tool, {
-    
+
     /** api: ptype = gxp_layerproperties */
     ptype: "gxp_addsos",
-    
+
     /** api: config[menuText]
      *  ``String``
      *  Text for layer properties menu item (i18n).
@@ -3672,7 +3733,7 @@ gxp.plugins.AddSOS = Ext.extend(gxp.plugins.Tool, {
      *  Text for layer properties action tooltip (i18n).
      */
     toolTip: "Add SOS",
-    
+
     constructor: function(config) {
         gxp.plugins.AddSOS.superclass.constructor.apply(this, arguments);
         if (!this.outputConfig) {
@@ -3682,7 +3743,7 @@ gxp.plugins.AddSOS = Ext.extend(gxp.plugins.Tool, {
             };
         }
     },
-        
+
     /** api: method[addActions]
      */
     addActions: function() {
@@ -3735,7 +3796,7 @@ gxp.plugins.AddSOS = Ext.extend(gxp.plugins.Tool, {
 	this.sosDialog = output;
         return output;
     }
-        
+
 });
 
 Ext.preg(gxp.plugins.AddSOS.prototype.ptype, gxp.plugins.AddSOS);
@@ -4005,11 +4066,11 @@ gxp.plugins.SOSSource = Ext.extend(gxp.plugins.LayerSource, {
      *  ``String``  XTemplate string for feature info popup
      */
     popupTemplate:'<a target="_blank" href="{link}">{description}</a>',
-    
-    
+
+
     /** api: config[fixed]
      * ``Boolean`` Use OpenLayers.Strategy.Fixed if true, BBOX if false
-     **/    
+     **/
     fixed: true,
 
     /** api: method[createLayerRecord]
@@ -4021,21 +4082,14 @@ gxp.plugins.SOSSource = Ext.extend(gxp.plugins.LayerSource, {
     createLayerRecord:function (config) {
         var record;
 	this.sosClient = new OpenLayers.SOSClient({map: null, url: this.url});
+        this.sosClient.events.on(
+            {'loaded': function(){
+                // TODO: move configuration layer here
+            },
+             scope: this
+            });
 
 	var layer = this.sosClient.createLayer();
-        // //create a vector layer based on config parameters
-        // var layer = new OpenLayers.Layer.Vector(config.name, {
-        //     projection:"projection" in config ? config.projection : "EPSG:4326",
-        //     visibility:"visibility" in config ? config.visibility : true,
-        //     strategies:[this.fixed?new OpenLayers.Strategy.Fixed():new OpenLayers.Strategy.BBOX({resFactor:1,ratio:1})],
-        //     protocol:new OpenLayers.Protocol.HTTP({
-        //         url:this.url,
-        //         params:config.params,
-        //         format:this.getFormat(config)
-        //     }),
-        //     styleMap:this.getStyleMap(config)
-        // });
-
 
         //configure the popup balloons for feed items
         this.configureInfoPopup(layer);

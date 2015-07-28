@@ -23,11 +23,11 @@ gxp.plugins.SOSSource = Ext.extend(gxp.plugins.LayerSource, {
      *  ``String``  XTemplate string for feature info popup
      */
     popupTemplate:'<a target="_blank" href="{link}">{description}</a>',
-    
-    
+
+
     /** api: config[fixed]
      * ``Boolean`` Use OpenLayers.Strategy.Fixed if true, BBOX if false
-     **/    
+     **/
     fixed: true,
 
     /** api: method[createLayerRecord]
@@ -39,21 +39,14 @@ gxp.plugins.SOSSource = Ext.extend(gxp.plugins.LayerSource, {
     createLayerRecord:function (config) {
         var record;
 	this.sosClient = new OpenLayers.SOSClient({map: null, url: this.url});
+        this.sosClient.events.on(
+            {'loaded': function(){
+                // TODO: move configuration layer here
+            },
+             scope: this
+            });
 
 	var layer = this.sosClient.createLayer();
-        // //create a vector layer based on config parameters
-        // var layer = new OpenLayers.Layer.Vector(config.name, {
-        //     projection:"projection" in config ? config.projection : "EPSG:4326",
-        //     visibility:"visibility" in config ? config.visibility : true,
-        //     strategies:[this.fixed?new OpenLayers.Strategy.Fixed():new OpenLayers.Strategy.BBOX({resFactor:1,ratio:1})],
-        //     protocol:new OpenLayers.Protocol.HTTP({
-        //         url:this.url,
-        //         params:config.params,
-        //         format:this.getFormat(config)
-        //     }),
-        //     styleMap:this.getStyleMap(config)
-        // });
-
 
         //configure the popup balloons for feed items
         this.configureInfoPopup(layer);
