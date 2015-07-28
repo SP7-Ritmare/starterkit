@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: STARTER KIT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-03 14:38-0500\n"
+"POT-Creation-Date: 2015-07-28 08:35-0500\n"
 "PO-Revision-Date: 2014-06-19 18:14+0100\n"
 "Last-Translator: <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -75,7 +75,7 @@ msgstr "SK Front end"
 #: _locale_external/geonode/layers/templates/layers/layer_change_poc.html:5
 #: _locale_external/geonode/templates/500.html:107
 #: _locale_external/geonode/templates/base.html:114
-#: templates/site_base.html:101
+#: templates/site_base.html:104
 msgid "Home"
 msgstr "Home"
 
@@ -85,7 +85,7 @@ msgstr "Home"
 #: _locale_external/geonode/search/templates/search/_type_filters.html:6
 #: _locale_external/geonode/templates/500.html:110
 #: _locale_external/geonode/templates/base.html:117
-#: templates/site_base.html:104
+#: templates/site_base.html:107
 msgid "Layers"
 msgstr "Layer"
 
@@ -95,7 +95,7 @@ msgstr "Layer"
 #: _locale_external/geonode/search/templates/search/_type_filters.html:5
 #: _locale_external/geonode/templates/500.html:113
 #: _locale_external/geonode/templates/base.html:120
-#: templates/site_base.html:117
+#: templates/site_base.html:120
 msgid "Maps"
 msgstr "Viste"
 
@@ -105,13 +105,13 @@ msgstr "Viste"
 #: _locale_external/geonode/search/templates/search/_type_filters.html:9
 #: _locale_external/geonode/templates/500.html:118
 #: _locale_external/geonode/templates/base.html:125
-#: templates/site_base.html:113
+#: templates/site_base.html:116
 msgid "Documents"
 msgstr "Documenti"
 
 #: dashboard.py:127 _locale_external/geonode/templates/500.html:122
 #: _locale_external/geonode/templates/base.html:129
-#: templates/site_base.html:120
+#: templates/site_base.html:123
 msgid "People"
 msgstr "Utenti"
 
@@ -122,12 +122,12 @@ msgstr "Utenti"
 #: _locale_external/geonode/search/templates/search/search.html:12
 #: _locale_external/geonode/templates/500.html:125
 #: _locale_external/geonode/templates/base.html:132
-#: templates/site_base.html:123 templates/search/advanced_search.html:4
+#: templates/site_base.html:126 templates/search/advanced_search.html:4
 #: templates/search/advanced_search.html:10
 msgid "Search"
 msgstr "Cerca"
 
-#: dashboard.py:137 templates/site_base.html:126
+#: dashboard.py:137 templates/site_base.html:129
 msgid "Services"
 msgstr "Servizi"
 
@@ -137,13 +137,13 @@ msgstr "Sos"
 
 #: _locale_external/account/forms.py:19 _locale_external/account/forms.py:95
 #: _locale_external/geonode/templates/500.html:71
-#: _locale_external/geonode/templates/base.html:78 templates/site_base.html:65
+#: _locale_external/geonode/templates/base.html:78 templates/site_base.html:68
 msgid "Username"
 msgstr "Username"
 
 #: _locale_external/account/forms.py:25 _locale_external/account/forms.py:64
 #: _locale_external/geonode/templates/500.html:73
-#: _locale_external/geonode/templates/base.html:80 templates/site_base.html:67
+#: _locale_external/geonode/templates/base.html:80 templates/site_base.html:70
 msgid "Password"
 msgstr "Password"
 
@@ -170,7 +170,7 @@ msgstr ""
 
 #: _locale_external/account/forms.py:68
 #: _locale_external/geonode/templates/500.html:77
-#: _locale_external/geonode/templates/base.html:84 templates/site_base.html:71
+#: _locale_external/geonode/templates/base.html:84 templates/site_base.html:74
 msgid "Remember Me"
 msgstr "Ricordamelo"
 
@@ -183,7 +183,7 @@ msgid "The username and/or password you specified are not correct."
 msgstr "Il nome e/o la password inserite non sono corrette."
 
 #: _locale_external/account/forms.py:106 _locale_external/account/forms.py:148
-#: _locale_external/account/forms.py:177 osk/templates/osk/osk_list.html:59
+#: _locale_external/account/forms.py:177 osk/templates/osk/osk_list.html:66
 msgid "Email"
 msgstr ""
 
@@ -220,7 +220,7 @@ msgstr ""
 #: _locale_external/geonode/templates/500.html:190
 #: _locale_external/geonode/templates/base.html:197
 #: mdtools/templates/base/resourcebase_info_panel.html:140
-#: templates/site_base.html:181
+#: templates/site_base.html:184
 msgid "Language"
 msgstr "Lingua"
 
@@ -233,7 +233,7 @@ msgid "timezone"
 msgstr ""
 
 #: _locale_external/account/models.py:32
-#: _locale_external/geonode/base/models.py:258 mdtools/models.py:73
+#: _locale_external/geonode/base/models.py:258 mdtools/models.py:75
 msgid "language"
 msgstr "lingua"
 
@@ -1434,7 +1434,7 @@ msgstr ""
 "dopo essere stati prodotti la prima volta"
 
 #: _locale_external/geonode/base/models.py:250
-#: _locale_external/geonode/people/models.py:59 mdtools/models.py:147
+#: _locale_external/geonode/people/models.py:59 mdtools/models.py:156
 msgid "keywords"
 msgstr "keywords"
 
@@ -1593,13 +1593,13 @@ msgstr "Per esempio \"text/xml\""
 #: _locale_external/geonode/base/templates/base/resourcebase_info_panel.html:7
 #: _locale_external/geonode/templates/announcements/announcement_list.html:30
 #: mdtools/templates/base/resourcebase_info_panel.html:7
-#: osk/templates/osk/osk_list.html:33
+#: osk/templates/osk/osk_list.html:40
 msgid "Title"
 msgstr "Titolo"
 
 #: _locale_external/geonode/base/templates/base/resourcebase_info_panel.html:14
 #: mdtools/templates/base/resourcebase_info_panel.html:14
-#: osk/templates/osk/osk_list.html:35
+#: osk/templates/osk/osk_list.html:42
 msgid "Abstract"
 msgstr "Descrizione"
 
@@ -1619,7 +1619,7 @@ msgstr "Tipo"
 #: _locale_external/geonode/base/templates/base/resourcebase_info_panel.html:35
 #: _locale_external/geonode/search/templates/search/_general_filters.html:38
 #: mdtools/templates/base/resourcebase_info_panel.html:35
-#: osk/templates/osk/osk_list.html:37
+#: osk/templates/osk/osk_list.html:44
 #: templates/search/_general_filters.html:16
 msgid "Keywords"
 msgstr "Parole chiave"
@@ -1650,7 +1650,7 @@ msgstr "Proprietario"
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:232
 #: _locale_external/geonode/layers/templates/layers/layer_metadata.html:57
 #: mdtools/templates/base/resourcebase_info_panel.html:95
-#: mdtools/templates/layers/layer_detail.html:226
+#: mdtools/templates/layers/layer_detail.html:257
 #: templates/documents/document_detail.html:140
 msgid "Point of Contact"
 msgstr "Punto di contatto"
@@ -1827,7 +1827,7 @@ msgstr "voti"
 #: _locale_external/geonode/layers/templates/layers/_layer_list_item.html:27
 #: _locale_external/geonode/maps/templates/maps/_map_list_item.html:26
 #: _locale_external/geonode/maps/templates/maps/map_download.html:6
-#: mdtools/templates/layers/_layer_list_item.html:35
+#: mdtools/templates/layers/_layer_list_item.html:39
 #: templates/documents/_document_list_item.html:27
 #: templates/maps/_map_list_item.html:26
 msgid "Download"
@@ -1847,7 +1847,7 @@ msgstr "Carica Documenti"
 
 #: _locale_external/geonode/documents/templates/documents/document_detail.html:33
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:42
-#: mdtools/templates/layers/layer_detail.html:42
+#: mdtools/templates/layers/layer_detail.html:41
 #: templates/documents/document_detail.html:33
 msgid "Download Metadata"
 msgstr "Scarica Metadati"
@@ -1866,7 +1866,7 @@ msgstr "Modifica Metadati"
 
 #: _locale_external/geonode/documents/templates/documents/document_detail.html:51
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:63
-#: mdtools/templates/layers/layer_detail.html:63
+#: mdtools/templates/layers/layer_detail.html:66
 #: templates/documents/document_detail.html:51
 msgid "Edit Permissions"
 msgstr "Modifica permessi"
@@ -1885,7 +1885,7 @@ msgstr "Rimuovi questo documento"
 #: _locale_external/geonode/layers/templates/layers/_actions.html:3
 #: _locale_external/geonode/maps/templates/maps/map_detail.html:73
 #: _locale_external/geonode/templates/_actions.html:3
-#: templates/site_base.html:173 templates/documents/document_detail.html:72
+#: templates/site_base.html:176 templates/documents/document_detail.html:72
 msgid "Info"
 msgstr "Informazioni"
 
@@ -1932,7 +1932,7 @@ msgstr "Valuta questo documento"
 #: _locale_external/geonode/documents/templates/documents/document_detail.html:107
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:147
 #: _locale_external/geonode/maps/templates/maps/map_detail.html:96
-#: mdtools/templates/layers/layer_detail.html:141
+#: mdtools/templates/layers/layer_detail.html:144
 #: templates/documents/document_detail.html:103
 msgid "Average Rating"
 msgstr "Valutazione media"
@@ -1964,7 +1964,7 @@ msgstr "Il presente documento non è correlato ad alcuna vista o livello"
 #: _locale_external/geonode/maps/templates/maps/map_detail.html:146
 #: _locale_external/geonode/templates/_permissions_form.html:7
 #: _locale_external/geonode/upload/templates/upload/layer_upload.html:95
-#: mdtools/templates/layers/layer_detail.html:193
+#: mdtools/templates/layers/layer_detail.html:224
 #: templates/documents/document_detail.html:129
 msgid "Permissions"
 msgstr "Permessi"
@@ -1985,7 +1985,7 @@ msgstr "Cambia i permessi del Documento"
 #: _locale_external/geonode/maps/templates/maps/map_detail.html:172
 #: _locale_external/geonode/templates/500.html:183
 #: _locale_external/geonode/templates/base.html:190
-#: mdtools/templates/layers/layer_detail.html:221 templates/site_base.html:166
+#: mdtools/templates/layers/layer_detail.html:252 templates/site_base.html:169
 #: templates/documents/document_detail.html:135
 msgid "About"
 msgstr "A proposito"
@@ -1997,7 +1997,7 @@ msgstr "Proprietario del Documento"
 
 #: _locale_external/geonode/documents/templates/documents/document_detail.html:148
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:236
-#: mdtools/templates/layers/layer_detail.html:230
+#: mdtools/templates/layers/layer_detail.html:261
 #: templates/documents/document_detail.html:144
 msgid "Metadata Author"
 msgstr "Autore dei Metadati"
@@ -2332,14 +2332,14 @@ msgid "Attributes"
 msgstr "Attributi"
 
 #: _locale_external/geonode/layers/templates/layers/_layer_list_item.html:28
-#: mdtools/templates/layers/_layer_list_item.html:36
+#: mdtools/templates/layers/_layer_list_item.html:40
 msgid "Create a map"
 msgstr "Crea una vista"
 
 #: _locale_external/geonode/layers/templates/layers/_layer_list_item.html:38
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:30
-#: mdtools/templates/layers/_layer_list_item.html:46
-#: mdtools/templates/layers/layer_detail.html:30
+#: mdtools/templates/layers/_layer_list_item.html:50
+#: mdtools/templates/layers/layer_detail.html:29
 msgid "Download Layer"
 msgstr "Scarica Layer"
 
@@ -2374,53 +2374,53 @@ msgid "Submit"
 msgstr "Invia"
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:56
-#: mdtools/templates/layers/layer_detail.html:56
+#: mdtools/templates/layers/layer_detail.html:55
 msgid "Edit Layer"
 msgstr "Modifica Layer"
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:65
 #: _locale_external/geonode/layers/templates/layers/layer_style_manage.html:14
-#: mdtools/templates/layers/layer_detail.html:65
+#: mdtools/templates/layers/layer_detail.html:68
 msgid "Manage Styles"
 msgstr "Gestisci gli stili"
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:66
-#: mdtools/templates/layers/layer_detail.html:66
+#: mdtools/templates/layers/layer_detail.html:69
 msgid "Edit Styles"
 msgstr "Modifica gli stili"
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:67
-#: mdtools/templates/layers/layer_detail.html:67
+#: mdtools/templates/layers/layer_detail.html:70
 msgid "Replace this Layer"
 msgstr "Sostituisci questo Layer"
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:68
-#: mdtools/templates/layers/layer_detail.html:68
+#: mdtools/templates/layers/layer_detail.html:71
 msgid "Remove this Layer"
 msgstr "Rimuovi questo layer"
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:92
-#: mdtools/templates/layers/layer_detail.html:92
+#: mdtools/templates/layers/layer_detail.html:95
 msgid "Attribute Name"
 msgstr "Nome Attributo"
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:93
-#: mdtools/templates/layers/layer_detail.html:93
+#: mdtools/templates/layers/layer_detail.html:96
 msgid "Range"
 msgstr "Intervallo"
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:94
-#: mdtools/templates/layers/layer_detail.html:94
+#: mdtools/templates/layers/layer_detail.html:97
 msgid "Average"
 msgstr "Media"
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:95
-#: mdtools/templates/layers/layer_detail.html:95
+#: mdtools/templates/layers/layer_detail.html:98
 msgid "Median"
 msgstr "Mediana"
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:96
-#: mdtools/templates/layers/layer_detail.html:96
+#: mdtools/templates/layers/layer_detail.html:99
 msgid "Standard Deviation"
 msgstr "Deviazione standard"
 
@@ -2429,47 +2429,47 @@ msgid "Share This Layer"
 msgstr "Condividi questo Layer"
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:143
-#: mdtools/templates/layers/layer_detail.html:137
+#: mdtools/templates/layers/layer_detail.html:140
 msgid "Rate this layer"
 msgstr "Giudica questo Layer"
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:161
-#: mdtools/templates/layers/layer_detail.html:155
+#: mdtools/templates/layers/layer_detail.html:186
 msgid "Legend"
 msgstr "Legenda"
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:167
-#: mdtools/templates/layers/layer_detail.html:161
+#: mdtools/templates/layers/layer_detail.html:192
 msgid "Maps using this layer"
 msgstr "Viste che usano questo layer"
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:169
-#: mdtools/templates/layers/layer_detail.html:163
+#: mdtools/templates/layers/layer_detail.html:194
 msgid "List of maps using this layer:"
 msgstr "Elenco di viste che usano questo layer"
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:175
-#: mdtools/templates/layers/layer_detail.html:169
+#: mdtools/templates/layers/layer_detail.html:200
 msgid "This layer is not currently used in any maps."
 msgstr "Questo layer non è al momento utilizzato da alcuna vista."
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:181
-#: mdtools/templates/layers/layer_detail.html:175
+#: mdtools/templates/layers/layer_detail.html:206
 msgid "Documents related to this layer"
 msgstr "Documenti correlati a questo livello"
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:182
-#: mdtools/templates/layers/layer_detail.html:176
+#: mdtools/templates/layers/layer_detail.html:207
 msgid "List of documents related to this layer:"
 msgstr "Elenco di documenti correlati a questo livello:"
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:191
-#: mdtools/templates/layers/layer_detail.html:185
+#: mdtools/templates/layers/layer_detail.html:216
 msgid "Create a map using this layer"
 msgstr "Crea una vista usando questo layer"
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:192
-#: mdtools/templates/layers/layer_detail.html:186
+#: mdtools/templates/layers/layer_detail.html:217
 msgid "Click the button below to generate a new map based on this layer."
 msgstr ""
 "Clicca il pulsante qui sotto per generare una nuova vista basata su questo "
@@ -2477,28 +2477,28 @@ msgstr ""
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:193
 #: _locale_external/geonode/templates/index.html:61
-#: mdtools/templates/layers/layer_detail.html:187 templates/site_index.html:85
+#: mdtools/templates/layers/layer_detail.html:218 templates/site_index.html:85
 msgid "Create a Map"
 msgstr "Crea una vista"
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:200
-#: mdtools/templates/layers/layer_detail.html:194
+#: mdtools/templates/layers/layer_detail.html:225
 msgid "Click the button below to change the permissions of this layer."
 msgstr ""
 "Clicca il pulsante qui sotto per modificare i permessi di questo livello."
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:201
-#: mdtools/templates/layers/layer_detail.html:195
+#: mdtools/templates/layers/layer_detail.html:226
 msgid "Change Layer Permissions"
 msgstr "Cambia i permessi del Layer"
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:207
-#: mdtools/templates/layers/layer_detail.html:201
+#: mdtools/templates/layers/layer_detail.html:232
 msgid "Styles"
 msgstr "Vestizione"
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:208
-#: mdtools/templates/layers/layer_detail.html:202
+#: mdtools/templates/layers/layer_detail.html:233
 msgid ""
 "The following styles are associated with this layer. Choose a style to view "
 "it in the preview map."
@@ -2507,12 +2507,12 @@ msgstr ""
 "visualizzare nell'anteprima della mappa.  "
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:221
-#: mdtools/templates/layers/layer_detail.html:215
+#: mdtools/templates/layers/layer_detail.html:246
 msgid "No styles associated with this layer"
 msgstr "Nessuno stile associato a questo Layer"
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:228
-#: mdtools/templates/layers/layer_detail.html:222
+#: mdtools/templates/layers/layer_detail.html:253
 msgid "Layer Owner"
 msgstr "Proprietario del Layer"
 
@@ -3186,7 +3186,7 @@ msgstr ""
 "essere contattati"
 
 #: _locale_external/geonode/people/models.py:54
-#: osk/templates/osk/osk_list.html:53
+#: osk/templates/osk/osk_list.html:60
 msgid "City"
 msgstr "Città"
 
@@ -3608,20 +3608,20 @@ msgstr "Aiuto"
 #: _locale_external/geonode/templates/500.html:66
 #: _locale_external/geonode/templates/500.html:79
 #: _locale_external/geonode/templates/base.html:73
-#: _locale_external/geonode/templates/base.html:86 templates/site_base.html:60
-#: templates/site_base.html.py:73
+#: _locale_external/geonode/templates/base.html:86 templates/site_base.html:63
+#: templates/site_base.html.py:76
 msgid "Sign in"
 msgstr "Entra"
 
 #: _locale_external/geonode/templates/500.html:85
-#: _locale_external/geonode/templates/base.html:92 templates/site_base.html:79
+#: _locale_external/geonode/templates/base.html:92 templates/site_base.html:82
 msgid "or"
 msgstr "oppure"
 
 #: _locale_external/geonode/templates/500.html:86
 #: _locale_external/geonode/templates/base.html:93
 #: skregistration/templates/skregistration/registration.html:58
-#: templates/site_base.html:80
+#: templates/site_base.html:83
 msgid "Register"
 msgstr "Registrati"
 
@@ -3654,7 +3654,7 @@ msgstr "Fornito da: "
 
 #: _locale_external/geonode/templates/500.html:181
 #: _locale_external/geonode/templates/base.html:188
-#: templates/site_base.html:172
+#: templates/site_base.html:175
 msgid "GeoNode"
 msgstr ""
 
@@ -4811,7 +4811,22 @@ msgstr ""
 msgid " Or just go "
 msgstr ""
 
-#: mdtools/admin.py:22 osk/templates/osk/osk_list.html:40
+#: demo/templates/demo/index.html:5 demo/templates/demo/index.html.py:13
+msgid "Demo"
+msgstr ""
+
+#: demo/templates/demo/index.html:15
+msgid ""
+"Please follow the link below to download the sample datasets you can use for "
+"thesting the GET-IT suite"
+msgstr ""
+
+#: demo/templates/demo/index.html:18
+#, fuzzy
+msgid "Demo dataset"
+msgstr "dataset"
+
+#: mdtools/admin.py:22 osk/templates/osk/osk_list.html:47
 msgid "Provider"
 msgstr "Fornitore"
 
@@ -4819,122 +4834,122 @@ msgstr "Fornitore"
 msgid "Contact"
 msgstr "Contatto"
 
-#: mdtools/models.py:47
+#: mdtools/models.py:48
 msgid "Metadata responsible party"
 msgstr "Responsabile dei Metadati"
 
-#: mdtools/models.py:48
+#: mdtools/models.py:49
 msgid "Responsible party"
 msgstr "Responsabile"
 
-#: mdtools/models.py:49
+#: mdtools/models.py:50
 msgid "Point of contact"
 msgstr "Punto di contatto"
 
-#: mdtools/models.py:50
+#: mdtools/models.py:51
 msgid "Distributor"
 msgstr "Distributore"
 
-#: mdtools/models.py:55
+#: mdtools/models.py:56
 msgid "Scope"
 msgstr "Scopo"
 
-#: mdtools/models.py:73
+#: mdtools/models.py:75
 msgid "language used for metadata"
 msgstr "lingua utilizzata per il metadato"
 
-#: mdtools/models.py:74
+#: mdtools/models.py:76
 msgid "metadata date"
 msgstr "data del metadato"
 
-#: mdtools/models.py:144
+#: mdtools/models.py:153
 msgid "node name"
 msgstr "nome del nodo"
 
-#: mdtools/models.py:144
+#: mdtools/models.py:153
 msgid "shorter than the title: e.g. acronym. This field is required"
 msgstr ""
 "pi&ugrave; breve del titolo: e.g. acronimo. Questo campo &egrave; "
 "obbligatorio"
 
-#: mdtools/models.py:145
+#: mdtools/models.py:154
 msgid "node title"
 msgstr "titolo"
 
-#: mdtools/models.py:145 mdtools/models.py:149 mdtools/models.py:151
-#: mdtools/models.py:153
+#: mdtools/models.py:154 mdtools/models.py:158 mdtools/models.py:160
+#: mdtools/models.py:162
 msgid "This field is required"
 msgstr "Questo campo &egrave; obbligatorio"
 
-#: mdtools/models.py:146
+#: mdtools/models.py:155
 msgid "node abastract"
 msgstr "descrizione del nodo"
 
-#: mdtools/models.py:149
+#: mdtools/models.py:158
 msgid "organization name"
 msgstr "Nome dell'organizzazione"
 
-#: mdtools/models.py:150
+#: mdtools/models.py:159
 msgid "provider url"
 msgstr "url del fornitore di dati"
 
-#: mdtools/models.py:151
+#: mdtools/models.py:160
 msgid "contact name"
 msgstr "nome del contatto"
 
-#: mdtools/models.py:152
+#: mdtools/models.py:161
 msgid "contact position"
 msgstr "inquadramento contatto"
 
-#: mdtools/models.py:153
+#: mdtools/models.py:162
 msgid "contact email"
 msgstr "email contatto"
 
-#: mdtools/models.py:154
+#: mdtools/models.py:163
 msgid "contact url"
 msgstr "url contatto"
 
-#: mdtools/models.py:155
+#: mdtools/models.py:164
 msgid "contact address"
 msgstr "indirizzo contatto"
 
-#: mdtools/models.py:156
+#: mdtools/models.py:165
 msgid "contact city"
 msgstr "città del contatto"
 
-#: mdtools/models.py:157
+#: mdtools/models.py:166
 msgid "contact state or province"
 msgstr "stato o provincia del contatto"
 
-#: mdtools/models.py:158
+#: mdtools/models.py:167
 msgid "contact postalcode"
 msgstr "indirizzo postale"
 
-#: mdtools/models.py:159
+#: mdtools/models.py:168
 msgid "contact country"
 msgstr "paese del contatto"
 
-#: mdtools/models.py:160
+#: mdtools/models.py:169
 msgid "contact phone"
 msgstr "telefono del contatto"
 
-#: mdtools/models.py:161
+#: mdtools/models.py:170
 msgid "contact fax"
 msgstr "fax del contatto"
 
-#: mdtools/models.py:162
+#: mdtools/models.py:171
 msgid "contact hours"
 msgstr "orari "
 
-#: mdtools/models.py:163
+#: mdtools/models.py:172
 msgid "contact instructions"
 msgstr "istruzioni per il contatto"
 
-#: mdtools/models.py:164
+#: mdtools/models.py:173
 msgid "contact role"
 msgstr "ruolo del contatto"
 
-#: mdtools/models.py:167
+#: mdtools/models.py:176
 msgid "Services metadata"
 msgstr "Metadati dei Servizi"
 
@@ -4959,9 +4974,14 @@ msgid_plural "views "
 msgstr[0] "visualizzazione"
 msgstr[1] "visualizzazioni"
 
-#: mdtools/templates/layers/_layer_list_item.html:28
+#: mdtools/templates/layers/_layer_list_item.html:32
 msgid "Metadata Completeness"
 msgstr "Completezza dei metadati"
+
+#: mdtools/templates/layers/layer_detail.html:63
+#, fuzzy
+msgid "Edit Metadata (INSPIRE)"
+msgstr "Modifica Metadati"
 
 #: mdtools/templates/mdtools/edi_headers.html:66
 msgid ""
@@ -4994,82 +5014,90 @@ msgid "Oh snap! You got an error!"
 msgstr "Attenzione, si è verificato un errore!"
 
 #: osk/templates/osk/osk_base.html:12 osk/templates/osk/osk_list.html:7
-#: osk/templates/osk/osk_list.html.py:14
+#: osk/templates/osk/osk_list.html.py:15
 msgid "Explore SOS"
 msgstr "Esplora SOS"
 
 #: osk/templates/osk/osk_base.html:13
-#: osk/templates/osk/osk_registration.html:7
-msgid "Sensor Registration"
-msgstr "Registrazione del sensore"
-
-#: osk/templates/osk/osk_base.html:14
 msgid "Upload Observations"
 msgstr "Carica osservazioni"
 
-#: osk/templates/osk/osk_list.html:31
+#: osk/templates/osk/osk_list.html:20
+#, fuzzy
+msgid "Register a new  Sensor"
+msgstr "Crea un Sensore"
+
+#: osk/templates/osk/osk_list.html:22
+msgid "Capabilities &raquo;"
+msgstr ""
+
+#: osk/templates/osk/osk_list.html:38
 msgid "Identification"
 msgstr "Identificazione"
 
-#: osk/templates/osk/osk_list.html:43
+#: osk/templates/osk/osk_list.html:50
 msgid "Name"
 msgstr "Nome"
 
-#: osk/templates/osk/osk_list.html:45
+#: osk/templates/osk/osk_list.html:52
 msgid "Organization"
 msgstr "Nome dell'organizzazione"
 
-#: osk/templates/osk/osk_list.html:47
+#: osk/templates/osk/osk_list.html:54
 msgid "Position"
 msgstr "Ruolo"
 
-#: osk/templates/osk/osk_list.html:49
+#: osk/templates/osk/osk_list.html:56
 msgid "Address"
 msgstr "Indirizzo"
 
-#: osk/templates/osk/osk_list.html:51
+#: osk/templates/osk/osk_list.html:58
 msgid "Postcode"
 msgstr "Codice postale"
 
-#: osk/templates/osk/osk_list.html:55
+#: osk/templates/osk/osk_list.html:62
 msgid "Region"
 msgstr "Regione"
 
-#: osk/templates/osk/osk_list.html:57
+#: osk/templates/osk/osk_list.html:64
 msgid "Country"
 msgstr "Nazione"
 
-#: osk/templates/osk/osk_list.html:61
+#: osk/templates/osk/osk_list.html:68
 msgid "Phone"
 msgstr "Telefono"
 
-#: osk/templates/osk/osk_list.html:63
+#: osk/templates/osk/osk_list.html:70
 msgid "Fax"
 msgstr ""
 
-#: osk/templates/osk/osk_list.html:65
+#: osk/templates/osk/osk_list.html:72
 msgid "Site"
 msgstr "Sito Web"
 
-#: osk/templates/osk/osk_list.html:71
+#: osk/templates/osk/osk_list.html:78
 msgid "Sensors / Procedures"
 msgstr "Sensori / Procedure"
 
-#: osk/templates/osk/osk_list.html:73
+#: osk/templates/osk/osk_list.html:82
 msgid "Number of sensors:"
 msgstr "Numero di sensori:"
 
-#: osk/templates/osk/osk_list.html:78
+#: osk/templates/osk/osk_list.html:93
 msgid "Sensor"
 msgstr "Sensore"
 
-#: osk/templates/osk/osk_list.html:82
+#: osk/templates/osk/osk_list.html:100
 msgid "Sensor details"
 msgstr "Dettagli del sensore"
 
-#: osk/templates/osk/osk_list.html:83
+#: osk/templates/osk/osk_list.html:101
 msgid "Upload observations"
 msgstr "Carica osservazioni"
+
+#: osk/templates/osk/osk_registration.html:7
+msgid "Sensor Registration"
+msgstr "Registrazione del sensore"
 
 #: osk/templates/osk/osk_registration.html:25
 msgid "SOS compliance"
@@ -5382,34 +5410,34 @@ msgstr "Crea layer"
 msgid "Using Services"
 msgstr "Utilizza i Servizi"
 
-#: templates/site_base.html:108
+#: templates/site_base.html:111
 msgid "Sensors"
 msgstr "Sensori"
 
-#: templates/site_base.html:166
+#: templates/site_base.html:169
 msgid "SK is a project of the StarterKit Development Team"
 msgstr "SK è un progetto dello staff di sviluppatori di SP7"
 
-#: templates/site_base.html:167
+#: templates/site_base.html:170
 msgid ""
 "GET-IT is developed by <a target='_blank' href='http://sp7.irea.cnr.it'>SP7</"
 "a>-<a target='_blank' href='http://www.ritmare.it/'>RITMARE</a>"
 msgstr ""
 
-#: templates/site_base.html:168
+#: templates/site_base.html:171
 msgid "Contacts"
 msgstr "Contatti"
 
-#: templates/site_base.html:169
+#: templates/site_base.html:172
 msgid "Legal Notes"
 msgstr ""
 
-#: templates/site_base.html:170 templates/sk_credits.html:4
+#: templates/site_base.html:173 templates/sk_credits.html:4
 #: templates/sk_credits.html.py:8
 msgid "Credits"
 msgstr ""
 
-#: templates/site_base.html:172
+#: templates/site_base.html:175
 msgid "Based on"
 msgstr "Basato su"
 
