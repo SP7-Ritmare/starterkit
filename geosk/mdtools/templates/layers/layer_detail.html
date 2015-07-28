@@ -329,7 +329,7 @@
     {% get_current_language as  LANGUAGE_CODE %}
     var ediml_current_language = '{{ LANGUAGE_CODE }}';
     var ediml_edimlId = '{{ layer.mdextension.fileid }}';
-    var ediml_client_url = "{{ STATIC_URL }}EDI-NG_client/INSPIRE_dataset.html?";
+    var ediml_client_url = "{{ STATIC_URL }}EDI-NG_client/RNDT_dataset.html?";
     var ediml_proxy_url = '{% url "ediproxy_importmd" layer.typename %}';
 
     var parameters;
