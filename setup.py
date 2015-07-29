@@ -43,8 +43,9 @@ class PostInstallCommand(install):
             open(f, 'a').close()
             # make links
             link_name = os.path.join(self.install_lib, 'geosk', os.path.basename(f))
-            print 'make link', link_name
-            os.symlink(f, link_name)
+            if not os.path.islink(link_name):
+                print 'make link', link_name
+                os.symlink(f, link_name)
         os.chmod('/etc/starterkit/pycsw_settings.py', stat.S_IREAD|stat.S_IRGRP|stat.S_IROTH|
                  stat.S_IWRITE|stat.S_IWGRP|stat.S_IWOTH)
 
@@ -81,7 +82,7 @@ setup(
     "simplejson",
     "Django==1.5.5" # required by GeoNode 2.0
     ],
-    # 
+    #
     include_package_data = True,
     # exclude_package_data = {'': ['.gitignore', ],
     #                         'geosk': ['local_settings.py'],
@@ -95,4 +96,3 @@ setup(
         'install': PostInstallCommand,
     },
 )
-
