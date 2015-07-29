@@ -2636,16 +2636,17 @@ OpenLayers.SOSClient = OpenLayers.Class({
         url = OpenLayers.Util.urlAppend(this.url, paramString);
         OpenLayers.Request.GET({url: url,
                                 success: this.parseSOSCaps,
-				scope: this,
-				async: false // metto async false altrimenti non riesco a controllare il caricamento da GXP
-			       });
-
-
+                                failure: this.onFailure,
+                                scope: this
+                               });
+    },
+    onFailure: function(){
+        this.events.triggerEvent("failure");
     },
     getRandomColor: function () {
-	var colorIndex;
-	var color
-	var colors = ['#33a02c', '#1f78b4', '#b2df8a', '#a6cee3', '#fb9a99', '#e31a1c', '#fdbf6f', '#ff7f00', '#cab2d6' ,'#6a3d9a', '#ffff99', '#b15928']
+        var colorIndex;
+        var color;
+        var colors = ['#33a02c', '#1f78b4', '#b2df8a', '#a6cee3', '#fb9a99', '#e31a1c', '#fdbf6f', '#ff7f00', '#cab2d6' ,'#6a3d9a', '#ffff99', '#b15928'];
 	// warning: global variable
 	// if(sosColorsIndex  === 'undefined'){
 	if(typeof sosColorsIndex == 'undefined'){
@@ -3770,15 +3771,30 @@ gxp.plugins.AddSOS = Ext.extend(gxp.plugins.Tool, {
             target: this.target,
             listeners: {
                 'addfoi':function (config) {
-                    var sourceConfig = {"config":{"ptype": 'gxp_sossource'}};
+                    var sourceConfig = {"config":{
+                        "ptype": 'gxp_sossource',
+                        "listeners": {
+                            'beforeload': function(){
+                                this.loadingMask = new Ext.LoadMask(Ext.getBody());
+                                this.loadingMask.show();
+                            },
+                            'loaded': function(config){
+                                this.target.mapPanel.layers.add([config.record]);
+                                this.sosDialog.hide();
+                                this.loadingMask.hide();
+                            },
+                            'failure': function(){
+                                this.loadingMask.hide();
+                            },
+                            'scope': this
+                        }
+                    }};
                     if (config.url) {
                         sourceConfig.config["url"] = config.url;
                     }
                     var source = this.target.addLayerSource(sourceConfig);
                     config.source = source.id;
-                    var feedRecord = source.createLayerRecord(config);
-                    this.target.mapPanel.layers.add([feedRecord]);
-		    this.sosDialog.hide();
+                    source.createLayerRecord(config);
                 },
                 scope: this
 	    }
@@ -4081,55 +4097,56 @@ gxp.plugins.SOSSource = Ext.extend(gxp.plugins.LayerSource, {
      */
     createLayerRecord:function (config) {
         var record;
+        this.fireEvent("beforeload", {'record': record});
 	this.sosClient = new OpenLayers.SOSClient({map: null, url: this.url});
-        this.sosClient.events.on(
-            {'loaded': function(){
-                // TODO: move configuration layer here
+        this.sosClient.events.on({
+            'loaded': function(){
+                var layer = this.sosClient.createLayer();
+
+                //configure the popup balloons for feed items
+                this.configureInfoPopup(layer);
+
+                // create a layer record for this layer
+                var Record = GeoExt.data.LayerRecord.create([
+                    //{name: "title", type: "string"},
+                    {name:"name", type:"string"},
+                    {name:"source", type:"string"},
+                    {name:"group", type:"string"},
+                    {name:"fixed", type:"boolean"},
+                    {name:"selected", type:"boolean"},
+                    {name:"visibility", type:"boolean"},
+                    {name:"format", type:"string"},
+                    {name:"defaultStyle"},
+                    {name:"selectStyle"},
+                    {name:"params"}
+                ]);
+
+                var formatConfig = "format" in config ? config.format : this.format;
+
+                var data = {
+                    layer:layer,
+                    //title: config.name,
+                    name:config.name,
+                    source:config.source,
+                    group:config.group,
+                    fixed:("fixed" in config) ? config.fixed : false,
+                    selected:("selected" in config) ? config.selected : false,
+                    params:("params" in config) ? config.params : {},
+                    visibility:("visibility" in config) ? config.visibility : false,
+                    format: formatConfig instanceof String ? formatConfig : null,
+                    defaultStyle:("defaultStyle" in config) ? config.defaultStyle : {},
+                    selectStyle:("selectStyle" in config) ? config.selectStyle : {}
+                };
+
+
+                record = new Record(data, layer.id);
+                this.fireEvent("loaded", {'record': record});
             },
-             scope: this
-            });
-
-	var layer = this.sosClient.createLayer();
-
-        //configure the popup balloons for feed items
-        this.configureInfoPopup(layer);
-
-        // create a layer record for this layer
-        var Record = GeoExt.data.LayerRecord.create([
-            //{name: "title", type: "string"},
-            {name:"name", type:"string"},
-            {name:"source", type:"string"},
-            {name:"group", type:"string"},
-            {name:"fixed", type:"boolean"},
-            {name:"selected", type:"boolean"},
-            {name:"visibility", type:"boolean"},
-            {name:"format", type:"string"},
-            {name:"defaultStyle"},
-            {name:"selectStyle"},
-            {name:"params"}
-        ]);
-
-        var formatConfig = "format" in config ? config.format : this.format;
-
-        var data = {
-            layer:layer,
-            //title: config.name,
-            name:config.name,
-            source:config.source,
-            group:config.group,
-            fixed:("fixed" in config) ? config.fixed : false,
-            selected:("selected" in config) ? config.selected : false,
-            params:("params" in config) ? config.params : {},
-            visibility:("visibility" in config) ? config.visibility : false,
-            format: formatConfig instanceof String ? formatConfig : null,
-            defaultStyle:("defaultStyle" in config) ? config.defaultStyle : {},
-            selectStyle:("selectStyle" in config) ? config.selectStyle : {}
-        };
-
-
-        record = new Record(data, layer.id);
-        return record;
-
+            'failure': function(){
+                this.fireEvent("failure");
+            },
+            scope: this
+        });
     },
 
 

@@ -60,16 +60,17 @@ OpenLayers.SOSClient = OpenLayers.Class({
         url = OpenLayers.Util.urlAppend(this.url, paramString);
         OpenLayers.Request.GET({url: url,
                                 success: this.parseSOSCaps,
-				scope: this,
-				async: false // metto async false altrimenti non riesco a controllare il caricamento da GXP
-			       });
-
-
+                                failure: this.onFailure,
+                                scope: this
+                               });
+    },
+    onFailure: function(){
+        this.events.triggerEvent("failure");
     },
     getRandomColor: function () {
-	var colorIndex;
-	var color
-	var colors = ['#33a02c', '#1f78b4', '#b2df8a', '#a6cee3', '#fb9a99', '#e31a1c', '#fdbf6f', '#ff7f00', '#cab2d6' ,'#6a3d9a', '#ffff99', '#b15928']
+        var colorIndex;
+        var color;
+        var colors = ['#33a02c', '#1f78b4', '#b2df8a', '#a6cee3', '#fb9a99', '#e31a1c', '#fdbf6f', '#ff7f00', '#cab2d6' ,'#6a3d9a', '#ffff99', '#b15928'];
 	// warning: global variable
 	// if(sosColorsIndex  === 'undefined'){
 	if(typeof sosColorsIndex == 'undefined'){

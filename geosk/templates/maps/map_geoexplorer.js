@@ -39,9 +39,9 @@ Ext.onReady(function() {
         printService: "{{GEOSERVER_BASE_URL}}pdf/",
         {% else %}
         printService: "",
-        {% endif %} 
-        /* The URL to a REST map configuration service.  This service 
-         * provides listing and, with an authenticated user, saving of 
+        {% endif %}
+        /* The URL to a REST map configuration service.  This service
+         * provides listing and, with an authenticated user, saving of
          * maps on the server for sharing and editing.
          */
         rest: "{% url "maps_browse" %}",
@@ -67,20 +67,28 @@ Ext.onReady(function() {
 				   //'http://sos.ise.cnr.it/biology/sos?',
 				   //'http://sos.ise.cnr.it/chemistry/sos?'
 				  ]
-		    
+
 		    for(var index = 0; index < sosUrls.length; ++index){
 			var sosUrl = sosUrls[index];
-			var sourceConfig = {"config":{"ptype": 'gxp_sossource', "url": sosUrl}};
+			var sourceConfig = {"config":{
+                            "ptype": 'gxp_sossource',
+                            "url": sosUrl,
+                            "listeners": {
+                                'loaded': function(config){
+			            app.mapPanel.layers.add([config.record]);
+                                }
+                            }
+                        }};
 			var source = app.addLayerSource(sourceConfig);
-			
+
 			var layerConfig = {
   			    "url": sosUrl,
 			    "group": "sos"
 			};
-			
+
 			layerConfig.source = source.id;
-			var sosRecord = source.createLayerRecord(layerConfig);
-			app.mapPanel.layers.add([sosRecord]);
+			source.createLayerRecord(layerConfig);
+
 		    }
 		});
 	    }

@@ -55,15 +55,30 @@ gxp.plugins.AddSOS = Ext.extend(gxp.plugins.Tool, {
             target: this.target,
             listeners: {
                 'addfoi':function (config) {
-                    var sourceConfig = {"config":{"ptype": 'gxp_sossource'}};
+                    var sourceConfig = {"config":{
+                        "ptype": 'gxp_sossource',
+                        "listeners": {
+                            'beforeload': function(){
+                                this.loadingMask = new Ext.LoadMask(Ext.getBody());
+                                this.loadingMask.show();
+                            },
+                            'loaded': function(config){
+                                this.target.mapPanel.layers.add([config.record]);
+                                this.sosDialog.hide();
+                                this.loadingMask.hide();
+                            },
+                            'failure': function(){
+                                this.loadingMask.hide();
+                            },
+                            'scope': this
+                        }
+                    }};
                     if (config.url) {
                         sourceConfig.config["url"] = config.url;
                     }
                     var source = this.target.addLayerSource(sourceConfig);
                     config.source = source.id;
-                    var feedRecord = source.createLayerRecord(config);
-                    this.target.mapPanel.layers.add([feedRecord]);
-		    this.sosDialog.hide();
+                    source.createLayerRecord(config);
                 },
                 scope: this
 	    }

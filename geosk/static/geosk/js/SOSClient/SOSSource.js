@@ -38,55 +38,56 @@ gxp.plugins.SOSSource = Ext.extend(gxp.plugins.LayerSource, {
      */
     createLayerRecord:function (config) {
         var record;
+        this.fireEvent("beforeload", {'record': record});
 	this.sosClient = new OpenLayers.SOSClient({map: null, url: this.url});
-        this.sosClient.events.on(
-            {'loaded': function(){
-                // TODO: move configuration layer here
+        this.sosClient.events.on({
+            'loaded': function(){
+                var layer = this.sosClient.createLayer();
+
+                //configure the popup balloons for feed items
+                this.configureInfoPopup(layer);
+
+                // create a layer record for this layer
+                var Record = GeoExt.data.LayerRecord.create([
+                    //{name: "title", type: "string"},
+                    {name:"name", type:"string"},
+                    {name:"source", type:"string"},
+                    {name:"group", type:"string"},
+                    {name:"fixed", type:"boolean"},
+                    {name:"selected", type:"boolean"},
+                    {name:"visibility", type:"boolean"},
+                    {name:"format", type:"string"},
+                    {name:"defaultStyle"},
+                    {name:"selectStyle"},
+                    {name:"params"}
+                ]);
+
+                var formatConfig = "format" in config ? config.format : this.format;
+
+                var data = {
+                    layer:layer,
+                    //title: config.name,
+                    name:config.name,
+                    source:config.source,
+                    group:config.group,
+                    fixed:("fixed" in config) ? config.fixed : false,
+                    selected:("selected" in config) ? config.selected : false,
+                    params:("params" in config) ? config.params : {},
+                    visibility:("visibility" in config) ? config.visibility : false,
+                    format: formatConfig instanceof String ? formatConfig : null,
+                    defaultStyle:("defaultStyle" in config) ? config.defaultStyle : {},
+                    selectStyle:("selectStyle" in config) ? config.selectStyle : {}
+                };
+
+
+                record = new Record(data, layer.id);
+                this.fireEvent("loaded", {'record': record});
             },
-             scope: this
-            });
-
-	var layer = this.sosClient.createLayer();
-
-        //configure the popup balloons for feed items
-        this.configureInfoPopup(layer);
-
-        // create a layer record for this layer
-        var Record = GeoExt.data.LayerRecord.create([
-            //{name: "title", type: "string"},
-            {name:"name", type:"string"},
-            {name:"source", type:"string"},
-            {name:"group", type:"string"},
-            {name:"fixed", type:"boolean"},
-            {name:"selected", type:"boolean"},
-            {name:"visibility", type:"boolean"},
-            {name:"format", type:"string"},
-            {name:"defaultStyle"},
-            {name:"selectStyle"},
-            {name:"params"}
-        ]);
-
-        var formatConfig = "format" in config ? config.format : this.format;
-
-        var data = {
-            layer:layer,
-            //title: config.name,
-            name:config.name,
-            source:config.source,
-            group:config.group,
-            fixed:("fixed" in config) ? config.fixed : false,
-            selected:("selected" in config) ? config.selected : false,
-            params:("params" in config) ? config.params : {},
-            visibility:("visibility" in config) ? config.visibility : false,
-            format: formatConfig instanceof String ? formatConfig : null,
-            defaultStyle:("defaultStyle" in config) ? config.defaultStyle : {},
-            selectStyle:("selectStyle" in config) ? config.selectStyle : {}
-        };
-
-
-        record = new Record(data, layer.id);
-        return record;
-
+            'failure': function(){
+                this.fireEvent("failure");
+            },
+            scope: this
+        });
     },
 
 
