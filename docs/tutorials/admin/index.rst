@@ -14,3 +14,6 @@ Welcome to the GET-IT Administrators Workshop!
 
 :ref:`install`
   Learn how to install GET-IT
+
+:ref:`advanced`
+  Advance administration
