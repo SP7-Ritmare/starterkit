@@ -52,6 +52,6 @@ so here an alternative installation procedure Ubuntu 12.04 LTS (with
 Oracle JRE 6)::
 
     sudo apt-get install libjai-core-java libjai-imageio-core-java
-    sudo cp /usr/lib/jni/* /usr/lib/jvm/java-6-oracle/jre/lib/amd64/
+    sudo cp /usr/lib/jni/{libclib_jiio.so,libmlib_jai.so} /usr/lib/jvm/java-6-oracle/jre/lib/amd64/
     sudo cp /usr/share/java/{jai_core-1.1.4.jar,jai_codec-1.1.4.jar,jai_imageio-1.2.jar,mlibwrapper_jai-1.1.4.jar,clibwrapper_jiio-1.2.jar} /usr/share/geoserver/WEB-INF/lib/
     sudo /etc/init.d/tomcat7 restart
