@@ -12,6 +12,8 @@ Welcome to the GET-IT Administrators Workshop!
      Learn how to install GET-IT from scratch step by step.
 :ref:`server`
      Minimum server requirements.
+:ref:`advanced`
+     Advanced administration
 
 
 .. toctree::
