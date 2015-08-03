@@ -74,20 +74,16 @@ setup(
     keywords="StarterKit GeoNode Django sensors SOS",
     packages=find_packages(),
     install_requires=[
-    "django-overextends",
-    "django-annoying",
-    "django-rosetta",
-    "django-grappelli==2.4.10",
-    "djproxy",
-    "simplejson",
-    "Django==1.5.5" # required by GeoNode 2.0
+        "django-overextends",
+        "django-annoying",
+        "django-rosetta",
+        "django-grappelli==2.4.10",
+        "djproxy",
+        "simplejson",
+        "Django==1.5.5" # required by GeoNode 2.0
     ],
     #
     include_package_data = True,
-    # exclude_package_data = {'': ['.gitignore', ],
-    #                         'geosk': ['local_settings.py'],
-    #                         # 'model': ['config.py']
-    #                         },
     setup_requires = [ "setuptools_git >= 0.3", ],
     scripts=['bin/sk',
              'bin/sk-updateip',
