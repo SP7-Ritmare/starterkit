@@ -27,7 +27,7 @@ This is where you can override the hero area block. You can simply modify the co
 
       <div class="intro">
       {% if SERVICES_METADATA.node_abstract %}
-        <h2>{{ SERVICES_METADATA.node_abstract }}</h2>
+        <h2>{{ SERVICES_METADATA.node_abstract|safe }}</h2>
       {% else %}
         <h2>
             {% blocktrans %}Upload your layers, your observations, create your maps and join the RITMARE interoperable Infrastructure.{% endblocktrans %}
