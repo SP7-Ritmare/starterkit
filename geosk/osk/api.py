@@ -161,8 +161,8 @@ def ediproxy_importmd(request):
 
         sensor = Sensor(fileid=fileid)
 
-        sensor.sensorml = sos_response
-        sensor.ediml = request.raw_post_data
+        sensor.sensorml = insertsensor
+        sensor.ediml = ediml
         sensor.save()
         return json_response(body={'success':True,'redirect': reverse('osk_browse')})
     else:
