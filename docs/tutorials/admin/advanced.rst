@@ -1,12 +1,26 @@
 .. _advanced:
 
+
 =======================
 Advanced administration
 =======================
 
 
 Keep GET-IT up-to-date
-----------------------
+-----------------------
+
+A partire dalla versione **1.2**, è possibile aggiornare il proprio StarterKit in modo semplice. E' necessario che l'amministratore del server lanci un comando per far aggiornare il software all'ultima versione disponibile.
+Il comando da eseguire con utenti di amministratore è::
+
+  sudo pip install --upgrade --no-deps starterkit
+  sudo sk  collectstatic --noinput -i externals -i node_modules -i SOSClient
+  sudo /etc/init.d/apache2 reload
+
+Purtroppo **questo non è possibile per chi ha installato sul proprio server una versione precedente alla 1.2a4** (questo è il caso solo dei primi 2 rilasci), questo comando non funziona, sarà quindi necessario contattare il proprio tutor che si occuperà di contattare il sistemista per provvedere all'aggiornamento. Successivamente invece potrete usare il comando di upgrade autonomamente.
+
+
+Keep your system up-to-date
+----------------------------
 
 It's very important to maintain the system updated for security and stability.
 
