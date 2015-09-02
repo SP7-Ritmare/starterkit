@@ -24,6 +24,13 @@ gunzip starterkit.vmdk.gz
 
 
 
+Update GET-IT
+-------------
+
+At the end of the installation it's important to update your GET-IT to the last version available following the steps described in :ref:`update`.
+
+
+
 
 
 
