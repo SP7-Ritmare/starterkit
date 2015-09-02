@@ -2,21 +2,8 @@
 
 
 =======================
-Advanced administration
+Advanced administrsation
 =======================
-
-
-Keep GET-IT up-to-date
------------------------
-
-A partire dalla versione **1.2**, è possibile aggiornare il proprio StarterKit in modo semplice. E' necessario che l'amministratore del server lanci un comando per far aggiornare il software all'ultima versione disponibile.
-Il comando da eseguire con utenti di amministratore è::
-
-  sudo pip install --upgrade --no-deps starterkit
-  sudo sk  collectstatic --noinput -i externals -i node_modules -i SOSClient
-  sudo /etc/init.d/apache2 reload
-
-Purtroppo **questo non è possibile per chi ha installato sul proprio server una versione precedente alla 1.2a4** (questo è il caso solo dei primi 2 rilasci), questo comando non funziona, sarà quindi necessario contattare il proprio tutor che si occuperà di contattare il sistemista per provvedere all'aggiornamento. Successivamente invece potrete usare il comando di upgrade autonomamente.
 
 
 Keep your system up-to-date
@@ -37,6 +24,19 @@ Alternatively, you may use an interactive text interface::
 Occasionally, you should remove the old kernel versions. Here an automatic script to cleanup (use with caution)::
 
    echo $(dpkg --list | grep linux-image | awk '{ print $2 }' | sort -V | sed -n '/'`uname -r`'/q;p') $(dpkg --list | grep linux-headers | awk '{ print $2 }' | sort -V | sed -n '/'"$(uname -r | sed "s/\([0-9.-]*\)-\([^0-9]\+\)/\1/")"'/q;p') | xargs sudo apt-get -y purge
+
+
+Keep GET-IT up-to-date
+-----------------------
+
+A partire dalla versione **1.2**, è possibile aggiornare il proprio StarterKit in modo semplice. E' necessario che l'amministratore del server lanci un comando per far aggiornare il software all'ultima versione disponibile.
+Il comando da eseguire con utenti di amministratore è::
+
+  sudo pip install --upgrade --no-deps starterkit
+  sudo sk  collectstatic --noinput -i externals -i node_modules -i SOSClient
+  sudo /etc/init.d/apache2 reload
+
+Purtroppo **questo non è possibile per chi ha installato sul proprio server una versione precedente alla 1.2a4** (questo è il caso solo dei primi 2 rilasci), questo comando non funziona, sarà quindi necessario contattare il proprio tutor che si occuperà di contattare il sistemista per provvedere all'aggiornamento. Successivamente invece potrete usare il comando di upgrade autonomamente.
 
 
 Oracle JDK (v. 6) Installation
