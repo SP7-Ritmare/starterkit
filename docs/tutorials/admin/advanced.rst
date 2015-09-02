@@ -28,14 +28,14 @@ Occasionally, you should remove the old kernel versions. Here an automatic scrip
 Keep GET-IT up-to-date
 -----------------------
 
-A partire dalla versione **1.2**, è possibile aggiornare il proprio GET-IT in modo semplice. E' necessario che l'amministratore del server lanci un comando per far aggiornare il software all'ultima versione disponibile.
-Il comando da eseguire con utenti di amministratore è::
+Starting from **1.2** version, updating GET-IT it's possible in a easy way. The administrator need run a command to update the software to the last version available. 
+The command to run with administrator permission is::
 
   sudo pip install --upgrade --no-deps starterkit
   sudo sk  collectstatic --noinput -i externals -i node_modules -i SOSClient
   sudo /etc/init.d/apache2 reload
 
-Purtroppo **questo non è possibile per chi ha installato sul proprio server una versione precedente alla 1.2a4** (questo è il caso solo dei primi 2 rilasci), questo comando non funziona, sarà quindi necessario contattare il proprio tutor che si occuperà di contattare il sistemista per provvedere all'aggiornamento. Successivamente invece potrete usare il comando di upgrade autonomamente.
+Unfortunately **this update command is not possible if you have a GET-IT version precedent the 1.2a4** (only first two release), in this case you will need to contact your tutor who will provide to contact the GET-IT developement team to update your system. Later you will be able to run the update command by yourself.
 
 
 Oracle JDK (v. 6) Installation
