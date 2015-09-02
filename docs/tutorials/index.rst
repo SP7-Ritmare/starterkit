@@ -19,6 +19,8 @@ and are broken into two groups *Users* and *Administrators*.
 .. :ref:`users`
 	In the user workshop you will learn how to create an account on GET-IT, add layers and maps to your account as well as publishing those.
 
+Users Tutorials ``section on development``
+
 :ref:`admin`
 	The administrator workshop will guide you through the installation and configuration of GET-IT, as well as explore further possibilities with GET-IT.
 

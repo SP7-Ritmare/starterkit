@@ -33,6 +33,8 @@ Tutorials
    tutorials/index
 
 
+``This section is on development``
+
 The Tutorials section contains step-by-step
 workshops that are oriented around performing particular sets of
 tasks, like adding data or publishing maps, setting up and maintaining
@@ -40,7 +42,6 @@ a server, or setting up a project to extend from GET-IT. These
 tutorials are written in a workshop like format and are broken into
 three groups: Users, Administrators and Developers.
 
-Users ``section on development``
 
 :ref:`tutorials`
 
