@@ -5,7 +5,6 @@
 Advanced administrsation
 ========================
 
-
 Keep your system up-to-date
 ----------------------------
 
