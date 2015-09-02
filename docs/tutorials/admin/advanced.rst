@@ -1,9 +1,9 @@
 .. _advanced:
 
 
-=======================
+========================
 Advanced administrsation
-=======================
+========================
 
 
 Keep your system up-to-date
@@ -29,7 +29,7 @@ Occasionally, you should remove the old kernel versions. Here an automatic scrip
 Keep GET-IT up-to-date
 -----------------------
 
-A partire dalla versione **1.2**, è possibile aggiornare il proprio StarterKit in modo semplice. E' necessario che l'amministratore del server lanci un comando per far aggiornare il software all'ultima versione disponibile.
+A partire dalla versione **1.2**, è possibile aggiornare il proprio GET-IT in modo semplice. E' necessario che l'amministratore del server lanci un comando per far aggiornare il software all'ultima versione disponibile.
 Il comando da eseguire con utenti di amministratore è::
 
   sudo pip install --upgrade --no-deps starterkit
