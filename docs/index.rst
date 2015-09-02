@@ -39,7 +39,7 @@ The Tutorials section contains step-by-step
 workshops that are oriented around performing particular sets of
 tasks, like adding data or publishing maps, setting up and maintaining
 a server, or setting up a project to extend from GET-IT. These
-tutorials are written in a workshop like format and are broken into
+tutorials are written in a workshop-like format and are broken into
 three groups: Users, Administrators and Developers.
 
 
@@ -49,11 +49,11 @@ three groups: Users, Administrators and Developers.
 Need Help?
 ==========
 
-Having trouble? Cant find what you are looking for? We'd like to help!
+Having trouble? Can't find what you are looking for? We'd like to help!
 
 
  * Write us an email to: help.skritmare@irea.cnr.it
- * Report bugs with GET-IT in our `ticket tracker`_.
+ * Report bugs in GET-IT in our `ticket tracker`_.
 
 .. _ticket tracker: https://github.com/SP7-Ritmare/starterkit
 
