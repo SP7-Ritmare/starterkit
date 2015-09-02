@@ -10,8 +10,6 @@ Tutorials
    admin/index
 
 
-``This section is on working``
-
 The tutorials are based around performing tasks, like adding data or
 publishing maps. The tutorials are written in a workshop like format
 and are broken into two groups *Users* and *Administrators*.
