@@ -12,8 +12,8 @@ It's very important to maintain the system updated for security and stability.
 
 To update your system in command line, run::
 
-    $ aptitude update
-    $ aptitude full-upgrade
+    $ sudo aptitude update
+    $ sudo aptitude full-upgrade
 
 Alternatively, you may use an interactive text interface::
 
