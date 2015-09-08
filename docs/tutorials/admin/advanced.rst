@@ -17,7 +17,7 @@ To update your system in command line, run::
 
 Alternatively, you may use an interactive text interface::
 
-    $ aptitude
+    $ sudo aptitude
 
 
 Occasionally, you should remove the old kernel versions. Here an automatic script to cleanup (use with caution)::
