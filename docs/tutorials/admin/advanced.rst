@@ -35,6 +35,7 @@ The command to run with administrator permission is::
 
   sudo pip install --upgrade --no-deps starterkit
   sudo sk  collectstatic --noinput -i externals -i node_modules -i SOSClient
+  sudo sk migrate mdtools
   sudo /etc/init.d/apache2 reload
 
 Unfortunately **this update command is not possible if you have a GET-IT version precedent the 1.2a4** (only first two release), in this case you will need to contact your tutor who will provide to contact the GET-IT developement team to update your system. Later you will be able to run the update command by yourself.
