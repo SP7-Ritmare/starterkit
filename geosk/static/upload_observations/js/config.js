@@ -24,7 +24,7 @@ var baseUrlSK="//"+window.location.host;
 /**
  * @note uncomment the following lines for local tests
  */
-baseUrlSK="test";console.warn("file config.js is set for local tests, please comment this line for production");
+//baseUrlSK="test";console.warn("file config.js is set for local tests, please comment this line for production");
 
 
 console.log("loading whoami from: "+ baseUrlSK+"/whoami"+(baseUrlSK==="test")?".js":"");
