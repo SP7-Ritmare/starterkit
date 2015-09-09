@@ -290,7 +290,9 @@ ritmaresk.utils.namingConvention = (function () {
 
         xsl = xslt.loadXMLDoc(filenameXsl);
         //workaround...intercept xslt issue for querystring "&" sep
-        var sampledFeature_workaround=foi.sampledFeature.replace(/&/g,"%_%26_%");
+        var sampledFeature_workaround=foi.sampledFeature;//.replace(/&/g,"%_%26_%");
+        /* @todo check this change: I removed the workaround. XSLT will transform the ampersand. This way the browser should be able to properly interpret the urlencoding.
+        OGC Documentation uses the same encoding in xml (but uses also ather possibile encodings). Anyway: the ampersand is not */
         var params = {
             // TODO: sostituire l'endpoint con il VERO URI dello SK
             SK_DOMAIN_NAME: sk_dns,//endpoint.replace(/http[s]*:\/\//, ""),
@@ -319,7 +321,7 @@ ritmaresk.utils.namingConvention = (function () {
 
         //return(xmlRTemplate);
 
-        return (stringInsertObservation.replace(sampledFeature_workaround,foi.sampledFeature));
+        return (stringInsertObservation);//.replace(sampledFeature_workaround,foi.sampledFeature));
 
     }
 
