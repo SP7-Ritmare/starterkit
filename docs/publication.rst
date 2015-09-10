@@ -4,7 +4,7 @@
 Activities by SP7 team
 =========================
 
-Here is a list of pubblications and other activities by the SP7 project team, if interestead you can read it and make references in your pubblications.
+Here is a list of publications and other activities of the SP7 project team.
 
 
 Publications on Journals
@@ -29,9 +29,9 @@ International Conferences
 IPR Protection of the suite software GET-IT
 ===========================================
 
-Action to protect IPR of the developers of the suite software GET-IT Starter Kit within the Italian flagship project RITMARE
+Action to protect IPR (Intellectual Property Rights) of the developers of the suite software GET-IT Starter Kit within the Italian flagship project RITMARE.
 
-Trademark application request has been submitted on May 2015 to the Italian Patent and Trademark Office (UIB) to protect the Intellectual Property Right of the suite software developed during the RITMARE project, enabling researchers to create their services to disseminate observed and geographical data (and their metadata) in spatial data infrastructures compliant with OGC standards. The name registred is: GET-IT Geoinformation Enabling Toolkit Starter Kit
+A trademark application request has been submitted on May 2015 to the Italian Patent and Trademark Office (UIB) to protect the Intellectual Property Right of the suite software developed during the RITMARE project, enabling researchers to create their services to disseminate observed and geographical data (and their metadata) in spatial data infrastructures compliant with OGC standards. The name registred is: GET-IT Geoinformation Enabling Toolkit Starter Kit.
 
 
 

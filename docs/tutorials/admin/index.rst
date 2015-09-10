@@ -22,3 +22,4 @@ Welcome to the GET-IT Administrators Workshop!
    quick
    scratch
    server
+   advanced

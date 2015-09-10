@@ -1,28 +1,44 @@
 .. _advanced:
 
-=======================
-Advanced administration
-=======================
 
+========================
+Advanced administrsation
+========================
 
-Keep GET-IT up-to-date
-----------------------
+Keep your system up-to-date
+----------------------------
 
 It's very important to maintain the system updated for security and stability.
 
 To update your system in command line, run::
 
-    $ aptitude update
-    $ aptitude full-upgrade
+    $ sudo aptitude update
+    $ sudo aptitude full-upgrade
 
 Alternatively, you may use an interactive text interface::
 
-    $ aptitude
+    $ sudo aptitude
 
 
 Occasionally, you should remove the old kernel versions. Here an automatic script to cleanup (use with caution)::
 
    echo $(dpkg --list | grep linux-image | awk '{ print $2 }' | sort -V | sed -n '/'`uname -r`'/q;p') $(dpkg --list | grep linux-headers | awk '{ print $2 }' | sort -V | sed -n '/'"$(uname -r | sed "s/\([0-9.-]*\)-\([^0-9]\+\)/\1/")"'/q;p') | xargs sudo apt-get -y purge
+
+
+.. _update:
+
+Keep GET-IT up-to-date
+-----------------------
+
+Starting from **1.2** version, updating GET-IT it's possible in a easy way. The administrator need run a command to update the software to the last version available. 
+The command to run with administrator permission is::
+
+  sudo pip install --upgrade --no-deps starterkit
+  sudo sk  collectstatic --noinput -i externals -i node_modules -i SOSClient
+  sudo sk migrate mdtools
+  sudo /etc/init.d/apache2 reload
+
+Unfortunately **this update command is not possible if you have a GET-IT version precedent the 1.2a4** (only first two release), in this case you will need to contact your tutor who will provide to contact the GET-IT developement team to update your system. Later you will be able to run the update command by yourself.
 
 
 Oracle JDK (v. 6) Installation
