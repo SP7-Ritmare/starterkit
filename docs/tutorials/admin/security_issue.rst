@@ -8,6 +8,7 @@ Please customize these settings:
 
 Changing DB password of “geonode” user
 --------------------------------------
+
 ::
 $ sudo -u postgres psql --command '\password geonode'
 
@@ -25,5 +26,6 @@ Edit the configuration file to reflect the changes
 
 Keeping cryptography secure
 ----------------------------
+
 /etc/starterkit/local_settings.py
 * SECRET_KEY

@@ -16,6 +16,8 @@ Welcome to the GET-IT Administrators Workshop!
      Advanced administration
 :ref:`security_issue`
      Customize important setting for security.
+:ref:`domain_name`
+     Learn how to change the domain name of your server.
 
 
 .. toctree::
@@ -26,3 +28,4 @@ Welcome to the GET-IT Administrators Workshop!
    server
    advanced
    security_issue
+   domain_name

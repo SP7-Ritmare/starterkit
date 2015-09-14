@@ -5,6 +5,8 @@
 Installing GET-IT from scratch
 ===============================
 
+Before starting installation read the requirements at :ref:`server`.
+
 If you just want to install GET-IT, it is recommended to use Ubuntu 12.04.
 
 **Prerequisites:**
@@ -70,9 +72,9 @@ Syncdb and collectstatic::
 
     $ sk collectstatic
 
-Register a "fully qualified domain name" (FQDN), then configure the starterkit::
-
-    $ sk-updateip your-FQDN
+Domain Name
+-----------
+To let GET-IT work properly you need to use a right domain name, See the page :ref:`domain_name` to learn how to change it.
 
 Security
 --------

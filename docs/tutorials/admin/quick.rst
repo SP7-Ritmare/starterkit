@@ -5,6 +5,8 @@
 GET-IT quick installation
 ==========================
 
+Before starting installation read the requirements at :ref:`server`.
+
 GET-IT is distributed as a virtual appliance in "vmdk"(virtual machine disk) format.
 
 A video demo is available `HERE <http://youtu.be/q-QDU-WxRRc>`_ (you can change the settings in YouTube to improve the resolution of the video). 
@@ -22,8 +24,13 @@ Extract the file with "gunzip" command: ::
 
  gunzip starterkit.vmdk.gz
 
+Domain Name
+-----------
+To let GET-IT work properly you need to use a right domain name, See the page :ref:`domain_name` to learn how to change it.
+
 Security
 --------
+
 It's important for your server security follow instruction on the page: :ref:`security_issue`
 
 Update GET-IT
