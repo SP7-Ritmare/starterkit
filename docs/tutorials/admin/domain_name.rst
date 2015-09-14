@@ -7,11 +7,9 @@ Choosing the “right” Domain Name
 
 To let GET-IT work, you cannot use the IP address in configuration files, you need to set a domain name.
 
-*Keep “OGC Endpoints” persistent and alive (for remote users and cascading
-services)
-*Stable URIs/URLs as semantic web “best practice”
-*GET-IT uses Domain Name as default prefix for different resources URIs (i.e.
-Sensors, Offerings)
+* Keep “OGC Endpoints” persistent and alive (for remote users and cascading services)
+* Stable URIs/URLs as semantic web “best practice”
+* GET-IT uses Domain Name as default prefix for different resources URIs (i.e. Sensors, Offerings)
 
 Updating Domain Name
 ---------------------

@@ -5,7 +5,7 @@
 GET-IT quick installation
 ==========================
 
-Before starting installation read the requirements at :ref:`server`.
+Before starting installation read the :ref:`server` page.
 
 GET-IT is distributed as a virtual appliance in "vmdk"(virtual machine disk) format.
 

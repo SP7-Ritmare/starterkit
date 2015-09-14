@@ -5,7 +5,7 @@
 Installing GET-IT from scratch
 ===============================
 
-Before starting installation read the requirements at :ref:`server`.
+Before starting installation read the :ref:`server` page.
 
 If you just want to install GET-IT, it is recommended to use Ubuntu 12.04.
 
