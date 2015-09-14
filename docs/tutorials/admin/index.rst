@@ -14,6 +14,8 @@ Welcome to the GET-IT Administrators Workshop!
      Minimum server requirements.
 :ref:`advanced`
      Advanced administration
+:ref:`security_issue`
+     Customize important setting for security.
 
 
 .. toctree::
@@ -23,3 +25,4 @@ Welcome to the GET-IT Administrators Workshop!
    scratch
    server
    advanced
+   security_issue

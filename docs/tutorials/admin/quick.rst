@@ -22,7 +22,9 @@ Extract the file with "gunzip" command: ::
 
  gunzip starterkit.vmdk.gz
 
-
+Security
+--------
+It's important for your server security follow instruction on the page: :ref:`security_issue`
 
 Update GET-IT
 -------------

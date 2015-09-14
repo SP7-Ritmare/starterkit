@@ -74,4 +74,8 @@ Register a "fully qualified domain name" (FQDN), then configure the starterkit::
 
     $ sk-updateip your-FQDN
 
+Security
+--------
+It's important for your server security follow instruction on the page: :ref:`security_issue`
+
 
