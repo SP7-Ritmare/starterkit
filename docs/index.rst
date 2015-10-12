@@ -9,12 +9,26 @@ Welcome to GET-IT's documentation!
 Documentation of 1.3 GET-IT version.
 Link to the old documentation pages: http://sp7.irea.cnr.it/wiki/index.php/Category:Learning
 
+
+Bing Maps Issue
+===============
+From 6th October 2015 the Bing Maps API that are used by default in every GET-IT/GeoNode map are not working anymore.
+
+The effect is that every map cannot be zoomed properly.
+
+In order to remove the dependence from the Bing Maps please follow these instructions:
+
+
+:ref:`bing_maps_issue`
+
+
+
 Presentation
 ============
 
 .. toctree::
    :hidden:
-      
+
    presentation
    publication
 
@@ -22,14 +36,14 @@ Presentation
 :ref:`presentation`
 
 :ref:`publication`
-  
+
 
 Tutorials
 =========
 
 .. toctree::
    :hidden:
-      
+
    tutorials/index
 
 
@@ -56,8 +70,3 @@ Having trouble? Can't find what you are looking for? We'd like to help!
  * Report bugs in GET-IT in our `ticket tracker`_.
 
 .. _ticket tracker: https://github.com/SP7-Ritmare/starterkit
-
-
-
-   
-
