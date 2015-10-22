@@ -18,6 +18,8 @@ Welcome to the GET-IT Administrators Workshop!
      Customize important setting for security.
 :ref:`domain_name`
      Learn how to choose and change the domain name of your server.
+:ref:`bing_maps_issue`
+     Bing Maps Issue
 
 
 .. toctree::

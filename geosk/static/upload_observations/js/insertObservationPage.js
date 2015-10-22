@@ -323,6 +323,21 @@ var callback = {
          <th>Use</th>
          */
 
+        function foi2htmlTr(foi,i){
+            var name = ( foi.name != "" ? foi.name : foi.identifier );
+
+            var tr= "<tr id=\"featureOfInterest_" + i + "\"><td class=\"e_foi_name\">" + name + "</td><td <td class=\"e_foi_x\">" + coordx +
+            "</td><td class=\"e_foi_y\">" + coordy + "</td><td class=\"e_foi_srs\">" + foi.geometry.crs.properties.srsName +
+            "</td><td class=\"e_foi_sf\"><div><a target=\"_blank\" href=\""+
+                foi.sampledFeature+
+                //foi.sampledFeature.replace((/&amp;/g,"%26"))+
+                "\">" + foi.sampledFeature + "</a></div>" +
+                "</td><td><button class='btn btn-primary' onclick=\"chooseFOI('" + foi.identifier + "');\">Use</button>" + "</td></tr>";
+
+            console.warn("remove me --- "+tr);
+            return tr;
+        }
+
         // TODO: verificare se BUG risolto.
         // 		 caso che sembra risolto:
         //       Esempio seleziono procedure puntaSaluteCanalGrande (2 foi)
@@ -331,16 +346,18 @@ var callback = {
         //console.log("aggiorno FOI: inizio");
         var minx = 0, maxx = 0, miny = 0, maxy = 0;
         for (var i = 0; currentFois && i < currentFois.length; i++) {
-            var name = ( currentFois[i].name != "" ? currentFois[i].name : currentFois[i].identifier );
+            //var name = ( currentFois[i].name != "" ? currentFois[i].name : currentFois[i].identifier );
 
             if (Object.keys(currentFois[i].geometry).length > 0) { //possibile soluzione bug
                 var coordx = ( currentFois[i].geometry.coordinates ? currentFois[i].geometry.coordinates[0] : "");
                 var coordy = ( currentFois[i].geometry.coordinates ? currentFois[i].geometry.coordinates[1] : "");
 
+                options.push(foi2htmlTr(currentFois[i]));
+                /*
                 options.push("<tr id=\"featureOfInterest_" + i + "\"><td class=\"e_foi_name\">" + name + "</td><td <td class=\"e_foi_x\">" + coordx +
                 "</td><td class=\"e_foi_y\">" + coordy + "</td><td class=\"e_foi_srs\">" + currentFois[i].geometry.crs.properties.srsName +
-                "</td><td class=\"e_foi_sf\"><div>" + currentFois[i].sampledFeature + "</div></td><td><button class='btn btn-primary' onclick=\"chooseFOI('" + currentFois[i].identifier + "');\">Use</button>" + "</td></tr>");
-
+                "</td><td class=\"e_foi_sf\"><div><a href=\""+currentFois[i].sampledFeature+"\">" + currentFois[i].sampledFeature + "</a></div></td><td><button class='btn btn-primary' onclick=\"chooseFOI('" + currentFois[i].identifier + "');\">Use</button>" + "</td></tr>");
+                */
                 //compute map bounds and add them as a variable to currentFois
                 minx = minx > coordx ? coordx : minx;
                 minx = miny > coordy ? coordx : miny;
@@ -1197,13 +1214,10 @@ function loadMap() {
     map = map || L.map('map');
 
     // --- base OSM map ---
-    baseLayers["OpenStreetMap"] = L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png',
+    baseLayers["OpenStreetMap"] = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         {
-            maxZoom: 16,
-            attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-            '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-            'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-            id: 'examples.map-i875mjb7'
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }
     ).addTo(map);
 
