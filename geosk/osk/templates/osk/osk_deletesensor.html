@@ -1,0 +1,29 @@
+{% extends "osk/osk_base.html" %}
+{% load i18n %}
+{% load pagination_tags %}
+{% load staticfiles %}
+{% load url from future %}
+
+{% block title %} {% trans "Delete sensor" %} — {{ block.super }}{% endblock %}
+
+{% block body %}
+<div class="row">
+  <div class="span8">
+    <form action="{% url "osk_deletesensor" %}" method="POST">
+      <h2>
+        {% blocktrans %}
+          Are you sure you want to remove the sensor?
+        {% endblocktrans %}
+      </h2>
+      <p class="text-error">This action CANNOT be undone. This will permanently delete
+      the sensor and remove all observations associated.</p>
+      {% csrf_token %}
+      <input type="hidden" name="procedure" value="{{ procedure }}" />
+      <div class="form-actions">
+        <input type="submit" value="{% trans "Yes, I am sure" %}" class="btn btn-danger" />
+        <a href="{% url 'osk_browse' %}" class="btn btn-info">{% trans "No, don't remove it" %}</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
