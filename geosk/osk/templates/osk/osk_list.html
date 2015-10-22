@@ -98,7 +98,10 @@
                         <div class="btn-toolbar">
                             <div class="btn-group">
                                 <a href="{% url "osk_describe_sensor" %}?format={{ 'text/html'|urlencode }}&sensor_id={{sensor.id|urlencode }}" target="_blank" data-toggle="modal" class="btn btn-mini">{% trans "Sensor details" %}</a>
+                                {% if request.user.is_authenticated %}
                                 <a href="{% url "osk_upload" %}?procedureId={{ sensor.name }}" class="btn btn-mini">{% trans "Upload observations" %}</a>
+                                <a href="{% url "osk_deletesensor" %}?procedure={{ sensor.id }}" class="btn btn-mini btn-primary">{% trans "Delete sensor" %}</a>
+                                {% endif %}
                             </div>
                         </div>
                         <!--div class="details">
