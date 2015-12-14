@@ -6,8 +6,9 @@ Tutorials
 
 .. toctree::
    :hidden:
-   
+
    admin/index
+   dataflowengine/index
 
 
 The tutorials are based around performing tasks, like adding data or
@@ -22,6 +23,5 @@ Users Tutorials ``section on development``
 :ref:`admin`
 	The administrator workshop will guide you through the installation and configuration of GET-IT, as well as explore further possibilities with GET-IT.
 
-
-
-
+:ref:`dataflowengine`
+        TODO
