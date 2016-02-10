@@ -51,9 +51,10 @@ PostgreSQL and PostGIS (currently at version 9.1 and 2.0) are already installed 
     $ java -version
 
 Just a note: GET-IT expects to find a webapp named "observations".
-So, before "Install and configure Tomcat", **rename the 52n-sos-webapp.war into observations.war**.
+So, before "Install and configure Tomcat", rename the 52n-sos-webapp.war into observations.war.
 
 After the deploy of war file, in the http://127.0.0.1:8080/observations you can check the installation of the SOS admin, create a new PostgreSQL database using the PostGIS template created during the PostGIS installation.
+
     $ sudo su - postgres
     
     $ psql -U <user>
@@ -70,6 +71,7 @@ If return error like *could not open extension control file "/usr/share/postgres
 
 after retry the commands above.
 Check extensions:
+
     $ \dx
     
 Navigate to the http://127.0.0.1:8080/observations and complete the installation process. Follow the steps on the screen to configure your SOS instance (you don't have to do this if you've build the preconfigured webapp). More information about the settings can be found in the Configure/Administrate the SOS section of this page.
