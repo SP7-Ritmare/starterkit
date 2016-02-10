@@ -38,6 +38,9 @@ Setup the IP address and create a superuser::
 Follow the instructions (for SOS version 4.x) at
 https://wiki.52north.org/bin/view/SensorWeb/SensorObservationServiceIVDocumentation#Installation
 
+For the PostgreSQL and PostGIS installation please follow this wikipage:
+https://trac.osgeo.org/postgis/wiki/UsersWikiPostGIS21UbuntuPGSQL93Apt
+
 Just a note: GET-IT expects to find a webapp named "observations".
 So, before "Install and configure Tomcat",
 rename the 52n-sos-webapp.war into observations.war
