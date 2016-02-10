@@ -40,7 +40,7 @@ https://wiki.52north.org/bin/view/SensorWeb/SensorObservationServiceIVDocumentat
 
 Just a note: GET-IT expects to find a webapp named "observations".
 So, before "Install and configure Tomcat",
-rename the 52n-sos-webapp.war into observations.war into observations.war
+rename the 52n-sos-webapp.war into observations.war
 
 
 GET-IT Installation
