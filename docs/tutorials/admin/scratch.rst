@@ -12,7 +12,7 @@ If you just want to install GET-IT, it is recommended to use Ubuntu 12.04.
 **Prerequisites:**
 
 1. GeoNode (version 2.0.x)
-2. 52 North SOS (version 4.0.0 or 4.1.0)
+2. 52°North SOS (version 4.0.0 or 4.x)
 
 GeoNode Installation
 --------------------
