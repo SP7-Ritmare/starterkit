@@ -40,6 +40,8 @@ https://wiki.52north.org/bin/view/SensorWeb/SensorObservationServiceIVDocumentat
 
 For the PostgreSQL and PostGIS installation please follow this wikipage:
 https://trac.osgeo.org/postgis/wiki/UsersWikiPostGIS21UbuntuPGSQL93Apt
+if return this error:
+Error: No existing local cluster is suitable as a default target. Please see man pg_wrapper(1) how to specify one.
 
 Just a note: GET-IT expects to find a webapp named "observations".
 So, before "Install and configure Tomcat",
