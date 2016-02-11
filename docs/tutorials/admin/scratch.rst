@@ -40,7 +40,7 @@ https://wiki.52north.org/bin/view/SensorWeb/SensorObservationServiceIVDocumentat
 
 PostgreSQL and PostGIS (currently at version 9.1 and 2.0) are already installed by default in GeoNode. For this reason it is not necessary to make a new installation. An update of the current version of Java it is necessary, 52°North requires Java runtime environment (JRE) 7.0 or higher:
 
-    java -version
+    $ java -version
     
     $ sudo add-apt-repository ppa:webupd8team/java
     
