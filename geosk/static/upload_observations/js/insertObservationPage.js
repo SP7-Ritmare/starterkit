@@ -114,7 +114,7 @@ var
 //aliasing fx
     sosInsertionOperationsResponse2json = ritmaresk.utils.swe.sosInsertionOperationsResponse2json;
 
-
+var debugOn=false;
 /**
  *
  * @type {{printFois: printFois, printDescription: printDescription, printXml: printXml, printJson: printJson, printString: printString}}
@@ -125,22 +125,26 @@ var prettyprinter = {
      * @param currentProcedure
      */
     printFois: function (currentProcedure) {
-        sos.kvp.getFeatureOfInterestByProcedure(currentProcedure, function (xml_data) {
-            prettyprinter.printXml(xml_data, "#foi_xml");
-        });
+        if(debugOn){
+            sos.kvp.getFeatureOfInterestByProcedure(currentProcedure, function (xml_data) {
+                prettyprinter.printXml(xml_data, "#foi_xml");
+            });
 
-        sos.json.getFeatureOfInterestByProcedure(currentProcedure, function (json) {
-            prettyprinter.printJson(json, "#foi_json");
-        });
+            sos.json.getFeatureOfInterestByProcedure(currentProcedure, function (json) {
+                prettyprinter.printJson(json, "#foi_json");
+            });
+        }
     },
     printDescription: function (currentProcedure) {
-        sos.getSensorDescription(currentProcedure, function (sensorDescription_json) {
-            prettyprinter.printJson(sensorDescription_json.procedureDescription.description, "#sensordescription");
-        });
+        if(debugOn) {
+            sos.getSensorDescription(currentProcedure, function (sensorDescription_json) {
+                prettyprinter.printJson(sensorDescription_json.procedureDescription.description, "#sensordescription");
+            });
 
-        sos.kvp.describeSensor(currentProcedure, function (xml_data) {
-            prettyprinter.printXml(xml_data, "#sensordescription_xml");
-        });
+            sos.kvp.describeSensor(currentProcedure, function (xml_data) {
+                prettyprinter.printXml(xml_data, "#sensordescription_xml");
+            });
+        }
     },
     /**
      * @requires jQuery
@@ -148,11 +152,13 @@ var prettyprinter = {
      * @param containerId
      */
     printXml: function (xmlData, containerId) {
-        var xmlString = (new XMLSerializer()).serializeToString(xmlData);
-        $(containerId)
-            .removeClass("prettyprinted")
-            .text(xmlString);
-        prettyPrint();
+        if(debugOn) {
+            var xmlString = (new XMLSerializer()).serializeToString(xmlData);
+            $(containerId)
+                .removeClass("prettyprinted")
+                .text(xmlString);
+            prettyPrint();
+        }
     },
     /**
      * @requires jQuery
@@ -161,13 +167,15 @@ var prettyprinter = {
      * @param expand
      */
     printJson: function (jsonData, containerId, expand) {
-        if (typeof expand === 'undefined') {
-            expand = 3;
+        if(debugOn) {
+            if (typeof expand === 'undefined') {
+                expand = 3;
+            }
+            $(containerId)
+                .removeClass("prettyprinted")
+                .text(JSON.stringify(jsonData, undefined, expand));
+            prettyPrint();
         }
-        $(containerId)
-            .removeClass("prettyprinted")
-            .text(JSON.stringify(jsonData, undefined, expand));
-        prettyPrint();
     },
     /**
      * @requires jQuery
@@ -175,10 +183,12 @@ var prettyprinter = {
      * @param containerId
      */
     printString: function (string, containerId) {
-        $(containerId)
-            .removeClass("prettyprinted")
-            .text(string);
-        prettyPrint();
+        if(debugOn) {
+            $(containerId)
+                .removeClass("prettyprinted")
+                .text(string);
+            prettyPrint();
+        }
     }
 };
 
@@ -1256,6 +1266,9 @@ function loadMap() {
         "</div>"
     );
 
+    // testing Leaflet control locate
+    L.control.locate().addTo(map);
+
     refreshGeoJsonLayer();
 }
 
@@ -1416,7 +1429,11 @@ $(document).ready(function () {
 
     //namingUtils=new NamingConvention(baseurl_sp7,app_name,sk_domain_name); //TODO: ...preparing refactory...
     if (ritmaresk.utils.getQueryStringParameterByName("debug") == "on") {
+        debugOn=true;
         $(".debugInvisible").removeClass("debugInvisible");
+    }
+    else{
+
     }
     sos = new ritmaresk.Sos(endpoint);
     $("#sosEndpoint").text(endpoint);

@@ -136,10 +136,20 @@
 	<script src="js/ritmaresk.utils.insertResultHelper.js"></script>
 	
 
-	<script src="js/insertObservationPage.js"></script>
+
 
 	<script type="text/javascript" src="js/leaflet.js"></script>
     <script type="text/javascript" src="js/L.TileLayer.BetterWMS.js"></script>
+<!-- testing locate control for leaflet -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/L.Control.Locate.min.css" />
+    <!--[if lt IE 9]>
+    <link rel="stylesheet" href="css/L.Control.Locate.ie.min.css"/>
+    <![endif]-->
+
+    <script src="js/L.Control.Locate.min.js" ></script>
+
+    <script src="js/insertObservationPage.js"></script>
 </head>
 <body>	
 
@@ -310,7 +320,7 @@
 					      			<br/>
 					      		</div>
 				      		</div>
-				      		<div class="handsontable" id="insertResultTable"></div>
+				      		<div class="handsontable" id="insertResultTable" style="width: 400px; height: 200px; overflow: auto"></div>
 				      		
 				      		<button role="submit" name="insertResult" class="btn btn-primary btn-sm gettext">save data</button>
                             <button role="submit" name="resetTable" class="btn btn-warning btn-sm gettext">reset table</button>

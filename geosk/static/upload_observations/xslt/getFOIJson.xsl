@@ -4,7 +4,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:sams="http://www.opengis.net/samplingSpatial/2.0" 
 	xmlns:gml="http://www.opengis.net/gml/3.2" 
-	xmlns:sf="http://www.opengis.net/sampling/2.0" 
+	xmlns:sf="http://www.opengis.net/sampling/2.0"
 	xmlns:xlink="http://www.w3.org/1999/xlink"
 	xsi:schemaLocation="http://www.opengis.net/sos/2.0 http://schemas.opengis.net/sos/2.0/sosGetFeatureOfInterest.xsd http://www.opengis.net/gml/3.2 http://schemas.opengis.net/gml/3.2.1/gml.xsd http://www.opengis.net/samplingSpatial/2.0 http://schemas.opengis.net/samplingSpatial/2.0/spatialSamplingFeature.xsd http://www.opengis.net/sampling/2.0 http://schemas.opengis.net/sampling/2.0/samplingFeature.xsd"
 >
