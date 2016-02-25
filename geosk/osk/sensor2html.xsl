@@ -8,26 +8,25 @@
     version="2.0">
     
     <xsl:output method="html"
-        doctype-system="about:legacy-compat"
         encoding="UTF-8"
-        indent="yes" omit-xml-declaration="yes" />
-            
+        indent="no" omit-xml-declaration="yes" />
+
     <xsl:template match="/">
+        <xsl:text disable-output-escaping="yes">&lt;!DOCTYPE html&gt;</xsl:text>
         <html lang="en">
             <head>
-                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
                 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
                 <meta name="description" content="Human readable version of a sensor description from SensorML and describeSensor request"/>
                 <meta name="author" content="Alessandro Oggioni"/>
                 <meta name="author" content="Paolo Tagliolato"/>
-                <link rel="icon" href="http://skmi.irea.cnr.it/static/geosk/img/favicon.ico"></link>
+                <link rel="icon" href="http://skmi.irea.cnr.it/static/geosk/img/favicon.ico"/>
 
                 <title>Sensor description</title>
-                <link rel="stylesheet" href="//cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" ></link>
+                <link rel="stylesheet" href="//cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
 
-                <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet"></link>
+                <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet"/>
 
 
                 <style type="text/css">
@@ -371,8 +370,6 @@
             </body>
         </html>
     </xsl:template>
-
-
     
     <xsl:template name="description">
         <xsl:for-each select="swes:DescribeSensorResponse/swes:description/swes:SensorDescription/swes:data/sml:SensorML/sml:member/sml:System">
@@ -491,12 +488,9 @@
         //map.on('click', onMapClick);
         </xsl:for-each>
 
-        L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
-        maxZoom: 16,
-        attribution: 'Map data ?? <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-        '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-        'Imagery ?? <a href="http://mapbox.com">Mapbox</a>',
-        id: 'examples.map-i875mjb7'
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '�� <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
 
     </xsl:template>
