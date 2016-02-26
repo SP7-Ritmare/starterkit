@@ -2,24 +2,24 @@
 
 {% load i18n %}
 
-{% block title %} {% trans "SK Registration" %} — {{ block.super }}{% endblock %}
+{% block title %} {% trans "GET-IT Registration" %} — {{ block.super }}{% endblock %}
 
 {% block body_class %}services{% endblock %}
 
 {% block body %}
     <h1>{% trans "Registration status" %}</h1>
-    
+
     <div class="status status-registered alert alert-success">
     <i class="icon-ok"></i>
-    <b>SK Registered and validated</b>
+    <b>GET-IT Registered and validated</b>
     </div>
     <div class="status status-invalid alert alert-warning">
       <i class="icon-warning-sign"></i>
-      <b>SK Registered - waiting for validation</b>
+      <b>GET-IT Registered - waiting for validation</b>
     </div>
     <div class="status status-unregistered alert alert-error">
       <i class="icon-warning-sign"></i>
-      <b>SK Unregistered</b>
+      <b>GET-IT Unregistered</b>
     </div>
     <div class="status status-missing-metadata alert alert-error">
       <i class="icon-warning-sign"></i>
@@ -42,15 +42,15 @@
 	<td>{{ services_metadata }}  <button id="btn-modify-services-metadata" class="status status-unregistered btn btn-mini">{% trans "Modify" %}</button></td>
       </tr>
     </table>
-    
+
     <button id="btn-check-validation" class="status status-invalid btn btn-small">{% trans "Check validation" %}</button>
 
-    <p class="status status-unregistered">{% blocktrans %}Please check the information is correct prior to registering the SK{% endblocktrans %}</p>
+    <p class="status status-unregistered">{% blocktrans %}Please check the information is correct prior to registering the GET-IT{% endblocktrans %}</p>
 
-    <p> 
+    <p>
       <form class="status status-unregistered">
 	<label class="checkbox">
-	  <input id="chk-legal-notes-accepted" type="checkbox">{% blocktrans %}I have read the legal notes and i agree to them.{% endblocktrans %} 
+	  <input id="chk-legal-notes-accepted" type="checkbox">{% blocktrans %}I have read the legal notes and i agree to them.{% endblocktrans %}
 	  <a target="_blank" href="{% url 'sk_license' %}">{% trans "Read it." %}</a>
 	</label>
       </form>
@@ -58,9 +58,9 @@
     <button id="btn-register" class="status status-unregistered btn" disabled>{% trans "Register" %}</button>
 
 
-    <p class="status status-missing-metadata">{% blocktrans %}Please add more information about your SK implementation. Fill the Services Metadata form.{% endblocktrans %}</p>
+    <p class="status status-missing-metadata">{% blocktrans %}Please add more information about your GET-IT implementation. Fill the Services Metadata form.{% endblocktrans %}</p>
     <button id="btn-missing-metadata" class="status status-missing-metadata btn">{% trans "Insert metadata" %}</button>
-    
+
     <div id="messages-modal" class="modal hide fade">
       <div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal">×</button>
@@ -108,7 +108,7 @@
 	      }
 	      btn.button('reset');
 	  })
-	  .fail(function (jqXHR, textStatus, errorThrown) { 
+	  .fail(function (jqXHR, textStatus, errorThrown) {
 	      setModal('Validation result', 'Registration was received and it is waiting for authorisation from the SP7 team.');
 	  })
           .always(function(){
@@ -126,7 +126,7 @@
 	      }
 	      btn.button('reset');
 	  })
-	  .fail(function (jqXHR, textStatus, errorThrown) { 
+	  .fail(function (jqXHR, textStatus, errorThrown) {
 	      setModal('Registration result', 'Registration not allowed');
 	  })
           .always(function(){
@@ -155,6 +155,6 @@
       }
   });
 
-  
+
 </script>
 {% endblock extra_script %}

@@ -53,7 +53,7 @@
                         <!--a href="#" rel="tooltip" title="{% trans 'Notifications' %}"><i class="icon-bullhorn"></i></a>
                         <a href="#" rel="tooltip" title="{% trans 'Messages' %}"><i class="icon-envelope"></i></a-->
                         <a href="{% url "data_upload" %}" rel="tooltip" title="{% trans 'Upload' %}"><i class="icon-upload-alt"></i></a>
-                        <a href="{% url "help" %}" rel="tooltip" title="{% trans 'Help' %}"><i class="icon-question-sign"></i></a>
+                        <a target="_blank" href="http://getit.readthedocs.org/" rel="tooltip" title="{% trans 'Help' %}"><i class="icon-question-sign"></i></a>
                       </li>
                       <li class="divider-v">|</li>
                       <li><a href="{% url "demo_index" %}">Demo</a></li>
@@ -84,7 +84,7 @@
                       {% endif %}
                       <li class="divider-v">|</li>
                       <li class="actions">
-                        <a href="{% url "help" %}" rel="tooltip" title="help"><i class="icon-question-sign"></i></a>
+                        <a target="_blank" href="http://getit.readthedocs.org/" rel="tooltip" title="help"><i class="icon-question-sign"></i></a>
                       </li>
                     {% endif %}
                   </ul>
@@ -166,9 +166,10 @@
   <div class="container">
     <div class="pull-left">
       <i class="icon-arrow-right"></i>
-      <!--{% trans "SK is a project of the StarterKit Development Team" %} | <a href="{% url "about" %}">{% trans "About" %} </a> -->
-      {% trans "GET-IT is developed by <a target='_blank' href='http://sp7.irea.cnr.it'>SP7</a>-<a target='_blank' href='http://www.ritmare.it/'>RITMARE</a>" %}
-      | <a href="mailto:help.skritmare@irea.cnr.it">{% trans "Contacts" %} </a>
+      <!--{% trans "GET-IT is a project of the GET-IT Development Team" %} | <a href="{% url "about" %}">{% trans "About" %} </a> -->
+       Geoinformation Enabling ToolkIT starterkit&reg;
+      {% trans " is developed by <a target='_blank' href='http://sp7.irea.cnr.it'>SP7</a>-<a target='_blank' href='http://www.ritmare.it/'>RITMARE</a>" %}
+      | <a href="mailto:getitskinfo@gmail.com">{% trans "Contacts" %} </a>
       | <a href="{% url "sk_license" %}">{% trans "Legal Notes" %} </a>
       | <a href="{% url "sk_credits" %}">{% trans "Credits" %} </a>
       | <i class="icon-arrow-right"></i>

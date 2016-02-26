@@ -17,5 +17,5 @@ class SkRegistration(models.Model):
     objects = SkRegistrationManager()
 
     class Meta:
-        verbose_name = _("Starter Kit registration")
-        verbose_name_plural = _("Starter Kit registration")
+        verbose_name = _("GET-IT registration")
+        verbose_name_plural = _("GET-IT registration")

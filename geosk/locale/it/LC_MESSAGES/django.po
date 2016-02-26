@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: STARTER KIT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-28 08:35-0500\n"
+"POT-Creation-Date: 2016-02-26 06:08-0600\n"
 "PO-Revision-Date: 2014-06-19 18:14+0100\n"
 "Last-Translator: <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,8 +40,8 @@ msgid "AppList: Applications"
 msgstr "AppList: Applicazioni"
 
 #: dashboard.py:64 skregistration/templates/skregistration/registration.html:5
-msgid "SK Registration"
-msgstr "Registra Starter Kit"
+msgid "GET-IT Registration"
+msgstr "Registra GET-IT"
 
 #: dashboard.py:68
 msgid "Register or check registration"
@@ -68,8 +68,8 @@ msgid "Recent Actions"
 msgstr "Azioni recenti"
 
 #: dashboard.py:103
-msgid "SK Front end"
-msgstr "SK Front end"
+msgid "GET-IT Front end"
+msgstr "GET-IT Front end"
 
 #: dashboard.py:107
 #: _locale_external/geonode/layers/templates/layers/layer_change_poc.html:5
@@ -2051,12 +2051,14 @@ msgstr ""
 #: _locale_external/geonode/documents/templates/documents/document_remove.html:18
 #: _locale_external/geonode/layers/templates/layers/layer_remove.html:18
 #: _locale_external/geonode/maps/templates/maps/map_remove.html:19
+#: osk/templates/osk/osk_deletesensor.html:23
 msgid "Yes, I am sure"
 msgstr "Si, sono sicuro"
 
 #: _locale_external/geonode/documents/templates/documents/document_remove.html:19
 #: _locale_external/geonode/layers/templates/layers/layer_remove.html:19
 #: _locale_external/geonode/maps/templates/maps/map_remove.html:20
+#: osk/templates/osk/osk_deletesensor.html:24
 msgid "No, don't remove it"
 msgstr "No, non eliminarlo"
 
@@ -2123,7 +2125,7 @@ msgstr "etichetta dell'attributo"
 
 #: _locale_external/geonode/layers/models.py:251
 msgid "title of attribute as displayed in GeoNode"
-msgstr "titolo dell'attributo visualizzato in StarterKit"
+msgstr "titolo dell'attributo visualizzato in GET-IT"
 
 #: _locale_external/geonode/layers/models.py:252
 msgid "attribute type"
@@ -2347,7 +2349,7 @@ msgstr "Scarica Layer"
 #: _locale_external/geonode/layers/templates/layers/layer_list.html:9
 #: _locale_external/geonode/templates/index.html:29
 #: _locale_external/geonode/upload/templates/upload/layer_upload_base.html:13
-#: mdtools/templates/layers/layer_list.html:9 templates/site_index.html:45
+#: mdtools/templates/layers/layer_list.html:9 templates/site_index.html:46
 msgid "Explore Layers"
 msgstr "Esplora layer"
 
@@ -2355,7 +2357,7 @@ msgstr "Esplora layer"
 #: _locale_external/geonode/templates/index.html:57
 #: _locale_external/geonode/upload/templates/upload/layer_upload.html:18
 #: _locale_external/geonode/upload/templates/upload/layer_upload_base.html:15
-#: templates/about_upload_layers.html:5 templates/site_index.html:77
+#: templates/about_upload_layers.html:5 templates/site_index.html:78
 msgid "Upload Layers"
 msgstr "Carica layer"
 
@@ -2477,7 +2479,7 @@ msgstr ""
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:193
 #: _locale_external/geonode/templates/index.html:61
-#: mdtools/templates/layers/layer_detail.html:218 templates/site_index.html:85
+#: mdtools/templates/layers/layer_detail.html:218 templates/site_index.html:86
 msgid "Create a Map"
 msgstr "Crea una vista"
 
@@ -2542,8 +2544,8 @@ msgid ""
 msgstr ""
 "Note: I metadati originali di questo Layer sono stati popolati importando un "
 "file di metadati XML.\n"
-"        L'import dei metadati di StarterKit supporta un sottinsieme di "
-"elementi di metadata ISO secondo RNDT (INSPIRE).\n"
+"        L'import dei metadati di GET-IT supporta un sottinsieme di elementi "
+"di metadata ISO secondo RNDT (INSPIRE).\n"
 "        Alcuni dei tuoi metadati originali potrebbero essere andati persi."
 
 #: _locale_external/geonode/layers/templates/layers/layer_metadata.html:23
@@ -2814,7 +2816,7 @@ msgstr "Visualizza"
 #: _locale_external/geonode/maps/templates/maps/map_base.html:12
 #: _locale_external/geonode/maps/templates/maps/map_list.html:14
 #: _locale_external/geonode/templates/index.html:32
-#: templates/site_index.html:51
+#: templates/site_index.html:52
 msgid "Explore Maps"
 msgstr "Esplora viste"
 
@@ -2939,8 +2941,7 @@ msgid ""
 msgstr ""
 "\n"
 "    Qui puoi scaricare tutti i layer di questa vista che \n"
-"    sono gestiti su questo StarterKit.    I seguenti layer saranno "
-"scaricati:\n"
+"    sono gestiti su questo GET-IT.    I seguenti layer saranno scaricati:\n"
 "    "
 
 #: _locale_external/geonode/maps/templates/maps/map_download.html:22
@@ -2978,7 +2979,7 @@ msgid ""
 msgstr ""
 "\n"
 "    Infine, la vista contiene questi layer che non possono essere scaricati\n"
-"    perchè non sono disponibili direttamente da questo StarterKit:\n"
+"    perchè non sono disponibili direttamente da questo GET-IT:\n"
 "    "
 
 #: _locale_external/geonode/maps/templates/maps/map_download.html:54
@@ -3034,6 +3035,7 @@ msgstr ""
 "    "
 
 #: _locale_external/geonode/maps/templates/maps/map_view.html:5
+#: templates/maps/map_embed.html:5
 msgid "GeoExplorer"
 msgstr "GeoExplorer"
 
@@ -3640,11 +3642,11 @@ msgid ""
 "  "
 msgstr ""
 "\n"
-"      Please contact your StarterKit administrator (he may have received an "
+"      Please contact your GET-IT administrator (he may have received an "
 "email automatically if he configured it properly).\n"
 "      If you are the site administrator, enable debug mode to see the actual "
 "error and fix it or file an issue in <a href=\"http://github.com/GeoNode/"
-"geonode/issues\">StarterKit's issue tracker</a>\n"
+"geonode/issues\">GET-IT's issue tracker</a>\n"
 " "
 
 #: _locale_external/geonode/templates/500.html:181
@@ -3745,11 +3747,11 @@ msgstr "Lista"
 #: _locale_external/geonode/templates/about.html:4
 #: _locale_external/geonode/templates/about.html:8
 msgid "About GeoNode"
-msgstr "A proposito di StarterKit"
+msgstr "A proposito di GET-IT"
 
 #: _locale_external/geonode/templates/about.html:9
 msgid "About GeoNode."
-msgstr "A proposito di StarterKit."
+msgstr "A proposito di GET-IT."
 
 #: _locale_external/geonode/templates/base.html:49 templates/site_base.html:36
 msgid "Inbox"
@@ -3774,7 +3776,7 @@ msgstr "Informazioni per gli sviluppatori"
 
 #: _locale_external/geonode/templates/developer.html:9
 msgid "Useful information for developers interested in GeoNode."
-msgstr "Informazioni utili per gli sviluppatori interessati a StarterKit."
+msgstr "Informazioni utili per gli sviluppatori interessati a GET-IT."
 
 #: _locale_external/geonode/templates/developer.html:12
 msgid ""
@@ -3864,11 +3866,11 @@ msgstr ""
 
 #: _locale_external/geonode/templates/developer.html:53
 msgid "GeoNode's Web Services"
-msgstr "Web Services di StarterKit"
+msgstr "Web Services di GET-IT"
 
 #: _locale_external/geonode/templates/developer.html:54
 msgid "GeoNode's Web Services are available from the following URLs:"
-msgstr "I Web Services di StarterKit sono disponibili ai seguenti indirizzi:"
+msgstr "I Web Services di GET-IT sono disponibili ai seguenti indirizzi:"
 
 #: _locale_external/geonode/templates/developer.html:57
 msgid "Dynamic tiles via WMS:"
@@ -3896,16 +3898,16 @@ msgstr "Guida per l'utilizzatore"
 
 #: _locale_external/geonode/templates/help.html:8 templates/help.html:8
 msgid "GeoNode Help"
-msgstr "Aiuto sullo StarterKit"
+msgstr "Aiuto sullo GET-IT"
 
 #: _locale_external/geonode/templates/help.html:9 templates/help.html:9
 msgid ""
 "This page provides helpful information about how to use the GeoNode. You can "
 "use the sidebar links to navigate to what you want to know."
 msgstr ""
-"Questa pagina fornisce informazioni di aiuto sull'utilizzo di StarterKit. "
-"Puoi utilizzare i collegamenti nella barra laterale per ricercare quello che "
-"ti interessa."
+"Questa pagina fornisce informazioni di aiuto sull'utilizzo di GET-IT. Puoi "
+"utilizzare i collegamenti nella barra laterale per ricercare quello che ti "
+"interessa."
 
 #: _locale_external/geonode/templates/help.html:12
 msgid ""
@@ -3996,27 +3998,27 @@ msgid ""
 "  "
 msgstr ""
 "\n"
-"<p>StarterKit consente di accedere a set di dati e ad un'applicazione per "
+"<p>GET-IT consente di accedere a set di dati e ad un'applicazione per "
 "l'editing di viste che permette agli utenti di consultare le viste esistenti "
 "e contribuire alla piattaforma con le proprie.</p>\n"
 "<h4 id=\"browsing-data\">Navigazione dei Layer</h4>\n"
 "<p>La scheda <a href=\"/data\">Layer</a> ti permette di navigare i dati "
-"caricati su StarterKit.</p>\n"
+"caricati su GET-IT.</p>\n"
 "<p>Tutti i dati possono essere scaricati in vari formati, per utilizzarli in "
 "altre applicazioni.</p>\n"
 "<h4 id=\"developer-access\">Accesso sviluppatori</h4>\n"
 "<p>La pagina <a href=\"/developer\"> Sviluppatore</a> è il posto da cui gli "
-"sviluppatori possono iniziare a creare applicazioni basate su StarterKit. "
-"Esso comprende le istruzioni sull'utilizzo dei web service, i link al codice "
-"sorgente di StarterKit e informazioni sui progetti open source utilizzati "
-"per crearlo.</p>\n"
+"sviluppatori possono iniziare a creare applicazioni basate su GET-IT. Esso "
+"comprende le istruzioni sull'utilizzo dei web service, i link al codice "
+"sorgente di GET-IT e informazioni sui progetti open source utilizzati per "
+"crearlo.</p>\n"
 "<h4 id=\"browsing-maps\">Navigazione delle Viste</h4>\n"
-"<p>StarterKit consente agli utenti di creare e consividere viste con gli "
-"altri.</p>\n"
+"<p>GET-IT consente agli utenti di creare e consividere viste con gli altri.</"
+"p>\n"
 "<p>La scheda <a href=\"maps\">Viste</a> è il punto di accesso per "
-"l'esplorazione delle viste su StarterKit. Da qui puoi <strong>cercare una "
-"viste</strong> o <strong>creare una vista</strong>, che aprirà il <a href="
-"\"maps/new\">View Compositore di viste</a>.</p>\n"
+"l'esplorazione delle viste su GET-IT. Da qui puoi <strong>cercare una viste</"
+"strong> o <strong>creare una vista</strong>, che aprirà il <a href=\"maps/new"
+"\">View Compositore di viste</a>.</p>\n"
 "<h5>Modalità Google Earth</h5>\n"
 "<p>Ogni vista visualizzata su un editor di viste interattivo può essere "
 "visualizzata in modalità 3D attraverso il plugin Google Earth. Per passare "
@@ -4028,10 +4030,10 @@ msgstr ""
 "e clicca su <a href=\"maps/new\">Crea la tua vista</a> link.</p>\n"
 "<p>Quest'azione di manderà al <a href=\"maps/new\">Compositore di viste</a> "
 "con un layer di base caricato.</p>\n"
-"<p>Per aggiungere i Layer da StarterKit clicca sul pulsante verde presente "
-"sotto la scheda Layer sulla sinistra dello schermo. Quest'azione aprirà una "
-"finestra di dialogo con la lista di tutti i Layer disponibili su StarterKit."
-"</p>\n"
+"<p>Per aggiungere i Layer da GET-IT clicca sul pulsante verde presente sotto "
+"la scheda Layer sulla sinistra dello schermo. Quest'azione aprirà una "
+"finestra di dialogo con la lista di tutti i Layer disponibili su GET-IT.</"
+"p>\n"
 "<p>Per aggiungere Layer alla Vista selezionali e premi il pulsante "
 "<strong>Aggiungi Livelli</strong>. Una volta terminato clicca <strong>Fatto</"
 "strong> per chiudere la finestra di dialogo e tornare indietro sulla Vista.</"
@@ -4049,8 +4051,8 @@ msgstr ""
 "l'immagine di una vista con un disco - nel menu in alto e compila i campi "
 "con il titolo e l'abstract della vista.</p>\n"
 "<h4 id=\"exporting-a-map\">Esportare una vista</h4>\n"
-"<p>Ogni vista di StarterKit può essere inserita all'interno di un altro sito "
-"o blog. Per esportare una vista:</p>\n"
+"<p>Ogni vista di GET-IT può essere inserita all'interno di un altro sito o "
+"blog. Per esportare una vista:</p>\n"
 "<ol>\n"
 "<li>Seleziona la vista dalla lista delle viste e clicca il bottone \"Esporta "
 "vista\".</li>\n"
@@ -4126,29 +4128,29 @@ msgid ""
 "          "
 msgstr ""
 "\n"
-"            StarterKit è una piattaforma open source per condividere dati "
+"            GET-IT è una piattaforma open source per condividere dati "
 "geospaziali e viste. Se hai domande sul software o sul servizio, scrivi al "
-"nostro <a href=\"mailto:help.skritmare@irea.cnr.it\">help desk RITMARE "
-"StarterKit</a>.\n"
+"nostro <a href=\"mailto:help.skritmare@irea.cnr.it\">help desk RITMARE GET-"
+"IT</a>.\n"
 "          "
 
 #: _locale_external/geonode/templates/index.html:25
-#: templates/site_index.html:41
+#: templates/site_index.html:42
 msgid "Need help"
 msgstr "Serve aiuto?"
 
 #: _locale_external/geonode/templates/index.html:25
-#: templates/site_index.html:41
+#: templates/site_index.html:42
 msgid "Getting Started?"
 msgstr "Per iniziare"
 
 #: _locale_external/geonode/templates/index.html:42
-#: templates/site_index.html:62
+#: templates/site_index.html:63
 msgid "Latest Layers"
 msgstr "Ultimi Layer"
 
 #: _locale_external/geonode/templates/index.html:52
-#: templates/site_index.html:72
+#: templates/site_index.html:73
 msgid "Contribute"
 msgstr "Contribuisci"
 
@@ -4160,9 +4162,8 @@ msgid ""
 "            "
 msgstr ""
 "\n"
-"              StarterKit ti permette di caricare, gestire e navigare i "
-"Layer. Ricerca i dati che sono importanti per te o carica i dati in tuo "
-"possesso. \n"
+"              GET-IT ti permette di caricare, gestire e navigare i Layer. "
+"Ricerca i dati che sono importanti per te o carica i dati in tuo possesso. \n"
 "            "
 
 #: _locale_external/geonode/templates/index.html:58
@@ -4173,13 +4174,13 @@ msgid ""
 "            "
 msgstr ""
 "\n"
-"              StarterKit ti permette di creare e condividere viste. Crea una "
+"              GET-IT ti permette di creare e condividere viste. Crea una "
 "vista con il nostro strumento cartografico, oppure consulta le viste "
 "condivise da altri utenti. \n"
 "            "
 
 #: _locale_external/geonode/templates/index.html:67
-#: templates/site_index.html:91
+#: templates/site_index.html:92
 msgid "Latest Maps"
 msgstr "Ultime viste"
 
@@ -4595,7 +4596,7 @@ msgid ""
 "latitude and longitude coordinates, but please confirm that the correct\n"
 "attributes are selected below."
 msgstr ""
-"With this data, StarterKit was able to guess which attributes contain the\n"
+"With this data, GET-IT was able to guess which attributes contain the\n"
 "latitude and longitude coordinates, but please confirm that the correct\n"
 "attributes are selected below."
 
@@ -4822,9 +4823,8 @@ msgid ""
 msgstr ""
 
 #: demo/templates/demo/index.html:18
-#, fuzzy
 msgid "Demo dataset"
-msgstr "dataset"
+msgstr "Demo dataset"
 
 #: mdtools/admin.py:22 osk/templates/osk/osk_list.html:47
 msgid "Provider"
@@ -4955,8 +4955,8 @@ msgstr "Metadati dei Servizi"
 
 #: mdtools/templates/base/resourcebase_info_panel.html:80
 #: mdtools/templates/base/resourcebase_info_panel.html:88
-msgid "StarterKit User"
-msgstr "Utente StarterKit"
+msgid "GET-IT User"
+msgstr "Registra GET-IT"
 
 #: mdtools/templates/base/resourcebase_info_panel.html:102
 msgid "Show/Hide"
@@ -4979,9 +4979,8 @@ msgid "Metadata Completeness"
 msgstr "Completezza dei metadati"
 
 #: mdtools/templates/layers/layer_detail.html:63
-#, fuzzy
-msgid "Edit Metadata (INSPIRE)"
-msgstr "Modifica Metadati"
+msgid "Edit Metadata (RNDT)"
+msgstr "Modifica Metadati (RNDT)"
 
 #: mdtools/templates/mdtools/edi_headers.html:66
 msgid ""
@@ -5022,10 +5021,30 @@ msgstr "Esplora SOS"
 msgid "Upload Observations"
 msgstr "Carica osservazioni"
 
+#: osk/templates/osk/osk_deletesensor.html:7
+#: osk/templates/osk/osk_list.html:103
+msgid "Delete sensor"
+msgstr "Elimina sensore"
+
+#: osk/templates/osk/osk_deletesensor.html:14
+msgid ""
+"\n"
+"          Are you sure you want to remove the sensor?\n"
+"        "
+msgstr ""
+"\n"
+"          Sei sicuro di voler rimuovere il sensore?\n"
+"        "
+
+#: osk/templates/osk/osk_deletesensor.html:18
+msgid ""
+"This action CANNOT be undone. This will permanently delete\n"
+"      the sensor and remove all observations associated."
+msgstr "Attenzione: quest'azione NON può essere annullata. Il sensore e tutte le osservazioni associate verranno eliminate permanentemente dal sistema."
+
 #: osk/templates/osk/osk_list.html:20
-#, fuzzy
 msgid "Register a new  Sensor"
-msgstr "Crea un Sensore"
+msgstr "Crea un nuovo Sensore"
 
 #: osk/templates/osk/osk_list.html:22
 msgid "Capabilities &raquo;"
@@ -5091,7 +5110,7 @@ msgstr "Sensore"
 msgid "Sensor details"
 msgstr "Dettagli del sensore"
 
-#: osk/templates/osk/osk_list.html:101
+#: osk/templates/osk/osk_list.html:102
 msgid "Upload observations"
 msgstr "Carica osservazioni"
 
@@ -5104,8 +5123,8 @@ msgid "SOS compliance"
 msgstr "Conformità SOS"
 
 #: skregistration/models.py:20 skregistration/models.py:21
-msgid "Starter Kit registration"
-msgstr "Registrazione Starter Kit"
+msgid "GET-IT registration"
+msgstr "Registra GET-IT"
 
 #: skregistration/templates/skregistration/registration.html:10
 msgid "Registration status"
@@ -5136,9 +5155,9 @@ msgid "Check validation"
 msgstr ""
 
 #: skregistration/templates/skregistration/registration.html:48
-msgid "Please check the information is correct prior to registering the SK"
+msgid "Please check the information is correct prior to registering the GET-IT"
 msgstr ""
-"Controllare che le informazioni siano corrette prima di registrare lo SK"
+"Controllare che le informazioni siano corrette prima di registrare GET-IT"
 
 #: skregistration/templates/skregistration/registration.html:53
 msgid "I have read the legal notes and i agree to them."
@@ -5150,11 +5169,11 @@ msgstr "Leggi"
 
 #: skregistration/templates/skregistration/registration.html:61
 msgid ""
-"Please add more information about your SK implementation. Fill the Services "
-"Metadata form."
+"Please add more information about your GET-IT implementation. Fill the "
+"Services Metadata form."
 msgstr ""
-"Aggiungi maggiori informazioni relativamente alla tua installazione di "
-"StarterKit. Compila il modulo di Metadati dei Servizi."
+"Aggiungi maggiori informazioni relativamente alla tua installazione di GET-"
+"IT. Compila il modulo di Metadati dei Servizi."
 
 #: skregistration/templates/skregistration/registration.html:62
 msgid "Insert metadata"
@@ -5165,53 +5184,52 @@ msgid "Close"
 msgstr ""
 
 #: templates/about.html:4 templates/about.html.py:8
-msgid "About RITMARE Starter Kit"
-msgstr "A proposito di RITMARER StarterKit"
+msgid "About RITMARE GET-IT Starterkit"
+msgstr "A proposito di RITMARE GET-IT"
 
 #: templates/about.html:10
 msgid ""
 "\n"
 "      The updated documentation is available at the RITMARE SP7 Wiki:\n"
-"      <a href=\"http://sp7.irea.cnr.it/wiki/index.php/Getting_Started"
-"\">Starter Kit - Getting Started</a>\n"
+"      <a href=\"http://sp7.irea.cnr.it/wiki/index.php/Getting_Started\">GET-"
+"IT Starterkit - Getting Started</a>\n"
 "      "
 msgstr ""
 "\n"
 "La documentazione aggiornata &egrave: disponibile su Wiki RITMARE SP7 :\n"
-"<a href=\"http://sp7.irea.cnr.it/wiki/index.php/Getting_Started\">Starter "
-"Kit - Getting Started</a>"
+"<a href=\"http://sp7.irea.cnr.it/wiki/index.php/Getting_Started\">GET-IT "
+"Starterkit - Getting Started</a>"
 
 #: templates/about_services.html:5
 msgid "Descrizione servizi"
 msgstr "Descrizione servizi"
 
 #: templates/about_services.html:11
-msgid "SK Web Services"
-msgstr "Web Services di StarterKit"
+msgid "GET-IT Web Services"
+msgstr "Web Services di GET-IT"
 
 #: templates/about_services.html:13
 msgid ""
-"SK provides <a href=\"http://www.opengeospatial.org/\">OGC</a> compliant web "
-"services to discover, view and download geospatial datasets.\n"
+"GET-IT provides <a href=\"http://www.opengeospatial.org/\">OGC</a> compliant "
+"web services to discover, view and download geospatial datasets.\n"
 msgstr ""
-"StarterKit fornisce i seguenti servizi web interoperabili per la ricerca, la "
+"GET-IT fornisce i seguenti servizi web interoperabili per la ricerca, la "
 "visualizzazione ed il download dei datasets geografici seguendo gli standard "
 "<a href='http://www.opengeospatial.org/'> OGC.</a>\n"
 
 #: templates/about_upload_layers.html:11
-msgid "Uploading layers in SK"
-msgstr "Carica layer"
+msgid "Uploading layers in GET-IT"
+msgstr "Carica layer is GET-IT"
 
 #: templates/about_upload_layers.html:15
 msgid ""
-"SK provides a user friendly tool to upload easilly spatial data such as "
+"GET-IT provides a user friendly tool to upload easilly spatial data such as "
 "Rasters (GeoTIFF) and vector data (shapefiles).\n"
 "      For different type of spatial data, consult the <a href=\"http://docs."
-"geoserver.org/2.4.x/en/user/\">Geoserver manual</a>       \n"
+"geoserver.org/2.4.x/en/user/\">Geoserver manual</a>\n"
 msgstr ""
-"StarterKit fornisce uno strumento di facile utilizzo per caricare "
-"agevolmente dati spaziali come file raster (GeoTIFF) e file vettori "
-"(shapefiles).\n"
+"GET-IT fornisce uno strumento di facile utilizzo per caricare agevolmente "
+"dati spaziali come file raster (GeoTIFF) e file vettori (shapefiles).\n"
 "Per formati diversi di dati spaziali consulta il <a href=\"http://docs."
 "geoserver.org/2.4.x/en/user/\">Manuale Geoserver</a> \n"
 
@@ -5223,11 +5241,11 @@ msgid ""
 "\n"
 "  <h4 id=\"upload-layers\">Creating Layers</h4>\n"
 "  <p>The \"UPLOAD LAYER\" tab in <a href=\"/layers\">Layers</a> page allows "
-"you to upload new layers to this Starterkit and, after the upload, to "
-"compile metadata.</p>\n"
+"you to upload new layers to this GET-IT and, after the upload, to compile "
+"metadata.</p>\n"
 "  <p>We invite you if you need help to consult the official <a href=\"http://"
 "docs.geonode.org/en/latest/tutorials/users/layers/upload.html\">Geonode "
-"Documentation</a> or the SK help page for <a href=\"/about_upload_layers"
+"Documentation</a> or the GET-IT help page for <a href=\"/about_upload_layers"
 "\">uploading data</a>.</p>\n"
 "\n"
 "  <h4 id=\"browsing-data\">Browsing Layers</h4>\n"
@@ -5257,9 +5275,9 @@ msgid ""
 "Google Earth plugin installed you will be prompted to install it.</p>\n"
 "\n"
 "  <h4 id=\"using-services\">Using Services: WMS, WFS,...</h4>\n"
-"  <p>The SK portal provides services like WMS, WFS, WMS; See this page to "
-"get more informations and the url of the services <a href=\"/about_services"
-"\">about services</a>.</p>\n"
+"  <p>The GET-IT portal provides services like WMS, WFS, WMS; See this page "
+"to get more informations and the url of the services <a href=\"/"
+"about_services\">about services</a>.</p>\n"
 "\n"
 "  <h4 id=\"creating-a-map\">Creating a Map</h4>\n"
 "  <p>To create a new map go to the <a href=\"/maps\">Contributed Maps</a> "
@@ -5290,9 +5308,9 @@ msgid ""
 "blog. To export a map:</p>\n"
 "  <ol>\n"
 "    <li>Select the from the list of maps on the community or map page and "
-"then hit the 'export map' button.</li> \n"
+"then hit the 'export map' button.</li>\n"
 "    <li>Choose your desired height and width for the widget in the wizard.</"
-"li> \n"
+"li>\n"
 "    <li>Copy the HTML snippet provided in the wizard to any HTML page or "
 "iFrame-supporting blog post.</li>\n"
 "  </ol>\n"
@@ -5314,31 +5332,31 @@ msgid ""
 "    <li>Save the map.</li>\n"
 "  </ol>\n"
 "  <p>You will be able to see your new map when you search for it from the <a "
-"href=\"/maps\">Maps</a> tab.</p> \n"
+"href=\"/maps\">Maps</a> tab.</p>\n"
 "  "
 msgstr ""
 "\n"
-"<p>StarterKit consente di accedere a set di dati e ad un'applicazione per "
+"<p>GET-IT consente di accedere a set di dati e ad un'applicazione per "
 "l'editing di viste che permette agli utenti di consultare le viste esistenti "
 "e contribuire alla piattaforma con le proprie.</p>\n"
 "<h4 id=\"browsing-data\">Navigazione dei Layer</h4>\n"
 "<p>La scheda <a href=\"/data\">Layer</a> ti permette di navigare i dati "
-"caricati su StarterKit.</p>\n"
+"caricati su GET-IT.</p>\n"
 "<p>Tutti i dati possono essere scaricati in vari formati, per utilizzarli in "
 "altre applicazioni.</p>\n"
 "<h4 id=\"developer-access\">Accesso sviluppatori</h4>\n"
 "<p>La pagina <a href=\"/developer\"> Sviluppatore</a> è il posto da cui gli "
-"sviluppatori possono iniziare a creare applicazioni basate su StarterKit. "
-"Esso comprende le istruzioni sull'utilizzo dei web service, i link al codice "
-"sorgente di StarterKit e informazioni sui progetti open source utilizzati "
-"per crearlo.</p>\n"
+"sviluppatori possono iniziare a creare applicazioni basate su GET-IT. Esso "
+"comprende le istruzioni sull'utilizzo dei web service, i link al codice "
+"sorgente di GET-IT e informazioni sui progetti open source utilizzati per "
+"crearlo.</p>\n"
 "<h4 id=\"browsing-maps\">Navigazione delle Viste</h4>\n"
-"<p>StarterKit consente agli utenti di creare e consividere viste con gli "
-"altri.</p>\n"
+"<p>GET-IT consente agli utenti di creare e consividere viste con gli altri.</"
+"p>\n"
 "<p>La scheda <a href=\"maps\">Viste</a> è il punto di accesso per "
-"l'esplorazione delle viste su StarterKit. Da qui puoi <strong>cercare una "
-"vista</strong> o <strong>creare una vista</strong>, che aprirà il <a href="
-"\"maps/new\"> Compositore di viste</a>.</p>\n"
+"l'esplorazione delle viste su GET-IT. Da qui puoi <strong>cercare una vista</"
+"strong> o <strong>creare una vista</strong>, che aprirà il <a href=\"maps/new"
+"\"> Compositore di viste</a>.</p>\n"
 "<h5>Modalità Google Earth</h5>\n"
 "<p>Ogni vista visualizzata su un editor di viste interattivo può essere "
 "visualizzata in modalità 3D attraverso il plugin Google Earth. Per passare "
@@ -5350,10 +5368,10 @@ msgstr ""
 "e clicca su <a href=\"maps/new\">Crea la tua vista</a> link.</p>\n"
 "<p>Quest'azione di manderà al <a href=\"maps/new\">Compositore di viste</a> "
 "con un layer di base caricato.</p>\n"
-"<p>Per aggiungere i Layer da StarterKit clicca sul pulsante verde presente "
-"sotto la scheda Layer sulla sinistra dello schermo. Quest'azione aprirà una "
-"finestra di dialogo con la lista di tutti i Layer disponibili su StarterKit."
-"</p>\n"
+"<p>Per aggiungere i Layer da GET-IT clicca sul pulsante verde presente sotto "
+"la scheda Layer sulla sinistra dello schermo. Quest'azione aprirà una "
+"finestra di dialogo con la lista di tutti i Layer disponibili su GET-IT.</"
+"p>\n"
 "<p>Per aggiungere Layer alla Vista selezionali e premi il pulsante "
 "<strong>Aggiungi Livelli</strong>. Una volta terminato clicca <strong>Fatto</"
 "strong> per chiudere la finestra di dialogo e tornare indietro sulla Vista.</"
@@ -5371,8 +5389,8 @@ msgstr ""
 "l'immagine di una vista con un disco - nel menu in alto e compila i campi "
 "con il titolo e l'abstract della vista.</p>\n"
 "<h4 id=\"exporting-a-map\">Esportare una vista</h4>\n"
-"<p>Ogni vista di StarterKit può essere inserita all'interno di un altro sito "
-"o blog. Per esportare una vista:</p>\n"
+"<p>Ogni vista di GET-IT può essere inserita all'interno di un altro sito o "
+"blog. Per esportare una vista:</p>\n"
 "<ol>\n"
 "<li>Seleziona la vista dalla lista delle viste e clicca il bottone \"Esporta "
 "vista\".</li>\n"
@@ -5415,8 +5433,8 @@ msgid "Sensors"
 msgstr "Sensori"
 
 #: templates/site_base.html:169
-msgid "SK is a project of the StarterKit Development Team"
-msgstr "SK è un progetto dello staff di sviluppatori di SP7"
+msgid "GET-IT is a project of the GET-IT Development Team"
+msgstr "GET-IT è un progetto dello staff di sviluppatori di SP7"
 
 #: templates/site_base.html:170
 msgid ""
@@ -5454,26 +5472,33 @@ msgstr ""
 "all'Infrastruttura Interoperabile di RITMARE."
 
 #: templates/site_index.html:37
-#, fuzzy
 msgid ""
 "\n"
-"\tThe GET-IT is developed in the context of <a href=\"http://sp7.irea.cnr.it/"
-"\">Sub-Project 7</a> of RITMARE (<a href=\"http://www.ritmare.it/\">www."
-"ritmare.it</a>). It is based upon <a href=\"http://geonode.org/\">GeoNode</"
-"a>.\n"
+"\t<a href=\"http://www.get-it.it/\" target=\"_blank\">GET-IT</a> is "
+"developed in the context of <a href=\"http://sp7.irea.cnr.it/\">Sub-Project "
+"7</a> of RITMARE (<a href=\"http://www.ritmare.it/\">www.ritmare.it</a>). It "
+"is based upon <a href=\"http://geonode.org/\">GeoNode</a>.\n"
 "\t"
 msgstr ""
-"Lo Starter Kit è stato sviluppato nell’ambito del <a href=\"http://sp7.irea."
-"cnr.it/\">Sotto-Progetto 7</a> di RITMARE (<a href=\"http://www.ritmare.it/"
-"\">www.ritmare.it</a>). Il sofware &egrave; basato su <a href=\"http://"
-"geonode.org/\">GeoNode</a>."
+"\n<a href=\"http://www.get-it.it/\" target=\"_blank\">GET-IT</a> è stato "
+"sviluppato nell’ambito del <a href=\"http://sp7.irea.cnr.it/\">Sotto-"
+"Progetto 7</a> di RITMARE (<a href=\"http://www.ritmare.it/\">www.ritmare."
+"it</a>). Il sofware &egrave; basato su <a href=\"http://geonode.org/"
+"\">GeoNode</a>."
 
-#: templates/site_index.html:48
+#: templates/site_index.html:41
+msgid ""
+"For more info visit the project site: <a href=\"http://www.get-it.it/\" "
+"target=\"_blank\">www.get-it.it</a>"
+msgstr ""
+"Per maggiori informazioni vista il sito del progetto: <a href=\"http://www."
+"get-it.it/\" \"target=\"_blank\">www.get-it.it</a>"
+
+#: templates/site_index.html:49
 msgid "Explore Sensors"
 msgstr "Esplora Sensori"
 
-#: templates/site_index.html:74
-#, fuzzy
+#: templates/site_index.html:75
 msgid ""
 "\n"
 "              GeoNode enables you to upload, manage, and browse data layers. "
@@ -5481,13 +5506,11 @@ msgid ""
 "            "
 msgstr ""
 "\n"
-"              StarterKit ti permette di caricare, gestire e navigare i "
-"Layer. Ricerca i dati che sono importanti per te o carica i dati in tuo "
-"possesso. \n"
+"              GET-IT ti permette di caricare, gestire e navigare i Layer. "
+"Ricerca i dati che sono importanti per te o carica i dati in tuo possesso. \n"
 "            "
 
-#: templates/site_index.html:78
-#, fuzzy
+#: templates/site_index.html:79
 msgid ""
 "\n"
 "              GET-IT enables you to upload, manage, and view sensors and "
@@ -5496,16 +5519,15 @@ msgid ""
 "            "
 msgstr ""
 "\n"
-"              StarterKit ti permette di creare, gestire e visualizzare "
-"sensori e relative osservazioni. Crea un sensore o carica le osservazioni di "
-"un sensore già esistente."
+"              GET-IT ti permette di creare, gestire e visualizzare sensori e "
+"relative osservazioni. Crea un sensore o carica le osservazioni di un "
+"sensore già esistente."
 
-#: templates/site_index.html:81
+#: templates/site_index.html:82
 msgid "Create a Sensor"
 msgstr "Crea un Sensore"
 
-#: templates/site_index.html:82
-#, fuzzy
+#: templates/site_index.html:83
 msgid ""
 "\n"
 "              GeoNode enables you to compose and share maps. Create a map "
@@ -5513,7 +5535,7 @@ msgid ""
 "            "
 msgstr ""
 "\n"
-"              StarterKit ti permette di creare e condividere viste. Crea una "
+"              GET-IT ti permette di creare e condividere viste. Crea una "
 "vista con il nostro strumento cartografico, oppure consulta le viste "
 "condivise da altri utenti. \n"
 "            "
@@ -5526,13 +5548,13 @@ msgstr "Team di sviluppo"
 msgid "The development team is composed by:"
 msgstr ""
 
-#: templates/sk_credits.html:34
-msgid "Starter Kit software"
-msgstr "Software Starter Kit"
-
 #: templates/sk_credits.html:35
+msgid "GET-IT software"
+msgstr "Registra GET-IT"
+
+#: templates/sk_credits.html:36
 msgid ""
-"StarterKit is built using several open source projects, each with its own "
+"GET-IT is built using several open source projects, each with its own "
 "community:"
 msgstr ""
 
@@ -5564,6 +5586,18 @@ msgstr "Minima data di inizio:"
 #: templates/search/_general_filters.html:11
 msgid "Date ends before:"
 msgstr "Massima data di fine:"
+
+#~ msgid "Starter Kit software"
+#~ msgstr "Software Starter Kit"
+
+#~ msgid "SK Registration"
+#~ msgstr "Registra GET-IT"
+
+#~ msgid "Starter Kit registration"
+#~ msgstr "Registrazione Starter Kit"
+
+#~ msgid "StarterKit User"
+#~ msgstr "Utente StarterKit"
 
 #~ msgid "Describe sensor"
 #~ msgstr "Descrivi il sensore"

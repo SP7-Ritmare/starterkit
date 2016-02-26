@@ -15,8 +15,8 @@
           Are you sure you want to remove the sensor?
         {% endblocktrans %}
       </h2>
-      <p class="text-error">This action CANNOT be undone. This will permanently delete
-      the sensor and remove all observations associated.</p>
+      <p class="text-error">{% blocktrans %}This action CANNOT be undone. This will permanently delete
+      the sensor and remove all observations associated.{% endblocktrans %}</p>
       {% csrf_token %}
       <input type="hidden" name="procedure" value="{{ procedure }}" />
       <div class="form-actions">

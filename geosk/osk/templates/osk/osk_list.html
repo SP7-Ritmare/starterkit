@@ -99,7 +99,7 @@
                             <div class="btn-group">
                                 <a href="{% url "osk_describe_sensor" %}?format={{ 'text/html'|urlencode }}&sensor_id={{sensor.id|urlencode }}" target="_blank" data-toggle="modal" class="btn btn-mini">{% trans "Sensor details" %}</a>
                                 {% if request.user.is_authenticated %}
-                                <a href="{% url "osk_upload" %}?procedureId={{ sensor.name }}" class="btn btn-mini">{% trans "Upload observations" %}</a>
+                                <a href="{% url "osk_upload" %}?procedureId={{ sensor.id }}" class="btn btn-mini">{% trans "Upload observations" %}</a>
                                 <a href="{% url "osk_deletesensor" %}?procedure={{ sensor.id }}" class="btn btn-mini btn-primary">{% trans "Delete sensor" %}</a>
                                 {% endif %}
                             </div>
@@ -156,7 +156,7 @@
             <h4 class="alert-heading">Oh snap! You got an error!</h4>
             <p class="error-message"></p>
         </div>
-        <iframe id="ediclient_container_iframe" src="" style="zoom:0.60" width="99.6%" height="90%" frameborder="0"></iframe>
+        <iframe id="ediclient_container_iframe" name="ediclient_container_iframe" src="" style="zoom:0.60" width="99.6%" height="90%" frameborder="0"></iframe>
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
@@ -172,7 +172,7 @@
 <script>
     {% get_current_language as  LANGUAGE_CODE %}
     var ediml_current_language = '{{ LANGUAGE_CODE }}';
-    var ediml_client_url = "{{ STATIC_URL }}EDI-NG_client/SensorML101_forGet-It.html?";
+    var ediml_client_url = "{{ STATIC_URL }}EDI-NG_client/SensorML101_forRITMARE.html?";
     var ediml_proxy_url = '{% url "osk_ediproxy_importmd" %}';
     var ediml_edimlId = '';
 
@@ -190,7 +190,8 @@
         ediml_client_url: ediml_client_url,
         ediml_proxy_url: ediml_proxy_url,
         ediml_current_language: ediml_current_language,
-        parameters: parameters
+        parameters: parameters,
+        redirect_url: location.pathname
     }
 
     var ediProxy = new EdiProxy(ediProxyConfig);
