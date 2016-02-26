@@ -7,6 +7,7 @@ var EdiProxy = function(config){
     this.ediml_proxy_url = config.ediml_proxy_url;
     this.ediml_current_language = config.ediml_current_language;
     this.parameters = config.parameters;
+    this.redirect_url = config.redirect_url;
 
     this.iframe = $('#' + this.id_container).find('iframe');
 
@@ -43,7 +44,8 @@ EdiProxy.prototype.saveSuccess = function (robj) {
         type: 'POST',
         success: function(data){
             e.ediml.isDirty = false;
-            location.reload();
+            // location.reload();
+            location = proxy.redirect_url;
         },
         error: function(jqXHR, textStatus, errorThrown ){
             e.ediml.isDirty = true;

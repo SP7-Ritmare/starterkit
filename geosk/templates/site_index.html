@@ -35,9 +35,10 @@ This is where you can override the hero area block. You can simply modify the co
       {% endif %}
       <p>
         {% blocktrans %}
-	The GET-IT is developed in the context of <a href="http://sp7.irea.cnr.it/">Sub-Project 7</a> of RITMARE (<a href="http://www.ritmare.it/">www.ritmare.it</a>). It is based upon <a href="http://geonode.org/">GeoNode</a>.
+	<a href="http://www.get-it.it/" target="_blank">GET-IT</a> is developed in the context of <a href="http://sp7.irea.cnr.it/">Sub-Project 7</a> of RITMARE (<a href="http://www.ritmare.it/">www.ritmare.it</a>). It is based upon <a href="http://geonode.org/">GeoNode</a>.
 	{% endblocktrans %}
       </p>
+      <p>{% blocktrans %}For more info visit the project site: <a href="http://www.get-it.it/" target="_blank">www.get-it.it</a>{% endblocktrans %}.
       <span>{% trans 'Need help' %} <a href="http://sp7.irea.cnr.it/wiki/index.php/Getting_Started">{% trans 'Getting Started?' %}</a></span>
       </div>
       <div class="btns">
@@ -75,10 +76,12 @@ This is where you can override the hero area block. You can simply modify the co
               GeoNode enables you to upload, manage, and browse data layers. Search for data that is valuable to you, or upload your own data.
             {% endblocktrans %}
               <a href="{% url "data_upload" %}" class="btn btn-large">{% trans 'Upload Layers' %}</a>
+            {% if perms.osk.admin_sos %}
             {% blocktrans %}
               GET-IT enables you to upload, manage, and view sensors and their observations. Create a sensor or upload observations of existing sensor.
             {% endblocktrans %}
               <a href="{% url "osk_browse" %}#ediclient_container" class="btn btn-large">{% trans 'Create a Sensor'  %}</a>
+            {% endif %}
             {% blocktrans %}
               GeoNode enables you to compose and share maps. Create a map with our cartography tool, or explore maps shared by others.
             {% endblocktrans %}

@@ -70,8 +70,10 @@ class Catalog(object):
                     ds['describe_sensor'] = cap.describe_sensor(outputFormat='http://www.opengis.net/sensorML/1.0.1', procedure=sensor_id)
                     ds['name'] = ds['describe_sensor'].sensor_ml.members[0].name
                     ds['description'] = ds['describe_sensor'].sensor_ml.members[0].description
-                except (AttributeError, IndexError, HTTPError):
+                    ds['isvalid'] = True
+                except: #(AttributeError, IndexError, HTTPError):
                     ds['description'] = 'Invalid Sensor'
+                    ds['isvalid'] = False
                     pass
             sensors.append(ds)
 

@@ -17,10 +17,10 @@ class CustomIndexDashboard(Dashboard):
     """
     Custom index dashboard for www.
     """
-    
+
     def init_with_context(self, context):
         site_name = get_admin_site_name(context)
-       
+
         # append an app list module for "Administration"
         self.children.append(modules.ModelList(
             _('Metadata Configuration & Registration'),
@@ -28,7 +28,7 @@ class CustomIndexDashboard(Dashboard):
             collapsible=False,
             models=('geosk.mdtools.*','geosk.skregistration.*'),
         ))
-        
+
 
         # append a group for "Administration" & "Applications"
         self.children.append(modules.Group(
@@ -50,7 +50,7 @@ class CustomIndexDashboard(Dashboard):
                 )
             ]
         ))
-        
+
         # append an app list module for "Applications"
         self.children.append(modules.AppList(
             _('AppList: Applications'),
@@ -59,9 +59,9 @@ class CustomIndexDashboard(Dashboard):
             css_classes=('collapse closed',),
             exclude=('django.contrib.*',),
         ))
-        
+
         self.children.append(modules.LinkList(
-            _('SK Registration'),
+            _('GET-IT Registration'),
             column=2,
             children=[
                 {
@@ -90,7 +90,7 @@ class CustomIndexDashboard(Dashboard):
                 },
             ]
         ))
-        
+
         # append a recent actions module
         self.children.append(modules.RecentActions(
             _('Recent Actions'),
@@ -100,7 +100,7 @@ class CustomIndexDashboard(Dashboard):
         ))
 
         self.children.append(modules.LinkList(
-            _('SK Front end'),
+            _('GET-IT Front end'),
             column=3,
             children=[
                 {
@@ -145,4 +145,3 @@ class CustomIndexDashboard(Dashboard):
                 },
             ]
         ))
-

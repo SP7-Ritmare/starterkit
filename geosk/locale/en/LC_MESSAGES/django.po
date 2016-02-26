@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-28 08:35-0500\n"
+"POT-Creation-Date: 2016-02-26 06:08-0600\n"
 "PO-Revision-Date: 2014-06-18 02:48-0600\n"
 "Last-Translator: <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,7 +39,7 @@ msgid "AppList: Applications"
 msgstr ""
 
 #: dashboard.py:64 skregistration/templates/skregistration/registration.html:5
-msgid "SK Registration"
+msgid "GET-IT Registration"
 msgstr ""
 
 #: dashboard.py:68
@@ -67,7 +67,7 @@ msgid "Recent Actions"
 msgstr ""
 
 #: dashboard.py:103
-msgid "SK Front end"
+msgid "GET-IT Front end"
 msgstr ""
 
 #: dashboard.py:107
@@ -2025,12 +2025,14 @@ msgstr ""
 #: _locale_external/geonode/documents/templates/documents/document_remove.html:18
 #: _locale_external/geonode/layers/templates/layers/layer_remove.html:18
 #: _locale_external/geonode/maps/templates/maps/map_remove.html:19
+#: osk/templates/osk/osk_deletesensor.html:23
 msgid "Yes, I am sure"
 msgstr ""
 
 #: _locale_external/geonode/documents/templates/documents/document_remove.html:19
 #: _locale_external/geonode/layers/templates/layers/layer_remove.html:19
 #: _locale_external/geonode/maps/templates/maps/map_remove.html:20
+#: osk/templates/osk/osk_deletesensor.html:24
 msgid "No, don't remove it"
 msgstr ""
 
@@ -2097,7 +2099,7 @@ msgstr ""
 
 #: _locale_external/geonode/layers/models.py:251
 msgid "title of attribute as displayed in GeoNode"
-msgstr "title of attribute as displayed in StarterKit"
+msgstr "title of attribute as displayed in GET-IT"
 
 #: _locale_external/geonode/layers/models.py:252
 msgid "attribute type"
@@ -2318,7 +2320,7 @@ msgstr ""
 #: _locale_external/geonode/layers/templates/layers/layer_list.html:9
 #: _locale_external/geonode/templates/index.html:29
 #: _locale_external/geonode/upload/templates/upload/layer_upload_base.html:13
-#: mdtools/templates/layers/layer_list.html:9 templates/site_index.html:45
+#: mdtools/templates/layers/layer_list.html:9 templates/site_index.html:46
 msgid "Explore Layers"
 msgstr ""
 
@@ -2326,7 +2328,7 @@ msgstr ""
 #: _locale_external/geonode/templates/index.html:57
 #: _locale_external/geonode/upload/templates/upload/layer_upload.html:18
 #: _locale_external/geonode/upload/templates/upload/layer_upload_base.html:15
-#: templates/about_upload_layers.html:5 templates/site_index.html:77
+#: templates/about_upload_layers.html:5 templates/site_index.html:78
 msgid "Upload Layers"
 msgstr ""
 
@@ -2446,7 +2448,7 @@ msgstr "Click the button below to generate a new view based on this layer."
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:193
 #: _locale_external/geonode/templates/index.html:61
-#: mdtools/templates/layers/layer_detail.html:218 templates/site_index.html:85
+#: mdtools/templates/layers/layer_detail.html:218 templates/site_index.html:86
 msgid "Create a Map"
 msgstr "Create a View"
 
@@ -2486,9 +2488,8 @@ msgstr ""
 
 #: _locale_external/geonode/layers/templates/layers/layer_list.html:15
 #: mdtools/templates/layers/layer_list.html:15
-#, fuzzy
 msgid "Explore Layer"
-msgstr "Explore Views"
+msgstr ""
 
 #: _locale_external/geonode/layers/templates/layers/layer_metadata.html:12
 #, python-format
@@ -2508,8 +2509,8 @@ msgid ""
 msgstr ""
 "Note: this layer's orginal metadata was populated by importing a metadata "
 "XML file.\n"
-"        StarterKit's metadata import supports a subset of ISO, FGDC, and "
-"Dublin Core metadata elements.\n"
+"        GET-IT's metadata import supports a subset of ISO, FGDC, and Dublin "
+"Core metadata elements.\n"
 "        Some of your original metadata may have been lost."
 
 #: _locale_external/geonode/layers/templates/layers/layer_metadata.html:23
@@ -2772,7 +2773,7 @@ msgstr ""
 #: _locale_external/geonode/maps/templates/maps/map_base.html:12
 #: _locale_external/geonode/maps/templates/maps/map_list.html:14
 #: _locale_external/geonode/templates/index.html:32
-#: templates/site_index.html:51
+#: templates/site_index.html:52
 msgid "Explore Maps"
 msgstr "Explore Views"
 
@@ -2897,7 +2898,7 @@ msgid ""
 msgstr ""
 "\n"
 "      Here you can download all the layers of this view that\n"
-"      are hosted on this StarterKit.\n"
+"      are hosted on this GET-IT.\n"
 "    "
 
 #: _locale_external/geonode/maps/templates/maps/map_download.html:22
@@ -2936,7 +2937,7 @@ msgstr ""
 "\n"
 "        Finally, the view contains these layers which will not be "
 "downloaded\n"
-"        because they are not available directly from this StarterKit:\n"
+"        because they are not available directly from this GET-IT:\n"
 "      "
 
 #: _locale_external/geonode/maps/templates/maps/map_download.html:54
@@ -2986,6 +2987,7 @@ msgid ""
 msgstr ""
 
 #: _locale_external/geonode/maps/templates/maps/map_view.html:5
+#: templates/maps/map_embed.html:5
 msgid "GeoExplorer"
 msgstr ""
 
@@ -3564,7 +3566,7 @@ msgid ""
 "  "
 msgstr ""
 "\n"
-"      Please contact your StarterKit administrator (he may have received an "
+"      Please contact your GET-IT administrator (he may have received an "
 "email automatically if he configured it properly).\n"
 "      If you are the site administrator, enable debug mode to see the actual "
 "error and fix it or file an issue in <a href=\"http://github.com/StarterKit/"
@@ -3638,9 +3640,8 @@ msgid "Who can edit this data?"
 msgstr ""
 
 #: _locale_external/geonode/templates/_permissions.html:29
-#, fuzzy
 msgid "Only the following users:"
-msgstr "This view uses the following layers:"
+msgstr ""
 
 #: _locale_external/geonode/templates/_permissions.html:36
 msgid "Who can manage and edit this data?"
@@ -4050,22 +4051,22 @@ msgstr ""
 "          "
 
 #: _locale_external/geonode/templates/index.html:25
-#: templates/site_index.html:41
+#: templates/site_index.html:42
 msgid "Need help"
 msgstr ""
 
 #: _locale_external/geonode/templates/index.html:25
-#: templates/site_index.html:41
+#: templates/site_index.html:42
 msgid "Getting Started?"
 msgstr ""
 
 #: _locale_external/geonode/templates/index.html:42
-#: templates/site_index.html:62
+#: templates/site_index.html:63
 msgid "Latest Layers"
 msgstr ""
 
 #: _locale_external/geonode/templates/index.html:52
-#: templates/site_index.html:72
+#: templates/site_index.html:73
 msgid "Contribute"
 msgstr ""
 
@@ -4094,7 +4095,7 @@ msgstr ""
 "            "
 
 #: _locale_external/geonode/templates/index.html:67
-#: templates/site_index.html:91
+#: templates/site_index.html:92
 msgid "Latest Maps"
 msgstr "Latest Views"
 
@@ -4854,7 +4855,7 @@ msgstr ""
 
 #: mdtools/templates/base/resourcebase_info_panel.html:80
 #: mdtools/templates/base/resourcebase_info_panel.html:88
-msgid "StarterKit User"
+msgid "GET-IT User"
 msgstr ""
 
 #: mdtools/templates/base/resourcebase_info_panel.html:102
@@ -4868,20 +4869,18 @@ msgstr ""
 #: mdtools/templates/layers/_layer_list_item.html:21
 #: templates/documents/_document_list_item.html:21
 #: templates/maps/_map_list_item.html:20
-#, fuzzy
 msgid "view "
 msgid_plural "views "
-msgstr[0] "View View"
-msgstr[1] "View View"
+msgstr[0] ""
+msgstr[1] ""
 
 #: mdtools/templates/layers/_layer_list_item.html:32
 msgid "Metadata Completeness"
 msgstr ""
 
 #: mdtools/templates/layers/layer_detail.html:63
-#, fuzzy
-msgid "Edit Metadata (INSPIRE)"
-msgstr "Edit View Metadata"
+msgid "Edit Metadata (RNDT)"
+msgstr ""
 
 #: mdtools/templates/mdtools/edi_headers.html:66
 msgid ""
@@ -4920,10 +4919,27 @@ msgstr ""
 msgid "Upload Observations"
 msgstr ""
 
+#: osk/templates/osk/osk_deletesensor.html:7
+#: osk/templates/osk/osk_list.html:103
+msgid "Delete sensor"
+msgstr ""
+
+#: osk/templates/osk/osk_deletesensor.html:14
+msgid ""
+"\n"
+"          Are you sure you want to remove the sensor?\n"
+"        "
+msgstr ""
+
+#: osk/templates/osk/osk_deletesensor.html:18
+msgid ""
+"This action CANNOT be undone. This will permanently delete\n"
+"      the sensor and remove all observations associated."
+msgstr ""
+
 #: osk/templates/osk/osk_list.html:20
-#, fuzzy
 msgid "Register a new  Sensor"
-msgstr "Create a view"
+msgstr ""
 
 #: osk/templates/osk/osk_list.html:22
 msgid "Capabilities &raquo;"
@@ -4989,10 +5005,9 @@ msgstr ""
 msgid "Sensor details"
 msgstr ""
 
-#: osk/templates/osk/osk_list.html:101
-#, fuzzy
+#: osk/templates/osk/osk_list.html:102
 msgid "Upload observations"
-msgstr "Explore Views"
+msgstr ""
 
 #: osk/templates/osk/osk_registration.html:7
 msgid "Sensor Registration"
@@ -5003,7 +5018,7 @@ msgid "SOS compliance"
 msgstr ""
 
 #: skregistration/models.py:20 skregistration/models.py:21
-msgid "Starter Kit registration"
+msgid "GET-IT registration"
 msgstr ""
 
 #: skregistration/templates/skregistration/registration.html:10
@@ -5023,9 +5038,8 @@ msgid "Web Title/Name"
 msgstr ""
 
 #: skregistration/templates/skregistration/registration.html:41
-#, fuzzy
 msgid "Metadata"
-msgstr "Edit View Metadata"
+msgstr ""
 
 #: skregistration/templates/skregistration/registration.html:42
 msgid "Modify"
@@ -5036,7 +5050,7 @@ msgid "Check validation"
 msgstr ""
 
 #: skregistration/templates/skregistration/registration.html:48
-msgid "Please check the information is correct prior to registering the SK"
+msgid "Please check the information is correct prior to registering the GET-IT"
 msgstr ""
 
 #: skregistration/templates/skregistration/registration.html:53
@@ -5049,29 +5063,28 @@ msgstr ""
 
 #: skregistration/templates/skregistration/registration.html:61
 msgid ""
-"Please add more information about your SK implementation. Fill the Services "
-"Metadata form."
+"Please add more information about your GET-IT implementation. Fill the "
+"Services Metadata form."
 msgstr ""
 
 #: skregistration/templates/skregistration/registration.html:62
-#, fuzzy
 msgid "Insert metadata"
-msgstr "Lingua dei metadati"
+msgstr ""
 
 #: skregistration/templates/skregistration/registration.html:73
 msgid "Close"
 msgstr ""
 
 #: templates/about.html:4 templates/about.html.py:8
-msgid "About RITMARE Starter Kit"
+msgid "About RITMARE GET-IT Starterkit"
 msgstr ""
 
 #: templates/about.html:10
 msgid ""
 "\n"
 "      The updated documentation is available at the RITMARE SP7 Wiki:\n"
-"      <a href=\"http://sp7.irea.cnr.it/wiki/index.php/Getting_Started"
-"\">Starter Kit - Getting Started</a>\n"
+"      <a href=\"http://sp7.irea.cnr.it/wiki/index.php/Getting_Started\">GET-"
+"IT Starterkit - Getting Started</a>\n"
 "      "
 msgstr ""
 
@@ -5080,29 +5093,28 @@ msgid "Descrizione servizi"
 msgstr ""
 
 #: templates/about_services.html:11
-msgid "SK Web Services"
+msgid "GET-IT Web Services"
 msgstr ""
 
 #: templates/about_services.html:13
 msgid ""
-"SK provides <a href=\"http://www.opengeospatial.org/\">OGC</a> compliant web "
-"services to discover, view and download geospatial datasets.\n"
+"GET-IT provides <a href=\"http://www.opengeospatial.org/\">OGC</a> compliant "
+"web services to discover, view and download geospatial datasets.\n"
 msgstr ""
 
 #: templates/about_upload_layers.html:11
-msgid "Uploading layers in SK"
+msgid "Uploading layers in GET-IT"
 msgstr ""
 
 #: templates/about_upload_layers.html:15
 msgid ""
-"SK provides a user friendly tool to upload easilly spatial data such as "
+"GET-IT provides a user friendly tool to upload easilly spatial data such as "
 "Rasters (GeoTIFF) and vector data (shapefiles).\n"
 "      For different type of spatial data, consult the <a href=\"http://docs."
-"geoserver.org/2.4.x/en/user/\">Geoserver manual</a>       \n"
+"geoserver.org/2.4.x/en/user/\">Geoserver manual</a>\n"
 msgstr ""
 
 #: templates/help.html:12
-#, fuzzy
 msgid ""
 "\n"
 "  <p>The GeoNode provides access to data sets and a map editing application "
@@ -5110,11 +5122,11 @@ msgid ""
 "\n"
 "  <h4 id=\"upload-layers\">Creating Layers</h4>\n"
 "  <p>The \"UPLOAD LAYER\" tab in <a href=\"/layers\">Layers</a> page allows "
-"you to upload new layers to this Starterkit and, after the upload, to "
-"compile metadata.</p>\n"
+"you to upload new layers to this GET-IT and, after the upload, to compile "
+"metadata.</p>\n"
 "  <p>We invite you if you need help to consult the official <a href=\"http://"
 "docs.geonode.org/en/latest/tutorials/users/layers/upload.html\">Geonode "
-"Documentation</a> or the SK help page for <a href=\"/about_upload_layers"
+"Documentation</a> or the GET-IT help page for <a href=\"/about_upload_layers"
 "\">uploading data</a>.</p>\n"
 "\n"
 "  <h4 id=\"browsing-data\">Browsing Layers</h4>\n"
@@ -5144,9 +5156,9 @@ msgid ""
 "Google Earth plugin installed you will be prompted to install it.</p>\n"
 "\n"
 "  <h4 id=\"using-services\">Using Services: WMS, WFS,...</h4>\n"
-"  <p>The SK portal provides services like WMS, WFS, WMS; See this page to "
-"get more informations and the url of the services <a href=\"/about_services"
-"\">about services</a>.</p>\n"
+"  <p>The GET-IT portal provides services like WMS, WFS, WMS; See this page "
+"to get more informations and the url of the services <a href=\"/"
+"about_services\">about services</a>.</p>\n"
 "\n"
 "  <h4 id=\"creating-a-map\">Creating a Map</h4>\n"
 "  <p>To create a new map go to the <a href=\"/maps\">Contributed Maps</a> "
@@ -5177,9 +5189,9 @@ msgid ""
 "blog. To export a map:</p>\n"
 "  <ol>\n"
 "    <li>Select the from the list of maps on the community or map page and "
-"then hit the 'export map' button.</li> \n"
+"then hit the 'export map' button.</li>\n"
 "    <li>Choose your desired height and width for the widget in the wizard.</"
-"li> \n"
+"li>\n"
 "    <li>Copy the HTML snippet provided in the wizard to any HTML page or "
 "iFrame-supporting blog post.</li>\n"
 "  </ol>\n"
@@ -5201,37 +5213,35 @@ msgid ""
 "    <li>Save the map.</li>\n"
 "  </ol>\n"
 "  <p>You will be able to see your new map when you search for it from the <a "
-"href=\"/maps\">Maps</a> tab.</p> \n"
+"href=\"/maps\">Maps</a> tab.</p>\n"
 "  "
 msgstr ""
 "\n"
-"<p>The StarterKit provides access to data sets and a view editing "
-"application allows users to browse existing views and contribute their own.</"
-"p>\n"
+"<p>The GET-IT provides access to data sets and a view editing application "
+"allows users to browse existing views and contribute their own.</p>\n"
 "<h4 id=\"upload-layers\">Creating Layers</h4>\n"
 "<p>The \"UPLOAD LAYER\" tab in <a href=\"/layers\">Layers</a> page allows "
-"you to upload new layers to this Starterkit and, after the upload, to "
-"compile metadata.</p>\n"
+"you to upload new layers to this GET-IT and, after the upload, to compile "
+"metadata.</p>\n"
 "<p>We invite you if you need help to consult the official <a href=\"http://"
 "docs.geonode.org/en/latest/tutorials/users/layers/upload.html\">Geonode "
-"Documentation</a> or the SK help page for <a href=\"/about_upload_layers"
+"Documentation</a> or the GET-IT help page for <a href=\"/about_upload_layers"
 "\">uploading data</a>.</p>\n"
 "<h4 id=\"browsing-data\">Browsing Layers</h4>\n"
 "<p>The <a href=\"/layers\">Layers</a> tab allows you to browse data uploaded "
-"to this StarterKit.</p>\n"
+"to this GET-IT.</p>\n"
 "<p>All data can be downloaded in a variety of formats, for use in other "
 "applications.</p>\n"
 "<h4 id=\"developer-access\">Developer Access</h4>\n"
 "<p>The <a href=\"/developer\"> Developer</a> page is the place for "
-"developers to get started building applications against the StarterKit. It "
+"developers to get started building applications against the GET-IT. It "
 "includes instructions on using the web services, links to the source code of "
-"the StarterKit, and information about the open source projects used to "
-"create it.</p>\n"
+"the GET-IT, and information about the open source projects used to create it."
+"</p>\n"
 "<h4 id=\"browsing-maps\">Browsing Views</h4>\n"
-"<p>The StarterKit allows users to create and share views with one another.</"
-"p>\n"
+"<p>The GET-IT allows users to create and share views with one another.</p>\n"
 "<p>The <a href=\"/maps\">Views</a> tab is a gateway to view exploration on "
-"StarterKit.  From here you can <strong>search for a view</strong> or "
+"GET-IT.  From here you can <strong>search for a view</strong> or "
 "<strong>create a view</strong>, which will open the <a href=\"/maps/new"
 "\">View Composer</a>.</p>\n"
 "<h5>Google Earth Mode</h5>\n"
@@ -5240,17 +5250,17 @@ msgstr ""
 "globe logo, the rightmost button on top toolbar. If you do not have the "
 "Google Earth plugin installed you will be prompted to install it.</p>\n"
 "<h4 id=\"using-services\">Using Services: WMS, WFS,...</h4>\n"
-"<p>The SK portal provides services like WMS, WFS, WMS; See this page to get "
-"more informations and the url of the services <a href=\"/about_services"
+"<p>The GET-IT portal provides services like WMS, WFS, WMS; See this page to "
+"get more informations and the url of the services <a href=\"/about_services"
 "\">about services</a>.</p>\n"
 "<h4 id=\"creating-a-map\">Creating a View</h4>\n"
 "<p>To create a new view go to the <a href=\"/maps\">Contributed Views</a> "
 "tab and click the <a href=\"/maps/new\">create your own view</a> link.</p>\n"
 "<p>This will take you to the <a href=\"/maps/new\">View Composer</a> with a "
 "base layer loaded.</p>\n"
-"<p>To add data layers from the StarterKit click on the green plus button "
-"located below the layers tab on the left hand side of the screen. This will "
-"open a dialog listing all the layers available on the StarterKit.</p>\n"
+"<p>To add data layers from the GET-IT click on the green plus button located "
+"below the layers tab on the left hand side of the screen. This will open a "
+"dialog listing all the layers available on the GET-IT.</p>\n"
 "<p>To add layers to your view select them and hit the <strong>Add Layers</"
 "strong> button. When finished you may hit <strong>Done</strong> to close the "
 "dialog and go back to the view.</p>\n"
@@ -5265,8 +5275,8 @@ msgstr ""
 "the top toolbar, an image of a view with a disk--on the top menu and fill "
 "out the title and abstract of the view.</p>\n"
 "<h4 id=\"exporting-a-map\">Exporting a View</h4>\n"
-"<p>Any view from the StarterKit can be embedded for use in another site or "
-"blog. To export a view:</p>\n"
+"<p>Any view from the GET-IT can be embedded for use in another site or blog. "
+"To export a view:</p>\n"
 "<ol>\n"
 "<li>Select the from the list of views on the community or view page and then "
 "hit the 'export view' button.</li>\n"
@@ -5307,7 +5317,7 @@ msgid "Sensors"
 msgstr ""
 
 #: templates/site_base.html:169
-msgid "SK is a project of the StarterKit Development Team"
+msgid "GET-IT is a project of the GET-IT Development Team"
 msgstr ""
 
 #: templates/site_base.html:170
@@ -5338,31 +5348,32 @@ msgid "GET-IT - Demo"
 msgstr ""
 
 #: templates/site_index.html:33
-#, fuzzy
 msgid ""
 "Upload your layers, your observations, create your maps and join the RITMARE "
 "interoperable Infrastructure."
 msgstr ""
-"Upload your layers, create your views and join the RITMARE interoperable "
-"Infrastructure."
 
 #: templates/site_index.html:37
 msgid ""
 "\n"
-"\tThe GET-IT is developed in the context of <a href=\"http://sp7.irea.cnr.it/"
-"\">Sub-Project 7</a> of RITMARE (<a href=\"http://www.ritmare.it/\">www."
-"ritmare.it</a>). It is based upon <a href=\"http://geonode.org/\">GeoNode</"
-"a>.\n"
+"\t<a href=\"http://www.get-it.it/\" target=\"_blank\">GET-IT</a> is "
+"developed in the context of <a href=\"http://sp7.irea.cnr.it/\">Sub-Project "
+"7</a> of RITMARE (<a href=\"http://www.ritmare.it/\">www.ritmare.it</a>). It "
+"is based upon <a href=\"http://geonode.org/\">GeoNode</a>.\n"
 "\t"
 msgstr ""
 
-#: templates/site_index.html:48
-#, fuzzy
-msgid "Explore Sensors"
-msgstr "Explore Views"
+#: templates/site_index.html:41
+msgid ""
+"For more info visit the project site: <a href=\"http://www.get-it.it/\" "
+"target=\"_blank\">www.get-it.it</a>"
+msgstr ""
 
-#: templates/site_index.html:74
-#, fuzzy
+#: templates/site_index.html:49
+msgid "Explore Sensors"
+msgstr ""
+
+#: templates/site_index.html:75
 msgid ""
 "\n"
 "              GeoNode enables you to upload, manage, and browse data layers. "
@@ -5370,12 +5381,11 @@ msgid ""
 "            "
 msgstr ""
 "\n"
-"              StarterKit enables you to upload, manage, and browse data "
-"layers. Search for data that is valuable to you, or upload your own data. \n"
+"              GET-IT enables you to upload, manage, and browse data layers. "
+"Search for data that is valuable to you, or upload your own data. \n"
 "            "
 
-#: templates/site_index.html:78
-#, fuzzy
+#: templates/site_index.html:79
 msgid ""
 "\n"
 "              GET-IT enables you to upload, manage, and view sensors and "
@@ -5383,18 +5393,12 @@ msgid ""
 "sensor.\n"
 "            "
 msgstr ""
-"\n"
-"              StarterKit enables you to upload, manage, and browse data "
-"layers. Search for data that is valuable to you, or upload your own data. \n"
-"            "
-
-#: templates/site_index.html:81
-#, fuzzy
-msgid "Create a Sensor"
-msgstr "Create a view"
 
 #: templates/site_index.html:82
-#, fuzzy
+msgid "Create a Sensor"
+msgstr ""
+
+#: templates/site_index.html:83
 msgid ""
 "\n"
 "              GeoNode enables you to compose and share maps. Create a map "
@@ -5402,8 +5406,8 @@ msgid ""
 "            "
 msgstr ""
 "\n"
-"              StarterKit enables you to compose and share views. Create a "
-"view with our cartography tool, or explore views shared by others. \n"
+"              GET-IT enables you to compose and share views. Create a view "
+"with our cartography tool, or explore views shared by others. \n"
 "            "
 
 #: templates/sk_credits.html:16
@@ -5414,13 +5418,13 @@ msgstr ""
 msgid "The development team is composed by:"
 msgstr ""
 
-#: templates/sk_credits.html:34
-msgid "Starter Kit software"
+#: templates/sk_credits.html:35
+msgid "GET-IT software"
 msgstr ""
 
-#: templates/sk_credits.html:35
+#: templates/sk_credits.html:36
 msgid ""
-"StarterKit is built using several open source projects, each with its own "
+"GET-IT is built using several open source projects, each with its own "
 "community:"
 msgstr ""
 

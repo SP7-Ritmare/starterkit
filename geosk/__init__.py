@@ -19,7 +19,7 @@
 
 import os
 # __version__ = (1, 2, 0, 'alpha', 6)
-__version__ = (1, 2, 16, 'final', 0)
+__version__ = (1, 3, 0, 'final', 0)
 
 class UnregisteredSKException(Exception):
     pass

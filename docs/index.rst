@@ -63,7 +63,7 @@ three groups: Users, Administrators and Developers.
 Need Help?
 ==========
 
-Having trouble? Can't find what you are looking for? We'd like to help!
+Having trouble? Can't find what you are looking for? We'd like to help!!
 
 
  * Write us an email to: help.skritmare@irea.cnr.it

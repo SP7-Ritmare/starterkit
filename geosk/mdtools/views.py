@@ -14,6 +14,9 @@ from geonode.maps.forms import MapForm
 from geonode.maps.models import Map
 
 from geosk.mdtools.models import ServicesMetadata
+from geosk import get_version as geosk_version
+from geonode import get_version as geonode_version
+from django import get_version as django_version
 
 
 logger = logging.getLogger(__name__)
@@ -36,7 +39,7 @@ def get_data_api(request, format='json'):
     data = model_to_dict(r, exclude=exclude)
 
     #f=LayerForm(model_to_dict(l), prefix='layer')
-    
+
 
     data['keywords'] = r.keyword_csv
     # data_prefix = {"layer-%s" % k: v for k, v in data.items()}
@@ -59,5 +62,12 @@ def whoami(request, format='json'):
         _md = {
             'message': 'Missing metadata'
             }
-    return HttpResponse(json.dumps(_md, indent=2), mimetype="application/json")
 
+    # software
+    _md['software'] = {
+        'getit': geosk_version(),
+        'geonode': geonode_version(),
+        'django': django_version()
+    }
+
+    return HttpResponse(json.dumps(_md, indent=2), mimetype="application/json")

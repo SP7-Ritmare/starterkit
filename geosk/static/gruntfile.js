@@ -6,7 +6,8 @@ module.exports = function(grunt) {
         concat: {
             gxp_extr: {
                 src: [
-                    '.components/gxp/src/script/locale/it.js'
+                    '.components/gxp/src/script/locale/it.js',
+                    '.components/gxp/src/script/plugins/CSWCatalogueSource.js'
                 ],
                 dest: 'geosk/js/gxp_extra.js'
 
@@ -23,6 +24,11 @@ module.exports = function(grunt) {
                     '.components/openlayers/lib/OpenLayers/Format/SOSCapabilities/v1_0_0.js',
                     '.components/openlayers/lib/OpenLayers/Protocol/SOS.js',
                     '.components/openlayers/lib/OpenLayers/Protocol/SOS/v1_0_0.js',
+                    'geoext/lib/GeoExt/data/CSWRecordsReader.js',
+                    '.components/openlayers/lib/OpenLayers/Format/CSWGetRecords.js',
+                    '.components/openlayers/lib/OpenLayers/Format/CSWGetRecords/v2_0_2.js',
+                    '.components/openlayers/lib/OpenLayers/Protocol/CSW.js',
+                    '.components/openlayers/lib/OpenLayers/Protocol/CSW/v2_0_2.js'
                 ],
                 dest: 'geosk/js/openlayers_sos.js'
             },
