@@ -60,7 +60,7 @@
           {% if layer.mdextension.ediversion == '1' %}
           <li><a href="{% url "layer_metadata" layer.typename %}">{% trans "Edit Metadata" %} <i class="icon-chevron-right"></i></a></li>
           {% else %}
-          <li><a id="open_ediclient_btn" href="#ediclient_container">{% trans "Edit Metadata (INSPIRE)" %}<i class="icon-chevron-right"></i></a></li>
+          <li><a id="open_ediclient_btn" href="#ediclient_container">{% trans "Edit Metadata (RNDT)" %}<i class="icon-chevron-right"></i></a></li>
           {% endif %}
           {% if GEONODE_SECURITY_ENABLED %}
           <li><a href="#modal_perms" data-toggle="modal">{% trans "Edit Permissions" %} <i class="icon-chevron-right"></i></a></li>
@@ -329,7 +329,7 @@
     {% get_current_language as  LANGUAGE_CODE %}
     var ediml_current_language = '{{ LANGUAGE_CODE }}';
     var ediml_edimlId = '{{ layer.mdextension.fileid }}';
-    var ediml_client_url = "{{ STATIC_URL }}EDI-NG_client/RNDT_dataset.html?";
+    var ediml_client_url = "{{ STATIC_URL }}EDI-NG_client/RNDT_dataset_forRITMARE.html?";
     var ediml_proxy_url = '{% url "ediproxy_importmd" layer.typename %}';
 
     var parameters;
@@ -340,6 +340,7 @@
     {% else %}
     var _parameters = {
         'uid': '{{ layer.uuid }}',
+        'id': 'cnr:{{ layer.uuid }}',
         'title': '{{ layer.title }}',
         'resource': '{{ layer.mdextension.ediml_resource }}',
         'westlon': {{ layer.bbox_x0 }},
@@ -362,7 +363,8 @@
         ediml_client_url: ediml_client_url,
         ediml_proxy_url: ediml_proxy_url,
         ediml_current_language: ediml_current_language,
-        parameters: parameters
+        parameters: parameters,
+        redirect_url: location.pathname
     }
 
     var ediProxy = new EdiProxy(ediProxyConfig);

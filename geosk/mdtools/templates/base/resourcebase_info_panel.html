@@ -38,21 +38,21 @@
       {% endfor %}
     </li>
   {% endif %}
-          
+
   {% if resourcebase.category %}
     <li>
       <strong>{% trans "Category" %}:</strong>
       {{ resourcebase.category }}
     </li>
   {% endif %}
-  
+
   {% if resourcebase.regions.all %}
    <li>
       <strong>{% trans "Regions" %}:</strong>
         {{ resourcebase.regions.all|join:", " }}
     </li>
   {% endif %}
-  
+
   {% if resourcebase.license %}
     <li>
       <strong>{% trans "License" %}:</strong>
@@ -77,7 +77,7 @@
 
     {% if resourcebase.owner %}
     <li>
-      <strong>{% trans "StarterKit User" %}:</strong>
+      <strong>{% trans "GET-IT User" %}:</strong>
       <a href="{{ resourcebase.owner.get_profile.get_absolute_url }}">{{ resourcebase.owner.username }}</a>
     </li>
     {% endif %}
@@ -85,7 +85,7 @@
   {% else %}
     {% if resourcebase.owner %}
     <li>
-      <strong>{% trans "StarterKit User" %}:</strong>
+      <strong>{% trans "GET-IT User" %}:</strong>
       <a href="{{ resourcebase.owner.get_profile.get_absolute_url }}">{{ resourcebase.owner.username }}</a>
     </li>
     {% endif %}
@@ -101,7 +101,7 @@
 
   <a href="#more" data-toggle="collapse" data-target=".more">{% trans "Show/Hide" %}</a>
 
-  <div class="more collapse in"> 
+  <div class="more collapse in">
     <ul class="unstyled wide">
     {% if resourcebase.maintenance_frequency %}
       <li>
@@ -109,7 +109,7 @@
         {{ resourcebase.maintenance_frequency_title }}
       </li>
     {% endif %}
-    
+
     {% if resourcebase.restriction_code_type or resourcebase.constraints_other %}
       <li>
         <strong>{% trans "Restrictions" %}:</strong>
@@ -120,7 +120,7 @@
         {% endif %}
       </li>
     {% endif %}
-          
+
     {% if resourcebase.edition %}
       <li>
         <strong>{% trans "Edition" %}:</strong>
@@ -158,7 +158,7 @@
 
     {% if resourcebase.supplemental_information %}
       <li>
-        <strong>{% trans "Supplemental Information" %}:</strong> 
+        <strong>{% trans "Supplemental Information" %}:</strong>
         {{ resourcebase.supplemental_information|escape|urlize|linebreaks|safe }}
       </li>
     {% endif %}
