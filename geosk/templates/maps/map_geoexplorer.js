@@ -58,7 +58,7 @@ Ext.onReady(function() {
     Ext.ns("Geosk");
     Geosk.Composer = Ext.extend(GeoNode.Composer, {
 	loadConfig: function(config) {
-            {% if request.path == '/maps/117/view' %}
+            {% if request.path == '/maps/117/view' or  request.path == '/maps/117/embed' %}
 	    config.listeners.ready = function(obj_id) {
 		setTimeout(function(){
 		    var sosUrls = ['http://david.ve.ismar.cnr.it/52nSOSv3_WAR/sos?',
@@ -87,7 +87,9 @@ Ext.onReady(function() {
 			};
 
 			layerConfig.source = source.id;
-			source.createLayerRecord(layerConfig);
+			sosRecord = source.createLayerRecord(layerConfig);
+                        // nei sos vecchi ho dovuto aggiungere anche questa riga di codice
+                        //app.mapPanel.layers.add([sosRecord]);
 
 		    }
 		});

@@ -172,7 +172,7 @@
 <script>
     {% get_current_language as  LANGUAGE_CODE %}
     var ediml_current_language = '{{ LANGUAGE_CODE }}';
-    var ediml_client_url = "{{ STATIC_URL }}EDI-NG_client/SensorML101.html?";
+    var ediml_client_url = "{{ STATIC_URL }}EDI-NG_client/SensorML101_forGet-It.html?";
     var ediml_proxy_url = '{% url "osk_ediproxy_importmd" %}';
     var ediml_edimlId = '';
 
@@ -194,6 +194,12 @@
     }
 
     var ediProxy = new EdiProxy(ediProxyConfig);
+
+    //open modal
+    var hash = window.location.hash
+    if(hash=='#ediclient_container'){
+        $(hash).modal('show');
+    }
 
 </script>
 {% endblock extra_script %}
