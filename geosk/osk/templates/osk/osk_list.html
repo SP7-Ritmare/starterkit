@@ -15,7 +15,7 @@
             <h2 class="page-title span7">{% trans "Explore SOS" %}</h2>
         </div>
         <div class="span6">
-            {% if request.user.is_authenticated %}
+            {% if perms.osk.admin_sos %}
             <a  id="open_ediclient_btn" href="#ediclient_container"
                 class="btn btn-large btn-primary" href="">{% trans "Register a new  Sensor" %}</a>
             {% endif %}
@@ -98,7 +98,7 @@
                         <div class="btn-toolbar">
                             <div class="btn-group">
                                 <a href="{% url "osk_describe_sensor" %}?format={{ 'text/html'|urlencode }}&sensor_id={{sensor.id|urlencode }}" target="_blank" data-toggle="modal" class="btn btn-mini">{% trans "Sensor details" %}</a>
-                                {% if request.user.is_authenticated %}
+                                {% if perms.osk.admin_sos %}
                                 <a href="{% url "osk_upload" %}?procedureId={{ sensor.id }}" class="btn btn-mini">{% trans "Upload observations" %}</a>
                                 <a href="{% url "osk_deletesensor" %}?procedure={{ sensor.id }}" class="btn btn-mini btn-primary">{% trans "Delete sensor" %}</a>
                                 {% endif %}
