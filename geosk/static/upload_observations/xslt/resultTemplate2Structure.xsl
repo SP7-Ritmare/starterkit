@@ -19,13 +19,12 @@
 	omit-xml-declaration="yes"
 	indent="yes"
 	media-type="text"/>
-	
 	<xsl:template match="/">	
 	{
 		"resultStructure":[
 		<xsl:for-each select="//sos:resultStructure/swe:DataRecord//swe:field">
 			{
-			"fieldName":"<xsl:value-of select="replace(replace(replace(./@name, '                  ', ' '), '\s+', '_'), '\{|\}|\[|\]|\(|\)|&gt;|&lt;|:', '')"/>",
+			"fieldName":"<xsl:value-of select="replace(replace(replace(./@name, '                  ', ' '), '\s+', '_'), '\{|\}|\[|\]|\(|\)|&gt;|&lt;|:|&amp;|&#163;|&#8356;|&#64;', '')"/>",
 			"fieldType":"<xsl:value-of select="name(./*[1])"/>",
 			"fieldDefinition":"<xsl:value-of select="./*[1]/@definition"/>",
 			"uom_code_value":"<xsl:value-of select=".//swe:uom/@code"/>",
