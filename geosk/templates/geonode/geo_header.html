@@ -55,6 +55,33 @@ GeoExplorer.Viewer.prototype.loadConfig = function(config) {
     GeoExplorer.Viewer.superclass.loadConfig.call(this, config);
 };
 
+var _register_disableObliqueView_interval;
+//
+function disableObliqueView(){
+    if (typeof app == "undefined") {
+        return;
+    }
+    if (typeof app.mapPanel == "undefined") {
+        return;
+    }
+    if (typeof app.mapPanel.layers == "undefined") {
+        return;
+    }
+    var layers = app.mapPanel.map.layers;
+    Ext.each(layers, function(layer){
+        if(layer.typeName == 'SATELLITE'){
+            if (typeof layer.mapObject == "undefined") {
+                return;
+            }
+
+            layer.mapObject.setTilt(0);
+            clearInterval(_register_disableObliqueView_interval);
+        }
+    });
+}
+_register_disableObliqueView_interval = setInterval(disableObliqueView, 1000);
+
+
 </script>
 
 <!-- geosk -->
