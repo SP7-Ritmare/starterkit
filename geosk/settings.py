@@ -91,6 +91,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
 
     # Third party apps
+    'analytical',
 
     # Utility
     'pagination',
@@ -197,6 +198,10 @@ THEME_ACCOUNT_CONTACT_EMAIL = 'help.skritmare@irea.cnr.it'
 ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = True
 REGISTRATION_OPEN = False
 PROXY_ALLOWED_HOSTS=("*",)
+
+
+# Set default analytical
+PIWIK_DOMAIN_PATH = 'monitor.get-it.it/piwik'
 
 # Load more settings from a file called local_settings.py if it exists
 try:

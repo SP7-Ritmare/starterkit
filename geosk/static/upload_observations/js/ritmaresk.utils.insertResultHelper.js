@@ -173,9 +173,9 @@ ritmaresk.utils.insertResultHelper=(function(){
 
 
             nome='<a href="'+f.fieldDefinition + '" target="_blank">' + f.fieldName + '</a>';
-            tipo=f.uom_code_href!=="" ? '(<a href="' + f.uom_code_href + '" target="_blank">' + typ + '</a>)' : '('+typ+')';
+            tipo=f.uom_code_href!=="" ? '(<a href="' + f.uom_code_href + '" target="_blank">' + gettext(typ) + '</a>)' : '('+gettext(typ)+')';
             //uom=f.uom_code_value!=="" ? 'unità di misura: ' + f.uom_code_value : '';
-            uom=f.uom_code_value!=="" ? 'Unit of measure: ' + f.uom_code_value : '';
+            uom=f.uom_code_value!=="" ? gettext('Unit of measure')+': ' + f.uom_code_value : '';
 
 
             legend.push([nome,tipo,uom].join(" "));
@@ -183,7 +183,7 @@ ritmaresk.utils.insertResultHelper=(function(){
 
         //console.warn(legend.join("<br/>"));
         //$(tableLegendHtmlElementSelector).html("<div class=\"panel-heading\"><h3 class=\"panel-title\">Legenda - Definizione dei campi</h3></div><div class=\"panel-body\">"+legend.join("<br/>")+"</div>");
-        $(tableLegendHtmlElementSelector).html("<div class=\"panel-heading\"><h3 class=\"panel-title\">Legend - Fields definition</h3></div><div class=\"panel-body\">"+legend.join("<br/>")+"</div>");
+        $(tableLegendHtmlElementSelector).html("<div class=\"panel-heading\"><h3 class=\"panel-title\">"+gettext("Legend - Fields definition")+"</h3></div><div class=\"panel-body\">"+legend.join("<br/>")+"</div>");
     }
 
     // TODO: valutare la possibilita' di usare un callback (es after change o after validate per abilitare il pulsante che invia i dati - in modo che non si possa mandare due volte al SOS lo stesso set di dati)

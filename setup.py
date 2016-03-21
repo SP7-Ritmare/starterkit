@@ -80,13 +80,16 @@ setup(
         "django-grappelli==2.4.10",
         "djproxy",
         "simplejson",
-        "Django==1.5.5" # required by GeoNode 2.0
+        "Django==1.5.5", # required by GeoNode 2.0
+        "owslib==0.10.3",
+        "django-analytical==1.0.0",
     ],
     #
     include_package_data = True,
     setup_requires = [ "setuptools_git >= 0.3", ],
     scripts=['bin/sk',
              'bin/sk-updateip',
+             'bin/softInspector.sh',
              ],
     cmdclass={
         'install': PostInstallCommand,

@@ -1,0 +1,2 @@
+window.cookieconsent_options = {"message": gettext("We use cookies to ensure that we give you the best experience on our website. If you continue without changing your settings, we'll assume that you are happy to receive all cookies from this website."),
+                                "dismiss": gettext("Got it!"), "learnMore": gettext("More info"), "link": gettext('http://www.get-it.it/cookiepolicy-en.html'), "theme":"dark-top"};

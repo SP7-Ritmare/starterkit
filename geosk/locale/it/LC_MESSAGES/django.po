@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: STARTER KIT\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-26 06:08-0600\n"
+"POT-Creation-Date: 2016-03-21 05:10-0500\n"
 "PO-Revision-Date: 2014-06-19 18:14+0100\n"
 "Last-Translator: <>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -74,8 +74,8 @@ msgstr "GET-IT Front end"
 #: dashboard.py:107
 #: _locale_external/geonode/layers/templates/layers/layer_change_poc.html:5
 #: _locale_external/geonode/templates/500.html:107
-#: _locale_external/geonode/templates/base.html:114
-#: templates/site_base.html:104
+#: _locale_external/geonode/templates/base.html:114 templates/base.html:117
+#: templates/site_base.html:107
 msgid "Home"
 msgstr "Home"
 
@@ -84,8 +84,8 @@ msgstr "Home"
 #: _locale_external/geonode/people/templates/people/_profile_list_item.html:27
 #: _locale_external/geonode/search/templates/search/_type_filters.html:6
 #: _locale_external/geonode/templates/500.html:110
-#: _locale_external/geonode/templates/base.html:117
-#: templates/site_base.html:107
+#: _locale_external/geonode/templates/base.html:117 templates/base.html:120
+#: templates/site_base.html:110
 msgid "Layers"
 msgstr "Layer"
 
@@ -94,8 +94,8 @@ msgstr "Layer"
 #: _locale_external/geonode/people/templates/people/_profile_list_item.html:28
 #: _locale_external/geonode/search/templates/search/_type_filters.html:5
 #: _locale_external/geonode/templates/500.html:113
-#: _locale_external/geonode/templates/base.html:120
-#: templates/site_base.html:120
+#: _locale_external/geonode/templates/base.html:120 templates/base.html:123
+#: templates/site_base.html:123
 msgid "Maps"
 msgstr "Viste"
 
@@ -104,14 +104,14 @@ msgstr "Viste"
 #: _locale_external/geonode/people/templates/people/_profile_list_item.html:30
 #: _locale_external/geonode/search/templates/search/_type_filters.html:9
 #: _locale_external/geonode/templates/500.html:118
-#: _locale_external/geonode/templates/base.html:125
-#: templates/site_base.html:116
+#: _locale_external/geonode/templates/base.html:125 templates/base.html:128
+#: templates/site_base.html:119
 msgid "Documents"
 msgstr "Documenti"
 
 #: dashboard.py:127 _locale_external/geonode/templates/500.html:122
-#: _locale_external/geonode/templates/base.html:129
-#: templates/site_base.html:123
+#: _locale_external/geonode/templates/base.html:129 templates/base.html:132
+#: templates/site_base.html:126
 msgid "People"
 msgstr "Utenti"
 
@@ -121,13 +121,13 @@ msgstr "Utenti"
 #: _locale_external/geonode/search/templates/search/search.html:6
 #: _locale_external/geonode/search/templates/search/search.html:12
 #: _locale_external/geonode/templates/500.html:125
-#: _locale_external/geonode/templates/base.html:132
-#: templates/site_base.html:126 templates/search/advanced_search.html:4
+#: _locale_external/geonode/templates/base.html:132 templates/base.html:135
+#: templates/site_base.html:129 templates/search/advanced_search.html:4
 #: templates/search/advanced_search.html:10
 msgid "Search"
 msgstr "Cerca"
 
-#: dashboard.py:137 templates/site_base.html:129
+#: dashboard.py:137 templates/site_base.html:132
 msgid "Services"
 msgstr "Servizi"
 
@@ -137,13 +137,15 @@ msgstr "Sos"
 
 #: _locale_external/account/forms.py:19 _locale_external/account/forms.py:95
 #: _locale_external/geonode/templates/500.html:71
-#: _locale_external/geonode/templates/base.html:78 templates/site_base.html:68
+#: _locale_external/geonode/templates/base.html:78 templates/base.html:81
+#: templates/site_base.html:71
 msgid "Username"
 msgstr "Username"
 
 #: _locale_external/account/forms.py:25 _locale_external/account/forms.py:64
 #: _locale_external/geonode/templates/500.html:73
-#: _locale_external/geonode/templates/base.html:80 templates/site_base.html:70
+#: _locale_external/geonode/templates/base.html:80 templates/base.html:83
+#: templates/site_base.html:73
 msgid "Password"
 msgstr "Password"
 
@@ -170,7 +172,8 @@ msgstr ""
 
 #: _locale_external/account/forms.py:68
 #: _locale_external/geonode/templates/500.html:77
-#: _locale_external/geonode/templates/base.html:84 templates/site_base.html:74
+#: _locale_external/geonode/templates/base.html:84 templates/base.html:87
+#: templates/site_base.html:77
 msgid "Remember Me"
 msgstr "Ricordamelo"
 
@@ -220,7 +223,7 @@ msgstr ""
 #: _locale_external/geonode/templates/500.html:190
 #: _locale_external/geonode/templates/base.html:197
 #: mdtools/templates/base/resourcebase_info_panel.html:140
-#: templates/site_base.html:184
+#: templates/base.html:200 templates/site_base.html:188
 msgid "Language"
 msgstr "Lingua"
 
@@ -1885,7 +1888,7 @@ msgstr "Rimuovi questo documento"
 #: _locale_external/geonode/layers/templates/layers/_actions.html:3
 #: _locale_external/geonode/maps/templates/maps/map_detail.html:73
 #: _locale_external/geonode/templates/_actions.html:3
-#: templates/site_base.html:176 templates/documents/document_detail.html:72
+#: templates/site_base.html:180 templates/documents/document_detail.html:72
 msgid "Info"
 msgstr "Informazioni"
 
@@ -1985,8 +1988,8 @@ msgstr "Cambia i permessi del Documento"
 #: _locale_external/geonode/maps/templates/maps/map_detail.html:172
 #: _locale_external/geonode/templates/500.html:183
 #: _locale_external/geonode/templates/base.html:190
-#: mdtools/templates/layers/layer_detail.html:252 templates/site_base.html:169
-#: templates/documents/document_detail.html:135
+#: mdtools/templates/layers/layer_detail.html:252 templates/base.html:193
+#: templates/site_base.html:172 templates/documents/document_detail.html:135
 msgid "About"
 msgstr "A proposito"
 
@@ -2479,7 +2482,7 @@ msgstr ""
 
 #: _locale_external/geonode/layers/templates/layers/layer_detail.html:193
 #: _locale_external/geonode/templates/index.html:61
-#: mdtools/templates/layers/layer_detail.html:218 templates/site_index.html:86
+#: mdtools/templates/layers/layer_detail.html:218 templates/site_index.html:88
 msgid "Create a Map"
 msgstr "Crea una vista"
 
@@ -3139,7 +3142,8 @@ msgstr "nome dell'organizzazione responsabile"
 
 #: _locale_external/geonode/people/models.py:49
 #: _locale_external/geonode/templates/500.html:46
-#: _locale_external/geonode/templates/base.html:48 templates/site_base.html:35
+#: _locale_external/geonode/templates/base.html:48 templates/base.html:51
+#: templates/site_base.html:38
 msgid "Profile"
 msgstr "Profilo"
 
@@ -3569,12 +3573,14 @@ msgstr ""
 "    "
 
 #: _locale_external/geonode/templates/500.html:48
-#: _locale_external/geonode/templates/base.html:51 templates/site_base.html:38
+#: _locale_external/geonode/templates/base.html:51 templates/base.html:54
+#: templates/site_base.html:41
 msgid "Admin"
 msgstr "Amministrazione"
 
 #: _locale_external/geonode/templates/500.html:51
-#: _locale_external/geonode/templates/base.html:57 templates/site_base.html:44
+#: _locale_external/geonode/templates/base.html:57 templates/base.html:60
+#: templates/site_base.html:47
 msgid "GeoServer"
 msgstr "GeoServer"
 
@@ -3583,47 +3589,53 @@ msgstr "GeoServer"
 #: _locale_external/geonode/templates/account/logout.html:6
 #: _locale_external/geonode/templates/account/logout.html:12
 #: _locale_external/geonode/templates/account/logout.html:17
-#: templates/site_base.html:48
+#: templates/base.html:64 templates/site_base.html:51
 msgid "Log out"
 msgstr "Esci"
 
 #: _locale_external/geonode/templates/500.html:59
-#: _locale_external/geonode/templates/base.html:66 templates/site_base.html:53
+#: _locale_external/geonode/templates/base.html:66 templates/base.html:69
+#: templates/site_base.html:56
 msgid "Notifications"
 msgstr "notifiche"
 
 #: _locale_external/geonode/templates/500.html:60
-#: _locale_external/geonode/templates/base.html:67 templates/site_base.html:54
+#: _locale_external/geonode/templates/base.html:67 templates/base.html:70
+#: templates/site_base.html:57
 msgid "Messages"
 msgstr "Messaggi"
 
 #: _locale_external/geonode/templates/500.html:61
-#: _locale_external/geonode/templates/base.html:68 templates/site_base.html:55
+#: _locale_external/geonode/templates/base.html:68 templates/base.html:71
+#: templates/site_base.html:58
 msgid "Upload"
 msgstr "Carica"
 
 #: _locale_external/geonode/templates/500.html:62
-#: _locale_external/geonode/templates/base.html:69 templates/site_base.html:56
+#: _locale_external/geonode/templates/base.html:69 templates/base.html:72
+#: templates/site_base.html:59
 msgid "Help"
 msgstr "Aiuto"
 
 #: _locale_external/geonode/templates/500.html:66
 #: _locale_external/geonode/templates/500.html:79
 #: _locale_external/geonode/templates/base.html:73
-#: _locale_external/geonode/templates/base.html:86 templates/site_base.html:63
-#: templates/site_base.html.py:76
+#: _locale_external/geonode/templates/base.html:86 templates/base.html:76
+#: templates/base.html.py:89 templates/site_base.html:66
+#: templates/site_base.html.py:79
 msgid "Sign in"
 msgstr "Entra"
 
 #: _locale_external/geonode/templates/500.html:85
-#: _locale_external/geonode/templates/base.html:92 templates/site_base.html:82
+#: _locale_external/geonode/templates/base.html:92 templates/base.html:95
+#: templates/site_base.html:85
 msgid "or"
 msgstr "oppure"
 
 #: _locale_external/geonode/templates/500.html:86
 #: _locale_external/geonode/templates/base.html:93
 #: skregistration/templates/skregistration/registration.html:58
-#: templates/site_base.html:83
+#: templates/base.html:96 templates/site_base.html:86
 msgid "Register"
 msgstr "Registrati"
 
@@ -3650,23 +3662,23 @@ msgstr ""
 " "
 
 #: _locale_external/geonode/templates/500.html:181
-#: _locale_external/geonode/templates/base.html:188
+#: _locale_external/geonode/templates/base.html:188 templates/base.html:191
 msgid "Powered by"
 msgstr "Fornito da: "
 
 #: _locale_external/geonode/templates/500.html:181
-#: _locale_external/geonode/templates/base.html:188
-#: templates/site_base.html:175
+#: _locale_external/geonode/templates/base.html:188 templates/base.html:191
+#: templates/site_base.html:179
 msgid "GeoNode"
 msgstr ""
 
 #: _locale_external/geonode/templates/500.html:181
-#: _locale_external/geonode/templates/base.html:188
+#: _locale_external/geonode/templates/base.html:188 templates/base.html:191
 msgid "version"
 msgstr "Versione"
 
 #: _locale_external/geonode/templates/500.html:182
-#: _locale_external/geonode/templates/base.html:189
+#: _locale_external/geonode/templates/base.html:189 templates/base.html:192
 msgid "Developers"
 msgstr "Sviluppatori"
 
@@ -3753,7 +3765,8 @@ msgstr "A proposito di GET-IT"
 msgid "About GeoNode."
 msgstr "A proposito di GET-IT."
 
-#: _locale_external/geonode/templates/base.html:49 templates/site_base.html:36
+#: _locale_external/geonode/templates/base.html:49 templates/base.html:52
+#: templates/site_base.html:39
 msgid "Inbox"
 msgstr "Casella di entrata"
 
@@ -3761,11 +3774,12 @@ msgstr "Casella di entrata"
 #: _locale_external/geonode/templates/announcements/announcement_list.html:6
 #: _locale_external/geonode/templates/announcements/announcement_list.html:13
 #: _locale_external/geonode/templates/announcements/announcement_list.html:20
-#: templates/site_base.html:41
+#: templates/base.html:57 templates/site_base.html:44
 msgid "Announcements"
 msgstr "Notizie"
 
-#: _locale_external/geonode/templates/base.html:59 templates/site_base.html:46
+#: _locale_external/geonode/templates/base.html:59 templates/base.html:62
+#: templates/site_base.html:49
 msgid "Recent Activity"
 msgstr "Attività recente"
 
@@ -4180,7 +4194,7 @@ msgstr ""
 "            "
 
 #: _locale_external/geonode/templates/index.html:67
-#: templates/site_index.html:92
+#: templates/site_index.html:94
 msgid "Latest Maps"
 msgstr "Ultime viste"
 
@@ -5022,7 +5036,7 @@ msgid "Upload Observations"
 msgstr "Carica osservazioni"
 
 #: osk/templates/osk/osk_deletesensor.html:7
-#: osk/templates/osk/osk_list.html:103
+#: osk/templates/osk/osk_list.html:107
 msgid "Delete sensor"
 msgstr "Elimina sensore"
 
@@ -5040,7 +5054,9 @@ msgstr ""
 msgid ""
 "This action CANNOT be undone. This will permanently delete\n"
 "      the sensor and remove all observations associated."
-msgstr "Attenzione: quest'azione NON può essere annullata. Il sensore e tutte le osservazioni associate verranno eliminate permanentemente dal sistema."
+msgstr ""
+"Attenzione: quest'azione NON può essere annullata. Il sensore e tutte le "
+"osservazioni associate verranno eliminate permanentemente dal sistema."
 
 #: osk/templates/osk/osk_list.html:20
 msgid "Register a new  Sensor"
@@ -5106,11 +5122,11 @@ msgstr "Numero di sensori:"
 msgid "Sensor"
 msgstr "Sensore"
 
-#: osk/templates/osk/osk_list.html:100
+#: osk/templates/osk/osk_list.html:101
 msgid "Sensor details"
 msgstr "Dettagli del sensore"
 
-#: osk/templates/osk/osk_list.html:102
+#: osk/templates/osk/osk_list.html:105
 msgid "Upload observations"
 msgstr "Carica osservazioni"
 
@@ -5428,34 +5444,34 @@ msgstr "Crea layer"
 msgid "Using Services"
 msgstr "Utilizza i Servizi"
 
-#: templates/site_base.html:111
+#: templates/site_base.html:114
 msgid "Sensors"
 msgstr "Sensori"
 
-#: templates/site_base.html:169
+#: templates/site_base.html:172
 msgid "GET-IT is a project of the GET-IT Development Team"
 msgstr "GET-IT è un progetto dello staff di sviluppatori di SP7"
 
-#: templates/site_base.html:170
+#: templates/site_base.html:174
 msgid ""
-"GET-IT is developed by <a target='_blank' href='http://sp7.irea.cnr.it'>SP7</"
-"a>-<a target='_blank' href='http://www.ritmare.it/'>RITMARE</a>"
+" is developed by <a target='_blank' href='http://sp7.irea.cnr.it'>SP7</a>-<a "
+"target='_blank' href='http://www.ritmare.it/'>RITMARE</a>"
 msgstr ""
 
-#: templates/site_base.html:171
+#: templates/site_base.html:175
 msgid "Contacts"
 msgstr "Contatti"
 
-#: templates/site_base.html:172
+#: templates/site_base.html:176
 msgid "Legal Notes"
 msgstr ""
 
-#: templates/site_base.html:173 templates/sk_credits.html:4
+#: templates/site_base.html:177 templates/sk_credits.html:4
 #: templates/sk_credits.html.py:8
 msgid "Credits"
 msgstr ""
 
-#: templates/site_base.html:175
+#: templates/site_base.html:179
 msgid "Based on"
 msgstr "Basato su"
 
@@ -5480,7 +5496,8 @@ msgid ""
 "is based upon <a href=\"http://geonode.org/\">GeoNode</a>.\n"
 "\t"
 msgstr ""
-"\n<a href=\"http://www.get-it.it/\" target=\"_blank\">GET-IT</a> è stato "
+"\n"
+"<a href=\"http://www.get-it.it/\" target=\"_blank\">GET-IT</a> è stato "
 "sviluppato nell’ambito del <a href=\"http://sp7.irea.cnr.it/\">Sotto-"
 "Progetto 7</a> di RITMARE (<a href=\"http://www.ritmare.it/\">www.ritmare."
 "it</a>). Il sofware &egrave; basato su <a href=\"http://geonode.org/"
@@ -5510,7 +5527,7 @@ msgstr ""
 "Ricerca i dati che sono importanti per te o carica i dati in tuo possesso. \n"
 "            "
 
-#: templates/site_index.html:79
+#: templates/site_index.html:80
 msgid ""
 "\n"
 "              GET-IT enables you to upload, manage, and view sensors and "
@@ -5523,11 +5540,11 @@ msgstr ""
 "relative osservazioni. Crea un sensore o carica le osservazioni di un "
 "sensore già esistente."
 
-#: templates/site_index.html:82
+#: templates/site_index.html:83
 msgid "Create a Sensor"
 msgstr "Crea un Sensore"
 
-#: templates/site_index.html:83
+#: templates/site_index.html:85
 msgid ""
 "\n"
 "              GeoNode enables you to compose and share maps. Create a map "
@@ -5557,6 +5574,105 @@ msgid ""
 "GET-IT is built using several open source projects, each with its own "
 "community:"
 msgstr ""
+
+#: templates/sk_license.html:8
+msgid ""
+"\n"
+"      <h1>Geoinformation Enabling ToolkIT starterkit&reg License</h1>\n"
+"      <p class=\"lead\">Thank you for using GET-IT.</p>\n"
+"    "
+msgstr ""
+"    <h1>Licenza e limitazione all’uso dei Geoinformation Enabling ToolkIT "
+"starterkit&reg</h1>\n"
+"    <p class=\"lead\">Grazie per utilizzare GET-IT.</p>\n"
+"    "
+
+#: templates/sk_license.html:14
+msgid ""
+"\n"
+"  <p>The Geoinformation Enabling ToolkIT starterkit® - GET-IT\n"
+"      hereafter - is a software suite developed in the context of\n"
+"      RITMARE SP7_WP4_AZ2. GET-IT turns research groups into\n"
+"      autonomous, independent, and decentralised distributors of the\n"
+"      data (and metadata) they are collecting. Data and metadata are\n"
+"      provided according to standards, allowing for discovery and\n"
+"      interoperable access by spatial data infrastructures.\n"
+"  </p>\n"
+"\n"
+"  <p>GET-IT is made available according to a free and open source\n"
+"      license (GPL v3.0<sup><a href=\"#ref-gpl\">1</a></sup>). In the "
+"framework of RITMARE, the software\n"
+"      is complementd by technical support for installation and\n"
+"      usage. In other contexts, any form of technical support requires\n"
+"      preemptive consent by the Developer Team and by the RITMARE\n"
+"      SP7_WP4_AZ2 group.\n"
+"  </p>\n"
+"\n"
+"  <p>In addition to the rules drawn by the GPL v3.0 license, usage of\n"
+"      the GET-IT suite imply attribution of the Development Team as\n"
+"      creators of the software. Users are required to credit<sup><a href="
+"\"#ref-citation-repository\">2</a></sup>\n"
+"      the\n"
+"      Development Team<sup><a href=\"#ref-citation-team\">3</a></sup> in all "
+"products including features drawn from\n"
+"      the GET-IT suite. Also, the user is responsible for the\n"
+"      information and data that are made available by means of GET-IT.\n"
+"  </p>\n"
+"\n"
+"  <p>ACCORDING TO THE CONDITIONS SET BY THE LAW, THE DEVELOPERS AND\n"
+"      DISTRIBUTORS OF THE GET-IT SUITE DO NOT PROVIDE ANY WARRANTY,\n"
+"      EITHER EXPLICIT OR IMPLICIT, ON THE SERVICES PROVIDED THROUGH\n"
+"      THE SOFTWARE. THE SOFTWARE IS PROVIDED \"AS-IS\", WITH NO\n"
+"      WARRANTY. WE DO NOT ACKNOWLEDGE ANY WARRANTY OF MARKETABILITY,\n"
+"      OF APTITUDE FOR ANY SPECIFIC PURPOSE, AND OF\n"
+"      NON-INFRINGEMENT. ANY ISSUE REGARDING QUALITY AND PERFORMANCE OF\n"
+"      THE SOFTWARE RELAPSES ON THE USER.\n"
+"  </p>\n"
+"\n"
+"  <p>ACCORDING TO THE CONDITIONS SET BY THE LAW, THE DEVELOPERS ARE\n"
+"      NOT RESPONSIBLE FOR (A) INDIRECT, SPECIAL, ACCIDENTAL, PUNITIVE,\n"
+"      SAMPLE, AND CONSEQUENTIAL DAMAGES. THE DEVELOPERS ARE NOT\n"
+"      RESPONSIBLE FOR ANY LOSS IN ACTIVITY, DATA, AND PROFITS,\n"
+"      INDEPENDENTLY OF THE LEGAL THEORY AND INDEPENDENTLY OF ANY\n"
+"      AWARENESS BY THE DEVELOPERS ON THE POSSIBILITY OF SUCH DAMAGES,\n"
+"      EVEN IF ANY REMEDIES DO NOT MEET THEIR ESSENTIAL AIMS; (B)\n"
+"      DIRECT RESPONSIBILITY FOR ANY COMPLAINT ON THE SERVICES PROVIDED.\n"
+"  </p>\n"
+"  "
+msgstr ""
+"<p>Geoinformation Enabling ToolkIT starterkit&reg - indicato come GET-IT - è "
+"una suite software sviluppata     in RITMARE SP7_WP4_AZ2 che abilita gruppi "
+"di ricerca a diventare     distributori autonomi, indipendenti e "
+"decentralizzati dei dati (e     metadati) da essi raccolti in modalità "
+"standard, consentendone il     discovery e l'accesso interoperabile da parte "
+"di infrastrutture di     dati spaziali.   </p>  <p>GET-IT è disponibile in "
+"licenza gratuita e aperta (GPL     v3.0<sup><a href=\"#ref-gpl\">1</a></"
+"sup>). Nell’ambito di RITMARE     verrà rilasciato anche con supporto "
+"tecnico mentre per utenti     esterni qualunque forma di supporto sarà a "
+"discrezione     insindacabile del Developer Team e del gruppo RITMARE "
+"SP7_WP4_AZ2.   </p>  <p>In aggiunta alle regole della licenza GPL v3.0, "
+"l’utente accetta di riconoscere la paternità nello sviluppo di GET-IT e "
+"di     citare<sup><a href=\"#ref-citation-repository\">2</a></sup>     "
+"appropriatamente il Development     Team<sup><a href=\"#ref-citation-team"
+"\">3</a></sup> in tutti i     prodotti che presentino risultati ottenuti "
+"attraverso l’uso di     GET-IT. L’utente, in più, è completamente "
+"responsabile delle     informazioni e dei dati che rilascia attraverso i "
+"servizi     contenuti nello GET-IT.   </p>    <p>NEI LIMITI PREVISTI DALLA "
+"LEGGE, GLI SVILUPPATORI E DISTRIBUTORI     DI STARTERKIT NON RICONOSCONO "
+"ALCUNA GARANZIA, ESPLICITA O     IMPLICITA, SUI SERVIZI OFFERTI CON "
+"STARTERKIT. I SERVIZI VENGONO     FORNITI \"A SCATOLA CHIUSA\", SENZA "
+"GARANZIA DI ALCUN TIPO. NON     RICONOSCIAMO NEPPURE ALCUNA GARANZIA DI "
+"COMMERCIABILITÀ, DI     IDONEITÀ AD UNO SCOPO PARTICOLARE E DI NON "
+"VIOLAZIONE. L’INTERO     RISCHIO RELATIVO ALLA QUALITA’ E PERFORMANCE DEL "
+"PROGRAMMA RICADE     SULL’UTILIZZATORE.   </p>    <p>NEI LIMITI PREVISTI "
+"DALLA LEGGE, IN NESSUN CASO GLI SVILUPPATORI     E DISTRIBUTORI SARANNO "
+"RESPONSABILI PER: (A) DANNI INDIRETTI,     SPECIALI, INCIDENTALI, PUNITIVI, "
+"ESEMPLARI E CONSEQUENZIALI O     QUALSIASI PERDITA DI ATTIVITÀ, DATI E "
+"PROFITTI, INDIPENDENTEMENTE     DALLA TEORIA LEGALE E DALL'EVENTUALITÀ CHE "
+"ESSI SIANO STATI     INFORMATI O MENO DEL POSSIBILE VERIFICARSI DI TALI "
+"DANNI E ANCHE     SE GLI EVENTUALI RIMEDI NON SONO IN GRADO DI RISPONDERE AL "
+"LORO     PROPOSITO ESSENZIALE; (B) RESPONSABILITÀ INDIRETTA PER OGNI     "
+"RECLAMO RELATIVO AI SERVIZI.   </p> "
 
 #: templates/documents/_document_list_item.html:18
 msgid "Doc from"
