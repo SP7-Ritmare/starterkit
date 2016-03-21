@@ -101,6 +101,12 @@ module.exports = function(grunt) {
                 cwd: '.components/EDI-NG_client/',
                 src: '**',
                 dest: 'EDI-NG_client/'
+            },
+            cookieconsent2: {
+                expand: true,
+                cwd: '.components/cookieconsent2/build/',
+                src: '**',
+                dest: 'cookieconsent2/'
             }
         }
     });
