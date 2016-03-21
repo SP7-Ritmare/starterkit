@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-23 10:05-0500\n"
+"POT-Creation-Date: 2016-03-21 05:55-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -343,6 +343,7 @@ msgstr "Open View"
 
 #: _locale_external/geonode/templates/lang.js:107
 #: _locale_external/geonode/templates/lang.js:183
+#: static/upload_observations/js/gettext_statements.js:16
 msgid "Name"
 msgstr ""
 
@@ -543,4 +544,274 @@ msgstr ""
 
 #: _locale_external/geonode/templates/lang.js:237
 msgid "Please wait"
+msgstr ""
+
+#: static/geosk/js/cookieconsent.js:1
+msgid ""
+"We use cookies to ensure that we give you the best experience on our "
+"website. If you continue without changing your settings, we'll assume that "
+"you are happy to receive all cookies from this website."
+msgstr ""
+
+#: static/geosk/js/cookieconsent.js:2
+msgid "Got it!"
+msgstr ""
+
+#: static/geosk/js/cookieconsent.js:2
+msgid "More info"
+msgstr ""
+
+#: static/geosk/js/cookieconsent.js:2
+msgid "http://www.get-it.it/cookiepolicy-en.html"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:9
+msgid "Select Procedure"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:10
+msgid "Select Location"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:11
+msgid "Insert observations"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:12
+msgid "Select a Procedure/Sensor"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:13
+msgid ""
+"A sensor, system, method, algorithm or instrument which may be used in "
+"making an Observation (which may be described using SensorML)"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:14
+msgid ""
+"Select one of the available \"Features of Interest\" or create a new one"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:15
+msgid ""
+"In the first instance the Feature Of Interest (and the Sampling Feature) "
+"describe the geographical location of the target of the Observation, but "
+"more generally a Feature Of Interest is an abstraction of real world "
+"phenomena (thing, species, person, event, geographic place, etc.)."
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:17
+msgid "A descriptive name for the Feature Of Interest"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:18
+msgid "Sampling point"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:19
+msgid "Sampling Point"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:20
+msgid "The sampling position"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:21
+msgid "Sampled Feature (URI)"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:22
+msgid ""
+"Is the feature of the Sampling Feature, providing the ultimate context for "
+"the Observation. A Sampling Feature provides the direct context for the "
+"specific Observation (spatial, specimen etc.)."
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:23
+msgid "Action"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:24
+msgid "Lat."
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:25
+msgid "Lon."
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:26
+msgid "SRS"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:27
+msgid ""
+"You can use the map to choose (by left click) a Sampled Feature from the "
+"local WFS (activate the WFS layers with the layers control in the map)"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:28
+#: static/upload_observations/js/insertObservationPage.js:1205
+msgid "Use"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:29
+msgid "Tips"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:30
+msgid ""
+"You can input the coordinates for a new feature right clicking on the map"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:31
+msgid ""
+"You can use the map to choose (by left click) a Sampled Feature from the "
+"local WFS"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:32
+msgid ""
+"Features of Interest already inserted for the chosen Sensor/Procedure are "
+"displayed on the map. Click their marker to obtain more info"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:33
+msgid "Use the control layer on the map to show/hide layers"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:34
+msgid "Insert data"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:35
+msgid ""
+"Fill in the data manually or paste them from a spreadsheet, without "
+"headings.\n"
+"\t\t      \t\t\t\t\tPlease check the order of columns here proposed.\n"
+"\t\t      \t\t\t\t\t"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:36
+msgid "Show accepted date-time formats."
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:37
+msgid "REMARK - accepted date-time formats."
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:38
+msgid ""
+"Timestamp fields (date and time) like \"phenomenon time\" or \"result time\" "
+"require values expressed in ISO 8601 format. The table in this page admits "
+"also date and time time values in one of the following formats"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:39
+msgid ""
+" that will be automatically converted in the standard format. The use of "
+"different timestamps formats could lead to unexpected errors. Please check "
+"the conversion before submitting your data."
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:40
+msgid "save data"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:41
+msgid "ResultTime"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:42
+msgid ""
+"Please check the result time (i.e. the time when the result became "
+"available). Change it if different from the last phenomenonTime (default)."
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:43
+msgid "reset table"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:44
+msgid "Procedure/Sensor"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:45
+msgid "Feature of Interest"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:46
+msgid "Sampled Feature"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:47
+#: static/upload_observations/js/insertObservationPage.js:1265
+msgid "Available Features of Interest<br/>for the current procedure"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:48
+#: static/upload_observations/js/insertObservationPage.js:1213
+msgid "Set this as the sampling position<br/> for the new feature"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:49
+#: static/upload_observations/js/insertObservationPage.js:1345
+msgid "Use this as the sampled feature"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:50
+msgid "Legend - Fields definition"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:51
+msgid "Quantity"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:52
+msgid "Date and Time"
+msgstr ""
+
+#: static/upload_observations/js/gettext_statements.js:53
+msgid "Unit of measure"
+msgstr ""
+
+#: static/upload_observations/js/insertObservationPage.js:421
+msgid "Exception inserting results into SOS endpoint: "
+msgstr ""
+
+#: static/upload_observations/js/insertObservationPage.js:427
+#: static/upload_observations/js/insertObservationPage.js:1008
+msgid "Observations inserted"
+msgstr ""
+
+#: static/upload_observations/js/insertObservationPage.js:497
+msgid "To create a new feature of interest you must fill in all the fields"
+msgstr ""
+
+#: static/upload_observations/js/insertObservationPage.js:736
+msgid "Please select a location first."
+msgstr ""
+
+#: static/upload_observations/js/insertObservationPage.js:894
+msgid "Exception inserting results for "
+msgstr ""
+
+#: static/upload_observations/js/insertObservationPage.js:894
+msgid " into SOS endpoint: "
+msgstr ""
+
+#: static/upload_observations/js/insertObservationPage.js:1016
+msgid "Some exception occurred inserting results into SOS endpoint."
+msgstr ""
+
+#: static/upload_observations/js/insertObservationPage.js:1020
+msgid "Only the following columns were successfully inserted:"
+msgstr ""
+
+#: static/upload_observations/js/insertObservationPage.js:1022
+msgid "Please correct the errors, if possible, and retry, or reset the table."
+msgstr ""
+
+#: static/upload_observations/js/insertObservationPage.js:1457
+#: static/upload_observations/js/insertObservationPage.js:1458
+msgid "Please select one procedure first"
 msgstr ""
