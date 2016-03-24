@@ -34,6 +34,7 @@ Starting from **1.2** version, updating GET-IT it's possible in a easy way. The 
 The command to run with administrator permission is::
 
   sudo pip install --upgrade --no-deps starterkit
+  sudo pip install django-analytical==1.0.0 owslib==0.10.3
   sudo sk  collectstatic --noinput -i externals -i node_modules -i SOSClient
   sudo sk migrate mdtools
   sudo /etc/init.d/apache2 reload
