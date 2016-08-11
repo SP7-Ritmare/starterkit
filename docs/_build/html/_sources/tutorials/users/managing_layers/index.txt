@@ -1,8 +1,8 @@
 .. _managing_layers:
 
-=====================
+===============
 Managing layers
-=====================
+===============
 
 Layers are a published resource representing a raster or vector spatial data source. Layers also can be associated with metadata, ratings, and comments.
 

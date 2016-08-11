@@ -235,7 +235,7 @@ latex_documents = [
 # (source start file, name, description, authors, manual section).
 man_pages = [
     ('index', 'get-it', u'GET-IT Documentation',
-     [u'Anna Basoni, Stefano Menegon, Andrea Vianello'], 1)
+     [u'Anna Basoni, Stefano Menegon, Andrea Vianello, Alessandro Oggioni, Simone Lanucara'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -249,7 +249,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
   ('index', 'GET-IT', u'GET-IT Documentation',
-   u'Anna Basoni, Stefano Menegon, Andrea Vianello', 'GET-IT', 'One line description of project.',
+   u'Anna Basoni, Stefano Menegon, Andrea Vianello, Alessandro Oggioni, Simone Lanucara', 'GET-IT', 'One line description of project.',
    'Miscellaneous'),
 ]
 

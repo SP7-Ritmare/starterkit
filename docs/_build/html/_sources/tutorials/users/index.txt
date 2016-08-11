@@ -33,16 +33,8 @@ Before proceeding with the reading, it is strongly recommended to be sure having
    install/index
    accounts_and_users/index
    managing_layers/index
-   managing_sensors/index
+   managing_observations/index
    managing_views/index
-
-   compilazionemetadati
-   conversione_geotiff
-   editingmetadatasensor
-   editing_metadati
-   metadati_sensori
-   file_prj
-   servizi_jrc
 
 :ref:`accounts_and_users`
     This section will guide you through account registration, updating your account information, and viewing other user accounts.
@@ -50,22 +42,19 @@ Before proceeding with the reading, it is strongly recommended to be sure having
 :ref:`managing_layers`
     Create, delete, manage and share Layers and Metadata.
 	
-:ref:`managing_sensors`
-    Create and manage Sensors, upload observation.
+:ref:`managing_observations`
+    Manage observations, create and insert sensors.
 	
 :ref:`managing_views`
     Create, delete, manage and share Maps. Add, view and download observation.
 
 :ref:`compilazionemetadati`
            you will learn how to compile metadata.
-:ref:`conversione_geotiff`
-           how to create a correct geotiff format file.
-:ref:`editingmetadatasensor`
-           you will learn how to compile xxxxxx.
+
 :ref:`editing_metadati`
            you will learn how to compile xxxxxx.
-:ref:`metadati_sensori`
-           you will learn how to compile xxxxxx.
+:ref:`conversione_geotiff`
+           how to create a correct geotiff format file.
 :ref:`file_prj`
            description of what is a prj file.
 :ref:`servizi_jrc`

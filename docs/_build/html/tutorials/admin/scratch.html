@@ -88,9 +88,10 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../users/index.html">Users Tutorials</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Administrators Tutorials</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="quick.html">GET-IT quick installation</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="">Installing GET-IT from scratch</a><ul>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Installing GET-IT from scratch</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#geonode-installation">GeoNode Installation</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#north-sos-installation">52°North SOS Installation</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#get-it-installation">GET-IT Installation</a></li>
@@ -129,7 +130,7 @@
         <div class="rst-content">
           
 
-
+ 
 
 
 
@@ -157,7 +158,7 @@
             
   <div class="section" id="installing-get-it-from-scratch">
 <span id="scratch"></span><h1>Installing GET-IT from scratch<a class="headerlink" href="#installing-get-it-from-scratch" title="Permalink to this headline">¶</a></h1>
-<p>Before starting installation read the <a class="reference internal" href="server.html#server"><span>Server requirements</span></a> page.</p>
+<p>Before starting installation read the <a class="reference internal" href="server.html#server"><span class="std std-ref">Server requirements</span></a> page.</p>
 <p>If you just want to install GET-IT, it is recommended to use Ubuntu 12.04.</p>
 <p><strong>Prerequisites:</strong></p>
 <ol class="arabic simple">
@@ -167,7 +168,7 @@
 <div class="section" id="geonode-installation">
 <h2>GeoNode Installation<a class="headerlink" href="#geonode-installation" title="Permalink to this headline">¶</a></h2>
 <p>Install geonode from PPA in Ubuntu 12.04:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>$ sudo apt-get install python-software-properties
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ sudo apt-get install python-software-properties
 
 $ sudo add-apt-repository ppa:geonode/release
 
@@ -230,12 +231,12 @@ Before to start copy user (DATABASE_USER) and password (DATABASE_PASSWORD) of th
 <blockquote>
 <div>WSGIScriptAlias / /usr/local/lib/python2.7/dist-packages/geosk/wsgi.py # path to geosk/wsgi.py</div></blockquote>
 <p>Restart apache:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>$ sudo service apache2 restart
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ sudo service apache2 restart
 </pre></div>
 </div>
 <p>Edit the templates in geosk/templates, the css and images to match your needs.</p>
 <p>Syncdb and collectstatic:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>$ sk syncdb
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ sk syncdb
 
 $ sk collectstatic
 </pre></div>
@@ -243,11 +244,11 @@ $ sk collectstatic
 </div>
 <div class="section" id="domain-name">
 <h2>Domain Name<a class="headerlink" href="#domain-name" title="Permalink to this headline">¶</a></h2>
-<p>To let GET-IT work properly you need to use a right domain name, See the page <a class="reference internal" href="domain_name.html#domain-name"><span>Choosing the “right” Domain Name</span></a> to learn how to change it.</p>
+<p>To let GET-IT work properly you need to use a right domain name, See the page <a class="reference internal" href="domain_name.html#domain-name"><span class="std std-ref">Choosing the “right” Domain Name</span></a> to learn how to change it.</p>
 </div>
 <div class="section" id="security">
 <h2>Security<a class="headerlink" href="#security" title="Permalink to this headline">¶</a></h2>
-<p>It&#8217;s important for your server security follow instruction on the page: <a class="reference internal" href="security_issue.html#security-issue"><span>Security issues</span></a></p>
+<p>It&#8217;s important for your server security follow instruction on the page: <a class="reference internal" href="security_issue.html#security-issue"><span class="std std-ref">Security issues</span></a></p>
 </div>
 </div>
 

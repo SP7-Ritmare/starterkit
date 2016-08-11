@@ -88,11 +88,12 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../users/index.html">Users Tutorials</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Administrators Tutorials</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="quick.html">GET-IT quick installation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="scratch.html">Installing GET-IT from scratch</a></li>
 <li class="toctree-l3"><a class="reference internal" href="server.html">Server requirements</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="">Advanced administrsation</a><ul>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Advanced administrsation</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#keep-your-system-up-to-date">Keep your system up-to-date</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#keep-get-it-up-to-date">Keep GET-IT up-to-date</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#oracle-jdk-v-6-installation">Oracle JDK (v. 6) Installation</a></li>
@@ -128,7 +129,7 @@
         <div class="rst-content">
           
 
-
+ 
 
 
 
@@ -160,16 +161,16 @@
 <h2>Keep your system up-to-date<a class="headerlink" href="#keep-your-system-up-to-date" title="Permalink to this headline">¶</a></h2>
 <p>It&#8217;s very important to maintain the system updated for security and stability.</p>
 <p>To update your system in command line, run:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>$ sudo aptitude update
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ sudo aptitude update
 $ sudo aptitude full-upgrade
 </pre></div>
 </div>
 <p>Alternatively, you may use an interactive text interface:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>$ sudo aptitude
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ sudo aptitude
 </pre></div>
 </div>
 <p>Occasionally, you should remove the old kernel versions. Here an automatic script to cleanup (use with caution):</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>echo $(dpkg --list | grep linux-image | awk &#39;{ print $2 }&#39; | sort -V | sed -n &#39;/&#39;`uname -r`&#39;/q;p&#39;) $(dpkg --list | grep linux-headers | awk &#39;{ print $2 }&#39; | sort -V | sed -n &#39;/&#39;&quot;$(uname -r | sed &quot;s/\([0-9.-]*\)-\([^0-9]\+\)/\1/&quot;)&quot;&#39;/q;p&#39;) | xargs sudo apt-get -y purge
+<div class="highlight-default"><div class="highlight"><pre><span></span>echo $(dpkg --list | grep linux-image | awk &#39;{ print $2 }&#39; | sort -V | sed -n &#39;/&#39;`uname -r`&#39;/q;p&#39;) $(dpkg --list | grep linux-headers | awk &#39;{ print $2 }&#39; | sort -V | sed -n &#39;/&#39;&quot;$(uname -r | sed &quot;s/\([0-9.-]*\)-\([^0-9]\+\)/\1/&quot;)&quot;&#39;/q;p&#39;) | xargs sudo apt-get -y purge
 </pre></div>
 </div>
 </div>
@@ -177,10 +178,10 @@ $ sudo aptitude full-upgrade
 <span id="update"></span><h2>Keep GET-IT up-to-date<a class="headerlink" href="#keep-get-it-up-to-date" title="Permalink to this headline">¶</a></h2>
 <p>Starting from <strong>1.2</strong> version, updating GET-IT it&#8217;s possible in a easy way. The administrator need run a command to update the software to the last version available.
 The command to run with administrator permission is:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>sudo pip install --upgrade --no-deps starterkit
-sudo sk  collectstatic --noinput -i externals -i node_modules -i SOSClient
-sudo sk migrate mdtools
-sudo /etc/init.d/apache2 reload
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">deps</span> <span class="n">starterkit</span>
+<span class="n">sudo</span> <span class="n">sk</span>  <span class="n">collectstatic</span> <span class="o">--</span><span class="n">noinput</span> <span class="o">-</span><span class="n">i</span> <span class="n">externals</span> <span class="o">-</span><span class="n">i</span> <span class="n">node_modules</span> <span class="o">-</span><span class="n">i</span> <span class="n">SOSClient</span>
+<span class="n">sudo</span> <span class="n">sk</span> <span class="n">migrate</span> <span class="n">mdtools</span>
+<span class="n">sudo</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">apache2</span> <span class="n">reload</span>
 </pre></div>
 </div>
 <p>Unfortunately <strong>this update command is not possible if you have a GET-IT version precedent the 1.2a4</strong> (only first two release), in this case you will need to contact your tutor who will provide to contact the GET-IT developement team to update your system. Later you will be able to run the update command by yourself.</p>
@@ -191,10 +192,10 @@ sudo /etc/init.d/apache2 reload
 (JRE). For best performance, use Oracle JRE 6 (also known as JRE 1.6)
 or newer (<a class="reference external" href="http://docs.geoserver.org/2.4.x/en/user/production/java.html">http://docs.geoserver.org/2.4.x/en/user/production/java.html</a>).</p>
 <p>Installation steps on Ubuntu 12.04 LTS:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>sudo apt-get install python-software-properties
-sudo add-apt-repository ppa:webupd8team/java
-sudo apt-get update
-sudo apt-get install oracle-java6-installer
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">software</span><span class="o">-</span><span class="n">properties</span>
+<span class="n">sudo</span> <span class="n">add</span><span class="o">-</span><span class="n">apt</span><span class="o">-</span><span class="n">repository</span> <span class="n">ppa</span><span class="p">:</span><span class="n">webupd8team</span><span class="o">/</span><span class="n">java</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">oracle</span><span class="o">-</span><span class="n">java6</span><span class="o">-</span><span class="n">installer</span>
 </pre></div>
 </div>
 </div>
@@ -206,10 +207,10 @@ your JDK/JDE
 <p>Unfortunately, at time of writing the Oracle package is not available
 so here an alternative installation procedure Ubuntu 12.04 LTS (with
 Oracle JRE 6):</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>sudo apt-get install libjai-core-java libjai-imageio-core-java
-sudo cp /usr/lib/jni/{libclib_jiio.so,libmlib_jai.so} /usr/lib/jvm/java-6-oracle/jre/lib/amd64/
-sudo cp /usr/share/java/{jai_core-1.1.4.jar,jai_codec-1.1.4.jar,jai_imageio-1.2.jar,mlibwrapper_jai-1.1.4.jar,clibwrapper_jiio-1.2.jar} /usr/share/geoserver/WEB-INF/lib/
-sudo /etc/init.d/tomcat7 restart
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">libjai</span><span class="o">-</span><span class="n">core</span><span class="o">-</span><span class="n">java</span> <span class="n">libjai</span><span class="o">-</span><span class="n">imageio</span><span class="o">-</span><span class="n">core</span><span class="o">-</span><span class="n">java</span>
+<span class="n">sudo</span> <span class="n">cp</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">jni</span><span class="o">/</span><span class="p">{</span><span class="n">libclib_jiio</span><span class="o">.</span><span class="n">so</span><span class="p">,</span><span class="n">libmlib_jai</span><span class="o">.</span><span class="n">so</span><span class="p">}</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">jvm</span><span class="o">/</span><span class="n">java</span><span class="o">-</span><span class="mi">6</span><span class="o">-</span><span class="n">oracle</span><span class="o">/</span><span class="n">jre</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">amd64</span><span class="o">/</span>
+<span class="n">sudo</span> <span class="n">cp</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">java</span><span class="o">/</span><span class="p">{</span><span class="n">jai_core</span><span class="o">-</span><span class="mf">1.1</span><span class="o">.</span><span class="mf">4.</span><span class="n">jar</span><span class="p">,</span><span class="n">jai_codec</span><span class="o">-</span><span class="mf">1.1</span><span class="o">.</span><span class="mf">4.</span><span class="n">jar</span><span class="p">,</span><span class="n">jai_imageio</span><span class="o">-</span><span class="mf">1.2</span><span class="o">.</span><span class="n">jar</span><span class="p">,</span><span class="n">mlibwrapper_jai</span><span class="o">-</span><span class="mf">1.1</span><span class="o">.</span><span class="mf">4.</span><span class="n">jar</span><span class="p">,</span><span class="n">clibwrapper_jiio</span><span class="o">-</span><span class="mf">1.2</span><span class="o">.</span><span class="n">jar</span><span class="p">}</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">geoserver</span><span class="o">/</span><span class="n">WEB</span><span class="o">-</span><span class="n">INF</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span>
+<span class="n">sudo</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">tomcat7</span> <span class="n">restart</span>
 </pre></div>
 </div>
 </div>
