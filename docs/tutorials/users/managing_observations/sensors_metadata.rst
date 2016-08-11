@@ -48,8 +48,8 @@ Before insert any observations is necessary to create SensorML by EDI template.
 
 The figure below show the EDI user interface for OGC SensorML v2.0 Lightweight SOS Profile for Stationary In-Situ Sensors.
 
-.. image:: /EDI_SensorML.png
-   :scale: 50 %
+.. image:: _static/images/EDI_SensorML.png
+   :align: center
 
 The video allows to have a idea about the interaction between user and EDI user interface.
 

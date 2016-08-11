@@ -205,7 +205,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
   ('index', 'GET-IT.tex', u'GET-IT Documentation',
-   u'Anna Basoni, Stefano Menegon, Andrea Vianello', 'manual'),
+   u'Anna Basoni, Stefano Menegon, Andrea Vianello, Alessandro Oggioni, Simone Lanucara', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
