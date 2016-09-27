@@ -145,9 +145,9 @@
             
   <div class="section" id="examples-of-nrt-or-rt-insert-observations">
 <span id="insertobservations"></span><h1>Examples of NRT or RT insert observations<a class="headerlink" href="#examples-of-nrt-or-rt-insert-observations" title="Permalink to this headline">¶</a></h1>
-<p>For insert new observations within GET-IT the fastest way is to use the graphical user interface (GUI) (<a class="reference internal" href="../users/managing_observations/upload_observations.html#upload-observations"><span class="std std-ref">How upload Observations</span></a>) implemented ad-hoc for this porpouse.
-When the requirement is instead the automatic upload from data logger, remote station, etc. another options can be taken exploiting the transactional requests of Sensor Web (SWE) and SOS.
-The uses of XML language ensure a complete OGC-SWE standard way. Below an example of insertObservation request:</p>
+<p>The fastest way for inserting new observations within GET-IT is to use the graphical user interface (GUI) (<a class="reference internal" href="../users/managing_observations/upload_observations.html#upload-observations"><span class="std std-ref">How upload Observations</span></a>) implemented ad-hoc for this purpose. This GUI is specifically developed for users who want to insert data that were prevously collected within spreadsheets or similar files.
+A different scenario is the automatic upload from data logger, remote station, etc.: In this case the correct way to insert observation data in GET-IT is directly through the exposed SOS interface, exploiting standard transactional requests of Sensor Web (SWE) and SOS. In particular the SOS accept the insertObservation request to insert standard encoded observations.
+The use of XML language ensures a complete OGC-SWE compliance. Below an example of insertObservation request:</p>
 <div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;sos:InsertObservation</span> <span class="na">service=</span><span class="s">&quot;SOS&quot;</span> <span class="na">version=</span><span class="s">&quot;2.0.0&quot;</span>
     <span class="na">xmlns:sos=</span><span class="s">&quot;http://www.opengis.net/sos/2.0&quot;</span>
     <span class="na">xmlns:swes=</span><span class="s">&quot;http://www.opengis.net/swes/2.0&quot;</span>
@@ -342,7 +342,7 @@ The uses of XML language ensure a complete OGC-SWE standard way. Below an exampl
 <span class="nt">&lt;/sos:InsertResult&gt;</span>
 </pre></div>
 </div>
-<p>Otherwise SOS server integrated within GET-IT allows to use JSON for send requests. Below an example of insertObservations JSON:</p>
+<p>Otherwise the SOS server integrated within GET-IT allows to use JSON for sending requests. In OGC SWE, the JSON &#8220;binding&#8221; is not yet standardized, but this feature can ease the work of programmers familiar with JSON. Below an example of insertObservations JSON:</p>
 <div class="highlight-json"><div class="highlight"><pre><span></span>{
   &#39;observation&#39;: {
       &#39;featureOfInterest&#39;: {
@@ -386,7 +386,7 @@ The uses of XML language ensure a complete OGC-SWE standard way. Below an exampl
  }
 </pre></div>
 </div>
-<p>The requests should be sended to SOS endpoint, that could be founded in the GET-IT interface (Services -&gt; SOS e.g. <a class="reference external" href="http://demo2.get-it.it/about_services/#sos">http://demo2.get-it.it/about_services/#sos</a>), by client-side URL transfers (e.g. cURL).</p>
+<p>The requests should be sent to SOS endpoint that could be found in the GET-IT interface (Services -&gt; SOS e.g. <a class="reference external" href="http://demo2.get-it.it/about_services/#sos">http://demo2.get-it.it/about_services/#sos</a>), by client-side URL transfers (e.g. cURL).</p>
 </div>
 
 
