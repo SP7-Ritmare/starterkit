@@ -5,9 +5,9 @@
 Examples of NRT or RT insert observations
 =========================================
 
-The fastest way to insert new observations within GET-IT is through the graphical user interface (GUI) (:ref:`upload_observations`) implemented ad-hoc for this purpose. This GUI is specifically developed for users who want to insert data that were prevously collected within spreadsheets or similar files.
+The fastest way for inserting new observations within GET-IT is to use the graphical user interface (GUI) (:ref:`upload_observations`) implemented ad-hoc for this purpose. This GUI is specifically developed for users who want to insert data that were prevously collected within spreadsheets or similar files.
 A different scenario is the automatic upload from data logger, remote station, etc.: In this case the correct way to insert observation data in GET-IT is directly through the exposed SOS interface, exploiting standard transactional requests of Sensor Web (SWE) and SOS. In particular the SOS accept the insertObservation request to insert standard encoded observations.
-The use of XML language ensure a complete OGC-SWE compliance. Below an example of insertObservation request:
+The use of XML language ensures a complete OGC-SWE compliance. Below an example of insertObservation request:
 
 .. code-block:: xml
 
@@ -209,7 +209,7 @@ and insertResult
         <swe:values>2012-11-19T13:30:00+02:00#0.15@2012-11-19T13:31:00+02:00#0.15@2012-11-19T13:32:00+02:00#0.85@2012-11-19T13:33:00+02:00#0.5@2012-11-19T13:34:00+02:00#0.9@2012-11-19T13:35:00+02:00#0.7@2012-11-19T13:36:00+02:00#0.5@2012-11-19T13:37:00+02:00#0.6@2012-11-19T13:38:00+02:00#0.5@2012-11-19T13:39:00+02:00#0.4@2012-11-19T13:40:00+02:00#0.34@2012-11-19T13:41:00+02:00#0.25@2012-11-19T13:42:00+02:00#0.79@2012-11-19T13:43:00+02:00#0.56@2012-11-19T13:44:00+02:00#0.25</swe:values>
     </sos:InsertResult>
 
-Otherwise SOS server integrated within GET-IT allows to use JSON for sending requests. In OGC SWE, the JSON "binding" is not yet standardized, but this feature can ease the work of programmers familiar with JSON. Below an example of insertObservations JSON:
+Otherwise the SOS server integrated within GET-IT allows to use JSON for sending requests. In OGC SWE, the JSON "binding" is not yet standardized, but this feature can ease the work of programmers familiar with JSON. Below an example of insertObservations JSON:
 
 .. code-block:: json
 
@@ -255,4 +255,4 @@ Otherwise SOS server integrated within GET-IT allows to use JSON for sending req
     'version': '2.0.0'
    }
 
-The requests should be sent to SOS endpoint, that could be found in the GET-IT interface (Services -> SOS e.g. `<http://demo2.get-it.it/about_services/#sos>`_), by client-side URL transfers (e.g. cURL).
+The requests should be sent to SOS endpoint that could be found in the GET-IT interface (Services -> SOS e.g. `<http://demo2.get-it.it/about_services/#sos>`_), by client-side URL transfers (e.g. cURL).

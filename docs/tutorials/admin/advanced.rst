@@ -1,9 +1,9 @@
 .. _advanced:
 
 
-========================
-Advanced administrsation
-========================
+=======================
+Advanced administration
+=======================
 
 Keep your system up-to-date
 ----------------------------
