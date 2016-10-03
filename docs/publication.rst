@@ -24,8 +24,8 @@ International Conferences
 * M.Bastianini, F. Bernardi Aubry, F. Bianchi, A. Boldrin, E. Camatti, P. Carrara, A. Delazzari, S. Guerzoni, S. Menegon, A. Oggioni, A. Pugnetti, A. Sarretta, G. Socal, P. Tagliolato, A. Vianello, “The LTER site Gulf of Venice and the project RITMARE: a case study for the recovery, search, view and sharing of long term ecological marine research data”, submitted at XXII AIOL Congress
 * A.Oggioni, A. Basoni, M. Bastianini, C. Fugazza, S. Menegon, F. Pavesi, M. Pepe, A. Sarretta, P. Carrara, “Lo StarterKit RITMARE: uno strumento abilitante per la costruzione bottom-up di un'infrastruttura di dati marini”. 18a Conf. Naz. ASITA, Firenze 14-16ottobre 2014, pp. 921-922, ISBN 978-88-903132-9-5
 * M.Pepe, A. Basoni, M. Bastianini, C. Fugazza, S. Menegon, A. Oggioni, F. Pavesi, A. Sarretta, P. Carrara, “Bottom-up capacity building for data providers in RITMARE”, Geophysical Research Abstracts, Vol. 16, EGU2014-10536, 2014, EGU General Assembly 28-30 April 2014, ESSI1.2, 30 April 2014
-* P. Tagliolato, A. Oggioni, C. Fugazza, M. Pepe and P. Cararra, “Supporting provision of sensor metadata through multi-tenanted management of SensorML documents”, INSPIRE Conference 2016, Barcelona, 26-30 September 2016
-* C. Fugazza, M. Pepe, A. Oggioni, P. Tagliolato and P. Carrara, “Streamlining INSPIRE metadata for the Semantic Web”, INSPIRE Conference 2016, Barcelona, 26-30 September 2016.
+* P.Tagliolato, A. Oggioni, C. Fugazza, M. Pepe and P. Cararra, “Supporting provision of sensor metadata through multi-tenanted management of SensorML documents”, INSPIRE Conference 2016, Barcelona, 26-30 September 2016
+* C.Fugazza, M. Pepe, A. Oggioni, P. Tagliolato and P. Carrara, “Streamlining INSPIRE metadata for the Semantic Web”, INSPIRE Conference 2016, Barcelona, 26-30 September 2016.
 
 
 IPR Protection of the suite software GET-IT
