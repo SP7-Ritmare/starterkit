@@ -24,7 +24,7 @@ from geonode.layers.views import _resolve_layer, \
     _PERMISSION_MSG_METADATA, layer_detail
 from geonode.utils import http_client, _get_basic_auth_info, json_response
 from geonode.people.enumerations import ROLE_VALUES
-from geonode.people.models import Profile, Role
+from geonode.people.models import Profile #, Role
 from geonode.base.enumerations import ALL_LANGUAGES, \
     HIERARCHY_LEVELS, UPDATE_FREQUENCIES, \
     DEFAULT_SUPPLEMENTAL_INFORMATION, LINK_TYPES
