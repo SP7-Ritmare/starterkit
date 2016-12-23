@@ -5,7 +5,10 @@ from django.contrib.auth.decorators import login_required
 
 # patch https://github.com/GeoNode/geonode/commit/2832fc1959e50fa7034b03eaa79e83e8e7e475e1
 from geonode.layers import views as layers_views
-from geonode.layers.views import _resolve_layer, _PERMISSION_MSG_MODIFY, FailedRequestError, Layer, set_styles, render_to_response, RequestContext, MultiValueDictKeyError, logger, HttpResponseRedirect, reverse
+from geonode.layers.views import _resolve_layer, _PERMISSION_MSG_MODIFY, Layer, render_to_response, RequestContext, logger, HttpResponseRedirect, reverse
+from geoserver.catalog import FailedRequestError
+from geonode.geoserver.helpers import set_styles
+from django.utils.datastructures import MultiValueDictKeyError
 
 @login_required
 def layer_style_manage(req, layername):

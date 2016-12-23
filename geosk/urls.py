@@ -14,7 +14,7 @@ urlpatterns = patterns('',
         'geosk.mdtools.views.whoami', name='whoami'),
 
     # override / extend GeoNode's URLS
-    url(r'^$', 'geonode.views.index', {'template': 'site_index.html'}, name='home'),
+   # url(r'^$', 'geonode.views.index', {'template': 'site_index.html'}, name='home'),
     url(r'^layers/(?P<layername>[^/]*)/metadata$',
         'geosk.mdtools.api.rndteditor',
         name="layer_metadata"),
