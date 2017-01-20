@@ -11,20 +11,31 @@ Publications on Journals
 ===========================================
 
 * C.Fugazza, A. Oggioni, P. Carrara, “RITMARE: Linked Open Data for Italian Marine Research”, ERCIM-News (Issn: 0926-4981), No. 96 (January 2014), pp. 17-18, [Online] http://ercim-news.ercim.eu/en96/special/ritmare-linked-open-data-for-italian-marine-research
+* F.Pavesi, A. Basoni, C. Fugazza, S. Menegon, A. Oggioni, M. Pepe, P. Tagliolato, P. Carrara, “EDI - A template-driven metadata editor for research data”, JORS, 2016, in press.
 
 
 International Conferences
 =========================
 
-* P.Carrara, A. Sarretta, A. Giorgetti, M. Ribera D'Alcalà, A. Oggioni, E. Partescano, An interoperable infrastructure for the Italian Marine Research, IMDIS 2013 (Int. Conf. on Marine Data and Information Systems), ISSN 0006-6729, Lucca (Italia), September 23-25, 2013, pp. 186-190
-* C.Fugazza, A. Basoni, S. Menegon, A. Oggioni, F. Pavesi, M. Pepe, A. Sarretta, P. Carrara, RITMARE: Semantics-aware Harmonisation of Data in Italian Marine Research, Current Research Information Systems 2014 (CRIS2014), Rome 13-15 May 2014, Proceedings published in Procedia Computer Science 33 ( 2014 ) 261 – 265,  doi: 10.1016/j.procs.2014.06.041, available online at www.sciencedirect.com
-* C.Fugazza,  S. Menegon, A., Oggioni, F. Pavesi, M. Pepe, P. Carrara, The RITMARE Starter Kit: Bottom-up capacity building for geospatial data providers, ICSOFT 2014 (9th International Conference on Software Paradigm Trends), Vienna 29-31 August 2014
-* A.Basoni, M. Bastianini, C. Fugazza, S. Menegon, T. Minuzzo, A. Oggioni, F. Pavesi,M. Pepe, A. Sarretta, P. Tagliolato and P. Carrara, Fostering bottom-up capacity in managing and sharing marine observations: the RITMARE StarterKit, accepted at EuroGOOS 2014, Lisbon 28-30 October 2014 (poster session)
-* C.Fugazza et al., Sensor metadata blueprints and computer-aided editing for disciplined SensorML, accepted at Digital Earth 2015 / 9th ISDE Symposium in Halifax, NS, Canada
-* M.Bastianini, F. Bernardi Aubry, F. Bianchi, A. Boldrin, E. Camatti, P. Carrara, A. Delazzari, S. Guerzoni, S. Menegon, A. Oggioni, A. Pugnetti, A. Sarretta, G. Socal, P. Tagliolato, A. Vianello, The LTER site Gulf of Venice and the project RITMARE: a case study for the recovery, search, view and sharing of long term ecological marine research data, submitted at XXII AIOL Congress
-* A.Oggioni, A. Basoni, M. Bastianini, C. Fugazza, S. Menegon, F. Pavesi, M. Pepe, A. Sarretta, P. Carrara, Lo StarterKit RITMARE: uno strumento abilitante per la costruzione bottom-up di un'infrastruttura di dati marini. 18a Conf. Naz. ASITA, Firenze 14-16ottobre 2014, pp. 921-922, ISBN 978-88-903132-9-5
+* P.Carrara, A. Sarretta, A. Giorgetti, M. Ribera D'Alcalà, A. Oggioni, E. Partescano, “An interoperable infrastructure for the Italian Marine Research”, IMDIS 2013 (Int. Conf. on Marine Data and Information Systems), ISSN 0006-6729, Lucca (Italia), September 23-25, 2013, pp. 186-190
+* C.Fugazza, A. Basoni, S. Menegon, A. Oggioni, F. Pavesi, M. Pepe, A. Sarretta, P. Carrara, “RITMARE: Semantics-aware Harmonisation of Data in Italian Marine Research, Current Research Information Systems 2014 (CRIS2014)”, Rome 13-15 May 2014, Proceedings published in Procedia Computer Science 33 (2014) 261 – 265,  doi: 10.1016/j.procs.2014.06.041, available online at www.sciencedirect.com
+* C.Fugazza,  S. Menegon, A., Oggioni, F. Pavesi, M. Pepe, P. Carrara, “The RITMARE Starter Kit: Bottom-up capacity building for geospatial data providers”, ICSOFT 2014 (9th International Conference on Software Paradigm Trends), Vienna 29-31 August 2014
+* A.Basoni, M. Bastianini, C. Fugazza, S. Menegon, T. Minuzzo, A. Oggioni, F. Pavesi,M. Pepe, A. Sarretta, P. Tagliolato and P. Carrara, “Fostering bottom-up capacity in managing and sharing marine observations: the RITMARE StarterKit”, accepted at EuroGOOS 2014, Lisbon 28-30 October 2014 (poster session)
+* C.Fugazza et al., “Sensor metadata blueprints and computer-aided editing for disciplined SensorML”, accepted at Digital Earth 2015 / 9th ISDE Symposium in Halifax, NS, Canada
+* M.Bastianini, F. Bernardi Aubry, F. Bianchi, A. Boldrin, E. Camatti, P. Carrara, A. Delazzari, S. Guerzoni, S. Menegon, A. Oggioni, A. Pugnetti, A. Sarretta, G. Socal, P. Tagliolato, A. Vianello, “The LTER site Gulf of Venice and the project RITMARE: a case study for the recovery, search, view and sharing of long term ecological marine research data”, submitted at XXII AIOL Congress
+* A.Oggioni, A. Basoni, M. Bastianini, C. Fugazza, S. Menegon, F. Pavesi, M. Pepe, A. Sarretta, P. Carrara, “Lo StarterKit RITMARE: uno strumento abilitante per la costruzione bottom-up di un'infrastruttura di dati marini”. 18a Conf. Naz. ASITA, Firenze 14-16 ottobre 2014, pp. 921-922, ISBN 978-88-903132-9-5
+* A.Oggioni, P. Tagliolato, C. Fugazza, I. Rosati, L. Criscuolo, P. Carrara, “On the opportunity of exploiting open Geospatial standard for biotic data management,” in 13th European Ecological Federation (EEF), 2015.
 * M.Pepe, A. Basoni, M. Bastianini, C. Fugazza, S. Menegon, A. Oggioni, F. Pavesi, A. Sarretta, P. Carrara, “Bottom-up capacity building for data providers in RITMARE”, Geophysical Research Abstracts, Vol. 16, EGU2014-10536, 2014, EGU General Assembly 28-30 April 2014, ESSI1.2, 30 April 2014
+* C.Fugazza, M. Pepe, A. Oggioni, P. Tagliolato, P. Carrara, 2016, “Streamlining geospatial metadata in the Semantic Web”. IOP Conference Series: Earth and Environmental Science, 34(1), 12009. doi:10.1088/1755-1315/34/1/012009
+* P.Tagliolato, A. Oggioni, C. Fugazza, M. Pepe, P. Carrara, (2016), “Sensor metadata blueprints and computer-aided editing for disciplined SensorML”. IOP Conference Series: Earth and Environmental Science, 34(1), 12036. doi:10.1088/1755-1315/34/1/012036
+* P.Tagliolato, A. Oggioni, C. Fugazza, M. Pepe and P. Cararra, “Supporting provision of sensor metadata through multi-tenanted management of SensorML documents”, INSPIRE Conference 2016, Barcelona, 26-30 September 2016
+* C.Fugazza, M. Pepe, A. Oggioni, P. Tagliolato and P. Carrara, “Streamlining INSPIRE metadata for the Semantic Web”, INSPIRE Conference 2016, Barcelona, 26-30 September 2016.
 
+
+Books
+=====
+
+* A.Oggioni, P. Tagliolato, C. Fugazza, M. Pepe, S. Menegon, F. Pavesi, and P. Carrara, “Interoperability in marine sensor networks through SWE services,” in Oceanographic and Marine Cross-Domain Data Management for Sustainable Development, P. Diviacco, A. Leadbetter, and H. Glaves, Eds. Hershey: IGI Global, 2017, p. in press.
 
 IPR Protection of the suite software GET-IT
 ===========================================

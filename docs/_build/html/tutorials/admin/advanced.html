@@ -1,0 +1,287 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Advanced administration &mdash; GET-IT 1.3 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="GET-IT 1.3 documentation" href="../../index.html"/>
+        <link rel="up" title="Administrators Tutorials" href="index.html"/>
+        <link rel="next" title="Security issues" href="security_issue.html"/>
+        <link rel="prev" title="Server requirements" href="server.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> GET-IT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation.html">Short presentation to GET-IT features and its architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../publication.html">Activities by SP7 team</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../users/index.html">Users Tutorials</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Administrators Tutorials</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="quick.html">GET-IT quick installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scratch.html">Installing GET-IT from scratch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="server.html">Server requirements</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Advanced administration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#keep-your-system-up-to-date">Keep your system up-to-date</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#keep-get-it-up-to-date">Keep GET-IT up-to-date</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#oracle-jdk-v-6-installation">Oracle JDK (v. 6) Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#install-native-jai-and-jai-image-i-o-extensions">Install native JAI and JAI Image I/O extensions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="security_issue.html">Security issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="domain_name.html">Choosing the “right” Domain Name</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../dataflowengine/index.html">Data Flow Engine Tutorials</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">GET-IT</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Tutorials</a> &raquo;</li>
+      
+          <li><a href="index.html">Administrators Tutorials</a> &raquo;</li>
+      
+    <li>Advanced administration</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/tutorials/admin/advanced.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="advanced-administration">
+<span id="advanced"></span><h1>Advanced administration<a class="headerlink" href="#advanced-administration" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="keep-your-system-up-to-date">
+<h2>Keep your system up-to-date<a class="headerlink" href="#keep-your-system-up-to-date" title="Permalink to this headline">¶</a></h2>
+<p>It&#8217;s very important to maintain the system updated for security and stability.</p>
+<p>To update your system in command line, run:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ sudo aptitude update
+$ sudo aptitude full-upgrade
+</pre></div>
+</div>
+<p>Alternatively, you may use an interactive text interface:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ sudo aptitude
+</pre></div>
+</div>
+<p>Occasionally, you should remove the old kernel versions. Here an automatic script to cleanup (use with caution):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>echo $(dpkg --list | grep linux-image | awk &#39;{ print $2 }&#39; | sort -V | sed -n &#39;/&#39;`uname -r`&#39;/q;p&#39;) $(dpkg --list | grep linux-headers | awk &#39;{ print $2 }&#39; | sort -V | sed -n &#39;/&#39;&quot;$(uname -r | sed &quot;s/\([0-9.-]*\)-\([^0-9]\+\)/\1/&quot;)&quot;&#39;/q;p&#39;) | xargs sudo apt-get -y purge
+</pre></div>
+</div>
+</div>
+<div class="section" id="keep-get-it-up-to-date">
+<span id="update"></span><h2>Keep GET-IT up-to-date<a class="headerlink" href="#keep-get-it-up-to-date" title="Permalink to this headline">¶</a></h2>
+<p>Starting from <strong>1.2</strong> version, updating GET-IT it&#8217;s possible in a easy way. The administrator need run a command to update the software to the last version available.
+The command to run with administrator permission is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">deps</span> <span class="n">starterkit</span>
+<span class="n">sudo</span> <span class="n">sk</span>  <span class="n">collectstatic</span> <span class="o">--</span><span class="n">noinput</span> <span class="o">-</span><span class="n">i</span> <span class="n">externals</span> <span class="o">-</span><span class="n">i</span> <span class="n">node_modules</span> <span class="o">-</span><span class="n">i</span> <span class="n">SOSClient</span>
+<span class="n">sudo</span> <span class="n">sk</span> <span class="n">migrate</span> <span class="n">mdtools</span>
+<span class="n">sudo</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">apache2</span> <span class="n">reload</span>
+</pre></div>
+</div>
+<p>Unfortunately <strong>this update command is not possible if you have a GET-IT version precedent the 1.2a4</strong> (only first two release), in this case you will need to contact your tutor who will provide to contact the GET-IT developement team to update your system. Later you will be able to run the update command by yourself.</p>
+</div>
+<div class="section" id="oracle-jdk-v-6-installation">
+<h2>Oracle JDK (v. 6) Installation<a class="headerlink" href="#oracle-jdk-v-6-installation" title="Permalink to this headline">¶</a></h2>
+<p>GeoServer’s speed depends a lot on the chosen Java Runtime Environment
+(JRE). For best performance, use Oracle JRE 6 (also known as JRE 1.6)
+or newer (<a class="reference external" href="http://docs.geoserver.org/2.4.x/en/user/production/java.html">http://docs.geoserver.org/2.4.x/en/user/production/java.html</a>).</p>
+<p>Installation steps on Ubuntu 12.04 LTS:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">software</span><span class="o">-</span><span class="n">properties</span>
+<span class="n">sudo</span> <span class="n">add</span><span class="o">-</span><span class="n">apt</span><span class="o">-</span><span class="n">repository</span> <span class="n">ppa</span><span class="p">:</span><span class="n">webupd8team</span><span class="o">/</span><span class="n">java</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">oracle</span><span class="o">-</span><span class="n">java6</span><span class="o">-</span><span class="n">installer</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-native-jai-and-jai-image-i-o-extensions">
+<h2>Install native JAI and JAI Image I/O extensions<a class="headerlink" href="#install-native-jai-and-jai-image-i-o-extensions" title="Permalink to this headline">¶</a></h2>
+<p>In order to improve the performance, install the native JAI version in
+your JDK/JDE
+(see <a class="reference external" href="http://docs.geoserver.org/2.4.x/en/user/production/java.html">http://docs.geoserver.org/2.4.x/en/user/production/java.html</a>).</p>
+<p>Unfortunately, at time of writing the Oracle package is not available
+so here an alternative installation procedure Ubuntu 12.04 LTS (with
+Oracle JRE 6):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">libjai</span><span class="o">-</span><span class="n">core</span><span class="o">-</span><span class="n">java</span> <span class="n">libjai</span><span class="o">-</span><span class="n">imageio</span><span class="o">-</span><span class="n">core</span><span class="o">-</span><span class="n">java</span>
+<span class="n">sudo</span> <span class="n">cp</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">jni</span><span class="o">/</span><span class="p">{</span><span class="n">libclib_jiio</span><span class="o">.</span><span class="n">so</span><span class="p">,</span><span class="n">libmlib_jai</span><span class="o">.</span><span class="n">so</span><span class="p">}</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">jvm</span><span class="o">/</span><span class="n">java</span><span class="o">-</span><span class="mi">6</span><span class="o">-</span><span class="n">oracle</span><span class="o">/</span><span class="n">jre</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">amd64</span><span class="o">/</span>
+<span class="n">sudo</span> <span class="n">cp</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">java</span><span class="o">/</span><span class="p">{</span><span class="n">jai_core</span><span class="o">-</span><span class="mf">1.1</span><span class="o">.</span><span class="mf">4.</span><span class="n">jar</span><span class="p">,</span><span class="n">jai_codec</span><span class="o">-</span><span class="mf">1.1</span><span class="o">.</span><span class="mf">4.</span><span class="n">jar</span><span class="p">,</span><span class="n">jai_imageio</span><span class="o">-</span><span class="mf">1.2</span><span class="o">.</span><span class="n">jar</span><span class="p">,</span><span class="n">mlibwrapper_jai</span><span class="o">-</span><span class="mf">1.1</span><span class="o">.</span><span class="mf">4.</span><span class="n">jar</span><span class="p">,</span><span class="n">clibwrapper_jiio</span><span class="o">-</span><span class="mf">1.2</span><span class="o">.</span><span class="n">jar</span><span class="p">}</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">geoserver</span><span class="o">/</span><span class="n">WEB</span><span class="o">-</span><span class="n">INF</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span>
+<span class="n">sudo</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">tomcat7</span> <span class="n">restart</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="security_issue.html" class="btn btn-neutral float-right" title="Security issues" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="server.html" class="btn btn-neutral" title="Server requirements" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, GET-IT Development Team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

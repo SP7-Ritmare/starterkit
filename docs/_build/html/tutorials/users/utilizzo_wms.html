@@ -1,0 +1,240 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Using WMS services &mdash; GET-IT 1.3 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="GET-IT 1.3 documentation" href="../../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> GET-IT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation.html">Short presentation to GET-IT features and its architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../publication.html">Activities by SP7 team</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Tutorials</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">GET-IT</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+    <li>Using WMS services</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/tutorials/users/utilizzo_wms.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="using-wms-services">
+<span id="utilizzo-wms"></span><h1>Using WMS services<a class="headerlink" href="#using-wms-services" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<p><strong>immagini da caricare - pagina provvisioria - da sistemare</strong></p>
+<p>I servizi Web Map Services o <strong>WMS</strong>, come quelli offerti dal GET-IT o dal Portale Cartografico Nazionale (PCN), sono generalmente utilizzati attraverso software client-desktop come software GIS (es: QGIS, ArcView ecc.) oppure attraverso applicazioni web ( es: portale del PCN: <a class="reference external" href="http://www.pcn.minambiente.it/viewer/">http://www.pcn.minambiente.it/viewer/</a>).</p>
+<p>Questi applicativi sono in grado di visualizzare l&#8217;elenco dei layer forniti dal servizio scelto, inserendo la
+[[ServiziEsterni|&lt;big&gt;URL&lt;/big&gt;]] del servizio, e di visualizzare sulla mappa i layer desiderati.</p>
+<p>Vediamo ora due esempi di visualizzazione layer WMS con gli applicativi:</p>
+<ul class="simple">
+<li>Viewer del PCN</li>
+<li>Qgis desktop</li>
+</ul>
+<div class="section" id="viewer-pcn">
+<h2>Viewer PCN:<a class="headerlink" href="#viewer-pcn" title="Permalink to this headline">¶</a></h2>
+<p>Aprire la pagina del PCN: <a class="reference external" href="http://www.pcn.minambiente.it">http://www.pcn.minambiente.it</a></p>
+<p>e cliccare sul pulsante &#8220;cartografia 2D&#8221; in altoalla pagina.
+Si aprirà così il visualizzatore mappe del PCN che permette di caricare sia i layer forniti dal loro portale, sia servizi wms-layer esterni.</p>
+<p>I layer possono essere aggiunti alla mappa tramite i pannello di strumenti che presenta i comandi:
+Vettoriali, Immagini, Grid, Servizi, Progetti.</p>
+<p>Per aggiungere un  wms esterno cliccare su &#8220;Servizi&#8221; e successivamente su &#8220;WMS&#8221; con doppio-click del mouse: si aprirà la finestra sottostante:</p>
+<p>[[<a class="reference external" href="File:about_wms_1">File:about_wms_1</a>.png|passo 1]]</p>
+<p>Qui è necessario riportare l&#8217;[[ServiziEsterni|&lt;big&gt;URL&lt;/big&gt;]] di un servizio esterno come nell&#8217;esempio:</p>
+<p>[[<a class="reference external" href="File:about_wms_2">File:about_wms_2</a>.png|passo 2]]</p>
+<p>Ora selezioanre dalla lista dei layer, forniti dal servizio scelto, i layer che si desidera aggiungere alla mappa e, opzionalmente, indicare anche lo stile per ogni layer (dove disponibile). Quindi cliccare sul pulsante &#8220;aggiungi layer:</p>
+<p>[[<a class="reference external" href="File:about_wms_3">File:about_wms_3</a>.png|passo 3]]</p>
+<p>Il risultato finale sarà questo:</p>
+<p>[[<a class="reference external" href="File:about_wms_5">File:about_wms_5</a>.png|risultato finale]]</p>
+</div>
+<div class="section" id="qgis-desktop">
+<h2>QGIS Desktop<a class="headerlink" href="#qgis-desktop" title="Permalink to this headline">¶</a></h2>
+<p>Per aggiungere un layer wms alla mappa selezionare dal menù &#8220;layer&#8221; oppure direttamente dalla toolbar il comando &#8220;aggiungi layer WMS/WMTS&#8221;:</p>
+<p>[[<a class="reference external" href="File:wms_qgis_1">File:wms_qgis_1</a>.png|passo 1]]</p>
+<p>Compilare il campo Nome e il campo [[ServiziEsterni|&lt;big&gt;URL&lt;/big&gt;]].</p>
+<p>Questo è già sufficeiente, ma in caso di errore di connessione, provare selezionando le due caselle:</p>
+<ul class="simple">
+<li>&#8220;Ignora la URI GetMap riportata nelle capabilities&#8221;</li>
+<li>&#8220;Ignora la URI GetFeatureInfo riportata nelle capabilities&#8221;</li>
+</ul>
+<p>Cliccare su &#8220;ok&#8221; per salvare.</p>
+<p>[[<a class="reference external" href="File:wms_qgis_2">File:wms_qgis_2</a>.png|passo 2]]</p>
+<p>Selezionare dal menù a tendina il servizio appena memorizzato e cliccare su &#8220;connetti&#8221;
+Comparirà ora l&#8217;elenco dei layer wms disponibili (spesso è necessario attendere un po&#8217; di tempo), dal quale è possibile selezionre uno o più layer di prorpio interesse e aggiungerli alla mappa cliccando su &#8220;aggiungi&#8221;.</p>
+<p>Quando finito cliccare su &#8220;chiudi&#8221;.</p>
+<p>[[<a class="reference external" href="File:wms_qgis_3">File:wms_qgis_3</a>.png|passo 3]]</p>
+<p>Allo stesso modo possonoessere aggiunti altri tipi di servizi: WFS, WCS ecc., è sufficiente selezionare dal menù &#8220;layer&#8221; la voce corrispondente.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, GET-IT Development Team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

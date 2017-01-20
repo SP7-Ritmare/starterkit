@@ -1,0 +1,323 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Installing GET-IT from scratch &mdash; GET-IT 1.3 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="GET-IT 1.3 documentation" href="../../index.html"/>
+        <link rel="up" title="Administrators Tutorials" href="index.html"/>
+        <link rel="next" title="Server requirements" href="server.html"/>
+        <link rel="prev" title="GET-IT quick installation" href="quick.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> GET-IT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation.html">Short presentation to GET-IT features and its architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../publication.html">Activities by SP7 team</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../users/index.html">Users Tutorials</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Administrators Tutorials</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="quick.html">GET-IT quick installation</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Installing GET-IT from scratch</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#geonode-installation">GeoNode Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#north-sos-installation">52°North SOS Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-it-installation">GET-IT Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#domain-name">Domain Name</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#security">Security</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="server.html">Server requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="advanced.html">Advanced administrsation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security_issue.html">Security issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="domain_name.html">Choosing the “right” Domain Name</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../dataflowengine/index.html">Data Flow Engine Tutorials</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">GET-IT</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Tutorials</a> &raquo;</li>
+      
+          <li><a href="index.html">Administrators Tutorials</a> &raquo;</li>
+      
+    <li>Installing GET-IT from scratch</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/tutorials/admin/scratch.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installing-get-it-from-scratch">
+<span id="scratch"></span><h1>Installing GET-IT from scratch<a class="headerlink" href="#installing-get-it-from-scratch" title="Permalink to this headline">¶</a></h1>
+<p>Before starting installation read the <a class="reference internal" href="server.html#server"><span class="std std-ref">Server requirements</span></a> page.</p>
+<p>If you just want to install GET-IT, it is recommended to use Ubuntu 12.04.</p>
+<p><strong>Prerequisites:</strong></p>
+<ol class="arabic simple">
+<li>GeoNode (version 2.0.x)</li>
+<li>52°North SOS (version 4.0.0 or 4.x)</li>
+</ol>
+<div class="section" id="geonode-installation">
+<h2>GeoNode Installation<a class="headerlink" href="#geonode-installation" title="Permalink to this headline">¶</a></h2>
+<p>Install geonode from PPA in Ubuntu 12.04:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ sudo apt-get install python-software-properties
+
+$ sudo add-apt-repository ppa:geonode/release
+
+$ sudo apt-get update
+
+$ sudo apt-get install geonode
+</pre></div>
+</div>
+<p>Setup the IP address and create a superuser:</p>
+<blockquote>
+<div><p>$ sudo geonode-updateip 127.0.0.1</p>
+<p>$ geonode createsuperuser</p>
+</div></blockquote>
+</div>
+<div class="section" id="north-sos-installation">
+<h2>52°North SOS Installation<a class="headerlink" href="#north-sos-installation" title="Permalink to this headline">¶</a></h2>
+<p>Follow the instructions (for SOS version 4.x) at
+<a class="reference external" href="https://wiki.52north.org/bin/view/SensorWeb/SensorObservationServiceIVDocumentation#Installation">https://wiki.52north.org/bin/view/SensorWeb/SensorObservationServiceIVDocumentation#Installation</a></p>
+<p>PostgreSQL and PostGIS (currently at version 9.1 and 2.0) are already installed by default in GeoNode. For this reason it is not necessary to make a new installation. An update of the current version of Java it is necessary, 52°North requires Java runtime environment (JRE) 7.0 or higher:</p>
+<blockquote>
+<div><p>$ java -version</p>
+<p>$ sudo add-apt-repository ppa:webupd8team/java</p>
+<p>$ sudo apt-get update</p>
+<p>$ sudo apt-get install oracle-java7-installer</p>
+<p>$ java -version</p>
+</div></blockquote>
+<p>Just a note: GET-IT expects to find a webapp named &#8220;observations&#8221;.
+So, before &#8220;Install and configure Tomcat&#8221;, rename the 52n-sos-webapp.war into observations.war.</p>
+<p>After the deploy of war file, in the <a class="reference external" href="http://127.0.0.1:8080/observations">http://127.0.0.1:8080/observations</a> you can check the installation of the SOS admin, create a new PostgreSQL database using the PostGIS template created during the PostGIS installation.</p>
+<blockquote>
+<div><p>$ sudo su - postgres</p>
+<p>$ psql -U &lt;user&gt;</p>
+<p>$ CREATE DATABASE &lt;db_name&gt;;</p>
+<p>$ connect &lt;db_name&gt;;</p>
+<p>$ CREATE EXTENSION postgis;</p>
+</div></blockquote>
+<p>If return error like <em>could not open extension control file &#8220;/usr/share/postgresql/9.1/extension/postgis.control&#8221;: No such file or directory</em>, please exit to the PostgreSQL DB and to the user, execute:</p>
+<blockquote>
+<div>$ sudo apt-get install postgis postgresql-9.X-postgis-scripts</div></blockquote>
+<p>after retry the commands above.
+Check extensions:</p>
+<blockquote>
+<div>$ dx</div></blockquote>
+<p>Navigate to the <a class="reference external" href="http://127.0.0.1:8080/observations">http://127.0.0.1:8080/observations</a> and complete the installation process. Follow the steps on the screen to configure your SOS instance (you don&#8217;t have to do this if you&#8217;ve build the preconfigured webapp). More information about the settings can be found in the Configure/Administrate the SOS section of this page.
+Before to start copy user (DATABASE_USER) and password (DATABASE_PASSWORD) of the PostgreSQL:</p>
+<blockquote>
+<div>$ nano /etc/geonode/local_settings.py</div></blockquote>
+<p>Complete the installation follow the steps and finally set the user and password.</p>
+</div>
+<div class="section" id="get-it-installation">
+<h2>GET-IT Installation<a class="headerlink" href="#get-it-installation" title="Permalink to this headline">¶</a></h2>
+<p>Install SK from archive file</p>
+<blockquote>
+<div>$ sudo pip install starterkit</div></blockquote>
+<p>Rename the local_settings.py.sample to local_settings.py and edit it&#8217;s content by setting the SITEURL and SITENAME.</p>
+<p>Edit the file /etc/apache2/sites-available/geonode and change the following directive from:</p>
+<blockquote>
+<div>WSGIScriptAlias / /var/www/geonode/wsgi/geonode.wsgi</div></blockquote>
+<p>to:</p>
+<blockquote>
+<div>WSGIScriptAlias / /usr/local/lib/python2.7/dist-packages/geosk/wsgi.py # path to geosk/wsgi.py</div></blockquote>
+<p>Restart apache:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ sudo service apache2 restart
+</pre></div>
+</div>
+<p>Edit the templates in geosk/templates, the css and images to match your needs.</p>
+<p>Syncdb and collectstatic:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ sk syncdb
+
+$ sk collectstatic
+</pre></div>
+</div>
+</div>
+<div class="section" id="domain-name">
+<h2>Domain Name<a class="headerlink" href="#domain-name" title="Permalink to this headline">¶</a></h2>
+<p>To let GET-IT work properly you need to use a right domain name, See the page <a class="reference internal" href="domain_name.html#domain-name"><span class="std std-ref">Choosing the “right” Domain Name</span></a> to learn how to change it.</p>
+</div>
+<div class="section" id="security">
+<h2>Security<a class="headerlink" href="#security" title="Permalink to this headline">¶</a></h2>
+<p>It&#8217;s important for your server security follow instruction on the page: <a class="reference internal" href="security_issue.html#security-issue"><span class="std std-ref">Security issues</span></a></p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="server.html" class="btn btn-neutral float-right" title="Server requirements" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="quick.html" class="btn btn-neutral" title="GET-IT quick installation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, GET-IT Development Team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

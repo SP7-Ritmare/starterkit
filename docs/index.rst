@@ -10,6 +10,19 @@ Documentation of 1.3 GET-IT version.
 Link to the old documentation pages: http://sp7.irea.cnr.it/wiki/index.php/Category:Learning
 
 
+===============
+MapQuest Maps Issue
+===============
+
+From July 2016 the MapQuest Open is shutting down and moving to a new model which requires signing up and getting a 'key' to get access to map tiles.
+
+In order to remove the dependence from the MapQuest Maps please follow these instructions:
+
+
+:ref:`mapquest_maps_issue`
+
+
+
 Bing Maps Issue
 ===============
 From 6th October 2015 the Bing Maps API that are used by default in every GET-IT/GeoNode map are not working anymore.

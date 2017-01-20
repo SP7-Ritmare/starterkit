@@ -1,0 +1,219 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>PRJ file &mdash; GET-IT 1.3 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="GET-IT 1.3 documentation" href="../../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> GET-IT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation.html">Short presentation to GET-IT features and its architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../publication.html">Activities by SP7 team</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Tutorials</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">GET-IT</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+    <li>PRJ file</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/tutorials/users/file_prj.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="prj-file">
+<span id="file-prj"></span><h1>PRJ file<a class="headerlink" href="#prj-file" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<p>Il file con estensione &#8220;prj&#8221; contiene l&#8217;informazione sul sistema di coordinate di uno shapefile, espresso in Well-Known Text.
+E&#8217; un file opzionale, spesso i sistemi GIS riescono a individuare il corretto sistema di riferimento anche in sua assenza, ma spesso la sua mancanza o la sua scrittura errata (bag dei software GIS), generano errori di sovrapposizione/visualizzazione dello shapefile.</p>
+<p>Per questo motivo è sempre consigliabile conservare assieme ai files di estensione shp, dbf, shx anche il file prj.</p>
+<p>Uno shapefile è composto dai seguenti files:</p>
+<p>File obbligatori:</p>
+<ul class="simple">
+<li>.shp - il file che conserva le geometrie;</li>
+<li>.shx - il file che conserva l&#8217;indice delle geometrie;</li>
+<li>.dbf - il database degli attributi.</li>
+</ul>
+<p>File opzionali:</p>
+<ul class="simple">
+<li>.sbn e .sbx - indici spaziali;</li>
+<li>.fbn e .fbx - indici spaziali delle feature in sola lettura;</li>
+<li>.ain e .aih - indici attributari dei campi della tabella;</li>
+<li>.prj - il file che conserva l&#8217;informazione sul sistema di coordinate, espresso in Well-Known Text;</li>
+<li>.shp.xml - metadato dello shapefile;</li>
+<li>.atx - indice attributario della tabella (file .dbf) nella forma</li>
+</ul>
+<p>Da questo sito è possibile ricercare il codice da utilizzare per il nostro file &#8221;.prj&#8221; in caso di problemi:</p>
+<p><a class="reference external" href="http://spatialreference.org/ref/">http://spatialreference.org/ref/</a></p>
+<p>E&#8217; sufficiente selezionare il sistema di riferimento del nostro shapefile dalla lista e scaricare il file &#8221;.prj&#8221; fornito. Successivamente il file va rinominato con il nome dello shapefile mantenendo la stessa estensione.</p>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, GET-IT Development Team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

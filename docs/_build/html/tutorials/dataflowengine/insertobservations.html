@@ -1,0 +1,458 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Examples of NRT or RT insert observations &mdash; GET-IT 1.3 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="GET-IT 1.3 documentation" href="../../index.html"/>
+        <link rel="up" title="Data Flow Engine Tutorials" href="index.html"/>
+        <link rel="prev" title="Data Flow Engine Tutorials" href="index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> GET-IT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../presentation.html">Short presentation to GET-IT features and its architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../publication.html">Activities by SP7 team</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../users/index.html">Users Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../admin/index.html">Administrators Tutorials</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Data Flow Engine Tutorials</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Examples of NRT or RT insert observations</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">GET-IT</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Tutorials</a> &raquo;</li>
+      
+          <li><a href="index.html">Data Flow Engine Tutorials</a> &raquo;</li>
+      
+    <li>Examples of NRT or RT insert observations</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/tutorials/dataflowengine/insertobservations.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="examples-of-nrt-or-rt-insert-observations">
+<span id="insertobservations"></span><h1>Examples of NRT or RT insert observations<a class="headerlink" href="#examples-of-nrt-or-rt-insert-observations" title="Permalink to this headline">¶</a></h1>
+<p>The fastest way for inserting new observations within GET-IT is to use the graphical user interface (GUI) (<a class="reference internal" href="../users/managing_observations/upload_observations.html#upload-observations"><span class="std std-ref">How upload Observations</span></a>) implemented ad-hoc for this purpose. This GUI is specifically developed for users who want to insert data that were prevously collected within spreadsheets or similar files.
+A different scenario is the automatic upload from data logger, remote station, etc.: In this case the correct way to insert observation data in GET-IT is directly through the exposed SOS interface, exploiting standard transactional requests of Sensor Web (SWE) and SOS. In particular the SOS accept the insertObservation request to insert standard encoded observations.
+The use of XML language ensures a complete OGC-SWE compliance. Below an example of insertObservation request:</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="nt">&lt;sos:InsertObservation</span> <span class="na">service=</span><span class="s">&quot;SOS&quot;</span> <span class="na">version=</span><span class="s">&quot;2.0.0&quot;</span>
+    <span class="na">xmlns:sos=</span><span class="s">&quot;http://www.opengis.net/sos/2.0&quot;</span>
+    <span class="na">xmlns:swes=</span><span class="s">&quot;http://www.opengis.net/swes/2.0&quot;</span>
+    <span class="na">xmlns:swe=</span><span class="s">&quot;http://www.opengis.net/swe/2.0&quot;</span>
+    <span class="na">xmlns:sml=</span><span class="s">&quot;http://www.opengis.net/sensorML/1.0.1&quot;</span>
+    <span class="na">xmlns:gml=</span><span class="s">&quot;http://www.opengis.net/gml/3.2&quot;</span>
+    <span class="na">xmlns:xlink=</span><span class="s">&quot;http://www.w3.org/1999/xlink&quot;</span>
+    <span class="na">xmlns:om=</span><span class="s">&quot;http://www.opengis.net/om/2.0&quot;</span>
+    <span class="na">xmlns:sams=</span><span class="s">&quot;http://www.opengis.net/samplingSpatial/2.0&quot;</span>
+    <span class="na">xmlns:sf=</span><span class="s">&quot;http://www.opengis.net/sampling/2.0&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.opengis.net/sos/2.0 http://schemas.opengis.net/sos/2.0/sos.xsd http://www.opengis.net/samplingSpatial/2.0 http://schemas.opengis.net/samplingSpatial/2.0/spatialSamplingFeature.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;sos:offering&gt;</span>offering:https://www.website.org/procedure/procedureType_B/observations<span class="nt">&lt;/sos:offering&gt;</span>
+
+    <span class="c">&lt;!-- multiple offerings are possible --&gt;</span>
+    <span class="c">&lt;!-- Start of OM_Observation o1 --&gt;</span>
+    <span class="nt">&lt;sos:observation&gt;</span>
+        <span class="nt">&lt;om:OM_Observation</span> <span class="na">gml:id=</span><span class="s">&quot;o1&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;om:type</span> <span class="na">xlink:href=</span><span class="s">&quot;http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement&quot;</span><span class="nt">/&gt;</span>
+
+            <span class="nt">&lt;om:phenomenonTime&gt;</span>
+                <span class="nt">&lt;gml:TimeInstant</span> <span class="na">gml:id=</span><span class="s">&quot;phenomenonTime_o1&quot;</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;gml:timePosition&gt;</span>2015-08-27T12:32:16.000+02:00<span class="nt">&lt;/gml:timePosition&gt;</span>
+                <span class="nt">&lt;/gml:TimeInstant&gt;</span>
+            <span class="nt">&lt;/om:phenomenonTime&gt;</span>
+
+            <span class="nt">&lt;om:resultTime</span> <span class="na">xlink:href=</span><span class="s">&quot;#phenomenonTime_o1&quot;</span><span class="nt">/&gt;</span>
+
+            <span class="nt">&lt;om:procedure</span> <span class="na">xlink:href=</span><span class="s">&quot;https://www.website.org/procedure/procedureType_B&quot;</span> <span class="na">xlink:arcrole=</span><span class="s">&quot;http://www.website.org/2.0/sensors&quot;</span><span class="nt">/&gt;</span>
+
+            <span class="nt">&lt;om:observedProperty</span> <span class="na">xlink:href=</span><span class="s">&quot;http://vocab.nerc.ac.uk/collection/P02/current/ASLV/&quot;</span><span class="nt">/&gt;</span>
+
+            <span class="nt">&lt;om:featureOfInterest&gt;</span>
+                <span class="nt">&lt;sams:SF_SpatialSamplingFeature</span> <span class="na">gml:id=</span><span class="s">&quot;sample_o1&quot;</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;gml:identifier</span> <span class="na">codeSpace=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>http://www.website.org/sensors/SSF/SSF_b<span class="nt">&lt;/gml:identifier&gt;</span>
+                    <span class="nt">&lt;gml:name&gt;</span>Lago Paione inferiore<span class="nt">&lt;/gml:name&gt;</span>
+                    <span class="nt">&lt;sf:type</span> <span class="na">xlink:href=</span><span class="s">&quot;http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint&quot;</span><span class="nt">/&gt;</span>
+                    <span class="nt">&lt;sf:sampledFeature</span>
+                        <span class="na">xlink:title=</span><span class="s">&quot;Lago Paione inferiore&quot;</span><span class="nt">/&gt;</span>
+                    <span class="nt">&lt;sams:shape&gt;</span>
+                        <span class="nt">&lt;gml:Point</span> <span class="na">gml:id=</span><span class="s">&quot;p1&quot;</span><span class="nt">&gt;</span>
+                            <span class="nt">&lt;gml:pos</span> <span class="na">srsName=</span><span class="s">&quot;http://www.opengis.net/def/crs/EPSG/0/4326&quot;</span><span class="nt">&gt;</span>46.168979 8.18923<span class="nt">&lt;/gml:pos&gt;</span>
+                        <span class="nt">&lt;/gml:Point&gt;</span>
+                    <span class="nt">&lt;/sams:shape&gt;</span>
+                <span class="nt">&lt;/sams:SF_SpatialSamplingFeature&gt;</span>
+            <span class="nt">&lt;/om:featureOfInterest&gt;</span>
+
+            <span class="nt">&lt;om:result</span> <span class="na">xsi:type=</span><span class="s">&quot;gml:MeasureType&quot;</span> <span class="na">uom=</span><span class="s">&quot;m&quot;</span><span class="nt">&gt;</span>0.28<span class="nt">&lt;/om:result&gt;</span>
+
+        <span class="nt">&lt;/om:OM_Observation&gt;</span>
+    <span class="nt">&lt;/sos:observation&gt;</span>
+    <span class="c">&lt;!-- End of OM_Observation o1 --&gt;</span>
+
+    <span class="c">&lt;!-- Start of OM_Observation o2 --&gt;</span>
+    <span class="nt">&lt;sos:observation&gt;</span>
+        <span class="nt">&lt;om:OM_Observation</span> <span class="na">gml:id=</span><span class="s">&quot;o2&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;om:type</span> <span class="na">xlink:href=</span><span class="s">&quot;http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;om:phenomenonTime</span> <span class="na">xlink:href=</span><span class="s">&quot;#phenomenonTime_o1&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;om:resultTime</span> <span class="na">xlink:href=</span><span class="s">&quot;#phenomenonTime_o1&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;om:procedure</span> <span class="na">xlink:href=</span><span class="s">&quot;https://www.website.org/procedure/procedureType_B&quot;</span> <span class="na">xlink:arcrole=</span><span class="s">&quot;http://www.website.org/2.0/sensors&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;om:observedProperty</span> <span class="na">xlink:href=</span><span class="s">&quot;http://vocab.nerc.ac.uk/collection/P02/current/ASLV/&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;om:featureOfInterest</span> <span class="na">xlink:href=</span><span class="s">&quot;#sample_o1&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;om:result</span> <span class="na">xsi:type=</span><span class="s">&quot;xs:integer&quot;</span><span class="nt">&gt;</span>0.12<span class="nt">&lt;/om:result&gt;</span>
+        <span class="nt">&lt;/om:OM_Observation&gt;</span>
+    <span class="nt">&lt;/sos:observation&gt;</span>
+    <span class="c">&lt;!-- End of OM_Observation o2 --&gt;</span>
+
+    <span class="c">&lt;!-- Start of OM_Observation o3 --&gt;</span>
+    <span class="nt">&lt;sos:observation&gt;</span>
+        <span class="nt">&lt;om:OM_Observation</span> <span class="na">gml:id=</span><span class="s">&quot;o3&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;om:type</span> <span class="na">xlink:href=</span><span class="s">&quot;http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;om:phenomenonTime</span> <span class="na">xlink:href=</span><span class="s">&quot;#phenomenonTime_o1&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;om:resultTime</span> <span class="na">xlink:href=</span><span class="s">&quot;#phenomenonTime_o1&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;om:procedure</span> <span class="na">xlink:href=</span><span class="s">&quot;https://www.website.org/procedure/procedureType_B&quot;</span> <span class="na">xlink:arcrole=</span><span class="s">&quot;http://www.website.org/2.0/sensors&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;om:observedProperty</span> <span class="na">xlink:href=</span><span class="s">&quot;http://vocab.nerc.ac.uk/collection/P02/current/ASLV/&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;om:featureOfInterest</span> <span class="na">xlink:href=</span><span class="s">&quot;#sample_o1&quot;</span><span class="nt">/&gt;</span>
+
+            <span class="c">&lt;!-- example of data array --&gt;</span>
+            <span class="nt">&lt;om:result</span> <span class="na">xsi:type=</span><span class="s">&quot;swe:DataArrayPropertyType&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;swe:DataArray&gt;</span>
+                <span class="nt">&lt;swe:elementCount&gt;</span>
+                    <span class="nt">&lt;swe:Count&gt;</span>
+                        <span class="nt">&lt;swe:value&gt;</span>15<span class="nt">&lt;/swe:value&gt;</span>
+                    <span class="nt">&lt;/swe:Count&gt;</span>
+                <span class="nt">&lt;/swe:elementCount&gt;</span>
+                <span class="nt">&lt;swe:elementType</span> <span class="na">name=</span><span class="s">&quot;defs&quot;</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;swe:DataRecord&gt;</span>
+                        <span class="nt">&lt;swe:field</span> <span class="na">name=</span><span class="s">&quot;phenomenonTime&quot;</span><span class="nt">&gt;</span>
+                            <span class="nt">&lt;swe:Time</span> <span class="na">definition=</span><span class="s">&quot;http://www.opengis.net/def/property/OGC/0/PhenomenonTime&quot;</span><span class="nt">&gt;</span>
+                                <span class="nt">&lt;swe:uom</span> <span class="na">xlink:href=</span><span class="s">&quot;http://www.opengis.net/def/uom/ISO-8601/0/Gregorian&quot;</span><span class="nt">/&gt;</span>
+                            <span class="nt">&lt;/swe:Time&gt;</span>
+                        <span class="nt">&lt;/swe:field&gt;</span>
+                        <span class="nt">&lt;swe:field</span> <span class="na">name=</span><span class="s">&quot;ASLV&quot;</span><span class="nt">&gt;</span>
+                            <span class="nt">&lt;swe:Quantity</span> <span class="na">definition=</span><span class="s">&quot;http://vocab.nerc.ac.uk/collection/P02/current/ASLV/&quot;</span><span class="nt">&gt;</span>
+                                <span class="nt">&lt;swe:uom</span> <span class="na">code=</span><span class="s">&quot;m&quot;</span><span class="nt">/&gt;</span>
+                            <span class="nt">&lt;/swe:Quantity&gt;</span>
+                        <span class="nt">&lt;/swe:field&gt;</span>
+                    <span class="nt">&lt;/swe:DataRecord&gt;</span>
+                <span class="nt">&lt;/swe:elementType&gt;</span>
+                <span class="nt">&lt;swe:encoding&gt;</span>
+                    <span class="nt">&lt;swe:TextEncoding</span> <span class="na">tokenSeparator=</span><span class="s">&quot;#&quot;</span> <span class="na">blockSeparator=</span><span class="s">&quot;@&quot;</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;/swe:encoding&gt;</span>
+                <span class="nt">&lt;swe:values&gt;</span>2012-11-19T13:30:00+02:00#0.15@2012-11-19T13:31:00+02:00#0.15@2012-11-19T13:32:00+02:00#0.85@2012-11-19T13:33:00+02:00#0.5@2012-11-19T13:34:00+02:00#0.9@2012-11-19T13:35:00+02:00#0.7@2012-11-19T13:36:00+02:00#0.5@2012-11-19T13:37:00+02:00#0.6@2012-11-19T13:38:00+02:00#0.5@2012-11-19T13:39:00+02:00#0.4@2012-11-19T13:40:00+02:00#0.34@2012-11-19T13:41:00+02:00#0.25@2012-11-19T13:42:00+02:00#0.79@2012-11-19T13:43:00+02:00#0.56@2012-11-19T13:44:00+02:00#0.25<span class="nt">&lt;/swe:values&gt;</span>
+            <span class="nt">&lt;/swe:DataArray&gt;</span>
+        <span class="nt">&lt;/om:result&gt;</span>
+        <span class="nt">&lt;/om:OM_Observation&gt;</span>
+    <span class="nt">&lt;/sos:observation&gt;</span>
+    <span class="c">&lt;!-- End of OM_Observation o3 --&gt;</span>
+<span class="nt">&lt;/sos:InsertObservation&gt;</span>
+</pre></div>
+</div>
+<p>It is possible to further reduce the XML relying insertResultTemplate and insertResult, below the example of both requests.</p>
+<p>insertResultTemplate</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;sos:InsertResultTemplate</span> <span class="na">service=</span><span class="s">&quot;SOS&quot;</span> <span class="na">version=</span><span class="s">&quot;2.0.0&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    <span class="na">xmlns:swes=</span><span class="s">&quot;http://www.opengis.net/swes/2.0&quot;</span>
+    <span class="na">xmlns:sos=</span><span class="s">&quot;http://www.opengis.net/sos/2.0&quot;</span>
+    <span class="na">xmlns:swe=</span><span class="s">&quot;http://www.opengis.net/swe/2.0&quot;</span>
+    <span class="na">xmlns:sml=</span><span class="s">&quot;http://www.opengis.net/sensorML/1.0.1&quot;</span>
+    <span class="na">xmlns:gml=</span><span class="s">&quot;http://www.opengis.net/gml/3.2&quot;</span>
+    <span class="na">xmlns:xlink=</span><span class="s">&quot;http://www.w3.org/1999/xlink&quot;</span>
+    <span class="na">xmlns:om=</span><span class="s">&quot;http://www.opengis.net/om/2.0&quot;</span>
+    <span class="na">xmlns:sams=</span><span class="s">&quot;http://www.opengis.net/samplingSpatial/2.0&quot;</span>
+    <span class="na">xmlns:sf=</span><span class="s">&quot;http://www.opengis.net/sampling/2.0&quot;</span>
+    <span class="na">xmlns:xs=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.opengis.net/sos/2.0 http://schemas.opengis.net/sos/2.0/sosInsertResultTemplate.xsd http://www.opengis.net/om/2.0 http://schemas.opengis.net/om/2.0/observation.xsd  http://www.opengis.net/samplingSpatial/2.0 http://schemas.opengis.net/samplingSpatial/2.0/spatialSamplingFeature.xsd&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;sos:proposedTemplate&gt;</span>
+        <span class="nt">&lt;sos:ResultTemplate&gt;</span>
+            <span class="nt">&lt;swes:identifier&gt;</span>http://www.website.org/test/procedure/procedureType_B/template/1<span class="nt">&lt;/swes:identifier&gt;</span>
+
+            <span class="nt">&lt;sos:offering&gt;</span>offering:https://www.website.org/procedure/procedureType_B/observations<span class="nt">&lt;/sos:offering&gt;</span>
+
+            <span class="nt">&lt;sos:observationTemplate&gt;</span>
+                <span class="nt">&lt;om:OM_Observation</span> <span class="na">gml:id=</span><span class="s">&quot;sensor2obsTemplate&quot;</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;om:type</span> <span class="na">xlink:href=</span><span class="s">&quot;http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement&quot;</span><span class="nt">/&gt;</span>
+                    <span class="nt">&lt;om:phenomenonTime</span> <span class="na">nilReason=</span><span class="s">&quot;template&quot;</span><span class="nt">/&gt;</span>
+                    <span class="nt">&lt;om:resultTime</span> <span class="na">nilReason=</span><span class="s">&quot;template&quot;</span><span class="nt">/&gt;</span>
+                    <span class="nt">&lt;om:procedure</span> <span class="na">xlink:href=</span><span class="s">&quot;https://www.website.org/procedure/procedureType_B&quot;</span><span class="nt">/&gt;</span>
+                    <span class="nt">&lt;om:observedProperty</span> <span class="na">xlink:href=</span><span class="s">&quot;http://vocab.nerc.ac.uk/collection/P02/current/ASLV/&quot;</span><span class="nt">/&gt;</span>
+                    <span class="nt">&lt;om:featureOfInterest&gt;</span>
+                        <span class="nt">&lt;sams:SF_SpatialSamplingFeature</span> <span class="na">gml:id=</span><span class="s">&quot;sample_o1&quot;</span><span class="nt">&gt;</span>
+                            <span class="nt">&lt;gml:identifier</span> <span class="na">codeSpace=</span><span class="s">&quot;&quot;</span><span class="nt">&gt;</span>http://www.website.org/sensors/SSF/SSF_b<span class="nt">&lt;/gml:identifier&gt;</span>
+                            <span class="nt">&lt;gml:name&gt;</span>Lago Paione inferiore<span class="nt">&lt;/gml:name&gt;</span>
+                            <span class="nt">&lt;sf:type</span> <span class="na">xlink:href=</span><span class="s">&quot;http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint&quot;</span><span class="nt">/&gt;</span>
+                            <span class="nt">&lt;sf:sampledFeature</span>
+                                <span class="na">xlink:title=</span><span class="s">&quot;Lago Paione inferiore&quot;</span><span class="nt">/&gt;</span>
+                            <span class="nt">&lt;sams:shape&gt;</span>
+                                <span class="nt">&lt;gml:Point</span> <span class="na">gml:id=</span><span class="s">&quot;p1&quot;</span><span class="nt">&gt;</span>
+                                    <span class="nt">&lt;gml:pos</span> <span class="na">srsName=</span><span class="s">&quot;http://www.opengis.net/def/crs/EPSG/0/4326&quot;</span><span class="nt">&gt;</span>46.168979 8.18923<span class="nt">&lt;/gml:pos&gt;</span>
+                                <span class="nt">&lt;/gml:Point&gt;</span>
+                            <span class="nt">&lt;/sams:shape&gt;</span>
+                        <span class="nt">&lt;/sams:SF_SpatialSamplingFeature&gt;</span>
+                    <span class="nt">&lt;/om:featureOfInterest&gt;</span>
+                    <span class="nt">&lt;om:result/&gt;</span>
+                <span class="nt">&lt;/om:OM_Observation&gt;</span>
+            <span class="nt">&lt;/sos:observationTemplate&gt;</span>
+
+            <span class="nt">&lt;sos:resultStructure&gt;</span>
+                <span class="nt">&lt;swe:DataRecord&gt;</span>
+                    <span class="nt">&lt;swe:field</span> <span class="na">name=</span><span class="s">&quot;phenomenonTime&quot;</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;swe:Time</span> <span class="na">definition=</span><span class="s">&quot;http://www.opengis.net/def/property/OGC/0/PhenomenonTime&quot;</span><span class="nt">&gt;</span>
+                            <span class="nt">&lt;swe:uom</span> <span class="na">xlink:href=</span><span class="s">&quot;http://www.opengis.net/def/uom/ISO-8601/0/Gregorian&quot;</span><span class="nt">/&gt;</span>
+                        <span class="nt">&lt;/swe:Time&gt;</span>
+                    <span class="nt">&lt;/swe:field&gt;</span>
+                    <span class="nt">&lt;swe:field</span> <span class="na">name=</span><span class="s">&quot;ASLV&quot;</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;swe:Quantity</span> <span class="na">definition=</span><span class="s">&quot;http://vocab.nerc.ac.uk/collection/P02/current/ASLV/&quot;</span><span class="nt">&gt;</span>
+                            <span class="nt">&lt;swe:uom</span> <span class="na">code=</span><span class="s">&quot;m&quot;</span><span class="nt">/&gt;</span>
+                        <span class="nt">&lt;/swe:Quantity&gt;</span>
+                    <span class="nt">&lt;/swe:field&gt;</span>
+                <span class="nt">&lt;/swe:DataRecord&gt;</span>
+            <span class="nt">&lt;/sos:resultStructure&gt;</span>
+
+            <span class="nt">&lt;sos:resultEncoding&gt;</span>
+                <span class="nt">&lt;swe:TextEncoding</span> <span class="na">tokenSeparator=</span><span class="s">&quot;#&quot;</span> <span class="na">blockSeparator=</span><span class="s">&quot;@&quot;</span><span class="nt">/&gt;</span>
+            <span class="nt">&lt;/sos:resultEncoding&gt;</span>
+
+        <span class="nt">&lt;/sos:ResultTemplate&gt;</span>
+    <span class="nt">&lt;/sos:proposedTemplate&gt;</span>
+<span class="nt">&lt;/sos:InsertResultTemplate&gt;</span>
+</pre></div>
+</div>
+<p>and insertResult</p>
+<div class="highlight-xml"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;sos:InsertResult</span> <span class="na">service=</span><span class="s">&quot;SOS&quot;</span> <span class="na">version=</span><span class="s">&quot;2.0.0&quot;</span>
+    <span class="na">xmlns:sos=</span><span class="s">&quot;http://www.opengis.net/sos/2.0&quot;</span>
+    <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://www.opengis.net/sos/2.0 http://schemas.opengis.net/sos/2.0/sos.xsd&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;sos:template&gt;</span>http://www.website.org/test/procedure/procedureType_B/template/1<span class="nt">&lt;/sos:template&gt;</span>
+
+    <span class="nt">&lt;swe:values&gt;</span>2012-11-19T13:30:00+02:00#0.15@2012-11-19T13:31:00+02:00#0.15@2012-11-19T13:32:00+02:00#0.85@2012-11-19T13:33:00+02:00#0.5@2012-11-19T13:34:00+02:00#0.9@2012-11-19T13:35:00+02:00#0.7@2012-11-19T13:36:00+02:00#0.5@2012-11-19T13:37:00+02:00#0.6@2012-11-19T13:38:00+02:00#0.5@2012-11-19T13:39:00+02:00#0.4@2012-11-19T13:40:00+02:00#0.34@2012-11-19T13:41:00+02:00#0.25@2012-11-19T13:42:00+02:00#0.79@2012-11-19T13:43:00+02:00#0.56@2012-11-19T13:44:00+02:00#0.25<span class="nt">&lt;/swe:values&gt;</span>
+<span class="nt">&lt;/sos:InsertResult&gt;</span>
+</pre></div>
+</div>
+<p>Otherwise the SOS server integrated within GET-IT allows to use JSON for sending requests. In OGC SWE, the JSON &#8220;binding&#8221; is not yet standardized, but this feature can ease the work of programmers familiar with JSON. Below an example of insertObservations JSON:</p>
+<div class="highlight-json"><div class="highlight"><pre><span></span>{
+  &#39;observation&#39;: {
+      &#39;featureOfInterest&#39;: {
+          &#39;geometry&#39;: {
+              &#39;coordinates&#39;: [45.43,
+                              12.33],
+              &#39;crs&#39;: {
+                  &#39;properties&#39;: {
+                      &#39;name&#39;: &#39;EPSG:4326&#39;
+                  },
+                  &#39;type&#39;: &#39;name&#39;
+              },
+              &#39;type&#39;: &#39;Point&#39;
+          },
+          &#39;identifier&#39;: {
+              &#39;codespace&#39;: &#39;http://www.opengis.net/def/nil/OGC/0/unknown&#39;,
+              &#39;value&#39;: u&#39;http://sp7.irea.cnr.it/featureOfInterest/PuntaSaluteCanaleGiudecca&#39;
+          },
+          &#39;name&#39;: [{
+              &#39;codespace&#39;: &#39;http://www.opengis.net/def/nil/OGC/0/unknown&#39;,
+              &#39;value&#39;: u&#39;Laguna di Venezia - Punta Salute Canale della Giudecca&#39;}],
+          &#39;sampledFeature&#39;: [u&#39;lagunaVenezia002&#39;]
+      },
+      &#39;identifier&#39;: {
+          &#39;codespace&#39;: &#39;http://www.opengis.net/def/nil/OGC/0/unknown&#39;,
+          &#39;value&#39;: &#39;record410549&#39;
+      },
+      &#39;observedProperty&#39;: u&#39;http://vocab.nerc.ac.uk/collection/P02/current/ASLV/&#39;,
+      &#39;phenomenonTime&#39;: &#39;2015-01-12T11:40:00+00:00&#39;,
+      &#39;procedure&#39;: u&#39;http://sp7.irea.cnr.it/sensors/mareesk.irea.cnr.it/procedure/SIAPMICROS/DA9000/noSerialNumberDeclared/20140723044959616_PuntaSaluteCanaleGiudecca&#39;,
+      &#39;result&#39;: {
+          &#39;uom&#39;: u&#39;m&#39;, &#39;value&#39;: 0.03
+      },
+      &#39;resultTime&#39;: &#39;2015-01-12T11:40:00+00:00&#39;,
+      &#39;type&#39;: &#39;http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement&#39;
+  },
+  &#39;offering&#39;: u&#39;offering:http://sp7.irea.cnr.it/sensors/mareesk.irea.cnr.it/procedure/SIAPMICROS/DA9000/noSerialNumberDeclared/20140723044959616_PuntaSaluteCanaleGiudecca/observations&#39;,
+  &#39;request&#39;: &#39;InsertObservation&#39;,
+  &#39;service&#39;: &#39;SOS&#39;,
+  &#39;version&#39;: &#39;2.0.0&#39;
+ }
+</pre></div>
+</div>
+<p>The requests should be sent to SOS endpoint that could be found in the GET-IT interface (Services -&gt; SOS e.g. <a class="reference external" href="http://demo2.get-it.it/about_services/#sos">http://demo2.get-it.it/about_services/#sos</a>), by client-side URL transfers (e.g. cURL).</p>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Data Flow Engine Tutorials" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, GET-IT Development Team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

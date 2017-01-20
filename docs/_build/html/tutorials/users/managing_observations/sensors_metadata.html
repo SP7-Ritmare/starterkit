@@ -1,0 +1,260 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>How create Sensors Metadata &mdash; GET-IT 1.3 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="GET-IT 1.3 documentation" href="../../../index.html"/>
+        <link rel="up" title="Managing observations" href="index.html"/>
+        <link rel="next" title="How check Sensors Metadata" href="metadata_check.html"/>
+        <link rel="prev" title="Managing observations" href="index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> GET-IT
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../presentation.html">Short presentation to GET-IT features and its architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../publication.html">Activities by SP7 team</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Users Tutorials</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../accounts_and_users/index.html">Accounts and users</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../managing_layers/index.html">Managing layers</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Managing observations</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">How create Sensors Metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="metadata_check.html">How check Sensors Metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="upload_observations.html">How upload Observations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../managing_views/index.html">Managing views</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../admin/index.html">Administrators Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../dataflowengine/index.html">Data Flow Engine Tutorials</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">GET-IT</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../index.html">Tutorials</a> &raquo;</li>
+      
+          <li><a href="../index.html">Users Tutorials</a> &raquo;</li>
+      
+          <li><a href="index.html">Managing observations</a> &raquo;</li>
+      
+    <li>How create Sensors Metadata</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../../_sources/tutorials/users/managing_observations/sensors_metadata.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="how-create-sensors-metadata">
+<span id="sensors-metadata"></span><h1>How create Sensors Metadata<a class="headerlink" href="#how-create-sensors-metadata" title="Permalink to this headline">¶</a></h1>
+<p>In order to discover, integrate, and exploit sensor data (and also to presserve them for future needs), we need to accurately record sensor information.</p>
+<p>The <a class="reference external" href="https://portal.opengeospatial.org/files/?artifact_id=55939">Sensor Model Language (SensorML)</a> has been adopted by OGC for developing the SWE framework.</p>
+<p>SensorML provides a definition language that supports all details of sensors and sensor-to-platform constellations.</p>
+<p>Sensor meta-data creation has been performed by GET-IT metadata editor, called <a class="reference external" href="http://edidemo.get-it.it">EDI</a>, which allows ease and friendly instrument registration (SensorML editing version v1.0 and v2.0) through graphical user interfaces (GUI)
+and auto completion facilities linked to vocabularies. Some sections of SensorML have been borrowed from the terms present in RDF, in order to harmonize and semantically enrich the metadata. In particular for the SensorML templates implemented in the EDI:</p>
+<ul class="simple">
+<li>Parameters: <a class="reference external" href="http://vocab.nerc.ac.uk/collection/P01/current">P01</a> and <a class="reference external" href="http://vocab.nerc.ac.uk/collection/P02/current">P02</a> <a class="reference external" href="http://vocab.nerc.ac.uk/">NERC vocabularies</a> or <a class="reference external" href="http://vocabs.ceh.ac.uk/evn/tbl/envthes.evn">EnvThes</a></li>
+<li>Units of measure: <a class="reference external" href="http://vocab.nerc.ac.uk/collection/P06/current">P06</a> NERC vocabulary or EnvThes</li>
+<li>Sensor types: <a class="reference external" href="http://vocab.nerc.ac.uk/collection/P07/current">P07</a> NERC vocabulary</li>
+<li>Manufacturers: FOAF (<a class="reference external" href="http://www.foaf-project.org">Friends Of A Friend</a>) graph version of <a class="reference external" href="http://www.esonetyellowpages.com/">Esonet Yellow Pages</a>.</li>
+<li>Operators, and owners: FOAF (Friends Of A Friend) graph. In this case the graph changed independently from the project to which it refers.</li>
+</ul>
+<p>Within EDI template, implemented in GET_IT, we adopted the sensor profile suggested in the OGC document titled &#8220;<a class="reference external" href="https://portal.opengeospatial.org/files/?artifact_id=52803">OGC® Best Practice for Sensor Web Enablement Lightweight SOS Profile for Stationary In-Situ Sensors</a>.
+To be compliant to this profile every sensors will be modeled as a PhysicalSystem and the following metadata items are mandatory:</p>
+<ul class="simple">
+<li>gml:description - short textual description of the sensor or sensor system;</li>
+<li>gml:identifier - unique identifier of the sensor system.</li>
+<li>sml:keywords - terms which help to describe the sensor system and serve for discovery purposes;</li>
+<li>sml:identification - this element contains identifiers of the sensor system;</li>
+<li>sml:classification - this element contains classifiers for the sensor system;</li>
+<li>sml:contacts - this element contains contact information about the operator of the sensor;</li>
+<li>sml:featuresOfInterest - this element contains the real world entity, the feature of interest, which is observed by the sensor system. In case of this profile, the feature of interest is a station and modelled as a SamplingPoint;</li>
+<li>sml:outputs - the outputs of the sensors attached to the sensor system.</li>
+</ul>
+<p>Within EDI user interface items in bold are the mandatory ones.</p>
+<p>Before insert any observations is necessary to create SensorML by EDI template.</p>
+<p>The figure below show the EDI user interface for OGC SensorML v2.0 Lightweight SOS Profile for Stationary In-Situ Sensors.</p>
+<div class="figure align-center">
+<img alt="EDI_SensorML.png" src="EDI_SensorML.png" />
+</div>
+<p>The video allows to have a idea about the interaction between user and EDI user interface.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/OVZxqqEDHm0" frameborder="0" allowfullscreen></iframe></div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="metadata_check.html" class="btn btn-neutral float-right" title="How check Sensors Metadata" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Managing observations" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, GET-IT Development Team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'1.3',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
