@@ -154,6 +154,18 @@ def _get_fileid(ediml):
     ediml = etree.fromstring(ediml)
     return ediml.find('fileId').text
 
+
+def listediml(request):
+    # body={'success':True,'redirect': reverse('layer_detail', args=(layer.typename,))}
+    data = []
+
+    for l in Layer.objects.all():
+        if l.mdextension.elements_xml is not None:
+            url = '%s%s/ediml' % (settings.SITEURL[:-1], l.get_absolute_url()),
+            data.append({'url': url})
+    return json_response(data)
+
+
 def ediml(request, layername):
     layer = _resolve_layer(request, layername, 'layers.change_layer', _PERMISSION_MSG_METADATA)
     ediml = layer.mdextension.elements_xml

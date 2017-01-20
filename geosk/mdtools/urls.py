@@ -6,6 +6,7 @@ urlpatterns = [
     # import metadata
     url(r'^api/importediml$', 'geosk.mdtools.api.importediml', name='importediml'),
     url(r'^api/importrndt$', 'geosk.mdtools.api.importrndt', name='importrndt'),
+    url(r'^api/listediml$', 'geosk.mdtools.api.listediml', name='listediml'),
 
     # proxy to RNDT
     url(r'^rndt/$', TemplateView.as_view(template_name='mdtools/rndt.html'), name="rndt"),
