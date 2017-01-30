@@ -167,12 +167,12 @@ def listediml(request):
 
 
 def ediml(request, layername):
-    layer = _resolve_layer(request, layername, 'layers.change_layer', _PERMISSION_MSG_METADATA)
+    layer = _resolve_layer(request, layername, 'layers.view_layer', _PERMISSION_MSG_METADATA)
     ediml = layer.mdextension.elements_xml
     return HttpResponse(ediml, mimetype="text/xml")
 
 def rndt(request, layername):
-    layer = _resolve_layer(request, layername, 'layers.change_layer', _PERMISSION_MSG_METADATA)
+    layer = _resolve_layer(request, layername, 'layers.view_layer', _PERMISSION_MSG_METADATA)
     rndt = layer.mdextension.rndt_xml
     return HttpResponse(rndt, mimetype="text/xml")
 
