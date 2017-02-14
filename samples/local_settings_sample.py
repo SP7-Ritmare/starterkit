@@ -14,6 +14,8 @@ DEBUG_STATIC = False
 SITENAME = 'GET-IT Demo'
 SITEURL = "http://demo1.get-it.it/"
 
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+
 # For more information on available settings please consult the Django docs at
 # https://docs.djangoproject.com/en/dev/ref/settings
 ALLOWED_HOSTS=["demo1.get-it.it", "localhost"]
@@ -80,7 +82,7 @@ OGC_SERVER = {
         'MAPFISH_PRINT_ENABLED' : True,
         'PRINT_NG_ENABLED' : True,
         'GEONODE_SECURITY_ENABLED' : True,
-        'GEOGIT_ENABLED' : False,
+        'GEOGIG_ENABLED' : False,
         'WMST_ENABLED' : False,
         'BACKEND_WRITE_ENABLED': True,
         'WPS_ENABLED' : True,
@@ -98,6 +100,13 @@ STATIC_ROOT = '/var/www/starterkit/static/'
 # site.  See http://docs.djangoproject.com/en/1.2/ref/settings/#secret-key
 SECRET_KEY = 'changeme'
 
+UPLOADER = {
+    'BACKEND': 'geonode.rest',
+    'OPTIONS': {
+        'TIME_ENABLED': False,
+        'GEOGIG_ENABLED': False,
+    }
+}
 
 CATALOGUE = {
     'default': {

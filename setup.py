@@ -83,6 +83,7 @@ setup(
         "Django==1.6.11", # required by GeoNode 2.4
         "owslib==0.10.3",
         "django-analytical==1.0.0",
+        "django-taggit-templatetags",
     ],
     #
     include_package_data = True,

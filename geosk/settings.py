@@ -78,59 +78,77 @@ INSTALLED_APPS = (
     'rosetta',
     'grappelli.dashboard',
     'grappelli',
-
-    # Apps bundled with Django
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.admin',
-    'django.contrib.sitemaps',
-    'django.contrib.staticfiles',
-    'django.contrib.messages',
-    'django.contrib.humanize',
-
-    # Third party apps
     'analytical',
-
-    # Utility
-    'pagination',
-    'taggit',
     'taggit_templatetags',
-    'south',
-    'friendlytagloader',
-    'geoexplorer',
-    'django_extensions',
+) + INSTALLED_APPS
 
-    # Theme
-    "pinax_theme_bootstrap_account",
-    "pinax_theme_bootstrap",
-    'django_forms_bootstrap',
+# INSTALLED_APPS = (
+#     # GeoSK
+#     # 'geosk.rndt',
+#     'geosk.demo',
+#     'geosk.osk',
+#     'geosk.mdtools',
+#     'geosk.geoskbase',
+#     'geosk.search',
+#     'geosk.patches',
+#     'geosk.skregistration',
+#     'overextends', # https://github.com/stephenmcd/django-overextends
+#     'rosetta',
+#     'grappelli.dashboard',
+#     'grappelli',
 
-    # Social
-    'account',
-    'avatar',
-    'dialogos',
-    'agon_ratings',
-    'notification',
-    'announcements',
-    'actstream',
-    'user_messages',
+#     # Apps bundled with Django
+#     'django.contrib.auth',
+#     'django.contrib.contenttypes',
+#     'django.contrib.sessions',
+#     'django.contrib.sites',
+#     'django.contrib.admin',
+#     'django.contrib.sitemaps',
+#     'django.contrib.staticfiles',
+#     'django.contrib.messages',
+#     'django.contrib.humanize',
 
-    # GeoNode internal apps
-    'geonode.people',
-    'geonode.base',
-    'geonode.layers',
-    'geonode.upload',
-    'geonode.maps',
-    'geonode.proxy',
-    'geonode.security',
-   # 'geonode.search',
-    'geonode.social',
-    'geonode.catalogue',
-    'geonode.documents',
+#     # Third party apps
+#     'analytical',
 
-)
+#     # Utility
+#     'pagination',
+#     'taggit',
+#     'taggit_templatetags',
+#     'south',
+#     'friendlytagloader',
+#     'geoexplorer',
+#     'django_extensions',
+
+#     # Theme
+#     "pinax_theme_bootstrap_account",
+#     "pinax_theme_bootstrap",
+#     'django_forms_bootstrap',
+
+#     # Social
+#     'account',
+#     'avatar',
+#     'dialogos',
+#     'agon_ratings',
+#     'notification',
+#     'announcements',
+#     'actstream',
+#     'user_messages',
+
+#     # GeoNode internal apps
+#     'geonode.people',
+#     'geonode.base',
+#     'geonode.layers',
+#     'geonode.upload',
+#     'geonode.maps',
+#     'geonode.proxy',
+#     'geonode.security',
+#    # 'geonode.search',
+#     'geonode.social',
+#     'geonode.catalogue',
+#     'geonode.documents',
+
+# )
 
 METADATA_DEFAULT_VALUES = {
     'category': 'environment',
