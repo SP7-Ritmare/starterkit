@@ -22,6 +22,7 @@ import stat
 from codecs import open
 from setuptools import setup, find_packages
 from setuptools.command.install import install
+from shutil import copyfile
 
 
 class PostInstallCommand(install):
@@ -36,7 +37,13 @@ class PostInstallCommand(install):
         for d in dirs:
             if not os.path.exists(d):
                 os.makedirs(d)
-        files = ['/etc/starterkit/local_settings.py',
+
+        ls_fname = '/etc/starterkit/local_settings.py'
+        if not os.path.isfile(ls_fname):
+            sample_name = os.path.join(self.install_lib, local_settings.py.sample)
+            copyfile(sample_name, ls_fname)
+
+        files = [ls_fname,
                  '/etc/starterkit/pycsw_settings.py']
 
         for f in files:
