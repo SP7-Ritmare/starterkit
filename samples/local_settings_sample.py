@@ -29,6 +29,7 @@ DATABASE_HOST = 'localhost'
 DATABASE_PORT = '5432'
 
 DATA_DATABASE_NAME = 'geonode-data'
+POSTGIS_VERSION = (2, 1, 2)
 
 DATABASES = {
     'default': {
@@ -93,8 +94,8 @@ OGC_SERVER = {
 
 LANGUAGE_CODE = 'en'
 
-MEDIA_ROOT = '/var/www/starterkit/uploaded'
-STATIC_ROOT = '/var/www/starterkit/static/'
+MEDIA_ROOT = '/var/www/geonode/uploaded'
+STATIC_ROOT = '/var/www/geonode/static/'
 
 # secret key used in hashing, should be a long, unique string for each
 # site.  See http://docs.djangoproject.com/en/1.2/ref/settings/#secret-key

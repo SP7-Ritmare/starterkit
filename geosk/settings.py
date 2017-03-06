@@ -67,12 +67,12 @@ LANGUAGES = (
 INSTALLED_APPS = (
     # GeoSK
     # 'geosk.rndt',
-    'geosk.demo',
+  #  'geosk.demo',
     'geosk.osk',
     'geosk.mdtools',
     'geosk.geoskbase',
-    'geosk.search',
-    'geosk.patches',
+  #  'geosk.search',
+  #  'geosk.patches',
     'geosk.skregistration',
     'overextends', # https://github.com/stephenmcd/django-overextends
     'rosetta',
@@ -178,10 +178,11 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
     'account.context_processors.account',
-    'pinax_theme_bootstrap_account.context_processors.theme',
-    # The context processor below adds things like SITEURL
-    # and GEOSERVER_BASE_URL to all pages that use a RequestContext
     'geonode.context_processors.resource_urls',
+    'geonode.geoserver.context_processors.geoserver_urls',
+    # this template was used on geonode 2.0
+    # 'pinax_theme_bootstrap_account.context_processors.theme',
+
     # Add things like SOS_APP
     'geosk.context_processors.sk',
     # skregistraion

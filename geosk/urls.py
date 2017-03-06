@@ -50,7 +50,7 @@ urlpatterns = patterns('',
     (r'^sensors/', include('geosk.osk.urls')),
 
     # Demo
-    (r'^demo/', include('geosk.demo.urls')),
+  #  (r'^demo/', include('geosk.demo.urls')),
 
     (r'^grappelli/', include('grappelli.urls')), # grappelli URLS
  ) + urlpatterns
