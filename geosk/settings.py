@@ -22,8 +22,10 @@
 import os
 from geonode.settings import *
 
-SITENAME = 'StarterKit'
-SITEURL = "http://geosk.ve.ismar.cnr.it/"
+if 'SITENAME' not in locals():
+    SITENAME = 'StarterKit'
+if 'SITEURL' not in locals():
+    SITEURL = "http://geosk.ve.ismar.cnr.it/"
 
 # Defines the directory that contains the settings file as the LOCAL_ROOT
 # It is used for relative settings elsewhere.
