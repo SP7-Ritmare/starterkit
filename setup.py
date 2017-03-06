@@ -40,7 +40,7 @@ class PostInstallCommand(install):
 
         ls_fname = '/etc/starterkit/local_settings.py'
         if not os.path.isfile(ls_fname):
-            sample_name = os.path.join(self.install_lib, local_settings.py.sample)
+            sample_name = os.path.join(self.install_lib, 'local_settings.py.sample')
             copyfile(sample_name, ls_fname)
 
         files = [ls_fname,
