@@ -73,7 +73,7 @@ INSTALLED_APPS = (
     'geosk.osk',
     'geosk.mdtools',
     'geosk.geoskbase',
-    'geosk.search',
+    'geosk.geosksearch',
     'geosk.patches',
     'geosk.skregistration',
     'overextends', # https://github.com/stephenmcd/django-overextends
