@@ -79,6 +79,8 @@ Before to start copy user (DATABASE_USER) and password (DATABASE_PASSWORD) of th
 
     $ nano /etc/geonode/local_settings.py
     
+Change the 52 North SOS Configuration (http://127.0.0.1:8080/observations/admin/settings (Transactional Security) by setting the "Transactional Authorization Token"
+
 Complete the installation follow the steps and finally set the user and password. 
 
 GET-IT Installation
@@ -88,7 +90,8 @@ Install SK from archive file
 
     $ sudo pip install starterkit
 
-Rename the local_settings.py.sample to local_settings.py and edit it's content by setting the SITEURL and SITENAME.
+Edit the starterkit local_settings.py by setting the SITEURL, SITENAME, TRANSACTIONAL_AUTHORIZATION_TOKEN (SOS_SERVER) and PASSWORD (OGC_SERVER):
+    $ nano /etc/starterkit/local_settings.py
 
 Edit the file /etc/apache2/sites-available/geonode and change the following directive from:
 
