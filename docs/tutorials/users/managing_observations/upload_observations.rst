@@ -1,7 +1,7 @@
 .. _upload_observations:
 
 =======================
-How upload Observations
+How to upload Observations
 =======================
 
 .. raw:: html
