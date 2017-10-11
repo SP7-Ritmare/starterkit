@@ -11,7 +11,7 @@ In this section, you will learn how to add new sensor info (metadata of the sens
 
 In the GET-IT home page Sensor section is dedicated to managing observation and sensors, the figure below show the different interaction parts for managing observations and sensors.
 
-.. figure:: https://github.com/SP7-Ritmare/starterkit/blob/master/docs/tutorials/users/managing_observations/GETIT_Sensor_Interface.png
+.. figure:: GETIT_Sensor_Interface.png
    :align: center
 
 Two tabs, **Explore SOS** and **Upload Observations**, are dedicated respectively to:
