@@ -25,6 +25,7 @@ Before proceeding with the reading, it is strongly recommended to be sure having
 5.  What is a map and a legend.
 6.  What is a sensor and a observation (`Sensor Observation System, OGC standard <http://www.opengeospatial.org/standards/sos>`_).
 
+Through the left list you could explore different section tutorials:
 
 .. toctree::
    :maxdepth: 7
@@ -37,7 +38,7 @@ Before proceeding with the reading, it is strongly recommended to be sure having
    managing_views/index
    compilazione_metadati/index
    
-   Through the left panel you could find different sections:
+  
 
 :ref:`Accounts_and_users`
     This section will guide you through account registration, updating, and viewing other user accounts.
