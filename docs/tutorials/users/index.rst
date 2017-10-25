@@ -35,6 +35,7 @@ Before proceeding with the reading, it is strongly recommended to be sure having
    managing_layers/index
    managing_observations/index
    managing_views/index
+   compilazione_metadati/index
 
 :ref:`Accounts_and_users`
     This section will guide you through account registration, updating, and viewing other user accounts.
@@ -48,8 +49,8 @@ Before proceeding with the reading, it is strongly recommended to be sure having
 :ref:`Managing_views`
 	This section will guide you to create, delete, manage and share maps. 
 
-:ref:`Managing_metadata`
-	This section will guide you to compile metadata.
+:ref:`Compilazione_metadati`
+	This section will guide you to compile metadata for layers and sensors through the EDI metadata editor.
 
 
 
