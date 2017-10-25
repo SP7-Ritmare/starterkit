@@ -36,6 +36,8 @@ Before proceeding with the reading, it is strongly recommended to be sure having
    managing_observations/index
    managing_views/index
    compilazione_metadati/index
+   
+   Through the left panel you could find different sections:
 
 :ref:`Accounts_and_users`
     This section will guide you through account registration, updating, and viewing other user accounts.
