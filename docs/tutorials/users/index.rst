@@ -36,20 +36,20 @@ Before proceeding with the reading, it is strongly recommended to be sure having
    managing_observations/index
    managing_views/index
 
-:ref:`accounts_and_users`
-    This section will guide you through account registration, updating your account information, and viewing other user accounts.
+:ref:`Accounts_and_users`
+    This section will guide you through account registration, updating, and viewing other user accounts.
 
-:ref:`managing_layers`
-    Create, delete, manage and share Layers and Metadata.
+:ref:`Managing_layers`
+	This section will guide you to create, delete, manage and share layers and metadata.
 	
-:ref:`managing_observations`
-    Manage observations, create and insert sensors.
+:ref:`Managing_observations`
+	This section will guide you to register sensors and to create, delete, manage and share sensors bservations. 
 	
-:ref:`managing_views`
-    Create, delete, manage and share Maps. Add, view and download observation.
+:ref:`Managing_views`
+	This section will guide you to create, delete, manage and share maps. 
 
-:ref:`managing_metadata`
-           you will learn how to compile metadata.
+:ref:`Managing_metadata`
+	This section will guide you to compile metadata.
 
 
 
