@@ -1,6 +1,6 @@
 .. _metadata_check:
 
 ==========================
-How check Sensors Metadata
+How to check Sensors Metadata
 ==========================
 
