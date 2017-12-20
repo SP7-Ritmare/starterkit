@@ -6,44 +6,30 @@
 Welcome to GET-IT's documentation!
 ===================================
 
-The Geoinformation Enabling ToolkIT starterkit® (GET-IT) is a 
+The Geoinformation Enabling ToolkIT starterkit® (GET-IT) is an Open Source software for geospatial data managament. It allows to upload, visualize and share data on the Web through Open Geospatial Consoritum (OGC) standard services. GET-IT users could manage traditional geographic data (layers, maps) and observations from sensors through a single user interface. GET-IT package also include EDI to create metadata according to international profiles (INSPIRE, RNDT, ...).
 
 
-Presentation
+How To Use The Documentation
 ============
 
-.. toctree::
-   :hidden:
+The documentation contains step-by-step tutorials that are oriented around performing particular sets of tasks, like adding data or publishing data, setting up and maintaining a server, or setting up a project to extend from GET-IT. The documentation is written in a workshop format targeted to three different types of users:
 
-   presentation
-   publication
-
-
-:ref:`presentation`
-
-:ref:`publication`
+Users: are people who log into GET-IT website and use its functionality.
+Administrators: are people who install and deploy GET-IT websites in production for their Users.
+Developers: are people who write code to add functionality, integrate with other systems, fix bugs, and potentially help an Administrator setup a server and deploy a GeoNode instance for production.
 
 
-Tutorials
+
+
+Table of contents
 =========
 
-.. toctree::
-   :hidden:
-
-   tutorials/index
 
 
-``This section is on development``
-
-The Tutorials section contains step-by-step
-workshops that are oriented around performing particular sets of
-tasks, like adding data or publishing maps, setting up and maintaining
-a server, or setting up a project to extend from GET-IT. These
-tutorials are written in a workshop-like format and are broken into
-three groups: Users, Administrators and Developers.
 
 
-:ref:`tutorials`
+
+
 
 
 Need Help?
