@@ -3,42 +3,54 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to GET-IT's documentation!
+GET-IT documentation
 ===================================
+Welcome to GET-IT documentation!
 
-The Geoinformation Enabling ToolkIT starterkit® (GET-IT) is an Open Source software for geospatial data managament. It allows to upload, visualize and share data on the Web through Open Geospatial Consoritum (OGC) standard services. GET-IT users could manage traditional geographic data (layers, maps) and observations from sensors through a single user interface. GET-IT package also include EDI to create metadata according to international profiles (INSPIRE, RNDT, ...).
-
+The Geoinformation Enabling ToolkIT starterkit® (GET-IT) is an Open Source software for geospatial data and metadata management. 
+It allows the user to upload, store, visualize and share data on the Web through Open Geospatial Consoritum (OGC) standard services. 
+GET-IT users can manage traditional geographic data (layers, maps) and observations from sensors using simple web form through a single graphic user interface (GUI). GET-IT package also include EDI to create metadata according to international profiles (INSPIRE, RNDT, ...).
 
 How To Use The Documentation
 ============
 
-The documentation contains step-by-step tutorials that are oriented around performing particular sets of tasks, like adding data or publishing data, setting up and maintaining a server, or setting up a project to extend from GET-IT. The documentation is written in a workshop format targeted to three different types of users:
+The documentation is geared toward three distinct types of users: 
 
-Users: are people who log into GET-IT website and use its functionality.
-Administrators: are people who install and deploy GET-IT websites in production for their Users.
-Developers: are people who write code to add functionality, integrate with other systems, fix bugs, and potentially help an Administrator setup a server and deploy a GeoNode instance for production.
+* Users: are people who log into GET-IT web form and use its functionality.
+* Administrators: are people who install and deploy GET-IT in production for their Users.
+* Developers: are people who write code to add functionality, integrate with other systems, fix bugs, and potentially help an Administrator setup a server and deploy a GeoNode instance for production.
 
+The documentation is divided into three sections:
 
-
+* About GET-IT: a short presentation of GET-IT features and its functionalities
+* Tutorials: step-by-step instructions in workshop format that help different users to accomplish a set of tasks.
+* Activities by GET-IT team: about the project, how to contribute, links, resources, other info. 
 
 Table of contents
 =========
 
+It contains step-by-step tutorials that are oriented around performing particular sets of tasks, like adding data or publishing data, setting up and maintaining a server, or setting up a project to extend from GET-IT. 
+
+* About GET-IT:
+
+* Tutorials:
+
+The Tutorials section contains step-by-step workshops that are oriented around performing particular sets of tasks, like adding data or publishing maps, setting up and maintaining a server, or setting up a project to extend from GET-IT. These tutorials are written in a workshop like format and are broken into three groups: 
+* Users tutorials
+* Administrators tutorials 
 
 
-
-
-
+* Activities by GET-IT team: it scientifically summarize the history and the progression of GET-IT development. 
 
 
 
 Need Help?
 ==========
 
-Having trouble? Can't find what you are looking for? We'd like to help!!
+Having trouble? Can't find what you are looking for? We'd like to help!
 
 
- * Write us an email to: help.skritmare@irea.cnr.it
- * Report bugs in GET-IT in our `ticket tracker`_.
+* Write us an email to: help.skritmare@irea.cnr.it
+* Report bugs in GET-IT in our `ticket tracker`_.
 
 .. _ticket tracker: https://github.com/SP7-Ritmare/starterkit
