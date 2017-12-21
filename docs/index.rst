@@ -16,9 +16,9 @@ How To Use The Documentation
 
 The documentation is geared toward three distinct types of users: 
 
-* Users: are people who log into GET-IT web form and use its functionalities.
-* Administrators: are people who install and deploy GET-IT for their Users.
-* Developers: are people who write code to add functionalities, integrate with other systems, fix bugs, and potentially help an Administrator to setup a server and deploy a GET-IT instance.
+* **Users**: are people who log into GET-IT web form and use its functionalities.
+* **Administrators**: are people who install and deploy GET-IT for their Users.
+* **Developers**: are people who write code to add functionalities, integrate with other systems, fix bugs, and potentially help an Administrator to setup a server and deploy a GET-IT instance.
 
 The documentation is divided into three sections:
 
