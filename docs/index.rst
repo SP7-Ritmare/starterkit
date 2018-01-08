@@ -22,7 +22,7 @@ The documentation is geared toward three distinct types of users:
 
 The documentation is divided into three sections:
 
-:ref:accounts_and_users
+:ref:`_presentation`
 
 * **About GET-IT**: a short presentation of GET-IT features and its functionalities.
 * **Tutorials**: step-by-step instructions in workshop format that help different users to accomplish a set of tasks.
