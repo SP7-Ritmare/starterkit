@@ -1,8 +1,8 @@
 .. _users:
 
-===============
-Users Tutorials
-===============
+===================
+Tutorials for users 
+===================
 
 Welcome to the GET-IT Users Tutorial documentation.
 
