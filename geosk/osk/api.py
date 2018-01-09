@@ -79,6 +79,8 @@ def deletesensor(request, template='osk/osk_deletesensor.html'):
                 tr = etree.fromstring(sos_response.content)
                 if tr.tag == nspath_eval("ows110:ExceptionReport", namespaces):
                     return json_response(exception=sos_response.text.encode('utf8'), status=500)
+                # force sos cache reload
+                force_soscache_reload()
 
             # todo: remove Sensor object
             return HttpResponseRedirect(reverse("osk_browse"))
@@ -220,3 +222,8 @@ def ediproxy_importmd(request):
         return json_response(body={'success':True,'redirect': reverse('osk_browse')})
     else:
         return json_response(exception=sos_response.text.encode('utf8'), status=500)
+
+
+def force_soscache_reload():
+    if hasattr(settings, 'SOS_ADMIN_CACHE_RELOAD_URL') and hasattr(settings, 'SOS_ADMIN_USER') and hasattr(settings, 'SOS_ADMIN_PASSWORD'):
+        requests.post(settings.SOS_ADMIN_CACHE_RELOAD_URL, auth=(settings.SOS_ADMIN_USER, settings.SOS_ADMIN_PASSWORD))

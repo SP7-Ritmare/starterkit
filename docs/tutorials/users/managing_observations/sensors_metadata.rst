@@ -1,7 +1,7 @@
 .. _sensors_metadata:
 
 ===========================
-How create Sensors Metadata
+How to create Sensors Metadata
 ===========================
 
 In order to discover, integrate, and exploit sensor data (and also to presserve them for future needs), we need to accurately record sensor information.

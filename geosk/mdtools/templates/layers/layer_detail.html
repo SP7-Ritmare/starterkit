@@ -347,7 +347,13 @@
         'eastlon': {{ layer.bbox_x1 }},
         'southlat': {{ layer.bbox_y0 }},
         'northlat': {{ layer.bbox_y1 }},
-        'referencesystem': '{{ layer.mdextension.ediml_referencesystem  }}'
+        'referencesystem': '{{ layer.mdextension.ediml_referencesystem  }}',
+        // additional informations
+        'user_username': '{{ request.user.username }}',
+        'user_email': '{{ request.user.email }}',
+        'user_profile_organization': '{{ request.user.get_profile.organization }}',
+        'user_profile_email': '{{ request.user.get_profile.email }}',
+        'user_groups': '{% for g in request.user.groups.all %}{% if not forloop.first %}, {% else  %}{% endif %}{{g.name }}{% endfor %}'
         //
         //'spatialreferencesystem': 'http://www.opengis.net/def/crs/EPSG/0/4326'
         // 'date': datetime.date.today().isoformat(), # layer.date.date().isoformat(),

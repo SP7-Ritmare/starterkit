@@ -180,12 +180,18 @@
     var ediml_proxy_url = '{% url "osk_ediproxy_importmd" %}';
     var ediml_edimlId = '';
 
-    var parameters = {};
+    var parameters;
     if(parseInt(ediml_edimlId)){
-        parameters = {
-            edit: ediml_edimlId
-        }
+        parameters['edit'] = ediml_edimlId
     } else {
+        _parameters = {
+            'user_username': '{{ request.user.username }}',
+            'user_email': '{{ request.user.email }}',
+            'user_profile_organization': '{{ request.user.get_profile.organization }}',
+            'user_profile_email': '{{ request.user.get_profile.email }}',
+            'user_groups': '{% for g in request.user.groups.all %}{% if not forloop.first %}, {% else  %}{% endif %}{{g.name }}{% endfor %}'
+        };
+        parameters = {'parameters': JSON.stringify(_parameters)}
     }
 
     var ediProxyConfig = {

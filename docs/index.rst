@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to GET-IT's documentation!
+Welcome to GET-IT documentation!
 ===================================
 
 Documentation of 1.3 GET-IT version.
