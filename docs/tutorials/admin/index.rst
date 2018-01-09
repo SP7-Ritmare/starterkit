@@ -1,7 +1,7 @@
 .. _admin:
 
 ========================
-Administrators Tutorials
+Tutorials for administrators 
 ========================
 
 Welcome to the GET-IT Administrators Workshop!
