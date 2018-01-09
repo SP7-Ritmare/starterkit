@@ -42,7 +42,7 @@ Tutorials
 .. toctree::
     :hidden:
 
-    tutorials
+    tutorials/index
 
 
 ``This section is on development``
