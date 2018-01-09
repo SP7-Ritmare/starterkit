@@ -27,12 +27,35 @@ Bing Maps Issue
 ===============
 From 6th October 2015 the Bing Maps API that are used by default in every GET-IT/GeoNode map are not working anymore.
 
-The effect is that every map cannot be zoomed properly.
+The effect is that every map cannot be zoomed properly. Ale
 
 In order to remove the dependence from the Bing Maps please follow these instructions:
 
 
 :ref:`bing_maps_issue`
+
+
+
+Tutorials
+=========
+
+.. toctree::
+:hidden:
+
+      tutorials/index
+
+
+``This section is on development``
+
+The Tutorials section contains step-by-step
+workshops that are oriented around performing particular sets of
+tasks, like adding data or publishing maps, setting up and maintaining
+a server, or setting up a project to extend from GET-IT. These
+tutorials are written in a workshop-like format and are broken into
+three groups: Users, Administrators and Developers.
+
+
+:ref:`tutorials`
 
 
 
@@ -50,27 +73,6 @@ Presentation
 
 :ref:`publication`
 
-
-Tutorials
-=========
-
-.. toctree::
-   :hidden:
-
-   tutorials/index
-
-
-``This section is on development``
-
-The Tutorials section contains step-by-step
-workshops that are oriented around performing particular sets of
-tasks, like adding data or publishing maps, setting up and maintaining
-a server, or setting up a project to extend from GET-IT. These
-tutorials are written in a workshop-like format and are broken into
-three groups: Users, Administrators and Developers.
-
-
-:ref:`tutorials`
 
 
 Need Help?
