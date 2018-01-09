@@ -20,6 +20,8 @@ Metadata (compiled by this tool) are improved in semantic to increase discovery 
 	
 GET-IT also permits to manage (for every data type uploaded) permission for registered users to:
 
+Alessandro
+
 * visualize	
 * edit
 * download data
