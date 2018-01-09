@@ -40,9 +40,9 @@ Tutorials
 =========
 
 .. toctree::
-:hidden:
+    :hidden:
 
-      tutorials/index
+    tutorials
 
 
 ``This section is on development``
