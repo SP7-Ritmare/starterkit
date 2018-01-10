@@ -1,6 +1,6 @@
 .. _presentation:
 
-Short presentation to GET-IT features and its architecture
+About GET-IT
 ===========================================================
 
 GET-IT is a software package developed by SP7 researchers - working in different CNR Institutes - expert in Data infrastructure and geospatial services. The software was developed for RITMARE SP7 project.

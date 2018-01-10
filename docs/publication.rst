@@ -1,10 +1,10 @@
 .. _publication:
 
-=========================
-Activities by SP7 team
-=========================
+==========================
+Activities by GET-IT team
+==========================
 
-Here is a list of publications and other activities of the SP7 project team.
+Here is a list of publications and other activities of the GET-IT team.
 
 
 Publications on Journals

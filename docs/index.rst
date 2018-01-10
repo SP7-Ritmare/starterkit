@@ -4,12 +4,13 @@
    contain the root `toctree` directive.
 
 GET-IT documentation
-===================================
+================================
 Welcome to GET-IT documentation!
 
 The Geoinformation Enabling ToolkIT starterkit® (GET-IT) is an Open Source software for geospatial data and metadata management. 
 It allows the user to upload, store, visualize and share data on the Web through Open Geospatial Consoritum (OGC) standard services. 
 GET-IT users can manage traditional geographic data (layers, maps) and observations from sensors using simple web form accessible through a single graphic user interface (GUI). GET-IT also include EDI to create metadata according to international profiles (INSPIRE, RNDT, SensorML).
+
 
 How To Use The Documentation
 ============
@@ -66,6 +67,8 @@ The Activities by GET-IT team section scientifically summarize the history and t
  * International Conferences
  * Books
  * IPR Protection of the suite software GET-IT
+=======
+
 
 Need Help?
 ==========
