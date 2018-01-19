@@ -27,6 +27,8 @@ The documentation is divided into three sections:
 * **Tutorials**: step-by-step instructions in workshop format that help different users to accomplish a set of tasks.
 * **Activities by GET-IT team**: information about the project, how to contribute, links, resources, other info. 
 
+:menuselection:`Start --> Programs`
+
 Table of contents
 =====================
 
