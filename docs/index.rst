@@ -25,7 +25,7 @@ The documentation is divided into three sections:
 
 * :ref:`presentation`: a short presentation of GET-IT features and its functionalities.
 * :ref:`users`: step-by-step instructions in workshop format that help different users to accomplish a set of tasks.
-* :ref:`users`: information about the project, how to contribute, links, resources, other info. 
+* :ref:`publication`: information about the project, how to contribute, links, resources, other info. 
 
 
 Table of contents
@@ -70,6 +70,7 @@ The Activities by GET-IT team section scientifically summarize the history and t
  * International Conferences
  * Books
  * IPR Protection of the suite software GET-IT
+
 
 
 
