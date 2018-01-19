@@ -32,7 +32,7 @@ Table of contents
 
 It contains step-by-step tutorials that are oriented around performing particular sets of tasks, like adding data or publishing data, setting up and maintaining a server, or setting up a project to extend from GET-IT. 
 
-**:ref:'_presentation'**
+**:ref:'presentation'**
 ================
 
 The About GET-IT section gives an overview of GET-IT and it is targeted at a non-technical audience to present its functionalities and its main work environment who just want to and will come back later to the complete documentation
