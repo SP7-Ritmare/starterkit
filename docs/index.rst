@@ -27,7 +27,7 @@ The documentation is divided into three sections:
 * **Tutorials**: step-by-step instructions in workshop format that help different users to accomplish a set of tasks.
 * **Activities by GET-IT team**: information about the project, how to contribute, links, resources, other info. 
 
-Table of contents
+**Table of contents**
 
 It contains step-by-step tutorials that are oriented around performing particular sets of tasks, like adding data or publishing data, setting up and maintaining a server, or setting up a project to extend from GET-IT. 
 
