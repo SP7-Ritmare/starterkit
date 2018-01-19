@@ -30,7 +30,7 @@ The documentation is divided into three sections:
 Table of contents
 =====================
 
-It contains step-by-step tutorials that are oriented around performing particular sets of tasks, like adding data or publishing data, setting up and maintaining a server, or setting up a project to extend from GET-IT. 
+It contains step-by-step tutorials that are oriented around performing particular sets of tasks, like adding data or publishing data, setting up and maintaining a server, or setting up a project to extend from GET-IT. :ref:'presentation'
 
 :ref:'presentation'
 ================
