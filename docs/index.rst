@@ -12,7 +12,7 @@ It allows the user to upload, store, visualize and share data on the Web through
 GET-IT users can manage traditional geographic data (layers, maps) and observations from sensors using simple web form accessible through a single graphic user interface (GUI). GET-IT also include EDI to create metadata according to international profiles (INSPIRE, RNDT, SensorML).
 
 
-# How To Use The Documentation
+How To Use The Documentation
 
 
 The documentation is geared toward three distinct types of users: 
@@ -68,7 +68,7 @@ The Activities by GET-IT team section scientifically summarize the history and t
 
 
 
-# Need Help?
+Need Help?
 
 Having trouble? Can't find what you are looking for? We'd like to help!
 
