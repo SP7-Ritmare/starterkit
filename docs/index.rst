@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 GET-IT documentation
-================================
+********************
 Welcome to GET-IT documentation!
 
 The Geoinformation Enabling ToolkIT starterkit® (GET-IT) is an Open Source software for geospatial data and metadata management. 
