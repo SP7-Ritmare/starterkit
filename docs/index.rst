@@ -33,12 +33,12 @@ Table of contents
 
 It contains step-by-step tutorials that are oriented around performing particular sets of tasks, like adding data or publishing data, setting up and maintaining a server, or setting up a project to extend from GET-IT.
 
-:ref:`presentation <About GET-IT>`
+:ref:`presentation`
 ================
 
 The About GET-IT section gives an overview of GET-IT and it is targeted at a non-technical audience to present its functionalities and its main work environment who just want to and will come back later to the complete documentation
 
-:ref:`users <Tutorials for users>`
+:ref:`users`
 ================
 
 The Tutorials section contains step-by-step instructions that are oriented around performing particular sets of tasks, like adding data or publishing maps, setting up and maintaining a server, or setting up a project to extend from GET-IT. These tutorials are written in a workshop like format and are broken into two groups: 
@@ -61,7 +61,7 @@ The Tutorials section contains step-by-step instructions that are oriented aroun
 * Tutorials for developers
  * 
  
-:ref:`publication <Activities by GET-IT team>`
+:ref:`<Activities by GET-IT team> publication`
 ================
 
 The Activities by GET-IT team section scientifically summarize the history and the progression of GET-IT development. It contains links to papers, articles, use cases and the most updated materials produced by GET-IT team.
