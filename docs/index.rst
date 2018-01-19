@@ -13,7 +13,7 @@ GET-IT users can manage traditional geographic data (layers, maps) and observati
 
 
 How To Use The Documentation
-
+=====================
 
 The documentation is geared toward three distinct types of users: 
 
@@ -27,11 +27,12 @@ The documentation is divided into three sections:
 * **Tutorials**: step-by-step instructions in workshop format that help different users to accomplish a set of tasks.
 * **Activities by GET-IT team**: information about the project, how to contribute, links, resources, other info. 
 
-**Table of contents**
+Table of contents
+=====================
 
 It contains step-by-step tutorials that are oriented around performing particular sets of tasks, like adding data or publishing data, setting up and maintaining a server, or setting up a project to extend from GET-IT. 
 
-**About GET-IT**
+**:ref:_presentation**
 ================
 
 The About GET-IT section gives an overview of GET-IT and it is targeted at a non-technical audience to present its functionalities and its main work environment who just want to and will come back later to the complete documentation
