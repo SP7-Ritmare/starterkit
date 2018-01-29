@@ -19,11 +19,12 @@
 #########################################################################
 
 import os
+
 from celery import Celery
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'geosk28.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'geosk.settings')
 
-app = Celery('geosk28')
+app = Celery('geosk')
 
 # Using a string here means the worker will not have to
 # pickle the object when using Windows.

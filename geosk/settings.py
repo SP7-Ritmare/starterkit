@@ -23,7 +23,7 @@ import os
 
 # Load more settings from a file called local_settings.py if it exists
 try:
-    from geosk28.local_settings import *
+    from geosk.local_settings import *
 #    from geonode.local_settings import *
 except ImportError:
     from geonode.settings import *
