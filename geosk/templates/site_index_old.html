@@ -1,0 +1,104 @@
+{% extends 'index.html' %}
+{% load i18n %}
+{% load maps_tags %}
+{% load layers_tags %}
+{% load pagination_tags %}
+{% load staticfiles %}
+{% load url from future %}
+{% comment %}
+This is where you can override the hero area block. You can simply modify the content below or replace it wholesale to meet your own needs.
+{% endcomment %}
+  {% block hero %}
+  <div class="hero-unit">
+    {% if user.is_superuser and not skregistration %}
+    <div class="alert">
+      <strong>Warning!</strong> The GET-IT is not registered to RITMARE infrastructure. Please complete the
+      <a class="" href="{% url 'skregistration_registration' %}">registration</a>
+    </div>
+    {% endif %}
+    {% if SERVICES_METADATA %}
+      <h1>{{ SERVICES_METADATA.node_name }}</h1>
+      <h2>{{ SERVICES_METADATA.node_title }}</h2>
+    {% else %}
+      <h1>{% trans "GET-IT - Demo" %}</h1>
+    {% endif %}
+
+    <div class="hero-unit-content">
+
+      <div class="intro">
+      {% if SERVICES_METADATA.node_abstract %}
+        <h2>{{ SERVICES_METADATA.node_abstract|safe }}</h2>
+      {% else %}
+        <h2>
+            {% blocktrans %}Upload your layers, your observations, create your maps and join the RITMARE interoperable Infrastructure.{% endblocktrans %}
+        </h2>
+      {% endif %}
+      <p>
+        {% blocktrans %}
+	<a href="http://www.get-it.it/" target="_blank">GET-IT</a> is developed in the context of <a href="http://sp7.irea.cnr.it/">Sub-Project 7</a> of RITMARE (<a href="http://www.ritmare.it/">www.ritmare.it</a>). It is based upon <a href="http://geonode.org/">GeoNode</a>.
+	{% endblocktrans %}
+      </p>
+      <p>{% blocktrans %}For more info visit the project site: <a href="http://www.get-it.it/" target="_blank">www.get-it.it</a>{% endblocktrans %}.
+      <span>{% trans 'Need help' %} <a href="http://sp7.irea.cnr.it/wiki/index.php/Getting_Started">{% trans 'Getting Started?' %}</a></span>
+      </div>
+      <div class="btns">
+        <a class="btn btn-large" href="{% url "layer_browse" %}">
+          {% trans "Explore Layers" %}
+        </a>
+        <a class="btn btn-large" href="{% url "osk_browse" %}">
+          {% trans "Explore Sensors" %}
+        </a>
+        <a class="btn btn-large" href="{% url "maps_browse" %}">
+          {% trans "Explore Maps" %}
+        </a>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+
+  {% block mainbody %}
+  <div class="row">
+    <div class="span8">
+      <section class="widget list paginate-contents">
+        <h2>{% trans "Latest Layers" %}</h2>
+        <div class="paginate paginate-auto" id="search-content">
+          {% include 'search/search_content.html' %}
+        </div>
+      </section>
+    </div>
+    <aside class="span4">
+      {% if request.user.is_authenticated %}
+        <div class="well">
+          <section>
+            <h2>{% trans "Contribute" %}</h2>
+            <p class="main-actions">
+            {% blocktrans %}
+              GeoNode enables you to upload, manage, and browse data layers. Search for data that is valuable to you, or upload your own data.
+            {% endblocktrans %}
+              <a href="{% url "data_upload" %}" class="btn btn-large">{% trans 'Upload Layers' %}</a>
+            {% if perms.osk.admin_sos %}
+            {% blocktrans %}
+              GET-IT enables you to upload, manage, and view sensors and their observations. Create a sensor or upload observations of existing sensor.
+            {% endblocktrans %}
+              <a href="{% url "osk_browse" %}#ediclient_container" class="btn btn-large">{% trans 'Create a Sensor'  %}</a>
+            {% endif %}
+            {% blocktrans %}
+              GeoNode enables you to compose and share maps. Create a map with our cartography tool, or explore maps shared by others.
+            {% endblocktrans %}
+              <a href="{% url "new_map" %}" class="btn btn-large">{% trans 'Create a Map' %}</a>
+            </p>
+          </section>
+        </div>
+      {% endif %}
+      <div class="well">
+        <h2>{% trans "Latest Maps" %}</h2>
+        <section class="article-list latest-maps">
+          {% featured_maps as featured_maps %}
+          {% for map in featured_maps %}
+            {% include "maps/_map_list_item.html" %}
+          {% endfor %}
+        </section>
+      </div>
+    </aside>
+  </div>
+  {% endblock %}
