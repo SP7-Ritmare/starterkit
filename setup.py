@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #########################################################################
 #
 # Copyright (C) 2014 Starter Kit Development Team
@@ -22,6 +23,7 @@ import stat
 from codecs import open
 from setuptools import setup, find_packages
 from setuptools.command.install import install
+from distutils.core import setup
 
 
 class PostInstallCommand(install):
@@ -54,6 +56,8 @@ here = os.path.abspath(os.path.dirname(__file__))
 
 with open(os.path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
+def read(*rnames):
+    return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
 setup(
     name='starterkit',
@@ -84,6 +88,7 @@ setup(
         "owslib==0.10.3",
         "django-analytical==1.0.0",
         "django-taggit-templatetags",
+       'geonode>=2.5',
     ],
     #
     include_package_data = True,
