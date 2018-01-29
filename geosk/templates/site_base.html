@@ -7,7 +7,7 @@
 {% comment %}
 {% endcomment %}
 <li id="nav_osk">
-  {% if user.is_authenticated %}
+  {% if user.is_authenticated and SOS_APP %}
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Sensors" %}<i class="fa fa-angle-down fa-lg"></i></a>
   <ul class="dropdown-menu">
     <li><a href="{% url "osk_browse" %}?limit={{ CLIENT_RESULTS_LIMIT }}">{% trans "Explore Sensors" %}</a></li>
