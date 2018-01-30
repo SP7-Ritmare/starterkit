@@ -4,16 +4,20 @@
       <link href="{{ STATIC_URL }}css/site_base.css" rel="stylesheet"/>
 {% endblock %}
 {% block extra_tab %}
-{% comment %}
-{% endcomment %}
 <li id="nav_osk">
-  {% if user.is_authenticated and SOS_APP %}
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Sensors" %}<i class="fa fa-angle-down fa-lg"></i></a>
+  {% if user.is_authenticated %}
   <ul class="dropdown-menu">
     <li><a href="{% url "osk_browse" %}?limit={{ CLIENT_RESULTS_LIMIT }}">{% trans "Explore Sensors" %}</a></li>
+    {% if perms.osk.admin_sos %}
+    <li><a href="{% url "osk_registration" %}?limit={{ CLIENT_RESULTS_LIMIT }}#ediclient_container">{% trans "Register a new  Sensor" %}</a></li>
+    {% endif %}
+    {% comment %}<li><a href="{% url "demo_index" %}">{% trans "Demo" %}</a></li>{% endcomment %}
   </ul>
+  {% comment %}
   {% else %}
   <a href="{% url "osk_browse" %}?limit={{ CLIENT_RESULTS_LIMIT }}">{% trans "Sensors" %}</a>
+  {% endcomment %}
   {% endif %}
 </li>
 {% endblock %}
