@@ -12,12 +12,12 @@
     {% if perms.osk.admin_sos %}
     <li><a href="{% url "osk_registration" %}?limit={{ CLIENT_RESULTS_LIMIT }}#ediclient_container">{% trans "Register a new  Sensor" %}</a></li>
     {% endif %}
-    {% comment %}<li><a href="{% url "demo_index" %}">{% trans "Demo" %}</a></li>{% endcomment %}
+    <li><a href="{% url "demo_index" %}">{% trans "Demo" %}</a></li>
   </ul>
-  {% comment %}
   {% else %}
-  <a href="{% url "osk_browse" %}?limit={{ CLIENT_RESULTS_LIMIT }}">{% trans "Sensors" %}</a>
-  {% endcomment %}
+  <ul class="dropdown-menu">
+    <li><a href="{% url "osk_browse" %}?limit={{ CLIENT_RESULTS_LIMIT }}">{% trans "Sensors" %}</a></li>
+  </ul>
   {% endif %}
 </li>
 {% endblock %}

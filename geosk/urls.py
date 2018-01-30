@@ -71,7 +71,9 @@ geoskurlpatterns = patterns(
      ),
 
     # Demo
-    #  (r'^demo/', include('geosk.demo.urls')),
+    (r'^demo/',
+     include('geosk.demo.urls')
+     ),
 
     (r'^grappelli/',
      include('grappelli.urls')
