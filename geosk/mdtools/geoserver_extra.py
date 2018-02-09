@@ -1,10 +1,11 @@
-import requests
-import simplejson
+import json
 from datetime import datetime, timedelta
 
+import requests
+
+import simplejson
 from geoserver.catalog import Catalog, logger
 from geoserver.support import url
-from django.utils import simplejson as json
 
 
 class Settings(object):
@@ -14,13 +15,13 @@ class Settings(object):
     @property
     def contact_url(self):
         return url(self.catalog.service_url,
-            ["settings", "contact.json"])
+                   ["settings", "contact.json"])
 
     def _get_contact(self):
         return self.catalog.get_json(self.contact_url)
 
     def update_contact(self, json):
-        headers = { "Content-Type": "application/json" }
+        headers = {"Content-Type": "application/json"}
         self.catalog.http.request(
             self.contact_url, "PUT", simplejson.dumps(json), headers)
 
@@ -30,7 +31,7 @@ class Settings(object):
                    ['services', service, "settings.json"])
 
     def update_service(self, service, json):
-        headers = { "Content-Type": "application/json" }
+        headers = {"Content-Type": "application/json"}
         self.catalog.http.request(
             self.service_url(service), "PUT", simplejson.dumps(json), headers)
 
@@ -38,6 +39,6 @@ class Settings(object):
         response, content = self.catalog.http.request(
             self.service_url(service), "GET")
         if response.status == 200:
-            return json.loads(content)        
+            return json.loads(content)
         else:
             return None
