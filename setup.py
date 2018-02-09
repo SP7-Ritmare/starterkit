@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #########################################################################
 #
 # Copyright (C) 2014 Starter Kit Development Team
@@ -20,7 +21,9 @@
 import os
 import stat
 from codecs import open
-from setuptools import setup, find_packages
+from distutils.core import setup
+
+from setuptools import find_packages, setup
 from setuptools.command.install import install
 from shutil import copyfile
 
@@ -49,18 +52,24 @@ class PostInstallCommand(install):
         for f in files:
             open(f, 'a').close()
             # make links
-            link_name = os.path.join(self.install_lib, 'geosk', os.path.basename(f))
+            link_name = os.path.join(
+                self.install_lib, 'geosk', os.path.basename(f))
             if not os.path.islink(link_name):
                 print 'make link', link_name
                 os.symlink(f, link_name)
-        os.chmod('/etc/starterkit/pycsw_settings.py', stat.S_IREAD|stat.S_IRGRP|stat.S_IROTH|
-                 stat.S_IWRITE|stat.S_IWGRP|stat.S_IWOTH)
+        os.chmod('/etc/starterkit/pycsw_settings.py', stat.S_IREAD | stat.S_IRGRP | stat.S_IROTH |
+                 stat.S_IWRITE | stat.S_IWGRP | stat.S_IWOTH)
 
 
 here = os.path.abspath(os.path.dirname(__file__))
 
 with open(os.path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
+
+
+def read(*rnames):
+    return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
+
 
 setup(
     name='starterkit',
@@ -83,17 +92,19 @@ setup(
     install_requires=[
         "django-overextends",
         "django-annoying",
-        "django-rosetta==0.7.4",
+        "django-rosetta==0.7.6",
         "django-grappelli==2.4.10",
         "djproxy",
         "simplejson",
-        "Django==1.5.5", # required by GeoNode 2.0
-        "owslib==0.10.3",
+        "Django==1.8.18",  # required by GeoNode 2.4
+        # "owslib==0.10.3",
         "django-analytical==1.0.0",
+        "django-taggit-templatetags",
+        'geonode>=2.5',
     ],
     #
-    include_package_data = True,
-    setup_requires = [ "setuptools_git >= 0.3", ],
+    include_package_data=True,
+    setup_requires=["setuptools_git >= 0.3", ],
     scripts=['bin/sk',
              'bin/sk-updateip',
              'bin/softInspector.sh',

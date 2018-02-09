@@ -1,8 +1,8 @@
 from django.db import models
 
 # override search function
-from geonode.search import search
-from geonode.search.search import _build_kw_only_query
+# from geonode.search import search
+# from geonode.search.search import _build_kw_only_query
 
 from django.db.models import Q
 import operator
@@ -29,6 +29,6 @@ def  _build_map_layer_text_query2(q, query, query_keywords=False):
     return q
 
 
-search._build_map_layer_text_query = _build_map_layer_text_query2
+#search._build_map_layer_text_query = _build_map_layer_text_query2
 
 
