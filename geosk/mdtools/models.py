@@ -28,9 +28,9 @@ from annoying.fields import AutoOneToOneField
 from django.utils.translation import ugettext, ugettext_lazy as _
 
 from geonode.base.models import ResourceBase, ResourceBaseManager, Link, \
-    resourcebase_post_save, resourcebase_post_delete
+    resourcebase_post_save #, resourcebase_post_delete
 
-from geonode.people.models import Profile, Role
+from geonode.people.models import Profile #, Role
 
 from geonode.base.enumerations import ALL_LANGUAGES, \
     HIERARCHY_LEVELS, UPDATE_FREQUENCIES, \
@@ -61,7 +61,7 @@ class ResponsiblePartyScope(models.Model):
 class MultiContactRole(models.Model):
     resource = models.ForeignKey('MdExtension')
     contact  = models.ForeignKey(Profile)
-    role     = models.ForeignKey(Role)
+    #role     = models.ForeignKey(Role)
     scope    = models.ForeignKey(ResponsiblePartyScope)
 
 
