@@ -57,6 +57,7 @@ The Tutorials section contains step-by-step instructions that are oriented aroun
 
 .. toctree::
     :maxdepth: 5
+    :hidden:
     
     publication
 
