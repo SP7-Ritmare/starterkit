@@ -75,7 +75,7 @@ Need Help?
 
 Having trouble? Can't find what you are looking for? We'd like to help!
 
-* Write us an email to: help.skritmare@irea.cnr.it
+* Write us an email to: infogetitsk@gmail.com
 * Report bugs in GET-IT in our `ticket tracker`_.
 
 .. _ticket tracker: https://github.com/SP7-Ritmare/starterkit
