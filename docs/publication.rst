@@ -1,8 +1,7 @@
 .. _publication:
 
-==========================
-Activities by GET-IT team
-==========================
+Publications by GET-IT team
+********************
 
 Here is a list of publications and other activities of the GET-IT team.
 
