@@ -38,31 +38,20 @@ It contains step-by-step tutorials that are oriented around performing particula
 
 The About GET-IT section gives an overview of GET-IT and it is targeted at a non-technical audience to present its functionalities and its main work environment who just want to and will come back later to the complete documentation
 
-:ref:`users`
+Tutorials for users
 ================
 
 The Tutorials section contains step-by-step instructions that are oriented around performing particular sets of tasks, like adding data or publishing maps, setting up and maintaining a server, or setting up a project to extend from GET-IT. These tutorials are written in a workshop like format and are broken into two groups: 
 
-* Tutorials for user
- * Accounts and users
- * Managing layers
- * Managing maps
- * Managing observations
- * Managing metadata
- 
-* Tutorials for administrators  
- * GET-IT Quick Installation
- * Installing GET-IT from scratch
- * Server requirements
- * Advanced administrations
- * Security issues
- * Choosing the right "Domain" name
- 
-* Tutorials for developers
- * 
+.. toctree::
+    :maxdepth: 5
+
+    tutorials/index
  
 :ref:`publication`
 ================
+
+
 
 The Activities by GET-IT team section scientifically summarize the history and the progression of GET-IT development. It contains links to papers, articles, use cases and the most updated materials produced by GET-IT team.
 
