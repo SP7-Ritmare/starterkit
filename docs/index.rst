@@ -38,7 +38,7 @@ It contains step-by-step tutorials that are oriented around performing particula
 
 The About GET-IT section gives an overview of GET-IT and it is targeted at a non-technical audience to present its functionalities and its main work environment who just want to and will come back later to the complete documentation
 
-Tutorials for users
+Tutorials
 ================
 
 The Tutorials section contains step-by-step instructions that are oriented around performing particular sets of tasks, like adding data or publishing maps, setting up and maintaining a server, or setting up a project to extend from GET-IT. These tutorials are written in a workshop like format and are broken into two groups: 
@@ -46,7 +46,7 @@ The Tutorials section contains step-by-step instructions that are oriented aroun
 .. toctree::
     :maxdepth: 5
 
-    tutorials
+    tutorials/
  
 :ref:`publication`
 ================
