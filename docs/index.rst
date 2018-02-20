@@ -47,7 +47,7 @@ The Tutorials section contains step-by-step instructions that are oriented aroun
     :maxdepth: 5
     :hidden:
 
-    tutorials/index
+    tutorials/*
  
 :ref:`publication`
 ================
