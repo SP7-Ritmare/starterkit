@@ -35,6 +35,11 @@ It contains step-by-step tutorials that are oriented around performing particula
 
 :ref:`presentation`
 ================
+.. toctree::
+    :maxdepth: 5
+    :hidden:
+    
+    About GET-IT <presentation>
 
 The About GET-IT section gives an overview of GET-IT and it is targeted at a non-technical audience to present its functionalities and its main work environment who just want to and will come back later to the complete documentation
 
