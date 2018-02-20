@@ -46,7 +46,11 @@ The Tutorials section contains step-by-step instructions that are oriented aroun
 .. toctree::
     :maxdepth: 5
 
-    tutorials/
+    tutorials/index
+    users/index
+    admin/index
+    developers/index
+    dataflowengine/index
  
 :ref:`publication`
 ================
