@@ -5,6 +5,7 @@ Tutorials
 =========
 
 .. toctree::
+   :maxdepth: 5
    :hidden:
 
    users/index
