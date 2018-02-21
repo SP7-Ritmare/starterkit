@@ -57,19 +57,12 @@ The Tutorials section contains step-by-step instructions that are oriented aroun
 :ref:`publication`
 ================
 
-.. toctree::
-    :maxdepth: 5
-    :hidden:
-    
-    GET-IT team activities <publication>
-
 The Activities by GET-IT team section scientifically summarize the history and the progression of GET-IT development. It contains links to papers, articles, use cases and the most updated materials produced by GET-IT team.
 
- * Publications on Journals
- * International Conferences
- * Books
- * IPR Protection of the suite software GET-IT
-
+.. toctree::
+    :maxdepth: 5
+    :includehidden:
+    
 
 Need Help?
 ================
