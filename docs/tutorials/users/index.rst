@@ -8,10 +8,11 @@ Tutorials for users
    :maxdepth: 5
    :hidden:
    
-   accounts_and_users
-   managing_layers
-   managing_observations
-   managing_views
+   accounts_and_users/index
+   managing_layers/layers
+   managing_observations/index
+   managing_views/index
+   managing_layers/layers_metadata.rst
 
 Welcome to the GET-IT Users Tutorial documentation.
 
