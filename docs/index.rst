@@ -63,6 +63,7 @@ The Activities by GET-IT team section scientifically summarize the history and t
     :maxdepth: 5
     :includehidden:
     
+    GET-IT team activities <publication>
 
 Need Help?
 ================
