@@ -7,6 +7,11 @@ Tutorials for users
 .. toctree::
    :maxdepth: 5
    :hidden:
+   
+   accounts_and_users
+   managing_layers
+   managing_observations
+   managing_views
 
 Welcome to the GET-IT Users Tutorial documentation.
 
