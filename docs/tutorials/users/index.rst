@@ -4,6 +4,10 @@
 Tutorials for users 
 ===================
 
+.. toctree::
+   :maxdepth: 4
+   :hidden:
+
 Welcome to the GET-IT Users Tutorial documentation.
 
 This tutorial documentation will teach how to use the `GET-IT <http://www.get-it.it/>`_ going in depth into what we can do with the software application. The avaiable sections are:
