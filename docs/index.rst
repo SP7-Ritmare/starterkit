@@ -45,13 +45,13 @@ The About GET-IT section gives an overview of GET-IT and it is targeted at a non
 
 :ref:`tutorials`
 ================
-.. toctree::
-    :maxdepth: 5
-    :hidden:
-    
-    tutorials/index
 
 The Tutorials section contains step-by-step instructions that are oriented around performing particular sets of tasks, like adding data or publishing maps, setting up and maintaining a server, or setting up a project to extend from GET-IT. These tutorials are written in a workshop like format and are broken into two groups: 
+
+.. toctree::
+    :maxdepth: 5
+    
+    tutorials/index
  
 :ref:`publication`
 ================
