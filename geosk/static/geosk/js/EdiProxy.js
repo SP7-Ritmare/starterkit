@@ -11,7 +11,7 @@ var EdiProxy = function(config){
 
     this.iframe = $('#' + this.id_container).find('iframe');
 
-    $('#' + proxy.id_container).on('show', function () {
+    $('#' + proxy.id_container).on('show.bs.modal', function () {
         proxy.iframe.attr("src", proxy.ediml_client_url + $.param(proxy.parameters));
     });
 

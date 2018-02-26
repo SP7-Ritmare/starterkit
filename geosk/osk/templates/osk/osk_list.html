@@ -9,163 +9,169 @@
 {% block body_class %}osk osk-list explore{% endblock %}
 
 {% block body %}
-<div class="span12">
-    <div class="row">
-        <div class="span6">
-            <h2 class="page-title span7">{% trans "Explore SOS" %}</h2>
+<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-4">
+                <h2 class="page-title">{% trans "Explore SOS" %}</h2>
+            </div>
+            <div class="col-md-8">
+                <p class="sos-actions">
+                    {% if perms.osk.admin_sos %}
+                    <a  id="open_ediclient_btn" href="#ediclient_container"
+                        class="btn btn-large btn-primary" href=""><i class="glyphicon glyphicon-upload"></i> {% trans "Register a new  Sensor" %}</a>
+                    {% endif %}
+                    <a class="btn btn-large btn-info" target="_blank" href="{{ cap.capabilities_url }}"><i class="glyphicon glyphicon-new-window"></i> {% trans "Capabilities" %}</a>
+                </p>
+            </div>
+            <!--div class="span3 input-append">
+            <form  method="GET" action"/osk/">
+            <input class="span2 input-small"  type="text" name="sosurl" placeholder="Remote SOS">
+            <button class="btn" type="submit">Load</button>
+            </form>
+            </div-->
         </div>
-        <div class="span6">
-            {% if perms.osk.admin_sos %}
-            <a  id="open_ediclient_btn" href="#ediclient_container"
-                class="btn btn-large btn-primary" href="">{% trans "Register a new  Sensor" %}</a>
-            {% endif %}
-            <a class="btn btn-large btn-info" target="_blank" href="{{ cap.capabilities_url }}">{% trans "Capabilities &raquo;" %}</a>
-        </div>
-        <!--div class="span3 input-append">
-        <form  method="GET" action"/osk/">
-        <input class="span2 input-small"  type="text" name="sosurl" placeholder="Remote SOS">
-        <button class="btn" type="submit">Load</button>
-        </form>
-        </div-->
     </div>
 </div>
 
-<div class="span12">
-    <div class="row" id="contain-slider">
+<div class="row" id="contain-slider">
 
-        <article class="description tab-pane active" id="info">
-            <div class="span4">
-                <h2><i class="icon-info-sign"></i> {% trans "Identification" %}</h2>
-                <dl>
-                    <dt>{% trans "Title" %}</dt>
-                    <dd>{{ cap.identification.title }}</dd>
-                    <dt>{% trans "Abstract" %}</dt>
-                    <dd>{{ cap.identification.abstract }}</dd>
-                    <dt>{% trans "Keywords" %}</dt>
-                    <dd>{{ cap.identification.keywords|join:", " }}</dd>
-                </dl>
-                <h2><i class="icon-user"></i> {% trans "Provider" %}</h2>
-                <p>{{ cap.provider.name }}</p>
-                <dl>
-                    <dt>{% trans "Name" %}</dt>
-                    <dd>{{ cap.provider.contact.name }}</dd>
-                    <dt>{% trans "Organization" %}</dt>
-                    <dd>{{ cap.provider.contact.organization }}</dd>
-                    <dt>{% trans "Position" %}</dt>
-                    <dd>{{ cap.provider.contact.position }}</dd>
-                    <dt>{% trans "Address" %}</dt>
-                    <dd>{{ cap.provider.contact.address }}</dd>
-                    <dt>{% trans "Postcode" %}</dt>
-                    <dd>{{ cap.provider.contact.postcode }}</dd>
-                    <dt>{% trans "City" %}</dt>
-                    <dd>{{ cap.provider.contact.city }}</dd>
-                    <dt>{% trans "Region" %}</dt>
-                    <dd>{{ cap.provider.contact.region }}</dd>
-                    <dt>{% trans "Country" %}</dt>
-                    <dd>{{ cap.provider.contact.country }}</dd>
-                    <dt>{% trans "Email" %}</dt>
-                    <dd>{{ cap.provider.contact.email }}</dd>
-                    <dt>{% trans "Phone" %}</dt>
-                    <dd>{{ cap.provider.contact.phone }}</dd>
-                    <dt>{% trans "Fax" %}</dt>
-                    <dd>{{ cap.provider.contact.fax }}</dd>
-                    <dt>{% trans "Site" %}</dt>
-                    <dd class="break-word">{{ cap.provider.contact.site|urlize }}</dd>
-                </dl>
-            </div>
+    <article class="description tab-pane active" id="info">
+        <div class="col-md-4">
+            <h2><i class="glyphicon glyphicon-info-sign"></i> {% trans "Identification" %}</h2>
+            <dl>
+                <dt>{% trans "Title" %}</dt>
+                <dd>{{ cap.identification.title }}</dd>
+                <dt>{% trans "Abstract" %}</dt>
+                <dd>{{ cap.identification.abstract }}</dd>
+                <dt>{% trans "Keywords" %}</dt>
+                <dd>{{ cap.identification.keywords|join:", " }}</dd>
+            </dl>
+            <h2><i class="glyphicon glyphicon-user"></i> {% trans "Provider" %}</h2>
+            <p>{{ cap.provider.name }}</p>
+            <dl>
+                <dt>{% trans "Name" %}</dt>
+                <dd>{{ cap.provider.contact.name }}</dd>
+                <dt>{% trans "Organization" %}</dt>
+                <dd>{{ cap.provider.contact.organization }}</dd>
+                <dt>{% trans "Position" %}</dt>
+                <dd>{{ cap.provider.contact.position }}</dd>
+                <dt>{% trans "Address" %}</dt>
+                <dd>{{ cap.provider.contact.address }}</dd>
+                <dt>{% trans "Postcode" %}</dt>
+                <dd>{{ cap.provider.contact.postcode }}</dd>
+                <dt>{% trans "City" %}</dt>
+                <dd>{{ cap.provider.contact.city }}</dd>
+                <dt>{% trans "Region" %}</dt>
+                <dd>{{ cap.provider.contact.region }}</dd>
+                <dt>{% trans "Country" %}</dt>
+                <dd>{{ cap.provider.contact.country }}</dd>
+                <dt>{% trans "Email" %}</dt>
+                <dd>{{ cap.provider.contact.email }}</dd>
+                <dt>{% trans "Phone" %}</dt>
+                <dd>{{ cap.provider.contact.phone }}</dd>
+                <dt>{% trans "Fax" %}</dt>
+                <dd>{{ cap.provider.contact.fax }}</dd>
+                <dt>{% trans "Site" %}</dt>
+                <dd class="break-word">{{ cap.provider.contact.site|urlize }}</dd>
+            </dl>
+        </div>
 
-            <div class="span8">
-                <h2><i class="icon-map-marker"></i> {% trans "Sensors / Procedures" %}</h2>
-                <div class="row">
-                    <div class="span3">
-                        <div class="alert alert-info">
-                            {% trans "Number of sensors:" %} <strong>{{ sensors|length  }}</strong>
-                        </div>
+        <div class="col-md-8">
+            <h2><i class="glyphicon glyphicon-map-marker"></i> {% trans "Sensors / Procedures" %}</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="bg-info" style="padding: 15px;">
+                        {% trans "Number of sensors:" %} <strong>{{ sensors|length  }}</strong>
                     </div>
                 </div>
-                {% for sensor in sensors %}
-                <article>
-                    <div class="content">
-                        <h2>
-                            {% if sensor.name %}
-                              {{ sensor.name }}
-                            {% else %}
-                              {% trans "Sensor" %} {{ forloop.counter }}
-                            {% endif %}
-                        </h2>
-                        <p>{{ sensor.description }}</p>
-                        <p class="break-word"><small>{{ sensor.id|urlize }}</small></p>
-                        <div class="btn-toolbar">
-                            <div class="btn-group">
-                                {% if sensor.isvalid %}
-                                <a href="{% url "osk_describe_sensor" %}?format={{ 'text/html'|urlencode }}&sensor_id={{sensor.id|urlencode }}" target="_blank" data-toggle="modal" class="btn btn-mini">{% trans "Sensor details" %}</a>
-                                {% endif %}
-                                {% if perms.osk.admin_sos %}
-                                {% if sensor.isvalid %}
-                                <a href="{% url "osk_upload" %}?procedureId={{ sensor.id }}" class="btn btn-mini">{% trans "Upload observations" %}</a>
-                                {% endif %}
-                                <a href="{% url "osk_deletesensor" %}?procedure={{ sensor.id }}" class="btn btn-mini btn-primary">{% trans "Delete sensor" %}</a>
-                                {% endif %}
-                            </div>
-                        </div>
-                        <!--div class="details">
-                        <div class="meta">
-                        <p> <a href="{% url "osk_upload" %}?procedureId={{ sensor.name }}">Upload observations</a>  </p>
-                        <p class="abstract">{{ sensor.sensor.description|default:'No abstract provided.' }}</p>
-                        <p class="Keywords">{{ sensor.sensor.keywords|join:', '|default:'No keywords provided' }}</p>
-                        </div>
-                        <div>
-                        <ul>
-                        {% for op in sensor.observable_properties %}
-                        <li>{{ op }}</li>
-                        {% endfor %}
-                        </ul>
-                        </div>
-                        </div--> <!-- /.details -->
-                    </div> <!-- /.content -->
-                    <hr/>
-                </article>
-
-                <!--
-                <dt>{{ sensor.name }}</dt>
-                <dd>{{ sensor.id }}
-                <ul>
-                {% for op in sensor.observable_properties %}
-                <li>{{ op }} <button class="btn btn-small">Upload</button> </li>
-                {% endfor %}
-                </li>
-                </dd>
-                -->
-                {% endfor %}
-                </dl>
             </div>
-        </article>
-    </div>
+            {% for sensor in sensors %}
+            <article>
+                <div class="content">
+                    <h2>
+                        {% if sensor.name %}
+                          {{ sensor.name }}
+                        {% else %}
+                          {% trans "Sensor" %} {{ forloop.counter }}
+                        {% endif %}
+                    </h2>
+                    <p>{{ sensor.description }}</p>
+                    <p class="break-word"><small>{{ sensor.id|urlize }}</small></p>
+                    <div class="btn-toolbar">
+                        <div class="btn-group">
+                            {% if sensor.isvalid %}
+                            <a href="{% url "osk_describe_sensor" %}?format={{ 'text/html'|urlencode }}&sensor_id={{sensor.id|urlencode }}" target="_blank" data-toggle="modal" class="btn btn-mini btn-default">{% trans "Sensor details" %}</a>
+                            {% endif %}
+                            {% if perms.osk.admin_sos %}
+                            {% if sensor.isvalid %}
+                            <a href="{% url "osk_upload" %}?procedureId={{ sensor.id }}" class="btn btn-mini  btn-default">{% trans "Upload observations" %}</a>
+                            {% endif %}
+                            <a href="{% url "osk_deletesensor" %}?procedure={{ sensor.id }}" class="btn btn-mini btn-primary">{% trans "Delete sensor" %}</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <!--div class="details">
+                    <div class="meta">
+                    <p> <a href="{% url "osk_upload" %}?procedureId={{ sensor.name }}">Upload observations</a>  </p>
+                    <p class="abstract">{{ sensor.sensor.description|default:'No abstract provided.' }}</p>
+                    <p class="Keywords">{{ sensor.sensor.keywords|join:', '|default:'No keywords provided' }}</p>
+                    </div>
+                    <div>
+                    <ul>
+                    {% for op in sensor.observable_properties %}
+                    <li>{{ op }}</li>
+                    {% endfor %}
+                    </ul>
+                    </div>
+                    </div--> <!-- /.details -->
+                </div> <!-- /.content -->
+                <hr/>
+            </article>
+
+            <!--
+            <dt>{{ sensor.name }}</dt>
+            <dd>{{ sensor.id }}
+            <ul>
+            {% for op in sensor.observable_properties %}
+            <li>{{ op }} <button class="btn btn-small">Upload</button> </li>
+            {% endfor %}
+            </li>
+            </dd>
+            -->
+            {% endfor %}
+            </dl>
+        </div>
+    </article>
 </div>
 
-<div id="ediclient_container" class="modal hide fade" tabindex="-1" role="dialog">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h1>Register Sensor</h1>
-    </div>
-    <div class="modal-body">
-        <div class="alert alert-block alert-info hide">
-            <h4 class="alert-heading loading-message"></h4>
-            <div class="progress progress-striped active">
-                <div class="bar" style="width: 100%;"></div>
+<div id="ediclient_container" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h1>Register Sensor</h1>
             </div>
-        </div>
-        <div class="alert alert-block alert-error hide">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            <h4 class="alert-heading">Oh snap! You got an error!</h4>
-            <p class="error-message"></p>
-        </div>
-        <iframe id="ediclient_container_iframe" name="ediclient_container_iframe" src="" style="zoom:0.60" width="99.6%" height="90%" frameborder="0"></iframe>
-    </div>
-    <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-        <button id="save_metadata_btn" data-loading-text="Saving..." class="btn btn-primary">Register</button>
-    </div>
+            <div class="modal-body">
+                <div class="alert alert-block alert-info hide">
+                    <h4 class="alert-heading loading-message"></h4>
+                    <div class="progress progress-striped active">
+                        <div class="bar" style="width: 100%;"></div>
+                    </div>
+                </div>
+                <div class="alert alert-block alert-error hide">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <h4 class="alert-heading">Oh snap! You got an error!</h4>
+                    <p class="error-message"></p>
+                </div>
+                <iframe id="ediclient_container_iframe" name="ediclient_container_iframe" src="" style="zoom:0.60" width="99.6%" height="90%" frameborder="0"></iframe>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                <button id="save_metadata_btn" data-loading-text="Saving..." class="btn btn-primary">Register</button>
+            </div>
+        </div> <!-- /modal-content-->
+    </div> <!-- /modal-dialog-->
 </div>
 
 {% endblock %}

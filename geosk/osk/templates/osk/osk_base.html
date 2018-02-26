@@ -6,12 +6,18 @@
 
 {% block body_class %}osk{% endblock %}
 
+{% block extra_head %}
+      <link href="{{ STATIC_URL }}geosk/css/site_base.css" rel="stylesheet"/>
+{% endblock %}
+
 {% block body_outer %}
-    <div class="span12">
-      <ul class="nav nav-tabs" id="subnav-tabs">
-            <li><a href="{% url "osk_browse" %}" class="explore">{% trans "Explore SOS" %}</a></li>
-            <li><a href="{% url "osk_upload" %}" class="upload">{% trans "Upload Observations" %}</a></li>
-      </ul>
+    <div class="row">
+        <div class="col-md-12">
+          <ul class="nav nav-tabs" id="subnav-tabs">
+                <li><a href="{% url "osk_browse" %}" class="explore">{% trans "Explore SOS" %}</a></li>
+                <li><a href="{% url "osk_upload" %}" class="upload">{% trans "Upload Observations" %}</a></li>
+          </ul>
+        </div>
     </div>
     {% block body %}{% endblock body %}
     {% block sidebar %}{% endblock sidebar %}
