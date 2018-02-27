@@ -149,7 +149,7 @@ def _geonode_public_port():
     if not gn_pub_port:
         gn_pub_port = _container_exposed_port(
             'nginx',
-            os.getenv('GEONODE_INSTANCE_NAME', 'geonode')
+            os.getenv('GEONODE_INSTANCE_NAME', 'starterkit')
         )
     return gn_pub_port
 
