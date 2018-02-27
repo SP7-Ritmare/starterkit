@@ -16,6 +16,22 @@ services:
     env_file:
       - ./scripts/docker/env/production/db.env
 
+  dbsos:
+    image: mdillon/postgis:9.5
+    restart: unless-stopped
+    container_name: dbsos4${COMPOSE_PROJECT_NAME}
+    stdin_open: true
+    # tty: true
+    labels:
+        org.geonode.component: dbsos
+        org.geonode.instance.name: geonode
+    # ports:
+    #   - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=sos
+
   elasticsearch:
     image: elasticsearch
     restart: unless-stopped
