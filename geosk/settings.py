@@ -33,7 +33,7 @@ except ImportError:
 #
 PROJECT_NAME = 'geosk'
 SITENAME = 'StarterKit'
-SITEURL = "http://geosk.ve.ismar.cnr.it/"
+SITEURL = os.getenv('SITEURL', "http://geosk.ve.ismar.cnr.it/")
 
 # Defines the directory that contains the settings file as the LOCAL_ROOT
 # It is used for relative settings elsewhere.
@@ -41,8 +41,11 @@ LOCAL_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 WSGI_APPLICATION = "{}.wsgi.application".format(PROJECT_NAME)
 
-ALLOWED_HOSTS = ['localhost', 'django'] if os.getenv('ALLOWED_HOSTS') is None \
-    else re.split(r' *[,|:|;] *', os.getenv('ALLOWED_HOSTS'))
+if os.getenv('DOCKER_ENV'):
+    ALLOWED_HOSTS = ast.literal_eval(os.getenv('ALLOWED_HOSTS'))
+else:
+    ALLOWED_HOSTS = ['localhost', ] if os.getenv('ALLOWED_HOSTS') is None \
+        else re.split(r' *[,|:|;] *', os.getenv('ALLOWED_HOSTS'))
 
 PROXY_ALLOWED_HOSTS += ('nominatim.openstreetmap.org',)
 
@@ -553,13 +556,16 @@ RITMARE = {
 
 
 # SOS
+SOS_LOCATION = os.getenv(
+    'SOS_LOCATION', 'http://localhost:8080/observations/sos'
+)
 SOS_APP = True
 SOS_PUBLIC_ACCESS = True  # to read data
 SOS_URL = SITEURL + 'observations/sos'
 
 SOS_SERVER = {
     'default': {
-        'LOCATION': 'http://localhost:8080/observations/sos',
+        'LOCATION': SOS_LOCATION,
         'PUBLIC_LOCATION': SOS_URL,
         'KVP_LOCATION': SOS_URL + '/kvp',
         'POX_LOCATION': SOS_URL + '/pox',

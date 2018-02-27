@@ -126,8 +126,22 @@ services:
     env_file:
       - ./scripts/docker/env/production/geoserver.env
 
+  sos:
+    image: geobeyond/sos-configured:4.4.0
+    restart: unless-stopped
+    container_name: sos4${COMPOSE_PROJECT_NAME}
+    stdin_open: true
+    # tty: true
+    labels:
+        org.geonode.component: sos
+        org.geonode.instance.name: geonode
+    depends_on:
+      - dbsos
+    env_file:
+      - ./scripts/docker/env/production/sos.env
+
   geonode:
-    image: geonode/nginx:geoserver
+    image: geobeyond/nginx:sos
     restart: unless-stopped
     container_name: nginx4${COMPOSE_PROJECT_NAME}
     stdin_open: true
@@ -138,6 +152,7 @@ services:
     depends_on:
       - django
       - geoserver
+      - sos
     ports:
       - "80:80"
 
