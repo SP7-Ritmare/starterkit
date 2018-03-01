@@ -10,7 +10,7 @@
   <ul class="dropdown-menu">
     <li><a href="{% url "osk_browse" %}?limit={{ CLIENT_RESULTS_LIMIT }}">{% trans "Explore Sensors" %}</a></li>
     {% if perms.osk.admin_sos %}
-    <li><a href="{% url "osk_registration" %}?limit={{ CLIENT_RESULTS_LIMIT }}#ediclient_container">{% trans "Register a new  Sensor" %}</a></li>
+    <li><a href="{% url "osk_browse" %}#ediclient_container">{% trans "Register a new  Sensor" %}</a></li>
     {% endif %}
     <li><a href="{% url "demo_index" %}">{% trans "Demo" %}</a></li>
   </ul>
