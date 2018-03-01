@@ -14,8 +14,10 @@
     <div class="row">
         <div class="col-md-12">
           <ul class="nav nav-tabs" id="subnav-tabs">
-                <li><a href="{% url "osk_browse" %}" class="explore">{% trans "Explore SOS" %}</a></li>
-                <li><a href="{% url "osk_upload" %}" class="upload">{% trans "Upload Observations" %}</a></li>
+                {% url "osk_browse" as osk_browse %}
+                {% url "osk_upload" as osk_upload %}
+                <li><a href="{{ osk_browse }}" class="explore {% if request.path == osk_browse %}active{% endif %}">{% trans "Explore SOS" %}</a></li>
+                <li><a href="{{ osk_upload }}" class="upload {% if request.path == osk_upload %}active{% endif %}">{% trans "Upload Observations" %}</a></li>
           </ul>
         </div>
     </div>
