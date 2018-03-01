@@ -16,6 +16,8 @@ body.osk #subnav-tabs {
   -moz-box-shadow: 0 1px 2px #cccccc;
   box-shadow: 0 1px 2px #cccccc;
   border-bottom: 2px solid #484748;
+  margin-top: 20px;
+  margin-bottom:20px;
 }
 body.osk #subnav-tabs a {
   display: block;
@@ -67,6 +69,7 @@ body.osk #subnav-tabs li {
   width: 320px;
 }
 */
+/*
 .home .content-wrap {
   padding-top: 60px;
 }
@@ -128,6 +131,7 @@ A:visited {text-decoration: none}
 A:active {text-decoration: none}
 A:hover {font-size:24; font-weight:bold; color: red;}
 */
+
 /* SOS grid */
 .sos-window .x-grid3-hd-inner {
   height: 12px;
@@ -149,7 +153,7 @@ A:hover {font-size:24; font-weight:bold; color: red;}
 }
 
 /* modal window for EDIClient */
-#ediclient_container {
+#ediclient_container > .modal-dialog {
   width: 100%;
   left: 0;
   margin-left: 0;
@@ -157,6 +161,11 @@ A:hover {font-size:24; font-weight:bold; color: red;}
   margin-top: 0!important;
   height: 100%;
 }
+
+#ediclient_container  .modal-content {
+  height: 100%;
+}
+
 #ediclient_container .modal-body {
   height: 90%;
   max-height: none;
@@ -166,4 +175,8 @@ A:hover {font-size:24; font-weight:bold; color: red;}
   left: 0;
   bottom: 0;
   right: 0;
+}
+
+.sos-actions {
+  margin-top: 22px;
 }

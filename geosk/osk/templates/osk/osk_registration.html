@@ -9,7 +9,7 @@
 {% block body_class %}osk osk-list registration{% endblock %}
 
 {% block extra_head %}
-  <link href="/static/geosk/css/mdeditor.css" rel="stylesheet"/>
+  <link href="{{ STATIC_URL }}geosk/css/mdeditor.css" rel="stylesheet"/>
   {{ block.super }}
 {% endblock %}
 
