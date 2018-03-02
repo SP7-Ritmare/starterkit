@@ -10,6 +10,7 @@ WORKDIR /usr/src/app/geosk/static
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
     && apt-get -y install nodejs git g++ pkg-config build-essential \
     && npm install -g bower grunt grunt-cli node-gyp \
+    && npm install \
     && bower update --allow-root \
     && grunt \
     && npm uninstall -g bower grunt grunt-cli node-gyp \
