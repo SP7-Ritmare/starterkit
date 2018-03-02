@@ -1,6 +1,19 @@
 FROM geonode/geonode:latest
 MAINTAINER Starterkit development team
 
+# WORKDIR /usr/src/
+# RUN apt-get update \
+#     && apt-get install -y gdal-bin \
+#     && pip uninstall --yes geonode \
+#     && git clone -b 2.7.x https://github.com/GeoNode/geonode \
+#     && pip install -e geonode \
+#     && pip install -r geonode/requirements.txt \
+#     && pip install pygdal==1.10.1.3
+#
+#
+# WORKDIR /usr/src/app/
+RUN pip uninstall --yes geonode \
+    && pip install git+https://github.com/GeoNode/geonode.git@2.7.x#egg=geonode
 COPY requirements.txt /usr/src/app/
 RUN pip install -r requirements.txt --no-deps
 

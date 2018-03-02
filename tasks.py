@@ -49,6 +49,12 @@ http://{public_fqdn}/ >> {override_fn}".format(**envs), pty=True)
     ctx.run("env", pty=True)
 
 
+# @task
+# def workaround(ctx):
+#     print "**************************workaround*******************************"
+#     ctx.run("pip uninstall --yes geonode", pty=True)
+#     ctx.run("pip install \
+# git+https://github.com/GeoNode/geonode.git@2.7.x#egg=geonode", pty=True)
 @task
 def migrations(ctx):
     print "**************************migrations*******************************"
