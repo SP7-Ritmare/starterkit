@@ -15,7 +15,12 @@ MAINTAINER Starterkit development team
 RUN pip uninstall --yes geonode \
     && pip install git+https://github.com/GeoNode/geonode.git@2.7.x#egg=geonode
 COPY requirements.txt /usr/src/app/
-RUN pip install -r requirements.txt --no-deps
+# see issue https://github.com/celery/celery/issues/3200
+RUN pip install -r requirements.txt \
+    && pip uninstall --yes billiard \
+    && pip install git+https://github.com/celery/billiard.git#egg=billiard \
+    && pip uninstall --yes kombu \
+    && pip install git+https://github.com/celery/kombu.git#egg=kombu
 
 # add bower and grunt command
 ONBUILD COPY . /usr/src/app/
