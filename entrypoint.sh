@@ -15,6 +15,9 @@ echo GEOSERVER_PUBLIC_LOCATION=$GEOSERVER_PUBLIC_LOCATION
 
 echo "waitfordbs task done"
 
+# see issue https://github.com/celery/celery/issues/3200
+# /usr/local/bin/invoke workaround >> /usr/src/app/invoke.log
+# echo "workaround task done"
 /usr/local/bin/invoke migrations >> /usr/src/app/invoke.log
 echo "migrations task done"
 /usr/local/bin/invoke prepare >> /usr/src/app/invoke.log

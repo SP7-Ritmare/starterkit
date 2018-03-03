@@ -22,10 +22,10 @@ import os
 import stat
 from codecs import open
 from distutils.core import setup
+from shutil import copyfile
 
 from setuptools import find_packages, setup
 from setuptools.command.install import install
-from shutil import copyfile
 
 
 class PostInstallCommand(install):
@@ -43,7 +43,8 @@ class PostInstallCommand(install):
 
         ls_fname = '/etc/starterkit/local_settings.py'
         if not os.path.isfile(ls_fname):
-            sample_name = os.path.join(self.install_lib, 'geosk', 'local_settings.py.sample')
+            sample_name = os.path.join(
+                self.install_lib, 'geosk', 'local_settings.py.sample')
             copyfile(sample_name, ls_fname)
 
         files = [ls_fname,
@@ -100,7 +101,10 @@ setup(
         # "owslib==0.10.3",
         "django-analytical==1.0.0",
         "django-taggit-templatetags",
-        'geonode>=2.5',
+        "geonode==2.7.x",
+    ],
+    dependency_links=[
+        "git+https://github.com/GeoNode/geonode.git@2.7.x#egg=geonode-2.7.x"
     ],
     #
     include_package_data=True,

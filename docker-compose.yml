@@ -53,8 +53,8 @@ services:
         org.geonode.instance.name: geonode
 
   django:
-    restart: unless-stopped
     image: geonode/geonode:latest
+    restart: unless-stopped
     container_name: django4${COMPOSE_PROJECT_NAME}
     stdin_open: true
     # tty: true
@@ -72,8 +72,8 @@ services:
       - ./scripts/docker/env/production/django.env
 
   celery:
-    restart: unless-stopped
     image: geonode/geonode:latest
+    restart: unless-stopped
     container_name: celery4${COMPOSE_PROJECT_NAME}
     stdin_open: true
     # tty: true

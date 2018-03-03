@@ -17,8 +17,8 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 #########################################################################
-
 # Django settings for the GeoNode project.
+import ast
 import os
 
 # Load more settings from a file called local_settings.py if it exists

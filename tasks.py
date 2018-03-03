@@ -49,9 +49,33 @@ http://{public_fqdn}/ >> {override_fn}".format(**envs), pty=True)
     ctx.run("env", pty=True)
 
 
+# see issue https://github.com/celery/celery/issues/3200
+# @task
+# def workaround(ctx):
+#     print "**************************workaround*******************************"
+#     ctx.run("pip uninstall --yes geonode", pty=True)
+#     ctx.run("pip install \
+# git+https://github.com/GeoNode/geonode.git@2.7.x#egg=geonode", pty=True)
+#     ctx.run("pip uninstall --yes billiard", pty=True)
+#     ctx.run("pip install \
+# git+https://github.com/celery/billiard.git#egg=billiard", pty=True)
+#     ctx.run("pip uninstall --yes kombu", pty=True)
+#     ctx.run("pip install \
+# git+https://github.com/celery/kombu.git#egg=kombu", pty=True)
+
+
 @task
 def migrations(ctx):
     print "**************************migrations*******************************"
+    ctx.run("django-admin.py makemigrations --settings={0}".format(
+        "geonode.settings"
+    ), pty=True)
+    ctx.run("django-admin.py migrate --noinput --settings={0}".format(
+        "geonode.settings"
+    ), pty=True)
+    ctx.run("django-admin.py makemigrations --settings={0}".format(
+        _localsettings()
+    ), pty=True)
     ctx.run("django-admin.py migrate --noinput --settings={0}".format(
         _localsettings()
     ), pty=True)
@@ -68,11 +92,11 @@ def prepare(ctx):
 def fixtures(ctx):
     print "**************************fixtures********************************"
     ctx.run("django-admin.py loaddata sample_admin \
---settings={0}".format(_localsettings()), pty=True)
+--settings={0}".format("geonode.settings"), pty=True)
     ctx.run("django-admin.py loaddata /tmp/default_oauth_apps_docker.json \
---settings={0}".format(_localsettings()), pty=True)
-    ctx.run("django-admin.py loaddata geonode/base/fixtures/initial_data.json \
---settings={0}".format(_localsettings()), pty=True)
+--settings={0}".format("geonode.settings"), pty=True)
+    ctx.run("django-admin.py loaddata initial_data.json \
+--settings={0}".format("geonode.settings"), pty=True)
 
 
 def _docker_host_ip():
