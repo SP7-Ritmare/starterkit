@@ -86,6 +86,8 @@ def prepare(ctx):
     print "**********************prepare fixture***************************"
     ctx.run("rm -rf /tmp/default_oauth_apps_docker.json", pty=True)
     _prepare_oauth_fixture()
+    ctx.run("rm -rf /tmp/mdtools_services_metadata_docker.json", pty=True)
+    _prepare_service_metadata_fixture()
 
 
 @task
@@ -205,4 +207,81 @@ Y9HKeIQPcy5Cp08KQNpRHQbjpLItDHv12GvkSeXp6OxaUETv3",
         }
     ]
     with open('/tmp/default_oauth_apps_docker.json', 'w') as fixturefile:
+        json.dump(default_fixture, fixturefile)
+
+
+def _prepare_service_metadata_fixture():
+    pub_ip = _geonode_public_host_ip()
+    print "Public Hostname or IP is {0}".format(pub_ip)
+    pub_port = _geonode_public_port()
+    print "Public PORT is {0}".format(pub_port)
+    contact_country = os.getenv("SERVICEPROVIDER_COUNTRY", "")
+    print "contact_country is {0}".format(contact_country)
+    provider_url = os.getenv("SERVICEPROVIDER_SITE", "")
+    print "provider_url is {0}".format(provider_url)
+    contact_role = os.getenv("SERVICEPROVIDER_INDIVIDUALNAME", "")
+    print "contact_role is {0}".format(contact_role)
+    contact_city = os.getenv("SERVICEPROVIDER_CITY", "")
+    print "contact_city is {0}".format(contact_city)
+    contact_instructions = os.getenv("SERVICEPROVIDER_INSTRUCTIONS", "")
+    print "contact_instructions is {0}".format(contact_instructions)
+    contact_position = os.getenv("SERVICEPROVIDER_POSITIONNAME", "")
+    print "contact_position is {0}".format(contact_position)
+    contact_fax = os.getenv("SERVICEPROVIDER_FAX", "")
+    print "contact_fax is {0}".format(contact_fax)
+    node_title = os.getenv("SERVICEPROVIDER_NODETITLE", "")
+    print "node_title is {0}".format(node_title)
+    contact_hours = os.getenv("SERVICEPROVIDER_HOURS", "")
+    print "contact_hours is {0}".format(contact_hours)
+    node_name = os.getenv("SERVICEPROVIDER_NODENAME", "")
+    print "node_name is {0}".format(node_name)
+    node_abstract = os.getenv("SERVICEPROVIDER_NODEABSTRACT", "")
+    print "node_abstract is {0}".format(node_abstract)
+    contact_address = os.getenv("SERVICEPROVIDER_ADDRESS", "")
+    print "contact_address is {0}".format(contact_address)
+    contact_email = os.getenv("SERVICEPROVIDER_EMAIL", "")
+    print "contact_email is {0}".format(contact_email)
+    contact_url = os.getenv("SERVICEPROVIDER_SITE", "")
+    print "contact_url is {0}".format(contact_url)
+    contact_stateprovince = os.getenv("SERVICEPROVIDER_STATEPROVINCE", "")
+    print "contact_stateprovince is {0}".format(contact_stateprovince)
+    provider_name = os.getenv("SERVICEPROVIDER_NAME", "")
+    print "provider_name is {0}".format(provider_name)
+    contact_postalcode = os.getenv("SERVICEPROVIDER_POSTALCODE", "")
+    print "contact_postalcode is {0}".format(contact_postalcode)
+    contact_phone = os.getenv("SERVICEPROVIDER_PHONE", "")
+    print "contact_phone is {0}".format(contact_phone)
+    contact_name = os.getenv("SERVICEPROVIDER_NAME", "")
+    print "contact_name is {0}".format(contact_name)
+    node_keywords = os.getenv("SERVICEPROVIDER_NODEKEYWORDS", "")
+    print "node_keywords is {0}".format(node_keywords)
+    default_fixture = [
+        {"pk": 1,
+         "model": "mdtools.servicesmetadata",
+         "fields": {"contact_country": contact_country,
+                    "provider_url": provider_url,
+                    "contact_role": contact_role,
+                    "contact_city": contact_city,
+                    "contact_instructions": contact_instructions,
+                    "contact_position": contact_position,
+                    "contact_fax": contact_fax,
+                    "node_title": node_title,
+                    "contact_hours": contact_hours,
+                    "node_name": node_name,
+                    "node_abstract": node_abstract,
+                    "contact_address": contact_address,
+                    "contact_email": contact_email,
+                    "contact_url": contact_url,
+                    "contact_stateprovince": contact_stateprovince,
+                    "provider_name": provider_name,
+                    "contact_postalcode": contact_postalcode,
+                    "contact_phone": contact_phone,
+                    "contact_name": contact_name,
+                    "node_keywords": node_keywords}
+         }
+    ]
+    with open(
+        '/tmp/mdtools_services_metadata_docker.json',
+        'w'
+    ) as fixturefile:
         json.dump(default_fixture, fixturefile)
