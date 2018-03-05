@@ -98,7 +98,7 @@ module.exports = function(grunt) {
         copy:{
             html: {
                 expand: true,
-                cwd: '.components/EDI-NG_client/dist/',
+                cwd: '.components/EDI-NG_client/',
                 src: '**',
                 dest: 'EDI-NG_client/'
             },
