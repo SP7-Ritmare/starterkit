@@ -12,7 +12,6 @@
     {% if perms.osk.admin_sos %}
     <li><a href="{% url "osk_browse" %}#ediclient_container">{% trans "Register a new  Sensor" %}</a></li>
     {% endif %}
-    <li><a href="{% url "demo_index" %}">{% trans "Demo" %}</a></li>
   </ul>
   {% else %}
   <ul class="dropdown-menu">
