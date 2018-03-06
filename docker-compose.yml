@@ -70,6 +70,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     env_file:
       - ./scripts/docker/env/production/django.env
+      - ./scripts/docker/env/production/sos.env
 
   celery:
     image: geonode/geonode:latest
