@@ -29,6 +29,11 @@ International Conferences
 * P.Tagliolato, A. Oggioni, C. Fugazza, M. Pepe, P. Carrara, (2016), “Sensor metadata blueprints and computer-aided editing for disciplined SensorML”. IOP Conference Series: Earth and Environmental Science, 34(1), 12036. doi:10.1088/1755-1315/34/1/012036
 * P.Tagliolato, A. Oggioni, C. Fugazza, M. Pepe and P. Cararra, “Supporting provision of sensor metadata through multi-tenanted management of SensorML documents”, INSPIRE Conference 2016, Barcelona, 26-30 September 2016
 * C.Fugazza, M. Pepe, A. Oggioni, P. Tagliolato and P. Carrara, “Streamlining INSPIRE metadata for the Semantic Web”, INSPIRE Conference 2016, Barcelona, 26-30 September 2016.
+* Zilioli M, Lanucara S., Oggioni A. and Carrara P. “Need Help? Designing and Implementing the RITMARE Help Desk to Support Research Data Management” Data Infrastructures for Open Science - Research Data Alliance Plenary 2017, Barcellona- Poster session
+* Zilioli M, Lanucara S., Oggioni A. and Carrara P., “A Help Desk to support Data Sharing                                               in Environmental Research Communities” - From Science to Society: the Bridge provided by Environmental Informatics - EnviroInfo 2017, Proceedings (2017) ISSN 1616-0886
+* Lanucara S., Zilioli M., Oggioni A. and Carrara P. “GET-IT, a software suite for easy, interoperable sharing of ecological data in the Long Term Ecological Research Network” - From Science to Society: the Bridge provided by Environmental Informatics - EnviroInfo 2017, Proceedings (2017) ISSN 1616-0886
+
+
 
 
 Books
