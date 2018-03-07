@@ -559,6 +559,10 @@ RITMARE = {
 SOS_LOCATION = os.getenv(
     'SOS_LOCATION', 'http://localhost:8080/observations/sos'
 )
+SOS_TRANSACTIONAL_AUTHORIZATION_TOKEN = os.getenv(
+    'SOS_TRANSACTIONAL_AUTHORIZATION_TOKEN',
+    'changeme'
+)
 SOS_APP = True
 SOS_PUBLIC_ACCESS = True  # to read data
 SOS_URL = SITEURL + 'observations/sos'
@@ -570,7 +574,7 @@ SOS_SERVER = {
         'KVP_LOCATION': SOS_URL + '/kvp',
         'POX_LOCATION': SOS_URL + '/pox',
         'VERSION': '2.0.0',
-        'TRANSACTIONAL_AUTHORIZATION_TOKEN': 'changeme',
+        'TRANSACTIONAL_AUTHORIZATION_TOKEN': SOS_TRANSACTIONAL_AUTHORIZATION_TOKEN,
         'USER': None,
         'PASSWORD': None,
     }
