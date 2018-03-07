@@ -1,13 +1,15 @@
 import os
-from lxml import etree
-import requests
-from django.template import RequestContext
-from django.shortcuts import render_to_response
-from django.http import HttpResponse
-from django.conf import settings
 
-from . import models
-from . import utils
+import requests
+
+from django.conf import settings
+from django.http import HttpResponse
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+from geosk import settings as geosk_settings
+from lxml import etree
+
+from . import models, utils
 
 
 def browse(request):
@@ -16,8 +18,8 @@ def browse(request):
     cap = utils.todict(cap)
     sensors = cat.get_sensors(full=True)
 
-
     cap['capabilities_url'] = cat.get_capabilities_url()
+    cap['public_capabilities_url'] = geosk_settings.SOS_PUBLIC_CAPABILITIES_URL
     return render_to_response('osk/osk_list.html',
                               RequestContext(request, {'cap': cap,
                                                        'sensors': sensors
@@ -31,6 +33,7 @@ def get_capabilities(request):
     response = HttpResponse(xml, content_type='application/xml')
     return response
 
+
 def describe_sensor(request):
     formats = ['text/xml', 'text/html']
     sensor_id = request.GET.get('sensor_id', None)
@@ -40,16 +43,20 @@ def describe_sensor(request):
 
     cat = models.Sensor.objects.sos_catalog
     cap = cat.get_capabilities()
-    xml = cap.describe_sensor(outputFormat='http://www.opengis.net/sensorML/1.0.1', procedure=sensor_id.encode(), raw=True)
+    xml = cap.describe_sensor(
+        outputFormat='http://www.opengis.net/sensorML/1.0.1', procedure=sensor_id.encode(), raw=True)
 
     if output_format == 'text/xml':
         return HttpResponse(xml, content_type='application/xml')
     elif output_format == 'text/html':
-        r = requests.get('http://sp7.irea.cnr.it/jboss/MDService/rest/sensor2html.xsl')
+        r = requests.get(
+            'http://sp7.irea.cnr.it/jboss/MDService/rest/sensor2html.xsl')
         if r.status_code == 200:
-            xslt = etree.fromstring(r.text.encode('utf8'), etree.XMLParser(no_network=False))
+            xslt = etree.fromstring(r.text.encode(
+                'utf8'), etree.XMLParser(no_network=False))
         else:
-            xsl_file = os.path.join(os.path.dirname(__file__), 'sensor2html.xsl')
+            xsl_file = os.path.join(
+                os.path.dirname(__file__), 'sensor2html.xsl')
             xslt = etree.parse(xsl_file)
 
         transform = etree.XSLT(xslt)
