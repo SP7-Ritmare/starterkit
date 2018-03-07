@@ -565,14 +565,15 @@ SOS_TRANSACTIONAL_AUTHORIZATION_TOKEN = os.getenv(
 )
 SOS_APP = True
 SOS_PUBLIC_ACCESS = True  # to read data
-SOS_URL = SITEURL + 'observations/sos'
+SOS_PUBLIC_URL = SITEURL + 'observations/sos'
+SOS_PRIVATE_URL = SOS_LOCATION
 
 SOS_SERVER = {
     'default': {
-        'LOCATION': SOS_LOCATION,
-        'PUBLIC_LOCATION': SOS_URL,
-        'KVP_LOCATION': SOS_URL + '/kvp',
-        'POX_LOCATION': SOS_URL + '/pox',
+        'LOCATION': SOS_PRIVATE_URL,
+        'PUBLIC_LOCATION': SOS_PUBLIC_URL,
+        'KVP_LOCATION': SOS_PRIVATE_URL + '/kvp',
+        'POX_LOCATION': SOS_PRIVATE_URL + '/pox',
         'VERSION': '2.0.0',
         'TRANSACTIONAL_AUTHORIZATION_TOKEN': SOS_TRANSACTIONAL_AUTHORIZATION_TOKEN,
         'USER': None,
