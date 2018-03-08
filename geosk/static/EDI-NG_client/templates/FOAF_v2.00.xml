@@ -1,0 +1,693 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <settings>
+    <defaultLanguage>en</defaultLanguage>
+    <languageSelection>
+      <byItem>ling_md_1</byItem>
+    </languageSelection>
+    <metadataEndpoint>https://sp7.irea.cnr.it/tomcat2/EDI-T/</metadataEndpoint>
+    <sparqlEndpoint>http://sp7.irea.cnr.it:8891/sparql</sparqlEndpoint>
+    <requiresAuthentication>false</requiresAuthentication>
+    <requiresValidation>false</requiresValidation>
+    <baseDocument>
+      <![CDATA[
+        <rdf:RDF
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+         xmlns:foaf="http://xmlns.com/foaf/0.1/">
+        </rdf:RDF>
+      ]]>
+    </baseDocument>    
+  </settings> 
+  <endpointTypes>
+    <endpointType>
+      <id>virtuoso</id>
+      <method>GET</method>
+      <queryParameter>query</queryParameter>
+      <parameters>
+        <format>application/sparql-results+json</format>
+        <save>display</save>
+        <fname>undefined</fname>
+      </parameters>
+    </endpointType>
+
+    <endpointType>
+      <id>pubs_endpoint</id>
+      <method>GET</method>
+      <Content-Type>application/sparql-results+json; charset=utf-8</Content-Type>
+      <queryParameter>query</queryParameter>
+      <parameters>
+        <output>json</output>
+      </parameters>
+    </endpointType>
+
+    <endpointType>
+      <id>cnr_pubs_endpoint</id>
+      <method>GET</method>
+      <Content-Type>application/sparql-results+json; charset=utf-8</Content-Type>
+      <queryParameter>query</queryParameter>
+      <parameters>
+        <output>json</output>
+        <format>application/sparql-results+json</format>
+      </parameters>
+    </endpointType>
+    
+  </endpointTypes>
+  <datasources>
+    <datasource>
+      <id>countries</id>
+      <singleton>false</singleton>
+      <!-- <url>http://10.0.0.20:8890/sparql</url> -->
+      <endpointType>virtuoso</endpointType>
+      <query>
+        <![CDATA[
+            PREFIX jur: <http://sweet.jpl.nasa.gov/2.3/humanJurisdiction.owl#>
+            SELECT ?c ?l
+            FROM <http://ritmare.it/rdfdata/countries>
+            WHERE {
+              ?c rdf:type jur:Country .
+              ?c foaf:name ?l .
+              FILTER( LANG(?l) = "en" )
+            }
+            ORDER BY ASC(?l)
+        ]]>
+      </query>
+      <type>
+        sparql
+      </type>
+    </datasource>
+    <datasource>
+      <id>institutes</id>
+      <singleton>false</singleton>
+      <!-- <url>http://10.0.0.20:8890/sparql</url> -->
+      <endpointType>virtuoso</endpointType>
+      <query>
+        <![CDATA[
+            PREFIX  vcard: <http://www.w3.org/2006/vcard/ns#>
+            SELECT ?c ?l
+            FROM <http://ritmare.it/rdfdata/project>
+            WHERE {
+              ?c rdf:type foaf:Organization .
+              ?c foaf:name ?l .
+              FILTER( LANG(?l) = "zxx" )
+            }
+            ORDER BY ASC(?l)
+        ]]>
+      </query>
+      <type>
+        sparql
+      </type>
+    </datasource>
+    <datasource>
+      <id>address</id>
+      <singleton>true</singleton>
+      <!-- <url>http://10.0.0.20:8890/sparql</url> -->
+      <endpointType>virtuoso</endpointType>
+      <query>
+        <![CDATA[
+            PREFIX  vcard: <http://www.w3.org/2006/vcard/ns#>
+            SELECT ?str ?loc ?cap ?cou
+            FROM <http://ritmare.it/rdfdata/project>
+            WHERE {
+              {
+                OPTIONAL {
+                  <http://sp7.irea.cnr.it/rdfdata/project/AlessandroOggioniIREA> vcard:hasAddress ?a .
+                  ?a vcard:street-address ?str .
+                  ?a vcard:locality ?loc .
+                  ?a vcard:postal-code ?cap .
+                  ?a vcard:country-name ?cou .
+                }
+              } UNION {
+                <http://sp7.irea.cnr.it/rdfdata/project/AlessandroOggioniIREA> vcard:org ?org . 
+                ?org vcard:hasAddress ?b .
+                OPTIONAL {
+                  ?b vcard:street-address ?str .
+                  ?b vcard:locality ?loc .
+                  ?b vcard:postal-code ?cap .
+                  ?b vcard:country-name ?cou .
+                }                
+              }
+            }
+            LIMIT 1
+        ]]>
+      </query>
+      <triggerItem>webid_1</triggerItem>
+      <type>
+        sparql
+      </type>
+    </datasource>
+    <datasource>
+      <id>person</id>
+      <singleton>false</singleton>
+      <!-- <url>http://10.0.0.20:8890/sparql</url> -->
+      <endpointType>virtuoso</endpointType>
+      <query>
+        <![CDATA[
+            SELECT ?c ?l
+            FROM <http://ritmare.it/rdfdata/project>
+            WHERE {
+              ?c rdf:type foaf:Person.
+              ?c foaf:fullName ?l.
+              FILTER( REGEX( STR(?l), "$search_param", "i") )
+            }
+            ORDER BY ASC(?l)
+        ]]>
+      </query>
+      <searchItem>dati_personali_1</searchItem>
+      <type>
+        sparql
+      </type>
+    </datasource>
+    <datasource>
+      <id>personS</id>
+      <singleton>true</singleton>
+      <!-- <url>http://10.0.0.20:8890/sparql</url> -->
+      <endpointType>virtuoso</endpointType>
+      <query>
+        <![CDATA[
+            PREFIX  vcard: <http://www.w3.org/2006/vcard/ns#>
+            SELECT ?gName ?fName ?email ?phone ?org
+            FROM <http://ritmare.it/rdfdata/project>
+            WHERE {
+              OPTIONAL {
+                <http://sp7.irea.cnr.it/rdfdata/project/AlessandroOggioniIREA> foaf:givenName ?gName .
+              }
+              OPTIONAL {
+                <http://sp7.irea.cnr.it/rdfdata/project/AlessandroOggioniIREA> foaf:familyName ?fName .
+              }
+              OPTIONAL {
+                <http://sp7.irea.cnr.it/rdfdata/project/AlessandroOggioniIREA> vcard:email ?email .
+              }
+              OPTIONAL {
+                <http://sp7.irea.cnr.it/rdfdata/project/AlessandroOggioniIREA> foaf:phone ?phone .
+              }
+              OPTIONAL {
+                <http://sp7.irea.cnr.it/rdfdata/project/AlessandroOggioniIREA> vcard:org ?org .
+              }
+            }
+        ]]>
+      </query>
+      <triggerItem>webid_1</triggerItem>
+      <type>
+        sparql
+      </type>
+    </datasource>
+    <datasource>
+      <id>research_areas</id>
+      <uri>http://ritmare.it/rdfdata/thesauri/domains/all</uri>
+      <endpointType>virtuoso</endpointType>
+      <type>virtuosoCodelist</type>
+    </datasource>
+    <datasource>
+      <id>keywords</id>
+      <singleton>false</singleton>
+      <!-- <url>http://10.0.0.10:8890/sparql</url> -->
+      <endpointType>virtuoso</endpointType>
+      <query>    
+            <![CDATA[
+              SELECT ?c ?l
+              FROM <http://ritmare.it/rdfdata/reference>
+              WHERE {
+                ?c rdf:type skos:Concept .
+                ?c skos:prefLabel ?l .
+                FILTER( REGEX( STR(?l), "$search_param", "i") )
+              }
+              ORDER BY ASC(?l)
+            ]]>
+      </query>
+      <type>
+        sparql
+      </type>
+    </datasource>    
+    <datasource>
+      <id>networks</id>
+      <uri>http://ritmare.it/rdfdata/thesauri/accountServices</uri>
+      
+      <singleton>false</singleton>
+      <endpointType>virtuoso</endpointType>
+      <query>
+        <![CDATA[
+            SELECT DISTINCT ?c ?l
+            WHERE {
+                ?t skos:inScheme <http://ritmare.it/rdfdata/thesauri/accountServices> .
+                ?t foaf:accountServiceHomepage ?c .
+                ?t skos:prefLabel ?l .
+                FILTER( LANG(?l) = 'en' ) 
+            }
+            LIMIT 10
+        ]]>
+      </query>
+      <!-- <triggerItem>webid_1</triggerItem> -->
+      <type>
+        sparql
+      </type>
+      <!--
+      <endpointType>virtuoso</endpointType>
+      <type>virtuosoCodelist</type>
+      -->
+    </datasource>
+    <!--
+    <datasource>
+      <id>knows</id>
+      <singleton>false</singleton>
+      <endpointType>virtuoso</endpointType>
+      <query>
+        <![CDATA[
+            PREFIX  vcard: <http://www.w3.org/2006/vcard/ns#>
+            SELECT ?c ?l
+            FROM <http://ritmare.it/rdfdata/project>
+            WHERE {
+              OPTIONAL {
+                <$search_param> foaf:knows ?c .
+                ?c foaf:fullName ?l .
+              }
+            }
+            LIMIT 10
+        ]]>
+      </query>
+      <triggerItem>webid_1</triggerItem>
+      <type>
+        sparql
+      </type>
+    </datasource>
+    -->
+    <datasource>
+      <id>cnr_pubs</id>
+      <singleton>false</singleton>
+      <url>http://data.cnr.it/sparql-proxy/</url>
+      <endpointType>cnr_pubs_endpoint</endpointType>
+      <query>
+        <![CDATA[
+          prefix pubblicazioni:	<http://www.cnr.it/ontology/cnr/pubblicazioni.owl#>
+          
+          select ?c ?l where {
+            ?c pubblicazioni:autoreCNR <http://www.cnr.it/ontology/cnr/individuo/unitaDiPersonaleInterno/MATRICOLA11429> .
+            ?c pubblicazioni:titolo ?l .
+          }
+        ]]>
+      </query>   
+      <type>
+        sparql
+      </type>
+    </datasource>
+    
+    <datasource>
+      <id>pubs</id>
+      <singleton>false</singleton>
+      <url>http://dblp.l3s.de/d2r/sparql</url>
+      <!-- <url>http://dblp.l3s.de/d2r/sparql</url> -->
+      <!-- <url>http://dblp.rkbexplorer.com/sparql/</url> -->
+      <endpointType>pubs_endpoint</endpointType>
+      <!--
+      <query>
+        <![CDATA[
+          PREFIX id:   <http://dblp.rkbexplorer.com/id/>
+          PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+          PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+          PREFIX akt:  <http://www.aktors.org/ontology/portal#>
+          PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+          PREFIX akt:  <http://www.aktors.org/ontology/portal#>
+          PREFIX akts: <http://www.aktors.org/ontology/support#>
+          
+          SELECT * WHERE { 
+            ?c rdf:type akt:Article-Reference .
+            ?c akt:has-title ?l .
+            FILTER( REGEX( STR(?l), "$search_param", "i") )
+          } 
+          LIMIT 10
+        ]]>
+      </query>
+      -->
+      <query>
+        <![CDATA[
+          PREFIX d2r: <http://sites.wiwiss.fu-berlin.de/suhl/bizer/d2r-server/config.rdf#>
+          PREFIX swrc: <http://swrc.ontoware.org/ontology#>
+          PREFIX dcterms: <http://purl.org/dc/terms/>
+          PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+          PREFIX dc: <http://purl.org/dc/elements/1.1/>
+          PREFIX map: <file:///home/diederich/d2r-server-0.3.2/dblp-mapping.n3#>
+          PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+          PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+          PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+          PREFIX owl: <http://www.w3.org/2002/07/owl#>
+          
+          SELECT * WHERE { 
+            ?c rdf:type swrc:Article .
+            ?c dc:title ?l .
+            FILTER( REGEX( STR(?l), "$search_param", "i") )
+          } 
+          LIMIT 10
+        ]]>
+      </query>
+      <triggerItem>pubblicazioni_1</triggerItem>
+      <type>
+        sparql
+      </type>
+    </datasource>
+    
+  </datasources>    
+  <group>
+    <id>external_accounts</id>
+    <label xml:lang="it">Account esterni</label>
+    <label xml:lang="en">External accounts</label>
+
+    <element>
+      <id>ref_acc</id>
+      <label xml:lang="it">Estremi account</label>
+      <label xml:lang="en">Account details</label>
+      <isMandatory>NA</isMandatory>
+      <isMultiple>true</isMultiple>
+      <hasRoot>/rdf:RDF/foaf:Person</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <label xml:lang="it">ID utente</label>
+          <label xml:lang="en">User ID</label>
+          <hasPath>/rdf:RDF/foaf:Person/foaf:account/foaf:accountName</hasPath>
+          <isFixed>false</isFixed>
+          <id>foaf:accountName</id>
+          <hasDatatype>string</hasDatatype> 
+        </item>
+        <item>
+          <hasIndex>2</hasIndex>
+          <label xml:lang="it">Rete sociale</label>
+          <label xml:lang="en">Social Network</label>
+          <hasPath>/rdf:RDF/foaf:Person/foaf:account/foaf:accountServiceHomepage/@rdf:resource</hasPath>
+          <isFixed>false</isFixed>
+          <hasDatatype>code</hasDatatype>
+          <datasource>networks</datasource>
+	        <useCode>true</useCode>
+          <show>combobox</show>
+        </item>
+      </produces>
+    </element>
+  </group>
+  <group>
+    <id>anagrafica</id>
+    <label xml:lang="it">Anagrafica</label>
+    <label xml:lang="en">Vital statistics</label>
+    <element>
+      <id>webid</id>
+      <isMandatory>forAll</isMandatory>
+      <isMultiple>false</isMultiple>
+      <hasRoot>/rdf:RDF/foaf:Person</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <hasPath>/rdf:RDF/foaf:Person/@rdf:about</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>string</hasDatatype>
+          <queryStringParameter>webid</queryStringParameter>
+          <hasValue>http://sp7.irea.cnr.it/rdfdata/project/AlessandroOggioniIREA</hasValue>
+        </item>
+      </produces>
+    </element>
+    <element>
+      <id>dati_personali</id>
+      <label xml:lang="it">Dati personali</label>
+      <label xml:lang="en">Personal data</label>
+      <isMandatory>forAll</isMandatory>
+      <isMultiple>false</isMultiple>
+      <hasRoot>/rdf:RDF/foaf:Person</hasRoot>
+      <produces>
+        <!--
+        <item>
+          <hasIndex>1</hasIndex>
+          <label xml:lang="it">Utente</label>
+          <label xml:lang="en">User</label>
+          <hasPath>/rdf:RDF/foaf:Person/@rdf:about</hasPath>
+          <isFixed>false</isFixed>
+          <id>rdf:about</id>
+          <datasource>person</datasource>
+          <hasDatatype>autoCompletion</hasDatatype>
+          <isLanguageNeutral>true</isLanguageNeutral>
+        </item>
+        -->
+        <item>
+          <hasIndex>1</hasIndex>
+          <label xml:lang="it">Nome</label>
+          <label xml:lang="en">First name</label>
+          <hasPath>/rdf:RDF/foaf:Person/foaf:firstName</hasPath>
+          <isFixed>false</isFixed>
+          <datasource>personS</datasource>
+          <hasDatatype>select</hasDatatype>
+          <field>gName</field>
+        </item>
+        <item>
+          <hasIndex>2</hasIndex>
+          <label xml:lang="it">Cognome</label>
+          <label xml:lang="en">Family name</label>
+          <hasPath>/rdf:RDF/foaf:Person/foaf:familyName</hasPath>
+          <isFixed>false</isFixed>
+          <datasource>personS</datasource>
+          <hasDatatype>select</hasDatatype>
+          <field>fName</field>
+        </item>
+        <item>
+          <hasIndex>3</hasIndex>
+          <!-- <label xml:lang="it">Nome completo</label>
+          <label xml:lang="en">Full name</label> -->
+          <hasPath>/rdf:RDF/foaf:Person/foaf:fullName</hasPath>
+          <isFixed>true</isFixed>
+          <datasource>person</datasource>
+          <hasDatatype>function</hasDatatype>
+          <show>hidden</show>
+          <hasValue>concat(foaf:familyName/text(), ' ', foaf:firstName/text())</hasValue>
+        </item>
+        <item>
+          <label xml:lang="it">Indirizzo e-mail</label>
+          <label xml:lang="en">E-mail address</label>
+          <hasIndex>4</hasIndex>
+          <hasPath>/rdf:RDF/foaf:Person/vcard:email/@rdf:resource</hasPath>
+          <isFixed>false</isFixed>
+          <datasource>personS</datasource>
+          <hasDatatype>select</hasDatatype>
+          <field>email</field>
+        </item>
+        <item>
+          <label xml:lang="it">Telefono</label>
+          <label xml:lang="en">Phone</label>
+          <hasIndex>5</hasIndex>
+          <hasPath>/rdf:RDF/foaf:Person/foaf:phone/@rdf:resource</hasPath>
+          <isFixed>false</isFixed>
+          <datasource>personS</datasource>
+          <hasDatatype>select</hasDatatype>
+          <field>phone</field>
+        </item>
+        <item>
+          <label xml:lang="it">URI istituto</label>
+          <label xml:lang="en">Institute URI</label>
+          <hasIndex>6</hasIndex>
+          <hasPath></hasPath>
+          <isFixed>false</isFixed>
+          <datasource>personS</datasource>
+          <hasDatatype>select</hasDatatype>
+          <show>hidden</show>
+          <field>org</field>
+        </item>
+        <item>
+          <label xml:lang="it">Istituto</label>
+          <label xml:lang="en">Institute</label>
+          <hasIndex>7</hasIndex>
+          <hasPath>/rdf:RDF/foaf:Person/vcard:org/@rdf:resource</hasPath>
+          <isFixed>false</isFixed>
+          <show>combobox</show>
+          <datasource>institutes</datasource>
+          <hasDatatype>select</hasDatatype>
+          <defaultValue>http://sp7.irea.cnr.it/rdfdata/project/IREA</defaultValue>
+          <!-- <itemId>dati_personali_7</itemId> -->
+        </item>
+      </produces>
+    </element>
+    <element>
+      <id>address</id>
+      <label xml:lang="it">Indirizzo</label>
+      <label xml:lang="en">Address</label>
+      <isMandatory>forAll</isMandatory>
+      <isMultiple>false</isMultiple>
+      <hasRoot>/rdf:RDF/foaf:Person/vcard:hasAddress</hasRoot>
+      <produces>
+        <item>
+          <label xml:lang="it">Nome via</label>
+          <label xml:lang="en">Street name</label>
+          <hasIndex>1</hasIndex>
+          <hasPath>/rdf:RDF/foaf:Person/vcard:hasAddress/vcard:street-address</hasPath>
+          <isFixed>false</isFixed>
+          <datasource>address</datasource>
+          <hasDatatype>select</hasDatatype>
+          <field>str</field>
+        </item>
+        <item>
+          <label xml:lang="it">Localit&#224;</label>
+          <label xml:lang="en">Locality</label>
+          <hasIndex>2</hasIndex>
+          <hasPath>/rdf:RDF/foaf:Person/vcard:hasAddress/vcard:locality</hasPath>
+          <isFixed>false</isFixed>
+          <datasource>address</datasource>
+          <hasDatatype>select</hasDatatype>
+          <field>loc</field>
+        </item>      
+        <item>
+          <label xml:lang="it">C.A.P.</label>
+          <label xml:lang="en">Postal code</label>
+          <hasIndex>3</hasIndex>
+          <hasPath>/rdf:RDF/foaf:Person/vcard:hasAddress/vcard:postal-code</hasPath>
+          <isFixed>false</isFixed>
+          <datasource>address</datasource>
+          <hasDatatype>select</hasDatatype>
+          <field>cap</field>
+        </item>
+        <!--
+        <item>
+          <label xml:lang="it">URI nazione</label>
+          <label xml:lang="en">Country URI</label>
+          <hasIndex>4</hasIndex>
+          <hasPath></hasPath>
+          <isFixed>false</isFixed>
+          <datasource>address</datasource>
+          <hasDatatype>select</hasDatatype>
+          <show>hidden</show>
+          <field>cou</field>
+        </item>
+        -->        
+        <item>
+          <label xml:lang="it">Nazione</label>
+          <label xml:lang="en">Country</label>
+          <hasIndex>4</hasIndex>
+          <hasPath>/rdf:RDF/foaf:Person/vcard:hasAddress/vcard:country/@rdf:resource</hasPath>
+          <isFixed>false</isFixed>
+          <show>combobox</show>
+          <datasource>countries</datasource>
+          <hasDatatype>select</hasDatatype>
+          <!-- <useCode>true</useCode> -->
+          <defaultValue>http://eulersharp.sourceforge.net/2003/03swap/countries#it</defaultValue>
+        </item>      
+      </produces>
+    </element>
+  </group>
+  <group>
+    <id>ambiti</id>
+    <label xml:lang="it">Ambiti di ricerca</label>
+    <label xml:lang="en">Research areas</label>
+    <!--
+    <element>
+      <id>ambito</id>
+      <label xml:lang="it">Ambito</label>
+      <label xml:lang="en">Areas</label>
+      <isMandatory>forAll</isMandatory>
+      <isMultiple>true</isMultiple>
+      <hasRoot>/rdf:RDF/foaf:Person</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <hasPath>/rdf:RDF/foaf:Person/foaf:topic-interest/@rdf:resource</hasPath>
+          <isFixed>false</isFixed>
+          <hasDatatype>code</hasDatatype>
+          <datasource>research_areas</datasource>
+          <isLanguageNeutral>true</isLanguageNeutral>
+          <show>combobox</show>
+        </item>
+      </produces>
+    </element>
+    -->
+    <element>
+      <id>keyword</id>
+      <label xml:lang="it">Parola chiave</label>
+      <label xml:lang="en">Keyword</label>
+      <isMandatory>NA</isMandatory>
+      <isMultiple>true</isMultiple>
+      <hasRoot>/rdf:RDF/foaf:Person</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <hasPath>/rdf:RDF/foaf:Person/foaf:topic-interest/@rdf:resource</hasPath>
+          <isFixed>false</isFixed>
+          <datasource>keywords</datasource>
+          <hasDatatype>autoCompletion</hasDatatype>
+          <isLanguageNeutral>true</isLanguageNeutral>
+        </item>
+      </produces>
+    </element>     
+    <element>
+      <id>pubblicazioni</id>
+      <label xml:lang="it">Pubblicazioni</label>
+      <label xml:lang="en">Publications</label>
+      <isMandatory>NA</isMandatory>
+      <isMultiple>true</isMultiple>
+      <hasRoot>/rdf:RDF/foaf:Person</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <hasPath>/rdf:RDF/foaf:Person/foaf:made/@rdf:resource</hasPath>
+          <isFixed>false</isFixed>
+          <datasource>pubs</datasource>
+          <hasDatatype>autoCompletion</hasDatatype>
+          <!-- <isLanguageNeutral>true</isLanguageNeutral> -->
+          <useCode>true</useCode>
+        </item>        
+      </produces>
+    </element>       
+    
+    <element>
+      <id>people_pubblicazioni</id>
+      <label xml:lang="it">Pubblicazioni da PEOPLE</label>
+      <label xml:lang="en">Publications from PEOPLE</label>
+      <isMandatory>NA</isMandatory>
+      <isMultiple>true</isMultiple>
+      <hasRoot>/rdf:RDF/foaf:Person</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <hasPath>/rdf:RDF/foaf:Person/foaf:made/@rdf:resource</hasPath>
+          <isFixed>false</isFixed>
+          <datasource>cnr_pubs</datasource>
+          <hasDatatype>codelist</hasDatatype>
+          <!-- <hasDatatype>select</hasDatatype> -->
+          <!-- <isLanguageNeutral>true</isLanguageNeutral> -->
+          <useCode>true</useCode>
+          <show>combobox</show>
+        </item>        
+      </produces>
+    </element> 
+    
+  </group>
+  <group>
+    <id>rete</id>
+    <label xml:lang="it">Rete sociale</label>
+    <label xml:lang="en">Social network</label>
+    <element>
+      <id>conosce</id>
+      <label xml:lang="it">Conosce</label>
+      <label xml:lang="en">Knows</label>
+      <isMandatory>NA</isMandatory>
+      <isMultiple>true</isMultiple>
+      <hasRoot>/rdf:RDF/foaf:Person</hasRoot>
+      <produces>
+        <!--
+        <item>
+          <label xml:lang="it">URI persona</label>
+          <label xml:lang="en">Person URI</label>
+          <hasIndex>1</hasIndex>
+          <hasPath></hasPath>
+          <isFixed>false</isFixed>
+          <datasource>personS</datasource>
+          <hasDatatype>select</hasDatatype>
+          <show>hidden</show>
+          <field>c</field>
+        </item>
+        -->
+       <item>
+          <hasIndex>1</hasIndex>
+          <hasPath>/rdf:RDF/foaf:Person/foaf:knows/@rdf:resource</hasPath>
+          <isFixed>false</isFixed>
+          <datasource>person</datasource>
+          <hasDatatype>autoCompletion</hasDatatype>
+          <isLanguageNeutral>true</isLanguageNeutral>
+        </item>
+      </produces>
+    </element>    
+  </group>
+</template>
