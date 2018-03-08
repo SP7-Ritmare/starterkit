@@ -53,7 +53,7 @@ services:
         org.geonode.instance.name: geonode
 
   django:
-    image: geonode/geonode:latest
+    image: geonode/geonode:2.7.x
     restart: unless-stopped
     container_name: django4${COMPOSE_PROJECT_NAME}
     stdin_open: true
