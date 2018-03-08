@@ -73,7 +73,7 @@ services:
       - ./scripts/docker/env/production/sos.env
 
   celery:
-    image: geonode/geonode:latest
+    image: geonode/geonode:2.7.x
     restart: unless-stopped
     container_name: celery4${COMPOSE_PROJECT_NAME}
     stdin_open: true
@@ -92,7 +92,7 @@ services:
       - ./scripts/docker/env/production/celery.env
 
   consumers:
-    image: geonode/geonode:latest
+    image: geonode/geonode:2.7.x
     restart: unless-stopped
     container_name: consumers4${COMPOSE_PROJECT_NAME}
     stdin_open: true
@@ -111,7 +111,7 @@ services:
       - ./scripts/docker/env/production/django.env
 
   geoserver:
-    image: geonode/geoserver:2.12.x
+    image: geonode/geoserver:2.10.x
     restart: unless-stopped
     container_name: geoserver4${COMPOSE_PROJECT_NAME}
     stdin_open: true
@@ -160,7 +160,7 @@ services:
       - "80:80"
 
   data-dir-conf:
-    image: geonode/geoserver_data:2.12.x
+    image: geonode/geoserver_data:2.10.x
     restart: on-failure
     container_name: gsconf4${COMPOSE_PROJECT_NAME}
     labels:
