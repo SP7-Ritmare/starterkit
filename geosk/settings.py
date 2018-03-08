@@ -559,22 +559,31 @@ RITMARE = {
 SOS_LOCATION = os.getenv(
     'SOS_LOCATION', 'http://localhost:8080/observations/sos'
 )
+SOS_TRANSACTIONAL_AUTHORIZATION_TOKEN = os.getenv(
+    'SOS_TRANSACTIONAL_AUTHORIZATION_TOKEN',
+    'changeme'
+)
 SOS_APP = True
 SOS_PUBLIC_ACCESS = True  # to read data
-SOS_URL = SITEURL + 'observations/sos'
+SOS_PUBLIC_URL = SITEURL + 'observations/sos'
+SOS_PRIVATE_URL = SOS_LOCATION
 
 SOS_SERVER = {
     'default': {
-        'LOCATION': SOS_LOCATION,
-        'PUBLIC_LOCATION': SOS_URL,
-        'KVP_LOCATION': SOS_URL + '/kvp',
-        'POX_LOCATION': SOS_URL + '/pox',
+        'LOCATION': SOS_PRIVATE_URL,
+        'PUBLIC_LOCATION': SOS_PUBLIC_URL,
+        'KVP_LOCATION': SOS_PRIVATE_URL + '/kvp',
+        'POX_LOCATION': SOS_PRIVATE_URL + '/pox',
         'VERSION': '2.0.0',
-        'TRANSACTIONAL_AUTHORIZATION_TOKEN': 'changeme',
+        'TRANSACTIONAL_AUTHORIZATION_TOKEN\
+': SOS_TRANSACTIONAL_AUTHORIZATION_TOKEN,
         'USER': None,
         'PASSWORD': None,
     }
 }
+
+SOS_PUBLIC_CAPABILITIES_URL = SOS_PUBLIC_URL + \
+    '/kvp?service=SOS&request=GetCapabilities'
 
 THEME_ACCOUNT_CONTACT_EMAIL = 'help.skritmare@irea.cnr.it'
 ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = True

@@ -35,10 +35,6 @@ def update(ctx):
     }
     ctx.run("echo export GEOSERVER_PUBLIC_LOCATION=\
 http://{public_fqdn}/geoserver/ >> {override_fn}".format(**envs), pty=True)
-    ctx.run("echo export SOS_LOCATION=\
-http://{public_fqdn}/observations/sos >> {override_fn}".format(
-        **envs
-    ), pty=True)
     ctx.run("echo export SITEURL=\
 http://{public_fqdn}/ >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export ALLOWED_HOSTS=\
@@ -194,7 +190,7 @@ def _prepare_oauth_fixture():
             "pk": 1001,
             "fields": {
                 "skip_authorization": True,
-                "redirect_uris": "http://{0}:{1}/geoserver/index.html".format(
+                "redirect_uris": "http://{0}:{1}/geoserver".format(
                     pub_ip, pub_port
                 ),
                 "name": "GeoServer",
