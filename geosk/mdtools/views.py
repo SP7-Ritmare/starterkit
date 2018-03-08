@@ -7,7 +7,7 @@ import subprocess
 import re
 
 from django.conf import settings
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.forms import model_to_dict
 from django.core.serializers.json import DjangoJSONEncoder
 from django.forms.models import model_to_dict
@@ -160,5 +160,4 @@ def whoami(request, format='json'):
         'sos': get_sos_version()
     }
 
-
-    return HttpResponse(json.dumps(_md, indent=2), mimetype="application/json")
+    return JsonResponse(_md)
