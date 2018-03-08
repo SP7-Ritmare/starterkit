@@ -57,7 +57,8 @@ def get_data_api(request, format='json'):
 
 def get_ubuntu_release():
     try:
-        version = subprocess.check_output(['lsb_release', '-sr'])
+        version = os.getenv('VERSION_UBUNTU', subprocess.check_output(['lsb_release', '-sr']))
+        #version = subprocess.check_output(['lsb_release', '-sr'])
     except:
         version = ''
     return version.strip()
@@ -86,22 +87,26 @@ def get_postgis_version():
 
 def get_java_version():
     try:
-        version = subprocess.check_output(['java', '-version'], stderr=subprocess.STDOUT)
-        pattern = '\"(\d+\.\d+).*\"'
-        version = re.search(pattern, version).groups()[0]
+        version = os.getenv('VERSION_JAVA')
+        if not version:
+            version = subprocess.check_output(['java', '-version'], stderr=subprocess.STDOUT)
+            pattern = '\"(\d+\.\d+).*\"'
+            version = re.search(pattern, version).groups()[0]
     except:
         version = ''
     return version
 
 def get_tomcat_version():
     try:
-        out = subprocess.check_output(['ps', '-efww']).split("\n")
-        reg_cat_home = re.compile('catalina.home=(\S*)')
-        for o in out:
-            if o.find('tomcat') >= 0:
-                _find = reg_cat_home.search(o)
-                if _find:
-                    version = _get_tomcat_version(_find.groups()[0])
+        version = os.getenv('VERSION_TOMCAT')
+        if not version:
+            out = subprocess.check_output(['ps', '-efww']).split("\n")
+            reg_cat_home = re.compile('catalina.home=(\S*)')
+            for o in out:
+                if o.find('tomcat') >= 0:
+                    _find = reg_cat_home.search(o)
+                    if _find:
+                        version = _get_tomcat_version(_find.groups()[0])
     except:
         version = ''
     return version
@@ -115,11 +120,13 @@ def _get_tomcat_version(catalina_home):
 
 def get_sos_version():
     try:
-        with open('/var/lib/tomcat7/webapps/observations/version-info.txt') as f:
-            out = f.readlines()
-            for o in out:
-                if o.find('version =') >= 0:
-                    version = o.split('=')[1]
+        version = os.getenv('VERSION_SOS')
+        if not version:
+            with open('/var/lib/tomcat7/webapps/observations/version-info.txt') as f:
+                out = f.readlines()
+                for o in out:
+                    if o.find('version =') >= 0:
+                        version = o.split('=')[1]
     except TypeError:
         version = ''
     return version.strip()
