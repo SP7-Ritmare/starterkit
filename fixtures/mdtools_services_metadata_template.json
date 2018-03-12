@@ -1,9 +1,9 @@
 [
-    {"pk": 1,
+    {"pk": 2,
      "model": "mdtools.servicesmetadata",
      "fields": {"contact_country": "Italy",
                 "provider_url": "http://www.ibfservizi.it",
-                "contact_role": null,
+                "contact_role": "",
                 "contact_city": "Milan",
                 "contact_instructions": "",
                 "contact_position": "",
