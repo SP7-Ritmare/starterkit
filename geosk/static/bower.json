@@ -13,7 +13,7 @@
     "float": "https://github.com/flot/flot/archive/v0.8.2.tar.gz",
     "momentjs": "2.5.1",
     "gxp": "https://github.com/boundlessgeo/gxp.git",
-    "EDI-NG_client": "git://github.com/SP7-Ritmare/EDI-NG_client.git#master",
+    "EDI-NG_client": "https://github.com/SP7-Ritmare/EDI-NG_client.git#master",
     "cookieconsent2": "~1.0.10"
   }
 }
