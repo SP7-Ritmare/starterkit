@@ -66,7 +66,7 @@ USE_TZ = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-# MEDIA_ROOT = os.path.join(LOCAL_ROOT, "uploaded")
+MEDIA_ROOT = os.path.join(LOCAL_ROOT, "uploaded")
 
 # Absolute path to the directory that holds static files like app media.
 # Example: "/home/media/media.lawrence.com/apps/"
