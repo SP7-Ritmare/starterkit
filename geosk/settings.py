@@ -527,26 +527,9 @@ GRAPPELLI_ADMIN_TITLE = "Home - Starter Kit"
 GRAPPELLI_INDEX_DASHBOARD = 'geosk.dashboard.CustomIndexDashboard'
 
 # add skregistration context processor
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.debug',
-    'django.core.context_processors.i18n',
-    "django.core.context_processors.tz",
-    'django.core.context_processors.media',
-    "django.core.context_processors.static",
-    'django.core.context_processors.request',
-    'django.contrib.messages.context_processors.messages',
-    'account.context_processors.account',
-    'geonode.context_processors.resource_urls',
-    'geonode.geoserver.context_processors.geoserver_urls',
-    # this template was used on geonode 2.0
-    # 'pinax_theme_bootstrap_account.context_processors.theme',
+TEMPLATES[0]['OPTIONS']['context_processors'].append('geosk.context_processors.sk')
+TEMPLATES[0]['OPTIONS']['context_processors'].append('geosk.skregistration.context_processors.skregistration')
 
-    # Add things like SOS_APP
-    'geosk.context_processors.sk',
-    # skregistraion
-    'geosk.skregistration.context_processors.skregistration',
-)
 
 # RITMARE services
 RITMARE = {
