@@ -1,44 +1,48 @@
-import os
 import logging
+import os
 
 from django.conf import settings
-from django.contrib import admin
-from django.core.files import locks
-from django.utils.translation import ugettext, ugettext_lazy as _
+from django.contrib import admin, messages
 from django.contrib.sites.models import Site
-from django.contrib import messages
-
+from django.core.files import locks
+from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext
+from geonode.geoserver.signals import gs_catalog
+from geosk.mdtools.geoserver_extra import Settings
 from geosk.mdtools.models import ServicesMetadata
-
 from geosk.osk.models import StringSettings, UriSettings
+
 
 class ServicesMetadataAdmin(admin.ModelAdmin):
     list_display = ('node_title', 'provider_name', 'provider_url')
     fieldsets = (
         (None, {
-                'fields': (('node_name', 'node_title'), 'node_abstract', 'node_keywords')
-                }
-         ),
+            'fields': (('node_name', 'node_title'), 'node_abstract', 'node_keywords')
+        }
+        ),
         (_('Provider'), {
-                'fields': (('provider_name', 'provider_url'),)
-                }
-         ),
+            'fields': (('provider_name', 'provider_url'),)
+        }
+        ),
         (_('Contact'), {
-                'fields': (
-                    ('contact_name', 'contact_position'),
-                    ('contact_email', 'contact_url'),
-                    ('contact_address',),
-                    ('contact_city', 'contact_stateprovince',),
-                    ('contact_postalcode', 'contact_country'),
-                    ('contact_phone', 'contact_fax',),
-                    ('contact_hours', 'contact_instructions',),
-                    )
-                }
-         ),
-        )
+            'fields': (
+                ('contact_name', 'contact_position'),
+                ('contact_email', 'contact_url'),
+                ('contact_address',),
+                ('contact_city', 'contact_stateprovince',),
+                ('contact_postalcode', 'contact_country'),
+                ('contact_phone', 'contact_fax',),
+                ('contact_hours', 'contact_instructions',),
+            )
+        }
+        ),
+    )
+
     def save_model(self, request, obj, form, change):
         obj.save()
-        post_save_nodeconfiguration(request, obj)
+        post_save_nodeconfiguration(request, obj) # FIXME with lines below
+        # if not os.getenv("DOCKER_ENV", ""):
+        #     post_save_nodeconfiguration(request, obj)
 
     def has_add_permission(self, request):
         return not ServicesMetadata.objects.exists()
@@ -47,28 +51,26 @@ class ServicesMetadataAdmin(admin.ModelAdmin):
 admin.site.register(ServicesMetadata, ServicesMetadataAdmin)
 
 
-
-from geosk.mdtools.geoserver_extra import Settings
-from geonode.layers.models import Layer
 def post_save_nodeconfiguration(request, instance):
-    cat = Layer.objects.gs_catalog
+    # cat = Layer.objects.gs_catalog
+    cat = gs_catalog
     gs_settings = Settings(cat)
     contact = {"contact":
-                   {"address": instance.contact_address,
-                    "addressCity": instance.contact_city,
-                    "addressCountry": instance.contact_country,
-                    "addressPostalCode": instance.contact_postalcode,
-                    "addressState": instance.contact_stateprovince,
-                    "addressType": None,
-                    "contactEmail": instance.contact_email,
-                    "contactFacsimile": instance.contact_fax,
-                    "contactOrganization": instance.provider_name,
-                    "contactPerson": instance.contact_name,
-                    "contactPosition": instance.contact_position,
-                    "contactVoice": instance.contact_phone}
+               {"address": instance.contact_address,
+                "addressCity": instance.contact_city,
+                "addressCountry": instance.contact_country,
+                "addressPostalCode": instance.contact_postalcode,
+                "addressState": instance.contact_stateprovince,
+                "addressType": None,
+                "contactEmail": instance.contact_email,
+                "contactFacsimile": instance.contact_fax,
+                "contactOrganization": instance.provider_name,
+                "contactPerson": instance.contact_name,
+                "contactPosition": instance.contact_position,
+                "contactVoice": instance.contact_phone}
                }
 
-    def get_service_json (instance, service):
+    def get_service_json(instance, service):
         # get current values
         service_base = gs_settings.get_service_config(service)
         # service_base = {service: {"enabled": True, # va lasciato altrimenti lo disabilita
@@ -82,19 +84,19 @@ def post_save_nodeconfiguration(request, instance):
         #                           "citeCompliant": False,
         #                           "onlineResource": settings.SITEURL,
         #                           }}
-        service_base[service]['name']     = "%s - %s " % (instance.node_name, service)
-        service_base[service]['title']    = "%s - %s " % (instance.node_title, service)
-        service_base[service]['maintainer']    = instance.provider_url if instance.provider_url is not None and instance.provider_url else settings.SITEURL
-        service_base[service]['abstrct'] =  instance.node_abstract if instance.node_abstract is not None else '-'
+        service_base[service]['name'] = "%s - %s " % (
+            instance.node_name, service)
+        service_base[service]['title'] = "%s - %s " % (
+            instance.node_title, service)
+        service_base[service]['maintainer'] = instance.provider_url if instance.provider_url is not None and instance.provider_url else settings.SITEURL
+        service_base[service]['abstrct'] = instance.node_abstract if instance.node_abstract is not None else '-'
         service_base[service]['onlineResource'] = settings.SITEURL
         return service_base
-
 
     gs_settings.update_contact(contact)
     gs_settings.update_service('wms', get_service_json(instance, 'wms'))
     gs_settings.update_service('wfs', get_service_json(instance, 'wfs'))
     gs_settings.update_service('wcs', get_service_json(instance, 'wcs'))
-
 
     # save PYCSW settings
     try:
@@ -123,9 +125,11 @@ def post_save_nodeconfiguration(request, instance):
     # save observations settings
     try:
         set_sensors_configuration(instance)
-        messages.warning(request, "The SOS metadta were configured. You need to manually restart the SOS service in order to apply the changes.")
+        messages.warning(
+            request, "The SOS metadta were configured. You need to manually restart the SOS service in order to apply the changes.")
     except Exception, e:
-        messages.error(request, 'An error occured while saving SOS metadata: you need to manually configure the SOS settings through admin interface.')
+        messages.error(
+            request, 'An error occured while saving SOS metadata: you need to manually configure the SOS settings through admin interface.')
         logging.error('Error while saving SOS settings')
         logging.error(str(e))
 
@@ -135,6 +139,7 @@ def getval(val, default='None'):
         return default
     return val
 
+
 def get_pycsw_configuration(instance):
     PYCSW = {
         # pycsw configuration
@@ -142,10 +147,10 @@ def get_pycsw_configuration(instance):
             'metadata:main': {
                 'identification_title': "%s - Catalog " % (instance.node_title,),
                 'identification_abstract': getval(instance.node_abstract),
-                'identification_keywords': 'sdi,catalogue,discovery,metadata,GeoNode', # TODO
+                'identification_keywords': 'sdi,catalogue,discovery,metadata,GeoNode',  # TODO
                 'identification_keywords_type': 'theme',
-                'identification_fees': 'None', # TODO
-                'identification_accessconstraints': 'None', # TODO
+                'identification_fees': 'None',  # TODO
+                'identification_accessconstraints': 'None',  # TODO
                 'provider_name': getval(instance.provider_name),
                 'provider_url': settings.SITEURL,
                 'contact_name': getval(instance.contact_name),
@@ -162,7 +167,7 @@ def get_pycsw_configuration(instance):
                 'contact_hours': getval(instance.contact_hours),
                 'contact_instructions': getval(instance.contact_instructions),
                 'contact_role': getval(instance.contact_role),
-                },
+            },
             'metadata:inspire': {
                 'enabled': 'true',
                 'languages_supported': 'it,eng',
@@ -173,9 +178,9 @@ def get_pycsw_configuration(instance):
                 'contact_name': 'Organization Name',
                 'contact_email': 'Email Address',
                 'temp_extent': 'YYYY-MM-DD/YYYY-MM-DD',
-                }
             }
         }
+    }
     return PYCSW
 
 
@@ -185,35 +190,35 @@ def set_sensors_configuration(instance):
         'serviceProvider.phone': getval(instance.contact_phone),
         'serviceProvider.individualName': getval(instance.contact_name),
         'serviceProvider.positionName': getval(instance.contact_position),
-        'serviceProvider.email': getval( instance.contact_email),
+        'serviceProvider.email': getval(instance.contact_email),
         'serviceProvider.address': getval(instance.contact_address),
-        'serviceProvider.postalCode': getval( instance.contact_postalcode),
+        'serviceProvider.postalCode': getval(instance.contact_postalcode),
         'serviceProvider.city': getval(instance.contact_city),
         'serviceProvider.state': getval(instance.contact_stateprovince),
         'serviceProvider.country': getval(instance.contact_country),
         'serviceIdentification.title': getval(instance.node_title),
         'serviceIdentification.abstract': getval(instance.node_abstract),
-        'serviceIdentification.accessConstraints': 'None', # TODO
-        'serviceIdentification.fees': 'None', # TODO
+        'serviceIdentification.accessConstraints': 'None',  # TODO
+        'serviceIdentification.fees': 'None',  # TODO
         'serviceIdentification.serviceType': 'OGC:SOS',
         #
         'misc.defaultOfferingPrefix': 'offering:',
         'misc.defaultProcedurePrefix': "http://sp7.irea.cnr.it/sensors/%s/procedure/" % Site.objects.get_current().domain,
         'misc.defaultObservablePropertyPrefix':  "http://sp7.irea.cnr.it/sensors/%s/observableProperty/" % Site.objects.get_current().domain,
         'misc.defaultFeaturePrefix':  "http://sp7.irea.cnr.it/sensors/%s/foi/" % Site.objects.get_current().domain,
-        }
+    }
 
     configuration_uri = {
-        'serviceProvider.site' : instance.contact_url,
-        'service.sosUrl' : settings.SOS_URL,
-        }
+        'serviceProvider.site': instance.contact_url,
+        'service.sosUrl': settings.SOS_URL,
+    }
 
-    for k,v in configuration_strings.iteritems():
+    for k, v in configuration_strings.iteritems():
         el = StringSettings.objects.using('sensors').get(identifier=k)
         el.value = getval(v)
         el.save()
 
-    for k,v in configuration_uri.iteritems():
+    for k, v in configuration_uri.iteritems():
         el = UriSettings.objects.using('sensors').get(identifier=k)
         el.value = getval(v)
         el.save()
