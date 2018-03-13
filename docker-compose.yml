@@ -176,5 +176,7 @@ volumes:
     name: ${COMPOSE_PROJECT_NAME}-gsdatadir
   dbdata:
     name: ${COMPOSE_PROJECT_NAME}-dbdata
+  dbsosdata:
+    name: ${COMPOSE_PROJECT_NAME}-dbsosdata
   dbbackups:
     name: ${COMPOSE_PROJECT_NAME}-dbbackups
