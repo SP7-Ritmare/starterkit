@@ -129,7 +129,7 @@ in the sos.env, django.env, geoserver.env, celery.env
 
 Launch the stack with the build of GeoNode so any changes you did will be immediately available::
 
-    cd starterkit/
+    cd ~/starterkit/
     docker-compose up --build -d
 
 **The GET-IT is installed correctly!** GET-IT will be available at the ip address of the ``docker0`` interface::
