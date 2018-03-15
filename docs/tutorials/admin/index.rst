@@ -6,8 +6,8 @@ Tutorials for administrators
 
 Welcome to the GET-IT Administrators Workshop!
 
-:ref:`quick`
-     Learn how to install GET-IT by virtual machine.
+.. :ref:`quick`
+..     Learn how to install GET-IT by virtual machine.
 :ref:`scratch`
      Learn how to install GET-IT from scratch step by step.
 :ref:`server`
