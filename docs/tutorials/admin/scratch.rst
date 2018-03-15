@@ -1,4 +1,3 @@
-Installation GET-IT new version
 .. _scratch:
 
 
