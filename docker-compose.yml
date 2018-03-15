@@ -53,7 +53,7 @@ services:
         org.geonode.instance.name: geonode
 
   django:
-    image: geonode/geonode:2.7.x
+    image: geobeyond/geonode:2.7.x
     restart: unless-stopped
     container_name: django4${COMPOSE_PROJECT_NAME}
     stdin_open: true
@@ -73,7 +73,7 @@ services:
       - ./scripts/docker/env/production/sos.env
 
   celery:
-    image: geonode/geonode:2.7.x
+    image: geobeyond/geonode:2.7.x
     restart: unless-stopped
     container_name: celery4${COMPOSE_PROJECT_NAME}
     stdin_open: true
@@ -92,7 +92,7 @@ services:
       - ./scripts/docker/env/production/celery.env
 
   consumers:
-    image: geonode/geonode:2.7.x
+    image: geobeyond/geonode:2.7.x
     restart: unless-stopped
     container_name: consumers4${COMPOSE_PROJECT_NAME}
     stdin_open: true
