@@ -128,7 +128,7 @@ services:
       - ./scripts/docker/env/production/geoserver.env
 
   sos:
-    image: geobeyond/sos-configured:4.4.0
+    image: geobeyond/sos-configured:4.4.2
     restart: unless-stopped
     container_name: sos4${COMPOSE_PROJECT_NAME}
     stdin_open: true
