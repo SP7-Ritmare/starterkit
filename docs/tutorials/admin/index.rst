@@ -25,7 +25,7 @@ Welcome to the GET-IT Administrators Workshop!
 .. toctree::
    :hidden:
 
-   quick
+..   quick
    scratch
    server
    advanced
