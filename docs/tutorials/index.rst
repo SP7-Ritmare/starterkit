@@ -10,8 +10,8 @@ Tutorials
 
    users/index
    admin/index
-   developers/index
-   dataflowengine/index
+..   developers/index
+..   dataflowengine/index
 
 The tutorials are based around performing tasks, like adding data or
 publishing maps. The tutorials are written in a workshop like format
