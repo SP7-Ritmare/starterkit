@@ -40,9 +40,9 @@ class ServicesMetadataAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         obj.save()
-        post_save_nodeconfiguration(request, obj) # FIXME with lines below
-        # if not os.getenv("DOCKER_ENV", ""):
-        #     post_save_nodeconfiguration(request, obj)
+        # post_save_nodeconfiguration(request, obj) # FIXME with lines below
+        if not os.getenv("DOCKER_ENV", ""):
+            post_save_nodeconfiguration(request, obj)
 
     def has_add_permission(self, request):
         return not ServicesMetadata.objects.exists()
