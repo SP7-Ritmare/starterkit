@@ -2,7 +2,7 @@ import json
 import logging
 import os
 import re
-
+import datetime
 import docker
 
 from invoke import run, task
@@ -99,6 +99,8 @@ def fixtures(ctx):
 --settings={0}".format("geonode.settings"), pty=True)
     ctx.run("django-admin.py loaddata initial_data.json \
 --settings={0}".format("geonode.settings"), pty=True)
+    ctx.run("django-admin.py loaddata /tmp/mdtools_services_metadata_docker.json \
+--settings={0}".format("geosk.settings"), pty=True)
 
 
 def _docker_host_ip():
@@ -255,10 +257,25 @@ def _prepare_service_metadata_fixture():
     print "contact_name is {0}".format(contact_name)
     node_keywords = os.getenv("SERVICEPROVIDER_NODEKEYWORDS", "")
     print "node_keywords is {0}".format(node_keywords)
+
+    d = datetime.datetime.now()
+    mdext_date = d.isoformat()[:23] + "Z"
     default_fixture = [
-        {"pk": 1,
-         "model": "mdtools.servicesmetadata",
-         "fields": {"contact_country": contact_country,
+            {
+                "fields": {
+                    "elements_xml": None,
+                    "md_date": mdext_date,
+                    "rndt_xml": None,
+                    "ediversion": None,
+                    "md_language": "ita",
+                    "fileid": None
+                },
+                "model": "mdtools.mdextension",
+                "pk": 2
+            },
+            {
+                "fields": {
+                    "contact_country": contact_country,
                     "provider_url": provider_url,
                     "contact_role": contact_role,
                     "contact_city": contact_city,
@@ -277,8 +294,11 @@ def _prepare_service_metadata_fixture():
                     "contact_postalcode": contact_postalcode,
                     "contact_phone": contact_phone,
                     "contact_name": contact_name,
-                    "node_keywords": node_keywords}
-         }
+                    "node_keywords": node_keywords
+                },
+                "model": "mdtools.servicesmetadata",
+                "pk": 2
+            }  
     ]
     with open(
         '/tmp/mdtools_services_metadata_docker.json',

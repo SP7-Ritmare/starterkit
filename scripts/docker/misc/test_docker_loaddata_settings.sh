@@ -11,5 +11,8 @@ echo SITEURL=$SITEURL
 echo ALLOWED_HOSTS=$ALLOWED_HOSTS
 echo GEOSERVER_PUBLIC_LOCATION=$GEOSERVER_PUBLIC_LOCATION
 
-python manage.py loaddata /tmp/mdtools.json --settings=geosk.settings
+/usr/local/bin/invoke prepare >> /usr/src/app/invoke.log
+echo "prepare task done"
+
+python manage.py loaddata /tmp/mdtools_services_metadata_docker.json --settings=geosk.settings
 
