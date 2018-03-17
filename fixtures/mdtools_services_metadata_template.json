@@ -1,18 +1,6 @@
 [
   {
     "fields": {
-      "elements_xml": null,
-      "md_date": "2018-03-13T10:17:05.938Z",
-      "rndt_xml": null,
-      "ediversion": null,
-      "md_language": "ita",
-      "fileid": null
-    },
-    "model": "mdtools.mdextension",
-    "pk": 2
-  },
-  {
-    "fields": {
       "contact_country": "Italy",
       "provider_url": "http://www.irea.cnr.it",
       "contact_role": "pointOfContact",
@@ -35,6 +23,6 @@
       "node_keywords": ""
     },
     "model": "mdtools.servicesmetadata",
-    "pk": 2
+    "pk": 1
   }
 ]

@@ -261,44 +261,32 @@ def _prepare_service_metadata_fixture():
     d = datetime.datetime.now()
     mdext_date = d.isoformat()[:23] + "Z"
     default_fixture = [
-            {
-                "fields": {
-                    "elements_xml": None,
-                    "md_date": mdext_date,
-                    "rndt_xml": None,
-                    "ediversion": None,
-                    "md_language": "ita",
-                    "fileid": None
-                },
-                "model": "mdtools.mdextension",
-                "pk": 2
+        {
+            "fields": {
+                "contact_country": contact_country,
+                "provider_url": provider_url,
+                "contact_role": contact_role,
+                "contact_city": contact_city,
+                "contact_instructions": contact_instructions,
+                "contact_position": contact_position,
+                "contact_fax": contact_fax,
+                "node_title": node_title,
+                "contact_hours": contact_hours,
+                "node_name": node_name,
+                "node_abstract": node_abstract,
+                "contact_address": contact_address,
+                "contact_email": contact_email,
+                "contact_url": contact_url,
+                "contact_stateprovince": contact_stateprovince,
+                "provider_name": provider_name,
+                "contact_postalcode": contact_postalcode,
+                "contact_phone": contact_phone,
+                "contact_name": contact_name,
+                "node_keywords": node_keywords
             },
-            {
-                "fields": {
-                    "contact_country": contact_country,
-                    "provider_url": provider_url,
-                    "contact_role": contact_role,
-                    "contact_city": contact_city,
-                    "contact_instructions": contact_instructions,
-                    "contact_position": contact_position,
-                    "contact_fax": contact_fax,
-                    "node_title": node_title,
-                    "contact_hours": contact_hours,
-                    "node_name": node_name,
-                    "node_abstract": node_abstract,
-                    "contact_address": contact_address,
-                    "contact_email": contact_email,
-                    "contact_url": contact_url,
-                    "contact_stateprovince": contact_stateprovince,
-                    "provider_name": provider_name,
-                    "contact_postalcode": contact_postalcode,
-                    "contact_phone": contact_phone,
-                    "contact_name": contact_name,
-                    "node_keywords": node_keywords
-                },
-                "model": "mdtools.servicesmetadata",
-                "pk": 2
-            }  
+            "model": "mdtools.servicesmetadata",
+            "pk": 1
+        }  
     ]
     with open(
         '/tmp/mdtools_services_metadata_docker.json',
