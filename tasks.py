@@ -88,6 +88,8 @@ def prepare(ctx):
     _prepare_oauth_fixture()
     ctx.run("rm -rf /tmp/mdtools_services_metadata_docker.json", pty=True)
     _prepare_service_metadata_fixture()
+    ctx.run("rm -rf /tmp/sites_docker.json", pty=True)
+    _prepare_site_fixture()
 
 
 @task
@@ -99,6 +101,8 @@ def fixtures(ctx):
 --settings={0}".format("geonode.settings"), pty=True)
     ctx.run("django-admin.py loaddata initial_data.json \
 --settings={0}".format("geonode.settings"), pty=True)
+    ctx.run("django-admin.py loaddata /tmp/sites_docker.json \
+--settings={0}".format("geosk.settings"), pty=True)
     ctx.run("django-admin.py loaddata /tmp/mdtools_services_metadata_docker.json \
 --settings={0}".format("geosk.settings"), pty=True)
 
@@ -290,6 +294,28 @@ def _prepare_service_metadata_fixture():
     ]
     with open(
         '/tmp/mdtools_services_metadata_docker.json',
+        'w'
+    ) as fixturefile:
+        json.dump(default_fixture, fixturefile)
+
+
+def _prepare_site_fixture():
+    domain = _geonode_public_host_ip()
+    print "Public domain is {0}".format(domain)
+    port = _geonode_public_port()
+    print "Public port is {0}".format(port)
+    default_fixture = [
+        {
+            "fields": {
+                "domain": domain,
+                "name": domain
+            },
+            "model": "sites.site",
+            "pk": 1
+        }
+    ]
+    with open(
+        '/tmp/sites_docker.json',
         'w'
     ) as fixturefile:
         json.dump(default_fixture, fixturefile)
