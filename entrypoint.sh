@@ -3,6 +3,7 @@ set -e
 
 /usr/local/bin/invoke update >> /usr/src/app/invoke.log
 
+source $HOME/.bashrc
 source $HOME/.override_env
 
 echo DATABASE_URL=$DATABASE_URL
