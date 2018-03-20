@@ -23,6 +23,8 @@ echo "waitfordbs task done"
 echo "migrations task done"
 /usr/local/bin/invoke prepare >> /usr/src/app/invoke.log
 echo "prepare task done"
+/usr/local/bin/invoke waitforgeoserver >> /usr/src/app/invoke.log
+echo "waitforgeoserver task done"
 /usr/local/bin/invoke fixtures >> /usr/src/app/invoke.log
 echo "fixture task done"
 

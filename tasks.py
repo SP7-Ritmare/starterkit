@@ -17,6 +17,15 @@ def waitfordbs(ctx):
 
 
 @task
+def waitforgeoserver(ctx):
+    print "**************************geoserver*******************************"
+    while not _rest_api_availability(os.environ['GEOSERVER_LOCATION'] + 'rest'):
+        print ("Wait for GeoServer API availability...")
+    print "GeoServer is available for HTTP calls!"
+    
+
+
+@task
 def update(ctx):
     print "***************************initial*********************************"
     ctx.run("env", pty=True)
@@ -105,6 +114,12 @@ def fixtures(ctx):
 --settings={0}".format("geosk.settings"), pty=True)
     ctx.run("django-admin.py loaddata /tmp/mdtools_services_metadata_docker.json \
 --settings={0}".format("geosk.settings"), pty=True)
+
+
+@task
+def geoserverfixture(ctx):
+    print "*****************geoserver fixture********************************"
+    _geoserver_info_provision(os.environ['GEOSERVER_LOCATION'] + "rest/")    
 
 
 def _docker_host_ip():
@@ -319,3 +334,108 @@ def _prepare_site_fixture():
         'w'
     ) as fixturefile:
         json.dump(default_fixture, fixturefile)
+
+
+def _rest_api_availability(url):
+    import requests
+    try:
+        r = response = requests.request('get', url)
+        r.raise_for_status()  # Raises a HTTPError if the status is 4xx, 5xxx
+
+    except (requests.exceptions.ConnectionError, requests.exceptions.Timeout) as e:
+        print "GeoServer connection error is {0}".format(e)
+        return False
+    except requests.exceptions.HTTPError as er:
+        print "GeoServer HTTP error is {0}".format(er)
+        return False
+    else:
+        print "GeoServer API are available!"
+        return True
+
+
+def _geoserver_info_provision(url):
+    from geoserver.catalog import Catalog
+    from geosk.mdtools.geoserver_extra import Settings
+    cat = Catalog(url,
+        username="admin",
+        password="geoserver"
+    )
+    gs_settings = Settings(cat)
+    print "GeoServer service url is {0}".format(cat.service_url)
+    contact_country = os.getenv("SERVICEPROVIDER_COUNTRY", "")
+    print "contact_country is {0}".format(contact_country)
+    provider_url = os.getenv("SERVICEPROVIDER_SITE", "")
+    print "provider_url is {0}".format(provider_url)
+    contact_role = os.getenv("SERVICEPROVIDER_INDIVIDUALNAME", "")
+    print "contact_role is {0}".format(contact_role)
+    contact_city = os.getenv("SERVICEPROVIDER_CITY", "")
+    print "contact_city is {0}".format(contact_city)
+    contact_instructions = os.getenv("SERVICEPROVIDER_INSTRUCTIONS", "")
+    print "contact_instructions is {0}".format(contact_instructions)
+    contact_position = os.getenv("SERVICEPROVIDER_POSITIONNAME", "")
+    print "contact_position is {0}".format(contact_position)
+    contact_fax = os.getenv("SERVICEPROVIDER_FAX", "")
+    print "contact_fax is {0}".format(contact_fax)
+    node_title = os.getenv("SERVICEPROVIDER_NODETITLE", "")
+    print "node_title is {0}".format(node_title)
+    contact_hours = os.getenv("SERVICEPROVIDER_HOURS", "")
+    print "contact_hours is {0}".format(contact_hours)
+    node_name = os.getenv("SERVICEPROVIDER_NODENAME", "")
+    print "node_name is {0}".format(node_name)
+    node_abstract = os.getenv("SERVICEPROVIDER_NODEABSTRACT", "")
+    print "node_abstract is {0}".format(node_abstract)
+    contact_address = os.getenv("SERVICEPROVIDER_ADDRESS", "")
+    print "contact_address is {0}".format(contact_address)
+    contact_email = os.getenv("SERVICEPROVIDER_EMAIL", "")
+    print "contact_email is {0}".format(contact_email)
+    contact_url = os.getenv("SERVICEPROVIDER_SITE", "")
+    print "contact_url is {0}".format(contact_url)
+    contact_stateprovince = os.getenv("SERVICEPROVIDER_STATEPROVINCE", "")
+    print "contact_stateprovince is {0}".format(contact_stateprovince)
+    provider_name = os.getenv("SERVICEPROVIDER_NAME", "")
+    print "provider_name is {0}".format(provider_name)
+    contact_postalcode = os.getenv("SERVICEPROVIDER_POSTALCODE", "")
+    print "contact_postalcode is {0}".format(contact_postalcode)
+    contact_phone = os.getenv("SERVICEPROVIDER_PHONE", "")
+    print "contact_phone is {0}".format(contact_phone)
+    contact_name = os.getenv("SERVICEPROVIDER_NAME", "")
+    print "contact_name is {0}".format(contact_name)
+    node_keywords = os.getenv("SERVICEPROVIDER_NODEKEYWORDS", "")
+    print "node_keywords is {0}".format(node_keywords)
+    contact = {
+        "contact": {
+            "address": contact_address,
+            "addressCity": contact_city,
+            "addressCountry": contact_country,
+            "addressPostalCode": contact_postalcode,
+            "addressState": contact_stateprovince,
+            "addressType": None,
+            "contactEmail": contact_email,
+            "contactFacsimile": contact_fax,
+            "contactOrganization": provider_name,
+            "contactPerson": contact_name,
+            "contactPosition": contact_position,
+            "contactVoice": contact_phone
+        }
+    }
+
+    def get_service_json(service):
+        # get current values
+        service_base = gs_settings.get_service_config(service)
+        service_base[service]['name'] = "{0} - {1}".format(
+            node_name,
+            service
+        )
+        service_base[service]['title'] = "{0} - {1}".format(
+            node_title,
+            service
+        )
+        service_base[service]['maintainer'] = provider_url if provider_url is not None and provider_url else os.environ['SITEURL']
+        service_base[service]['abstrct'] = node_abstract if node_abstract is not None else '-'
+        service_base[service]['onlineResource'] = os.environ['SITEURL']
+        return service_base
+
+    gs_settings.update_contact(contact)
+    gs_settings.update_service('wms', get_service_json('wms'))
+    gs_settings.update_service('wfs', get_service_json('wfs'))
+    gs_settings.update_service('wcs', get_service_json('wcs'))
