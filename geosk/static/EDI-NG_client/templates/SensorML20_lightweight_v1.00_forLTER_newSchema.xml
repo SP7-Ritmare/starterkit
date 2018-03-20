@@ -244,7 +244,7 @@
                         SERVICE <http://vocabs.ceh.ac.uk/evn/tbl/sparql> {
                             GRAPH <urn:x-evn-pub:envthes>{
                                 {
-                                    BIND (<http://vocabs.lter-europe.net/EnvThes/EUUnits_003> as ?root)
+                                    BIND (<http://vocabs.lter-europe.net/EnvThes/EUUnits_001> as ?root)
                                     ?root (skos:narrower*) ?narrow.
                                     ?narrow skos:prefLabel ?zxx.
                                     ?narrow skos:altLabel ?l.
