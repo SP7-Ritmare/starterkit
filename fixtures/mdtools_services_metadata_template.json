@@ -1,25 +1,28 @@
 [
-    {"pk": 2,
-     "model": "mdtools.servicesmetadata",
-     "fields": {"contact_country": "Italy",
-                "provider_url": "http://www.ibfservizi.it",
-                "contact_role": "",
-                "contact_city": "Milan",
-                "contact_instructions": "",
-                "contact_position": "",
-                "contact_fax": "",
-                "node_title": "GET-ITAgri",
-                "contact_hours": "",
-                "node_name": "GET-ITFarm",
-                "node_abstract": "",
-                "contact_address": "Via Cavicchini, 2 Ferrara",
-                "contact_email": "info@ibfservizi.it",
-                "contact_url": "http://www.ibfservizi.it",
-                "contact_stateprovince": "FE",
-                "provider_name": "IBF Servizi SpA",
-                "contact_postalcode": "44037",
-                "contact_phone": "",
-                "contact_name": "IBF Servizi SpA",
-                "node_keywords": ""}
-    }
+  {
+    "fields": {
+      "contact_country": "Italy",
+      "provider_url": "http://www.irea.cnr.it",
+      "contact_role": "pointOfContact",
+      "contact_city": "MI",
+      "contact_instructions": "istruzioni contatto",
+      "contact_position": "TBA",
+      "contact_fax": "",
+      "node_title": "GET-IT Demo",
+      "contact_hours": "orari",
+      "node_name": "GET-IT Demo",
+      "node_abstract": "Sensor Observation Service - Access of observations",
+      "contact_address": "Via Alfonso Corti 12",
+      "contact_email": "infogetitsk@gmail.com",
+      "contact_url": "http://www.irea.cnr.it",
+      "contact_stateprovince": "MI",
+      "provider_name": "IREA CNR",
+      "contact_postalcode": "20133",
+      "contact_phone": "",
+      "contact_name": "Alessandro Oggioni",
+      "node_keywords": ""
+    },
+    "model": "mdtools.servicesmetadata",
+    "pk": 1
+  }
 ]

@@ -3,6 +3,7 @@ set -e
 
 /usr/local/bin/invoke update >> /usr/src/app/invoke.log
 
+source $HOME/.bashrc
 source $HOME/.override_env
 
 echo DATABASE_URL=$DATABASE_URL
@@ -22,6 +23,8 @@ echo "waitfordbs task done"
 echo "migrations task done"
 /usr/local/bin/invoke prepare >> /usr/src/app/invoke.log
 echo "prepare task done"
+/usr/local/bin/invoke waitforgeoserver >> /usr/src/app/invoke.log
+echo "waitforgeoserver task done"
 /usr/local/bin/invoke fixtures >> /usr/src/app/invoke.log
 echo "fixture task done"
 

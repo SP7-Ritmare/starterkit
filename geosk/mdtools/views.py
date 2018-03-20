@@ -135,7 +135,7 @@ def whoami(request, format='json'):
     if ServicesMetadata.objects.count() == 1:
         services_metadata = ServicesMetadata.objects.all()[0]
         _md = model_to_dict(services_metadata)
-        domain = Site.objects.get_current().domain
+        domain = Site.objects.all()[0].domain
         _md['uri'] = 'http://%s' % domain
         _md['sk_domain_name'] = domain
         # TODO sistemare

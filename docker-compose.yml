@@ -90,6 +90,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     env_file:
       - ./scripts/docker/env/production/celery.env
+      - ./scripts/docker/env/production/sos.env
 
   consumers:
     image: geobeyond/geonode:2.7.x
@@ -109,6 +110,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     env_file:
       - ./scripts/docker/env/production/django.env
+      - ./scripts/docker/env/production/sos.env
 
   geoserver:
     image: geonode/geoserver:2.10.x
