@@ -137,10 +137,10 @@ def rndteditor(request, layername):
         )
 
 def _ediml2rndt(ediml):
-    if SkRegistration.objects.get_current() is None:
-        raise UnregisteredSKException('You must register the GET-IT before a Metadata')
+    # if SkRegistration.objects.get_current() is None:
+    #    raise UnregisteredSKException('You must register the GET-IT before a Metadata')
     service = settings.RITMARE['MDSERVICE'] + 'postMetadata'
-    headers = {'api_key': get_key(),
+    headers = {#'api_key': get_key(),
                'Content-Type': 'application/xml',
                }
     r = requests.post(service, data=ediml,  headers=headers, verify=False)
