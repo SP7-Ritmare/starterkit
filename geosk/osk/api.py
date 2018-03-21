@@ -133,12 +133,12 @@ def _get_register_sensor(xml):
 
 
 def sensormlproxy(request):
-    if SkRegistration.objects.get_current() is None:
-        return json_response(errors='You must register the GET-IT before save a Metadata',
-                             status=500)
+    # if SkRegistration.objects.get_current() is None:
+    #    return json_response(errors='You must register the GET-IT before save a Metadata',
+    #                         status=500)
     service = settings.RITMARE['MDSERVICE'] + 'postMetadata'
     headers = {
-        'api_key': get_key(),
+        # 'api_key': get_key(),
         'Content-Type': 'application/xml'
         }
 
@@ -186,9 +186,9 @@ def sensormlproxy(request):
 # ediml version 2
 @login_required
 def ediproxy_importmd(request):
-    if SkRegistration.objects.get_current() is None:
-        return json_response(errors='You must register the GET-IT before save a Metadata',
-                             status=500)
+    # if SkRegistration.objects.get_current() is None:
+    #    return json_response(errors='You must register the GET-IT before save a Metadata',
+    #                         status=500)
     insertsensor = request.POST.get('generatedXml').encode('utf8')
     ediml = request.POST.get('ediml').encode('utf8')
     edimlid = request.POST.get('edimlid')
