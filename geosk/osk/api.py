@@ -123,7 +123,7 @@ def sensormleditor(request):
 def _get_register_sensor(xml):
     service = settings.RITMARE['MDSERVICE'] + 'sos/registerSensor'
     headers = {
-        'api_key': get_key(),
+        # 'api_key': get_key(),
         'Content-Type': 'application/xml'
         }
     r = requests.post(service, data=xml,  headers=headers, verify=False)
