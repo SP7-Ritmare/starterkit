@@ -285,7 +285,7 @@ def _savelayermd(layer, rndt, ediml, version='1'):
         # print >>sys.stderr, key, unicode(value).encode('utf8')
         # EDI_Metadata e MD_Metadata non riesco a leggerlo, inoltre EDI può averlo multiplo mentre GeoNode no
         if key == 'spatial_representation_type':
-            value = SpatialRepresentationType.object.get_or_create(identifier=value)
+            value, is_created = SpatialRepresentationType.objects.get_or_create(identifier=value)
         elif key == 'topic_category':
             key = 'category'
             value = TopicCategory.objects.get(identifier=get_topic_category(value.encode('utf8')))
