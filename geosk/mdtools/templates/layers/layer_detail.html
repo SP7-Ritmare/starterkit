@@ -64,7 +64,7 @@
 
     <div class="tab-content">
       <article id="info" class="tab-pane{% if tab == 'info' or not tab %} active{% endif %}">
-        {% include "base/resourcebase_info_panel.html" %}
+        {% include "base/resourcebase_info_panel.html" with resourcebase=resource %}
 
         {% if USE_GEOSERVER and DISPLAY_WMS_LINKS %}
         <p>
@@ -693,7 +693,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h1>Register Sensor</h1>
+                <h1>Edit metadata {{ resource.title|default:resource.typename }}</h1>
             </div>
             <div class="modal-body">
                 <div class="alert alert-block alert-info hide">

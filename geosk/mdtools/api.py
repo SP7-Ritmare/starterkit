@@ -137,10 +137,10 @@ def rndteditor(request, layername):
         )
 
 def _ediml2rndt(ediml):
-    if SkRegistration.objects.get_current() is None:
-        raise UnregisteredSKException('You must register the GET-IT before a Metadata')
+    # if SkRegistration.objects.get_current() is None:
+    #    raise UnregisteredSKException('You must register the GET-IT before a Metadata')
     service = settings.RITMARE['MDSERVICE'] + 'postMetadata'
-    headers = {'api_key': get_key(),
+    headers = {#'api_key': get_key(),
                'Content-Type': 'application/xml',
                }
     r = requests.post(service, data=ediml,  headers=headers, verify=False)
@@ -285,7 +285,7 @@ def _savelayermd(layer, rndt, ediml, version='1'):
         # print >>sys.stderr, key, unicode(value).encode('utf8')
         # EDI_Metadata e MD_Metadata non riesco a leggerlo, inoltre EDI può averlo multiplo mentre GeoNode no
         if key == 'spatial_representation_type':
-            value = SpatialRepresentationType(identifier=value)
+            value = SpatialRepresentationType.object.get_or_create(identifier=value)
         elif key == 'topic_category':
             key = 'category'
             value = TopicCategory.objects.get(identifier=get_topic_category(value.encode('utf8')))
@@ -314,10 +314,11 @@ def _set_contact_role_scope(scope, contacts, resource):
     for c in contacts:
         profile = _get_or_create_profile(c)
         if profile is not None:
-            role = _get_or_create_role(c)
+            #role = _get_or_create_role(c)
+            role = None
             MultiContactRole.objects.create(resource=resource,
                                             contact=profile,
-                                            role=role,
+                                            #role=role,
                                             scope=scope)
 
 def _get_or_create_scope(_scope):
@@ -330,7 +331,7 @@ def _get_or_create_role(contact, default='pointOfContact'):
     roles = dict(ROLE_VALUES)
     if roles.get(_role) is None:
         _role = default
-    role, is_created = Role.objects.get_or_create(value=_role)
+    role, is_created = Profile.objects.get_or_create(profile=_role)
     return role
 
 def _get_or_create_profile(contact):
