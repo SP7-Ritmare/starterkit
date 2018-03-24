@@ -438,6 +438,11 @@
 
     {% if "change_resourcebase_metadata" in perms_list or "change_resourcebase" in perms_list or "delete_resourcebase" in perms_list or "change_layer_style" in layer_perms %}
     <li class="list-group-item">
+      <a id="open_ediclient_btn" >
+        <button class="btn btn-primary btn-md btn-block">{% trans "Edit" %} INSPIRE</button>
+      </a>
+    </li>
+    <li class="list-group-item">
       <button class="btn btn-primary btn-md btn-block" data-toggle="modal" data-target="#edit-layer">{% trans "Edit Layer" %}</button>
     </li>
     <div class="modal fade" id="edit-layer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -453,7 +458,7 @@
               <div class="col-sm-3">
                 <i class="fa fa-list-alt fa-3x"></i>
                 <h4>{% trans "Metadata" %}</h4>
-                <a class="btn btn-default btn-block btn-xs" id="open_ediclient_btn" href="#ediclient_container">{% trans "Edit Metadata (RNDT)" %}</a>
+                <!--<a class="btn btn-default btn-block btn-xs" id="open_ediclient_btn" href="#ediclient_container">{% trans "Edit" %} INSPIRE</a>-->
                 <a class="btn btn-default btn-block btn-xs" href="{% url "layer_metadata" resource.service_typename %}">{% trans "Wizard" %}</a>
                 <a class="btn btn-default btn-block btn-xs" href="{% url "layer_metadata_advanced" resource.service_typename %}">{% trans "Advanced Edit" %}</a>
                 <a class="btn btn-default btn-block btn-xs" href="{% url "layer_metadata_upload" resource.service_typename %}">{% trans "Upload Metadata" %}</a>
@@ -512,6 +517,8 @@
       </div>
     </div>
     {% endif %}
+
+
 
     <li class="list-group-item">
       <button class="btn btn-default btn-md btn-block" data-toggle="modal" data-target="#download-metadata">{% trans "Download Metadata" %}</button>
@@ -996,7 +1003,7 @@
         {% get_current_language as  LANGUAGE_CODE %}
         var ediml_current_language = '{{ LANGUAGE_CODE }}';
         var ediml_edimlId = '{{ resource.mdextension.fileid }}';
-        var ediml_client_url = "{{ STATIC_URL }}EDI-NG_client/RNDT_dataset_forRITMARE.html?";
+        var ediml_client_url = "{{ STATIC_URL }}EDI-NG_client/INSPIRE_dataset.html?";
         var ediml_proxy_url = '{% url "ediproxy_importmd" resource.typename %}';
 
         var parameters;
