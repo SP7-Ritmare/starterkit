@@ -50,13 +50,13 @@ def describe_sensor(request):
         return HttpResponse(xml, content_type='application/xml')
     elif output_format == 'text/html':
         r = requests.get(
-            'http://sp7.irea.cnr.it/jboss/MDService/rest/sensor2html.xsl')
+            'http://sp7.irea.cnr.it/jboss/MDService/rest/sensor2html_v2.xsl')
         if r.status_code == 200:
             xslt = etree.fromstring(r.text.encode(
                 'utf8'), etree.XMLParser(no_network=False))
         else:
             xsl_file = os.path.join(
-                os.path.dirname(__file__), 'sensor2html.xsl')
+                os.path.dirname(__file__), 'sensor2html_v2.xsl')
             xslt = etree.parse(xsl_file)
 
         transform = etree.XSLT(xslt)
