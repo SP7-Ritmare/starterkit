@@ -685,10 +685,10 @@
          <help xml:lang="it">Viene indicato se il sistema è attivo o disattivato.
                 Spuntare la casella nel caso di sistema attivo</help>
          <help xml:lang="en">Tick the box if the system is on, otherwise it is off.</help>
-         <hasRoot>/swes:InsertSensor/swes:procedureDescription/sml:PhysicalSystem/sml:capabilities[@name='specification']/sml:CapabilityList/sml:capability[@name='StatusCapabilities']/swe:DataRecord[@definition='StatusCapabilities']/swe:field[@name='status']</hasRoot>
+         <hasRoot>/swes:InsertSensor/swes:procedureDescription/sml:PhysicalSystem/sml:capabilities[@name='specification']/sml:CapabilityList/sml:capability[@name='insitu']/swe:Boolean[@definition='insitu']</hasRoot>
          <produces>
             <item hasIndex="1" xml:id="status_capab_1" isFixed="false" hasDatatype="boolean">
-               <hasPath>swe:Boolean/swe:value</hasPath>
+               <hasPath>swe:value</hasPath>
                <hasValue>false</hasValue>
             </item>
          </produces>
@@ -699,10 +699,10 @@
          <help xml:lang="it">Viene indicato se il sistema è mobile o fisso. Spuntare la
                 casella nel caso si tratti di sistema mobile</help>
          <help xml:lang="en">Tick the box if the system is mobile, otherwise it is fixed.</help>
-         <hasRoot>/swes:InsertSensor/swes:procedureDescription/sml:PhysicalSystem/sml:capabilities[@name='specification']/sml:CapabilityList/sml:capability[@name='StatusCapabilities']/swe:DataRecord[@definition='StatusCapabilities']/swe:field[@name='mobile']</hasRoot>
+         <hasRoot>/swes:InsertSensor/swes:procedureDescription/sml:PhysicalSystem/sml:capabilities[@name='specification']/sml:CapabilityList/sml:capability[@name='mobile']/swe:Boolean[@definition='mobile']</hasRoot>
          <produces>
             <item hasIndex="1" xml:id="mobility_capab_1" isFixed="false" hasDatatype="boolean">
-               <hasPath>swe:Boolean/swe:value</hasPath>
+               <hasPath>swe:value</hasPath>
                <hasValue>false</hasValue>
             </item>
          </produces>
