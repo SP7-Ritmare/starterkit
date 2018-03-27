@@ -51,7 +51,7 @@
          <uri>http://inspire-registry.jrc.ec.europa.eu/registers/Types/items</uri>
       </codelist>
       <codelist xml:id="referenceSystemCodes" endpointType="virtuoso">
-         <uri>http://www.rndt.gov.it/codelists/INSPIRE_ReferenceSystemCode/items</uri>
+         <uri>http://www.rndt.gov.it/codelists/MD_ReferenceSystemCode/items</uri>
       </codelist>
       <codelist xml:id="dateTypes" endpointType="virtuoso">
          <uri>http://www.rndt.gov.it/codelists/CI_DateTypeCode/items</uri>
