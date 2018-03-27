@@ -69,6 +69,9 @@ Update the package index::
 Install the latest version of the binary or a specific version with the command::
 
     sudo apt-get install docker-ce  # latest
+    
+or::
+    
     sudo apt-get install docker-ce=<VERSION>  # specific
 
 The docker daemon will start automatically.
@@ -80,7 +83,7 @@ Add your user to the ``docker`` group if you want to run docker command without 
 
 Verify the health of your installation by running the sample ``hello-world`` image::
 
-    docker run hello-world
+    sudo docker run hello-world
 
 The following message has to be displayed if everything is working properly::
 
