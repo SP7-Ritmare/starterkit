@@ -10,8 +10,11 @@ Before starting installation read the :ref:`server` page.
 If you just want to install GET-IT, it is recommended to use Ubuntu 16.04
 
 **Prerequisites of virtual machine:**
-RAM - 8 GB
+
+RAM - 16 GB
+
 Disk space - 50 GB 
+
 Core - 4
 
 Install Docker CE on Ubuntu
