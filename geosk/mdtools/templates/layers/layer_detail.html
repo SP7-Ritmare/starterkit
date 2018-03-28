@@ -1022,7 +1022,6 @@
             'southlat': {{ resource.bbox_y0|stringformat:"f" }},
             'northlat': {{ resource.bbox_y1|stringformat:"f" }},
             'referencesystem': '{{ resource.mdextension.ediml_referencesystem  }}',
-            'edit': ediml_edimlId,
             // additional informations
             'user_username': '{{ request.user.username }}',
             'user_email': '{{ request.user.email }}',
