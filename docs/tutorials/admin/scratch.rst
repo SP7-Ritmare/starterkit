@@ -10,8 +10,11 @@ Before starting installation read the :ref:`server` page.
 If you just want to install GET-IT, it is recommended to use Ubuntu 16.04
 
 **Prerequisites of virtual machine:**
-RAM - 8 GB
+
+RAM - 16 GB
+
 Disk space - 50 GB 
+
 Core - 4
 
 Install Docker CE on Ubuntu
@@ -66,6 +69,9 @@ Update the package index::
 Install the latest version of the binary or a specific version with the command::
 
     sudo apt-get install docker-ce  # latest
+    
+or::
+    
     sudo apt-get install docker-ce=<VERSION>  # specific
 
 The docker daemon will start automatically.
@@ -77,7 +83,7 @@ Add your user to the ``docker`` group if you want to run docker command without 
 
 Verify the health of your installation by running the sample ``hello-world`` image::
 
-    docker run hello-world
+    sudo docker run hello-world
 
 The following message has to be displayed if everything is working properly::
 
