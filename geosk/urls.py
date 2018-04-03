@@ -47,7 +47,6 @@ geoskurlpatterns = patterns(
         name='sk_credits'
         ),
 
-<<<<<<< Updated upstream
     # additional pages
     url(
         r'^about_services/$',
@@ -69,46 +68,19 @@ geoskurlpatterns = patterns(
         name='sk_credits'
         ),
 
-=======
     ###
     ## additional services within GeoNode
     ###
     ## Sensors
->>>>>>> Stashed changes
     # observations
     url(r'^observations/(?P<url>.*)$',
         ObservationsProxy.as_view(),
         name='observations'
         ),
-<<<<<<< Updated upstream
-
-    # mdtools views
-    (r'^mdtools/',
-     include('geosk.mdtools.urls')
-     ),
-
-    # skregistration views
-    (r'^skregistration/',
-     include('geosk.skregistration.urls')
-     ),
-
-=======
->>>>>>> Stashed changes
     # OSK views
     (r'^sensors/',
      include('geosk.osk.urls')
      ),
-<<<<<<< Updated upstream
-
-    # Demo
-    (r'^demo/',
-     include('geosk.demo.urls')
-     ),
-
-    (r'^grappelli/',
-     include('grappelli.urls')
-     ),  # grappelli URLS
-=======
     # upload csv file
     url(r'^sensors/$',
         TemplateView.as_view(template_name='csv_upload.html'),
@@ -124,7 +96,6 @@ geoskurlpatterns = patterns(
     (r'^demo/',
      include('geosk.demo.urls')
      )
->>>>>>> Stashed changes
 )
 
 if 'rosetta' in settings.INSTALLED_APPS:
