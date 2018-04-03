@@ -4132,6 +4132,17 @@ msgstr "Benvenuto"
 msgid "Welcome"
 msgstr "Benvenuto"
 
+msgid "GET-IT"
+msgstr "GET-IT"
+
+msgid "Share your maps, measurements, and sensors. Easily."
+msgstr "Condividi le tue mappe, le tue misure e i tuoi sensori. Facilmente"
+
+msgid "<a href=\"http://www.get-it.it\" title=\"GET-IT website\" target=\"_blank\">GET-IT</a> allows you to easily share geospatial data on the web with simple actions.\n"
+"The suite is the first open-source collaborative effort toward the integration of traditional geographic information with observational data."
+msgstr "<a href=\"http://www.get-it.it\" title=\"GET-IT website\" target=\"_blank\">GET-IT</a> ti permette di condividere facilmente dati geospaziali attraverso il web attraverso semplici azioni.\n"
+"La suite è il primo sforzo collaborativo open source verso l'integrazione delle informazioni geografiche tradizionali con i dati osservativi."
+
 #: _locale_external/geonode/templates/index.html:21
 msgid ""
 "\n"
@@ -5454,9 +5465,17 @@ msgstr "GET-IT è un progetto dello staff di sviluppatori di SP7"
 
 #: templates/site_base.html:174
 msgid ""
-" is developed by <a target='_blank' href='http://sp7.irea.cnr.it'>SP7</a>-<a "
-"target='_blank' href='http://www.ritmare.it/'>RITMARE</a>"
+" is conceived and developed by <a target=\"_blank\" href=\"http://www.get-it.it/#team\">reaserchers team</a>"
 msgstr ""
+
+msgid " is based on"
+msgstr " è basato su"
+
+msgid "Informations for developers"
+msgstr "Informazioni per gli sviluppatori"
+
+msgid "After installing GET-IT, getting started to use it following the <a href=\"http://getit.readthedocs.io/en/latest/tutorials/users/index.html\" target=\"_blank\">user tutorial</a> in GET-IT <a href=\"http://getit.readthedocs.io/en/latest/index.html\" target=\"_blank\">documentation</a>."
+msgstr "Dopo aver installato GET-IT, puoi iniziare ad usarlo seguendo il <a href=\"http://getit.readthedocs.io/en/latest/tutorials/users/index.html\" target=\"_blank\">tutorial per gli utenti</a> nella <a href=\"http://getit.readthedocs.io/en/latest/index.html\" target=\"_blank\">documentation</a> di GET-IT."
 
 #: templates/site_base.html:175
 msgid "Contacts"
@@ -5582,6 +5601,7 @@ msgid ""
 "      <p class=\"lead\">Thank you for using GET-IT.</p>\n"
 "    "
 msgstr ""
+"\n"
 "    <h1>Licenza e limitazione all’uso dei Geoinformation Enabling ToolkIT "
 "starterkit&reg</h1>\n"
 "    <p class=\"lead\">Grazie per utilizzare GET-IT.</p>\n"
@@ -5640,6 +5660,7 @@ msgid ""
 "  </p>\n"
 "  "
 msgstr ""
+"\n"
 "<p>Geoinformation Enabling ToolkIT starterkit&reg - indicato come GET-IT - è "
 "una suite software sviluppata     in RITMARE SP7_WP4_AZ2 che abilita gruppi "
 "di ricerca a diventare     distributori autonomi, indipendenti e "

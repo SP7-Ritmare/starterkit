@@ -4048,6 +4048,16 @@ msgstr ""
 msgid "Welcome"
 msgstr ""
 
+msgid "GET-IT"
+msgstr ""
+
+msgid "Share your maps, measurements, and sensors. Easily."
+msgstr ""
+
+msgid "<a href=\"http://www.get-it.it\" title=\"GET-IT website\" target=\"_blank\">GET-IT</a> allows you to easily share geospatial data on the web with simple actions.\n"
+"The suite is the first open-source collaborative effort toward the integration of traditional geographic information with observational data."
+msgstr ""
+
 #: _locale_external/geonode/templates/index.html:21
 msgid ""
 "\n"
@@ -5336,9 +5346,18 @@ msgstr ""
 
 #: templates/site_base.html:174
 msgid ""
-" is developed by <a target='_blank' href='http://sp7.irea.cnr.it'>SP7</a>-<a "
-"target='_blank' href='http://www.ritmare.it/'>RITMARE</a>"
+" is conceived and developed by <a target='_blank' href='http://www.get-it.it/#team'>reaserchers team</a>"
 msgstr ""
+
+msgid " is based on"
+msgstr ""
+
+msgid "Informations for developers"
+msgstr ""
+
+msgid "After installing GET-IT, getting started to use it following the <a href=\"http://getit.readthedocs.io/en/latest/tutorials/users/index.html\" target=\"_blank\">user tutorial</a> in GET-IT <a href=\"http://getit.readthedocs.io/en/latest/index.html\" target=\"_blank\">documentation</a>."
+msgstr ""
+
 
 #: templates/site_base.html:175
 msgid "Contacts"
