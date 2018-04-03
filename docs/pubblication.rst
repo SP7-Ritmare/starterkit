@@ -2,6 +2,10 @@
 Pubblication by SP7 team
 =========================
 
+.. toctree::
+   :maxdepth: 5
+   :hidden:
+
 Here is a list of pubblications by the SP7 project team, if interestead you can read it and make references in your pubblications.
 
 

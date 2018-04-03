@@ -7,118 +7,137 @@ Installing GET-IT from scratch
 
 Before starting installation read the :ref:`server` page.
 
-If you just want to install GET-IT, it is recommended to use Ubuntu 12.04.
+If you just want to install GET-IT, it is recommended to use Ubuntu 16.04
 
-**Prerequisites:**
+**Prerequisites of virtual machine:**
 
-1. GeoNode (version 2.0.x)
-2. 52°North SOS (version 4.0.0 or 4.x)
+RAM - 16 GB
 
-GeoNode Installation
---------------------
+Disk space - 50 GB 
 
-Install geonode from PPA in Ubuntu 12.04::
+Core - 4
 
-    $ sudo apt-get install python-software-properties
+Install Docker CE on Ubuntu
+===========================
 
-    $ sudo add-apt-repository ppa:geonode/release
+Docker CE is supported on Ubuntu on x86_64 , armhf , s390x (IBM Z), and ppc64le (IBM Power) architectures.
 
-    $ sudo apt-get update
+.. warning:: Make sure to check the OS version as one among supported ones
 
-    $ sudo apt-get install geonode
+Show your OS details running::
+        
+    uname -a 
 
-Setup the IP address and create a superuser:
+Uninstall old docker versions
+-----------------------------
 
-    $ sudo geonode-updateip 127.0.0.1
+if old versions of Docker binary were installed then uninstall them::
 
-    $ geonode createsuperuser
+    sudo apt-get remove docker docker-engine docker.io
 
-52°North SOS Installation
--------------------------
-Follow the instructions (for SOS version 4.x) at
-https://wiki.52north.org/bin/view/SensorWeb/SensorObservationServiceIVDocumentation#Installation
+Install docker
+--------------
 
-PostgreSQL and PostGIS (currently at version 9.1 and 2.0) are already installed by default in GeoNode. For this reason it is not necessary to make a new installation. An update of the current version of Java it is necessary, 52°North requires Java runtime environment (JRE) 7.0 or higher:
+The package of **Docker CE** is now called ``docker-ce``. Before doing the installation steps please
+make sure that the ``apt`` package index has been updated::
 
-    $ java -version
+    sudo apt-get update
+
+Add packages to allow the use of secure http channel::
+
+    sudo apt-get install \
+        apt-transport-https \
+        ca-certificates \
+        curl \
+        software-properties-common
+
+Add the official GPG key from Docker::
+
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+Run the following command to setup the **stable** repository::
+
+    sudo add-apt-repository \
+        "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+        $(lsb_release -cs) \
+        stable"
+
+Update the package index::
+
+    sudo apt-get update
+
+Install the latest version of the binary or a specific version with the command::
+
+    sudo apt-get install docker-ce  # latest
     
-    $ sudo add-apt-repository ppa:webupd8team/java
+or::
     
-    $ sudo apt-get update
-    
-    $ sudo apt-get install oracle-java7-installer
-    
-    $ java -version
+    sudo apt-get install docker-ce=<VERSION>  # specific
 
-Just a note: GET-IT expects to find a webapp named "observations".
-So, before "Install and configure Tomcat", rename the 52n-sos-webapp.war into observations.war.
+The docker daemon will start automatically.
 
-After the deploy of war file, in the http://127.0.0.1:8080/observations you can check the installation of the SOS admin, create a new PostgreSQL database using the PostGIS template created during the PostGIS installation.
+Add your user to the ``docker`` group if you want to run docker command without ``sudo`` privileges::
 
-    $ sudo su - postgres
-    
-    $ psql -U <user>
-    
-    $ CREATE DATABASE <db_name>;
-    
-    $ \connect <db_name>;
-    
-    $ CREATE EXTENSION postgis;
-    
-If return error like *could not open extension control file "/usr/share/postgresql/9.1/extension/postgis.control": No such file or directory*, please exit to the PostgreSQL DB and to the user, execute:
+    sudo usermod -aG docker $USER
+    source $HOME/.bashrc
 
-    $ sudo apt-get install postgis postgresql-9.X-postgis-scripts
+Verify the health of your installation by running the sample ``hello-world`` image::
 
-after retry the commands above.
-Check extensions:
+    sudo docker run hello-world
 
-    $ \dx
-    
-Navigate to the http://127.0.0.1:8080/observations and complete the installation process. Follow the steps on the screen to configure your SOS instance (you don't have to do this if you've build the preconfigured webapp). More information about the settings can be found in the Configure/Administrate the SOS section of this page.
-Before to start copy user (DATABASE_USER) and password (DATABASE_PASSWORD) of the PostgreSQL:
+The following message has to be displayed if everything is working properly::
 
-    $ nano /etc/geonode/local_settings.py
-    
-Change the 52 North SOS Configuration (http://127.0.0.1:8080/observations/admin/settings (Transactional Security) by setting the "Transactional Authorization Token"
+    Hello from Docker!
+    This message shows that your installation appears to be working correctly.
 
-Complete the installation follow the steps and finally set the user and password. 
+    To generate this message, Docker took the following steps:
+    1. The Docker client contacted the Docker daemon.
+    2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+        (amd64)
+    3. The Docker daemon created a new container from that image which runs the
+        executable that produces the output you are currently reading.
+    4. The Docker daemon streamed that output to the Docker client, which sent it
+        to your terminal.
 
-GET-IT Installation
--------------------
+    To try something more ambitious, you can run an Ubuntu container with:
+    $ docker run -it ubuntu bash
 
-Install SK from archive file
+Install Docker Compose on Ubuntu
+================================
 
-    $ sudo pip install starterkit
+Download the latest version of ``docker-compose`` binary::
 
-Edit the starterkit local_settings.py by setting the SITEURL, SITENAME, TRANSACTIONAL_AUTHORIZATION_TOKEN (SOS_SERVER) and PASSWORD (OGC_SERVER):
-    $ nano /etc/starterkit/local_settings.py
+    sudo curl -L \
+    https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` \
+    -o /usr/local/bin/docker-compose
 
-Edit the file /etc/apache2/sites-available/geonode and change the following directive from:
+Adjust executable permissions to the binary::
 
-    WSGIScriptAlias / /var/www/geonode/wsgi/geonode.wsgi
+    sudo chmod +x /usr/local/bin/docker-compose
 
-to:
+Verify the installation::
 
-    WSGIScriptAlias / /usr/local/lib/python2.7/dist-packages/geosk/wsgi.py # path to geosk/wsgi.py
+    docker-compose --version
 
-Restart apache::
+Running GET-IT stack
+=====================
 
-    $ sudo service apache2 restart
+Clone the repository::
 
-Edit the templates in geosk/templates, the css and images to match your needs.
+    git clone https://github.com/SP7-Ritmare/starterkit.git
 
-Syncdb and collectstatic::
+Modify configuration files::
 
-    $ sk syncdb
+    cd starterkit/scripts/docker/env/production/
 
-    $ sk collectstatic
+change GEONODE_LB_HOST_IP variable value with *address IP* of the GET-IT in your server
+in the sos.env, django.env, geoserver.env, celery.env 
 
-Domain Name
------------
-To let GET-IT work properly you need to use a right domain name, See the page :ref:`domain_name` to learn how to change it.
+Launch the stack with the build of GeoNode so any changes you did will be immediately available::
 
-Security
---------
-It's important for your server security follow instruction on the page: :ref:`security_issue`
+    cd ~/starterkit/
+    docker-compose up --build -d
 
+**The GET-IT is installed correctly!** GET-IT will be available at the ip address of the ``docker0`` interface::
 
+    ifconfig -a

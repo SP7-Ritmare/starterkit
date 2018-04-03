@@ -1,0 +1,1449 @@
+<template>
+  <settings>
+    <defaultLanguage>en</defaultLanguage>
+    <languageSelection>
+      <byItem>ling_md_1</byItem>
+    </languageSelection>
+    <!-- <metadataEndpoint>https://adamassoft.it/jbossTest/edi/</metadataEndpoint> -->
+    <metadataEndpoint>http://sp7.irea.cnr.it/jboss/edi/</metadataEndpoint>
+    <sparqlEndpoint>http://sp7.irea.cnr.it:8891/sparql</sparqlEndpoint>
+    <requiresAuthentication>false</requiresAuthentication>
+    <requiresValidation>true</requiresValidation>
+    <baseDocument>
+      <![CDATA[
+        <gmd:MD_Metadata
+            xsi:schemaLocation="http://www.isotc211.org/2005/gmd
+            http://schemas.opengis.net/iso/19139/20060504/gmd/gmd.xsd"
+            xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gml="http://www.opengis.net/gml"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+        </gmd:MD_Metadata>
+      ]]>
+    </baseDocument>
+    <xsltChain>
+      <xslt>http://sp7.irea.cnr.it/jboss/MDService/rest/stylesheet_1.xsl?version=1.00</xslt>
+    </xsltChain>
+  </settings>
+  <endpointTypes>
+    <endpointType>
+      <id>virtuoso</id>
+      <method>GET</method>
+      <queryParameter>query</queryParameter>
+      <parameters>
+        <format>application/sparql-results+json</format>
+        <save>display</save>
+        <fname>undefined</fname>
+      </parameters>
+    </endpointType>
+    <endpointType>
+      <id>sparqlCNR</id>
+      <method>GET</method>
+      <queryParameter>query</queryParameter>
+      <parameters>
+        <format>application/json</format>
+      </parameters>
+    </endpointType>
+    <endpointType>
+      <id>sparqlCSIRO</id>
+      <method>GET</method>
+      <queryParameter>query</queryParameter>
+      <parameters>
+        <format>application/json</format>
+      </parameters>
+    </endpointType>
+  </endpointTypes>
+  <datasources>
+    <datasource>
+      <id>languages</id>
+      <uri>http://inspire-registry.jrc.ec.europa.eu/registers/Languages/items</uri>
+      <endpointType>virtuoso</endpointType>
+      <type>virtuosoCodelist</type>
+    </datasource>
+    <datasource>
+      <id>scopes</id>
+      <uri>http://inspire-registry.jrc.ec.europa.eu/registers/Types/items</uri>
+      <endpointType>virtuoso</endpointType>
+      <type>virtuosoCodelist</type>
+    </datasource>
+    <datasource>
+      <id>referenceSystemCodes</id>
+      <uri>http://www.rndt.gov.it/codelists/INSPIRE_ReferenceSystemCode/items</uri>
+      <endpointType>virtuoso</endpointType>
+      <type>virtuosoCodelist</type>
+    </datasource>
+    <datasource>
+      <id>dateTypes</id>
+      <uri>http://www.rndt.gov.it/codelists/CI_DateTypeCode/items</uri>
+      <endpointType>virtuoso</endpointType>
+      <type>virtuosoCodelist</type>
+    </datasource>
+    <datasource>
+      <id>roleCodes</id>
+      <uri>http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole</uri>
+      <endpointType>virtuoso</endpointType>
+      <type>virtuosoCodelist</type>
+    </datasource>
+    <!--
+    <datasource>
+      <id>constraints</id>
+      <uri>http://www.rndt.gov.it/codelists/constraints/items</uri>
+      <singleton>false</singleton>
+      <endpointType>virtuoso</endpointType>
+      <query>
+        <![CDATA[
+          SELECT DISTINCT <http://www.rndt.gov.it/codelists/constraints/items/001> AS ?c ?l
+          FROM <http://ritmare.it/rdfdata/inspire>
+          WHERE {
+            <http://www.rndt.gov.it/codelists/constraints/items/001> skos:prefLabel ?l .
+          }
+        ]]>
+      </query>
+      <type>sparql</type>
+    </datasource>
+    -->
+    <!-- da commentare -->
+      <datasource>
+      <id>person</id>
+      <singleton>false</singleton>
+      <endpointType>virtuoso</endpointType>
+      <query>
+        <![CDATA[
+          PREFIX ns: <http://www.w3.org/2006/vcard/ns#>
+          SELECT DISTINCT ?c ?l
+          FROM <http://ermes-fp7space.eu/rdfdata/project>
+          WHERE {
+            ?c rdf:type foaf:Person .
+            ?c ns:email ?l .
+            ?c ns:org ?o .
+            FILTER( REGEX( STR(?l), "$search_param", "i") )
+          }
+          ORDER BY ASC(?l)
+        ]]>
+      </query>
+      <searchItem>md_resp_1</searchItem>
+      <type>sparql</type>
+    </datasource>
+    <datasource>
+      <id>personS</id>
+      <singleton>true</singleton>
+      <endpointType>virtuoso</endpointType>
+      <query>
+        <![CDATA[
+          PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+          SELECT ?inst ?home ?phone
+          FROM <http://ermes-fp7space.eu/rdfdata/project>
+          WHERE {
+            <$search_param> vcard:org ?o.
+            ?o foaf:name ?inst .
+            <$search_param> foaf:phone ?phone.
+            # ?o foaf:homepage ?home .
+            # FILTER(LANG(?inst)='it')
+          }
+        ]]>
+      </query>
+      <triggerItem>md_resp_1_uri</triggerItem>
+      <type>sparql</type>
+    </datasource>
+    <datasource>
+      <id>personS_2</id>
+      <singleton>true</singleton>
+      <query>
+        <![CDATA[
+          PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+          SELECT ?inst ?home ?phone
+          FROM <http://ermes-fp7space.eu/rdfdata/project>
+          WHERE {
+            <$search_param> vcard:org ?o.
+            ?o foaf:name ?inst .
+            <$search_param> foaf:phone ?phone.
+            # ?o foaf:homepage ?home .
+            # FILTER(LANG(?inst)='it')
+          }
+        ]]>
+      </query>
+      <endpointType>virtuoso</endpointType>
+      <triggerItem>resp_1_uri</triggerItem>
+      <type>sparql</type>
+    </datasource>
+    <datasource>
+      <id>inspireTheme</id>
+      <uri>http://inspire-registry.jrc.ec.europa.eu/registers/Themes/items</uri>
+      <endpointType>virtuoso</endpointType>
+      <type>virtuosoCodelist</type>
+    </datasource>
+    <datasource>
+      <id>keywordFromContrVoc</id>
+      <singleton>false</singleton>
+      <query>
+        <![CDATA[
+        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+        SELECT ?c ?l ?a
+        FROM <http://ritmare.it/rdfdata/reference>
+        WHERE {
+          ?c rdf:type skos:Concept .
+          OPTIONAL {
+            ?c skos:prefLabel ?l .
+            FILTER( LANG(?l) = "en")
+          }
+          OPTIONAL {
+            ?c skos:prefLabel ?a .
+            FILTER( LANG(?a) = "it")
+          }
+          FILTER( REGEX( STR(?l), "$search_param", "i") || REGEX( STR(?a), "$search_param", "i") )
+        }
+        ORDER BY ASC(?l) ASC(?a)
+        ]]>
+      </query>
+      <searchItem>keyw_voc_contr_1</searchItem>
+      <endpointType>virtuoso</endpointType>
+      <type> sparql </type>
+    </datasource>
+
+    <datasource>
+      <id>ERMESproducts</id>
+      <singleton>false</singleton>
+      <query>
+        <![CDATA[
+        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+        SELECT ?c ?l
+        FROM <http://ermes-fp7space.eu/rdfdata/project>
+        WHERE {
+          ?c rdf:type foaf:Group .
+          ?c foaf:name ?l .
+          FILTER( REGEX( STR(?l), "$search_param", "i") )
+        }
+        ORDER BY ASC(?l)
+        ]]>
+      </query>
+      <triggerItem>tit_1</triggerItem>
+      <endpointType>virtuoso</endpointType>
+      <type> sparql </type>
+    </datasource>
+    <datasource>
+      <id>ERMESproducts_2</id>
+      <singleton>true</singleton>
+      <query>
+        <![CDATA[
+        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+        SELECT ?c ?a ?l ?date
+        WHERE {
+          {
+            <$search_param> foaf:topic_interest ?t .
+          } UNION {
+            ?father foaf:member <$search_param> .
+            ?father foaf:topic_interest ?t .
+          }
+          ?t skos:prefLabel ?a .
+          ?t skos:inScheme ?c .
+          ?c skos:prefLabel ?l .
+          ?c dct:issued ?date .
+          FILTER( LANG(?l) = "en" && LANG(?a) = "en")
+        } LIMIT 1
+        ]]>
+      </query>
+      <triggerItem>tit_1_uri</triggerItem>
+      <endpointType>virtuoso</endpointType>
+      <type>sparql</type>
+    </datasource>
+    
+    <datasource>
+      <id>contrVocSpecs</id>
+      <singleton>true</singleton>
+      <query>
+        <![CDATA[
+        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+        SELECT ?c ?l ?date
+        FROM <http://ritmare.it/rdfdata/reference>
+        WHERE {
+          <$search_param> skos:inScheme ?c .
+          ?c skos:prefLabel ?l .
+          ?c dct:issued ?date .
+          FILTER( LANG(?l) = "en")
+        }
+        ]]>
+      </query>
+      <triggerItem>keyw_voc_contr_1_uri</triggerItem>
+      <endpointType>virtuoso</endpointType>
+      <type>sparql</type>
+    </datasource>
+    <datasource>
+      <id>restrictionCode</id>
+      <uri>http://www.rndt.gov.it/codelists/MD_RestrictionCode/items</uri>
+      <endpointType>virtuoso</endpointType>
+      <type>virtuosoCodelist</type>
+    </datasource>
+    <datasource>
+      <id>topicCategories</id>
+      <uri>http://inspire-registry.jrc.ec.europa.eu/registers/TopicCategories/items</uri>
+      <endpointType>virtuoso</endpointType>
+      <type>virtuosoCodelist</type>
+    </datasource>
+    <datasource>
+      <id>conformity</id>
+      <uri>http://www.rndt.gov.it/codelists/conformity/items</uri>
+      <endpointType>virtuoso</endpointType>
+      <type>virtuosoCodelist</type>
+    </datasource>
+  </datasources>
+  <group>
+    <id>m_on_m</id>
+    <label xml:lang="en">Information on metadata</label>
+    <label xml:lang="it">Informazioni sui metadati</label>
+    <!--Identificatore del file: -->
+    <element>
+      <id>id_md</id>
+      <label xml:lang="en">File identifier</label>
+      <label xml:lang="it">Identificatore del file</label>
+      <help xml:lang="en">This metadata item is not required by INSPIRE but is useful to draw the correspondence between the metadata record and the resource itself.
+        It is therefore suggested that the workflow invoking EDI provides this piece of information as a request parameter.</help>
+      <help xml:lang="it">Questo metadato non &#232; richiesto da INSPIRE ma &#232; utile per tracciare la corrispondenza tra il metadato e la risorsa corrispondente. 
+        &#201; quindi consigliato che EDI riceva questa informazione come parametro della richiesta.</help>
+      <isMandatory>NA</isMandatory>
+      <isMultiple>false</isMultiple>
+      <hasRoot>/gmd:MD_Metadata/gmd:fileIdentifier</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:fileIdentifier/gco:CharacterString</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>string</hasDatatype>
+          <queryStringParameter>uid</queryStringParameter>
+        </item>
+      </produces>
+    </element>
+    <!--Lingua dei metadati: -->
+    <element>
+      <id>ling_md</id>
+      <label xml:lang="en">Metadata language</label>
+      <label xml:lang="it">Lingua dei metadati</label>
+      <help xml:lang="en">Language used for documenting metadata. The default language in ERMES is English </help>
+      <help xml:lang="it"> La lingua utilizzata nella compilazione dei metadati. La lingua di default in ERMES &#232; l'inglese</help>
+      <isMandatory>forAll</isMandatory>
+      <isMultiple>false</isMultiple>
+      <hasRoot>/gmd:MD_Metadata/gmd:language</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:language/gmd:LanguageCode</hasPath>
+          <isFixed>false</isFixed>
+          <datasource>languages</datasource>
+          <show>combobox</show>
+          <hasDatatype>codelist</hasDatatype>
+          <isLanguageNeutral>true</isLanguageNeutral>
+          <defaultValue>http://inspire-registry.jrc.ec.europa.eu/registers/Languages/items/5</defaultValue>
+        </item>
+        <item>
+          <hasIndex>2</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:language/gmd:LanguageCode/@codeList</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>string</hasDatatype>
+          <hasValue>http://www.loc.gov/standards/iso639-2/</hasValue>
+        </item>
+        <item>
+          <hasIndex>3</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:language/gmd:LanguageCode/@codeListValue</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>ref</hasDatatype>
+          <hasValue>/gmd:MD_Metadata/gmd:language/gmd:LanguageCode</hasValue>
+        </item>
+      </produces>
+    </element>
+    <!--Livello gerarchico -->
+    <element>
+      <id>liv_ger</id>
+      <label xml:lang="en">Resource type</label>
+      <label xml:lang="it">Tipo di risorsa</label>
+      <help xml:lang="en">Scope to which metadata applies.</help>
+      <help xml:lang="it">Ambito di applicazione dei metadati.</help>
+      <isMandatory>forAll</isMandatory>
+      <isMultiple>false</isMultiple>
+      <hasRoot>/gmd:MD_Metadata/gmd:hierarchyLevel</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:hierarchyLevel/gmd:MD_ScopeCode</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>codelist</hasDatatype>
+          <datasource>scopes</datasource>
+          <defaultValue>http://inspire.ec.europa.eu/metadata-codelist/ResourceType/dataset</defaultValue>
+          <isLanguageNeutral>true</isLanguageNeutral>
+        </item>
+        <item>
+          <hasIndex>2</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:hierarchyLevel/gmd:MD_ScopeCode/@codeList</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>string</hasDatatype>
+          <hasValue>http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#MD_ScopeCode</hasValue>
+        </item>
+        <item>
+          <hasIndex>3</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:hierarchyLevel/gmd:MD_ScopeCode/@codeListValue</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>ref</hasDatatype>
+          <hasValue>/gmd:MD_Metadata/gmd:hierarchyLevel/gmd:MD_ScopeCode</hasValue>
+        </item>
+      </produces>
+    </element>
+    <!--Responsabile dei metadati -->
+    <element>
+      <id>md_resp</id>
+      <label xml:lang="en">Metadata point of contact.</label>
+      <label xml:lang="it">Punto di contatto dei metadati</label>
+      <help xml:lang="en">Party responsible for the metadata information. Start typing at least the first 3 letters of your e-mail address and, if you are in the ERMES database of contacts,
+          the fields will autocomplete.
+          More than one contact can be added clicking the blue button.</help>
+      <help xml:lang="it">Parte responsabile delle informazioni contenute nei metadati. I campi sono ad autocompletamento per chi &#232; inserito nel database ERMES,
+          &#232; sufficiente cominciare a digitare le prime 3 lettere dell'indirizzo email. </help>
+      <isMandatory>forAll</isMandatory>
+      <isMultiple>true</isMultiple>
+      <hasRoot>/gmd:MD_Metadata</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <outIndex>3</outIndex>
+          <label xml:lang="en">Email</label>
+          <label xml:lang="it">Email</label>
+          <hasPath>/gmd:MD_Metadata/gmd:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:electronicMailAddress/gco:CharacterString</hasPath>
+          <isFixed>false</isFixed>
+          <id>gmd:electronicMailAddress</id>
+          <hasDatatype>autoCompletion</hasDatatype>
+          <datasource>person</datasource>
+        </item>
+        <item>
+          <hasIndex>2</hasIndex>
+          <outIndex>1</outIndex>
+          <label xml:lang="en">Institute</label>
+          <label xml:lang="it">Ente</label>
+          <hasPath>/gmd:MD_Metadata/gmd:contact/gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString</hasPath>
+          <isFixed>false</isFixed>
+          <id>gmd:organisationName</id>
+          <hasDatatype>select</hasDatatype>
+          <datasource>personS</datasource>
+          <field>inst</field>
+        </item>
+        
+        <item>
+          <hasIndex>3</hasIndex>
+          <outIndex>2</outIndex>
+          <label xml:lang="en">Telephone number</label>
+          <label xml:lang="it">Telefono</label>
+          <hasPath>/gmd:MD_Metadata/gmd:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone/gmd:voice/gco:CharacterString</hasPath>
+          <isFixed>false</isFixed>
+          <hasDatatype>select</hasDatatype>
+          <datasource>personS</datasource>
+          <field>phone</field>
+        </item>        
+        
+        <item>
+          <hasIndex>4</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:contact/gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode/@codeList</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>URI</hasDatatype>
+          <hasValue>http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#CI_RoleCode</hasValue>
+        </item>
+        <item>
+          <hasIndex>5</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:contact/gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode</hasPath>
+          <isFixed>true</isFixed>
+          <datasource>roleCodes</datasource>
+          <hasDatatype>codelist</hasDatatype>
+          <defaultValue>http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/pointOfContact</defaultValue>
+          <isLanguageNeutral>true</isLanguageNeutral>
+        </item>
+        <item>
+          <hasIndex>6</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:contact/gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode/@codeListValue</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>ref</hasDatatype>
+          <hasValue>/gmd:MD_Metadata/gmd:contact/gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode</hasValue>
+        </item>
+      </produces>
+    </element>
+    <!--Data dei metadati -->
+    <element>
+      <id>data_md</id>
+      <label xml:lang="en">Metadata date</label>
+      <label xml:lang="it">Data dei metadati</label>
+      <help xml:lang="en">Date that the metadata was created.</help>
+      <help xml:lang="it">Data di creazione dei metadati.</help>
+      <isMandatory>forAll</isMandatory>
+      <isMultiple>false</isMultiple>
+      <hasRoot>/gmd:MD_Metadata/gmd:dateStamp</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:dateStamp/gco:Date</hasPath>
+          <isFixed>false</isFixed>
+          <hasDatatype>date</hasDatatype>
+          <defaultValue>$TODAY$</defaultValue>
+        </item>
+      </produces>
+    </element>
+    <!--Nome dello standard: -->
+    <element>
+      <id>nome_std</id>
+      <label xml:lang="en">Name of standard</label>
+      <label xml:lang="it">Nome dello standard</label>
+      <isMandatory>forAll</isMandatory>
+      <isMultiple>false</isMultiple>
+      <hasRoot>/gmd:MD_Metadata/gmd:metadataStandardName</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:metadataStandardName/gco:CharacterString</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>string</hasDatatype>
+          <hasValue>ISO19115</hasValue>
+        </item>
+      </produces>
+    </element>
+    <!--Versione dello standard: -->
+    <element>
+      <id>vers_std</id>
+      <label xml:lang="en">Version of standard</label>
+      <label xml:lang="it">Versione dello standard</label>
+      <isMandatory>forAll</isMandatory>
+      <isMultiple>false</isMultiple>
+      <hasRoot>/gmd:MD_Metadata/gmd:metadataStandardVersion</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:metadataStandardVersion/gco:CharacterString</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>string</hasDatatype>
+          <hasValue>2003/Cor.1:2006</hasValue>
+        </item>
+      </produces>
+    </element>
+  </group>
+  <group>
+    <id>identification</id>
+    <label xml:lang="en">Identification</label>
+    <label xml:lang="it">Identificazione</label>
+    <!-- CRS -->
+    <element>
+      <id>sist_rif_spa</id>
+      <label xml:lang="en">Spatial reference system. </label>
+      <label xml:lang="it">Sistema di riferimento spaziale. </label>
+      <help xml:lang="en">Describes the coordinate reference system that is associated with the resource.The default value is the projection adopted by ERMES.</help>
+      <help xml:lang="it">Esprime il sistema di riferimento in cui &#232; inquadrata la risorsa georiferita. Il valore di default &#232; la proiezione adottata da ERMES</help>
+      <isMandatory>forData</isMandatory>
+      <isMultiple>false</isMultiple>
+      <hasRoot>/gmd:MD_Metadata</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:code/gco:CharacterString</hasPath>
+          <isFixed>false</isFixed>
+          <hasDatatype>codelist</hasDatatype>
+          <show>combobox</show>
+          <datasource>referenceSystemCodes</datasource>
+          <!-- <queryStringParameter>referencesystem</queryStringParameter> -->
+          <defaultValue>http://www.opengis.net/def/crs/EPSG/0/3035</defaultValue>
+          <useCode>true</useCode>
+        </item>
+        <item>
+          <hasIndex>2</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:referenceSystemInfo/gmd:MD_ReferenceSystem/gmd:referenceSystemIdentifier/gmd:RS_Identifier/gmd:codeSpace/gco:CharacterString</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>string</hasDatatype>
+          <hasValue>http://www.epsg-registry.org/</hasValue>
+        </item>
+      </produces>
+    </element>
+    <!--Titolo -->
+    <element>
+      <id>tit</id>
+      <label xml:lang="en">Resource title</label>
+      <label xml:lang="it">Titolo della risorsa</label>
+      <help xml:lang="en">Name by which the cited resource is known. Start typing at least 3 letters of the product
+          name following the ERMES naming convention, and a product list will appear.</help>
+      <help xml:lang="it">Il nome con il quale la risorsa &#232; conosciuta. Digitare 3 lettere del nome del prodotto
+      secondo la convenzione ERMES e apparira' una lista </help>
+      <isMandatory>forAll</isMandatory>
+      <isMultiple>false</isMultiple>
+      <hasRoot>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:title</hasRoot>
+      <produces>
+        <!-- 
+        <item>
+          <hasIndex>1</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:title/gco:CharacterString</hasPath>
+          <isFixed>false</isFixed>
+          <hasDatatype>string</hasDatatype>
+          <defaultValue>ERMES Product "Ex_L/Rx"</defaultValue>
+        </item>
+        -->
+        <item>
+          <hasIndex>1</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:title/gco:CharacterString</hasPath>
+          <isFixed>false</isFixed>
+          <datasource>ERMESproducts</datasource>
+          <!-- <show>combobox</show> -->
+          <hasDatatype>autoCompletion</hasDatatype>
+          <!-- <hasDatatype>codelist</hasDatatype> -->
+          <!-- <isLanguageNeutral>true</isLanguageNeutral> -->
+        </item>
+      </produces>
+    </element>
+    <!--Descrizione -->
+    <element>
+      <id>desc</id>
+      <label xml:lang="en">Resource abstract</label>
+      <label xml:lang="it">Descrizione della risorsa</label>
+      <help xml:lang="en">Brief narrative summary of the content of the resource(s). There is already a text with the ERMES short description, add the information
+      regarding the data contents before.</help>
+      <help xml:lang="it">Breve sommario discorsivo del contenuto della/e risorsa/e. E' gia' contenuta una breve descrizione del progetto ERMES,
+      si devono aggiungere prima le informazioni relative ai contenuti della risorsa</help>
+      <isMandatory>forAll</isMandatory>
+      <isMultiple>false</isMultiple>
+      <hasRoot>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:abstract</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:abstract/gco:CharacterString</hasPath>
+          <isFixed>false</isFixed>
+          <hasDatatype>text</hasDatatype>
+          <!--  <queryStringParameter>abstract</queryStringParameter> -->
+          <defaultValue>"Brief description of the data contents".This dataset was created in the framework of ERMES (an Earth obseRvation Model based ricE information Service), which is a FP7 Project co-funded by the European Commission with the objective of developing a prototype of downstream service dedicated to the rice sector to support authorities and farmers.</defaultValue>
+        </item>
+      </produces>
+    </element>
+    <!--Risorsa online -->
+    <element>
+      <id>ris_online</id>
+      <label xml:lang="en">Resource locator</label>
+      <label xml:lang="it">Indirizzo della risorsa</label>
+      <isMandatory>NA</isMandatory>
+      <isMultiple>false</isMultiple>
+      <hasRoot>/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:linkage</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:distributionInfo/gmd:MD_Distribution/gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource/gmd:linkage/gmd:URL</hasPath>
+          <isFixed>false</isFixed>
+          <hasDatatype>URI</hasDatatype>
+            <defaultValue>http://get-it.ermes-fp7space.eu/geoserver/wms?</defaultValue>
+          <queryStringParameter>resource</queryStringParameter>
+        </item>
+      </produces>
+    </element>
+    <!--Responsabile -->
+    <element>
+      <id>resp</id>
+      <label xml:lang="en">Responsible party</label>
+      <label xml:lang="it">Responsabile</label>
+      <help xml:lang="en">Identification of, and means of communication with, person(s) and organization(s) associated with the resource(s).
+          Start typing at least the first 3 letters of your e-mail address and, if you are in the ERMES database of contacts, the fields will autocomplete.
+          More than one contact can be added clicking the blue button.</help>
+      <help xml:lang="it">Identificazione delle persone e organizzazioni associate alla risorsa, e mezzo di comunicazione con esse.
+          I campi sono ad autocompletamento per chi &#232; inserito nel database ERMES,
+          &#232; sufficiente cominciare a digitare le prime 3 lettere dell'indirizzo email.</help>
+      <isMandatory>forAll</isMandatory>
+      <isMultiple>true</isMultiple>
+      <hasRoot>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <outIndex>3</outIndex>
+          <label xml:lang="en">Email</label>
+          <label xml:lang="it">Email</label>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:pointOfContact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:electronicMailAddress/gco:CharacterString</hasPath>
+          <isFixed>false</isFixed>
+          <!--<id>gmd:electronicMailAddress</id>-->
+          <hasDatatype>autoCompletion</hasDatatype>
+          <datasource>person</datasource>
+        </item>
+        <item>
+          <hasIndex>2</hasIndex>
+          <outIndex>1</outIndex>
+          <label xml:lang="en">Institute</label>
+          <label xml:lang="it">Ente</label>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:pointOfContact/gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString</hasPath>
+          <isFixed>false</isFixed>
+          <!--<id>gmd:organisationName</id>-->
+          <hasDatatype>select</hasDatatype>
+          <datasource>personS_2</datasource>
+          <field>inst</field>
+        </item>
+        
+        <item>
+          <hasIndex>3</hasIndex>
+          <outIndex>2</outIndex>
+          <label xml:lang="en">Telephone number</label>
+          <label xml:lang="it">Telefono</label>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:pointOfContact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone/gmd:voice/gco:CharacterString</hasPath>
+          <isFixed>false</isFixed>
+          <hasDatatype>select</hasDatatype>
+          <datasource>personS_2</datasource>
+          <field>phone</field>
+        </item>        
+        
+        <item>
+          <hasIndex>4</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:pointOfContact/gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode/@codeList</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>URI</hasDatatype>
+          <hasValue>http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#CI_RoleCode</hasValue>
+        </item>
+        <item>
+          <hasIndex>5</hasIndex>
+          <label xml:lang="en">Role</label>
+          <label xml:lang="it">Ruolo</label>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:pointOfContact/gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode/@codeListValue</hasPath>
+          <isFixed>false</isFixed>
+          <hasDatatype>codelist</hasDatatype>
+          <datasource>roleCodes</datasource>
+          <defaultValue>http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/resourceProvider</defaultValue>
+          <isLanguageNeutral>true</isLanguageNeutral>
+        </item>
+        <item>
+          <hasIndex>6</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:pointOfContact/gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>ref</hasDatatype>
+          <hasValue>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:pointOfContact/gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode/@codeListValue</hasValue>
+        </item>
+      </produces>
+    </element>
+  </group>
+  <group>
+    <id>keyword</id>
+    <label xml:lang="en">Classification</label>
+    <label xml:lang="it">Classificazione</label>
+    <!--Keyword obbligatoria per dati (INSPIRE Theme) -->
+    <element>
+      <id>tem_ins</id>
+      <label xml:lang="en">INSPIRE theme</label>
+      <label xml:lang="it">Tema di INSPIRE</label>
+      <help xml:lang="en">The INSPIRE Theme that is used for describing the resource. There is already a default value; you can add
+      other themes by clicking the blue button, then choosing form the list.</help>
+      <help xml:lang="it">Parola chiave per descrivere la risorsa come da temi (categorie tematiche) INSPIRE. E' presente un valore
+      di default, &#232; possibile aggiungere un secondo tema premendo il pulsante blue e scegliendo dalla lista. </help>
+      <isMandatory>forData</isMandatory>
+      <isMultiple>true</isMultiple>
+      <hasRoot>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword/gco:CharacterString</hasPath>
+          <isFixed>false</isFixed>
+          <hasDatatype>codelist</hasDatatype>
+          <datasource>inspireTheme</datasource>
+          <defaultValue>http://inspire.ec.europa.eu/theme/lu</defaultValue>
+        </item>
+        <item>
+          <hasIndex>2</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:thesaurusName/gmd:CI_Citation/gmd:title/gco:CharacterString</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>string</hasDatatype>
+          <hasValue>GEMET - INSPIRE themes, version 1.0</hasValue>
+        </item>
+        <item>
+          <hasIndex>3</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:thesaurusName/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:date/gco:Date</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>string</hasDatatype>
+          <hasValue>2008-06-01</hasValue>
+        </item>
+        <item>
+          <hasIndex>4</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:thesaurusName/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:dateType/gmd:CI_DateTypeCode</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>string</hasDatatype>
+          <hasValue>publication</hasValue>
+        </item>
+        <item>
+          <hasIndex>5</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:thesaurusName/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:dateType/gmd:CI_DateTypeCode/@codeList</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>URI</hasDatatype>
+          <hasValue>http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#CI_DateTypeCode</hasValue>
+        </item>
+        <item>
+          <hasIndex>6</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:thesaurusName/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:dateType/gmd:CI_DateTypeCode/@codeListValue</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>string</hasDatatype>
+          <hasValue>publication</hasValue>
+        </item>
+      </produces>
+    </element>
+    
+    <!--Keyword attinente al progetto ERMES -->
+    <element>
+      <id>keyw_ermes</id>
+      <label xml:lang="en">Keyword related to project ERMES</label>
+      <label xml:lang="it">Keyword attinente al progetto ERMES</label>
+      <isMandatory>NA</isMandatory>
+      <isMultiple>false</isMultiple>
+      <hasRoot>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <label xml:lang="it">Keyword</label>
+          <label xml:lang="en">Keyword</label>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword/gco:CharacterString</hasPath>
+          <isFixed>false</isFixed>
+          <hasDatatype>select</hasDatatype>
+          <datasource>ERMESproducts_2</datasource>
+          <field>a</field>
+        </item>
+        <item>
+          <hasIndex>2</hasIndex>
+          <label xml:lang="it">Vocabolario controllato di provenienza</label>
+          <label xml:lang="en">Originating controlled vocabulary</label>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:thesaurusName/gmd:CI_Citation/gmd:title/gco:CharacterString</hasPath>
+          <isFixed>false</isFixed>
+          <hasDatatype>select</hasDatatype>
+          <datasource>ERMESproducts_2</datasource>
+          <field>l</field>
+        </item>
+        <item>
+          <hasIndex>3</hasIndex>
+          <label xml:lang="it">Data di pubblicazione (aaaa-mm-gg)</label>
+          <label xml:lang="en">Publication date (yyyy-mm-dd)</label>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:thesaurusName/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:date/gco:Date</hasPath>
+          <isFixed>false</isFixed>
+          <hasDatatype>select</hasDatatype>
+          <datasource>ERMESproducts_2</datasource>
+          <field>date</field>
+        </item>
+        <item>
+          <hasIndex>4</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:thesaurusName/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:dateType/gmd:CI_DateTypeCode</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>string</hasDatatype>
+          <hasValue>publication</hasValue>
+        </item>
+        <item>
+          <hasIndex>5</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:thesaurusName/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:dateType/gmd:CI_DateTypeCode/@codeList</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>URI</hasDatatype>
+          <hasValue>http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#CI_DateTypeCode</hasValue>
+        </item>
+        <item>
+          <hasIndex>6</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:thesaurusName/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:dateType/gmd:CI_DateTypeCode/@codeListValue</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>string</hasDatatype>
+          <hasValue>publication</hasValue>
+        </item>
+      </produces>
+    </element>    
+    
+    <!--Keyword da vocabolari controllati -->
+    <element>
+      <id>keyw_voc_contr</id>
+      <label xml:lang="en">Keyword from controlled vocabularies</label>
+      <label xml:lang="it">Keyword da vocabolari controllati</label>
+      <help xml:lang="en">Keyword drawn from the controlled vocabularies that are supported.</help>
+      <help xml:lang="it">Keyword proveniente dai vocabolari controllati supportati.</help>
+      <isMandatory>NA</isMandatory>
+      <isMultiple>true</isMultiple>
+      <hasRoot>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <label xml:lang="it">Keyword</label>
+          <label xml:lang="en">Keyword</label>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword/gco:CharacterString</hasPath>
+          <isFixed>false</isFixed>
+          <hasDatatype>autoCompletion</hasDatatype>
+          <datasource>keywordFromContrVoc</datasource>
+        </item>
+        <item>
+          <hasIndex>2</hasIndex>
+          <label xml:lang="it">Vocabolario controllato di provenienza</label>
+          <label xml:lang="en">Originating controlled vocabulary</label>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:thesaurusName/gmd:CI_Citation/gmd:title/gco:CharacterString</hasPath>
+          <isFixed>false</isFixed>
+          <hasDatatype>select</hasDatatype>
+          <datasource>contrVocSpecs</datasource>
+          <field>l</field>
+        </item>
+        <item>
+          <hasIndex>3</hasIndex>
+          <label xml:lang="it">Data di pubblicazione (aaaa-mm-gg)</label>
+          <label xml:lang="en">Publication date (yyyy-mm-dd)</label>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:thesaurusName/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:date/gco:Date</hasPath>
+          <isFixed>false</isFixed>
+          <hasDatatype>select</hasDatatype>
+          <datasource>contrVocSpecs</datasource>
+          <field>date</field>
+        </item>
+        <item>
+          <hasIndex>4</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:thesaurusName/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:dateType/gmd:CI_DateTypeCode</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>string</hasDatatype>
+          <hasValue>publication</hasValue>
+        </item>
+        <item>
+          <hasIndex>5</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:thesaurusName/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:dateType/gmd:CI_DateTypeCode/@codeList</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>URI</hasDatatype>
+          <hasValue>http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#CI_DateTypeCode</hasValue>
+        </item>
+        <item>
+          <hasIndex>6</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:thesaurusName/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:dateType/gmd:CI_DateTypeCode/@codeListValue</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>string</hasDatatype>
+          <hasValue>publication</hasValue>
+        </item>
+      </produces>
+    </element>
+    <!--Keyword a testo libero -->
+    <element>
+      <id>keyw</id>
+      <label xml:lang="en">Free-text keyword</label>
+      <label xml:lang="it">Keyword a testo libero</label>
+      <help xml:lang="en">Keyword not coming from the supported controlled vocabularies.</help>
+      <help xml:lang="it">Parola chiave formalizzata o utilizzata comunemente per descrivere la
+        risorsa ma non vincolata ai temi di INSPIRE o appartenente a vocabolari controllati.</help>
+      <isMandatory>NA</isMandatory>
+      <isMultiple>true</isMultiple>
+      <hasRoot>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword/gco:CharacterString</hasPath>
+          <isFixed>false</isFixed>
+          <hasDatatype>string</hasDatatype>
+<!--          <defaultValue>ERMES</defaultValue>-->
+        </item>
+      </produces>
+    </element>
+    <element>
+      <id>keyw_2</id>
+      <label xml:lang="en">Free-text keyword</label>
+      <label xml:lang="it">Keyword a testo libero</label>
+      <help xml:lang="en">Keyword not coming from the supported controlled vocabularies.</help>
+      <help xml:lang="it">Parola chiave formalizzata o utilizzata comunemente per descrivere la
+        risorsa ma non vincolata ai temi di INSPIRE o appartenente a vocabolari controllati.</help>
+      <isMandatory>NA</isMandatory>
+      <isMultiple>true</isMultiple>
+      <hasRoot>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:descriptiveKeywords/gmd:MD_Keywords/gmd:keyword/gco:CharacterString</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>string</hasDatatype>
+          <defaultValue>ERMES</defaultValue>
+        </item>
+      </produces>
+    </element>
+  </group>
+  <group>
+    <id>constraints</id>
+    <label xml:lang="en">Constraints related to access and use</label>
+    <label xml:lang="it">Vincoli relativi all'accesso e all'uso</label>
+    <element>
+      <id>lim_uso</id>
+      <label xml:lang="en">Conditions applying to access and use</label>
+      <label xml:lang="it">Condizioni applicabili all'accesso e all'uso</label>
+        <help xml:lang="en">Access constraints applied to assure the protection of privacy or
+            intellectual property, and any special restrictions or limitations on obtaining the
+            resource. The default values are the ones for Open Data with CC-BY-NC license for non commercial use.
+        </help>
+        <help xml:lang="it">Vincoli di accesso per garantire la protezione di privacy o propriet&#224; intellettuale.
+            I valori di default si riferiscono a Open Data sotto licenza CC-BY-NC per uso non commerciale.</help>
+      <isMandatory>forAll</isMandatory>
+      <isMultiple>false</isMultiple>
+      <hasRoot>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_Constraints/gmd:useLimitation/gco:CharacterString</hasPath>
+          <isFixed>false</isFixed>
+          <hasDatatype>string</hasDatatype>
+          <!--
+          <hasDatatype>select</hasDatatype>
+          <datasource>constraints</datasource>
+          -->
+          <!-- <hasValue>user-defined</hasValue> -->
+          <!-- 
+          <field>l</field>
+          -->
+          <defaultValue>Access and use is open for non commercial uses according to Creative Commons License CC-BY-NC (>3.0), http://creativecommons.org/licenses/by-nc/3.0/legalcode.</defaultValue>
+        </item>
+      </produces>
+    </element>
+    <!--Vincoli di accesso -->
+    <element>
+      <id>vinc_acc</id>
+        <label xml:lang="en">Limitations on public access</label>
+        <label xml:lang="it">Limitazioni all'accesso pubblico</label>
+        <help xml:lang="en">Limitations on the access and use of a resource or metadata. The default values are the ones suggested for ERMES,
+            i.e. Open Data for non commercial use</help>
+        <help xml:lang="it">Restrizioni sull'accesso e utilizzo di una risorsa o metadato. I valori di deafult sono quelli consigliati
+            da ERMES, ovvero Open Data per uso non commerciale.</help>
+      <isMandatory>forAll</isMandatory>
+      <isMultiple>true</isMultiple>
+      <hasRoot>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:accessConstraints/gmd:MD_RestrictionCode</hasPath>
+          <isLanguageNeutral>true</isLanguageNeutral>
+          <isFixed>false</isFixed>
+          <hasDatatype>codelist</hasDatatype>
+          <datasource>restrictionCode</datasource>
+          <defaultValue>http://www.rndt.gov.it/codelists/MD_RestrictionCode/items/8</defaultValue>
+        </item>
+        <item>
+          <hasIndex>2</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:accessConstraints/gmd:MD_RestrictionCode/@codeList</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>string</hasDatatype>
+          <hasValue>http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/gmxCodelists.xml#MD_RestrictionCode</hasValue>
+        </item>
+        <item>
+          <hasIndex>3</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:accessConstraints/gmd:MD_RestrictionCode/@codeListValue</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>ref</hasDatatype>
+          <hasValue>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:accessConstraints/gmd:MD_RestrictionCode</hasValue>
+        </item>
+        <item>
+          <hasIndex>4</hasIndex>
+          <label xml:lang="en">Other constraints</label>
+          <label xml:lang="it">Altri vincoli</label>          
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:otherConstraints/gco:CharacterString</hasPath>
+          <isFixed>false</isFixed>
+          <hasDatatype>text</hasDatatype>
+          <defaultValue>Access and fruition of data is open for non commercial uses.</defaultValue>
+        </item>
+      </produces>
+    </element>
+    
+  </group>
+  <group>
+    <id>ling_d</id>
+    <label xml:lang="en">Description</label>
+    <label xml:lang="it">Descrizione</label>
+    <!--Scala equivalente (denominatore) -->
+    <element>
+      <alternativeTo>dist</alternativeTo>
+      <id>sca_equ</id>
+      <label xml:lang="en">Scale (denominator of the ratio)</label>
+      <label xml:lang="it">Scala (denominatore del rapporto)</label>
+      <help xml:lang="en">Level of detail expressed as the scale denominator of a comparable
+        hardcopy map or chart.</help>
+      <help xml:lang="it">Livello di dettaglio espresso come il denominatore della scala di una
+        mappa cartacea comparabile.</help>
+      <isMandatory>forData</isMandatory>
+      <isMultiple>false</isMultiple>
+      <hasRoot>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution/gmd:MD_Resolution/gmd:equivalentScale/gmd:MD_RepresentativeFraction/gmd:denominator</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution/gmd:MD_Resolution/gmd:equivalentScale/gmd:MD_RepresentativeFraction/gmd:denominator/gco:Integer</hasPath>
+          <isFixed>false</isFixed>
+          <hasDatatype>int</hasDatatype>
+        </item>
+      </produces>
+    </element>
+    <!--Distanza -->
+    <element>
+      <alternativeTo>sca_equ</alternativeTo>
+      <id>dist</id>
+      <label xml:lang="en">Spatial resolution (distance at ground, in metres)</label>
+      <label xml:lang="it">Risoluzione spaziale (distanza al suolo, in metri)</label>
+      <help xml:lang="en">Ground sample distance.</help>
+      <help xml:lang="it">Campione di distanza al suolo.</help>
+      <isMandatory>forData</isMandatory>
+      <isMultiple>false</isMultiple>
+      <hasRoot>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution/gmd:MD_Resolution/gmd:distance</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution/gmd:MD_Resolution/gmd:distance/gco:Distance</hasPath>
+          <isFixed>false</isFixed>
+          <hasDatatype>int</hasDatatype>
+          <!-- <hasValue>user-defined</hasValue> -->
+        </item>
+        <item>
+          <hasIndex>2</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:spatialResolution/gmd:MD_Resolution/gmd:distance/gco:Distance/@uom</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>string</hasDatatype>
+          <hasValue>http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/uom/ML_gmxUom.xml#m</hasValue>
+        </item>
+      </produces>
+    </element>    
+    <!--Lingua -->
+    <element>
+      <id>ling</id>
+      <label xml:lang="en">Resource language</label>
+      <label xml:lang="it">Lingua della risorsa</label>
+      <help xml:lang="en">Language used for data (resources), the languages are the 23 EU official ones, as listed in the code list.</help>
+      <help xml:lang="it">Linguaggio utilizzato per i dati (o risorse), le lingue selezionabili sono
+        le 23 lingue ufficiali della UE, codificate come da men&#249; a tendina.</help>
+      <isMandatory>forAll</isMandatory>
+      <isMultiple>true</isMultiple>
+      <hasRoot>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:language/gmd:LanguageCode</hasPath>
+          <isFixed>false</isFixed>
+          <datasource>languages</datasource>
+          <show>combobox</show>
+          <hasDatatype>codelist</hasDatatype>
+          <isLanguageNeutral>true</isLanguageNeutral>
+          <defaultValue>http://inspire-registry.jrc.ec.europa.eu/registers/Languages/items/5</defaultValue>
+        </item>
+        <item>
+          <hasIndex>2</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:language/gmd:LanguageCode/@codeList</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>string</hasDatatype>
+          <hasValue>http://www.loc.gov/standards/iso639-2/</hasValue>
+        </item>
+        <item>
+          <hasIndex>3</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:language/gmd:LanguageCode/@codeListValue</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>ref</hasDatatype>
+          <hasValue>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:language/gmd:LanguageCode</hasValue>
+        </item>
+      </produces>
+    </element>
+    <!--Categoria tematica -->
+    <element>
+      <id>cat_tem</id>
+      <label xml:lang="en">Topic category</label>
+      <label xml:lang="it">Categoria tematica</label>
+      <help xml:lang="en">Main theme(s) of the dataset.</help>
+      <help xml:lang="it">Tema o temi principali del dataset.</help>
+      <isMandatory>forAll</isMandatory>
+      <isMultiple>true</isMultiple>
+      <hasRoot>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:topicCategory/gmd:MD_TopicCategoryCode</hasPath>
+          <isFixed>false</isFixed>
+          <hasDatatype>codelist</hasDatatype>
+          <datasource>topicCategories</datasource>
+          <defaultValue>http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/farming</defaultValue>
+          <isLanguageNeutral>true</isLanguageNeutral>
+        </item>
+      </produces>
+    </element>    
+  </group>
+  <group>
+    <id>geographic_location</id>
+    <label xml:lang="en">Geographic location</label>
+    <label xml:lang="it">Localizzazione geografica</label>
+    <!--Localizzazione geografica -->
+    <element>
+      <id>loc_geo</id>
+      <label xml:lang="en">Geographic bounding box</label>
+      <label xml:lang="it">Bounding box geografico</label>
+      <help xml:lang="en">Western-, eastern-, sout-, and north-most coordinate of the limit of the
+        dataset extent, expressed in decimal degrees in the WGS84 system. The map below allow for drawing, but the manual insertion
+      of precise coordinates is to be preferred</help>
+      <help xml:lang="it">Esprime l&apos;estensione della risorsa nello spazio geografico sotto
+        forma di un ipotetico riquadro di delimitazione (Bounding Box), ovvero esprime la massima
+        estensione del dato come si ottiene dalla coordinata pi&#249; occidentale, pi&#249;
+        orientale, pi&#249; meridionale e pi&#249; settentrionale. Le coordinate debbono essere
+        espresse in gradi decimali, con almeno due cifre dopo la virgola, nel sistema WGS84.</help>
+      <isMandatory>forAll</isMandatory>
+      <isMultiple>false</isMultiple>
+      <hasRoot>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <!-- <CRSItem>sist_rif_spa_1</CRSItem> -->
+          <westLongitude>
+            <outIndex>1</outIndex>
+            <label xml:lang="en">W longitude</label>
+            <label xml:lang="it">Longitudine O</label>
+            <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox/gmd:westBoundLongitude/gco:Decimal</hasPath>
+            <queryStringParameter>westlon</queryStringParameter>
+          </westLongitude>
+          <eastLongitude>
+            <outIndex>2</outIndex>
+            <label xml:lang="en">E longitude</label>
+            <label xml:lang="it">Longitudine E</label>
+            <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox/gmd:eastBoundLongitude/gco:Decimal</hasPath>
+            <queryStringParameter>eastlon</queryStringParameter>
+          </eastLongitude>
+          <southLatitude>
+            <outIndex>3</outIndex>
+            <label xml:lang="en">S latitude</label>
+            <label xml:lang="it">Latitudine S</label>
+            <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox/gmd:southBoundLatitude/gco:Decimal</hasPath>
+            <queryStringParameter>southlat</queryStringParameter>
+          </southLatitude>
+          <northLatitude>
+            <outIndex>4</outIndex>
+            <label xml:lang="en">N latitude</label>
+            <label xml:lang="it">Latitudine N</label>
+            <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:geographicElement/gmd:EX_GeographicBoundingBox/gmd:northBoundLatitude/gco:Decimal</hasPath>
+            <queryStringParameter>northlat</queryStringParameter>
+          </northLatitude>
+          <isFixed>false</isFixed>
+          <hasDatatype>boundingBox</hasDatatype>
+        </item>
+      </produces>
+    </element>
+  </group>
+  <group>
+    <id>temporal</id>
+    <label xml:lang="en">Temporal reference</label>
+    <label xml:lang="it">Riferimento temporale</label>
+    <!--Estensione temporale -->
+    <element>
+      <id>est_temp</id>
+      <label xml:lang="en">Temporal extent</label>
+      <label xml:lang="it">Estensione temporale</label>
+      <help xml:lang="en">Period to which data contained in the dataset refers to.</help>
+      <help xml:lang="it">Periodo di tempo a cui si riferisce il dataset  </help>
+      
+      <!-- <alternativeTo>data</alternativeTo> -->
+      <isMandatory>forData</isMandatory>
+      <isMultiple>true</isMultiple>
+      <hasRoot>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <label xml:lang="en">Start date</label>
+          <label xml:lang="it">Data inizio</label>
+          <start>
+            <label xml:lang="en">Start date</label>
+            <label xml:lang="it">Data inizio</label>
+            <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:beginPosition</hasPath>
+          </start>
+          <end>
+            <label xml:lang="en">End date</label>
+            <label xml:lang="it">Data fine</label>
+            <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:endPosition</hasPath>
+          </end>
+          <isFixed>false</isFixed>
+          <hasDatatype>dateRange</hasDatatype>
+        </item>
+        <item>
+          <hasIndex>2</hasIndex>
+          <label>progressivo</label>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/@gml:id</hasPath>
+          <hasDatatype>autonumber</hasDatatype>
+          <isFixed>true</isFixed>
+          <hasValue>u</hasValue>
+        </item>
+      </produces>
+    </element>
+    <!-- Data -->
+    <element>
+      <id>data</id>
+      <label xml:lang="en">Date</label>
+      <label xml:lang="it">Data</label>
+      <!-- <alternativeTo>est_temp</alternativeTo> -->
+      <help xml:lang="en">One among the date of creation, last revision, or publication of the
+        resource.</help>
+      <help xml:lang="it">Si indica una data scegliendo se indicare quella relativa alla
+        &quot;creazione&quot;, &quot;ultima revisione&quot; o &quot;pubblicazione&quot; della
+        risorsa. </help>
+      <isMandatory>forData</isMandatory>
+      <isMultiple>true</isMultiple>
+      <hasRoot>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <label xml:lang="en">Date</label>
+          <label xml:lang="it">Data</label>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:date/gco:Date</hasPath>
+          <isFixed>false</isFixed>
+          <hasDatatype>date</hasDatatype>
+          <defaultValue>$TODAY$</defaultValue>
+        </item>
+        <item>
+          <hasIndex>2</hasIndex>
+          <label xml:lang="en">Date type</label>
+          <label xml:lang="it">Tipo di data</label>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:dateType/gmd:CI_DateTypeCode</hasPath>
+          <isFixed>false</isFixed>
+          <hasDatatype>codelist</hasDatatype>
+          <datasource>dateTypes</datasource>
+          <defaultValue>http://www.rndt.gov.it/codelists/CI_DateTypeCode/items/2</defaultValue>
+          <isLanguageNeutral>true</isLanguageNeutral>
+        </item>
+        <item>
+          <hasIndex>3</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:dateType/gmd:CI_DateTypeCode/@codeList</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>URI</hasDatatype>
+          <hasValue>http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/ML_gmxCodelists.xml#CI_DateTypeCode</hasValue>
+        </item>
+        <item>
+          <hasIndex>4</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:dateType/gmd:CI_DateTypeCode/@codeListValue</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>ref</hasDatatype>
+          <hasValue>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:dateType/gmd:CI_DateTypeCode</hasValue>
+        </item>
+      </produces>
+    </element>
+    <!--Identificatore -->
+    <element>
+      <id>id</id>
+      <label xml:lang="en">Identifier</label>
+      <label xml:lang="it">Identificatore</label>
+      <isMandatory>forAll</isMandatory>
+      <isMultiple>false</isMultiple>
+      <hasRoot>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/gmd:MD_Identifier</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:identifier/gmd:MD_Identifier/gmd:code/gco:CharacterString</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>URN</hasDatatype>
+          <hasValue>auto</hasValue>
+        </item>
+      </produces>
+    </element> 
+  </group>
+  <group>
+    <id>quality</id>
+    <label xml:lang="en">Quality and validity</label>
+    <label xml:lang="it">Qualit&#224; e validit&#224;</label>
+    <!--Livello di qualit&#224; -->
+    <element>
+      <id>qual_lvl</id>
+      <label xml:lang="en">Quality level</label>
+      <label xml:lang="it">Livello di qualit&#224;</label>
+      <isMandatory>forAll</isMandatory>
+      <isMultiple>false</isMultiple>
+      <hasRoot>/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope/gmd:DQ_Scope/gmd:level</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope/gmd:DQ_Scope/gmd:level/gmd:MD_ScopeCode</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>codelist</hasDatatype>
+          <datasource>scopes</datasource>
+          <defaultValue>http://inspire-registry.jrc.ec.europa.eu/registers/Types/items/1</defaultValue>
+          <isLanguageNeutral>true</isLanguageNeutral>
+        </item>
+        <item>
+          <hasIndex>2</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope/gmd:DQ_Scope/gmd:level/gmd:MD_ScopeCode/@codeList</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>string</hasDatatype>
+          <hasValue>http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/gmxCodelists.xml#MD_ScopeCode</hasValue>
+        </item>
+        <item>
+          <hasIndex>3</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope/gmd:DQ_Scope/gmd:level/gmd:MD_ScopeCode/@codeListValue</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>ref</hasDatatype>
+          <hasValue>/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:scope/gmd:DQ_Scope/gmd:level/gmd:MD_ScopeCode</hasValue>
+        </item>
+      </produces>
+    </element>
+    <!--Conformit&#224;: specifiche -->
+    <element>
+      <id>conf_spec</id>
+      <label xml:lang="en">Specification</label>
+      <label xml:lang="it">Specifiche</label>
+      <isMandatory>forAll</isMandatory>
+      <isMultiple>false</isMultiple>
+      <hasRoot>/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation/gmd:title/gco:CharacterString</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>codelist</hasDatatype>
+          <datasource>conformity</datasource>
+          <defaultValue>http://www.rndt.gov.it/codelists/conformity/items/1</defaultValue>
+        </item>
+        <item>
+          <hasIndex>2</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:date/gco:Date</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>string</hasDatatype>
+          <hasValue>2010-12-08</hasValue>
+        </item>
+        <item>
+          <hasIndex>3</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation/gmd:date/gmd:CI_Date//gmd:dateType/gmd:CI_DateTypeCode</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>string</hasDatatype>
+          <hasValue>publication</hasValue>
+        </item>
+        <item>
+          <hasIndex>4</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:dateType/gmd:CI_DateTypeCode/@codeList</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>string</hasDatatype>
+          <hasValue>http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/codelist/gmxCodelists.xml#CI_DateTypeCode</hasValue>
+        </item>
+        <item>
+          <hasIndex>5</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:specification/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:dateType/gmd:CI_DateTypeCode/@codeListValue</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>string</hasDatatype>
+          <hasValue>publication</hasValue>
+        </item>
+      </produces>
+    </element>
+    <!--Conformit&#224;: grado -->
+    <element>
+      <id>conf_degree</id>
+      <label xml:lang="en">Degree</label>
+      <label xml:lang="it">Grado</label>
+      <isMandatory>forAll</isMandatory>
+      <isMultiple>false</isMultiple>
+      <hasRoot>/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:explanation/gco:CharacterString</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>string</hasDatatype>
+          <hasValue>See the referenced specification</hasValue>
+        </item>
+        <item>
+          <hasIndex>2</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:report/gmd:DQ_DomainConsistency/gmd:result/gmd:DQ_ConformanceResult/gmd:pass/gco:Boolean</hasPath>
+          <isFixed>true</isFixed>
+          <hasDatatype>string</hasDatatype>
+          <hasValue>true</hasValue>
+        </item>
+      </produces>
+    </element>
+    <!--Genealogia -->
+    <element>
+      <id>gene</id>
+      <label xml:lang="en">Lineage</label>
+      <label xml:lang="it">Genealogia</label>
+      <help xml:lang="en">This refers to the lineage of data</help>
+      <help xml:lang="it">(Traduzione di Lineage) esprime attraverso un testo libero la provenienza
+        e il processo di produzione dei dati (o risorse), in modo da dare informazioni relativamente
+        al ciclo di vita e alla qualit&#224;. E&apos; consigliabile inserire in tale campo
+        dichiarazioni relative al fatto che la risorsa sia stata convalidata o sottoposta a
+        controllo di qualit&#224;, secondo quali standard o metodologie, se queste abbiano
+        validit&#224; legale (ad es. collaudi) e se sia la versione ufficiale. </help>
+      <isMandatory>forAll</isMandatory>
+      <isMultiple>false</isMultiple>
+      <hasRoot>/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:lineage/gmd:LI_Lineage/gmd:statement</hasRoot>
+      <produces>
+        <item>
+          <hasIndex>1</hasIndex>
+          <hasPath>/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:lineage/gmd:LI_Lineage/gmd:statement/gco:CharacterString</hasPath>
+          <isFixed>false</isFixed>
+          <hasDatatype>text</hasDatatype>
+          <defaultValue>Please describe briefly the procedure used to derive the dataset (e.g. input dataset used and processing, validation, etc.).</defaultValue>
+        </item>
+      </produces>
+    </element>
+  </group>
+</template>
+

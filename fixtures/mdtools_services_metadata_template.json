@@ -1,0 +1,28 @@
+[
+  {
+    "fields": {
+      "contact_country": "Italy",
+      "provider_url": "http://www.irea.cnr.it",
+      "contact_role": "pointOfContact",
+      "contact_city": "MI",
+      "contact_instructions": "istruzioni contatto",
+      "contact_position": "TBA",
+      "contact_fax": "",
+      "node_title": "GET-IT Demo",
+      "contact_hours": "orari",
+      "node_name": "GET-IT Demo",
+      "node_abstract": "Sensor Observation Service - Access of observations",
+      "contact_address": "Via Alfonso Corti 12",
+      "contact_email": "infogetitsk@gmail.com",
+      "contact_url": "http://www.irea.cnr.it",
+      "contact_stateprovince": "MI",
+      "provider_name": "IREA CNR",
+      "contact_postalcode": "20133",
+      "contact_phone": "",
+      "contact_name": "Alessandro Oggioni",
+      "node_keywords": ""
+    },
+    "model": "mdtools.servicesmetadata",
+    "pk": 1
+  }
+]

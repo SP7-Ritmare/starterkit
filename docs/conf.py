@@ -46,7 +46,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'GET-IT'
-copyright = u'2015, GET-IT Development Team'
+copyright = u'2017, GET-IT Development Team'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -205,7 +205,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
   ('index', 'GET-IT.tex', u'GET-IT Documentation',
-   u'Anna Basoni, Stefano Menegon, Andrea Vianello, Alessandro Oggioni, Simone Lanucara', 'manual'),
+   u'Martina Zilioli, Alessandro Oggioni, Simone Lanucara, Stefano Menegon, Paolo Tagliolato, Cristiano Fugazza', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -235,7 +235,7 @@ latex_documents = [
 # (source start file, name, description, authors, manual section).
 man_pages = [
     ('index', 'get-it', u'GET-IT Documentation',
-     [u'Anna Basoni, Stefano Menegon, Andrea Vianello, Alessandro Oggioni, Simone Lanucara'], 1)
+     [u'Martina Zilioli, Alessandro Oggioni, Simone Lanucara, Stefano Menegon, Paolo Tagliolato, Cristiano Fugazza'], 1)
 ]
 
 # If true, show URL addresses after external links.
