@@ -4,9 +4,9 @@
 
 define(function (require, exports) {
 
-    var _        = require('underscore'),
-        fileTypes = require('upload/FileTypes'),
-        path     = require('upload/path'),
+        var _      = require('underscore'),
+        fileTypes  = require('upload/FileTypes'),
+        path       = require('upload/path'),
         common     = require('upload/common'),
         LayerInfo;
 
@@ -18,6 +18,7 @@ define(function (require, exports) {
      */
     LayerInfo = function (options) {
 
+        this.id       = null;
         this.name     = null;
         this.files    = null;
 
@@ -25,42 +26,32 @@ define(function (require, exports) {
         this.main     = null;
 
         this.element  = null;
+
         $.extend(this, options || {});
         if (!this.main || !this.type) {
             this.guessFileType();
         }
 
         // need to find a way converting this name to a safe selector
-        this.selector = '#' + LayerInfo.safeSelector(this.name) + '-element';
-        this.selector = this.selector.replace(' ','_');
-        this.name = this.name.replace(' ','_');
+        this.name = LayerInfo.safeSelector(this.name.split('.')[0]);
+        this.selector = '#' + this.name + '-element';
         this.errors = this.collectErrors();
         this.polling = false;
     };
 
-    /** Function to safely select a filename 
+    /** Function to safely select a filename
      *
-     *  @params name 
-     *  @returns string 
+     *  @params name
+     *  @returns string
      */
     LayerInfo.safeSelector = function (name) {
-        return name.replace(/\[|\]|\(|\)/g, '_');
+        return name.replace(/\[|\]|\(|\)| /g, '_');
     };
 
-    /** Function to get progress template 
+    /** Function to return the success template
      *
      *  @params {options}
-     *  @returns 
-     */
-    LayerInfo.prototype.progressTemplate  = function (options) {
-        var template =  _.template($('#progressTemplate').html());
-        return template(options);
-    };
-
-    /** Function to return the success template  
-     *
-     *  @params {options}
-     *  @returns 
+     *  @returns
      */
     LayerInfo.prototype.successTemplate = function (options) {
         var template = _.template($('#successTemplate').html());
@@ -83,7 +74,7 @@ define(function (require, exports) {
         return res;
     };
 
-    /** Function to check the type of a Layer 
+    /** Function to check the type of a Layer
      *
      *  @params {options}
      *  @returns {string}
@@ -95,8 +86,14 @@ define(function (require, exports) {
             // if we find the type of the file, we also find the "main"
             // file
             if (results) {
-                self.type = results.type;
-                self.main = results.file;
+                // Avoid assuming the metadata file as main one
+                if (results.type.main == 'xml' && self.main != undefined) {
+                   self.type = self.type;
+                   self.main = self.main;
+                } else {
+                   self.type = results.type;
+                   self.main = results.file;
+                }
             }
         });
     };
@@ -109,6 +106,19 @@ define(function (require, exports) {
      */
     LayerInfo.prototype.collectErrors = function () {
         var errors = [];
+	var mosaic_is_valid = true;
+	var is_granule = $('#' + this.name + '-mosaic').is(':checked');
+
+        var is_time_enabled = $('#' + this.name + '-timedim').is(':checked');
+	var is_time_valid = is_time_enabled && !$('#' + this.name + '-timedim-value-valid').is(':visible');
+
+        if (is_granule && is_time_enabled) {
+		mosaic_is_valid = is_time_valid;
+	}
+	if (is_granule && !mosaic_is_valid) {
+		errors.push('The configuration of the file as a Mosaic Granule is not valid, please fix the issue and try again');
+	}
+
         if (this.type) {
             errors = this.type.findTypeErrors(this.getExtensions());
         } else {
@@ -118,7 +128,7 @@ define(function (require, exports) {
     };
 
     /** Function to get all the file extensions in
-     *  the current list of files being handled. 
+     *  the current list of files being handled.
      *
      *  @params {options}
      *  @returns {string}
@@ -140,11 +150,20 @@ define(function (require, exports) {
 
     /** Build a new FormData object from the current state of the
      *  LayerInfo object.
-     * 
+     *
      *  @returns {FromData}
      */
     LayerInfo.prototype.prepareFormData = function (form_data) {
-        var i, ext, file, perm, geogig, geogig_store, time;
+        var i, ext, file, perm, geogig, geogig_store, time, mosaic;
+
+        var base_ext  = this.main.name.split('.').pop();
+        var base_name = this.name;
+
+        var base_ext  = this.main.name.split('.').pop();
+        var base_name = this.name;
+
+        var base_ext  = this.main.name.split('.').pop();
+        var base_name = this.name;
 
         if (!form_data) {
             form_data = new FormData();
@@ -158,9 +177,9 @@ define(function (require, exports) {
         }
 
         if (geogig_enabled) {
-            geogig = $('#' + this.main.name.slice(0, -4) + '\\:geogig_toggle').is(':checked');
+            geogig_store = $('#' + base_name + '\\:geogig_store').val();
+            geogig = $('#' + base_name + '\\:geogig_toggle').is(':checked') && geogig_store.length != 0;
             if (geogig) {
-                geogig_store = $('#' + this.main.name.slice(0, -4) + '\\:geogig_store').val();
                 form_data.append('geogig_store', geogig_store);
             } else {
                 form_data.append('geogig_store', "");
@@ -168,50 +187,120 @@ define(function (require, exports) {
             form_data.append('geogig', geogig);
         }
         if (time_enabled) {
-            time = $('#' + this.main.name.slice(0, -4) + '-time').is(':checked');
+            time = $('#' + base_name + '-time').is(':checked');
             form_data.append('time', time);
-        } 
+        }
+        if (mosaic_enabled) {
+            mosaic = $('#' + base_name + '-mosaic').is(':checked');
+			var is_time_valid = $('#' + base_name + '-timedim').is(':checked') && !$('#' + base_name + '-timedim-value-valid').is(':visible');
+
+			if (mosaic /*&& is_time_valid*/) {
+				form_data.append('mosaic', mosaic);
+
+				var append_to_mosaic_opts = $('#' + base_name + '-mosaic-granule').is(':checked');
+				var append_to_mosaic_name = $('#' + base_name + '-mosaic-granule-format-select').val();
+
+				//console.log("append_to_mosaic_opts:" + append_to_mosaic_opts + " / append_to_mosaic_name:" + append_to_mosaic_name);
+
+                if (is_time_valid) {
+                    var time_regex = $('#' + base_name + '-timedim-format-select').val();
+                    var time_value = $('#' + base_name + '-timedim-value').val();
+
+                    //console.log("time_regex:" + time_regex + " / time_value:" + time_value);
+
+                    var time_presentation_opts = $('#' + base_name + '-timedim-presentation').is(':checked');
+                    var time_presentation = "LIST";
+                    var time_presentation_res = 0;
+                    var time_presentation_default_value = "";
+                    var time_presentation_reference_value = "";
+                    if (time_presentation_opts) {
+                        time_presentation = $('#' + base_name + '-timedim-presentation-format-select').val();
+
+                        if (time_presentation === 'DISCRETE_INTERVAL') {
+                            // Years
+                            time_presentation_res += parseInt( $('#' + base_name + '-timedim-presentation-years').val() ) * 31536000000;
+                            // Months
+                            time_presentation_res += parseInt( $('#' + base_name + '-timedim-presentation-months').val() ) * 2628000000;
+                            // Weeks
+                            time_presentation_res += parseInt( $('#' + base_name + '-timedim-presentation-weeks').val() ) * 604800000;
+                            // Days
+                            time_presentation_res += parseInt( $('#' + base_name + '-timedim-presentation-days').val() ) * 86400000;
+                            // Hours
+                            time_presentation_res += parseInt( $('#' + base_name + '-timedim-presentation-hours').val() ) * 3600000;
+                            // Minutes
+                            time_presentation_res += parseInt( $('#' + base_name + '-timedim-presentation-minutes').val() ) * 60000;
+                            // Seconds
+                            time_presentation_res += parseInt( $('#' + base_name + '-timedim-presentation-seconds').val() ) * 1000;
+                        }
+
+                        time_presentation_default_value = $('#' + base_name + '-timedim-defaultvalue-format-select').val();
+
+                        if (time_presentation_default_value == 'NEAREST' || time_presentation_default_value == 'FIXED') {
+                            time_presentation_reference_value = $('#' + base_name + '-timedim-defaultvalue-ref-value').val();
+                        }
+                    }
+
+                    //console.log("time_presentation:" + time_presentation + " / time_presentation_res:" + time_presentation_res);
+
+                    form_data.append('mosaic_time_regex', time_regex);
+                    form_data.append('mosaic_time_value', time_value);
+
+                    form_data.append('time_presentation', time_presentation);
+                    form_data.append('time_presentation_res', time_presentation_res);
+
+                    form_data.append('time_presentation_default_value', time_presentation_default_value);
+                    form_data.append('time_presentation_reference_value', time_presentation_reference_value);
+                }
+
+				form_data.append('append_to_mosaic_opts', append_to_mosaic_opts);
+				if (append_to_mosaic_opts) {
+					form_data.append('append_to_mosaic_name', append_to_mosaic_name);
+				}
+			}
+        }
 
         form_data.append('base_file', this.main);
         form_data.append('permissions', JSON.stringify(perm));
 
         for (i = 0; i < this.files.length; i += 1) {
             file = this.files[i];
-            if (file.name !== this.main.name) {
+            if (file.name !== this.name) {
                 ext = path.getExt(file);
                 form_data.append(ext + '_file', file);
             }
         }
 
         form_data.append('charset', $('#charset').val());
+        if ($('#id_metadata_upload_form').prop('checked')) {
+             form_data.append('metadata_upload_form', true);
+        }
+        if ($('#id_metadata_uploaded_preserve').prop('checked')) {
+             form_data.append('metadata_uploaded_preserve', true);
+        }
+        if ($('#id_style_upload_form').prop('checked')) {
+             form_data.append('style_upload_form', true);
+             form_data.append('layer_title', $('#id_layer_title').val());
+        }
         return form_data;
     };
 
-    /** Log the status to the status div 
+    /** Log the status to the status div
      *
      *  @params {options}
      *  @returns {string}
      */
     LayerInfo.prototype.logStatus = function (options) {
-        var status = this.element.find('#status'),
-            empty = options.empty;
-
-        if (empty) {
-            status.empty();
-        }
-        status.append(this.progressTemplate({
-            message: options.msg,
-            alertLevel: options.level
-        }));
+        options.element = this.element.find('#status');
+        common.logStatus(options);
     };
 
-    /** Function to mark errors in the the status 
+    /** Function to mark errors in the the status
      *
      *  @params {error}
      *  @returns {string}
      */
     LayerInfo.prototype.markError = function (error, status) {
-        this.logStatus({msg: error, level: 'alert-error', empty:true});
+        common.logError(error, this.element.find('#status'));
     };
 
     /** Function to mark the start of the upload
@@ -224,12 +313,12 @@ define(function (require, exports) {
      */
     LayerInfo.prototype.markStart = function () {
         this.logStatus({
-            msg: 'Your upload has started<div class="progress" id="prog"><div class="bar bar-success" style="width:0%"></div>',
+            msg: 'Your upload has started<div class="progress" id="prog"><div class="progress-bar progress-bar-success" style="width:0%"></div>',
             level: 'alert-success',
             empty: 'true'
         });
     };
-   
+
     LayerInfo.prototype.doResume = function (event) {
         common.make_request({
             url: event.data.url,
@@ -238,7 +327,11 @@ define(function (require, exports) {
                 self.markError(resp.errors, status);
             },
             success: function (resp, status) {
-                window.location = resp.redirect_to; 
+                if(resp.url && resp.input_required){
+                    window.location = resp.url;
+                }else {
+                    window.location = resp.redirect_to;
+                }
             },
         });
         return false;
@@ -246,11 +339,24 @@ define(function (require, exports) {
 
     LayerInfo.prototype.displayUploadedLayerLinks = function(resp) {
         var self = this;
-        var a = '<a href="' + resp.url + '" class="btn">Layer Info</a>';
-        var b = '<a href="' + resp.url + '#ediclient_container" class="btn">Edit Metadata</a>';
-        var c = '<a href="' + resp.url + '/style/manage" class="btn">Manage Styles</a>';
+        var a = '<a href="' + resp.url + '" class="btn btn-success">' + gettext('Layer Info') + '</a>';
+        var b = '<a href="' + resp.url + '#ediclient_container" class="btn btn-warning">' + gettext('Edit INSPIRE') + '</a>';
+        var c = '<a href="' + resp.url + '/metadata_upload" class="btn btn-warning">' + gettext('Upload Metadata') + '</a>';
+        var d = '<a href="' + resp.url + '/style_upload" class="btn btn-warning">' + gettext('Upload SLD') + '</a>';
+        var e = '<a href="' + resp.url.replace(/^\/layers/, '/gs') + '/style/manage" class="btn btn-warning">' + gettext('Manage Styles') + '</a>';
+        if(resp.ogc_backend == 'geonode.qgis_server'){
+            // QGIS Server has no manage style interaction.
+            d = '';
+        }
+        var msg_col = "";
+        if (resp.info){
+            var msg_template = gettext('The column %1 was renamed to %2 <br/>');
+            for (var key in resp.info){
+               msg_col += format(msg_template,[key,resp.info[key]]);
+            }
+        }
         self.logStatus({
-            msg: '<p> Your layer was successfully uploaded<br/><br/>' + a + '&nbsp;&nbsp;&nbsp;' + b + '&nbsp;&nbsp;&nbsp;' + c + '</p>',
+            msg: '<p>' + gettext('Your layer was successfully uploaded') + '<br/>' + msg_col + '<br/>' + a + '&nbsp;&nbsp;&nbsp;' + b + '&nbsp;&nbsp;&nbsp;' + c + '&nbsp;&nbsp;&nbsp;' + d + '&nbsp;&nbsp;&nbsp;' + e + '</p>',
             level: 'alert-success',
             empty: 'true'
         });
@@ -259,27 +365,27 @@ define(function (require, exports) {
     LayerInfo.prototype.startPolling = function() {
         var self = this;
         if (self.polling) {
-            $.ajax({ url: "/upload/progress", type: 'GET', success: function(data){
+            $.ajax({ url: updateUrl("/upload/progress", 'id', self.id), type: 'GET', success: function(data){
                 // TODO: Not sure we need to do anything here?
                 //console.log('polling');
             }, dataType: "json", complete: setTimeout(function() {self.startPolling()}, 3000), timeout: 30000 });
         }
     };
 
-    /** Function to deal with the final step in the upload process 
+    /** Function to deal with the final step in the upload process
      *
      *  @params {options}
      *  @returns {string}
      */
     LayerInfo.prototype.doFinal = function (resp) {
         var self = this;
-        if (resp.redirect_to === '/upload/final') {
+        if (resp.hasOwnProperty('redirect_to') && resp.redirect_to.indexOf('/upload/final') > -1) {
             common.make_request({
                 url: resp.redirect_to,
                 async: true,
                 beforeSend: function() {
                     self.logStatus({
-                        msg: '<p>Performing Final GeoServer Config Step <img class="pull-right" src="/static/geonode/img/loading.gif"></p>',
+                        msg: '<p>' + gettext('Performing Final GeoServer Config Step') + '<img class="pull-right" src="/static/geonode/img/loading.gif"></p>',
                         level: 'alert-success',
                         empty: 'true'
                     });
@@ -288,27 +394,31 @@ define(function (require, exports) {
                 },
                 failure: function (resp, status) {
                     self.polling = false;
-                    self.markError(resp.errors, status); 
+                    self.markError(resp.errors, status);
                 },
                 success: function (resp, status) {
                     self.polling = false;
                     if (resp.status === "other") {
                         self.logStatus({
-                            msg:'<p>You need to specify more information in order to complete your upload</p>',
+                            msg:'<p>' + gettext('You need to specify more information in order to complete your upload') + '</p>',
                             level: 'alert-success',
                             empty: 'true'
                         });
+                    } else if (resp.status === "pending") {
+                        setTimeout(function() {
+                            self.doFinal(resp);
+                        }, 5000);
                     } else {
                         self.displayUploadedLayerLinks(resp);
                     }
-                },
+                }
             });
         } else if (resp.status === "incomplete") {
-            var id = resp.url.split('=')[1]
+            var id = common.parseQueryString(resp.url).id;
             var element = 'next_step_' + id
             var a = '<a id="' + element + '" class="btn">Continue</a>';
             self.logStatus({
-                msg:'<p>You need to specify more information in order to complete your upload.</p><p>You can continue configuring your layer.</p><p>' + a + '</p>',
+                msg:'<p>' + gettext('You need to specify more information in order to complete your upload.') + '</p><p>' + gettext('You can continue configuring your layer.') + '</p><p>' + a + '</p>',
                 level: 'alert-success',
                 empty: 'true'
             });
@@ -316,7 +426,7 @@ define(function (require, exports) {
             return;
         } else if (resp.status === "other") {
             self.logStatus({
-                msg:'<p>You need to specify more information in order to complete your upload</p>',
+                msg:'<p>' + gettext('You need to specify more information in order to complete your upload') + '</p>',
                 level: 'alert-success',
                 empty: 'true'
             });
@@ -326,7 +436,7 @@ define(function (require, exports) {
         } else {
             self.polling = false;
             self.logStatus({
-                msg:'<p>Unexpected Error</p>',
+                msg:'<p>' + gettext('Unexpected Error') + '</p>',
                 level: 'alert-error',
                 empty: 'true'
             });
@@ -342,33 +452,36 @@ define(function (require, exports) {
     LayerInfo.prototype.doStep = function (resp) {
         var self = this;
         self.logStatus({
-            msg: '<p>Performing GeoServer Config Step</p>',
+            msg: '<p>' + gettext('Performing GeoServer Config Step') + '</p>',
             level: 'alert-success',
             empty: 'true'
         });
         if (resp.success === true && resp.status === 'incomplete') {
             common.make_request({
-                url: resp.redirect_to + '?force_ajax=true',
+                url: updateUrl(resp.redirect_to, 'force_ajax', 'true'),
                 async: true,
                 failure: function (resp, status) {
                     self.polling = false;
                     self.markError(resp.errors, status);
                 },
                 success: function (resp, status) {
+                    self.id = resp.id;
                     if (resp.status === 'incomplete') {
                         if (resp.input_required === true) {
                             self.doFinal(resp);
                         } else {
                             self.doStep(resp);
                         }
-                    } else if (resp.redirect_to === '/upload/final') {
+                    } else if (resp.redirect_to.indexOf('/upload/final') > -1) {
                         self.doFinal(resp);
+                    } else {
+                        window.location = resp.url;
                     }
                 }
             });
         } else if (resp.success === true && typeof resp.url != 'undefined') {
             self.doFinal(resp);
-        } else if (resp.success === true && resp.redirect_to === '/upload/final') {
+        } else if (resp.success === true && resp.redirect_to.indexOf('/upload/final') > -1) {
             self.doFinal(resp);
         }
     };
@@ -382,6 +495,7 @@ define(function (require, exports) {
         var form_data = this.prepareFormData(),
             self = this;
         var prog = "";
+
         $.ajaxQueue({
             url: form_target,
             async: true,
@@ -395,7 +509,7 @@ define(function (require, exports) {
                     req.upload.addEventListener('progress', function(evt) {
                         if(evt.lengthComputable) {
                             var pct = (evt.loaded / evt.total) * 100;
-                            $('#prog > .bar').css('width', pct.toPrecision(3) + '%');
+                            $('#prog > .progress-bar').css('width', pct.toPrecision(3) + '%');
                         }
                     }, false);
                 }
@@ -409,17 +523,18 @@ define(function (require, exports) {
             error: function (jqXHR) {
                 self.polling = false;
                 if (jqXHR === null) {
-                    self.markError("Unexpected Error");
+                    self.markError(gettext('Unexpected Error'));
                 } else {
-                    self.markError($.parseJSON(jqXHR.responseText).errors);
+                    self.markError(jqXHR);
                 }
             },
             success: function (resp, status) {
                 self.logStatus({
-                    msg: '<p> Layer files uploaded, configuring in GeoServer</p>',
+                    msg: '<p>' + gettext('Layer files uploaded, configuring in GeoServer') + '</p>',
                     level: 'alert-success',
-                    empty: 'true',
+                    empty: 'true'
                 });
+                self.id = resp.id;
                 self.doStep(resp);
             }
         });
@@ -431,7 +546,7 @@ define(function (require, exports) {
            data: {results:geogig_stores, text:'name'},
            formatSelection: format,
            formatResult: format,
-           placeholder: 'Select or create a Geogig repository.',
+           placeholder: gettext('Select or create a Geogig repository.'),
 
             id: function(object) {
              return object.name;
@@ -440,21 +555,20 @@ define(function (require, exports) {
              if ($(data).filter( function() {
                return this.name.localeCompare(term)===0;
              }).length===0) {
-               return {name:term.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '')};
+               return {name:term.replace(/[`~!@#$%^&*()|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '')};
              }
            }
           });
-
-
     }
 
     /** Function to display the layers collected from the files
-     * selected for uploading 
+     * selected for uploading
      *
      *  @params {file_queue}
      *  @returns {string}
      */
     LayerInfo.prototype.display = function (file_queue) {
+
         var layerTemplate = _.template($('#layerTemplate').html()),
             li = layerTemplate({
                 name: this.name,
@@ -462,7 +576,8 @@ define(function (require, exports) {
                 type: this.type.name,
                 format: this.type.format,
                 geogig: geogig_enabled,
-                time: time_enabled
+                time: time_enabled,
+				mosaic: mosaic_enabled
             });
         file_queue.append(li);
         this.errors = this.collectErrors();
@@ -470,19 +585,85 @@ define(function (require, exports) {
         this.displayErrors();
         this.element = $(this.selector);
 
+	    var time_re_txt = "[0-9]{8}";
+
+        $('#' + this.name + '-mosaic').on('change', this.doImageMosaicToggle);
+        $('#' + this.name + '-mosaic-granule').on('change', this.doImageMosaicGranuleOptionsToggle);
+        $('#' + this.name + '-timedim').on('change', this.doImageMosaicTimedimOptionsToggle);
+        $('#' + this.name + '-timedim-presentation').on('change', this.doImageMosaicTimedimPresentationOptionsToggle);
+        $('#' + this.name + '-mosaic-granule-format-select').on('change', this.doImageMosaicGranuleLayerSelect);
+
+        $('#' + this.name + '-timedim-format-select').on('change', function() {
+             var input = $(this);
+
+             time_re_txt = input.val();
+
+	     var base_name = this.name.split('-timedim')[0];
+
+	     $('#' + base_name + '-timedim-value-valid').show();
+        });
+
+        $('#' + this.name + '-timedim-presentation-format-select').on('change', function() {
+             var input = $(this);
+
+             var base_name = this.name.split('-timedim')[0];
+
+             if (input.val() === 'DISCRETE_INTERVAL') {
+                $('#' + base_name + '-mosaic-timedim-presentation-res-options').show();
+             } else {
+                $('#' + base_name + '-mosaic-timedim-presentation-res-options').hide();
+             }
+        });
+
+        $('#' + this.name + '-timedim-defaultvalue-format-select').on('change', function() {
+             var input = $(this);
+
+              var base_name = this.name.split('-timedim')[0];
+
+             if (input.val() === 'NEAREST' || input.val() === 'FIXED') {
+                $('#' + base_name + '-mosaic-timedim-defaultvalue-res-options').show();
+             } else {
+                $('#' + base_name + '-mosaic-timedim-defaultvalue-res-options').hide();
+             }
+        });
+
+        $('#' + this.name + '-timedim-value').on('input', function() {
+           var input = $(this);
+
+           var re = new RegExp(time_re_txt, "g");
+           var is_valid = re.test(input.val());
+           if(is_valid){
+	      $('#' + this.name + '-valid').hide();
+	   } else {
+	      $('#' + this.name + '-valid').show();
+           }
+        });
+
+        $('#' + this.name + '-timedim-defaultvalue-ref-value').on('input', function() {
+           var input = $(this);
+
+           var re = /(\d{4})-(\d{2})-(\d{2})T(\d{2})\:(\d{2})\:(\d{2})[+-](\d{2})\:(\d{2})/;
+           var is_valid = re.test(input.val());
+           if(is_valid){
+		      $('#' + this.name + '-valid').hide();
+		   } else {
+		      $('#' + this.name + '-valid').show();
+	       }
+        });
+
         $('#' + this.name + '\\:geogig_toggle').on('change', this.doGeoGigToggle);
 
         // Add values to the geogig store dropdown and hide.
-        this.setupGeogigDropdown($('#' + this.main.name.slice(0, -4) + '\\:geogig_store'));
+        this.setupGeogigDropdown($('#' + this.name.split('.')[0] + '\\:geogig_store'));
         $("#s2id_" + this.name + "\\:geogig_store").hide()
 
         return li;
     };
 
-    /** Event handler to deal with user clicking on remove link 
+    /** Event handler to deal with user clicking on remove link
      *
      *  @params event
-     *  @returns none 
+     *  @returns none
      */
     LayerInfo.prototype.removeFileHandler = function (event) {
         var target = $(event.target),
@@ -512,7 +693,7 @@ define(function (require, exports) {
         }
     };
 
-    /** Function to display the files selected for uploading 
+    /** Function to display the files selected for uploading
      *
      *  @params
      *  @returns
@@ -524,12 +705,18 @@ define(function (require, exports) {
         ul.empty();
 
         $.each(this.files, function (idx, file) {
+            var file_ext = file.name.substr(file.name.lastIndexOf('.') + 1);
+
             var li = $('<li/>').appendTo(ul),
                 p = $('<p/>', {text: file.name}).appendTo(li),
-                a  = $('<a/>', {text: ' Remove'});
+                a  = $('<a/>', {text: ' ' + gettext('Remove')});
 
+            if (file_ext === 'xml') {
+                $('#metadata_uploaded_preserve_check').show();
+            }
             a.data('layer', self.name);
             a.data('file',  file.name);
+            a.attr('class', 'remove-file');
             a.appendTo(p);
             a.on('click', function (event) {
                 var target = $(event.target),
@@ -537,15 +724,22 @@ define(function (require, exports) {
                     layer_name = target.data('layer'),
                     file_name  = target.data('file');
                 self.removeFile(file_name);
-                self.displayRefresh();
+                if (self.files.length == 0) {
+                    delete layers[self.name];
+                }
+                if (file_ext === 'xml') {
+                    $('#metadata_uploaded_preserve_check').hide();
+                }
+                self.errors = self.collectErrors();
+                self.displayErrors();
             });
         });
     };
 
-    /** Function to display errors 
+    /** Function to display errors
      *
-     *  @params 
-     *  @returns 
+     *  @params
+     *  @returns
      */
     LayerInfo.prototype.displayErrors = function () {
         var ul = $('#' + LayerInfo.safeSelector(this.name) + '-element .errors').first();
@@ -554,13 +748,13 @@ define(function (require, exports) {
         $.each(this.errors, function (idx, error) {
             var li = $('<li/>', {text: error, 'class': 'alert alert-error'});
             li.appendTo(ul);
-            li.animate({opacity:1}, 5000, 'linear', function() { 
-                li.animate({opacity:0}, 1000, 'linear', function() {li.remove(); }); 
+            li.animate({opacity:1}, 5000, 'linear', function() {
+                li.animate({opacity:0}, 1000, 'linear', function() {li.remove(); });
             });
         });
     };
 
-    /** Function to refresh display after adding or removing files 
+    /** Function to refresh display after adding or removing files
      *
      *  @params {options}
      *  @returns {string}
@@ -571,7 +765,7 @@ define(function (require, exports) {
         this.displayErrors();
     };
 
-    LayerInfo.prototype.doGeoGigToggle = function () {
+    LayerInfo.prototype.doGeoGigToggle = function (event) {
         var target = event.target || event.srcElement;
         var id = target.id;
         var base_name = id.split(':')[0];
@@ -585,5 +779,127 @@ define(function (require, exports) {
         }
     };
 
+    LayerInfo.prototype.doImageMosaicToggle = function (event) {
+        var target = event.target || event.srcElement;
+        var id = target.id;
+        var base_name = id.split('-mosaic')[0];
+        var mosaic_chkbox = $('#' + id).is(':checked');
+        if (mosaic_chkbox) {
+            $('#' + base_name + '-mosaic-options').show();
+        } else {
+            $('#' + base_name + '-mosaic-options').hide();
+        }
+    };
+
+    LayerInfo.prototype.doImageMosaicTimedimOptionsToggle = function (event) {
+        var target = event.target || event.srcElement;
+        var id = target.id;
+        var base_name = id.split('-timedim')[0];
+        var mosaic_chkbox = $('#' + id).is(':checked');
+        if (mosaic_chkbox) {
+            $('#' + base_name + '-mosaic-timedim-options').show();
+        } else {
+            $('#' + base_name + '-mosaic-timedim-options').hide();
+        }
+    };
+
+    LayerInfo.prototype.doImageMosaicTimedimPresentationOptionsToggle = function (event) {
+        var target = event.target || event.srcElement;
+        var id = target.id;
+        var base_name = id.split('-timedim')[0];
+        var mosaic_chkbox = $('#' + id).is(':checked');
+        if (mosaic_chkbox) {
+            $('#' + base_name + '-mosaic-timedim-presentation-options').show();
+        } else {
+            $('#' + base_name + '-mosaic-timedim-presentation-options').hide();
+        }
+    };
+
+    LayerInfo.prototype.doImageMosaicGranuleOptionsToggle = function (event) {
+        var target = event.target || event.srcElement;
+        var id = target.id;
+        var base_name = id.split('-mosaic')[0];
+        var mosaic_chkbox = $('#' + id).is(':checked');
+        if (mosaic_chkbox) {
+            $('#' + base_name + '-mosaic-granule-format-options').show();
+
+            var dropdown = $('#' + base_name + '-mosaic-granule-format-select');
+            // Clear drop down list
+            $(dropdown).empty();
+            $("<option />", {
+                val: '',
+                text: 'Select one Mosaic layer ...',
+                selected: 'selected'
+            }).appendTo(dropdown);
+            // Fill drop down list with new data
+            $(json_mosaics).each(function () {
+                $("<option />", {
+                    val: this.name,
+                    text: this.name
+                }).appendTo(dropdown);
+            });
+
+        } else {
+            $('#' + base_name + '-mosaic-granule-format-options').hide();
+            $('#' + base_name + '-timedim').prop("checked", false);
+            $('#' + base_name + '-timedim').prop("disabled", false);
+            $('#' + base_name + '-mosaic-timedim-options').hide();
+            $('#' + base_name + '-timedim-presentation').prop("checked", false);
+            $('#' + base_name + '-timedim-presentation').prop("disabled", false);
+            $('#' + base_name + '-mosaic-timedim-presentation-options').hide();
+            $('#' + base_name + '-timedim-format-select').val($('#' + base_name + '-timedim-format-select option:first').val());
+            $('#' + base_name + '-timedim-format-select').prop("disabled", false);
+        }
+    };
+
+    LayerInfo.prototype.doImageMosaicGranuleLayerSelect = function (event) {
+        var target = event.target || event.srcElement;
+        var id = target.id;
+        var val = target.value;
+        var base_name = id.split('-mosaic')[0];
+        if (val !== '') {
+            $(json_mosaics).each(function () {
+                if (this.name === val) {
+                    if (this.has_time === "True") {
+                        $('#' + base_name + '-timedim').prop("checked", true);
+                        $('#' + base_name + '-timedim').prop("disabled", true);
+                        $('#' + base_name + '-mosaic-timedim-options').show();
+                        $('#' + base_name + '-timedim-presentation').prop("checked", false);
+                        $('#' + base_name + '-timedim-presentation').prop("disabled", true);
+                        $('#' + base_name + '-mosaic-timedim-presentation-options').hide();
+                        $('#' + base_name + '-timedim-format-select').val(this.time_regex);
+                        $('#' + base_name + '-timedim-format-select').prop("disabled", true);
+                    }
+                    else {
+                        $('#' + base_name + '-timedim').prop("checked", false);
+                        $('#' + base_name + '-timedim').prop("disabled", false);
+                        $('#' + base_name + '-mosaic-timedim-options').hide();
+                        $('#' + base_name + '-timedim-presentation').prop("checked", false);
+                        $('#' + base_name + '-timedim-presentation').prop("disabled", false);
+                        $('#' + base_name + '-mosaic-timedim-presentation-options').hide();
+                        $('#' + base_name + '-timedim-format-select').val($('#' + base_name + '-timedim-format-select option:first').val());
+                        $('#' + base_name + '-timedim-format-select').prop("disabled", false);
+                    }
+                }
+            });
+        }
+    };
+
     return LayerInfo;
 });
+
+function updateUrl(url, key, value){
+    if (key == null || value == null){
+    	return url;
+    }
+
+    var pair = key.concat('=').concat(value);
+
+    return (url.lastIndexOf('?') > -1)? url.concat('&').concat(pair): url.concat('?').concat(pair);
+}
+
+function format(str, arr) {
+  return str.replace(/%(\d+)/g, function(_,m) {
+    return arr[--m];
+  });
+}
