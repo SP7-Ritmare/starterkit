@@ -117,6 +117,13 @@ def fixtures(ctx):
 
 
 @task
+def collectstatic(ctx):
+    print "**************************fixtures********************************"
+    ctx.run("django-admin.py collectstatic \
+--settings={0}".format("geosk.settings"), pty=True)
+
+
+@task
 def geoserverfixture(ctx):
     print "*****************geoserver fixture********************************"
     _geoserver_info_provision(os.environ['GEOSERVER_LOCATION'] + "rest/")    
