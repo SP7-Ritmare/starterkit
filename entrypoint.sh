@@ -25,8 +25,6 @@ echo "migrations task done"
 echo "prepare task done"
 /usr/local/bin/invoke fixtures >> /usr/src/app/invoke.log
 echo "fixture task done"
-/usr/local/bin/invoke collectstatic >> /usr/src/app/invoke.log
-echo "collectstatic task done"
 
 cmd="$@"
 
