@@ -130,7 +130,7 @@ Modify configuration files::
 
     cd starterkit/scripts/docker/env/production/
 
-change GEONODE_LB_HOST_IP variable value with *address IP* of the GET-IT in your server
+change GEONODE_LB_HOST_IP variable value with *address IP* or *DNS* of the GET-IT in your server
 in the sos.env, django.env, geoserver.env, celery.env 
 
 Launch the stack with the build of GeoNode so any changes you did will be immediately available::
@@ -138,7 +138,7 @@ Launch the stack with the build of GeoNode so any changes you did will be immedi
     cd ~/starterkit/
     sudo docker-compose up --build -d
 
-**The GET-IT is installed correctly!** GET-IT will be available at the ip address of the ``docker0`` interface.
+**The GET-IT is installed correctly!** GET-IT will be available at the ip address of the ``eth0`` interface.
 Check IP address with::
 
     ifconfig -a
