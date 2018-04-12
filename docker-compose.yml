@@ -17,7 +17,7 @@ services:
       - ./scripts/docker/env/production/db.env
 
   dbsos:
-    image: geobeyond/dbsos-postgis:9.5
+    image: geobeyond/dbsos438-postgis:9.5
     restart: unless-stopped
     container_name: dbsos4${COMPOSE_PROJECT_NAME}
     stdin_open: true
@@ -130,7 +130,7 @@ services:
       - ./scripts/docker/env/production/geoserver.env
 
   sos:
-    image: geobeyond/sos-configured:4.4.2
+    image: geobeyond/sos-configured:4.3.8
     restart: unless-stopped
     container_name: sos4${COMPOSE_PROJECT_NAME}
     stdin_open: true
