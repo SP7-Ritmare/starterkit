@@ -530,6 +530,9 @@ GRAPPELLI_INDEX_DASHBOARD = 'geosk.dashboard.CustomIndexDashboard'
 TEMPLATES[0]['OPTIONS']['context_processors'].append('geosk.context_processors.sk')
 TEMPLATES[0]['OPTIONS']['context_processors'].append('geosk.skregistration.context_processors.skregistration')
 
+# PYCSW override from env file
+if os.getenv('DOCKER_ENV', ""):
+    PYCSW = os.getenv("PYCSW")
 
 # RITMARE services
 RITMARE = {
