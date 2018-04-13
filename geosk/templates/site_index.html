@@ -6,10 +6,11 @@ This is where you can override the hero area block. You can simply modify the co
   {% block hero %}
   <div class="jumbotron">
     <div class="container">
-      <h1>{% trans "Welcome" %}</h1>
-      <p>{% blocktrans %}GeoNode is an open source platform for sharing geospatial data and maps.{% endblocktrans %}</p>
-      <p>{% blocktrans %}If you have any questions about the software or service, join our <a href="https://groups.google.com/d/forum/geonode-users">mailing list</a>.{% endblocktrans %}</p>
-      <span>{% trans 'Need help?' %} <a href="http://docs.geonode.org/en/latest/tutorials/users/quickstart/index.html">{% trans 'Getting Started' %}</a></span>
+      <h1>{% trans "GET-IT" %}</h1>
+      <p>{% blocktrans %}Share your maps, measurements, and sensors. Easily.{% endblocktrans %}</p>
+      <p>{% blocktrans %}<a href="http://www.get-it.it" title="GET-IT website" target="_blank">GET-IT</a> allows you to easily share geospatial data on the web with simple actions.
+          The suite is the first open-source collaborative effort toward the integration of traditional geographic information with observational data.{% endblocktrans %}</p>
+      <span>{% trans 'Need help?' %} <a href="http://getit.readthedocs.io/en/latest/index.html" title="GET-IT doc" target="_blank">{% trans 'Getting Started' %}</a></span>
     </div>
   </div>
   {% endblock %}

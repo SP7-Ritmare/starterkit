@@ -22,3 +22,38 @@
 </li>
 <li><a href="{% url "about_services" %}">{% trans "Services" %}</a></li>
 {% endblock %}
+
+{% block footer %}
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-left">
+                Geoinformation Enabling ToolkIT starterkit&reg; GET-IT
+                {% trans " is conceived and developed by <a target=\"_blank\" href=\"http://www.get-it.it/#team\">reaserchers team</a>" %}
+                | <a href="mailto:getitskinfo@gmail.com">{% trans "Contacts" %} </a>
+                | <a href="{% url "sk_license" %}">{% trans "Legal Notes" %} </a>
+                | <a href="{% url "sk_credits" %}">{% trans "Credits" %} </a>
+            </div>
+            <div class="col-md-6 text-right">
+                <ul class="list-unstyled">
+                    <li>GET-IT{% trans " is based on" %} <a href="http://geonode.org">{% trans "GeoNode" %}</a> <em>{% trans "version" %} {{ VERSION }}</em></li>
+                </ul>
+                <label class="hidden">{% trans "Language" %}</label>
+                {% if csrf_token != "NOTPROVIDED" %}
+                {% get_current_language as LANGUAGE %}
+                <form class="form-inline" action="/i18n/setlang/" method="post">
+                    {% csrf_token %}
+                    <select class="col-md-6 pull-right" name="language" onchange="javascript:form.submit()">
+                        {% for lang in LANGUAGES %}
+                        <option value="{{ lang.0 }}" {% ifequal LANGUAGE_CODE lang.0 %} selected="selected"{% endifequal %}>
+                            {{ lang.1 }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</footer>
+{% endblock footer %}
