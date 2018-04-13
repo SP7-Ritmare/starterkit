@@ -27,57 +27,50 @@ geoskurlpatterns = patterns(
     # url(r'^layers/(?P<layername>[^/]+)/rdf$', 'geosk.mdtools.views_rdf.rdf_layer_detail', kwargs={'rdf_format':'xml'}, name='mdtools_rdf_metadata'),
     # url(r'^layers/(?P<layername>[^/]+)/n3$', 'geosk.mdtools.views_rdf.rdf_layer_detail', kwargs={'rdf_format':'n3'}, name='mdtools_n3_metadata'),
 
-
-    # additional pages
+    ###
+    ## additional pages within GeoNode
+    ###
     url(
         r'^about_services/$',
         TemplateView.as_view(template_name='about_services.html'),
         name='about_services'
     ),
-    url(
-        r'^about_upload_layers/$',
-        TemplateView.as_view(template_name='about_upload_layers.html'),
-        name='about_upload_layers'
-    ),
+    # license
     url(
         r'^sk_license/$',
         TemplateView.as_view(template_name='sk_license.html'),
         name='sk_license'
     ),
+    # credit
     url(r'^sk_credits/$',
         TemplateView.as_view(template_name='sk_credits.html'),
         name='sk_credits'
-        ),
+    ),
 
+    ###
+    ## additional services within GeoNode
+    ###
+    ## Sensors
     # observations
     url(r'^observations/(?P<url>.*)$',
         ObservationsProxy.as_view(),
         name='observations'
-        ),
-
-    # mdtools views
-    (r'^mdtools/',
-     include('geosk.mdtools.urls')
-     ),
-
-    # skregistration views
-    (r'^skregistration/',
-     include('geosk.skregistration.urls')
-     ),
-
+    ),
     # OSK views
     (r'^sensors/',
      include('geosk.osk.urls')
      ),
+    # upload csv file
+    url(r'^sensors/$',
+        TemplateView.as_view(template_name='csv_upload.html'),
+        name='csv_upload'
+    ),
 
+    ## Demo data
     # Demo
     (r'^demo/',
      include('geosk.demo.urls')
-     ),
-
-    (r'^grappelli/',
-     include('grappelli.urls')
-     ),  # grappelli URLS
+     )
 )
 
 if 'rosetta' in settings.INSTALLED_APPS:
