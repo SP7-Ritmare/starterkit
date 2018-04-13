@@ -35,7 +35,11 @@ geoskurlpatterns = patterns(
         TemplateView.as_view(template_name='about_services.html'),
         name='about_services'
     ),
-    # license
+    url(
+        r'^about_upload_layers/$',
+        TemplateView.as_view(template_name='about_upload_layers.html'),
+        name='about_upload_layers'
+    ),
     url(
         r'^sk_license/$',
         TemplateView.as_view(template_name='sk_license.html'),
@@ -55,22 +59,32 @@ geoskurlpatterns = patterns(
     url(r'^observations/(?P<url>.*)$',
         ObservationsProxy.as_view(),
         name='observations'
-    ),
+        ),
+
+    # mdtools views
+    (r'^mdtools/',
+     include('geosk.mdtools.urls')
+     ),
+
+    # skregistration views
+    (r'^skregistration/',
+     include('geosk.skregistration.urls')
+     ),
+
     # OSK views
     (r'^sensors/',
      include('geosk.osk.urls')
      ),
-    # upload csv file
-    url(r'^sensors/$',
-        TemplateView.as_view(template_name='csv_upload.html'),
-        name='csv_upload'
-    ),
 
     ## Demo data
     # Demo
     (r'^demo/',
      include('geosk.demo.urls')
-     )
+     ),
+
+    (r'^grappelli/',
+     include('grappelli.urls')
+     ),  # grappelli URLS
 )
 
 if 'rosetta' in settings.INSTALLED_APPS:
