@@ -65,11 +65,7 @@ geoskurlpatterns = patterns(
         TemplateView.as_view(template_name='csv_upload.html'),
         name='csv_upload'
     ),
-    ## Samples
-    # samples
-    (r'^samples/',
-     include('geosk.samp.urls')
-     ),
+
     ## Demo data
     # Demo
     (r'^demo/',
