@@ -53,8 +53,10 @@ http://{public_fqdn}/ >> {override_fn}".format(**envs), pty=True)
 {dburl} >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export GEODATABASE_URL=\
 {geodburl} >> {override_fn}".format(**envs), pty=True)
-    ctx.run("echo export PYCSW={0}".format(
-            _pycsw_info_provision()
+    ctx.run("echo export PYCSW=\
+\"\\\"{0}\\\"\" >> {override_fn}".format(
+            _pycsw_info_provision(),
+            **envs
         )
     )
     ctx.run("source $HOME/.override_env", pty=True)
