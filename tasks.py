@@ -53,6 +53,12 @@ http://{public_fqdn}/ >> {override_fn}".format(**envs), pty=True)
 {dburl} >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export GEODATABASE_URL=\
 {geodburl} >> {override_fn}".format(**envs), pty=True)
+    ctx.run("echo export PYCSW=\
+\"\\\"{0}\\\"\" >> {override_fn}".format(
+            _pycsw_info_provision(),
+            **envs
+        )
+    )
     ctx.run("source $HOME/.override_env", pty=True)
     print "****************************final**********************************"
     ctx.run("env", pty=True)
@@ -113,6 +119,13 @@ def fixtures(ctx):
     ctx.run("django-admin.py loaddata /tmp/sites_docker.json \
 --settings={0}".format("geosk.settings"), pty=True)
     ctx.run("django-admin.py loaddata /tmp/mdtools_services_metadata_docker.json \
+--settings={0}".format("geosk.settings"), pty=True)
+
+
+@task
+def collectstatic(ctx):
+    print "**************************fixtures********************************"
+    ctx.run("django-admin.py collectstatic \
 --settings={0}".format("geosk.settings"), pty=True)
 
 
@@ -439,3 +452,82 @@ def _geoserver_info_provision(url):
     gs_settings.update_service('wms', get_service_json('wms'))
     gs_settings.update_service('wfs', get_service_json('wfs'))
     gs_settings.update_service('wcs', get_service_json('wcs'))
+
+def _pycsw_info_provision():
+    node_title = os.getenv("SERVICEPROVIDER_NODETITLE", "")
+    print "node_title is {0}".format(node_title)
+    node_abstract = os.getenv("SERVICEPROVIDER_NODEABSTRACT", "")
+    print "node_abstract is {0}".format(node_abstract)
+    provider_name = os.getenv("SERVICEPROVIDER_NAME", "")
+    print "provider_name is {0}".format(provider_name)
+    provider_url = os.getenv("SERVICEPROVIDER_SITE", "")
+    print "provider_url is {0}".format(provider_url)
+    contact_name = os.getenv("SERVICEPROVIDER_NAME", "")
+    print "contact_name is {0}".format(contact_name)
+    contact_position = os.getenv("SERVICEPROVIDER_POSITIONNAME", "")
+    print "contact_position is {0}".format(contact_position)
+    contact_address = os.getenv("SERVICEPROVIDER_ADDRESS", "")
+    print "contact_address is {0}".format(contact_address)
+    contact_city = os.getenv("SERVICEPROVIDER_CITY", "")
+    print "contact_city is {0}".format(contact_city)
+    contact_stateprovince = os.getenv("SERVICEPROVIDER_STATEPROVINCE", "")
+    print "contact_stateprovince is {0}".format(contact_stateprovince)
+    contact_postalcode = os.getenv("SERVICEPROVIDER_POSTALCODE", "")
+    print "contact_postalcode is {0}".format(contact_postalcode)
+    contact_country = os.getenv("SERVICEPROVIDER_COUNTRY", "")
+    print "contact_country is {0}".format(contact_country)
+    contact_phone = os.getenv("SERVICEPROVIDER_PHONE", "")
+    print "contact_phone is {0}".format(contact_phone)
+    contact_fax = os.getenv("SERVICEPROVIDER_FAX", "")
+    print "contact_fax is {0}".format(contact_fax)
+    contact_email = os.getenv("SERVICEPROVIDER_EMAIL", "")
+    print "contact_email is {0}".format(contact_email)
+    contact_url = os.getenv("SERVICEPROVIDER_SITE", "")
+    print "contact_url is {0}".format(contact_url)
+    contact_hours = os.getenv("SERVICEPROVIDER_HOURS", "")
+    print "contact_hours is {0}".format(contact_hours)
+    contact_instructions = os.getenv("SERVICEPROVIDER_INSTRUCTIONS", "")
+    print "contact_instructions is {0}".format(contact_instructions)
+    contact_role = os.getenv("SERVICEPROVIDER_INDIVIDUALNAME", "")
+    print "contact_role is {0}".format(contact_role)
+    PYCSW = {
+        # pycsw configuration
+        'CONFIGURATION': {
+            'metadata:main': {
+                'identification_title': "{0} - Catalog ".format(node_title),
+                'identification_abstract': node_abstract,
+                'identification_keywords': 'sdi,catalogue,discovery,metadata,GeoNode',  # TODO
+                'identification_keywords_type': 'theme',
+                'identification_fees': 'None',  # TODO
+                'identification_accessconstraints': 'None',  # TODO
+                'provider_name': provider_name,
+                'provider_url': provider_url,
+                'contact_name': contact_name,
+                'contact_position': contact_position,
+                'contact_address': contact_address,
+                'contact_city': contact_city,
+                'contact_stateorprovince': contact_stateprovince,
+                'contact_postalcode': contact_postalcode,
+                'contact_country': contact_country,
+                'contact_phone': contact_phone,
+                'contact_fax': contact_fax,
+                'contact_email': contact_email,
+                'contact_url': contact_url,
+                'contact_hours': contact_hours,
+                'contact_instructions': contact_instructions,
+                'contact_role': contact_role,
+            },
+            'metadata:inspire': {
+                'enabled': 'true',
+                'languages_supported': 'it,eng',
+                'default_language': 'it',
+                'date': 'YYYY-MM-DD',
+                'gemet_keywords': 'Utility and governmental services',
+                'conformity_service': 'notEvaluated',
+                'contact_name': 'Organization Name',
+                'contact_email': 'Email Address',
+                'temp_extent': 'YYYY-MM-DD/YYYY-MM-DD',
+            }
+        }
+    }
+    return PYCSW
