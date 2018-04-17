@@ -532,7 +532,9 @@ TEMPLATES[0]['OPTIONS']['context_processors'].append('geosk.skregistration.conte
 
 # PYCSW override from env file
 if os.getenv('DOCKER_ENV', ""):
-    PYCSW = os.getenv("PYCSW")
+    PYCSW = ast.literal_eval(
+        os.getenv("PYCSW")
+    )
 
 # RITMARE services
 RITMARE = {
