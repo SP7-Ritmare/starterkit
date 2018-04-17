@@ -138,6 +138,12 @@ Launch the stack with the build of GeoNode so any changes you did will be immedi
     cd ~/starterkit/
     sudo docker-compose up --build -d
 
+If the network where you want install the GET-IT is protected by proxy, follow this:
+
+    cd ~/starterkit/
+    sudo docker-compose build --build-arg HTTPS_PROXY=http://proxy.uns.ac.rs:8080
+    sudo -E docker-compose up -d
+
 **The GET-IT is installed correctly!** GET-IT will be available at the ip address of the ``eth0`` interface.
 Check IP address with::
 
