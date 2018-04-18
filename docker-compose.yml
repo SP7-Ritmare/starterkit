@@ -113,7 +113,7 @@ services:
       - ./scripts/docker/env/production/sos.env
 
   geoserver:
-    image: geonode/geoserver:2.10.x
+    image: geobeyond/geoserver:2.10.x
     restart: unless-stopped
     container_name: geoserver4${COMPOSE_PROJECT_NAME}
     stdin_open: true
