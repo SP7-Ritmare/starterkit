@@ -25,6 +25,7 @@ MAINTAINER Starterkit development team
 # add bower and grunt command
 ONBUILD COPY . /usr/src/app/
 WORKDIR /usr/src/app
+RUN pip install -e .
 
 EXPOSE 8000
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
