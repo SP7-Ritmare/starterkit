@@ -10,7 +10,7 @@ Publications on Journals
 ===========================================
 
 * C.Fugazza, A. Oggioni, P. Carrara, “RITMARE: Linked Open Data for Italian Marine Research”, ERCIM-News (Issn: 0926-4981), No. 96 (January 2014), pp. 17-18, [Online] http://ercim-news.ercim.eu/en96/special/ritmare-linked-open-data-for-italian-marine-research
-* F.Pavesi, A. Basoni, C. Fugazza, S. Menegon, A. Oggioni, M. Pepe, P. Tagliolato, P. Carrara, “EDI - A template-driven metadata editor for research data”, JORS, 2016, doi: 10.5334/jors.106.
+* F.Pavesi, A. Basoni, C. Fugazza, S. Menegon, A. Oggioni, M. Pepe, P. Tagliolato, P. Carrara, “EDI - A template-driven metadata editor for research data”, JORS, 2016, doi: 10.5334/jors.106
 * C. Fugazza, M. Pepe, A. Oggioni, P. Tagliolato, F. Pavesi, and P. Carrara. “Describing geospatial assets in the web of data: A metadata management scenario”. ISPRS International Journal of Geo-Information, 5(12):229, 2016, doi: 10.3390/ijgi512022
 * C. Fugazza, P. Tagliolato, L. Frigerio, and P. Carrara. Web-scale normalization of geospatial metadata based on semantics-aware data sources. ISPRS International Journal of Geo-Information, 2017, doi: 10.3390/ijgi6110354
 * S. Lanucara, C. Fugazza, P. Tagliolato, and A. Oggioni. Information systems for precision agriculture: Monitoring computation of prescription maps. ERCIM News (Issn: 0926-4981), 2018(113), 2018.
