@@ -14,8 +14,10 @@ Publications on Journals
 * C. Fugazza, M. Pepe, A. Oggioni, P. Tagliolato, F. Pavesi, and P. Carrara. “Describing geospatial assets in the web of data: A metadata management scenario”. ISPRS International Journal of Geo-Information, 5(12):229, 2016, doi: 10.3390/ijgi512022
 * C. Fugazza, P. Tagliolato, L. Frigerio, and P. Carrara. Web-scale normalization of geospatial metadata based on semantics-aware data sources. ISPRS International Journal of Geo-Information, 2017, doi: 10.3390/ijgi6110354
 * S. Lanucara, C. Fugazza, P. Tagliolato, and A. Oggioni. Information systems for precision agriculture: Monitoring computation of prescription maps. ERCIM News (Issn: 0926-4981), 2018(113), 2018.
-.. * P. Tagliolato, A. Oggioni, C. Fugazza, F. Cianferoni, and S. De Felici. Georiferimento di campioni museali nell’infrastruttura lifewatch italia: le nuove prospettive dal web semantico. Museologia Scientifica (Issn: 1123-265X), 11, 2017.
-.. * I. Rosati, C. Bergami, E. Stanca, L. Roselli, P. Tagliolato, A. Oggioni, N. Fiore, A. Pugnetti, A. Zingone, A. Boggero, and A. Basset. A thesaurus for phytoplankton trait-based approaches: Development and applicability. Ecological Informatics, 42:129–138, Nov 2017. DOI: 10.1016/j.ecoinf.2017.10.014
+.. 
+* P. Tagliolato, A. Oggioni, C. Fugazza, F. Cianferoni, and S. De Felici. Georiferimento di campioni museali nell’infrastruttura lifewatch italia: le nuove prospettive dal web semantico. Museologia Scientifica (Issn: 1123-265X), 11, 2017.
+.. 
+* I. Rosati, C. Bergami, E. Stanca, L. Roselli, P. Tagliolato, A. Oggioni, N. Fiore, A. Pugnetti, A. Zingone, A. Boggero, and A. Basset. A thesaurus for phytoplankton trait-based approaches: Development and applicability. Ecological Informatics, 42:129–138, Nov 2017. DOI: 10.1016/j.ecoinf.2017.10.014
 
 
 International Conferences
