@@ -43,7 +43,6 @@ International Conferences
 * Zilioli M, Lanucara S., Oggioni A. and Carrara P., “A Help Desk to support Data Sharing                                               in Environmental Research Communities” - From Science to Society: the Bridge provided by Environmental Informatics - EnviroInfo 2017, Proceedings (2017) ISSN 1616-0886
 * Lanucara S., Zilioli M., Oggioni A. and Carrara P. “GET-IT, a software suite for easy, interoperable sharing of ecological data in the Long Term Ecological Research Network” - From Science to Society: the Bridge provided by Environmental Informatics - EnviroInfo 2017, Proceedings (2017) ISSN 1616-0886
 
-
 Books
 =====
 
