@@ -29,21 +29,22 @@ services:
     #   - 5432:5432
     volumes:
       - dbsosdata:/dbsosdata
-    env_file:
-      - ./scripts/docker/env/production/dbsos.env
     environment:
-      - max_connections = 200
-      - shared_buffers = 2GB
-      - effective_cache_size = 6GB
-      - maintenance_work_mem = 512MB
-      - checkpoint_completion_target = 0.7
-      - wal_buffers = 16MB
-      - default_statistics_target = 100
-      - random_page_cost = 4
-      - effective_io_concurrency = 2
-      - work_mem = 10485kB
-      - min_wal_size = 1GB
-      - max_wal_size = 2GB
+      - MAX_CONNECTION = 200
+      - SHARED_BUFFERS = 2GB
+      - EFFECTIVE_CHACE_SIZE = 6GB
+      - MAINTENANCE_WORK_MEM = 512MB
+      - CHECKPOINT_COMPLETION_TARGET = 0.7
+      - WAL_BUFFERS = 16MB
+      - DEFAULT_STATISTICS_TARGET = 100
+      - RANDOM_PAGE_COST = 4
+      - EFFECTIVE_IO_CONCURRENCY = 2
+      - WORK_MEM = 10485KB
+      - MIN_WAL_SIZE = 1GB
+      - MAX_WAL_SIZE = 2GB
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=sos
 
   elasticsearch:
     image: elasticsearch
