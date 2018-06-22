@@ -31,6 +31,19 @@ services:
       - dbsosdata:/dbsosdata
     env_file:
       - ./scripts/docker/env/production/dbsos.env
+    environment:
+      - max_connections = 200
+      - shared_buffers = 2GB
+      - effective_cache_size = 6GB
+      - maintenance_work_mem = 512MB
+      - checkpoint_completion_target = 0.7
+      - wal_buffers = 16MB
+      - default_statistics_target = 100
+      - random_page_cost = 4
+      - effective_io_concurrency = 2
+      - work_mem = 10485kB
+      - min_wal_size = 1GB
+      - max_wal_size = 2GB
 
   elasticsearch:
     image: elasticsearch
