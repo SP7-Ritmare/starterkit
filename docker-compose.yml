@@ -30,7 +30,7 @@ services:
     #   - 5432:5432
     volumes:
       - dbsosdata:/dbsosdata
-      - ./custom-pg-conf/postgresql.conf:/etc/postgresql/postgresql.conf
+      - ./custom-conf/postgresql_sos.conf:/etc/postgresql/postgresql.conf
     env_file:
       - ./scripts/docker/env/production/dbsos.env
 
