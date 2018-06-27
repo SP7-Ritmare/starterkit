@@ -20,6 +20,7 @@ services:
     image: geobeyond/dbsos-postgis:9.5
     restart: unless-stopped
     container_name: dbsos4${COMPOSE_PROJECT_NAME}
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
     stdin_open: true
     # tty: true
     labels:
@@ -29,22 +30,9 @@ services:
     #   - 5432:5432
     volumes:
       - dbsosdata:/dbsosdata
-    environment:
-      - 'max_connection = 200'
-      - 'shared_buffers = 2gb'
-      - 'effective_chace_size = 6gb'
-      - 'maintenance_work_mem = 512mb'
-      - 'checkpoint_completion_target = 0.7'
-      - 'wal_buffers = 16mb'
-      - 'default_statistics_target = 100'
-      - 'random_page_cost = 4'
-      - 'effective_io_concurrency = 2'
-      - 'work_mem = 10485kb'
-      - 'min_wal_size = 1gb'
-      - 'max_wal_size = 2gb'
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=sos
+      - ./custom-pg-conf/postgresql.conf:/etc/postgresql/postgresql.conf
+    env_file:
+      - ./scripts/docker/env/production/dbsos.env
 
   elasticsearch:
     image: elasticsearch
