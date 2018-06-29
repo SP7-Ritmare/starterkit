@@ -269,6 +269,49 @@ SOCIALACCOUNT_PROFILE_EXTRACTORS = {
     "linkedin_oauth2": "geonode.people.profileextractors.LinkedInExtractor",
 }
 
+if os.getenv('DOCKER_ENV'):
+
+    # Set geodatabase to datastore for OGC server
+    if os.getenv('DEFAULT_BACKEND_DATASTORE'):
+        GEODATABASE_URL = os.getenv('GEODATABASE_URL',
+                                    'postgis://\
+    geonode_data:geonode_data@localhost:5432/geonode_data')
+        DATABASES[os.getenv('DEFAULT_BACKEND_DATASTORE')] = dj_database_url.parse(
+            GEODATABASE_URL, conn_max_age=600
+        )
+
+    # Override OGC server config if docker is production
+    OGC_SERVER = {
+        'default': {
+            'BACKEND': 'geonode.geoserver',
+            'LOCATION': GEOSERVER_LOCATION,
+            'LOGIN_ENDPOINT': 'j_spring_oauth2_geonode_login',
+            'LOGOUT_ENDPOINT': 'j_spring_oauth2_geonode_logout',
+            # PUBLIC_LOCATION needs to be kept like this because in dev mode
+            # the proxy won't work and the integration tests will fail
+            # the entire block has to be overridden in the local_settings
+            'PUBLIC_LOCATION': GEOSERVER_PUBLIC_LOCATION,
+            'USER': OGC_SERVER_DEFAULT_USER,
+            'PASSWORD': OGC_SERVER_DEFAULT_PASSWORD,
+            'MAPFISH_PRINT_ENABLED': True,
+            'PRINT_NG_ENABLED': True,
+            'GEONODE_SECURITY_ENABLED': True,
+            'GEOFENCE_SECURITY_ENABLED': GEOFENCE_SECURITY_ENABLED,
+            'GEOGIG_ENABLED': False,
+            'WMST_ENABLED': False,
+            'BACKEND_WRITE_ENABLED': True,
+            'WPS_ENABLED': False,
+            'LOG_FILE': '%s/geoserver/data/logs/geoserver.log'
+            % os.path.abspath(os.path.join(PROJECT_ROOT, os.pardir)),
+            # Set to name of database in DATABASES dictionary to enable
+            # 'datastore',
+            'DATASTORE': os.getenv('DEFAULT_BACKEND_DATASTORE', ''),
+            'PG_GEOGIG': False,
+            # 'CACHE': ".cache"  # local cache file to for HTTP requests
+            'TIMEOUT': 10  # number of seconds to allow for HTTP requests
+        }
+    }
+
 # MAPs and Backgrounds
 
 # Default preview library
@@ -409,6 +452,19 @@ MAP_BASELAYERS = [{
     "fixed": True,
     "group": "background"
 }]
+
+if BING_API_KEY:
+    BASEMAP = {
+        'source': {
+            'ptype': 'gxp_bingsource',
+            'apiKey': BING_API_KEY
+        },
+        'name': 'AerialWithLabels',
+        'fixed': True,
+        'visibility': False,
+        'group': 'background'
+    }
+    MAP_BASELAYERS.append(BASEMAP)
 
 if 'geonode.geoserver' in INSTALLED_APPS:
     LOCAL_GEOSERVER = {
