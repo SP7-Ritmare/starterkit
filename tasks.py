@@ -105,6 +105,8 @@ def prepare(ctx):
     _prepare_service_metadata_fixture()
     ctx.run("rm -rf /tmp/sites_docker.json", pty=True)
     _prepare_site_fixture()
+    ctx.run("rm -rf /tmp/apikey_docker.json", pty=True)
+    _prepare_apikey_fixture()
 
 
 @task
@@ -120,6 +122,8 @@ def fixtures(ctx):
 --settings={0}".format("geosk.settings"), pty=True)
     ctx.run("django-admin.py loaddata /tmp/mdtools_services_metadata_docker.json \
 --settings={0}".format("geosk.settings"), pty=True)
+    ctx.run("django-admin.py loaddata /tmp/apikey_docker.json \
+--settings={0}".format("geosk.settings"), pty=True)
 
 
 @task
@@ -132,7 +136,7 @@ def collectstatic(ctx):
 @task
 def geoserverfixture(ctx):
     print "*****************geoserver fixture********************************"
-    _geoserver_info_provision(os.environ['GEOSERVER_LOCATION'] + "rest/")    
+    _geoserver_info_provision(os.environ['GEOSERVER_LOCATION'] + "rest/")
 
 
 def _docker_host_ip():
@@ -318,7 +322,7 @@ def _prepare_service_metadata_fixture():
             },
             "model": "mdtools.servicesmetadata",
             "pk": 1
-        }  
+        }
     ]
     with open(
         '/tmp/mdtools_services_metadata_docker.json',
@@ -344,6 +348,30 @@ def _prepare_site_fixture():
     ]
     with open(
         '/tmp/sites_docker.json',
+        'w'
+    ) as fixturefile:
+        json.dump(default_fixture, fixturefile)
+
+
+def _prepare_apikey_fixture():
+    api_key = os.getenv(
+        "TASTYPIE_APIKEY",
+        "pyxW5djJ7XsjeFUXduAsGpR4xMGUwpeBGQRqTeT3"
+    )
+    print "Tastypie apikey is {0}".format(api_key)
+    default_fixture = [
+        {
+            "fields": {
+                "user": 1000,
+                "key": api_key,
+                "created": "2018-06-28T14:54:51Z"
+            },
+            "model": "tastypie.apikey",
+            "pk": 1
+        }
+    ]
+    with open(
+        '/tmp/apikey_docker.json',
         'w'
     ) as fixturefile:
         json.dump(default_fixture, fixturefile)
