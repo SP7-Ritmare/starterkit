@@ -1,6 +1,6 @@
  .navbar-brand {
-    width: 180px;
-    height: 45px;
-    background: transparent url("../img/logo-getit-eLTER_200px.png") no-repeat scroll 10px 2px;
+    width: 185px;
+    height: 50px;
+    background: transparent url("../img/logo-getit-eLTER_200px.png") no-repeat scroll 0px 5px;
     background-size: contain;
  }
