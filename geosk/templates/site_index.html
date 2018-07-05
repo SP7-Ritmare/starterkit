@@ -37,55 +37,43 @@ This is where you can override the hero area block. You can simply modify the co
                     <h2><a href="{% url " osk_browse" %}">{% trans 'Sensors'%}</a></h2>
                     <p></p>
                     {% if user.is_authenticated %}
-                    <p class="text-center"><a class="btn btn-default" href="{% url " osk_browse" %}#ediclient_container"
-                        role="button">{% trans "Add sensors" %} &raquo;</a></p>
+                    <p class="text-center"><a class="btn btn-default" href="{% url " osk_browse" %}#ediclient_container" role="button">{% trans "Add sensors" %} &raquo;</a></p>
                     {% else %}
-                    <p class="text-center"><a class="btn btn-default" href="{% url " osk_browse" %}" role="button">{%
-                        trans "Explore sensors" %} &raquo;</a></p>
+                    <p class="text-center"><a class="btn btn-default" href="{% url " osk_browse" %}" role="button">{% trans "Explore sensors" %} &raquo;</a></p>
                     {% endif %}
                 </div>
                 <!-- Layer -->
                 <div class="col-md-6">
                     <p><a href="{% url " layer_browse" %}"><i class="fa fa-square-o fa-4x rotate-45"></i></a></p>
-                    <h2><a href="{% url " layer_browse" %}">{{ facets.layer|default:_("No") }} {% blocktrans count
-                        counter=facets.layer %}Layer{% plural %}Layers{% endblocktrans %}</a></h2>
-                    <p>{% trans "Click to search for geospatial data published by other users, organizations and public
-                        sources. Download data in standard formats." %}</p>
+                    <h2><a href="{% url " layer_browse" %}">{{ facets.layer|default:_("No") }} {% blocktrans count counter=facets.layer %}Layer{% plural %}Layers{% endblocktrans %}</a></h2>
+                    <p>{% trans "Click to search for geospatial data published by other users, organizations and public sources. Download data in standard formats." %}</p>
                     {% if user.is_authenticated %}
-                    <p class="text-center"><a class="btn btn-default" href="{% url " layer_upload" %}" role="button">{%
-                        trans "Add layers" %} &raquo;</a></p>
+                    <p class="text-center"><a class="btn btn-default" href="{% url " layer_upload" %}" role="button">{% trans "Add layers" %} &raquo;</a></p>
                     {% else %}
-                    <p class="text-center"><a class="btn btn-default" href="{% url " layer_browse" %}" role="button">{%
-                        trans "Explore layers" %} &raquo;</a></p>
+                    <p class="text-center"><a class="btn btn-default" href="{% url " layer_browse" %}" role="button">{% trans "Explore layers" %} &raquo;</a></p>
                     {% endif %}
                 </div>
                 <!-- Sample -->
                 <div class="col-md-6">
                     <p><a href="{% url " samples_browse" %}"><i class="fa fa-fill fa-4x"></i></a></p>
-                    <h2><a href="{% url " samples_browse" %}">{{ facets.map|default:_("No") }} {% blocktrans count
-                        counter=facets.map %}Sample{% plural %}Samples{% endblocktrans %}</a></h2>
+                    <h2><a href="{% url " samples_browse" %}">{{ facets.map|default:_("No") }} {% blocktrans count counter=facets.map %}Sample{% plural %}Samples{% endblocktrans %}</a></h2>
                     <p>Click to visualize samples shared by other users.</p>
                     {% if user.is_authenticated %}
-                    <p><a class="btn btn-default" href="{% url " samples_upload" %}" role="button">Create sample
-                        &raquo;</a></p>
+                    <p><a class="btn btn-default" href="{% url " samples_upload" %}" role="button">Create sample &raquo;</a></p>
                     {% else %}
-                    <p><a class="btn btn-default" href="{% url " samples_browse" %}" role="button">{% trans "Explore samples"
-                        %} &raquo;</a></p>
+                    <p><a class="btn btn-default" href="{% url " samples_browse" %}" role="button">Explore samples &raquo;</a></p>
                     {% endif %}
                 </div>
                 <!-- Map -->
                 <div class="col-md-6">
                     <p><a href="{% url " maps_browse" %}"><i class="fa fa-map fa-4x"></i></a></p>
-                    <h2><a href="{% url " maps_browse" %}">{{ facets.map|default:_("No") }} {% blocktrans count
-                        counter=facets.map %}Map{% plural %}Maps{% endblocktrans %}</a></h2>
-                    <p>{% trans "Data is available for browsing, aggregating and styling to generate maps which can be
-                        saved, downloaded, shared publicly or restricted to specify users only." %}</p>
+                    <h2><a href="{% url " maps_browse" %}">{{ facets.map|default:_("No") }} {% blocktrans count counter=facets.map %}Map{% plural %}Maps{% endblocktrans %}</a></h2>
+                    <p>{% trans "Data is available for browsing, aggregating and styling to generate maps which can be saved, downloaded, shared publicly or restricted to specify users only." %}</p>
                     {% if user.is_authenticated %}
                     <p><a class="btn btn-default" href="{% url " new_map" %}" role="button">{% trans "Create maps" %}
                         &raquo;</a></p>
                     {% else %}
-                    <p><a class="btn btn-default" href="{% url " maps_browse" %}" role="button">{% trans "Explore maps"
-                        %} &raquo;</a></p>
+                    <p><a class="btn btn-default" href="{% url " maps_browse" %}" role="button">{% trans "Explore maps" %} &raquo;</a></p>
                     {% endif %}
                 </div>
                 <!--div class="col-md-6">
