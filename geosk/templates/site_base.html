@@ -17,6 +17,24 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav toolbar">
                 {% block tabs %}
+                {% block extra_tab %}
+                <li id="nav_osk">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Sensors data" %}<i class="fa fa-angle-down fa-lg"></i></a>
+                    {% if user.is_authenticated %}
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url "osk_browse" %}?limit={{ CLIENT_RESULTS_LIMIT }}">{% trans "Explore Sensors" %}</a></li>
+                        {% if perms.osk.admin_sos %}
+                        <li><a href="{% url "osk_browse" %}#ediclient_container">{% trans "Register a new  Sensor" %}</a></li>
+                        {% endif %}
+                    </ul>
+                    {% else %}
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url "osk_browse" %}?limit={{ CLIENT_RESULTS_LIMIT }}">{% trans "Sensors data" %}</a></li>
+                    </ul>
+                    {% endif %}
+                </li>
+                <li><a href="{% url "about_services" %}">{% trans "Services" %}</a></li>
+                {% endblock %}
                 <li id="nav_layers">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Geo data" %}<i class="fa fa-angle-down fa-lg"></i></a>
                     <ul class="dropdown-menu">
@@ -36,24 +54,6 @@
                         {% endif %}
                     </ul>
                 </li>
-                {% block extra_tab %}
-                <li id="nav_osk">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Sensors data" %}<i class="fa fa-angle-down fa-lg"></i></a>
-                    {% if user.is_authenticated %}
-                    <ul class="dropdown-menu">
-                        <li><a href="{% url "osk_browse" %}?limit={{ CLIENT_RESULTS_LIMIT }}">{% trans "Explore Sensors" %}</a></li>
-                        {% if perms.osk.admin_sos %}
-                        <li><a href="{% url "osk_browse" %}#ediclient_container">{% trans "Register a new  Sensor" %}</a></li>
-                        {% endif %}
-                    </ul>
-                    {% else %}
-                    <ul class="dropdown-menu">
-                        <li><a href="{% url "osk_browse" %}?limit={{ CLIENT_RESULTS_LIMIT }}">{% trans "Sensors data" %}</a></li>
-                    </ul>
-                    {% endif %}
-                </li>
-                <li><a href="{% url "about_services" %}">{% trans "Services" %}</a></li>
-                {% endblock %}
                 <li id="nav_maps">
                     {% if user.is_authenticated %}
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Maps" %}<i class="fa fa-angle-down fa-lg"></i></a>
