@@ -7,10 +7,9 @@ This is where you can override the hero area block. You can simply modify the co
 {% block hero %}
 <div class="jumbotron">
     <div class="container">
-        <h1>GET-IT Central Data Node (CDN)</h1>
+        <h2>GET-IT Central Data Node (CDN) of LTER-Europe network</h2>
         <p>enables you to provide time series data from field-based environmental sensors. You can describe sensor and upload data that are then linked to the eLTER portal as INSPIRE web services.</p>
-        <p>{% trans 'Need help?' %} <a href="http://getit.readthedocs.io/en/latest/index.html" title="GET-IT doc"
-                                       target="_blank">Visit GET-IT documentation</a></p>
+        <p>{% trans 'Need help?' %} <a href="http://getit.readthedocs.io/en/latest/index.html" title="GET-IT doc" target="_blank">Visit GET-IT documentation</a></p>
         <p></p>
     </div>
 </div>
@@ -37,9 +36,9 @@ This is where you can override the hero area block. You can simply modify the co
                     <h2><a href="{% url "osk_browse" %}">{% trans 'Sensors'%}</a></h2>
                     <p></p>
                     {% if user.is_authenticated %}
-                    <p class="text-center"><a class="btn btn-default" href="{% url "osk_browse" %}#ediclient_container" role="button">{% trans "Add sensors" %} &raquo</a></p>
+                    <p class="text-center"><a class="btn btn-default" href="{% url "osk_browse" %}#ediclient_container" role="button">Add sensors &raquo;</a></p>
                     {% else %}
-                    <p class="text-center"><a class="btn btn-default" href="{% url "osk_browse" %}" role="button">{% trans "Explore sensors" %} &raquo</a></p>
+                    <p class="text-center"><a class="btn btn-default" href="{% url "osk_browse" %}" role="button">Explore sensors &raquo;</a></p>
                     {% endif %}
                 </div>
                 <!-- Layer -->
