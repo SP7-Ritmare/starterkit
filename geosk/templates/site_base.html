@@ -46,9 +46,9 @@
                         <li><a href="{% url "layer_upload" %}">Upload Layer</a></li>
                         {% if 'geonode.contrib.createlayer' in INSTALLED_APPS %}
                         <li><a href="{% url "layer_create" %}">{% trans "Create Layer" %}</a></li>
-                        <!--{% endif %}
-                        <li><a href="{% url "document_upload" %}">Upload Document</a></li>
-                        {% endif %}-->
+                        {% endif %}
+                        <!--li><a href="{% url "document_upload" %}">Upload Document</a></li-->
+                        {% endif %}
                         {% if user.is_superuser or user.is_staff %}
                         <li><a href="{% url "register_service" %}">{% trans "Add Remote Service" %}</a></li>
                         {% endif %}
@@ -97,13 +97,13 @@
                         </form>
                     </div>
                 </li>
-                {% if not user.is_authenticated and ACCOUNT_OPEN_SIGNUP %}
-                <!--li><a href="{% url "account_signup" %}">{% trans "Register" %}</a></li-->
-                {% endif %}
+                <!--{% if not user.is_authenticated and ACCOUNT_OPEN_SIGNUP %}
+                <li><a href="{% url "account_signup" %}">{% trans "Register" %}</a></li>
+                {% endif %}-->
                 {% if user.is_authenticated %}
                 <li>
                     <a href="#" class="dropdown-toggle avatar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        {% autoescape off %}{% avatar user 42 %}{% end autoescape %}
+                        {% autoescape off %}{% avatar user 42 %}{% endautoescape %}
                         {% with full_name=user.first_name|add:' '|add:user.last_name %}
                         {% if full_name.strip %}
                         {{ full_name | truncatechars:20 }}
