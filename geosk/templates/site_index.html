@@ -53,17 +53,6 @@ This is where you can override the hero area block. You can simply modify the co
                     <p class="text-center"><a class="btn btn-default" href="{% url "layer_browse" %}" role="button">{% trans "Explore layers" %} &raquo;</a></p>
                     {% endif %}
                 </div>
-                <!-- Sample -->
-                <!--div class="col-md-6">
-                    <p><a href="{% url "samples_browse" %}"><i class="fa fa-fill fa-4x"></i></a></p>
-                    <h2><a href="{% url "samples_browse" %}">{{ facets.map|default:_("No") }} {% blocktrans count counter=facets.map %}Sample{% plural %}Samples{% endblocktrans %}</a></h2>
-                    <p>Click to visualize samples shared by other users.</p>
-                    {% if user.is_authenticated %}
-                    <p><a class="btn btn-default" href="{% url "samples_upload" %}" role="button">Create sample &raquo;</a></p>
-                    {% else %}
-                    <p><a class="btn btn-default" href="{% url "samples_browse" %}" role="button">Explore samples &raquo;</a></p>
-                    {% endif %}
-                </div-->
                 <!-- Map -->
                 <div class="col-md-6">
                     <p><a href="{% url "maps_browse" %}"><i class="fa fa-map fa-4x"></i></a></p>
@@ -75,22 +64,6 @@ This is where you can override the hero area block. You can simply modify the co
                     <p><a class="btn btn-default" href="{% url "maps_browse" %}" role="button">{% trans "Explore maps"%} &raquo;</a></p>
                     {% endif %}
                 </div>
-                <!--div class="col-md-6">
-                  <p><a href="{% url "document_browse" %}"><i class="fa fa-newspaper-o fa-4x"></i></a></p>
-                  <h2><a href="{% url "document_browse" %}">{{ facets.document|default:_("No") }} {% blocktrans count counter=facets.document %}Document{% plural %}Documents{% endblocktrans %}</a></h2>
-                  <p>{% trans "As for the layers and maps GeoNode allows to publish tabular and text data, manage theirs metadata and associated documents." %}</p>
-                  {% if user.is_authenticated %}
-                  <p class="text-center"><a class="btn btn-default" href="{% url "document_browse" %}" role="button">{% trans "Add documents" %} &raquo;</a></p>
-                  {% else %}
-                  <p class="text-center"><a class="btn btn-default" href="{% url "document_browse" %}" role="button">{% trans "Explore documents" %} &raquo;</a></p>
-                  {% endif %}
-                </div-->
-                <!--div class="col-md-6">
-                  <p><a href="{% url "profile_browse" %}"><i class="fa fa-user fa-4x"></i></a></p>
-                  <h2><a href="{% url "profile_browse" %}">{{ facets.user|default:_("No") }} {% blocktrans count counter=facets.user %}User{% plural %}Users{% endblocktrans %}</a></h2>
-                  <p>{% trans "IHP-WINS allows registered users to easily upload geospatial data and various documents in several formats." %}</p>
-                  <p><a class="btn btn-default" href="{% url "profile_browse" %}" role="button">{% trans "See users" %} &raquo;</a></p>
-                </div-->
                 {% endwith %}
             </div>
         </div>
