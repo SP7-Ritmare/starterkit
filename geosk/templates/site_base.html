@@ -4,6 +4,7 @@
       <link href="{{ STATIC_URL }}css/site_base.css" rel="stylesheet"/>
       <link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon.png">
 {% endblock %}
+
 <!-- Navbar -->
 {% block header %}
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -17,28 +18,11 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav toolbar">
                 {% block tabs %}
-                {% block extra_tab %}
-                <li id="nav_osk">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Sensors data" %}<i class="fa fa-angle-down fa-lg"></i></a>
-                    {% if user.is_authenticated %}
-                    <ul class="dropdown-menu">
-                        <li><a href="{% url "osk_browse" %}?limit={{ CLIENT_RESULTS_LIMIT }}">{% trans "Explore Sensors" %}</a></li>
-                        {% if perms.osk.admin_sos %}
-                        <li><a href="{% url "osk_browse" %}#ediclient_container">{% trans "Register a new  Sensor" %}</a></li>
-                        {% endif %}
-                    </ul>
-                    {% else %}
-                    <ul class="dropdown-menu">
-                        <li><a href="{% url "osk_browse" %}?limit={{ CLIENT_RESULTS_LIMIT }}">{% trans "Sensors data" %}</a></li>
-                    </ul>
-                    {% endif %}
-                </li>
-                <li><a href="{% url "about_services" %}">{% trans "Services" %}</a></li>
-                {% endblock %}
                 <li id="nav_layers">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Geo data" %}<i class="fa fa-angle-down fa-lg"></i></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Data" %}<i class="fa fa-angle-down fa-lg"></i></a>
                     <ul class="dropdown-menu">
                         <li><a href="{% url "layer_browse" %}?limit={{ CLIENT_RESULTS_LIMIT }}">{% trans "Layers" %}</a></li>
+                        <li><a href="{% url "document_browse" %}?limit={{ CLIENT_RESULTS_LIMIT }}">{% trans "Documents" %}</a></li>
                         <li><a href="{% url "services" %}?limit={{ CLIENT_RESULTS_LIMIT }}">{% trans "Remote Services" %}</a></li>
                         {% if user.is_authenticated %}
                         <li role="separator" class="divider"></li>
@@ -46,6 +30,7 @@
                         {% if 'geonode.contrib.createlayer' in INSTALLED_APPS %}
                         <li><a href="{% url "layer_create" %}">{% trans "Create Layer" %}</a></li>
                         {% endif %}
+                        <li><a href="{% url "document_upload" %}">Upload Document</a></li>
                         {% endif %}
                         {% if user.is_superuser or user.is_staff %}
                         <li><a href="{% url "register_service" %}">{% trans "Add Remote Service" %}</a></li>
@@ -64,18 +49,25 @@
                     {% endif %}
                 </li>
                 <li>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users<i class="fa fa-angle-down fa-lg"></i></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "About" %}<i class="fa fa-angle-down fa-lg"></i></a>
                     <ul class="dropdown-menu">
                         <li><a href="{% url "profile_browse" %}">{% trans "People" %}</a></li>
                         <li><a href="{% url "group_list" %}">{% trans "Groups" %}</a></li>
                         <li><a href="{% url "group_category_list" %}">{% trans "Group Categories" %}</a></li>
+                        {% if perms.announcements.can_manage %}
+                        <li><a href="{% url "announcements_list" %}">{% trans "Announcements" %}</a></li>
+                        {% endif %}
                         <li role="separator" class="divider"></li>
+                        <li><a href="{% url "geonode.invitations:geonode-send-invite" %}">{% trans "Invite Users" %}</a></li>
                         {% if user.is_superuser %}
                         <li><a href="/admin/people/profile/add/">{% trans "Add User" %}</a></li>
                         <li><a href="{% url "group_create" %}">{% trans "Create Group" %}</a></li>
                         {% endif %}
                     </ul>
                 </li>
+
+                {% block extra_tab %}
+                {% endblock %}
                 {% endblock %}
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -91,18 +83,21 @@
                         </form>
                     </div>
                 </li>
+                {% if not user.is_authenticated and ACCOUNT_OPEN_SIGNUP %}
+                <li><a href="{% url "account_signup" %}">{% trans "Register" %}</a></li>
+                {% endif %}
                 {% if user.is_authenticated %}
                 <li>
                     <a href="#" class="dropdown-toggle avatar" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                      {% autoescape off %}{% avatar user 42 %}{% endautoescape %}
-                      {% with full_name=user.first_name|add:' '|add:user.last_name %}
+                        {% autoescape off %}{% avatar user 42 %}{% endautoescape %}
+                        {% with full_name=user.first_name|add:' '|add:user.last_name %}
                         {% if full_name.strip %}
-                          {{ full_name | truncatechars:20 }}
+                        {{ full_name | truncatechars:20 }}
                         {% else %}
-                          {{ user.username | truncatechars:20 }}
+                        {{ user.username | truncatechars:20 }}
                         {% endif %}
-                      {% endwith %}
-                      <i class="fa fa-angle-down fa-lg"></i>
+                        {% endwith %}
+                        <i class="fa fa-angle-down fa-lg"></i>
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ user.get_absolute_url }}">{% trans "Profile" %}</a></li>
