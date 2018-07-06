@@ -54,7 +54,7 @@ This is where you can override the hero area block. You can simply modify the co
                     {% endif %}
                 </div>
                 <!-- Sample -->
-                <div class="col-md-6">
+                <!--div class="col-md-6">
                     <p><a href="{% url "samples_browse" %}"><i class="fa fa-fill fa-4x"></i></a></p>
                     <h2><a href="{% url "samples_browse" %}">{{ facets.map|default:_("No") }} {% blocktrans count counter=facets.map %}Sample{% plural %}Samples{% endblocktrans %}</a></h2>
                     <p>Click to visualize samples shared by other users.</p>
@@ -63,7 +63,7 @@ This is where you can override the hero area block. You can simply modify the co
                     {% else %}
                     <p><a class="btn btn-default" href="{% url "samples_browse" %}" role="button">Explore samples &raquo;</a></p>
                     {% endif %}
-                </div>
+                </div-->
                 <!-- Map -->
                 <div class="col-md-6">
                     <p><a href="{% url "maps_browse" %}"><i class="fa fa-map fa-4x"></i></a></p>
