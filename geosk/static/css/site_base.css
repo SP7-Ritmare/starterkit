@@ -4,3 +4,11 @@
     background: transparent url("../img/logo-getit-eLTER_200px.png") no-repeat scroll 0px 5px;
     background-size: contain;
  }
+ .navbar-inverse {
+     background-color: #435926!important;
+     border: 0;
+ }
+
+ .home .jumbotron {
+     background: #6D9538!important;
+ }
