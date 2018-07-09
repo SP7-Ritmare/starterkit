@@ -26,6 +26,15 @@
      border-top: 1px solid #6D9538!important;
  }
 
+ .navbar-nav .dropdown-menu .divider {
+     background-color: #6D9538!important;
+ }
+
+ .btn-primary {
+     background-color: #6D9538!important;
+     border-color: #435926!important;
+ }
+
  .home .jumbotron {
      background: #6D9538!important;
  }
