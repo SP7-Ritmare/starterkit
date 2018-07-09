@@ -13,6 +13,10 @@
      background-color: #6D9538!important;
  }
 
+ .navbar-nav .dropdown-menu li a:hover {
+     background-color: #6D9538!important;
+ }
+
  .home .jumbotron {
      background: #6D9538!important;
  }
