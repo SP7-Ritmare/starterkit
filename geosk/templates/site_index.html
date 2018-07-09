@@ -8,8 +8,16 @@ This is where you can override the hero area block. You can simply modify the co
 <div class="jumbotron">
     <div class="container">
         <h2>GET-IT Central Data Node (CDN) of LTER-Europe network</h2>
-        <p>enables you to provide time series data from field-based environmental sensors. You can describe sensor and upload data that are then linked to the eLTER portal as INSPIRE web services.</p>
-        <p>{% trans 'Need help?' %} <a href="http://getit.readthedocs.io/en/latest/index.html" title="GET-IT doc" target="_blank">Visit GET-IT documentation</a></p>
+        <p>enables you to provide time series data from field-based environmental sensors. You can describe sensor and upload data that are then linked to the eLTER portal as INSPIRE (2007/2/CE) web services.</p>
+        <p>To start uploading your data just 3 simple steps:
+            <ol>
+                <li><i>sign in</i> and access the <i>Sensor data</i> -> <i>Register a new Sensor</i> menu</li>
+                <li>fill out the template with the information of new sensor</li>
+                <li>upload the observations in the <i>Upload observations section</i></li>
+            </ol><br>
+            Follow the <a href="https://www.youtube.com/watch?v=OVZxqqEDHm0">videotutorial</a> to learn more about this topic.
+        </p>
+        <p>Need more help? <a href="http://getit.readthedocs.io/en/latest/index.html" title="GET-IT doc" target="_blank">Visit GET-IT documentation</a></p>
         <p></p>
     </div>
 </div>
@@ -34,7 +42,7 @@ This is where you can override the hero area block. You can simply modify the co
                     <p><a href="{% url "osk_browse" %}"><i class="fa fa-broadcast-tower fa-4x"></i></a></p>
                     <!--<h2><a href="{% url "osk_browse" %}">{{ facets.layer|default:_("No") }} {% blocktrans count counter=facets.layer %}Sensor{% plural %}Sensors{% endblocktrans %}</a></h2>-->
                     <h2><a href="{% url "osk_browse" %}">{% trans 'Sensors'%}</a></h2>
-                    <p></p>
+                    <p>Add sensor information and observations collected by them</p>
                     {% if user.is_authenticated %}
                     <p class="text-center"><a class="btn btn-default" href="{% url "osk_browse" %}#ediclient_container" role="button">Add sensors &raquo;</a></p>
                     {% else %}
