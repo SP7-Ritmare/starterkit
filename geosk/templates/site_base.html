@@ -67,16 +67,6 @@
 </li>
 {% endblock %}
 
-{% block extra_script %}
-{{ block.super }}
-<script>
-    $('#SigninModal').on('show.bs.modal', function (e) {
-        // do something...
-        $(this).find('.modal-body').append($('<a href="{% url "gdpr" %}">GDPR</a>'));
-    })
-</script>
-{% endblock extra_script %}
-
 {% block footer %}
 <footer>
     <div class="container">
