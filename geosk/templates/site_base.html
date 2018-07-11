@@ -12,9 +12,7 @@
     {% if user.is_authenticated %}
     <ul class="dropdown-menu">
         <li><a href="{% url "osk_browse" %}?limit={{ CLIENT_RESULTS_LIMIT }}">Explore Sensors</a></li>
-        {% if perms.osk.admin_sos %}
         <li><a href="{% url "osk_browse" %}#ediclient_container">Register a new Sensor</a></li>
-        {% endif %}
     </ul>
     {% else %}
     <ul class="dropdown-menu">
