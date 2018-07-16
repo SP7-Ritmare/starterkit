@@ -38,7 +38,7 @@ This is where you can override the hero area block. You can simply modify the co
                 {% with facet_type='home' %}
                 {% facets as facets %}
                 <!-- Sensor -->
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <p><a href="{% url "osk_browse" %}"><i class="fa fa-rss fa-4x"></i></a></p>
                     <!--<h2><a href="{% url "osk_browse" %}">{{ facets.layer|default:_("No") }} {% blocktrans count counter=facets.layer %}Sensor{% plural %}Sensors{% endblocktrans %}</a></h2>-->
                     <h2><a href="{% url "osk_browse" %}">{% trans 'Sensors'%}</a></h2>
@@ -50,7 +50,7 @@ This is where you can override the hero area block. You can simply modify the co
                     {% endif %}
                 </div>
                 <!-- Layer -->
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <p><a href="{% url "layer_browse" %}"><i class="fa fa-square-o fa-4x rotate-45"></i></a></p>
                     <h2><a href="{% url "layer_browse" %}">{{ facets.layer|default:_("No") }} {% blocktrans count counter=facets.layer %}Layer{% plural %}Layers{% endblocktrans %}</a></h2>
                     <p>{% trans "Click to search for geospatial data published by other users, organizations and public sources. Download data in standard formats." %}</p>
@@ -61,7 +61,7 @@ This is where you can override the hero area block. You can simply modify the co
                     {% endif %}
                 </div>
                 <!-- Map -->
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <p><a href="{% url "maps_browse" %}"><i class="fa fa-map fa-4x"></i></a></p>
                     <h2><a href="{% url "maps_browse" %}">{{ facets.map|default:_("No") }} {% blocktrans count counter=facets.map %}Map{% plural %}Maps{% endblocktrans %}</a></h2>
                     <p>{% trans "Data is available for browsing, aggregating and styling to generate maps which can be saved, downloaded, shared publicly or restricted to specify users only." %}</p>
