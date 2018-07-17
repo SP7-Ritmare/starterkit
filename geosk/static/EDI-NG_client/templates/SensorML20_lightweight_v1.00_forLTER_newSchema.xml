@@ -1108,7 +1108,7 @@
          <produces>
             <item hasIndex="1" xml:id="ref_sys_1" isFixed="false" hasDatatype="codelist" datasource="EPSG" useCode="true">
                <hasPath>swe:Vector/@referenceFrame</hasPath>
-               <defaultValue>http://www.opengis.net/def/crs/EPSG/0/4326</defaultValue>
+               <defaultValue>urn:ogc:def:crs:EPSG::4326</defaultValue>
             </item>
             <item hasIndex="2" xml:id="ref_sys_2" isFixed="true" hasDatatype="string">
                <hasPath>swe:Vector/@id</hasPath>
