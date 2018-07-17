@@ -237,26 +237,6 @@
                         
             ]]></query>
       </sparql>
-      <singleton xml:id="uom" endpointType="fuseki1">
-         <query><![CDATA[
-
-                    PREFIX skos: <http://www.w3.org/2004/02/skos/core#> SELECT * WHERE {
-                        SERVICE <http://vocabs.ceh.ac.uk/evn/tbl/sparql> {
-                            GRAPH <urn:x-evn-pub:envthes>{
-                                {
-                                    BIND (<http://vocabs.lter-europe.net/EnvThes/EUUnits_001> as ?root)
-                                    ?root (skos:narrower*) ?narrow.
-                                    ?narrow skos:prefLabel ?zxx.
-                                    ?narrow skos:altLabel ?l.
-                                }
-                                FILTER( REGEX( STR(?l), "$search_param", "i") )
-                            }
-                        }
-                    }
-
-            ]]></query>
-         <url>http://sdi.adamassoft.it/proxy/?proxyTo=http://vocabs.ceh.ac.uk/evn/tbl/sparql</url>
-      </singleton>
        <singleton xml:id="uom" endpointType="virtuoso">
            <query><![CDATA[
 
