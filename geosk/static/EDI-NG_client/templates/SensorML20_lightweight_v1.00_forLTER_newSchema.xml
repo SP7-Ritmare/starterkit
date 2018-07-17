@@ -68,35 +68,79 @@
          <uri>http://inspire-registry.jrc.ec.europa.eu/registers/Languages/items</uri>
          <url>http://sparql/sparql.get-it.it/sparql</url>
       </codelist>
-      <sparql xml:id="outputs" endpointType="EnvThes">
-         <query><![CDATA[
-                
-                    PREFIX skos: <http://www.w3.org/2004/02/skos/core#> SELECT * WHERE {
-                        SERVICE <http://vocabs.ceh.ac.uk/evn/tbl/sparql> {
-                            GRAPH <urn:x-evn-pub:envthes>{
-                                {
-                                    BIND (<http://vocabs.lter-europe.net/EnvThes/20935> as ?root)
-                                    ?root (skos:narrower*) ?c.
-                                    ?c skos:prefLabel ?l.
-                                }
-                                FILTER( REGEX( STR(?l), "$search_param", "i") )
-                            }
+       <!--sparql xml:id="outputs" endpointType="EnvThes">
+          <query><![CDATA[
+
+                     PREFIX skos: <http://www.w3.org/2004/02/skos/core#> SELECT * WHERE {
+                         SERVICE <http://vocabs.ceh.ac.uk/evn/tbl/sparql> {
+                             GRAPH <urn:x-evn-pub:envthes>{
+                                 {
+                                     BIND (<http://vocabs.lter-europe.net/EnvThes/10004> as ?root)
+                                     ?root (skos:narrower*) ?c.
+                                     ?c skos:prefLabel ?l.
+                                 }
+                                 FILTER( REGEX( STR(?l), "$search_param", "i") )
+                             }
+                         }
+                     }
+
+             ]]></query>
+          <url>http://sdi.adamassoft.it/proxy/?proxyTo=http://vocabs.ceh.ac.uk/evn/tbl/sparql</url>
+       </sparql>
+       <singleton xml:id="outputsS" endpointType="EnvThes" triggerItem="output_param_1_uri">
+          <query><![CDATA[
+
+                     PREFIX skos: <http://www.w3.org/2004/02/skos/core#> SELECT ?root WHERE {
+                                     BIND (<$search_param> as ?root)
+                     }
+
+             ]]></query>
+          <url>http://sdi.adamassoft.it/proxy/?proxyTo=http://vocabs.ceh.ac.uk/evn/tbl/sparql</url>
+       </singleton-->
+       <sparql xml:id="outputs" endpointType="virtuoso">
+           <query><![CDATA[
+
+                        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                        SELECT ?c ?l ?a
+                        FROM <http://ritmare.it/rdfdata/parameters>
+                        WHERE {
+                          ?c rdf:type skos:Concept.
+                          OPTIONAL {
+                            ?c skos:prefLabel ?l.
+                            FILTER( LANG(?l) = "en")
+                          }
+                          OPTIONAL {
+                            ?c skos:prefLabel ?a.
+                            FILTER( LANG(?a) = "it")
+                          }
+                          FILTER( REGEX( STR(?l), "$search_param", "i") || REGEX( STR(?a), "$search_param", "i") )
                         }
-                    }
-                
+                        ORDER BY ASC(?l) ASC(?a)
+
             ]]></query>
-         <url>http://sdi.adamassoft.it/proxy/?proxyTo=http://vocabs.ceh.ac.uk/evn/tbl/sparql</url>
-      </sparql>
-      <singleton xml:id="outputsS" endpointType="EnvThes" triggerItem="output_param_1_uri">
-         <query><![CDATA[
-                
-                    PREFIX skos: <http://www.w3.org/2004/02/skos/core#> SELECT ?root WHERE {
-                                    BIND (<$search_param> as ?root)
-                    }
-                
+       </sparql>
+       <singleton xml:id="outputsS" endpointType="virtuoso" triggerItem="output_param_1_uri">
+           <query><![CDATA[
+
+                        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                        SELECT ?c ?l ?a
+                        FROM <http://ritmare.it/rdfdata/parameters>
+                        WHERE {
+                          ?c rdf:type skos:Concept.
+                          OPTIONAL {
+                            ?c skos:prefLabel ?l.
+                            FILTER( LANG(?l) = "en")
+                          }
+                          OPTIONAL {
+                            ?c skos:prefLabel ?a.
+                            FILTER( LANG(?a) = "it")
+                          }
+                          FILTER( REGEX( STR(?c), "$search_param", "i") || REGEX( STR(?a), "$search_param", "i") )
+                        }
+                        ORDER BY ASC(?l) ASC(?a)
+
             ]]></query>
-         <url>http://sdi.adamassoft.it/proxy/?proxyTo=http://vocabs.ceh.ac.uk/evn/tbl/sparql</url>
-      </singleton>
+       </singleton>
       <sparql xml:id="sensorType" endpointType="fuseki1">
          <query><![CDATA[
                 
@@ -1067,17 +1111,17 @@
          <help xml:lang="en">Parameter measured by the system/sensor/platform and related information. Several parameters, and related information, can be inserted.</help>
          <hasRoot>/swes:InsertSensor/swes:procedureDescription/sml:PhysicalSystem/sml:outputs/sml:OutputList</hasRoot>
          <produces>
-            <item hasIndex="1" xml:id="output_param_1" outIndex="5" isFixed="false" hasDatatype="autoCompletion" datasource="outputs">
-               <label xml:lang="it">Nome parametro misurato</label>
-               <label xml:lang="en">Output signal</label>
-               <help xml:lang="it">Nome del parametro misurato. Iniziare a digitare tre lettere per ottenere dei suggerimenti da vocabolario controllato.</help>
-               <help xml:lang="en">Measured parameter. Start typing the first three letters to obtain suggested autocompletion from controlled vocabularies.</help>
-               <hasPath>sml:output/@name</hasPath>
-            </item>
-            <item hasIndex="2" xml:id="output_param_2" outIndex="6" field="root" isFixed="true" hasDatatype="select" datasource="outputsS">
-               <hasPath>sml:output/swe:Quantity/@definition</hasPath>
-               <hasValue>sml:output/@name</hasValue>
-            </item>
+             <item hasIndex="1" xml:id="output_param_1" outIndex="5" isFixed="false" hasDatatype="autoCompletion" datasource="outputs">
+                 <label xml:lang="it">Nome parametro misurato</label>
+                 <label xml:lang="en">Output signal</label>
+                 <help xml:lang="it">Nome del parametro misurato. Iniziare a digitare tre lettere per ottenere dei suggerimenti da vocabolario controllato.</help>
+                 <help xml:lang="en">Measured parameter. Start typing the first three letters to obtain suggested autocompletion from controlled vocabularies.</help>
+                 <hasPath>sml:output/@name</hasPath>
+             </item>
+             <item hasIndex="2" xml:id="output_param_2" outIndex="6" field="c" isFixed="true" hasDatatype="select" datasource="outputsS">
+                 <hasPath>sml:output/swe:Quantity/@definition</hasPath>
+                 <hasValue>sml:output/@name</hasValue>
+             </item>
              <item hasIndex="4" xml:id="output_param_4" outIndex="2" isFixed="false" hasDatatype="autoCompletion" datasource="uom">
                  <label xml:lang="it">Unità di misura</label>
                  <label xml:lang="en">Unit of measurement</label>
