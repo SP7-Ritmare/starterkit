@@ -237,8 +237,28 @@
                         
             ]]></query>
       </sparql>
-      <singleton xml:id="uom" endpointType="virtuoso">
+      <singleton xml:id="uom" endpointType="fuseki1">
          <query><![CDATA[
+
+                    PREFIX skos: <http://www.w3.org/2004/02/skos/core#> SELECT * WHERE {
+                        SERVICE <http://vocabs.ceh.ac.uk/evn/tbl/sparql> {
+                            GRAPH <urn:x-evn-pub:envthes>{
+                                {
+                                    BIND (<http://vocabs.lter-europe.net/EnvThes/EUUnits_001> as ?root)
+                                    ?root (skos:narrower*) ?narrow.
+                                    ?narrow skos:prefLabel ?zxx.
+                                    ?narrow skos:altLabel ?l.
+                                }
+                                FILTER( REGEX( STR(?l), "$search_param", "i") )
+                            }
+                        }
+                    }
+
+            ]]></query>
+         <url>http://sdi.adamassoft.it/proxy/?proxyTo=http://vocabs.ceh.ac.uk/evn/tbl/sparql</url>
+      </singleton>
+       <singleton xml:id="uom" endpointType="virtuoso">
+           <query><![CDATA[
 
                         PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
                         SELECT ?c ?l ?urn
@@ -262,7 +282,7 @@
                         ORDER BY ASC(?l) ASC(?a)
 
             ]]></query>
-      </singleton>
+       </singleton>
       <singleton xml:id="owners" endpointType="fuseki1">
          <query><![CDATA[
                 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -1078,21 +1098,21 @@
                <hasPath>sml:output/swe:Quantity/@definition</hasPath>
                <hasValue>sml:output/@name</hasValue>
             </item>
-            <item hasIndex="4" xml:id="output_param_4" outIndex="2" isFixed="false" hasDatatype="autoCompletion" datasource="uom">
-               <label xml:lang="it">Unità di misura</label>
-               <label xml:lang="en">Unit of measurement</label>
-               <help xml:lang="it">Unità di misura del parametro misurato. Iniziare a digitare tre lettere per ottenere dei suggerimenti da vocabolario controllato.</help>
-               <help xml:lang="en">Unit of measurement of the ouput parameter. Start typing the first three letters to obtain suggested autocompletion from controlled vocabularies.</help>
-               <hasPath>sml:output/swe:Quantity/swe:uom</hasPath>
-            </item>
-            <item hasIndex="5" xml:id="output_param_5" outIndex="3" field="zxx" isFixed="true" hasDatatype="select" datasource="uom">
-               <hasPath>sml:output/swe:Quantity/swe:uom/@code</hasPath>
-               <hasValue>sml:output/swe:Quantity/swe:uom</hasValue>
-            </item>
-            <item hasIndex="6" xml:id="output_param_6" outIndex="4" field="narrow" isFixed="true" hasDatatype="select" datasource="uom">
-               <hasPath>sml:output/swe:Quantity/swe:uom/@xlink:href</hasPath>
-               <hasValue>sml:output/swe:Quantity/swe:uom</hasValue>
-            </item>
+             <item hasIndex="4" xml:id="output_param_4" outIndex="2" isFixed="false" hasDatatype="autoCompletion" datasource="uom">
+                 <label xml:lang="it">Unità di misura</label>
+                 <label xml:lang="en">Unit of measurement</label>
+                 <help xml:lang="it">Unità di misura del parametro misurato. Iniziare a digitare tre lettere per ottenere dei suggerimenti da vocabolario controllato.</help>
+                 <help xml:lang="en">Unit of measurement of the ouput parameter. Start typing the first three letters to obtain suggested autocompletion from controlled vocabularies.</help>
+                 <hasPath>sml:output/swe:Quantity/swe:uom</hasPath>
+             </item>
+             <item hasIndex="5" xml:id="output_param_5" outIndex="3" field="urn" isFixed="true" hasDatatype="select" datasource="uom">
+                 <hasPath>sml:output/swe:Quantity/swe:uom/@code</hasPath>
+                 <hasValue>sml:output/swe:Quantity/swe:uom</hasValue>
+             </item>
+             <item hasIndex="6" xml:id="output_param_6" outIndex="4" field="c" isFixed="true" hasDatatype="select" datasource="uom">
+                 <hasPath>sml:output/swe:Quantity/swe:uom/@xlink:href</hasPath>
+                 <hasValue>sml:output/swe:Quantity/swe:uom</hasValue>
+             </item>
          </produces>
       </element>
    </group>
