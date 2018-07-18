@@ -68,14 +68,14 @@
          <uri>http://inspire-registry.jrc.ec.europa.eu/registers/Languages/items</uri>
          <url>http://sparql/sparql.get-it.it/sparql</url>
       </codelist>
-       <!--sparql xml:id="outputs" endpointType="EnvThes">
+       <sparql xml:id="outputs" endpointType="EnvThes">
           <query><![CDATA[
 
                      PREFIX skos: <http://www.w3.org/2004/02/skos/core#> SELECT * WHERE {
                          SERVICE <http://vocabs.ceh.ac.uk/evn/tbl/sparql> {
                              GRAPH <urn:x-evn-pub:envthes>{
                                  {
-                                     BIND (<http://vocabs.lter-europe.net/EnvThes/10004> as ?root)
+                                     BIND (<http://vocabs.lter-europe.net/EnvThes/20935> as ?root)
                                      ?root (skos:narrower*) ?c.
                                      ?c skos:prefLabel ?l.
                                  }
@@ -96,8 +96,8 @@
 
              ]]></query>
           <url>http://sdi.adamassoft.it/proxy/?proxyTo=http://vocabs.ceh.ac.uk/evn/tbl/sparql</url>
-       </singleton-->
-       <sparql xml:id="outputs" endpointType="virtuoso">
+       </singleton>
+       <!--sparql xml:id="outputs" endpointType="virtuoso">
            <query><![CDATA[
 
                         PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
@@ -140,7 +140,7 @@
                         ORDER BY ASC(?l) ASC(?a)
 
             ]]></query>
-       </singleton>
+       </singleton-->
       <sparql xml:id="sensorType" endpointType="fuseki1">
          <query><![CDATA[
                 
@@ -1150,7 +1150,8 @@
          <help xml:lang="it">Selezionare dalla lista il sistema di riferimento della posizione geografica del sistema, sensore o piattaforma.</help>
          <hasRoot>/swes:InsertSensor/swes:procedureDescription/sml:PhysicalSystem/sml:position</hasRoot>
          <produces>
-            <item hasIndex="1" xml:id="ref_sys_1" isFixed="false" hasDatatype="codelist" datasource="EPSG" useCode="true">
+            <!--item hasIndex="1" xml:id="ref_sys_1" isFixed="false" hasDatatype="codelist" datasource="EPSG" useCode="true"-->
+             <item hasIndex="1" xml:id="ref_sys_1" isFixed="true" hasDatatype="string">
                <hasPath>swe:Vector/@referenceFrame</hasPath>
                <defaultValue>urn:ogc:def:crs:EPSG::4326</defaultValue>
             </item>
