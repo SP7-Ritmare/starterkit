@@ -38,7 +38,7 @@
         ]]></baseDocument>
       <xsltChain>
             
-         <xslt>http://sp7.irea.cnr.it/jboss/MDService/rest/SensorML20_lightweight_forGet-It.xsl?version=1.00</xslt>
+         <xslt>http://sp7.irea.cnr.it/jboss/MDService/rest/SensorML20_lightweight_forLTER.xsl?version=1.00</xslt>
         
       </xsltChain>
    </settings>
@@ -158,7 +158,6 @@
                     ?c skos:prefLabel ?a.
                     FILTER( LANG(?a) = "it")
                     }
-                    FILTER( REGEX( STR(?l), "$search_param", "i") || REGEX( STR(?a), "$search_param", "i") )
                     }
                     ORDER BY ASC(?l) ASC(?a)
                     
@@ -673,7 +672,7 @@
                <hasPath>sml:classifier/sml:Term/sml:label</hasPath>
                <hasValue>SensorType</hasValue>
             </item>
-            <item hasIndex="3" xml:id="sensor_type_3" isFixed="false" hasDatatype="autoCompletion" datasource="sensorType">
+            <item hasIndex="3" xml:id="sensor_type_3" isFixed="false" hasDatatype="codelist" datasource="sensorType">
                <hasPath>sml:classifier/sml:Term/sml:value</hasPath>
             </item>
          </produces>
@@ -1069,7 +1068,7 @@
          <label xml:lang="en">Feature Of Interest</label>
          <help xml:lang="it">Aggiungere o un URL di un layer geografico, spostarsi sulla parte layer e copiare il valore del layer scelto (es. http://getit.lteritalia.it/layers/geonode:it22_001_a), oppure un URL che caratterizzi il con testo in cui si sta effettuando l'osservazione con il sensore</help>
          <help xml:lang="en">Add geographic layer URL, navigate to the layer and copy the value of the selected layer (eg http://getit.lteritalia.it/layers/geonode:it22_001_a). Or a URL that characterizes the context of the observation</help>
-         <hasRoot>/sml:PhysicalSystem/sml:featuresOfInterest/sml:FeatureList</hasRoot>
+         <hasRoot>/swes:InsertSensor/swes:procedureDescription/sml:PhysicalSystem/sml:featuresOfInterest/sml:FeatureList</hasRoot>
          <produces>
             <item hasIndex="1" isFixed="true" hasDatatype="string">
                <hasPath>@definition</hasPath>
