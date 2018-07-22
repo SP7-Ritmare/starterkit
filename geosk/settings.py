@@ -453,6 +453,19 @@ MAP_BASELAYERS = [{
     "group": "background"
 }]
 
+if BING_API_KEY:
+    BASEMAP = {
+        'source': {
+            'ptype': 'gxp_bingsource',
+            'apiKey': BING_API_KEY
+        },
+        'name': 'AerialWithLabels',
+        'fixed': True,
+        'visibility': False,
+        'group': 'background'
+    }
+    MAP_BASELAYERS.append(BASEMAP)
+
 if 'geonode.geoserver' in INSTALLED_APPS:
     LOCAL_GEOSERVER = {
         "source": {
