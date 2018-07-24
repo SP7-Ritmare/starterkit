@@ -875,7 +875,7 @@
                <hasPath>sml:contact/@xlink:arcrole</hasPath>
                <hasValue>http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/owner</hasValue>
             </item>
-            <item hasIndex="3" xml:id="owner_3" outIndex="2" isFixed="false" hasDatatype="select" datasource="info_owner" field="pidPers">
+            <item hasIndex="3" xml:id="owner_3" outIndex="2" isFixed="true" hasDatatype="select" datasource="info_owner" field="pidPers">
                <hasPath>sml:contact/@xlink:href</hasPath>
             </item>
             <item hasIndex="4" xml:id="owner_4" outIndex="3" field="fullname" isFixed="false" hasDatatype="select" datasource="info_owner">
@@ -948,7 +948,7 @@
                <hasPath>sml:contact/@xlink:arcrole</hasPath>
                <hasValue>http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/pointOfContact</hasValue>
             </item>
-            <item hasIndex="3" xml:id="operator_3" outIndex="2" isFixed="false" hasDatatype="select" datasource="info_operator" field="pidPers">
+            <item hasIndex="3" xml:id="operator_3" outIndex="2" isFixed="true" hasDatatype="select" datasource="info_operator" field="pidPers">
                <hasPath>sml:contact/@xlink:href</hasPath>
             </item>
             <item hasIndex="4" xml:id="operator_4" outIndex="3" field="fullname" isFixed="false" hasDatatype="select" datasource="info_operator">
