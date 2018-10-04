@@ -387,6 +387,19 @@ MAP_BASELAYERS = [{
     "fixed": True,
     "group":"background"
 }, {
+    "source": {"ptype": "gxp_osmsource"},
+    "type": "OpenLayers.Layer.OSM",
+    "title": "OpenStreetMap",
+    "name": "mapnik",
+    "attribution": "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors",
+    "visibility": True,
+    "wrapDateLine": True,
+    "fixed": True,
+    "group": "background"
+}]
+
+'''
+{
     "source": {"ptype": "gxp_olsource"},
     "type": "OpenLayers.Layer.XYZ",
     "title": "UNESCO",
@@ -396,7 +409,7 @@ MAP_BASELAYERS = [{
     "attribution": "&copy; UNESCO",
     "visibility": False,
     "fixed": True,
-    "group":"background"
+    "group": "background"
 }, {
     "source": {"ptype": "gxp_olsource"},
     "type": "OpenLayers.Layer.XYZ",
@@ -407,7 +420,7 @@ MAP_BASELAYERS = [{
     "visibility": False,
     "wrapDateLine": True,
     "fixed": True,
-    "group":"background"
+    "group": "background"
 }, {
     "source": {"ptype": "gxp_olsource"},
     "type": "OpenLayers.Layer.XYZ",
@@ -418,7 +431,7 @@ MAP_BASELAYERS = [{
     "visibility": False,
     "wrapDateLine": True,
     "fixed": True,
-    "group":"background"
+    "group": "background"
     # }, {
     #     "source": {"ptype": "gxp_olsource"},
     #     "type": "OpenLayers.Layer.XYZ",
@@ -441,17 +454,8 @@ MAP_BASELAYERS = [{
     #     "wrapDateLine": True,
     #     "fixed": True,
     #     "group":"background"
-}, {
-    "source": {"ptype": "gxp_osmsource"},
-    "type": "OpenLayers.Layer.OSM",
-    "title": "OpenStreetMap",
-    "name": "mapnik",
-    "attribution": "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors",
-    "visibility": True,
-    "wrapDateLine": True,
-    "fixed": True,
-    "group": "background"
-}]
+},
+'''
 
 if BING_API_KEY:
     BASEMAP = {
