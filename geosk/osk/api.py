@@ -42,6 +42,12 @@ class UploadView(TemplateView):
     def dispatch(self, *args, **kwargs):
         return super(UploadView, self).dispatch(*args, **kwargs)
 
+class UploadView(TemplateView):
+    template_name = 'osk/osk_uploadcsv.html'
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(UploadView, self).dispatch(*args, **kwargs)
+
 @login_required
 def deletesensor(request, template='osk/osk_deletesensor.html'):
     try:

@@ -10,6 +10,7 @@ urlpatterns = patterns(
     url(r'^$', 'geosk.osk.views.browse', name="osk_browse"),
     url(r'^registration$', 'geosk.osk.api.sensormleditor', name="osk_registration"),
     url(r'^upload$', UploadView.as_view(), name="osk_upload"),
+    url(r'^uploadcsv$', UploadView.as_view(), name="osk_uploadcsv"),
     url(r'^deletesensor$', 'geosk.osk.api.deletesensor', name="osk_deletesensor"),
     # url(r'^sensorml$', TemplateView.as_view(template_name='osk/sensorml.html'), name="osk_sensorml"),
     # sensors
