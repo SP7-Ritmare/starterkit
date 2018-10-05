@@ -1,4 +1,4 @@
-FROM geobeyond/geonode:2.7.x
+FROM geonode/geonode:2.7.x
 MAINTAINER Starterkit development team
 
 # WORKDIR /usr/src/
