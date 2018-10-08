@@ -101,7 +101,7 @@ setup(
         # "owslib==0.10.3",
         "django-analytical==1.0.0",
         "django-taggit-templatetags",
-        "geonode==2.7.x",
+        "geonode==2.7.5.dev20180302104813",
     ],
     dependency_links=[
         "git+https://github.com/GeoNode/geonode.git@2.7.x#egg=geonode-2.7.x"
