@@ -37,7 +37,7 @@ services:
       - ./scripts/docker/env/production/dbsos.env
 
   elasticsearch:
-    image: irea/elasticsearch
+    image: ireami/elasticsearch
     restart: unless-stopped
     container_name: elasticsearch4${COMPOSE_PROJECT_NAME}
     stdin_open: true
