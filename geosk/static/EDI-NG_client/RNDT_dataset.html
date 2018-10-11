@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta charset="utf-8">
-    <title>GET-IT EDI SensorML for LTER</title>
+    <title>GET_IT EDI</title>
     <link rel="stylesheet" href="css/assets.css">
     <link rel="stylesheet" href="css/ol.css">
 
@@ -17,27 +17,27 @@
         function onTemplateLoaded(data) {
             console.log("fatto");
         }
-        function pippo(data) {
-            alert("eccomi");
-            console.log(data);
-        }
         $(document).ready(function() {
-            // ediml.setPostCallbackError(pippo);
-            edi.loadLocalTemplate("SensorML20_lightweight", "1.00_forLTER_newSchema", onTemplateLoaded);
+            edi.loadLocalTemplate("RNDT_dataset", "4.00", onTemplateLoaded);
+
             $("#ediml").hide();
             $("#sendMetadata").click(ediml.post);
+
         });
         function allowDrop(ev) {
             ev.preventDefault();
         }
+
         function drag(ev) {
             ev.dataTransfer.setData("text", ev.target.id);
         }
+
         function drop(ev) {
             ev.preventDefault();
             var data = ev.dataTransfer.getData("text");
             ev.target.appendChild(document.getElementById(data));
         }
+
         function toggleEDIML(which) {
             $('#ediml').toggle();
             if ( $("#ediml").is(":visible") ) {
@@ -65,16 +65,16 @@
                         <button class="btn btn-primary" onclick="edi.setLanguage('it');">it</button>
                         <button class="btn btn-primary" onclick="edi.setLanguage('en');">en</button>
                         <br>
-                        <button class="btn btn-danger debug" onclick="toggleEDIML(this);">show EDIML</button>
-                        <br>
+                        <!--button class="btn btn-danger debug" onclick="toggleEDIML(this);">show EDIML</button>
+                        <br-->
                         <button class="btn btn-danger" onclick="ediml.saveAs('pippo');">save locally</button>
                         <br>
                         <button class="btn btn-danger" onclick="ediml.load('pippo');">load last version</button>
                         <br>
-                        <button class="btn btn-danger" style="display: none;" id="EDIMLDownload"
+                        <!--button class="btn btn-danger" style="display: none;" id="EDIMLDownload"
                                 onclick="ediml.downloadEDIML();">download EDIML
                         </button>
-                        <br>
+                        <br-->
                         <button class="btn btn-danger" style="display: none;" id="MDDownload"
                                 onclick="ediml.downloadMetadata();">download generated XML
                         </button>

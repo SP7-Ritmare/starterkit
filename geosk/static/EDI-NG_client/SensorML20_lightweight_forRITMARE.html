@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta charset="utf-8">
-    <title>GET-IT EDI SensorML for LTER</title>
+    <title>GET-IT EDI</title>
     <link rel="stylesheet" href="css/assets.css">
     <link rel="stylesheet" href="css/ol.css">
 
@@ -23,7 +23,7 @@
         }
         $(document).ready(function() {
             // ediml.setPostCallbackError(pippo);
-            edi.loadLocalTemplate("SensorML20_lightweight", "1.00_forLTER_newSchema", onTemplateLoaded);
+            edi.loadLocalTemplate("SensorML20_lightweight", "1.00_forRITMARE", onTemplateLoaded);
             $("#ediml").hide();
             $("#sendMetadata").click(ediml.post);
         });

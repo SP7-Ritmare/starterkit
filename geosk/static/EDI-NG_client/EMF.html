@@ -3,12 +3,13 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta charset="utf-8">
-    <title>GET-IT EDI SensorML for LTER</title>
+    <title>GET-IT EDI</title>
     <link rel="stylesheet" href="css/assets.css">
     <link rel="stylesheet" href="css/ol.css">
 
     <script src="js/assets.js"></script>
     <script src="js/ol.js"></script>
+
 
     <script src="http://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
     <script src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
@@ -21,9 +22,9 @@
             alert("eccomi");
             console.log(data);
         }
-        $(document).ready(function() {
+        $(document).ready(function () {
             // ediml.setPostCallbackError(pippo);
-            edi.loadLocalTemplate("SensorML20_lightweight", "1.00_forLTER_newSchema", onTemplateLoaded);
+            edi.loadLocalTemplate("EMF", "1.00", onTemplateLoaded);
             $("#ediml").hide();
             $("#sendMetadata").click(ediml.post);
         });
@@ -40,7 +41,7 @@
         }
         function toggleEDIML(which) {
             $('#ediml').toggle();
-            if ( $("#ediml").is(":visible") ) {
+            if ($("#ediml").is(":visible")) {
                 $(which).text("hide EDIML");
                 edi.edimlOutput();
             } else {

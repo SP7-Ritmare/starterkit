@@ -10,8 +10,6 @@ services:
     labels:
         org.geonode.component: db
         org.geonode.instance.name: geonode
-    ports:
-      - "0.0.0.0:5432:5432"
     volumes:
       - dbdata:/var/lib/postgresql/data
       - dbbackups:/pg_backups
@@ -22,17 +20,15 @@ services:
     image: geobeyond/dbsos-postgis:9.5
     restart: unless-stopped
     container_name: dbsos4${COMPOSE_PROJECT_NAME}
-    command: postgres -c config_file=/etc/postgresql/postgresql.conf
     stdin_open: true
     # tty: true
     labels:
         org.geonode.component: dbsos
         org.geonode.instance.name: geonode
-    #ports:
-    #  - "0.0.0.0:5432:5432"
+    # ports:
+    #   - 5432:5432
     volumes:
       - dbsosdata:/dbsosdata
-      - ./custom-conf/postgresql_sos.conf:/etc/postgresql/postgresql.conf
     env_file:
       - ./scripts/docker/env/production/dbsos.env
 

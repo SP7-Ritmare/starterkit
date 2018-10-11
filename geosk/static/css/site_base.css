@@ -1,40 +1,6 @@
  .navbar-brand {
-    width: 185px;
-    height: 50px;
-    background: transparent url("../img/logo-getit-eLTER_200px.png") no-repeat scroll 0px 5px;
+    width: 190px;
+    height: 70px;
+    background: transparent url("../img/logo1_200px.png") no-repeat scroll 10px 2px;
     background-size: contain;
- }
- .navbar-inverse {
-     background-color: #435926!important;
-     border: 0;
- }
-
- .navbar-inverse .navbar-nav > li > a:hover {
-     background-color: #6D9538!important;
- }
-
- .navbar-nav .dropdown-menu li a:hover {
-     background-color: #6D9538!important;
- }
-
- .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
-     background-color: #6D9538!important;
- }
-
- .navbar-nav .dropdown-menu {
-     background-color: #6D9538!important;
-     border-top: 1px solid #435926!important;
- }
-
- .navbar-nav .dropdown-menu .divider {
-     background-color: #6D9538!important;
- }
-
- .btn-primary {
-     background-color: #6D9538!important;
-     border-color: #435926!important;
- }
-
- .home .jumbotron {
-     background: #6D9538!important;
  }

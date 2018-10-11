@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="edi_template.xsd">
+    <settings>
+        <userInterfaceLanguage xml:lang="en"/>
+        <!--<metadataLanguage selectionItem="ling_md_1"/>-->
+        <metadataEndpoint>http://edidemo.get-it.it/edi/</metadataEndpoint>
+        <sparqlEndpoint>http://sparql.get-it.it</sparqlEndpoint>
+        <requiresValidation>true</requiresValidation>
+        <baseDocument><![CDATA[
+            
+       <sml:EventList xmlns:sml="http://www.opengis.net/sensorml/2.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:swe="http://www.opengis.net/swe/2.0"
+    xmlns:gml="http://www.opengis.net/gml/3.2"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+            xsi:schemaLocation=" http://www.opengis.net/sensorML/2.0 http://schemas.opengis.net/sensorML/2.0/sensorML.xsd http://www.opengis.net/samplingSpatial/2.0 http://schemas.opengis.net/samplingSpatial/2.0/spatialSamplingFeature.xsd">
+    
+       </sml:EventList>
+        
+        ]]></baseDocument>
+        <xsltChain>
+            <xslt>http://sp7.irea.cnr.it/jboss/MDService/rest/SensorML20_vessel.xsl?version=1.00</xslt>
+        </xsltChain>
+    </settings>
+    <endpointTypes>
+        <endpointType xml:id="virtuoso" method="GET" queryParameter="query">
+            <parameters>
+                <parameter name="format" value="application/sparql-results+json"/>
+                <parameter name="save" value="display"/>
+                <parameter name="fname" value="undefined"/>
+            </parameters>
+        </endpointType>
+        <endpointType xml:id="nercFuseki" method="GET" queryParameter="query">
+            <parameters>
+                <parameter name="output" value="json"/>
+            </parameters>
+        </endpointType>
+    </endpointTypes>
+    <datasources>
+        <singleton xml:id="devices" endpointType="nercFuseki">
+            <query><![CDATA[
+                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                    SELECT ?c ?l ?a
+                    WHERE {
+                    ?c rdf:type skos:Concept.
+                    <http://vocab.nerc.ac.uk/collection/L22/current/> skos:member ?c.
+                    OPTIONAL {
+                    ?c skos:prefLabel ?l.
+                    FILTER( LANG(?l) = "en")
+                    }
+                    OPTIONAL {
+                    ?c skos:prefLabel ?a.
+                    FILTER( LANG(?a) = "it")
+                    }
+                    FILTER( REGEX( STR(?l), "$search_param", "i") || REGEX( STR(?a), "$search_param", "i") )
+                    }
+                    ORDER BY ASC(?l) ASC(?a)
+            ]]></query>
+            <url>http://vocab.nerc.ac.uk/sparql/sparql</url>
+        </singleton>
+        <sparql xml:id="parameters" endpointType="nercFuseki">
+            <query><![CDATA[
+                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                    SELECT ?c ?l ?a
+                    WHERE {
+                    ?c rdf:type skos:Concept.
+                    <http://vocab.nerc.ac.uk/collection/P01/current/> skos:member ?c.
+                    OPTIONAL {
+                    ?c skos:prefLabel ?l.
+                    FILTER( LANG(?l) = "en")
+                    }
+                    OPTIONAL {
+                    ?c skos:prefLabel ?a.
+                    FILTER( LANG(?a) = "it")
+                    }
+                    FILTER( REGEX( STR(?l), "$search_param", "i") || REGEX( STR(?a), "$search_param", "i") )
+                    }
+                    ORDER BY ASC(?l) ASC(?a)
+            ]]></query>
+        </sparql>
+        <!-- Codelists -->
+        <codelist xml:id="languages" endpointType="virtuoso">
+            <uri>http://inspire-registry.jrc.ec.europa.eu/registers/Languages/items</uri>
+            <url>http://sp7.irea.cnr.it:8891/sparql</url>
+        </codelist>
+    </datasources>
+
+    <!-- Groups -->
+    <!-- History description -->
+    <group xml:id="historyDesc">
+        <label xml:lang="it">Descrizione</label>
+        <label xml:lang="en">Description</label>
+        <label xml:lang="es">Descripción</label>
+        <element isMandatory="false" isMultiple="false" xml:id="desc">
+            <hasRoot>/sml:EventList</hasRoot>
+            <produces>
+                <item hasDatatype="text" hasIndex="1" xml:id="desc_1" isFixed="false">
+                    <hasPath>swe:description</hasPath>
+                </item>
+            </produces>
+        </element>
+    </group>
+    <!-- Event group -->
+    <group xml:id="events">
+        <label xml:lang="it">Storia composizione strumentale</label>
+        <label xml:lang="en">Instrument Composition History</label>
+        <label xml:lang="es">Histórico de composición instrumental</label>
+        <element xml:id="history" isMandatory="true" isMultiple="true">
+            <label xml:lang="it">Strumentazione a bordo</label>
+            <label xml:lang="en">Instrument on board</label>
+            <label xml:lang="es">Embarque de instrumentación</label>
+            <help xml:lang="it">Strumentazione imbarco sulla nave nel tempo (es. modifiche,
+                ricalibrazione, ecc.)</help>
+            <help xml:lang="en">Instrument in a vessel in time (e.g., calibration, adjustments,
+                etc.)</help>
+            <help xml:lang="es">Embarque de la instrumentación del buque en el tiempo (p.e, calibración, ajustes, etc.)</help>
+            <hasRoot>/sml:EventList</hasRoot>
+            <produces>
+                <item hasIndex="1" xml:id="history_1" isFixed="false" hasDatatype="text">
+                    <label xml:lang="it">Descrizione</label>
+                    <label xml:lang="en">Description</label>
+                    <label xml:lang="es">Descripción</label>
+                    <help xml:lang="it">Breve descrizione</help>
+                    <help xml:lang="en">Brief description</help>
+                    <help xml:lang="es">Breve descripción</help>
+                    <hasPath>sml:event/sml:Event/swe:description</hasPath>
+                </item>
+                <!-- ISSUE: in this moment only date and not time -->
+                <item hasIndex="2" xml:id="history_2" isFixed="false" hasDatatype="dateRange">
+                    <label xml:lang="en">Foo</label>
+                    <label xml:lang="it">Data</label>
+                    <label xml:lang="es">Datos</label>
+                    <start>
+                        <label xml:lang="en">Begin date</label>
+                        <label xml:lang="it">Data inizio</label>
+                        <label xml:lang="es">Fecha de inicio</label>
+                        <hasPath>sml:event/sml:Event/sml:time/gml:TimePeriod/gml:beginPosition</hasPath>
+                    </start>
+                    <end>
+                        <label xml:lang="en">End date</label>
+                        <label xml:lang="it">Data fine</label>
+                        <label xml:lang="es">Fecha final</label>
+                        <hasPath>sml:event/sml:Event/sml:time/gml:TimePeriod/gml:endPosition</hasPath>
+                    </end>
+                </item>
+                <item hasIndex="3" xml:id="history_3" isFixed="true" hasDatatype="autonumber">
+                    <hasPath>sml:event/sml:Event/sml:time/gml:TimePeriod/@gml:id</hasPath>
+                    <hasValue>operation_interval_</hasValue>
+                </item>
+                <item hasIndex="4" xml:id="history_4" isFixed="true" hasDatatype="string">
+                    <hasPath>sml:event/sml:Event/sml:property/@xlink:title</hasPath>
+                    <hasValue>link to instrument</hasValue>
+                </item>
+                <item hasIndex="5" xml:id="history_5" isFixed="false" 
+                    hasDatatype="autoCompletion" datasource="devices">
+                    <label xml:lang="en">Device</label>
+                    <label xml:lang="it">Dispositivo</label>
+                    <label xml:lang="es">Dispositivo</label>
+                    <hasPath>sml:event/sml:Event/sml:property/@xlink:role</hasPath>
+                </item>           
+                <item hasIndex="6" xml:id="history_6" isFixed="true"
+                    datasource="devices" hasDatatype="select" field="c">
+                    <hasPath>sml:event/sml:Event/sml:property/@xlink:href</hasPath>
+                </item>
+            </produces>
+        </element>
+    </group>
+</template>

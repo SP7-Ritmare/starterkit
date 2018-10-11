@@ -3,12 +3,13 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta charset="utf-8">
-    <title>GET-IT EDI SensorML for LTER</title>
+    <title>GET-IT EDI</title>
     <link rel="stylesheet" href="css/assets.css">
     <link rel="stylesheet" href="css/ol.css">
 
     <script src="js/assets.js"></script>
     <script src="js/ol.js"></script>
+
 
     <script src="http://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
     <script src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
@@ -21,9 +22,18 @@
             alert("eccomi");
             console.log(data);
         }
-        $(document).ready(function() {
+        $(document).ready(function () {
             // ediml.setPostCallbackError(pippo);
-            edi.loadLocalTemplate("SensorML20_lightweight", "1.00_forLTER_newSchema", onTemplateLoaded);
+            edi.loadLocalTemplate("INSPIRE_dataset", "1.00_forRITMARE", onTemplateLoaded);
+
+            /*
+             ediml.setPostCallbackSuccess(function () {
+             console.log(arguments);
+             });
+             ediml.setPostCallbackError(function () {
+             console.log(arguments);
+             });
+             */
             $("#ediml").hide();
             $("#sendMetadata").click(ediml.post);
         });
@@ -40,7 +50,7 @@
         }
         function toggleEDIML(which) {
             $('#ediml').toggle();
-            if ( $("#ediml").is(":visible") ) {
+            if ($("#ediml").is(":visible")) {
                 $(which).text("hide EDIML");
                 edi.edimlOutput();
             } else {
@@ -65,16 +75,16 @@
                         <button class="btn btn-primary" onclick="edi.setLanguage('it');">it</button>
                         <button class="btn btn-primary" onclick="edi.setLanguage('en');">en</button>
                         <br>
-                        <button class="btn btn-danger debug" onclick="toggleEDIML(this);">show EDIML</button>
-                        <br>
+                        <!--<button class="btn btn-danger debug" onclick="toggleEDIML(this);">show EDIML</button>
+                        <br>-->
                         <button class="btn btn-danger" onclick="ediml.saveAs('pippo');">save locally</button>
                         <br>
                         <button class="btn btn-danger" onclick="ediml.load('pippo');">load last version</button>
                         <br>
-                        <button class="btn btn-danger" style="display: none;" id="EDIMLDownload"
+                        <!--<button class="btn btn-danger" style="display: none;" id="EDIMLDownload"
                                 onclick="ediml.downloadEDIML();">download EDIML
                         </button>
-                        <br>
+                        <br>-->
                         <button class="btn btn-danger" style="display: none;" id="MDDownload"
                                 onclick="ediml.downloadMetadata();">download generated XML
                         </button>
