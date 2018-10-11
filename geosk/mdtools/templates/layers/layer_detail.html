@@ -35,6 +35,7 @@
 
 
 {% block extra_head %}
+      {{ block.super }}
       <link href="{{ STATIC_URL }}geosk/css/site_base.css" rel="stylesheet"/>
 {% endblock %}
 
@@ -1003,7 +1004,7 @@
         {% get_current_language as  LANGUAGE_CODE %}
         var ediml_current_language = '{{ LANGUAGE_CODE }}';
         var ediml_edimlId = '{{ resource.mdextension.fileid }}';
-        var ediml_client_url = "{{ STATIC_URL }}EDI-NG_client/INSPIRE_dataset.html?";
+        var ediml_client_url = "{{ STATIC_URL }}EDI-NG_client/INSPIRE_dataset_forLTER.html?";
         var ediml_proxy_url = '{% url "ediproxy_importmd" resource.typename %}';
 
         var parameters;

@@ -7,6 +7,7 @@
 {% block body_class %}osk{% endblock %}
 
 {% block extra_head %}
+      {{ block.super }}
       <link href="{{ STATIC_URL }}geosk/css/site_base.css" rel="stylesheet"/>
 {% endblock %}
 

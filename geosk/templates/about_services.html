@@ -30,8 +30,15 @@
   <div class="tab-content">
     <div class="tab-pane active" id="wms">
       <p></p>
-      <p>Per Web Map Service (WMS) si intende una specifica tecnica definita dall'<a target="_blank" href="http://www.opengeospatial.org/standards/wms">OGC</a>, che produce dinamicamente mappe di dati spazialmente riferiti a partire da informazioni geografiche. Questo standard internazionale definisce una "mappa" come rappresentazione di informazioni geografiche restituendo un'immagine digitale idonea ad essere visualizzata su browser web.</p>
-      <p>Generalmente un Web Map Service non &egrave; invocato direttamente; vengono utilizzate applicazioni client come <u>GIS-Desktop o WEB-GIS</u> che forniscono all'utente controlli interattivi.</p>
+      {% blocktrans %}
+      <p>
+          <a target="_blank" href="https://en.wikipedia.org/wiki/Web_Map_Service">Web Map Service (WMS)</a> is a technical specification defined by the <a target="_blank" href="https://en.wikipedia.org/wiki/Open_Geospatial_Consortium">Open Geospatial Consortium (OGC)</a>, which dynamically produces spatially referenced data maps from geographic information. This international standard defines a "map" as a representation of geographical information by returning a digital image suitable for display on a web browser.
+      </p>
+
+      <p>
+	    Generally a WMS is not directly invoked; client applications such as GIS-Desktop or WEB-GIS are used that provide the user with interactive controls.
+      </p>
+    {% endblocktrans %}
       <p>
       <p>
       <p>
@@ -47,8 +54,16 @@
     </div>
     <div class="tab-pane" id="wfs">
       <p></p>
-      <p>L'Interfaccia Standard <a target="_blank" href="http://www.opengeospatial.org/standards/wfs">OGC</a> Web Feature Service (WFS) permette la richiesta e l'importazione da parte di un client di oggetti geografici attraverso il Web, usando chiamate indipendenti dalla piattaforma.</p>
-      <p>Generalmente un Web Feature Service non &egrave; invocato direttamente; vengono utilizzate applicazioni client come <u>GIS-Desktop o WEB-GIS</u> che forniscono all'utente controlli interattivi.</p>
+      {% blocktrans %}
+      <p>
+          The <a target="_blank" href="https://en.wikipedia.org/wiki/Open_Geospatial_Consortium">Open Geospatial Consortium (OGC)</a> <a target="_blank" href="https://en.wikipedia.org/wiki/Web_Feature_Service">Web Feature Service Standard Interface (WFS)</a> allows a client to request and import geographic objects through the Web, using platform-independent calls.
+      </p>
+
+      <p>
+	    Generally a WFS is not directly invoked; client applications such as GIS-Desktop or WEB-GIS are used that provide the user with interactive controls.
+      </p>
+    {% endblocktrans %}
+
       <p></p>
       <div class="alert alert-info">
         <h4>URL:</h4>
@@ -60,8 +75,15 @@
     </div>
     <div class="tab-pane" id="wcs">
       <p></p>
-      <p>Lo standard <a target="_blank" href="http://www.opengeospatial.org/standards/wcs">OGC</a> Web Coverage Service (WCS) definisce un'interfaccia standard e le operazioni che consentono l'accesso interoperabile alle coperture (coverages) geografiche. Il termine "grigliato di copertura" (grid coverage) tipicamente si riferisce a contenuti quali immagini satellitari, foto aeree digitali, dati digitali di elevazione, ed altri fenomeni rappresentati attraverso valori in ciascun punto di misura.</p>
-      <p>Generalmente un Web Coverage Service non &egrave; invocato direttamente; vengono utilizzate applicazioni client come <u>GIS-Desktop o WEB-GIS</u> che forniscono all'utente controlli interattivi.</p>
+      {% blocktrans %}
+      <p>
+          The <a target="_blank" href="https://en.wikipedia.org/wiki/Open_Geospatial_Consortium">Open Geospatial Consortium (OGC)</a> <a target="_blank" href="https://en.wikipedia.org/wiki/Web_Feature_Service">Web Coverage Service (WCS)</a> standard defines a standard interface and operations that allow interoperable access to geographical coverages. The term "grid coverage" typically refers to content such as satellite images, digital aerial photos, digital elevation data, and other phenomena represented by values at each measurement point.
+      </p>
+
+      <p>
+	    Generally a WCS is not directly invoked; client applications such as GIS-Desktop or WEB-GIS are used that provide the user with interactive controls.
+      </p>
+    {% endblocktrans %}
       <p></p>
       <div class="alert alert-info">
         <h4>URL:</h4>
@@ -73,7 +95,11 @@
     </div>
     <div class="tab-pane" id="csw">
      <p></p>
-      <p>Lo standard Catalog Service for the Web (CSW) dell'<a target="_blank"  href="http://www.opengeospatial.org/standards/specifications/catalog">OGC</a> che definisce un'interfaccia per servizi di ricerca, di navigazione e di interrogazione di metadati su dati, servizi, a altre risorse potenziali. Si riferisce alla pubblicazione Internet-based di informazioni su applicazioni spaziali, di geo-servizi e di dati spaziali (metadati) in un'infrastruttura di dati territoriali.</p>
+     {% blocktrans %}
+      <p>
+          The <a target="_blank" href="https://en.wikipedia.org/wiki/Open_Geospatial_Consortium">Open Geospatial Consortium (OGC)</a> <a target="_blank" href="https://en.wikipedia.org/wiki/Catalog_Service_for_the_Web">Catalog Service for the Web (CSW)</a> standard defines an interface for search, navigation and querying metadata on data, services, and other potential resources. It refers to the Internet-based publication of information on space applications, geo-services and spatial data (metadata) in a spatial data infrastructure.
+      </p>
+    {% endblocktrans %}
       <p></p>
       <div class="alert alert-info">
         <h4>URL:</h4>
@@ -85,7 +111,12 @@
     </div>
     <div class="tab-pane" id="wmts">
       <p></p>
-      <p>Lo standard Web Map Tile Service (WMTS) dell'<a target="_blank"  href="http://www.opengeospatial.org/standards/wmts">OGC</a> fornisce le specifiche internazionali per servire dati geografici sul web attraverso "cached image tiles".</p>
+      {% blocktrans %}
+      <p>
+          The <a target="_blank" href="https://en.wikipedia.org/wiki/Open_Geospatial_Consortium">Open Geospatial Consortium (OGC)</a> <a target="_blank" href="https://en.wikipedia.org/wiki/Web_Map_Tile_Service">Web Map Tile Service (WMTS)</a> standard provides international specifications for serving geographic data on the web through "cached image tiles".
+      </p>
+    {% endblocktrans %}
+
       <p></p>
       <div class="alert alert-info">
         <h4>URL:</h4>
@@ -96,30 +127,15 @@
       </div>
     </div>
     <div class="tab-pane" id="sos">
+    {% blocktrans %}
       <p>
-	Per <a href="http://www.opengeospatial.org/standards/sos">Sensor
-	Observation Service</a> (SOS) si intende una specifica tecnica
-	definita
-	dall'<a href="http://www.opengeospatial.org/standards/wms">OGC</a>,
-	applicabile nel caso occorra che i dati raccolti da sensori
-	siano gestiti in una logica interoperabile. Questo standard
-	definisce un servizio web che permette di effettuare
-	interrogazioni sulle osservazioni (utilizzando lo schema
-	<a href="http://www.opengeospatial.org/standards/om">Observation&Measurement</a>
-	- O&M), sui metadati dei sensori (utilizzando lo schema
-	<a href="http://www.opengeospatial.org/standards/sensorml">Sensor
-	Model Language</a> - SensorML) nonché sulle caratteristiche
-	osservate; ancora permette di registrare un sensore, ma anche
-	cancellarne la registrazione, definendo anche le operazioni
-	per inserire nuove osservazioni.
+	For <a href="http://www.opengeospatial.org/standards/sos">Sensor Observation Service (SOS)</a> we mean a technical specification defined by the <a href="http://www.opengeospatial.org/standards/wms">OGC</a>, applicable in the case where data are collected by sensors and they must be managed interoperable logic. This standard defines a web service that makes it possible to query the observations (using the <a href="http://www.opengeospatial.org/standards/om">Observation &amp; Measurement</a> - O&amp;M scheme), the sensor metadata (using the <a href="http://www.opengeospatial.org/standards/sensorml">Sensor Model Language</a> - SensorML scheme) as well as the characteristics observed; still it allows to record a sensor, but also to cancel the recording, also defining the operations to insert new observations.
       </p>
 
       <p>
-	Generalmente un SOS a tutte le richieste risponde con un XML,
-	ma per una visualizzazione più idonea si consiglia l'uso di
-	applicazioni client come <u>GIS-Desktop o WEB-GIS</u> che forniscono
-	all'utente controlli interattivi.
+	Generally an SOS to all requests responds with an XML, but for a more suitable display we recommend the use of client applications such as GIS-Desktop or WEB-GIS that provide the user with interactive controls.
       </p>
+    {% endblocktrans %}
       <div class="alert alert-info">
         <h4>URL:</h4>
         {{SOS_URL}}

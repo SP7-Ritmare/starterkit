@@ -27,8 +27,9 @@ geoskurlpatterns = patterns(
     # url(r'^layers/(?P<layername>[^/]+)/rdf$', 'geosk.mdtools.views_rdf.rdf_layer_detail', kwargs={'rdf_format':'xml'}, name='mdtools_rdf_metadata'),
     # url(r'^layers/(?P<layername>[^/]+)/n3$', 'geosk.mdtools.views_rdf.rdf_layer_detail', kwargs={'rdf_format':'n3'}, name='mdtools_n3_metadata'),
 
-
-    # additional pages
+    ###
+    ## additional pages within GeoNode
+    ###
     url(
         r'^about_services/$',
         TemplateView.as_view(template_name='about_services.html'),
@@ -44,11 +45,21 @@ geoskurlpatterns = patterns(
         TemplateView.as_view(template_name='sk_license.html'),
         name='sk_license'
     ),
+    # credit
     url(r'^sk_credits/$',
         TemplateView.as_view(template_name='sk_credits.html'),
         name='sk_credits'
-        ),
+    ),
+    # gdpr
+    url(r'^gdpr/',
+        TemplateView.as_view(template_name='gdpr.html'),
+        name='gdpr'
+    ),
 
+    ###
+    ## additional services within GeoNode
+    ###
+    ## Sensors
     # observations
     url(r'^observations/(?P<url>.*)$',
         ObservationsProxy.as_view(),
@@ -70,6 +81,7 @@ geoskurlpatterns = patterns(
      include('geosk.osk.urls')
      ),
 
+    ## Demo data
     # Demo
     (r'^demo/',
      include('geosk.demo.urls')

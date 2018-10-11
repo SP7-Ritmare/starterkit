@@ -10,6 +10,8 @@ Welcome to the GET-IT Administrators Workshop!
 ..     Learn how to install GET-IT by virtual machine.
 :ref:`scratch`
      Learn how to install GET-IT from scratch step by step.
+:ref:`uninstall`
+     Learn how to uninstall GET-IT from terminal.
 :ref:`server`
      Minimum server requirements.
 :ref:`advanced`

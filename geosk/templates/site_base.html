@@ -2,23 +2,112 @@
 {% load i18n %}
 {% block extra_head %}
       <link href="{{ STATIC_URL }}css/site_base.css" rel="stylesheet"/>
-      <link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon.ico">
+      <link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon.png">
 {% endblock %}
+
+{% block tabs %}
 {% block extra_tab %}
 <li id="nav_osk">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Sensors" %}<i class="fa fa-angle-down fa-lg"></i></a>
-  {% if user.is_authenticated %}
-  <ul class="dropdown-menu">
-    <li><a href="{% url "osk_browse" %}?limit={{ CLIENT_RESULTS_LIMIT }}">{% trans "Explore Sensors" %}</a></li>
-    {% if perms.osk.admin_sos %}
-    <li><a href="{% url "osk_browse" %}#ediclient_container">{% trans "Register a new  Sensor" %}</a></li>
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sensor data<i class="fa fa-angle-down fa-lg"></i></a>
+    {% if user.is_authenticated %}
+    <ul class="dropdown-menu">
+        <li><a href="{% url "osk_browse" %}?limit={{ CLIENT_RESULTS_LIMIT }}">Explore Sensors</a></li>
+        <li><a href="{% url "osk_browse" %}#ediclient_container">Register a new Sensor</a></li>
+    </ul>
+    {% else %}
+    <ul class="dropdown-menu">
+        <li><a href="{% url "osk_browse" %}?limit={{ CLIENT_RESULTS_LIMIT }}">Sensor data</a></li>
+    </ul>
     {% endif %}
-  </ul>
-  {% else %}
-  <ul class="dropdown-menu">
-    <li><a href="{% url "osk_browse" %}?limit={{ CLIENT_RESULTS_LIMIT }}">{% trans "Sensors" %}</a></li>
-  </ul>
-  {% endif %}
 </li>
 <li><a href="{% url "about_services" %}">{% trans "Services" %}</a></li>
 {% endblock %}
+<li id="nav_layers">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Geo data" %}<i class="fa fa-angle-down fa-lg"></i></a>
+    <ul class="dropdown-menu">
+        <li><a href="{% url "layer_browse" %}?limit={{ CLIENT_RESULTS_LIMIT }}">{% trans "Layers" %}</a></li>
+        <li><a href="{% url "services" %}?limit={{ CLIENT_RESULTS_LIMIT }}">{% trans "Remote Services" %}</a></li>
+        {% if user.is_authenticated %}
+        <li role="separator" class="divider"></li>
+        <li><a href="{% url "layer_upload" %}">Upload Layer</a></li>
+        {% if 'geonode.contrib.createlayer' in INSTALLED_APPS %}
+        <li><a href="{% url "layer_create" %}">{% trans "Create Layer" %}</a></li>
+        {% endif %}
+        {% endif %}
+        {% if user.is_superuser or user.is_staff %}
+        <li><a href="{% url "register_service" %}">{% trans "Add Remote Service" %}</a></li>
+        {% endif %}
+    </ul>
+</li>
+<li id="nav_maps">
+    {% if user.is_authenticated %}
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans "Maps" %}<i class="fa fa-angle-down fa-lg"></i></a>
+    <ul class="dropdown-menu">
+        <li><a href="{% url "maps_browse" %}?limit={{ CLIENT_RESULTS_LIMIT }}">{% trans "Explore Maps" %}</a></li>
+        <li> <a href="{% url "new_map" %}">{% trans "Create Map" %}</a></li>
+    </ul>
+    {% else %}
+    <a href="{% url "maps_browse" %}?limit={{ CLIENT_RESULTS_LIMIT }}">{% trans "Maps" %}</a>
+    {% endif %}
+</li>
+<li>
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users<i class="fa fa-angle-down fa-lg"></i></a>
+    <ul class="dropdown-menu">
+        <li><a href="{% url "profile_browse" %}">{% trans "People" %}</a></li>
+        <li><a href="{% url "group_list" %}">{% trans "Groups" %}</a></li>
+        <li><a href="{% url "group_category_list" %}">{% trans "Group Categories" %}</a></li>
+        <li role="separator" class="divider"></li>
+        {% if user.is_superuser %}
+        <li><a href="/admin/people/profile/add/">{% trans "Add User" %}</a></li>
+        <li><a href="{% url "group_create" %}">{% trans "Create Group" %}</a></li>
+        {% endif %}
+    </ul>
+</li>
+{% endblock %}
+
+{% block extra_script %}
+{{ block.super }}
+<script>
+    $('#SigninModal').on('show.bs.modal', function (e) {
+        // do something...
+            $(this).find('.modal-body').append($('<a href="{% url "gdpr" %} target="_blank">Please refer to CDN Privacy Statement</a>'));
+        })
+    </script>
+<script src="{{ STATIC_URL }}geosk/js/cookieconsent.js"></script>
+<script src="{{ STATIC_URL }}cookieconsent2/cookieconsent.min.js"></script>
+{% endblock extra_script %}
+
+{% block footer %}
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-left">
+                Geoinformation Enabling ToolkIT starterkit&reg; GET-IT
+                {% trans " is conceived and developed by <a target=\"_blank\" href=\"http://www.get-it.it/#team\">reaserchers team</a>" %}
+                | <a href="mailto:getitskinfo@gmail.com">{% trans "Contacts" %} </a>
+                | <a href="{% url "sk_license" %}">{% trans "Legal Notes" %} </a>
+                | <a href="{% url "sk_credits" %}">{% trans "Credits" %} </a>
+            </div>
+            <div class="col-md-6 text-right">
+                <ul class="list-unstyled">
+                    <li>GET-IT{% trans " is based on" %} <a href="http://geonode.org">{% trans "GeoNode" %}</a> <em>{% trans "version" %} {{ VERSION }}</em></li>
+                </ul>
+                <label class="hidden">{% trans "Language" %}</label>
+                {% if csrf_token != "NOTPROVIDED" %}
+                {% get_current_language as LANGUAGE %}
+                <!--form class="form-inline" action="/i18n/setlang/" method="post">
+                    {% csrf_token %}
+                    <select class="col-md-6 pull-right" name="language" onchange="javascript:form.submit()">
+                        {% for lang in LANGUAGES %}
+                        <option value="{{ lang.0 }}" {% ifequal LANGUAGE_CODE lang.0 %} selected="selected"{% endifequal %}>
+                            {{ lang.1 }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </form-->
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</footer>
+{% endblock footer %}

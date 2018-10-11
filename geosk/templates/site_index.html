@@ -1,15 +1,94 @@
 {% extends 'index.html' %}
 {% load i18n %}
+{% load base_tags %}
 {% comment %}
-This is where you can override the hero area block. You can simply modify the content below or replace it wholesale to meet your own needs. 
+This is where you can override the hero area block. You can simply modify the content below or replace it wholesale to meet your own needs.
 {% endcomment %}
-  {% block hero %}
-  <div class="jumbotron">
+{% block hero %}
+<div class="jumbotron">
     <div class="container">
-      <h1>{% trans "Welcome" %}</h1>
-      <p>{% blocktrans %}GeoNode is an open source platform for sharing geospatial data and maps.{% endblocktrans %}</p>
-      <p>{% blocktrans %}If you have any questions about the software or service, join our <a href="https://groups.google.com/d/forum/geonode-users">mailing list</a>.{% endblocktrans %}</p>
-      <span>{% trans 'Need help?' %} <a href="http://docs.geonode.org/en/latest/tutorials/users/quickstart/index.html">{% trans 'Getting Started' %}</a></span>
+        <h2>GET-IT Central Data Node (CDN) of LTER-Europe network</h2>
+        <p>enables you to provide time series data from field-based environmental sensors. You can describe sensor and upload data that are then linked to the eLTER portal as INSPIRE (2007/2/CE) web services.</p>
+        <p>To start uploading your data just 3 simple steps:
+            <ol>
+                <li><i>sign in</i> and access the <i>Sensor data</i> -> <a href="sensors/#ediclient_container"><i>Register a new Sensor</i></a> menu</li>
+                <li>fill out the template with the information of new sensor</li>
+                <li>upload the observations in the <a href="sensors/upload"><i>Upload observations</i></a> section</li>
+            </ol>
+        </p>
+        <p>You can view the <a href="https://www.youtube.com/watch?v=OVZxqqEDHm0" target="_blank">videotutorial</a> to learn more about how to upload your observations.</p>
+        <p>Need more help? <a href="http://getit.readthedocs.io/en/latest/index.html" title="GET-IT doc" target="_blank">Visit GET-IT documentation</a></p>
+        <p></p>
     </div>
-  </div>
-  {% endblock %}
+</div>
+{% endblock %}
+
+{% block bigsearch %}
+{% endblock %}
+
+{% block datasets %}
+{% endblock %}
+
+{% block showcase %}
+<section id="showcase">
+    <div class="row">
+        <div class="container text-center">
+            <h2>Featured Datasets</h2>
+            <div class="row home-facets">
+                {% with facet_type='home' %}
+                {% facets as facets %}
+                <!-- Sensor -->
+                <div class="col-md-4">
+                    <p><a href="{% url "osk_browse" %}"><i class="fa fa-rss fa-4x"></i></a></p>
+                    <!--<h2><a href="{% url "osk_browse" %}">{{ facets.layer|default:_("No") }} {% blocktrans count counter=facets.layer %}Sensor{% plural %}Sensors{% endblocktrans %}</a></h2>-->
+                    <h2><a href="{% url "osk_browse" %}">{% trans 'Sensors'%}</a></h2>
+                    <p>Add sensor information and observations collected by them, share yor data with others by standard service.</p>
+                    {% if user.is_authenticated %}
+                    <p class="text-center"><a class="btn btn-default" href="{% url "osk_browse" %}#ediclient_container" role="button">Add sensors &raquo;</a></p>
+                    {% else %}
+                    <p class="text-center"><a class="btn btn-default" href="{% url "osk_browse" %}" role="button">Explore sensors &raquo;</a></p>
+                    {% endif %}
+                </div>
+                <!-- Layer -->
+                <div class="col-md-4">
+                    <p><a href="{% url "layer_browse" %}"><i class="fa fa-square-o fa-4x rotate-45"></i></a></p>
+                    <h2><a href="{% url "layer_browse" %}">{{ facets.layer|default:_("No") }} {% blocktrans count counter=facets.layer %}Layer{% plural %}Layers{% endblocktrans %}</a></h2>
+                    <p>{% trans "Click to search for geospatial data published by other users, organizations and public sources. Download data in standard formats." %}</p>
+                    {% if user.is_authenticated %}
+                    <p class="text-center"><a class="btn btn-default" href="{% url "layer_upload" %}" role="button">{% trans "Add layers" %} &raquo;</a></p>
+                    {% else %}
+                    <p class="text-center"><a class="btn btn-default" href="{% url "layer_browse" %}" role="button">{% trans "Explore layers" %} &raquo;</a></p>
+                    {% endif %}
+                </div>
+                <!-- Map -->
+                <div class="col-md-4">
+                    <p><a href="{% url "maps_browse" %}"><i class="fa fa-map fa-4x"></i></a></p>
+                    <h2><a href="{% url "maps_browse" %}">{{ facets.map|default:_("No") }} {% blocktrans count counter=facets.map %}Map{% plural %}Maps{% endblocktrans %}</a></h2>
+                    <p>{% trans "Data is available for browsing, aggregating and styling to generate maps which can be saved, downloaded, shared publicly or restricted to specify users only." %}</p>
+                    {% if user.is_authenticated %}
+                    <p><a class="btn btn-default" href="{% url "new_map" %}" role="button">{% trans "Create maps" %} &raquo;</a></p>
+                    {% else %}
+                    <p><a class="btn btn-default" href="{% url "maps_browse" %}" role="button">{% trans "Explore maps"%} &raquo;</a></p>
+                    {% endif %}
+                </div>
+                {% endwith %}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container text-center">
+            {% verbatim %}
+            <div ng-app="featured">
+                <div ng-repeat="item in featured | limitTo:4">
+                    <div class="col-md-3">
+                        <a href="{{ item.detail_url }}"><img ng-src="{{ item.thumbnail_url }}"/></a>
+                        <h4>{{ item.title | limitTo: 20 }}{{item.title.length > 20 ? '...' : ''}}</h4>
+                    </div>
+                </div>
+            </div>
+            {% endverbatim %}
+            <!--p><a href="/search/">Explore all datasets</a></p-->
+        </div>
+    </div>
+</section>
+{% endblock %}

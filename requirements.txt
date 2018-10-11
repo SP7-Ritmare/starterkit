@@ -2,7 +2,7 @@
 django-overextends
 django-annoying
 django-rosetta==0.7.6
-django-grappelli==2.4.10
+django-grappelli==2.9.1
 djproxy
 simplejson
 django-analytical==1.0.0

@@ -1,4 +1,4 @@
-FROM geonode/geonode:2.7.x
+FROM geobeyond/geonode:2.7.x
 MAINTAINER Starterkit development team
 
 # WORKDIR /usr/src/
@@ -25,6 +25,7 @@ MAINTAINER Starterkit development team
 # add bower and grunt command
 ONBUILD COPY . /usr/src/app/
 WORKDIR /usr/src/app
+RUN pip install -e .
 
 EXPOSE 8000
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
