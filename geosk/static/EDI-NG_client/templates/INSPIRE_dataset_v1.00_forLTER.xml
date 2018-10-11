@@ -9,18 +9,17 @@
       <baseDocument><![CDATA[
       
         <gmd:MD_Metadata
-            xsi:schemaLocation="http://www.isotc211.org/2005/gmd
-            http://schemas.opengis.net/iso/19139/20060504/gmd/gmd.xsd"
+            xsi:schemaLocation="http://www.isotc211.org/2005/gmd http://schemas.opengis.net/iso/19139/20060504/gmd/gmd.xsd http://www.isotc211.org/2005/gmx http://schemas.opengis.net/iso/19139/20060504/gmx/gmx.xsd"
             xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gml="http://www.opengis.net/gml"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
+            xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gmx="http://www.isotc211.org/2005/gmx">
     
         </gmd:MD_Metadata>
       
     ]]></baseDocument>
       <xsltChain>
       
-         <xslt>http://static.get-it.it/stylesheet_1.xsl%3fversion=1.00</xslt>
+         <xslt>http://sp7.irea.cnr.it/jboss/MDService/rest/identity.xsl?version=1.00</xslt>
     
       </xsltChain>
    </settings>
@@ -42,6 +41,13 @@
             <parameter name="format" value="application/json"/>
          </parameters>
       </endpointType>
+      <endpointType xml:id="fuseki1" method="GET" queryParameter="query">
+         <parameters>
+            <parameter name="format" value="application/sparql-results+json"/>
+            <parameter name="save" value="display"/>
+            <parameter name="fname" value="undefined"/>
+         </parameters>
+      </endpointType>
    </endpointTypes>
    <datasources>
       <codelist xml:id="languages" endpointType="virtuoso">
@@ -59,75 +65,57 @@
       <codelist xml:id="roleCodes" endpointType="virtuoso">
          <uri>http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole</uri>
       </codelist>
-      <sparql xml:id="person" endpointType="virtuoso">
+      <sparql xml:id="person" endpointType="fuseki1">
          <query><![CDATA[
         
-          PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
-          SELECT DISTINCT ?c ?l
-          FROM <http://ritmare.it/rdfdata/lotrx>
-          WHERE {
-            ?c rdf:type foaf:Person .
-            ?c vcard:email ?l .
-            ?c vcard:org ?o .
-            FILTER( REGEX( STR(?l), "$search_param", "i") )
-          }
-          ORDER BY ASC(?l)
-        
-      ]]></query>
-      </sparql>
-      <singleton xml:id="personS" endpointType="virtuoso" triggerItem="md_resp_1_uri">
-         <query><![CDATA[
-                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-                        PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-                        SELECT ?c ?l
-                        WHERE { 
-                          ?c rdf:type foaf:Person .
-                          ?c foaf:mbox ?l.
-                          FILTER( REGEX( STR(?l), "$search_param", "i") )
-                        }
-                        ORDER BY ASC(?l)
-            ]]></query>
-         <!-- Query with ORCID
-            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+          PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
             PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-                        SELECT DISTINCT ?c ?l ?orcid
-                        WHERE { 
+                        SELECT DISTINCT ?c ?l
+                        WHERE {
                           ?c rdf:type foaf:Person .
                           ?c foaf:mbox ?l .
-  						  ?c foaf:account ?d .
-  						  ?d foaf:accountServiceHomepage ?homepage .
-  						  ?d foaf:accountProfilePage ?orcid .
-  							FILTER( 
-    							REGEX(STR(?l), "$search_param", "i") && STR(?homepage) = "http://orcid.org"
+                          FILTER(
+    							REGEX(STR(?l), "$search_param", "i")
   							)
                         }
                         ORDER BY ASC(?l)
-         -->
+        
+        ]]></query>
          <url>http://fuseki1.get-it.it/directory/sparql</url>
-      </singleton>
-      <singleton xml:id="personS_2" endpointType="virtuoso" triggerItem="resp_1_uri">
+      </sparql>
+      <singleton xml:id="personS" endpointType="fuseki1" triggerItem="md_resp_1_uri">
          <query><![CDATA[
                 PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
                 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
                 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-                        SELECT ?fullname ?email ?phone ?homepage ?l ?addr ?town ?postcode ?country
-                        WHERE { 
+                        SELECT ?fullname ?email ?phone ?homepage ?l ?addr ?town ?postcode ?country ?orcid1 ?c ?pidPers
+                        WHERE {
+                          BIND(<$search_param> as ?soggetto)
                           OPTIONAL {
-                            <$search_param> foaf:fullName ?fullname .
-                          }
-                          OPTIONAL {
-                            <$search_param> foaf:mbox ?email .
+                            ?soggetto foaf:fullName ?fullname .
                           }
   						  OPTIONAL {
-                            <$search_param> foaf:phone ?phone .
+                            ?c rdf:type foaf:Person .
                           }
                           OPTIONAL {
-                            <$search_param> vcard:org ?b3 .
+                            ?soggetto foaf:mbox ?email .
+                          }
+  						  OPTIONAL {
+                            ?soggetto foaf:phone ?phone .
+                          }
+  						  OPTIONAL {
+    					    ?soggetto foaf:account ?account .
+    						?account foaf:accountServiceHomepage <http://orcid.org>;
+      								 foaf:accountProfilePage ?orcid1 .
+  						  }
+                          BIND (IF(bound(?orcid1), ?orcid1, ?email) AS ?pidPers)
+                          OPTIONAL {
+                            ?soggetto vcard:org ?b3 .
                             ?b3 foaf:homepage ?homepage .
                             ?b3 foaf:name ?l .
                           }
                           {
-                            <$search_param> vcard:org/vcard:hasAddress ?b1 .
+                            ?soggetto vcard:org/vcard:hasAddress ?b1 .
                             ?b1 vcard:street-address ?addr .
                             ?b1 vcard:locality ?town .
                             ?b1 vcard:postal-code ?postcode .
@@ -143,8 +131,66 @@
                           #  ?b2 foaf:name ?country .
                           #}
                           #FILTER(lang(?l)='it')
+
 						  SERVICE <http://sparql.get-it.it> {
-    						?b2 foaf:name ?country . 
+    						?b2 foaf:name ?country .
+  						  }
+                        }
+                        LIMIT 1
+            ]]></query>
+         <url>http://fuseki1.get-it.it/directory/sparql</url>
+      </singleton>
+      <singleton xml:id="personS_2" endpointType="fuseki1" triggerItem="resp_1_uri">
+         <query><![CDATA[
+                PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+                PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                        SELECT ?fullname ?email ?phone ?homepage ?l ?addr ?town ?postcode ?country ?orcid1 ?c ?pidPers
+                        WHERE {
+                          BIND(<$search_param> as ?soggetto)
+                          OPTIONAL {
+                            ?soggetto foaf:fullName ?fullname .
+                          }
+  						  OPTIONAL {
+                            ?c rdf:type foaf:Person .
+                          }
+                          OPTIONAL {
+                            ?soggetto foaf:mbox ?email .
+                          }
+  						  OPTIONAL {
+                            ?soggetto foaf:phone ?phone .
+                          }
+  						  OPTIONAL {
+    					    ?soggetto foaf:account ?account .
+    						?account foaf:accountServiceHomepage <http://orcid.org>;
+      								 foaf:accountProfilePage ?orcid1 .
+  						  }
+                          BIND (IF(bound(?orcid1), ?orcid1, ?email) AS ?pidPers)
+                          OPTIONAL {
+                            ?soggetto vcard:org ?b3 .
+                            ?b3 foaf:homepage ?homepage .
+                            ?b3 foaf:name ?l .
+                          }
+                          {
+                            ?soggetto vcard:org/vcard:hasAddress ?b1 .
+                            ?b1 vcard:street-address ?addr .
+                            ?b1 vcard:locality ?town .
+                            ?b1 vcard:postal-code ?postcode .
+                            ?b1 vcard:country-name ?b2 .
+                            #?b2 foaf:name ?country .
+                          }
+  							#UNION {
+                          #  ?b3 vcard:hasAddress ?b1 .
+                          #  ?b1 vcard:street-address ?addr .
+                          #  ?b1 vcard:locality ?town .
+                          #  ?b1 vcard:postal-code ?postcode .
+                          #  ?b1 vcard:country-name ?b2 .
+                          #  ?b2 foaf:name ?country .
+                          #}
+                          #FILTER(lang(?l)='it')
+
+						  SERVICE <http://sparql.get-it.it> {
+    						?b2 foaf:name ?country .
   						  }
                         }
                         LIMIT 1                        
@@ -225,7 +271,7 @@
          <help xml:lang="it"> La lingua utilizzata nella compilazione dei metadati. La lingua di default è l'inglese</help>
          <hasRoot>/gmd:MD_Metadata/gmd:language</hasRoot>
          <produces>
-            <item hasIndex="1" xml:id="ling_md_1" isLanguageNeutral="true" isFixed="false" hasDatatype="codelist" datasource="languages" show="combobox">
+            <item hasIndex="1" xml:id="ling_md_1" isLanguageNeutral="true" isFixed="true" hasDatatype="codelist" datasource="languages" show="combobox">
                <hasPath>/gmd:MD_Metadata/gmd:language/gmd:LanguageCode</hasPath>
                <defaultValue>http://inspire-registry.jrc.ec.europa.eu/registers/Languages/items/5</defaultValue>
             </item>
@@ -269,25 +315,35 @@
           database dei contatti, è sufficiente cominciare a digitare le prime 3 lettere dell'indirizzo email. </help>
          <hasRoot>/gmd:MD_Metadata</hasRoot>
          <produces>
-            <item hasIndex="1" xml:id="md_resp_1" outIndex="3" isFixed="false" hasDatatype="autoCompletion" datasource="person">
+            <item hasIndex="1" xml:id="md_resp_1" outIndex="4" isFixed="false" hasDatatype="autoCompletion" datasource="person">
                <label xml:lang="en">Email</label>
                <label xml:lang="it">Email</label>
                <hasPath>/gmd:MD_Metadata/gmd:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:electronicMailAddress/gco:CharacterString</hasPath>
             </item>
-            <item hasIndex="2" xml:id="md_resp_2" outIndex="1" field="inst" isFixed="false" hasDatatype="select" datasource="personS">
+             <item hasIndex="2" xml:id="md_resp_2" outIndex="1" field="fullname" isFixed="false" hasDatatype="select" datasource="personS">
+                 <label xml:lang="en">Full name</label>
+                 <label xml:lang="it">Nome completo</label>
+                 <hasPath>/gmd:MD_Metadata/gmd:contact/gmd:CI_ResponsibleParty/gmd:individualName/gmx:Anchor</hasPath>
+             </item>
+             <item hasIndex="3" xml:id="md_resp_3" outIndex="2" field="orcid1" isFixed="false" hasDatatype="select" datasource="personS">
+                 <label xml:lang="en">ORCID</label>
+                 <label xml:lang="it">ORCID</label>
+                 <hasPath>/gmd:MD_Metadata/gmd:contact/gmd:CI_ResponsibleParty/gmd:individualName/gmx:Anchor/@xlink:href</hasPath>
+             </item>
+            <item hasIndex="4" xml:id="md_resp_4" outIndex="3" field="l" isFixed="false" hasDatatype="select" datasource="personS">
                <label xml:lang="en">Institute</label>
                <label xml:lang="it">Ente</label>
                <hasPath>/gmd:MD_Metadata/gmd:contact/gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString</hasPath>
             </item>
-            <item hasIndex="4" xml:id="md_resp_4" isFixed="true" hasDatatype="URI">
+            <item hasIndex="5" xml:id="md_resp_5" isFixed="true" hasDatatype="URI">
                <hasPath>/gmd:MD_Metadata/gmd:contact/gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode/@codeList</hasPath>
                <hasValue>http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#CI_RoleCode</hasValue>
             </item>
-            <item hasIndex="5" xml:id="md_resp_5" isLanguageNeutral="true" isFixed="true" hasDatatype="codelist" datasource="roleCodes">
+            <item hasIndex="6" xml:id="md_resp_6" isLanguageNeutral="true" isFixed="true" hasDatatype="codelist" datasource="roleCodes">
                <hasPath>/gmd:MD_Metadata/gmd:contact/gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode</hasPath>
                <defaultValue>http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/pointOfContact</defaultValue>
             </item>
-            <item hasIndex="6" xml:id="md_resp_6" isFixed="true" hasDatatype="ref">
+            <item hasIndex="7" xml:id="md_resp_7" isFixed="true" hasDatatype="ref">
                <hasPath>/gmd:MD_Metadata/gmd:contact/gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode/@codeListValue</hasPath>
                <hasValue>/gmd:MD_Metadata/gmd:contact/gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode</hasValue>
             </item>
@@ -393,27 +449,37 @@
           è sufficiente cominciare a digitare le prime 3 lettere dell'indirizzo email.</help>
          <hasRoot>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification</hasRoot>
          <produces>
-            <item hasIndex="1" xml:id="resp_1" outIndex="3" isFixed="false" hasDatatype="autoCompletion" datasource="person">
+            <item hasIndex="1" xml:id="resp_1" outIndex="4" isFixed="false" hasDatatype="autoCompletion" datasource="person">
                <label xml:lang="en">Email</label>
                <label xml:lang="it">Email</label>
                <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:pointOfContact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:electronicMailAddress/gco:CharacterString</hasPath>
             </item>
-            <item hasIndex="2" xml:id="resp_2" outIndex="1" field="inst" isFixed="false" hasDatatype="select" datasource="personS_2">
+             <item hasIndex="2" xml:id="resp_2" outIndex="1" field="fullname" isFixed="false" hasDatatype="select" datasource="personS_2">
+                 <label xml:lang="en">Full name</label>
+                 <label xml:lang="it">Nome completo</label>
+                 <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:pointOfContact/gmd:CI_ResponsibleParty/gmd:individualName/gmx:Anchor</hasPath>
+             </item>
+             <item hasIndex="3" xml:id="resp_3" outIndex="2" field="orcid1" isFixed="false" hasDatatype="select" datasource="personS_2">
+                 <label xml:lang="en">ORCID</label>
+                 <label xml:lang="it">ORCID</label>
+                 <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:pointOfContact/gmd:CI_ResponsibleParty/gmd:individualName/gmx:Anchor/@xlink:href</hasPath>
+             </item>
+            <item hasIndex="4" xml:id="resp_4" outIndex="3" field="l" isFixed="false" hasDatatype="select" datasource="personS_2">
                <label xml:lang="en">Institute</label>
                <label xml:lang="it">Ente</label>
                <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:pointOfContact/gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString</hasPath>
             </item>
-            <item hasIndex="4" xml:id="resp_4" isFixed="true" hasDatatype="URI">
+            <item hasIndex="5" xml:id="resp_5" isFixed="true" hasDatatype="URI">
                <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:pointOfContact/gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode/@codeList</hasPath>
                <hasValue>http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#CI_RoleCode</hasValue>
             </item>
-            <item hasIndex="5" xml:id="resp_5" isLanguageNeutral="true" isFixed="false" hasDatatype="codelist" datasource="roleCodes">
+            <item hasIndex="6" xml:id="resp_6" isLanguageNeutral="true" isFixed="false" hasDatatype="codelist" datasource="roleCodes">
                <label xml:lang="en">Role</label>
                <label xml:lang="it">Ruolo</label>
                <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:pointOfContact/gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode/@codeListValue</hasPath>
                <defaultValue>http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/resourceProvider</defaultValue>
             </item>
-            <item hasIndex="6" xml:id="resp_6" isFixed="true" hasDatatype="ref">
+            <item hasIndex="7" xml:id="resp_7" isFixed="true" hasDatatype="ref">
                <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:pointOfContact/gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode</hasPath>
                <hasValue>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:pointOfContact/gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode/@codeListValue</hasValue>
             </item>
@@ -521,6 +587,7 @@
          <produces>
             <item hasIndex="1" xml:id="lim_uso_1" isFixed="false" hasDatatype="string">
                <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_Constraints/gmd:useLimitation/gco:CharacterString</hasPath>
+                <defaultValue>Access and use is open for non commercial uses according to Creative Commons License CC-BY-NC (>3.0), http://creativecommons.org/licenses/by-nc/3.0/legalcode.</defaultValue>
             </item>
          </produces>
       </element>
@@ -533,6 +600,7 @@
          <produces>
             <item hasIndex="1" xml:id="vinc_acc_1" isLanguageNeutral="true" isFixed="false" hasDatatype="codelist" datasource="restrictionCode">
                <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:accessConstraints/gmd:MD_RestrictionCode</hasPath>
+                <defaultValue>http://www.rndt.gov.it/codelists/MD_RestrictionCode/items/8</defaultValue>
             </item>
             <item hasIndex="2" xml:id="vinc_acc_2" isFixed="true" hasDatatype="string">
                <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:accessConstraints/gmd:MD_RestrictionCode/@codeList</hasPath>
@@ -548,6 +616,7 @@
                <help xml:lang="en">Free-text describing constraints or prerequisites for access and fruition of the data. For OpenData it is suggested to indicate as public access, or public access and fruition.</help>
                <help xml:lang="it">E' un testo libero che descrive i vincoli o prerequisiti legali per l'accesso e/o l'utilizzo della risorsa (o dato), da indicare se nel campo precedente si è indicato ' Altri vincoli'. Per il dato pubblico (o OpenData) si deve qui indicare: l'accesso ai dati è pubblico o l'accesso e la fruibilità del dato sono pubblici ed . </help>
                <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:resourceConstraints/gmd:MD_LegalConstraints/gmd:otherConstraints/gco:CharacterString</hasPath>
+                <defaultValue>Access and fruition of data is open for non commercial uses.</defaultValue>
             </item>
          </produces>
       </element>
@@ -593,7 +662,7 @@
         le 23 lingue ufficiali della UE, codificate come da menù a tendina.</help>
          <hasRoot>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification</hasRoot>
          <produces>
-            <item hasIndex="1" xml:id="ling_1" isLanguageNeutral="true" isFixed="false" hasDatatype="codelist" datasource="languages" show="combobox">
+            <item hasIndex="1" xml:id="ling_1" isLanguageNeutral="true" isFixed="true" hasDatatype="codelist" datasource="languages" show="combobox">
                <hasPath>/gmd:MD_Metadata/gmd:identificationInfo/gmd:MD_DataIdentification/gmd:language/gmd:LanguageCode</hasPath>
                <defaultValue>http://inspire-registry.jrc.ec.europa.eu/registers/Languages/items/5</defaultValue>
             </item>
@@ -814,6 +883,7 @@
          <produces>
             <item hasIndex="1" xml:id="gene_1" isFixed="false" hasDatatype="text">
                <hasPath>/gmd:MD_Metadata/gmd:dataQualityInfo/gmd:DQ_DataQuality/gmd:lineage/gmd:LI_Lineage/gmd:statement/gco:CharacterString</hasPath>
+                <defaultValue>Please describe briefly the procedure used to derive the dataset (e.g. input dataset used and processing, validation, etc.).</defaultValue>
             </item>
          </produces>
       </element>
