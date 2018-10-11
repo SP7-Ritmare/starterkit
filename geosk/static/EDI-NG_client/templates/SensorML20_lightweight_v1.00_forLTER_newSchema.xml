@@ -784,12 +784,9 @@
          <help xml:lang="it">Indicare il tipo di memoria che viene utilizzato per archiviare le
                 osservazioni raccolte dal sistema o dal sensore o dalla piattaforma (es. data logger)</help>
          <help xml:lang="en">The type of storage of the observations collected by the system, sensor, or platform (e.g. data logger)</help>
-         <hasRoot>/swes:InsertSensor/swes:procedureDescription/sml:PhysicalSystem/sml:capabilities[@name='specification']/sml:CapabilityList/sml:capability[@name='OperationalCapabilities']/swe:DataRecord[@definition='OperationalCapabilities']/swe:field[@name='Storage_Type']</hasRoot>
+         <hasRoot>/swes:InsertSensor/swes:procedureDescription/sml:PhysicalSystem/sml:capabilities[@name='OperationalCapabilities']/sml:CapabilityList/sml:capability[@name='OperationalCapabilities']</hasRoot>
          <produces>
-            <item hasIndex="1" xml:id="storage_type_1" isFixed="true" hasDatatype="string">
-               <hasPath>swe:Category/@definition</hasPath>
-            </item>
-            <item hasIndex="2" xml:id="storage_type_2" isFixed="false" hasDatatype="string">
+            <item hasIndex="1" xml:id="storage_type_1" isFixed="false" hasDatatype="string">
                <hasPath>swe:Category/swe:value</hasPath>
             </item>
          </produces>
@@ -1155,7 +1152,7 @@
                  <help xml:lang="en">Measured parameter. Start typing the first three letters to obtain suggested autocompletion from controlled vocabularies.</help>
                  <hasPath>sml:output/@name</hasPath>
              </item>
-             <item hasIndex="2" xml:id="output_param_2" outIndex="6" field="root" isFixed="false" hasDatatype="select" datasource="outputsS">
+             <item hasIndex="2" xml:id="output_param_2" outIndex="6" field="root" isFixed="true" hasDatatype="select" datasource="outputsS">
                  <hasPath>sml:output/swe:Quantity/@definition</hasPath>
                  <hasValue>sml:output/@name</hasValue>
              </item>
@@ -1166,11 +1163,11 @@
                  <help xml:lang="en">Unit of measurement of the ouput parameter. Start typing the first three letters to obtain suggested autocompletion from controlled vocabularies.</help>
                  <hasPath>sml:output/swe:Quantity/swe:uom</hasPath>
              </item>
-             <item hasIndex="5" xml:id="output_param_5" outIndex="3" field="urn" isFixed="false" hasDatatype="select" datasource="uom">
+             <item hasIndex="5" xml:id="output_param_5" outIndex="3" field="urn" isFixed="true" hasDatatype="select" datasource="uom">
                  <hasPath>sml:output/swe:Quantity/swe:uom/@code</hasPath>
                  <hasValue>sml:output/swe:Quantity/swe:uom</hasValue>
              </item>
-             <item hasIndex="6" xml:id="output_param_6" outIndex="4" field="c" isFixed="false" hasDatatype="select" datasource="uom">
+             <item hasIndex="6" xml:id="output_param_6" outIndex="4" field="c" isFixed="true" hasDatatype="select" datasource="uom">
                  <hasPath>sml:output/swe:Quantity/swe:uom/@xlink:href</hasPath>
                  <hasValue>sml:output/swe:Quantity/swe:uom</hasValue>
              </item>
