@@ -20,7 +20,7 @@
                 {% url "osk_uploadcsv" as osk_uploadcsv %}
                 <li><a href="{{ osk_browse }}" class="explore {% if request.path == osk_browse %}active{% endif %}">{% trans "Explore SOS" %}</a></li>
                 <li><a href="{{ osk_upload }}" class="upload {% if request.path == osk_upload %}active{% endif %}">{% trans "Upload Observations" %}</a></li>
-                <li><a href="{{ osk_uploadcsv }}" class="upload {% if request.path == osk_uploadcsv %}active{% endif %}">{% trans "Upload CSV file" %}</a></li>
+                <!--li><a href="{{ osk_uploadcsv }}" class="upload {% if request.path == osk_uploadcsv %}active{% endif %}">{% trans "Upload CSV file" %}</a></li-->
           </ul>
         </div>
     </div>
