@@ -163,7 +163,7 @@ def listediml(request):
         if l.mdextension.elements_xml is not None:
             url = '%s%s/ediml' % (settings.SITEURL[:-1], l.get_absolute_url()),
             data.append({'url': url})
-    return json_response(data)
+    return json_response(body=data)
 
 
 def ediml(request, layername):
