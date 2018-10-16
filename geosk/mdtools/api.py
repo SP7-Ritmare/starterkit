@@ -169,17 +169,17 @@ def listediml(request):
 def ediml(request, layername):
     layer = _resolve_layer(request, layername, 'layers.view_layer', _PERMISSION_MSG_METADATA)
     ediml = layer.mdextension.elements_xml
-    return HttpResponse(ediml, mimetype="text/xml")
+    return HttpResponse(ediml, content_type="text/xml")
 
 def rndt(request, layername):
-    layer = _resolve_layer(request, layername, 'layers.view_layer', _PERMISSION_MSG_METADATA)
+    layer = _resolve_layer(request, layername, 'base.view_layer', _PERMISSION_MSG_METADATA)
     rndt = layer.mdextension.rndt_xml
-    return HttpResponse(rndt, mimetype="text/xml")
+    return HttpResponse(rndt, content_type="text/xml")
 
 
 def rndtproxy(request, layername):
-    layer = _resolve_layer(request, layername, 'layers.change_layer', _PERMISSION_MSG_METADATA)
-    ediml = request.raw_post_data
+    layer = _resolve_layer(request, layername, 'base.change_layer', _PERMISSION_MSG_METADATA)
+    ediml = request.body
     try:
         rndt = _ediml2rndt(ediml)
     except UnregisteredSKException, e:
@@ -214,7 +214,7 @@ def importediml(request, template='mdtools/upload_metadata.html'):
         form = UploadMetadataFileForm(request.POST, request.FILES)
         if form.is_valid():
             layername = Layer.objects.get(pk=form.cleaned_data['layer']).typename
-            layer = _resolve_layer(request, layername, 'layers.change_layer', _PERMISSION_MSG_METADATA)
+            layer = _resolve_layer(request, layername, 'base.change_layer', _PERMISSION_MSG_METADATA)
             ediml = request.FILES['file'].read()
             try:
                 rndt = _ediml2rndt(ediml)
@@ -238,7 +238,7 @@ def importrndt(request, template='mdtools/upload_metadata.html'):
         form = UploadMetadataFileForm(request.POST, request.FILES)
         if form.is_valid():
             layername = Layer.objects.get(pk=form.cleaned_data['layer']).typename
-            layer = _resolve_layer(request, layername, 'layers.change_layer', _PERMISSION_MSG_METADATA)
+            layer = _resolve_layer(request, layername, 'base.change_layer', _PERMISSION_MSG_METADATA)
             rndt = request.FILES['file'].read()
             try:
                 _savelayermd(layer, rndt, None)
@@ -347,7 +347,7 @@ def _get_or_create_profile(contact):
     _defaults= {k:v for k, v in contact.items() if k in fields}
     del(_defaults['email']) #
     # create profile
-    profile, is_created = Profile.objects.get_or_create(defaults=_defaults, email=_email)
+    profile, is_created = Profile.objects.get_or_create(defaults=_defaults, email=_email, username=_email)
     return profile
 
 split_email_regexp = re.compile(r'[ .-_]')
@@ -474,7 +474,7 @@ def rndt2dict(exml):
 # ediml version 2
 @login_required
 def ediproxy_importmd(request, layername):
-    layer = _resolve_layer(request, layername, 'layers.change_layer', _PERMISSION_MSG_METADATA)
+    layer = _resolve_layer(request, layername, 'base.change_layer', _PERMISSION_MSG_METADATA)
     isoml = request.POST.get('generatedXml').encode('utf8')
     ediml = request.POST.get('ediml').encode('utf8')
     edimlid = request.POST.get('edimlid')
@@ -489,7 +489,7 @@ def ediproxy_importmd(request, layername):
 # def load_isoedimlid(request, layername):
 
 # def load_isoediml(request, layername):
-#     layer = _resolve_layer(request, layername, 'layers.change_layer', _PERMISSION_MSG_METADATA)
+#     layer = _resolve_layer(request, layername, 'base.change_layer', _PERMISSION_MSG_METADATA)
 #     ediml = request.raw_post_data
 
 #         _savelayermd(layer, rndt, ediml)
