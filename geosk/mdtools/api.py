@@ -166,6 +166,7 @@ def listediml(request):
 
     if not data:
         data.append('Not results')
+
     return json_response(body=data)
 
 
