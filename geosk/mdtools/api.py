@@ -164,6 +164,8 @@ def listediml(request):
             url = '%s%s/ediml' % (settings.SITEURL[:-1], l.get_absolute_url()),
             data.append({'url': url})
 
+    if not data:
+        data.append('Not results')
 
     return json_response(body=data)
 
