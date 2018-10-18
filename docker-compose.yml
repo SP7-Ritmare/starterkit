@@ -113,7 +113,7 @@ services:
       - ./scripts/docker/env/production/sos.env
 
   geoserver:
-    image: geobeyond/geoserver:2.10.x
+    image: geobeyond/geoserver:2.12.x-monit
     restart: unless-stopped
     container_name: geoserver4${COMPOSE_PROJECT_NAME}
     stdin_open: true
@@ -162,7 +162,7 @@ services:
       - "80:80"
 
   data-dir-conf:
-    image: geonode/geoserver_data:2.10.x
+    image: geonode/geoserver_data:2.12.x
     restart: on-failure
     container_name: gsconf4${COMPOSE_PROJECT_NAME}
     labels:
