@@ -167,7 +167,7 @@ def listediml(request):
 
 
 def ediml(request, layername):
-    layer = _resolve_layer(request, layername, 'layers.view_layer', _PERMISSION_MSG_METADATA)
+    layer = _resolve_layer(request, layername, 'base.view_layer', _PERMISSION_MSG_METADATA)
     ediml = layer.mdextension.elements_xml
     return HttpResponse(ediml, content_type="text/xml")
 
