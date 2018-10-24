@@ -23,7 +23,6 @@ def waitforgeoserver(ctx):
     while not _rest_api_availability(os.environ['GEOSERVER_LOCATION'] + 'rest'):
         print ("Wait for GeoServer API availability...")
     print "GeoServer is available for HTTP calls!"
-    
 
 
 @task
