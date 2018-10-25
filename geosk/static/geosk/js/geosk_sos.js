@@ -2667,7 +2667,7 @@ OpenLayers.SOSClient = OpenLayers.Class({
     },
     createLayer: function(){
 	//console.log(this);
-	this.layer = new OpenLayers.Layer.Vector(this.SOSCapabilities.serviceIdentification.title, {
+	this.layer = new OpenLayers.Layer.Vector.SOS(this.SOSCapabilities.serviceIdentification.title, {
             styleMap: new OpenLayers.StyleMap({
 		"default": new OpenLayers.Style({},{
 		    rules: [
