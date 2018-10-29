@@ -21,6 +21,8 @@ MAINTAINER Starterkit development team
 #     && pip install git+https://github.com/celery/billiard.git#egg=billiard \
 #     && pip uninstall --yes kombu \
 #     && pip install git+https://github.com/celery/kombu.git#egg=kombu
+RUN apt-get update \
+    && apt-get install -y geoip-bin
 
 # add bower and grunt command
 ONBUILD COPY . /usr/src/app/
