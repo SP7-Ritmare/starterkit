@@ -69,3 +69,5 @@ local_settings.py
 \.vscode/
 
 \.pytest_cache/
+
+*.dat
