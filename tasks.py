@@ -145,9 +145,16 @@ def geoserverfixture(ctx):
 
 @task
 def updategeoip(ctx):
-    print "**************************fixtures********************************"
+    print "**************************update geoip********************************"
     ctx.run("django-admin.py updategeoip \
---settings={0}".format("geosk.settings"), pty=True)
+    --settings={0}".format("geosk.settings"), pty=True)
+
+
+@task
+def collectmetrics(ctx):
+    print "************************collect metrics******************************"
+    ctx.run("python -W ignore manage.py collect_metrics  \
+    --settings={0} -n -t xml".format("geosk.settings"), pty=True)
 
 
 def _docker_host_ip():

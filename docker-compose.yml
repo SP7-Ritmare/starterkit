@@ -112,6 +112,24 @@ services:
       - ./scripts/docker/env/production/django.env
       - ./scripts/docker/env/production/sos.env
 
+  cron:
+    image: geobeyond/cron:2.7.x
+    restart: unless-stopped
+    container_name: cron4${COMPOSE_PROJECT_NAME}
+    stdin_open: true
+    # tty: true
+    labels:
+        org.geonode.component: cron
+        org.geonode.instance.name: geonode
+    depends_on:
+      - db
+      - geonode
+    command: cron -f && tail -f /var/log/cron.log
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    env_file:
+      - ./scripts/docker/env/production/cron.env
+
   geoserver:
     image: geobeyond/geoserver:2.12.x-monit
     restart: unless-stopped
