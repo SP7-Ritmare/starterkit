@@ -10,8 +10,6 @@ services:
     labels:
         org.geonode.component: db
         org.geonode.instance.name: geonode
-    ports:
-      - "0.0.0.0:5432:5432"
     volumes:
       - dbdata:/var/lib/postgresql/data
       - dbbackups:/pg_backups
@@ -22,17 +20,15 @@ services:
     image: geobeyond/dbsos-postgis:9.5
     restart: unless-stopped
     container_name: dbsos4${COMPOSE_PROJECT_NAME}
-    command: postgres -c config_file=/etc/postgresql/postgresql.conf
     stdin_open: true
     # tty: true
     labels:
         org.geonode.component: dbsos
         org.geonode.instance.name: geonode
-    #ports:
-    #  - "0.0.0.0:5432:5432"
+    # ports:
+    #   - 5432:5432
     volumes:
       - dbsosdata:/dbsosdata
-      - ./custom-conf/postgresql_sos.conf:/etc/postgresql/postgresql.conf
     env_file:
       - ./scripts/docker/env/production/dbsos.env
 
@@ -116,8 +112,26 @@ services:
       - ./scripts/docker/env/production/django.env
       - ./scripts/docker/env/production/sos.env
 
+  cron:
+    image: geobeyond/cron:2.7.x
+    restart: unless-stopped
+    container_name: cron4${COMPOSE_PROJECT_NAME}
+    stdin_open: true
+    # tty: true
+    labels:
+        org.geonode.component: cron
+        org.geonode.instance.name: geonode
+    depends_on:
+      - db
+      - geonode
+    command: cron -f && tail -f /var/log/cron.log
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    env_file:
+      - ./scripts/docker/env/production/cron.env
+
   geoserver:
-    image: geobeyond/geoserver:2.10.x
+    image: geobeyond/geoserver:2.12.x-monit
     restart: unless-stopped
     container_name: geoserver4${COMPOSE_PROJECT_NAME}
     stdin_open: true
@@ -166,7 +180,7 @@ services:
       - "80:80"
 
   data-dir-conf:
-    image: geonode/geoserver_data:2.10.x
+    image: geonode/geoserver_data:2.12.x
     restart: on-failure
     container_name: gsconf4${COMPOSE_PROJECT_NAME}
     labels:

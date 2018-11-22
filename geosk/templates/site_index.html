@@ -2,10 +2,10 @@
 {% load i18n %}
 {% load base_tags %}
 {% comment %}
-This is where you can override the hero area block. You can simply modify the content below or replace it wholesale to meet your own needs.
+This is where you can override the hero area block. You can simply modify the content below or replace it wholesale to meet your own needs. 
 {% endcomment %}
-{% block hero %}
-<div class="jumbotron">
+  {% block hero %}
+  <div class="jumbotron">
     <div class="container">
         <h2><a href="https://www.get-it.it" targer="_blank">GET-IT</a> of LTER-Italy network</h2>
         <p>enables you to provide time series data from field-based environmental sensors. You can describe sensor and upload data that are then linked to the eLTER portal as INSPIRE (2007/2/CE) web services.</p>
@@ -21,8 +21,8 @@ This is where you can override the hero area block. You can simply modify the co
         <p>Need more help? <a href="http://getit.readthedocs.io/en/latest/index.html" title="GET-IT doc" target="_blank">Visit GET-IT documentation</a></p>
         <p></p>
     </div>
-</div>
-{% endblock %}
+  </div>
+  {% endblock %}
 
 {% block bigsearch %}
 {% endblock %}
@@ -31,65 +31,78 @@ This is where you can override the hero area block. You can simply modify the co
 {% endblock %}
 
 {% block showcase %}
-<section id="showcase">
+  <section id="showcase">
     <div class="row">
-        <div class="container text-center">
-            <h2>Featured Datasets</h2>
-            <div class="row home-facets">
-                {% with facet_type='home' %}
-                {% facets as facets %}
-                <!-- Sensor -->
-                <div class="col-md-4">
-                    <p><a href="{% url "osk_browse" %}"><i class="fa fa-rss fa-4x"></i></a></p>
-                    <!--<h2><a href="{% url "osk_browse" %}">{{ facets.layer|default:_("No") }} {% blocktrans count counter=facets.layer %}Sensor{% plural %}Sensors{% endblocktrans %}</a></h2>-->
-                    <h2><a href="{% url "osk_browse" %}">{% trans 'Sensors'%}</a></h2>
-                    <p>Add sensor information and observations collected by them, share yor data with others by standard service.</p>
-                    {% if user.is_authenticated %}
-                    <p class="text-center"><a class="btn btn-default" href="{% url "osk_browse" %}#ediclient_container" role="button">Add sensors &raquo;</a></p>
-                    {% else %}
-                    <p class="text-center"><a class="btn btn-default" href="{% url "osk_browse" %}" role="button">Explore sensors &raquo;</a></p>
-                    {% endif %}
-                </div>
-                <!-- Layer -->
-                <div class="col-md-4">
-                    <p><a href="{% url "layer_browse" %}"><i class="fa fa-square-o fa-4x rotate-45"></i></a></p>
-                    <h2><a href="{% url "layer_browse" %}">{{ facets.layer|default:_("No") }} {% blocktrans count counter=facets.layer %}Layer{% plural %}Layers{% endblocktrans %}</a></h2>
-                    <p>{% trans "Click to search for geospatial data published by other users, organizations and public sources. Download data in standard formats." %}</p>
-                    {% if user.is_authenticated %}
-                    <p class="text-center"><a class="btn btn-default" href="{% url "layer_upload" %}" role="button">{% trans "Add layers" %} &raquo;</a></p>
-                    {% else %}
-                    <p class="text-center"><a class="btn btn-default" href="{% url "layer_browse" %}" role="button">{% trans "Explore layers" %} &raquo;</a></p>
-                    {% endif %}
-                </div>
-                <!-- Map -->
-                <div class="col-md-4">
-                    <p><a href="{% url "maps_browse" %}"><i class="fa fa-map fa-4x"></i></a></p>
-                    <h2><a href="{% url "maps_browse" %}">{{ facets.map|default:_("No") }} {% blocktrans count counter=facets.map %}Map{% plural %}Maps{% endblocktrans %}</a></h2>
-                    <p>{% trans "Data is available for browsing, aggregating and styling to generate maps which can be saved, downloaded, shared publicly or restricted to specify users only." %}</p>
-                    {% if user.is_authenticated %}
-                    <p><a class="btn btn-default" href="{% url "new_map" %}" role="button">{% trans "Create maps" %} &raquo;</a></p>
-                    {% else %}
-                    <p><a class="btn btn-default" href="{% url "maps_browse" %}" role="button">{% trans "Explore maps"%} &raquo;</a></p>
-                    {% endif %}
-                </div>
-                {% endwith %}
-            </div>
+      <div class="container text-center">
+        <h2>Featured Datasets</h2>
+        <div class="row home-facets">
+        {% with facet_type='home' %}
+         {% facets as facets %}
+          <div class="col-md-6">
+            <p><a href="{% url "layer_browse" %}"><i class="fa fa-square-o fa-4x rotate-45"></i></a></p>
+            <h2><a href="{% url "layer_browse" %}">{{ facets.layer|default:_("No") }} {% blocktrans count counter=facets.layer %}Layer{% plural %}Layers{% endblocktrans %}</a></h2>
+            <p>{% trans "Click to search for geospatial data published by other users, organizations and public sources. Download data in standard formats." %}</p>
+            {% if user.is_authenticated %}
+            <p class="text-center"><a class="btn btn-default" href="{% url "layer_upload" %}" role="button">{% trans "Add layers" %} &raquo;</a></p>
+            {% else %}
+            <p class="text-center"><a class="btn btn-default" href="{% url "layer_browse" %}" role="button">{% trans "Explore layers" %} &raquo;</a></p>
+            {% endif %}
+          </div>
+          <div class="col-md-6">
+            <p><a href="{% url "osk_browse" %}"><i class="fa fa-square-o fa-4x rotate-45"></i></a></p>
+            <!--<h2><a href="{% url "osk_browse" %}">{{ facets.layer|default:_("No") }} {% blocktrans count counter=facets.layer %}Sensor{% plural %}Sensors{% endblocktrans %}</a></h2>-->
+            <h2><a href="{% url "osk_browse" %}">{% trans 'Sensors'%}</a></h2>
+            <p>{% trans "Registerd SOS (Sensor Observation Service). It aggregates observations from live in-situ sensors as well as historical data sets (time series data)" %}</p>
+            {% if user.is_authenticated %}
+            <p class="text-center"><a class="btn btn-default" href="{% url "osk_browse" %}#ediclient_container" role="button">{% trans "Add sensors" %} &raquo;</a></p>
+            {% else %}
+            <p class="text-center"><a class="btn btn-default" href="{% url "osk_browse" %}" role="button">{% trans "Explore sensors" %} &raquo;</a></p>
+            {% endif %}
+          </div>
+          <div class="col-md-6">
+            <p><a href="{% url "maps_browse" %}"><i class="fa fa-map-marker fa-4x"></i></a></p>
+            <h2><a href="{% url "maps_browse" %}">{{ facets.map|default:_("No") }} {% blocktrans count counter=facets.map %}Map{% plural %}Maps{% endblocktrans %}</a></h2>
+            <p>{% trans "Data is available for browsing, aggregating and styling to generate maps which can be saved, downloaded, shared publicly or restricted to specify users only." %}</p>
+            {% if user.is_authenticated %}
+            <p><a class="btn btn-default" href="{% url "new_map" %}" role="button">{% trans "Create maps" %} &raquo;</a></p>
+            {% else %}
+            <p><a class="btn btn-default" href="{% url "maps_browse" %}" role="button">{% trans "Explore maps" %} &raquo;</a></p>
+            {% endif %}
+          </div>
+          <div class="col-md-6">
+            <p><a href="{% url "document_browse" %}"><i class="fa fa-newspaper-o fa-4x"></i></a></p>
+            <h2><a href="{% url "document_browse" %}">{{ facets.document|default:_("No") }} {% blocktrans count counter=facets.document %}Document{% plural %}Documents{% endblocktrans %}</a></h2>
+            <p>{% trans "As for the layers and maps GeoNode allows to publish tabular and text data, manage theirs metadata and associated documents." %}</p>
+            {% if user.is_authenticated %}
+            <p class="text-center"><a class="btn btn-default" href="{% url "document_browse" %}" role="button">{% trans "Add documents" %} &raquo;</a></p>
+            {% else %}
+            <p class="text-center"><a class="btn btn-default" href="{% url "document_browse" %}" role="button">{% trans "Explore documents" %} &raquo;</a></p>
+            {% endif %}
+          </div>
+          <div class="col-md-6">
+            <p><a href="{% url "profile_browse" %}"><i class="fa fa-user fa-4x"></i></a></p>
+            <h2><a href="{% url "profile_browse" %}">{{ facets.user|default:_("No") }} {% blocktrans count counter=facets.user %}User{% plural %}Users{% endblocktrans %}</a></h2>
+            <p>{% trans "IHP-WINS allows registered users to easily upload geospatial data and various documents in several formats." %}</p>
+            <p><a class="btn btn-default" href="{% url "profile_browse" %}" role="button">{% trans "See users" %} &raquo;</a></p>
+          </div>
+        {% endwith %}
         </div>
+      </div>
     </div>
     <div class="row">
         <div class="container text-center">
             {% verbatim %}
             <div ng-app="featured">
-                <div ng-repeat="item in featured | limitTo:4">
-                    <div class="col-md-3">
-                        <a href="{{ item.detail_url }}"><img ng-src="{{ item.thumbnail_url }}"/></a>
-                        <h4>{{ item.title | limitTo: 20 }}{{item.title.length > 20 ? '...' : ''}}</h4>
-                    </div>
+              <div ng-repeat="item in featured | limitTo:4">
+                <div class="col-md-3">
+                  <a href="{{ item.detail_url }}"><img ng-src="{{ item.thumbnail_url }}" /></a>
+                  <h4>{{ item.title | limitTo: 20 }}{{item.title.length > 20 ? '...' : ''}}</h4>
                 </div>
+              </div>
             </div>
-            {% endverbatim %}
-            <!--p><a href="/search/">Explore all datasets</a></p-->
+      		{% endverbatim %}
+            <p><a href="/search/">Explore all datasets</a></p>
         </div>
     </div>
-</section>
-{% endblock %}
+  </section>
+  {% endblock %}

@@ -25,6 +25,8 @@ echo "migrations task done"
 echo "prepare task done"
 /usr/local/bin/invoke fixtures >> /usr/src/app/invoke.log
 echo "fixture task done"
+/usr/local/bin/invoke updategeoip >> /usr/src/app/invoke.log
+echo "updategeoip task done"
 
 cmd="$@"
 

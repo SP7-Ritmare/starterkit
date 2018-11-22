@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset="utf-8">
+    <title>GET-IT EDI</title>
+    <link rel="stylesheet" href="css/assets.css">
+    <link rel="stylesheet" href="css/ol.css">
+
+    <script src="js/assets.js"></script>
+    <script src="js/ol.js"></script>
+
+
+    <script src="http://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst"></script>
+    <script src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
+
+    <script language="javascript">
+        function onTemplateLoaded(data) {
+            console.log("fatto");
+        }
+        function pippo(data) {
+            alert("eccomi");
+            console.log(data);
+        }
+        $(document).ready(function () {
+            // ediml.setPostCallbackError(pippo);
+            edi.loadLocalTemplate("SensorML20_vesselCompHistory", "1.00_newEdiSchema", onTemplateLoaded);
+            $("#ediml").hide();
+            $("#sendMetadata").click(ediml.post);
+        });
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+        }
+        function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("text");
+            ev.target.appendChild(document.getElementById(data));
+        }
+        function toggleEDIML(which) {
+            $('#ediml').toggle();
+            if ($("#ediml").is(":visible")) {
+                $(which).text("hide EDIML");
+                edi.edimlOutput();
+            } else {
+                $(which).text("show EDIML");
+            }
+        }
+    </script>
+
+    <!--<link
+            rel="stylesheet"
+            type="text/css"
+            href="//cloud.github.com/downloads/lafeber/world-flags-sprite/flags32.css"
+    />-->
+
+</head>
+<body>
+<div class="content-wrap">
+    <div id="mdcontent"></div>
+    <div id="ediml">
+
+    </div>
+
+    <!-- Title -->
+    <div class="navbar-fixed-top" id="title">
+        <div class="container">
+            <div class="row" style="background-color: #fff">
+                <h1>
+                    <!-- TO DO: GALEONE!! -->
+                    <!--a href="index.html">
+                        <img src="..." title="EDI metadata editor" alt="EDI logo">
+                    </a-->
+                    EDI - SensorML v2.0.0 Vessel history profile
+                </h1>
+                <span style="display: none" id="template-version"></span>
+            </div>
+        </div>
+    </div>
+    <!-- Title end -->
+
+    <!-- EDI form and buttons -->
+    <div class="content-wrap" style="margin-top: 6em">
+        <div class="container">
+            <script> var elements = []; </script>
+            <div class="row">
+                <div class="tabbable tabs-left">
+                    <ul id="myTab" class="nav nav-tabs">
+                        <div class="bottoniera f32">
+                            <!-- https://github.com/lafeber/world-flags-sprite -->
+                            <!--<img alt="Italiano" class="flag it" onclick="edi.setLanguage('it')";></img>
+                            <img alt="English" class="flag gb" onclick="edi.setLanguage('en')";></img>
+                            <img alt="Español" class="flag es" onclick="edi.setLanguage('es')";></img>-->
+                            <button class="btn btn-primary" onclick="edi.setLanguage('it');">it</button>
+                            <button class="btn btn-primary" onclick="edi.setLanguage('en');">en</button>
+                            <button class="btn btn-primary" onclick="edi.setLanguage('es');">es</button>
+                            <br>
+                            <button class="btn btn-danger debug" onclick="toggleEDIML(this);">show EDIML</button>
+                            <br>
+                            <button class="btn btn-danger" onclick="ediml.saveAs('local');">save locally</button>
+                            <br>
+                            <button class="btn btn-danger" onclick="ediml.load('local');">load last version</button>
+                            <br>
+                            <button class="btn btn-danger" style="display: none;" id="EDIMLDownload"
+                                    onclick="ediml.downloadEDIML();">download EDIML
+                            </button>
+                            <br>
+                            <button class="btn btn-danger" style="display: none;" id="MDDownload"
+                                    onclick="ediml.downloadMetadata();">download generated XML
+                            </button>
+                            <br>
+                            <button class="btn btn-primary" id="sendMetadata">send metadata</button>
+                            <input type="checkbox" value="0" id="ignoreWarnings">ignore warnings
+                        </div>
+                    </ul>
+                    <article class="span8" id="mdcontent">
+                        <div id="theForm">
+                            <div class="tab-content">
+
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end content -->
+
+    <div id="debug">
+
+    </div>
+</div>
+</body>
+</html>

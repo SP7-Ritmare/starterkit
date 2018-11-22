@@ -4,6 +4,7 @@ import os
 import re
 import datetime
 import docker
+import socket
 
 from invoke import run, task
 
@@ -22,7 +23,6 @@ def waitforgeoserver(ctx):
     while not _rest_api_availability(os.environ['GEOSERVER_LOCATION'] + 'rest'):
         print ("Wait for GeoServer API availability...")
     print "GeoServer is available for HTTP calls!"
-    
 
 
 @task
@@ -107,6 +107,8 @@ def prepare(ctx):
     _prepare_site_fixture()
     ctx.run("rm -rf /tmp/apikey_docker.json", pty=True)
     _prepare_apikey_fixture()
+    ctx.run("rm -rf /tmp/default_monitoring_apps_docker.json", pty=True)
+    _prepare_monitoring_fixture()
 
 
 @task
@@ -124,6 +126,8 @@ def fixtures(ctx):
 --settings={0}".format("geosk.settings"), pty=True)
     ctx.run("django-admin.py loaddata /tmp/apikey_docker.json \
 --settings={0}".format("geosk.settings"), pty=True)
+    ctx.run("django-admin.py loaddata /tmp/default_monitoring_apps_docker.json \
+--settings={0}".format("geosk.settings"), pty=True)
 
 
 @task
@@ -137,6 +141,20 @@ def collectstatic(ctx):
 def geoserverfixture(ctx):
     print "*****************geoserver fixture********************************"
     _geoserver_info_provision(os.environ['GEOSERVER_LOCATION'] + "rest/")
+
+
+@task
+def updategeoip(ctx):
+    print "**************************update geoip********************************"
+    ctx.run("django-admin.py updategeoip \
+    --settings={0}".format("geosk.settings"), pty=True)
+
+
+@task
+def collectmetrics(ctx):
+    print "************************collect metrics******************************"
+    ctx.run("python -W ignore manage.py collect_metrics  \
+    --settings={0} -n -t xml".format("geosk.settings"), pty=True)
 
 
 def _docker_host_ip():
@@ -228,7 +246,7 @@ def _prepare_oauth_fixture():
             "pk": 1001,
             "fields": {
                 "skip_authorization": True,
-                "redirect_uris": "http://{0}:{1}/geoserver".format(
+                "redirect_uris": "http://{0}:{1}/geoserver/index.html".format(
                     pub_ip, pub_port
                 ),
                 "name": "GeoServer",
@@ -559,3 +577,66 @@ def _pycsw_info_provision():
         }
     }
     return PYCSW
+
+def _prepare_monitoring_fixture():
+    pub_ip = _geonode_public_host_ip()
+    print "Public Hostname or IP is {0}".format(pub_ip)
+    pub_port = _geonode_public_port()
+    print "Public PORT is {0}".format(pub_port)
+    default_fixture = [
+        {
+            "fields": {
+                "active": True,
+                "ip": "{0}".format(
+                    socket.gethostbyname('geonode')
+                ),
+                "name": "geonode"
+            },
+            "model": "monitoring.host",
+            "pk": 1
+        },
+        {
+            "fields": {
+                "name": "local-geonode",
+                "url": "",
+                "notes": "",
+                "last_check": None,
+                "active": True,
+                "host": 1,
+                "check_interval": "00:01:00",
+                "service_type": 1
+            },
+            "model": "monitoring.service",
+            "pk": 1
+        },
+        {
+            "fields": {
+                "name": "local-system-geonode",
+                "url": "http://geonode:80/",
+                "notes": "",
+                "last_check": None,
+                "active": True,
+                "host": 1,
+                "check_interval": "00:01:00",
+                "service_type": 3
+            },
+            "model": "monitoring.service",
+            "pk": 2
+        },
+        {
+            "fields": {
+                "name": "local-geoserver",
+                "url": "http://geonode:80/geoserver/",
+                "notes": "",
+                "last_check": None,
+                "active": True,
+                "host": 1,
+                "check_interval": "00:01:00",
+                "service_type": 2
+            },
+            "model": "monitoring.service",
+            "pk": 3
+        }
+    ]
+    with open('/tmp/default_monitoring_apps_docker.json', 'w') as fixturefile:
+        json.dump(default_fixture, fixturefile)

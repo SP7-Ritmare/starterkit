@@ -50,11 +50,6 @@ geoskurlpatterns = patterns(
         TemplateView.as_view(template_name='sk_credits.html'),
         name='sk_credits'
     ),
-    # gdpr
-    url(r'^gdpr/',
-        TemplateView.as_view(template_name='gdpr.html'),
-        name='gdpr'
-    ),
 
     ###
     ## additional services within GeoNode

@@ -1642,3 +1642,21 @@ OpenLayers.Protocol.CSW.v2_0_2 = OpenLayers.Class(OpenLayers.Protocol, {
     CLASS_NAME: "OpenLayers.Protocol.CSW.v2_0_2"
 
 });
+
+
+OpenLayers.Layer.Vector.SOS = OpenLayers.Class(OpenLayers.Layer.Vector, {
+
+     mergeNewParams:function(newParams) {
+        this.params = OpenLayers.Util.extend(this.params, newParams);
+        var ret = this.redraw();
+        if(this.map != null) {
+            this.map.events.triggerEvent("changelayer", {
+                layer: this,
+                property: "params"
+            });
+        }
+        return ret;
+    },
+
+    CLASS_NAME: "OpenLayers.Layer.Vector.SOS"
+});
