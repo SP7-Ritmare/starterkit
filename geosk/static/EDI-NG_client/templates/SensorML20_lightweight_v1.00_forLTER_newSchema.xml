@@ -5,7 +5,7 @@
       <metadataLanguage selectionItem="ling_md_1"/>
       <metadataEndpoint>http://edi.get-it.it/</metadataEndpoint>
       <sparqlEndpoint>http://sparql.get-it.it</sparqlEndpoint>
-      <requiresValidation>true</requiresValidation>
+      <requiresValidation>false</requiresValidation>
       <baseDocument><![CDATA[
             
             <swes:InsertSensor service="SOS" version="2.0.0" xmlns:swes="http://www.opengis.net/swes/2.0"
@@ -42,6 +42,7 @@
         
       </xsltChain>
    </settings>
+
    <endpointTypes>
       <endpointType xml:id="EnvThes" method="GET" queryParameter="query">
          <parameters>
@@ -63,6 +64,7 @@
          </parameters>
       </endpointType>
    </endpointTypes>
+
    <datasources>
       <codelist xml:id="languages" endpointType="virtuoso">
          <uri>http://inspire-registry.jrc.ec.europa.eu/registers/Languages/items</uri>
@@ -461,6 +463,7 @@
          <uri>http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole</uri>
       </codelist>
    </datasources>
+
    <group xml:id="name_desc">
       <label xml:lang="it">Descrizione del sistema</label>
       <label xml:lang="en">Description of system</label>
@@ -679,6 +682,23 @@
    <group xml:id="capab">
       <label xml:lang="it">Capacità</label>
       <label xml:lang="en">Capabilities</label>
+      <element xml:id="offering" isMandatory="false" isMultiple="false">
+         <hasRoot>/swes:InsertSensor/swes:procedureDescription/sml:PhysicalSystem/sml:capabilities[@name='offerings']/sml:CapabilityList/sml:capability[@name='offeringID']/swe:Text[@definition='urn:ogc:def:identifier:OGC:offeringID']</hasRoot>
+         <produces>
+            <item hasIndex="1" xml:id="offering_1" isFixed="true" hasDatatype="string">
+               <hasPath>swe:label</hasPath>
+               <hasValue>offering</hasValue>
+            </item>
+            <item hasIndex="2" xml:id="offering_2" isFixed="true" hasDatatype="ref">
+               <hasPath>swe:value_offering</hasPath>
+               <hasValue>/swes:InsertSensor/swes:procedureDescription/sml:PhysicalSystem/gml:identifier</hasValue>
+            </item>
+            <item hasIndex="3" xml:id="offering_3" isFixed="true" hasDatatype="function">
+               <hasPath>swe:value</hasPath>
+               <hasValue>concat('offering:', swe:value_offering/text(), '/observations')</hasValue>
+            </item>
+         </produces>
+      </element>
       <element xml:id="status_capab" isMandatory="false" isMultiple="false">
          <label xml:lang="it">Stato del sistema</label>
          <label xml:lang="en">Status</label>
@@ -801,7 +821,17 @@
                <hasPath>sml:contact/@xlink:arcrole</hasPath>
                <hasValue>http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/owner</hasValue>
             </item>
-            <item hasIndex="3" xml:id="owner_3" outIndex="2" field="l" isFixed="false" hasDatatype="select" datasource="info_owner">
+            <item hasIndex="3" xml:id="owner_3" outIndex="2" isFixed="false" hasDatatype="select" datasource="info_owner" field="pidPers">
+               <label xml:lang="it">ORCID</label>
+               <label xml:lang="en">ORCID</label>
+               <hasPath>sml:contact/@xlink:href</hasPath>
+            </item>
+            <item hasIndex="4" xml:id="owner_4" outIndex="3" field="fullname" isFixed="false" hasDatatype="select" datasource="info_owner">
+               <label xml:lang="it">Nome proprietario</label>
+               <label xml:lang="en">Owner name</label>
+               <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:individualName/gco:CharacterString</hasPath>
+            </item>
+            <item hasIndex="5" xml:id="owner_5" outIndex="4" field="l" isFixed="false" hasDatatype="select" datasource="info_owner">
                <label xml:lang="it">Organizzazione proprietario</label>
                <label xml:lang="en">Owner organisation</label>
                <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString</hasPath>
@@ -866,9 +896,19 @@
                <hasPath>sml:contact/@xlink:arcrole</hasPath>
                <hasValue>http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/pointOfContact</hasValue>
             </item>
-            <item hasIndex="3" xml:id="operator_3" outIndex="2" field="l" isFixed="false" hasDatatype="select" datasource="info_operator">
-               <label xml:lang="it">Nome operatore</label>
-               <label xml:lang="en">Operator name</label>
+            <item hasIndex="3" xml:id="operator_3" outIndex="2" isFixed="false" hasDatatype="select" datasource="info_operator" field="pidPers">
+               <label xml:lang="it">ORCID</label>
+               <label xml:lang="en">ORCID</label>
+               <hasPath>sml:contact/@xlink:href</hasPath>
+            </item>
+            <item hasIndex="4" xml:id="operator_4" outIndex="3" field="fullname" isFixed="false" hasDatatype="select" datasource="info_operator">
+               <label xml:lang="it">Nome proprietario</label>
+               <label xml:lang="en">Owner name</label>
+               <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:individualName/gco:CharacterString</hasPath>
+            </item>
+            <item hasIndex="5" xml:id="operator_5" outIndex="4" field="l" isFixed="false" hasDatatype="select" datasource="info_operator">
+               <label xml:lang="it">Nome organizzazione</label>
+               <label xml:lang="en">Organisation name</label>
                <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString</hasPath>
             </item>
             <!--item hasIndex="4" xml:id="operator_4" outIndex="3" field="phone" isFixed="false" hasDatatype="select" datasource="info_operator">
