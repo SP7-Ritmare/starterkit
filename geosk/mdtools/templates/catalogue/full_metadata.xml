@@ -1,5 +1,5 @@
 {% if layer.mdextension.rndt_xml %}
-{{ resource.mdextension.rndt_xml_clean|safe }}
+{{ layer.mdextension.rndt_xml_clean|safe }}
 {% else %}
 {% include "catalogue/_full_metadata.xml" %}
 {% endif %}
