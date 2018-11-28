@@ -648,3 +648,18 @@ PROXY_ALLOWED_HOSTS = ("*",)
 PIWIK_DOMAIN_PATH = 'monitor.get-it.it/piwik'
 
 THESAURI = [{'name':'inspire_themes', 'required':False, 'filter':True}]
+
+HAYSTACK_SEARCH = True
+
+SKIP_PERMS_FILTER = True
+INSTALLED_APPS += ('haystack', )
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch2_backend.Elasticsearch2SearchEngine',
+        'URL': os.getenv('HAYSTACK_ENGINE_URL', 'http://172.23.0.5:9200/'),
+        'INDEX_NAME': os.getenv('HAYSTACK_ENGINE_INDEX_NAME', 'haystack'),
+    },
+}
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = int(os.getenv('HAYSTACK_SEARCH_RESULTS_PER_PAGE', '200'))
+        

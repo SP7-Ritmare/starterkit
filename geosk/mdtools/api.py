@@ -299,6 +299,8 @@ def _savelayermd(layer, rndt, ediml, version='1'):
             _set_contact_role_scope(key, value, layer.mdextension)
         setattr(layer, key, value)
 
+    layer.metadata_xml = rndt
+
     layer.save()
 
     # save rndt & edi xml
