@@ -315,9 +315,9 @@ if os.getenv('DOCKER_ENV'):
 # MAPs and Backgrounds
 
 # Default preview library
-LAYER_PREVIEW_LIBRARY = 'geoext'
+# LAYER_PREVIEW_LIBRARY = 'geoext'
 
-# LAYER_PREVIEW_LIBRARY = 'leaflet'
+LAYER_PREVIEW_LIBRARY = 'leaflet'
 LEAFLET_CONFIG = {
     'TILES': [
         # Find tiles at:
@@ -646,3 +646,5 @@ PROXY_ALLOWED_HOSTS = ("*",)
 
 # Set default analytical
 PIWIK_DOMAIN_PATH = 'monitor.get-it.it/piwik'
+
+THESAURI = [{'name':'inspire_themes', 'required':False, 'filter':True}]
