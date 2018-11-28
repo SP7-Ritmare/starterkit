@@ -1,0 +1,136 @@
+Workshop with Stefano Menegon @Irea milano, 27, 28/11/2018
+
+iGeonode Ultima versione 2.8, ma su get-it 2.7
+geoserver 2.12
+postgres 26
+pycsw 2.0.3
+sos 4.4.0
+
+Stefano:
+(***) Procedure di migrazione per aggiornamento a nuove versioni. Esistono in geonode. Il cascata è: aggiornamento di geoserver, aggiornamento di geonode (con adattamento di strutture dati). Qui sopra si dovrebbe costruire aggiornamento get-it.
+
+Django -> geonode -> get-it
+
+geonode architecture
+
+sotto questo ci sono 2 sw INDIPENDENTI
+geoserver, 52north sos
+** invocati con servizi o API.
+[ma non condividono il database postgres?]
+
+Modelli di customizzazione:
+-1- Personalizzazione base. 
+a. template override
+b. static files override
+c. settings (config) customisation (es. cambiare o separare i DB)
+d. bare package installation (pacchetti aggiuntivi nel backend senza nuove pagine)
+
+-2- Downstream projects.
+- basati su installazione geonode senza modifiche
+- template overwrite
+- statica files overwrite
+- settings customization
+- URL overwrite
+- ...
+
+ 
+Esempi di modifiche
+Modifica settings.py: cambio preview, la chiedo con leaflet.
+va riavviato docker-compose stop django && docker-compose start django
+
+-----
+spulciamo la ricerca
+-----
+da site_base.html
+manca-> andiamo a vedere base di geonode
+usa haystack che è strato django che si appoggia a diversi sw tra cui elasticsearch
+troviamo form con acrtion %url “search”. Dobbiamo guardare in urls.py (di geonode).
+poi c’è un %if che guarda se haystack è attivo o no.
+il template è un template statico che contiene un js che esegue la ricerca e con angualrjs la renderizza.
+vedi: https://github.com/GeoNode/geonode/blob/debian/2.7.5%2Bdev20180124154147/geonode/templates/search/search.html
+
+L’url effettivamente chiamato è /api/base
+(Nel nostro caso haystack non è attivo)
+
+vedi geonode/api/urls.py
+vedi poi https://github.com/GeoNode/geonode/blob/debian/2.7.5%2Bdev20180124154147/geonode/api/resourcebase_api.py
+usa tastypie (restful api per modelli django)
+/api/base -> cerca su tutto
+/api/layers, /api/maps/, /api/documents/ -> cercano in modo specifico.
+/api/profiles/ -> cerca gli utenti
+
+
+— inciso sulle keyword che vengono gestite con tagit django-
+domanda: come si toglie, per esempio, un titolo dalle categorie? (i tag vengono collezionati via via che si aggiungono e sono poi visibili come facet di ricerca e vengono suggeriti nell’edizione dei metadati).
+NOTA: esiste anche una parte su keyword (tkeyword) da thesaurus . sarebbe interessante approfondire, ma mi pare che l’interfaccia di editing del metadato non le rende modificabili.
+
+---
+entra in container docker django
+docker exec -it django4starterkit bash
+python manage.py help | more
+python manage.py dbshell —>> apre shell psql su db
+python manage.py  shellplus —>> apre shell ipython (sehll con tutti gli import fatti)!!!!
+
+python manage.py help load_thesaurus —> help su singolo comando
+
+__________________
+Riassunto
+geonode ad-hoc api.
+Al momento per pubblicare API viene usato tastypi. In futuro potrebbe essere djsngo restful.
+http://docs.geonode.org/en/master/reference/api.html
+
+script di amministrazione progetti django in cartelle management/command. Sono script utilizzabili da shell.
+es:
+https://github.com/GeoNode/geonode/tree/debian/2.7.5%2Bdev20180124154147/geonode/layers/management/commands
+
+
+-----
+creazione super user
+python manage.py createsuperuser —username testuser —> in questo modo se ho perso controllo del sito lo posso riprendere entrando (via web) con il nuovo utente creato.
+
+in db la convenzione per le tabelle è 
+nomeApplicazione_modelllo
+in questo caso 
+base_thesaurus
+
+in shell plus si trova SETTINGS.database
+
+come lavora edi
+facciamo il giro. Vediamo chiamata quando si aggiorna metadato la chiamata a /ediproxy/…/
+in urls.py
+..
+ediproxy_importmd
+… alla fine chiama:
+_savelayermd
+
+python manage.py shell_plus
+layer=Layer.objects.all()[2]
+layer.metadata_xml 
+
+layer.name=‘Countries Europe"
+layer.save()
+
+----
+in getit
+mdtools/models.py viene definita estensione del modello come tabella riferita in relazione 1:1 con tabella base. 
+(class Mdextension)
+
+---
+configurazione 
+geonode/catalog
+https://github.com/GeoNode/geonode/blob/debian/2.7.5%2Bdev20180124154147/geonode/catalogue/backends/pycsw_local_mappings.py
+
+definisce mappatura tra campi db e tabella di geonode (resource_base)
+
+Trovato problema settings del catalogo. I link da scarica MD sono errati.
+In settings di geonode si trova che è composizione di SITEURL con “cataogue/..."
+
+
+
+____
+https://django-haystack.readthedocs.io/en/master/management_commands.html
+
+//eseguiamo
+python manage.py rebuild_index
+//vediamo apparire numero layer, profile, mappe, documenti...
+//in tutto 5 indici
