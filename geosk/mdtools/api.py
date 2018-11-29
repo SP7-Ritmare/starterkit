@@ -478,7 +478,7 @@ def rndt2dict(exml):
 # ediml version 2
 @login_required
 def ediproxy_importmd(request, layername):
-    layer = _resolve_layer(request, layername, 'base.change_layer', _PERMISSION_MSG_METADATA)
+    layer = _resolve_layer(request, layername, 'base.change_resourcebase', _PERMISSION_MSG_METADATA)
     isoml = request.POST.get('generatedXml').encode('utf8')
     ediml = request.POST.get('ediml').encode('utf8')
     edimlid = request.POST.get('edimlid')
