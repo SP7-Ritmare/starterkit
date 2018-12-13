@@ -583,6 +583,8 @@ def _prepare_monitoring_fixture():
     print "Public Hostname or IP is {0}".format(pub_ip)
     pub_port = _geonode_public_port()
     print "Public PORT is {0}".format(pub_port)
+    #d = str(datetime.datetime.now())
+    d = '1970-01-01 00:00:00'
     default_fixture = [
         {
             "fields": {
@@ -600,7 +602,7 @@ def _prepare_monitoring_fixture():
                 "name": "local-geonode",
                 "url": "",
                 "notes": "",
-                "last_check": None,
+                "last_check": d,
                 "active": True,
                 "host": 1,
                 "check_interval": "00:01:00",
@@ -614,7 +616,7 @@ def _prepare_monitoring_fixture():
                 "name": "local-system-geonode",
                 "url": "http://geonode:80/",
                 "notes": "",
-                "last_check": None,
+                "last_check": d,
                 "active": True,
                 "host": 1,
                 "check_interval": "00:01:00",
@@ -626,9 +628,9 @@ def _prepare_monitoring_fixture():
         {
             "fields": {
                 "name": "local-geoserver",
-                "url": "http://geonode:80/geoserver/",
+                "url": "http://{0}:80/geoserver/".format(pub_ip),
                 "notes": "",
-                "last_check": None,
+                "last_check": d,
                 "active": True,
                 "host": 1,
                 "check_interval": "00:01:00",
