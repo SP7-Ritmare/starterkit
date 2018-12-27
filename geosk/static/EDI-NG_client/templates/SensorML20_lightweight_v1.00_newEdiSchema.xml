@@ -647,6 +647,23 @@ LIMIT 1
     <group xml:id="capab">
         <label xml:lang="it">Capacità</label>
         <label xml:lang="en">Capabilities</label>
+        <element xml:id="offering" isMandatory="false" isMultiple="false">
+            <hasRoot>/swes:InsertSensor/swes:procedureDescription/sml:PhysicalSystem/sml:capabilities[@name='offerings']/sml:CapabilityList/sml:capability[@name='offeringID']/swe:Text[@definition='urn:ogc:def:identifier:OGC:offeringID']</hasRoot>
+            <produces>
+                <item hasIndex="1" xml:id="offering_1" isFixed="true" hasDatatype="string">
+                    <hasPath>swe:label</hasPath>
+                    <hasValue>offering</hasValue>
+                </item>
+                <item hasIndex="2" xml:id="offering_2" isFixed="true" hasDatatype="ref">
+                    <hasPath>swe:value_offering</hasPath>
+                    <hasValue>/swes:InsertSensor/swes:procedureDescription/sml:PhysicalSystem/gml:identifier</hasValue>
+                </item>
+                <item hasIndex="3" xml:id="offering_3" isFixed="true" hasDatatype="function">
+                    <hasPath>swe:value</hasPath>
+                    <hasValue>concat('offering:', swe:value_offering/text(), '/observations')</hasValue>
+                </item>
+            </produces>
+        </element>
         <element xml:id="status_capab" isMandatory="false" isMultiple="false">
             <label xml:lang="it">Stato del sistema</label>
             <label xml:lang="en">Status</label>
