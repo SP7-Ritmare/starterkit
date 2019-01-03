@@ -315,7 +315,7 @@ if os.getenv('DOCKER_ENV'):
 # MAPs and Backgrounds
 
 # Default preview library
-LAYER_PREVIEW_LIBRARY = 'leaflet'
+LAYER_PREVIEW_LIBRARY = 'geoext'
 #GEONODE_CLIENT_HOOKSET = "geonode.client.hooksets.LeafletHookSet"
 
 # LAYER_PREVIEW_LIBRARY = 'leaflet'
