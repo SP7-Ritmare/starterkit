@@ -316,6 +316,7 @@ if os.getenv('DOCKER_ENV'):
 
 # Default preview library
 LAYER_PREVIEW_LIBRARY = 'geoext'
+#GEONODE_CLIENT_HOOKSET = "geonode.client.hooksets.LeafletHookSet"
 
 # LAYER_PREVIEW_LIBRARY = 'leaflet'
 LEAFLET_CONFIG = {
@@ -350,7 +351,7 @@ LEAFLET_CONFIG = {
         },
         'leaflet-fullscreen': {
             'css': 'lib/css/leaflet.fullscreen.css',
-            'js': 'lib/js/Leaflet.fullscreen.min.js',
+            'js': 'js/Leaflet.fullscreen.min.js',
             'auto-include': True,
         },
     },
