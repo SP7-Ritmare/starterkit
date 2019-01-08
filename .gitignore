@@ -70,4 +70,4 @@ local_settings.py
 
 \.pytest_cache/
 
-*.dat
+#*.dat
