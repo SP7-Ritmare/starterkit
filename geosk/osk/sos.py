@@ -31,8 +31,6 @@ SensorObservationService_2_0_0.get_result_template = extension_sos200.get_result
 SensorObservationService_2_0_0.get_feature_of_interest_json = extension_sos200.get_feature_of_interest_json
 SensorObservationService_2_0_0.insert_observation_json = extension_sos200.insert_observation_json
 
-
-
 class Catalog(object):
     def __init__(self, service_url, username="observations", password="observations", version='2.0.0'):
         self.service_url = service_url
@@ -68,7 +66,8 @@ class Catalog(object):
             if full:
                 try:
                     ds['describe_sensor'] = cap.describe_sensor(outputFormat='http://www.opengis.net/sensorML/1.0.1', procedure=sensor_id)
-                    ds['name'] = ds['describe_sensor'].sensor_ml.members[0].name
+                    #ds['name'] = ds['describe_sensor'].sensor_ml.members[0].name
+                    ds['name'] = ds['describe_sensor'].sensor_ml.members[0].name if ds['describe_sensor'].sensor_ml.members[0].name else ds['describe_sensor'].sensor_ml.members[0].identifiers['long name'].value
                     ds['description'] = ds['describe_sensor'].sensor_ml.members[0].description
                     ds['isvalid'] = True
                 except: #(AttributeError, IndexError, HTTPError):
