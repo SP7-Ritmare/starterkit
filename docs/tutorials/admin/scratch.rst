@@ -71,7 +71,20 @@ Install the latest version of the binary or a specific version with the command:
     sudo apt-get install docker-ce  # latest
     
 or::
-    
+
+To install a specific version of Docker CE, list the available versions in the repo, then select and install::
+
+List the versions available in your repo::
+
+    $ apt-cache madison docker-ce
+    docker-ce | 5:18.09.1~3-0~ubuntu-xenial | https://download.docker.com/linux/ubuntu  xenial/stable amd64 Packages
+    docker-ce | 5:18.09.0~3-0~ubuntu-xenial | https://download.docker.com/linux/ubuntu  xenial/stable amd64 Packages
+    docker-ce | 18.06.1~ce~3-0~ubuntu       | https://download.docker.com/linux/ubuntu  xenial/stable amd64 Packages
+    docker-ce | 18.06.0~ce~3-0~ubuntu       | https://download.docker.com/linux/ubuntu  xenial/stable amd64 Packages
+    ...
+
+Install a specific version using the version string from the second column, for example, 5:18.09.1~3-0~ubuntu-xenial::
+
     sudo apt-get install docker-ce=<VERSION>  # specific
 
 The docker daemon will start automatically.
