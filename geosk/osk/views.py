@@ -43,8 +43,11 @@ def describe_sensor(request):
 
     cat = models.Sensor.objects.sos_catalog
     cap = cat.get_capabilities()
-    xml = cap.describe_sensor(
-        outputFormat='http://www.opengis.net/sensorml/2.0', procedure=sensor_id.encode(), raw=True)
+    # Fix error if XML is  sensorml 1.0.1
+    try:
+        xml = cap.describe_sensor(outputFormat='http://www.opengis.net/sensorml/2.0', procedure=sensor_id.encode(), raw=True)
+    except: #XMLSyntaxError:
+        xml = cap.describe_sensor(outputFormat='http://www.opengis.net/sensorML/1.0.1', procedure=sensor_id.encode(), raw=True)
 
     if output_format == 'text/xml':
         return HttpResponse(xml, content_type='application/xml')
