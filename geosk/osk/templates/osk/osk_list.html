@@ -97,11 +97,11 @@
                         {% endif %}
                     </h2>
                     <p>{{ sensor.description }}</p>
-                    <p class="break-word"><small>{{ sensor.id|urlize }}</small></p>
                     <div class="btn-toolbar">
                         <div class="btn-group">
                             {% if sensor.isvalid %}
                             <a href="{% url "osk_describe_sensor" %}?format={{ 'text/html'|urlencode }}&sensor_id={{sensor.id|urlencode }}" target="_blank" data-toggle="modal" class="btn btn-mini btn-default">{% trans "Sensor details" %}</a>
+                            <a href="{{ sensor.id }}" download="{{ sensor.id }}" target="_blank" data-toggle="modal" class="btn btn-mini btn-default">download SensorML XML</a>
                             {% endif %}
                             {% if perms.osk.admin_sos %}
                             {% if sensor.isvalid %}
