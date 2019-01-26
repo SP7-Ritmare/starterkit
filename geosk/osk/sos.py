@@ -67,8 +67,9 @@ class Catalog(object):
                 try:
                     ds['describe_sensor'] = cap.describe_sensor(outputFormat='http://www.opengis.net/sensorML/1.0.1', procedure=sensor_id)
                     #ds['name'] = ds['describe_sensor'].sensor_ml.members[0].name
-                    ds['name'] = ds['describe_sensor'].sensor_ml.members[0].name if ds['describe_sensor'].sensor_ml.members[0].name else ds['describe_sensor'].sensor_ml.members[0].identifiers['long name'].value
-                    ds['description'] = ds['describe_sensor'].sensor_ml.members[0].description
+                    ds['name'] = ds['describe_sensor'].sensor_ml.members[0].name if ds['describe_sensor'].sensor_ml.members[0].name else ds['describe_sensor'].sensor_ml.members[0].identifiers['short name'].value
+                    #ds['description'] = ds['describe_sensor'].sensor_ml.members[0].description
+                    ds['description'] = ds['describe_sensor'].sensor_ml.members[0].description if ds['describe_sensor'].sensor_ml.members[0].description else ds['describe_sensor'].sensor_ml.members[0].identifiers['long name'].value
                     ds['isvalid'] = True
                 except: #(AttributeError, IndexError, HTTPError):
                     ds['description'] = 'Invalid Sensor'
