@@ -2,7 +2,9 @@ from datetime import datetime, timedelta
 import cgi
 from urllib import urlencode
 from urllib2 import HTTPError
-from xml.etree.ElementTree import XML
+from xml.etree.ElementTree import fromstring
+from owslib.swe.sensor.sml import SensorML
+import requests
 
 from django.conf import settings
 
@@ -71,6 +73,25 @@ class Catalog(object):
                     #ds['description'] = ds['describe_sensor'].sensor_ml.members[0].description
                     ds['description'] = ds['describe_sensor'].sensor_ml.members[0].description if ds['describe_sensor'].sensor_ml.members[0].description else ds['describe_sensor'].sensor_ml.members[0].identifiers['long name'].value
                     ds['isvalid'] = True
+                    # for output content in the SensorML
+                    r = requests.get(sensor_id)
+                    root = fromstring(r.content)
+                    ns = {'sml': 'http://www.opengis.net/sensorML/1.0.1', 'swe': 'http://www.opengis.net/swe/1.0.1'}
+                    outputLen = len(root.findall(".//sml:output", ns))
+                    outputs = []
+                    for i in range(outputLen):
+                       if root.findall(".//sml:output[@name]", ns)[i].attrib["name"] != 'phenomenonTime':
+                          oo = {}
+                          oo["definition"] = root.findall(".//sml:output/swe:Quantity[@definition]", ns)[i-1].attrib["definition"]
+                          oo["name"] = root.findall(".//sml:output[@name]", ns)[i].attrib["name"]
+                          try:
+                             oo["uom"] = root.findall(".//sml:output/swe:Quantity/swe:uom[@code]", ns)[i-1].attrib["code"]
+                          except:
+                             oo["uom"] = ""
+                          outputs.append(oo)
+                          # outputs.append([root.findall(".//sml:output/swe:Quantity[@definition]", ns)[i-1].attrib["definition"], root.findall(".//sml:output[@name]", ns)[i].attrib["name"]])
+                    ds['outputs'] = outputs
+                    # end output content in the SensorML
                 except: #(AttributeError, IndexError, HTTPError):
                     ds['description'] = 'Invalid Sensor'
                     ds['isvalid'] = False
