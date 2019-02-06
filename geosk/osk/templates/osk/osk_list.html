@@ -97,6 +97,19 @@
                         {% endif %}
                     </h2>
                     <p>{{ sensor.description }}</p>
+                    <p class="break-word"><small><b>Sensor ID: {{ sensor.id|urlize }}</b></small></p>
+                    <p><b>Parameters: </b>
+                        <table style="width: 100%; border-collapse: collapse;">
+                        {% for oN in sensor.outputs %}
+                        <tr><td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;border-top: 1px solid #ddd;">
+                        <a href="{{ oN.definition }}" target="_blank">{{ oN.name }}</a></td>
+                        <td style="padding: 8px; text-align: left; border-bottom: 1px solid #ddd;border-top: 1px solid #ddd;">{{ oN.uom }}</td></tr>
+                        <!--span style="padding-right:0.5em">
+                        <a href="{{ oN.definition }}" target="_blank">{{ oN.name }}</a> ({{ oN.uom }})
+                        </span-->
+                        {% endfor %}
+                        </table>
+                    </p>
                     <div class="btn-toolbar">
                         <div class="btn-group">
                             {% if sensor.isvalid %}
