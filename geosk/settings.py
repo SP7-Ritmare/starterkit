@@ -85,23 +85,26 @@ STATICFILES_DIRS = [os.path.join(LOCAL_ROOT, "static")] + STATICFILES_DIRS
 
 # INSTALLED_APPS += (PROJECT_NAME,)
 
-INSTALLED_APPS = (
+INSTALLED_APPS += (
     # GeoSK
     # 'geosk.rndt',
-    #  'geosk.demo',
+    # 'geosk.demo',
+    # 'geosk',
     'geosk.osk',
     'geosk.mdtools',
     'geosk.geoskbase',
     #  'geosk.search',
     #  'geosk.patches',
     'geosk.skregistration',
+
     'overextends',  # https://github.com/stephenmcd/django-overextends
     'rosetta',
     'grappelli.dashboard',
     'grappelli',
     'analytical',
-    'taggit_templatetags',
-) + INSTALLED_APPS
+    # 'taggit_templatetags',
+    'taggit_templatetags2',
+)
 
 # INSTALLED_APPS = (
 #     # GeoSK
@@ -306,7 +309,6 @@ if os.getenv('DOCKER_ENV'):
             # Set to name of database in DATABASES dictionary to enable
             # 'datastore',
             'DATASTORE': os.getenv('DEFAULT_BACKEND_DATASTORE', ''),
-            'PG_GEOGIG': False,
             # 'CACHE': ".cache"  # local cache file to for HTTP requests
             'TIMEOUT': 10  # number of seconds to allow for HTTP requests
         }
@@ -514,8 +516,6 @@ if MONITORING_ENABLED:
         MONITORING_HOST_NAME = 'localhost'
     MONITORING_SERVICE_NAME = 'local-geonode'
 
-INSTALLED_APPS += ('geonode.contrib.ows_api',)
-
 GEOIP_PATH = os.path.join(os.path.dirname(__file__), '..', 'GeoLiteCity.dat')
 
 LOGGING = {
@@ -536,10 +536,6 @@ LOGGING = {
         }
     },
     'handlers': {
-        'null': {
-            'level': 'INFO',
-            'class': 'django.utils.log.NullHandler',
-        },
         'console': {
             'level': 'INFO',
             'class': 'logging.StreamHandler',
@@ -552,7 +548,7 @@ LOGGING = {
     },
     "loggers": {
         "django": {
-            "handlers": ["console"], "level": "INFO", },
+            "handlers": ["console"], "level": "DEBUG", },
         "geonode": {
             "handlers": ["console"], "level": "INFO", },
         "gsconfig.catalog": {
@@ -643,7 +639,6 @@ THEME_ACCOUNT_CONTACT_EMAIL = 'help.skritmare@irea.cnr.it'
 ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = True
 REGISTRATION_OPEN = False
 PROXY_ALLOWED_HOSTS = ("*",)
-
 
 # Set default analytical
 PIWIK_DOMAIN_PATH = 'monitor.get-it.it/piwik'

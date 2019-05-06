@@ -1,8 +1,9 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from django.views.generic import TemplateView
+from . import views
 
 urlpatterns = [
-    url(r'^registration$', 'geosk.skregistration.views.registration', name='skregistration_registration'),
-    url(r'^register$', 'geosk.skregistration.views.register', name='skregistration_register'),
-    url(r'^verify$', 'geosk.skregistration.views.verify', name='skregistration_verify'),
+    url(r'^registration$', views.registration, name='skregistration_registration'),
+    url(r'^register$', views.register, name='skregistration_register'),
+    url(r'^verify$', views.verify, name='skregistration_verify'),
 ]
