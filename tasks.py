@@ -341,7 +341,7 @@ def _prepare_service_metadata_fixture():
                 "contact_name": contact_name,
                 "node_keywords": node_keywords
             },
-            "model": "mdtools.servicesmetadata",
+            "model": "geosk_mdtools.servicesmetadata",
             "pk": 1
         }
     ]
