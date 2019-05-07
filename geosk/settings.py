@@ -85,7 +85,7 @@ STATICFILES_DIRS = [os.path.join(LOCAL_ROOT, "static")] + STATICFILES_DIRS
 
 # INSTALLED_APPS += (PROJECT_NAME,)
 
-INSTALLED_APPS += (
+INSTALLED_APPS = (
     # GeoSK
     # 'geosk.rndt',
     # 'geosk.demo',
@@ -104,7 +104,7 @@ INSTALLED_APPS += (
     'analytical',
     # 'taggit_templatetags',
     'taggit_templatetags2',
-)
+) + INSTALLED_APPS
 
 # INSTALLED_APPS = (
 #     # GeoSK

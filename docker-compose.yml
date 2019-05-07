@@ -85,7 +85,7 @@ services:
       - db
       - elasticsearch
       - rabbitmq
-    command: celery worker --app=geosk.celery_app:app -B -l INFO
+    command: celery worker --app=geosk.celeryapp:app -B -l INFO
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     env_file:
@@ -131,7 +131,7 @@ services:
       - ./scripts/docker/env/production/cron.env
 
   geoserver:
-    image: geobeyond/geoserver:2.12.x-monit
+    image: geonode/geoserver:2.14.x
     restart: unless-stopped
     container_name: geoserver4${COMPOSE_PROJECT_NAME}
     stdin_open: true
@@ -180,7 +180,7 @@ services:
       - "80:80"
 
   data-dir-conf:
-    image: geonode/geoserver_data:2.12.x
+    image: geonode/geoserver_data:2.14.x
     restart: on-failure
     container_name: gsconf4${COMPOSE_PROJECT_NAME}
     labels:
