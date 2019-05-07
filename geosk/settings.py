@@ -102,77 +102,8 @@ INSTALLED_APPS = (
     'grappelli.dashboard',
     'grappelli',
     'analytical',
-    # 'taggit_templatetags',
     'taggit_templatetags2',
 ) + INSTALLED_APPS
-
-# INSTALLED_APPS = (
-#     # GeoSK
-#     # 'geosk.rndt',
-#     'geosk.demo',
-#     'geosk.osk',
-#     'geosk.mdtools',
-#     'geosk.geoskbase',
-#     'geosk.search',
-#     'geosk.patches',
-#     'geosk.skregistration',
-#     'overextends', # https://github.com/stephenmcd/django-overextends
-#     'rosetta',
-#     'grappelli.dashboard',
-#     'grappelli',
-
-#     # Apps bundled with Django
-#     'django.contrib.auth',
-#     'django.contrib.contenttypes',
-#     'django.contrib.sessions',
-#     'django.contrib.sites',
-#     'django.contrib.admin',
-#     'django.contrib.sitemaps',
-#     'django.contrib.staticfiles',
-#     'django.contrib.messages',
-#     'django.contrib.humanize',
-
-#     # Third party apps
-#     'analytical',
-
-#     # Utility
-#     'pagination',
-#     'taggit',
-#     'taggit_templatetags',
-#     'south',
-#     'friendlytagloader',
-#     'geoexplorer',
-#     'django_extensions',
-
-#     # Theme
-#     "pinax_theme_bootstrap_account",
-#     "pinax_theme_bootstrap",
-#     'django_forms_bootstrap',
-
-#     # Social
-#     'account',
-#     'avatar',
-#     'dialogos',
-#     'agon_ratings',
-#     'notification',
-#     'announcements',
-#     'actstream',
-#     'user_messages',
-
-#     # GeoNode internal apps
-#     'geonode.people',
-#     'geonode.base',
-#     'geonode.layers',
-#     'geonode.upload',
-#     'geonode.maps',
-#     'geonode.proxy',
-#     'geonode.security',
-#    # 'geonode.search',
-#     'geonode.social',
-#     'geonode.catalogue',
-#     'geonode.documents',
-
-# )
 
 # Location of url mappings
 ROOT_URLCONF = os.getenv('ROOT_URLCONF', '{}.urls'.format(PROJECT_NAME))
@@ -215,62 +146,16 @@ ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = True
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 ACCOUNT_APPROVAL_REQUIRED = True
 
-SOCIALACCOUNT_ADAPTER = 'geonode.people.adapters.SocialAccountAdapter'
-
-SOCIALACCOUNT_AUTO_SIGNUP = False
-
-# Uncomment this to enable Linkedin and Facebook login
-# INSTALLED_APPS += (
-#     'allauth.socialaccount.providers.linkedin_oauth2',
-#     'allauth.socialaccount.providers.facebook',
-# )
-
-SOCIALACCOUNT_PROVIDERS = {
-    'linkedin_oauth2': {
-        'SCOPE': [
-            'r_emailaddress',
-            'r_basicprofile',
-        ],
-        'PROFILE_FIELDS': [
-            'emailAddress',
-            'firstName',
-            'headline',
-            'id',
-            'industry',
-            'lastName',
-            'pictureUrl',
-            'positions',
-            'publicProfileUrl',
-            'location',
-            'specialties',
-            'summary',
-        ]
-    },
-    'facebook': {
-        'METHOD': 'oauth2',
-        'SCOPE': [
-            'email',
-            'public_profile',
-        ],
-        'FIELDS': [
-            'id',
-            'email',
-            'name',
-            'first_name',
-            'last_name',
-            'verified',
-            'locale',
-            'timezone',
-            'link',
-            'gender',
-        ]
-    },
-}
-
-SOCIALACCOUNT_PROFILE_EXTRACTORS = {
-    "facebook": "geonode.people.profileextractors.FacebookExtractor",
-    "linkedin_oauth2": "geonode.people.profileextractors.LinkedInExtractor",
-}
+# security settings
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
+CSRF_COOKIE_HTTPONLY = False
+X_FRAME_OPTIONS = 'DENY'
+SECURE_CONTENT_TYPE_NOSNIFF = False
+SECURE_BROWSER_XSS_FILTER = False
+SECURE_SSL_REDIRECT = False
+SECURE_HSTS_SECONDS = 3600
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 if os.getenv('DOCKER_ENV'):
 
@@ -290,6 +175,7 @@ if os.getenv('DOCKER_ENV'):
             'LOCATION': GEOSERVER_LOCATION,
             'LOGIN_ENDPOINT': 'j_spring_oauth2_geonode_login',
             'LOGOUT_ENDPOINT': 'j_spring_oauth2_geonode_logout',
+            'WEB_UI_LOCATION': GEOSERVER_WEB_UI_LOCATION,
             # PUBLIC_LOCATION needs to be kept like this because in dev mode
             # the proxy won't work and the integration tests will fail
             # the entire block has to be overridden in the local_settings
@@ -309,7 +195,11 @@ if os.getenv('DOCKER_ENV'):
             # 'datastore',
             'DATASTORE': os.getenv('DEFAULT_BACKEND_DATASTORE', ''),
             # 'CACHE': ".cache"  # local cache file to for HTTP requests
-            'TIMEOUT': 10  # number of seconds to allow for HTTP requests
+            'TIMEOUT': int(os.getenv('OGC_REQUEST_TIMEOUT', '5')),
+            'MAX_RETRIES': int(os.getenv('OGC_REQUEST_MAX_RETRIES', '5')),
+            'BACKOFF_FACTOR': float(os.getenv('OGC_REQUEST_BACKOFF_FACTOR', '0.3')),
+            'POOL_MAXSIZE': int(os.getenv('OGC_REQUEST_POOL_MAXSIZE', '10')),
+            'POOL_CONNECTIONS': int(os.getenv('OGC_REQUEST_POOL_CONNECTIONS', '10')),
         }
     }
 
@@ -547,7 +437,7 @@ LOGGING = {
     },
     "loggers": {
         "django": {
-            "handlers": ["console"], "level": "DEBUG", },
+            "handlers": ["console"], "level": "INFO", },
         "geonode": {
             "handlers": ["console"], "level": "INFO", },
         "gsconfig.catalog": {
@@ -557,7 +447,7 @@ LOGGING = {
         "pycsw": {
             "handlers": ["console"], "level": "INFO", },
         "geosk": {
-            "handlers": ["console"], "level": "DEBUG", },
+            "handlers": ["console"], "level": "INFO", },
     },
 }
 
