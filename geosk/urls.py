@@ -15,9 +15,9 @@ geoskurlpatterns = [
 
     # override / extend GeoNode's URLS
     # url(r'^$', 'geonode.views.index', {'template': 'site_index.html'}, name='home'),
-    url(r'^layers/(?P<layername>[^/]*)/metadata$',
+    url(r'^layers/(?P<layername>[^/]*)/metadata_advanced$',
         api.rndteditor,
-        name="layer_metadata"),
+        name="layer_metadata_advanced"),
     url(r'^layers/(?P<layername>[^/]*)/ediml$',
         api.ediml,
         name="layer_ediml"),

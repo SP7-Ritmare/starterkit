@@ -1,6 +1,6 @@
 <script>
 $('.form-horizontal').before('\
-  <div class="well span3" style="position: absolute; right: 160px;">\
+  <div class="well col-md-8" style="position: absolute; right: 160px;">\
   <fieldset>\
     <legend>Import metadata</legend>\
     <form>\
@@ -29,7 +29,7 @@ $("#searchTemplate").select2({
     placeholder: 'Search...',
     width: 'element',     
     ajax: {
-        url: '{% url "search_api" %}',
+        url: '/api/layers',
         data: function(term,page){
             page = (page - 1) * 10;
             return {
@@ -41,9 +41,9 @@ $("#searchTemplate").select2({
             }
         },
         results: function(data, page) {
-            var more = (page * 10) < data.total;
+            var more = (page * 10) < data.meta.total_count;
             return {
-		results: $.map(data.results,function(object){
+		results: $.map(data.objects,function(object){
                     return {id: object.id, text: object.title, object: object};
 		}),
 		more: more
@@ -51,7 +51,7 @@ $("#searchTemplate").select2({
         }          
     },
     createSearchChoice:function(term, data) { if ($(data).filter(function() { return this.text.localeCompare(term)===0; }).length===0) {return {id:term, text:term};} 
-					    }
+    }
 });
 
 $('#import-metadata-import').on('click', function (e) {

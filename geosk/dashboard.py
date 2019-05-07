@@ -79,7 +79,7 @@ class CustomIndexDashboard(Dashboard):
             children=[
                 {
                     'title': _('Update translations'),
-                    'url': reverse('rosetta-home'),
+                    'url': reverse('rosetta-old-home-redirect'),
                     'external': False,
                     'description': _('Update the translations for your languages'),
                 },
