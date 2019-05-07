@@ -31,8 +31,8 @@ def get_data_api(request, format='json'):
     if request.method not in ('GET','POST'):
         return HttpResponse(status=405)
 
-    rtype = request.REQUEST.get('rtype')
-    id = request.REQUEST.get('id')
+    rtype = request.POST.get('rtype')
+    id = request.POST.get('id')
 
     if rtype == 'layer':
         r = Layer.objects.get(pk=id)
