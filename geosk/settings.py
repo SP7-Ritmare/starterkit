@@ -120,10 +120,15 @@ LOCALE_PATHS = (
 ) + LOCALE_PATHS
 
 TEMPLATES[0]['DIRS'].insert(0, os.path.join(LOCAL_ROOT, "templates"))
+
 loaders = TEMPLATES[0]['OPTIONS'].get('loaders') or [
-    'django.template.loaders.filesystem.Loader', 'django.template.loaders.app_directories.Loader']
-# loaders.insert(0, 'apptemplates.Loader')
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+]
+builtins = ['overextends.templatetags.overextends_tags',]
+
 TEMPLATES[0]['OPTIONS']['loaders'] = loaders
+TEMPLATES[0]['OPTIONS']['builtins'] = builtins
 TEMPLATES[0].pop('APP_DIRS', None)
 
 CLIENT_RESULTS_LIMIT = 20

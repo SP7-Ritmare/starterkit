@@ -1,5 +1,6 @@
-{% include 'geonode/ext_header.html' %}
-{% include 'geonode/geo_header.html' %}
+{% include "geoext/ext_header.html" %}
+{% include "geoext/app_header.html" %}
+{% include "geonode/geo_header.html" %}
 <style type="text/css">
 #aboutbutton {
     display: none;
