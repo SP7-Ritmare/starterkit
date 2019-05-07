@@ -154,7 +154,7 @@ define(function (require, exports) {
      *  @returns {FromData}
      */
     LayerInfo.prototype.prepareFormData = function (form_data) {
-        var i, ext, file, perm, geogig, geogig_store, time, mosaic;
+        var i, ext, file, perm, time, mosaic;
 
         var base_ext  = this.main.name.split('.').pop();
         var base_name = this.name;
@@ -176,16 +176,6 @@ define(function (require, exports) {
             perm = permissionsString('#permission_form','layers');
         }
 
-        if (geogig_enabled) {
-            geogig_store = $('#' + base_name + '\\:geogig_store').val();
-            geogig = $('#' + base_name + '\\:geogig_toggle').is(':checked') && geogig_store.length != 0;
-            if (geogig) {
-                form_data.append('geogig_store', geogig_store);
-            } else {
-                form_data.append('geogig_store', "");
-            }
-            form_data.append('geogig', geogig);
-        }
         if (time_enabled) {
             time = $('#' + base_name + '-time').is(':checked');
             form_data.append('time', time);
@@ -540,27 +530,6 @@ define(function (require, exports) {
         });
     };
 
-    LayerInfo.prototype.setupGeogigDropdown = function(selector){
-        function format(item){return item.name;};
-        $(selector).select2({
-           data: {results:geogig_stores, text:'name'},
-           formatSelection: format,
-           formatResult: format,
-           placeholder: gettext('Select or create a Geogig repository.'),
-
-            id: function(object) {
-             return object.name;
-           },
-            createSearchChoice:function(term, data) {
-             if ($(data).filter( function() {
-               return this.name.localeCompare(term)===0;
-             }).length===0) {
-               return {name:term.replace(/[`~!@#$%^&*()|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '')};
-             }
-           }
-          });
-    }
-
     /** Function to display the layers collected from the files
      * selected for uploading
      *
@@ -575,9 +544,8 @@ define(function (require, exports) {
                 selector: LayerInfo.safeSelector(this.name),
                 type: this.type.name,
                 format: this.type.format,
-                geogig: geogig_enabled,
                 time: time_enabled,
-				mosaic: mosaic_enabled
+                mosaic: mosaic_enabled
             });
         file_queue.append(li);
         this.errors = this.collectErrors();
@@ -650,12 +618,6 @@ define(function (require, exports) {
 		      $('#' + this.name + '-valid').show();
 	       }
         });
-
-        $('#' + this.name + '\\:geogig_toggle').on('change', this.doGeoGigToggle);
-
-        // Add values to the geogig store dropdown and hide.
-        this.setupGeogigDropdown($('#' + this.name.split('.')[0] + '\\:geogig_store'));
-        $("#s2id_" + this.name + "\\:geogig_store").hide()
 
         return li;
     };
@@ -763,20 +725,6 @@ define(function (require, exports) {
         this.errors = this.collectErrors();
         this.displayFiles();
         this.displayErrors();
-    };
-
-    LayerInfo.prototype.doGeoGigToggle = function (event) {
-        var target = event.target || event.srcElement;
-        var id = target.id;
-        var base_name = id.split(':')[0];
-        var geogig = $('#' + id.replace(':', '\\:')).is(':checked');
-        if (geogig) {
-            $('#' + base_name + '\\:geogig_store').show();
-            $("#s2id_" + base_name + "\\:geogig_store").show()
-        } else {
-            $("#s2id_" + base_name + "\\:geogig_store").hide()
-            $('#' + base_name + '\\:geogig_store').hide();
-        }
     };
 
     LayerInfo.prototype.doImageMosaicToggle = function (event) {

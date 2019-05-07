@@ -236,16 +236,6 @@
       </article>
       {% endif %}
 
-      {% if GEOGIG_ENABLED and resource.link_set.geogig %}
-        {% with "_geogig_layer_detail.html" as geogig_template %}
-        <article id="geogig" class="tab-pane">
-          {% with resource as obj %}
-            {% include geogig_template %}
-          {% endwith %}
-        </article>
-        {% endwith %}
-      {% endif %}
-
       {% if DISPLAY_RATINGS %}
       <article id="rate" class="tab-pane">
         <!-- TODO: Move this to a reusable template snippet -->
@@ -729,12 +719,6 @@
 
 {% block extra_script %}
 {{ block.super }}
-
-    {% if GEOGIG_ENABLED and resource.link_set.geogig %}
-        {% with "_geogig_scripts.html" as geogig_scripts_template %}
-            {% include  geogig_scripts_template %}
-        {% endwith %}
-    {% endif %}
 
     {% if request.user.is_authenticated %}
         {% user_rating_js request.user resource "layer" %}

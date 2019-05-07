@@ -300,7 +300,6 @@ if os.getenv('DOCKER_ENV'):
             'PRINT_NG_ENABLED': True,
             'GEONODE_SECURITY_ENABLED': True,
             'GEOFENCE_SECURITY_ENABLED': GEOFENCE_SECURITY_ENABLED,
-            'GEOGIG_ENABLED': False,
             'WMST_ENABLED': False,
             'BACKEND_WRITE_ENABLED': True,
             'WPS_ENABLED': False,
