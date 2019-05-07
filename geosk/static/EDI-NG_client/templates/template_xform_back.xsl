@@ -160,6 +160,12 @@
             <xsl:if test="@show">
                 <xsl:element name="show"><xsl:value-of select="@show" /></xsl:element>
             </xsl:if>
+            <xsl:if test="@useCode">
+                <xsl:element name="useCode"><xsl:value-of select="@useCode" /></xsl:element>
+            </xsl:if>
+            <xsl:if test="@useURN">
+                <xsl:element name="useURN"><xsl:value-of select="@useURN" /></xsl:element>
+            </xsl:if>
             <xsl:copy-of select="help" />
             <xsl:copy-of select="hasPath" />
             <xsl:copy-of select="hasValue" />

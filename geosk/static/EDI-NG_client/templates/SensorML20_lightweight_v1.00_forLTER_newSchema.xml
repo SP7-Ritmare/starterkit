@@ -37,10 +37,9 @@
         
         ]]></baseDocument>
       <xsltChain>
-
+            
          <xslt>http://sp7.irea.cnr.it/jboss/MDService/rest/SensorML20_lightweight_forLTER.xsl?version=1.00</xslt>
-          <!--xslt>http://sp7.irea.cnr.it/jboss/MDService/rest/identity.xsl?version=1.00</xslt-->
-
+        
       </xsltChain>
    </settings>
    <endpointTypes>
@@ -71,80 +70,80 @@
       </codelist>
       <sparql xml:id="outputs" endpointType="EnvThes">
          <query><![CDATA[
-
-                     PREFIX skos: <http://www.w3.org/2004/02/skos/core#> SELECT * WHERE {
-                         SERVICE <http://vocabs.ceh.ac.uk/evn/tbl/sparql> {
-                             GRAPH <urn:x-evn-pub:envthes>{
-                                 {
-                                     BIND (<http://vocabs.lter-europe.net/EnvThes/20935> as ?root)
-                                     ?root (skos:narrower*) ?c.
-                                     ?c skos:prefLabel ?l.
-                                 }
-                                 FILTER( REGEX( STR(?l), "$search_param", "i") )
-                             }
-                         }
-                     }
-
-             ]]></query>
+                
+                    PREFIX skos: <http://www.w3.org/2004/02/skos/core#> SELECT * WHERE {
+                        SERVICE <http://vocabs.ceh.ac.uk/evn/tbl/sparql> {
+                            GRAPH <urn:x-evn-pub:envthes>{
+                                {
+                                    BIND (<http://vocabs.lter-europe.net/EnvThes/20935> as ?root)
+                                    ?root (skos:narrower*) ?c.
+                                    ?c skos:prefLabel ?l.
+                                }
+                                FILTER( REGEX( STR(?l), "$search_param", "i") )
+                            }
+                        }
+                    }
+                
+            ]]></query>
          <url>http://sdi.adamassoft.it/proxy/?proxyTo=http://vocabs.ceh.ac.uk/evn/tbl/sparql</url>
       </sparql>
       <singleton xml:id="outputsS" endpointType="EnvThes" triggerItem="output_param_1_uri">
          <query><![CDATA[
-
-                     PREFIX skos: <http://www.w3.org/2004/02/skos/core#> SELECT ?root WHERE {
-                                     BIND (<$search_param> as ?root)
-                     }
-
-             ]]></query>
+                
+                    PREFIX skos: <http://www.w3.org/2004/02/skos/core#> SELECT ?root WHERE {
+                                    BIND (<$search_param> as ?root)
+                    }
+                
+            ]]></query>
          <url>http://sdi.adamassoft.it/proxy/?proxyTo=http://vocabs.ceh.ac.uk/evn/tbl/sparql</url>
       </singleton>
       <!--sparql xml:id="outputs" endpointType="virtuoso">
-          <query><![CDATA[
+         <query><![CDATA[
 
-                       PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-                       SELECT ?c ?l ?a
-                       FROM <http://ritmare.it/rdfdata/parameters>
-                       WHERE {
-                         ?c rdf:type skos:Concept.
-                         OPTIONAL {
-                           ?c skos:prefLabel ?l.
-                           FILTER( LANG(?l) = "en")
-                         }
-                         OPTIONAL {
-                           ?c skos:prefLabel ?a.
-                           FILTER( LANG(?a) = "it")
-                         }
-                         FILTER( REGEX( STR(?l), "$search_param", "i") || REGEX( STR(?a), "$search_param", "i") )
-                       }
-                       ORDER BY ASC(?l) ASC(?a)
+                        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                        SELECT ?c ?l ?a
+                        FROM <http://ritmare.it/rdfdata/parameters>
+                        WHERE {
+                          ?c rdf:type skos:Concept.
+                          OPTIONAL {
+                            ?c skos:prefLabel ?l.
+                            FILTER( LANG(?l) = "en")
+                          }
+                          OPTIONAL {
+                            ?c skos:prefLabel ?a.
+                            FILTER( LANG(?a) = "it")
+                          }
+                          FILTER( REGEX( STR(?l), "$search_param", "i") || REGEX( STR(?a), "$search_param", "i") )
+                        }
+                        ORDER BY ASC(?l) ASC(?a)
 
-           ]]></query>
+            ]]></query>
       </sparql>
       <singleton xml:id="outputsS" endpointType="virtuoso" triggerItem="output_param_1_uri">
-          <query><![CDATA[
+         <query><![CDATA[
 
-                       PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-                       SELECT ?c ?l ?a
-                       FROM <http://ritmare.it/rdfdata/parameters>
-                       WHERE {
-                         ?c rdf:type skos:Concept.
-                         OPTIONAL {
-                           ?c skos:prefLabel ?l.
-                           FILTER( LANG(?l) = "en")
-                         }
-                         OPTIONAL {
-                           ?c skos:prefLabel ?a.
-                           FILTER( LANG(?a) = "it")
-                         }
-                         FILTER( REGEX( STR(?c), "$search_param", "i") || REGEX( STR(?a), "$search_param", "i") )
-                       }
-                       ORDER BY ASC(?l) ASC(?a)
+                        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                        SELECT ?c ?l ?a
+                        FROM <http://ritmare.it/rdfdata/parameters>
+                        WHERE {
+                          ?c rdf:type skos:Concept.
+                          OPTIONAL {
+                            ?c skos:prefLabel ?l.
+                            FILTER( LANG(?l) = "en")
+                          }
+                          OPTIONAL {
+                            ?c skos:prefLabel ?a.
+                            FILTER( LANG(?a) = "it")
+                          }
+                          FILTER( REGEX( STR(?c), "$search_param", "i") || REGEX( STR(?a), "$search_param", "i") )
+                        }
+                        ORDER BY ASC(?l) ASC(?a)
 
-           ]]></query>
+            ]]></query>
       </singleton-->
       <sparql xml:id="sensorType" endpointType="fuseki1">
          <query><![CDATA[
-
+                
                 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
                 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
                     SELECT ?c ?l ?a
@@ -159,32 +158,33 @@
                     ?c skos:prefLabel ?a.
                     FILTER( LANG(?a) = "it")
                     }
+                    FILTER( REGEX( STR(?l), "$search_param", "i") || REGEX( STR(?a), "$search_param", "i") )
                     }
                     ORDER BY ASC(?l) ASC(?a)
-
+                    
             ]]></query>
          <url>http://vocab.nerc.ac.uk/sparql/sparql</url>
       </sparql>
       <singleton xml:id="manufacturers" endpointType="fuseki1">
          <query><![CDATA[
-
+                
                         PREFIX ns: <http://www.w3.org/2006/vcard/ns#>
                         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
                         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-                        SELECT ?c ?l
+                        SELECT ?c ?l 
                         WHERE {
                           ?c rdf:type foaf:Organization.
                           ?c foaf:name ?l.
                           FILTER( REGEX( STR(?l), "$search_param", "i") )
                         }
-                        ORDER BY ASC(?l)
-
+                        ORDER BY ASC(?l)                        
+                        
             ]]></query>
          <url>http://fuseki1.get-it.it/manufacturers/sparql</url>
       </singleton>
       <singleton xml:id="info_manufacturers" endpointType="fuseki1" triggerItem="manuf_name_3_uri">
          <query><![CDATA[
-
+                
                         PREFIX addr: <http://wymiwyg.org/ontologies/foaf/postaddress#>
                         PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
                         PREFIX foaf: <http://xmlns.com/foaf/0.1/>
@@ -227,41 +227,41 @@
                             ?b3 addr:country ?country.
                           }
                         }
-
+                        
             ]]></query>
          <url>http://fuseki1.get-it.it/manufacturers/sparql</url>
       </singleton>
       <sparql xml:id="intended_applications" endpointType="virtuoso">
          <query><![CDATA[
-
-                        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-                        SELECT ?c ?l ?a ?urn
+                
+                        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>        
+                        SELECT ?c ?l ?a ?urn                       
                         FROM <http://ritmare.it/rdfdata/parameters>
-                        WHERE {
+                        WHERE { 
                           ?c rdf:type skos:Concept.
                           OPTIONAL {
-                            ?c skos:notation ?urn.
+                            ?c skos:notation ?urn. 
                           }
                           OPTIONAL {
                             ?c skos:prefLabel ?l.
-                            FILTER( LANG(?l) = 'en')
+                            FILTER( LANG(?l) = 'en') 
                           }
                           OPTIONAL {
                             ?c skos:prefLabel ?a.
-                            FILTER( LANG(?a) = 'it')
+                            FILTER( LANG(?a) = 'it') 
                           }
-                          FILTER( REGEX( STR(?l), '$search_param', 'i') || REGEX( STR(?a), '$search_param', 'i') )
+                          FILTER( REGEX( STR(?l), '$search_param', 'i') || REGEX( STR(?a), '$search_param', 'i') ) 
                         }
                         ORDER BY ASC(?l) ASC(?a)
-
+                        
             ]]></query>
       </sparql>
       <sparql xml:id="type_of_systems" endpointType="virtuoso">
          <query><![CDATA[
-
-                        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+                
+                        PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
                         SELECT ?c ?l ?a ?urn
-                        WHERE {
+                        WHERE { 
                           ?c rdf:type skos:Concept.
                           ?c skos:inScheme <http://vocab.nerc.ac.uk/collection/L05/current/>.
                           OPTIONAL {
@@ -278,7 +278,7 @@
                           FILTER( REGEX( STR(?l), "$search_param", "i") || REGEX( STR(?a), "$search_param", "i") )
                         }
                         ORDER BY ASC(?l) ASC(?a)
-
+                        
             ]]></query>
       </sparql>
       <singleton xml:id="uom" endpointType="virtuoso">
@@ -309,29 +309,29 @@
       </singleton>
       <singleton xml:id="owners" endpointType="fuseki1">
          <query><![CDATA[
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                        PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                        SELECT ?c ?l
+                        WHERE { 
+                          ?c rdf:type foaf:Person .
+                          ?c foaf:mbox ?l.
+                          FILTER( REGEX( STR(?l), "$search_param", "i") )
+                        }
+                        ORDER BY ASC(?l)
+            ]]></query>
+         <!-- Query with ORCID
             PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
             PREFIX foaf: <http://xmlns.com/foaf/0.1/>
                         SELECT DISTINCT ?c ?l ?orcid
-                        WHERE {
+                        WHERE { 
                           ?c rdf:type foaf:Person .
                           ?c foaf:mbox ?l .
   						  ?c foaf:account ?d .
   						  ?d foaf:accountServiceHomepage ?homepage .
   						  ?d foaf:accountProfilePage ?orcid .
-  							FILTER(
+  							FILTER( 
     							REGEX(STR(?l), "$search_param", "i") && STR(?homepage) = "http://orcid.org"
   							)
-                        }
-                        ORDER BY ASC(?l)
-            ]]></query>
-         <!-- Query without ORCID
-         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-                        PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-                        SELECT ?c ?l
-                        WHERE {
-                          ?c rdf:type foaf:Person .
-                          ?c foaf:mbox ?l.
-                          FILTER( REGEX( STR(?l), "$search_param", "i") )
                         }
                         ORDER BY ASC(?l)
          -->
@@ -342,34 +342,24 @@
                 PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
                 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
                 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-                        SELECT ?fullname ?email ?phone ?homepage ?l ?addr ?town ?postcode ?country ?orcid1 ?c ?pidPers
-                        WHERE {
-                          BIND(<$search_param> as ?soggetto)
+                        SELECT ?fullname ?email ?phone ?homepage ?l ?addr ?town ?postcode ?country
+                        WHERE { 
                           OPTIONAL {
-                            ?soggetto foaf:fullName ?fullname .
-                          }
-  						  OPTIONAL {
-                            ?c rdf:type foaf:Person .
+                            <$search_param> foaf:fullName ?fullname .
                           }
                           OPTIONAL {
-                            ?soggetto foaf:mbox ?email .
+                            <$search_param> foaf:mbox ?email .
                           }
   						  OPTIONAL {
-                            ?soggetto foaf:phone ?phone .
+                            <$search_param> foaf:phone ?phone .
                           }
-  						  OPTIONAL {
-    					    ?soggetto foaf:account ?account .
-    						?account foaf:accountServiceHomepage <http://orcid.org>;
-      								 foaf:accountProfilePage ?orcid1 .
-  						  }
-                          BIND (IF(bound(?orcid1), ?orcid1, ?email) AS ?pidPers)
                           OPTIONAL {
-                            ?soggetto vcard:org ?b3 .
+                            <$search_param> vcard:org ?b3 .
                             ?b3 foaf:homepage ?homepage .
                             ?b3 foaf:name ?l .
                           }
                           {
-                            ?soggetto vcard:org/vcard:hasAddress ?b1 .
+                            <$search_param> vcard:org/vcard:hasAddress ?b1 .
                             ?b1 vcard:street-address ?addr .
                             ?b1 vcard:locality ?town .
                             ?b1 vcard:postal-code ?postcode .
@@ -385,40 +375,39 @@
                           #  ?b2 foaf:name ?country .
                           #}
                           #FILTER(lang(?l)='it')
-
 						  SERVICE <http://sparql.get-it.it> {
-    						?b2 foaf:name ?country .
+    						?b2 foaf:name ?country . 
   						  }
                         }
-                        LIMIT 1
+                        LIMIT 1                        
             ]]></query>
          <url>http://fuseki1.get-it.it/directory/sparql</url>
       </singleton>
       <sparql xml:id="operators" endpointType="fuseki1">
          <query><![CDATA[
-         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                        PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                        SELECT ?c ?l
+                        WHERE { 
+                          ?c rdf:type foaf:Person .
+                          ?c foaf:mbox ?l.
+                          FILTER( REGEX( STR(?l), "$search_param", "i") )
+                        }
+                        ORDER BY ASC(?l)
+            ]]></query>
+         <!-- Query with ORCID
+            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
             PREFIX foaf: <http://xmlns.com/foaf/0.1/>
                         SELECT DISTINCT ?c ?l ?orcid
-                        WHERE {
+                        WHERE { 
                           ?c rdf:type foaf:Person .
                           ?c foaf:mbox ?l .
   						  ?c foaf:account ?d .
   						  ?d foaf:accountServiceHomepage ?homepage .
   						  ?d foaf:accountProfilePage ?orcid .
-  							FILTER(
+  							FILTER( 
     							REGEX(STR(?l), "$search_param", "i") && STR(?homepage) = "http://orcid.org"
   							)
-                        }
-                        ORDER BY ASC(?l)
-            ]]></query>
-         <!-- Query without ORCID
-                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-                        PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-                        SELECT ?c ?l
-                        WHERE {
-                          ?c rdf:type foaf:Person .
-                          ?c foaf:mbox ?l.
-                          FILTER( REGEX( STR(?l), "$search_param", "i") )
                         }
                         ORDER BY ASC(?l)
          -->
@@ -426,38 +415,28 @@
       </sparql>
       <singleton xml:id="info_operator" endpointType="fuseki1" triggerItem="operator_1_uri">
          <query><![CDATA[
-
+                
                         PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
                 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
                 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-                        SELECT ?fullname ?email ?phone ?homepage ?l ?addr ?town ?postcode ?country ?orcid1 ?c ?pidPers
-                        WHERE {
-                          BIND(<$search_param> as ?soggetto)
+                        SELECT ?fullname ?email ?phone ?homepage ?l ?addr ?town ?postcode ?country
+                        WHERE { 
                           OPTIONAL {
-                            ?soggetto foaf:fullName ?fullname .
-                          }
-  						  OPTIONAL {
-                            ?c rdf:type foaf:Person .
+                            <$search_param> foaf:fullName ?fullname .
                           }
                           OPTIONAL {
-                            ?soggetto foaf:mbox ?email .
+                            <$search_param> foaf:mbox ?email .
                           }
   						  OPTIONAL {
-                            ?soggetto foaf:phone ?phone .
+                            <$search_param> foaf:phone ?phone .
                           }
-  						  OPTIONAL {
-    					    ?soggetto foaf:account ?account .
-    						?account foaf:accountServiceHomepage <http://orcid.org>;
-      								 foaf:accountProfilePage ?orcid1 .
-  						  }
-                          BIND (IF(bound(?orcid1), ?orcid1, ?email) AS ?pidPers)
                           OPTIONAL {
-                            ?soggetto vcard:org ?b3 .
+                            <$search_param> vcard:org ?b3 .
                             ?b3 foaf:homepage ?homepage .
                             ?b3 foaf:name ?l .
                           }
                           {
-                            ?soggetto vcard:org/vcard:hasAddress ?b1 .
+                            <$search_param> vcard:org/vcard:hasAddress ?b1 .
                             ?b1 vcard:street-address ?addr .
                             ?b1 vcard:locality ?town .
                             ?b1 vcard:postal-code ?postcode .
@@ -473,39 +452,38 @@
                           #  ?b2 foaf:name ?country .
                           #}
                           #FILTER(lang(?l)='it')
-
 						  SERVICE <http://sparql.get-it.it> {
-    						?b2 foaf:name ?country .
+    						?b2 foaf:name ?country . 
   						  }
                         }
-                        LIMIT 1
-
+                        LIMIT 1  
+                        
             ]]></query>
          <url>http://fuseki1.get-it.it/directory/sparql</url>
       </singleton>
       <sparql xml:id="parameters" endpointType="virtuoso">
          <query><![CDATA[
-
-                        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-                        SELECT ?c ?l ?a ?urn
+                
+                        PREFIX skos: <http://www.w3.org/2004/02/skos/core#>        
+                        SELECT ?c ?l ?a ?urn                       
                         FROM <http://ritmare.it/rdfdata/parameters>
-                        WHERE {
+                        WHERE { 
                           ?c rdf:type skos:Concept.
                           OPTIONAL {
-                            ?c skos:notation ?urn.
+                            ?c skos:notation ?urn. 
                           }
                           OPTIONAL {
                             ?c skos:prefLabel ?l.
-                            FILTER( LANG(?l) = 'en')
+                            FILTER( LANG(?l) = 'en') 
                           }
                           OPTIONAL {
                             ?c skos:prefLabel ?a.
-                            FILTER( LANG(?a) = 'it')
+                            FILTER( LANG(?a) = 'it') 
                           }
-                          FILTER( REGEX( STR(?l), '$search_param', 'i') || REGEX( STR(?a), '$search_param', 'i') )
+                          FILTER( REGEX( STR(?l), '$search_param', 'i') || REGEX( STR(?a), '$search_param', 'i') ) 
                         }
                         ORDER BY ASC(?l) ASC(?a)
-
+                        
             ]]></query>
       </sparql>
       <codelist xml:id="items" endpointType="virtuoso">
@@ -540,11 +518,11 @@
          <label xml:lang="it">Nome del sistema di sensori</label>
          <label xml:lang="en">Physical system name</label>
          <help xml:lang="it">È il nome con cui si identifica il sistema di sensori (es. piattaforma), deve
-            essere breve, non ne è la descrizione, e può coincidere con il nome
-            dato dal costruttore (es. Sensirion STH15, SBE 37-IM, MicroCAT,
-            CTP Recorder, ecc.).</help>
+                essere breve, non ne è la descrizione, e può coincidere con il nome
+                dato dal costruttore (es. Sensirion STH15, SBE 37-IM, MicroCAT,
+                CTP Recorder, ecc.).</help>
          <help xml:lang="en">Name assigned to identify the physical system. It should be short, while it is
-            not its description; it could coincide with the name given by the manufacturer.</help>
+                not its description; it could coincide with the name given by the manufacturer.</help>
          <hasRoot>/swes:InsertSensor/swes:procedureDescription/sml:PhysicalSystem</hasRoot>
          <produces>
             <item hasIndex="1" xml:id="system_name_1" outIndex="2" isFixed="false" hasDatatype="string">
@@ -573,18 +551,6 @@
                <hasPath>gml:identifier</hasPath>
                <hasValue>auto</hasValue>
             </item>
-             <item hasIndex="7" xml:id="system_name_7" outIndex="7" isFixed="true" hasDatatype="string">
-                 <hasPath>sml:identification/sml:IdentifierList/sml:identifier/sml:Term/@definition</hasPath>
-                 <hasValue>http://mmisw.org/ont/ioos/definition/longName</hasValue>
-             </item>
-             <item hasIndex="8" xml:id="system_name_8" outIndex="8" isFixed="true" hasDatatype="string">
-                 <hasPath>sml:identification/sml:IdentifierList/sml:identifier/sml:Term/sml:label</hasPath>
-                 <hasValue>long name</hasValue>
-             </item>
-             <item hasIndex="9" xml:id="system_name_9" outIndex="9" isFixed="true" hasDatatype="ref">
-                 <hasPath>sml:identification/sml:IdentifierList/sml:identifier/sml:Term/sml:value</hasPath>
-                 <hasValue>gml:description</hasValue>
-             </item>
          </produces>
       </element>
    </group>
@@ -612,7 +578,7 @@
          <label xml:lang="en">Manufacturer name</label>
          <help xml:lang="it">Indicare la denominazione del produttore del sensore, del sistema di sensori o della piattaforma. Iniziare a digitare tre lettere per ottenere dei suggerimenti da un elenco precompilato di produttori.</help>
          <help xml:lang="en">Name of the manufacturer of the sensor, system or platform. Start typing the first three letters
-            to obtain suggested autocompletion from a manufacturer list.</help>
+                to obtain suggested autocompletion from a manufacturer list.</help>
          <hasRoot>/swes:InsertSensor/swes:procedureDescription/sml:PhysicalSystem/sml:identification/sml:IdentifierList</hasRoot>
          <produces>
             <item hasIndex="1" xml:id="manuf_name_1" isFixed="true" hasDatatype="string">
@@ -628,8 +594,7 @@
             </item>
          </produces>
       </element>
-      <!-- this element has been moved above in the group name_desc -->
-      <!--<element xml:id="long_name" isMandatory="true" isMultiple="false">
+      <element xml:id="long_name" isMandatory="true" isMultiple="false">
          <label xml:lang="it">Nome esteso</label>
          <label xml:lang="en">Long Name</label>
          <help xml:lang="it">Indicare un nome esteso del sistema di sensori o della piattaforma.</help>
@@ -648,7 +613,7 @@
                <hasPath>sml:identifier/sml:Term/sml:value</hasPath>
             </item>
          </produces>
-      </element>-->
+      </element>
       <element xml:id="mod_number" isMandatory="false" isMultiple="false">
          <label xml:lang="it">Modello</label>
          <label xml:lang="en">Model</label>
@@ -708,7 +673,7 @@
                <hasPath>sml:classifier/sml:Term/sml:label</hasPath>
                <hasValue>SensorType</hasValue>
             </item>
-            <item hasIndex="3" xml:id="sensor_type_3" isFixed="false" hasDatatype="codelist" datasource="sensorType">
+            <item hasIndex="3" xml:id="sensor_type_3" isFixed="false" hasDatatype="autoCompletion" datasource="sensorType">
                <hasPath>sml:classifier/sml:Term/sml:value</hasPath>
             </item>
          </produces>
@@ -768,7 +733,7 @@
          <label xml:lang="it">Stato del sistema</label>
          <label xml:lang="en">Status</label>
          <help xml:lang="it">Viene indicato se il sistema è attivo o disattivato.
-            Spuntare la casella nel caso di sistema attivo</help>
+                Spuntare la casella nel caso di sistema attivo</help>
          <help xml:lang="en">Tick the box if the system is on, otherwise it is off.</help>
          <hasRoot>/swes:InsertSensor/swes:procedureDescription/sml:PhysicalSystem/sml:capabilities[@name='specification']/sml:CapabilityList/sml:capability[@name='insitu']/swe:Boolean[@definition='insitu']</hasRoot>
          <produces>
@@ -782,7 +747,7 @@
          <label xml:lang="it">Caratteristiche di mobilità</label>
          <label xml:lang="en">Mobility Capabilities</label>
          <help xml:lang="it">Viene indicato se il sistema è mobile o fisso. Spuntare la
-            casella nel caso si tratti di sistema mobile</help>
+                casella nel caso si tratti di sistema mobile</help>
          <help xml:lang="en">Tick the box if the system is mobile, otherwise it is fixed.</help>
          <hasRoot>/swes:InsertSensor/swes:procedureDescription/sml:PhysicalSystem/sml:capabilities[@name='specification']/sml:CapabilityList/sml:capability[@name='mobile']/swe:Boolean[@definition='mobile']</hasRoot>
          <produces>
@@ -796,7 +761,7 @@
          <label xml:lang="it">Tipo di memoria</label>
          <label xml:lang="en">Storage Type</label>
          <help xml:lang="it">Indicare il tipo di memoria che viene utilizzato per archiviare le
-            osservazioni raccolte dal sistema o dal sensore o dalla piattaforma (es. data logger)</help>
+                osservazioni raccolte dal sistema o dal sensore o dalla piattaforma (es. data logger)</help>
          <help xml:lang="en">The type of storage of the observations collected by the system, sensor, or platform (e.g. data logger)</help>
          <hasRoot>/swes:InsertSensor/swes:procedureDescription/sml:PhysicalSystem/sml:capabilities[@name='specification']/sml:CapabilityList/sml:capability[@name='OperationalCapabilities']/swe:DataRecord[@definition='OperationalCapabilities']/swe:field[@name='Storage_Type']</hasRoot>
          <produces>
@@ -876,11 +841,11 @@
          <label xml:lang="it">Informazioni sul proprietario</label>
          <label xml:lang="en">Owner</label>
          <help xml:lang="it">Contatti del proprietario; queste informazioni vengono autocompilate qualora il proprietario figuri nelle liste anagrafiche
-            del progetto RITMARE</help>
+                del progetto RITMARE</help>
          <help xml:lang="en">Owner contact information; autocompletion is performed if the owner appears in the RITMARE project contacts’ repository</help>
          <hasRoot>/swes:InsertSensor/swes:procedureDescription/sml:PhysicalSystem/sml:contacts/sml:ContactList</hasRoot>
          <produces>
-            <item hasIndex="1" xml:id="owner_1" outIndex="10" isFixed="false" hasDatatype="autoCompletion" datasource="owners">
+            <item hasIndex="1" xml:id="owner_1" outIndex="9" isFixed="false" hasDatatype="autoCompletion" datasource="owners">
                <label xml:lang="it">e-mail proprietario</label>
                <label xml:lang="en">Owner e-mail address</label>
                <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:electronicMailAddress/gco:CharacterString</hasPath>
@@ -889,15 +854,7 @@
                <hasPath>sml:contact/@xlink:arcrole</hasPath>
                <hasValue>http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/owner</hasValue>
             </item>
-            <item hasIndex="3" xml:id="owner_3" outIndex="2" isFixed="true" hasDatatype="select" datasource="info_owner" field="pidPers">
-               <hasPath>sml:contact/@xlink:href</hasPath>
-            </item>
-            <item hasIndex="4" xml:id="owner_4" outIndex="3" field="fullname" isFixed="false" hasDatatype="select" datasource="info_owner">
-               <label xml:lang="it">Nome proprietario</label>
-               <label xml:lang="en">Owner name</label>
-               <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:individualName/gco:CharacterString</hasPath>
-            </item>
-            <item hasIndex="5" xml:id="owner_5" outIndex="4" field="l" isFixed="false" hasDatatype="select" datasource="info_owner">
+            <item hasIndex="3" xml:id="owner_3" outIndex="2" field="l" isFixed="false" hasDatatype="select" datasource="info_owner">
                <label xml:lang="it">Organizzazione proprietario</label>
                <label xml:lang="en">Owner organisation</label>
                <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString</hasPath>
@@ -907,40 +864,40 @@
                <label xml:lang="en">Owner phone number</label>
                <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone/gmd:voice/gco:CharacterString</hasPath>
             </item-->
-            <item hasIndex="6" xml:id="owner_6" outIndex="5" field="addr" isFixed="false" hasDatatype="select" datasource="info_owner">
+            <item hasIndex="5" xml:id="owner_5" outIndex="4" field="addr" isFixed="false" hasDatatype="select" datasource="info_owner">
                <label xml:lang="it">Indirizzo proprietario</label>
                <label xml:lang="en">Owner address</label>
                <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:deliveryPoint/gco:CharacterString</hasPath>
             </item>
-            <item hasIndex="7" xml:id="owner_7" outIndex="6" field="town" isFixed="false" hasDatatype="select" datasource="info_owner">
+            <item hasIndex="6" xml:id="owner_6" outIndex="5" field="town" isFixed="false" hasDatatype="select" datasource="info_owner">
                <label xml:lang="it">Città proprietario</label>
                <label xml:lang="en">Owner city</label>
                <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:city/gco:CharacterString</hasPath>
             </item>
-            <item hasIndex="8" xml:id="owner_9" outIndex="8" field="postcode" isFixed="false" hasDatatype="select" datasource="info_owner">
+            <item hasIndex="8" xml:id="owner_8" outIndex="7" field="postcode" isFixed="false" hasDatatype="select" datasource="info_owner">
                <label xml:lang="it">CAP proprietario</label>
                <label xml:lang="en">Owner Postal code</label>
                <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:postalCode/gco:CharacterString</hasPath>
             </item>
-            <item hasIndex="9" xml:id="owner_10" outIndex="9" field="country" isFixed="false" hasDatatype="select" datasource="info_owner">
+            <item hasIndex="9" xml:id="owner_9" outIndex="8" field="country" isFixed="false" hasDatatype="select" datasource="info_owner">
                <label xml:lang="it">Nazione proprietario</label>
                <label xml:lang="en">Owner country</label>
                <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:country/gco:CharacterString</hasPath>
             </item>
-            <item hasIndex="10" xml:id="owner_11" outIndex="11" field="homepage" isFixed="false" hasDatatype="select" datasource="info_owner">
+            <item hasIndex="10" xml:id="owner_10" outIndex="10" field="homepage" isFixed="false" hasDatatype="select" datasource="info_owner">
                <label xml:lang="it">Sito web proprietario</label>
                <label xml:lang="en">Owner web site</label>
                <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:onlineResource/gmd:CI_OnlineResource/gmd:linkage/gmd:URL</hasPath>
             </item>
-            <item hasIndex="11" xml:id="owner_12" outIndex="12" isFixed="true" hasDatatype="URI">
+            <item hasIndex="11" xml:id="owner_11" outIndex="11" isFixed="true" hasDatatype="URI">
                <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode/@codeList</hasPath>
                <hasValue>http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#CI_RoleCode</hasValue>
             </item>
-            <item hasIndex="12" xml:id="owner_13" outIndex="13" isLanguageNeutral="true" isFixed="true" hasDatatype="codelist" datasource="roleCodes">
+            <item hasIndex="12" xml:id="owner_12" outIndex="12" isLanguageNeutral="true" isFixed="true" hasDatatype="codelist" datasource="roleCodes">
                <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode</hasPath>
                <defaultValue>http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/owner</defaultValue>
             </item>
-            <item hasIndex="13" xml:id="owner_14" outIndex="14" isFixed="true" hasDatatype="ref">
+            <item hasIndex="13" xml:id="owner_13" outIndex="13" isFixed="true" hasDatatype="ref">
                <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode/@codeListValue</hasPath>
                <hasValue>sml:contact/gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode</hasValue>
             </item>
@@ -953,7 +910,7 @@
          <help xml:lang="en">Operator contact information; autocompletion is performed if the operator appears in the RITMARE project contacts’ repository.</help>
          <hasRoot>/swes:InsertSensor/swes:procedureDescription/sml:PhysicalSystem/sml:contacts/sml:ContactList</hasRoot>
          <produces>
-            <item hasIndex="1" xml:id="operator_1" isFixed="false" hasDatatype="autoCompletion" datasource="operators" outIndex="9" >
+            <item hasIndex="1" xml:id="operator_1" isFixed="false" hasDatatype="autoCompletion" datasource="operators" outIndex="8" >
                <label xml:lang="it">e-mail operatore</label>
                <label xml:lang="en">Operator e-mail address</label>
                <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:electronicMailAddress/gco:CharacterString</hasPath>
@@ -962,17 +919,9 @@
                <hasPath>sml:contact/@xlink:arcrole</hasPath>
                <hasValue>http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/pointOfContact</hasValue>
             </item>
-            <item hasIndex="3" xml:id="operator_3" outIndex="2" isFixed="true" hasDatatype="select" datasource="info_operator" field="pidPers">
-               <hasPath>sml:contact/@xlink:href</hasPath>
-            </item>
-            <item hasIndex="4" xml:id="operator_4" outIndex="3" field="fullname" isFixed="false" hasDatatype="select" datasource="info_operator">
-               <label xml:lang="it">Nome proprietario</label>
-               <label xml:lang="en">Owner name</label>
-               <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:individualName/gco:CharacterString</hasPath>
-            </item>
-            <item hasIndex="5" xml:id="operator_5" outIndex="4" field="l" isFixed="false" hasDatatype="select" datasource="info_operator">
-               <label xml:lang="it">Nome organizzazione</label>
-               <label xml:lang="en">Organisation name</label>
+            <item hasIndex="3" xml:id="operator_3" outIndex="2" field="l" isFixed="false" hasDatatype="select" datasource="info_operator">
+               <label xml:lang="it">Nome operatore</label>
+               <label xml:lang="en">Operator name</label>
                <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString</hasPath>
             </item>
             <!--item hasIndex="4" xml:id="operator_4" outIndex="3" field="phone" isFixed="false" hasDatatype="select" datasource="info_operator">
@@ -980,40 +929,40 @@
                <label xml:lang="en">Operator phone number</label>
                <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone/gmd:voice/gco:CharacterString</hasPath>
             </item-->
-            <item hasIndex="6" xml:id="operator_6" outIndex="5" field="addr" isFixed="false" hasDatatype="select" datasource="info_operator">
+            <item hasIndex="5" xml:id="operator_5" outIndex="4" field="addr" isFixed="false" hasDatatype="select" datasource="info_operator">
                <label xml:lang="it">Indirizzo operatore</label>
                <label xml:lang="en">Operator address</label>
                <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:deliveryPoint/gco:CharacterString</hasPath>
             </item>
-            <item hasIndex="7" xml:id="operator_7" outIndex="6" field="town" isFixed="false" hasDatatype="select" datasource="info_operator">
+            <item hasIndex="6" xml:id="operator_6" outIndex="5" field="town" isFixed="false" hasDatatype="select" datasource="info_operator">
                <label xml:lang="it">Città operatore</label>
                <label xml:lang="en">Operator city</label>
                <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:city/gco:CharacterString</hasPath>
             </item>
-            <item hasIndex="8" xml:id="operator_8" outIndex="7" field="postcode" isFixed="false" hasDatatype="select" datasource="info_operator">
+            <item hasIndex="7" xml:id="operator_7" outIndex="6" field="postcode" isFixed="false" hasDatatype="select" datasource="info_operator">
                <label xml:lang="it">CAP operatore</label>
                <label xml:lang="en">Operator Postal code</label>
                <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:postalCode/gco:CharacterString</hasPath>
             </item>
-            <item hasIndex="9" xml:id="operator_9" outIndex="8" field="country" isFixed="false" hasDatatype="select" datasource="info_operator">
+            <item hasIndex="8" xml:id="operator_8" outIndex="7" field="country" isFixed="false" hasDatatype="select" datasource="info_operator">
                <label xml:lang="it">Nazione operatore</label>
                <label xml:lang="en">Operator country</label>
                <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:country/gco:CharacterString</hasPath>
             </item>
-            <item hasIndex="10" xml:id="operator_10" outIndex="10" field="homepage" isFixed="false" hasDatatype="select" datasource="info_operator">
+            <item hasIndex="9" xml:id="operator_9" outIndex="9" field="homepage" isFixed="false" hasDatatype="select" datasource="info_operator">
                <label xml:lang="it">Sito web operatore</label>
                <label xml:lang="en">Operator web site</label>
                <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:onlineResource/gmd:CI_OnlineResource/gmd:linkage/gmd:URL</hasPath>
             </item>
-            <item hasIndex="11" xml:id="operator_11" outIndex="11" isFixed="true" hasDatatype="URI">
+            <item hasIndex="10" xml:id="operator_10" outIndex="10" isFixed="true" hasDatatype="URI">
                <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode/@codeList</hasPath>
                <hasValue>http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#CI_RoleCode</hasValue>
             </item>
-            <item hasIndex="12" xml:id="operator_12" outIndex="12" isLanguageNeutral="true" isFixed="true" hasDatatype="codelist" datasource="roleCodes">
+            <item hasIndex="11" xml:id="operator_11" outIndex="11" isLanguageNeutral="true" isFixed="true" hasDatatype="codelist" datasource="roleCodes">
                <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode</hasPath>
                <defaultValue>http://inspire.ec.europa.eu/metadata-codelist/ResponsiblePartyRole/pointOfContact</defaultValue>
             </item>
-            <item hasIndex="13" xml:id="operator_13" outIndex="13" isFixed="true" hasDatatype="ref">
+            <item hasIndex="12" xml:id="operator_12" outIndex="12" isFixed="true" hasDatatype="ref">
                <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode/@codeListValue</hasPath>
                <hasValue>sml:contact/gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode</hasValue>
             </item>
@@ -1027,9 +976,9 @@
          <label xml:lang="it">Documentazione</label>
          <label xml:lang="en">Documentation</label>
          <help xml:lang="it">Documentazione che fornisca una descrizione di riferimento per il sistema
-            (es. scheda tecnica, letteratura relativa agli algoritmi, etc.)</help>
+                (es. scheda tecnica, letteratura relativa agli algoritmi, etc.)</help>
          <help xml:lang="en">Documentation that provides a reference description of the system (e.g., specification documentation,
-            peer-reviewed algorithm literature, etc.).</help>
+                peer-reviewed algorithm literature, etc.).</help>
          <hasRoot>/swes:InsertSensor/swes:procedureDescription/sml:PhysicalSystem</hasRoot>
          <produces>
             <item hasIndex="1" xml:id="documentation_1" isFixed="true" hasDatatype="URN">
@@ -1169,9 +1118,9 @@
                <help xml:lang="en">Measured parameter. Start typing the first three letters to obtain suggested autocompletion from controlled vocabularies.</help>
                <hasPath>sml:output/@name</hasPath>
             </item>
-            <item hasIndex="2" xml:id="output_param_2" outIndex="6" field="root" isFixed="true" hasDatatype="select" datasource="outputsS">
+            <item hasIndex="2" xml:id="output_param_2" outIndex="6" field="c" isFixed="true" hasDatatype="select" datasource="outputsS">
                <hasPath>sml:output/swe:Quantity/@definition</hasPath>
-               <!--hasValue>sml:output/@name</hasValue-->
+               <hasValue>sml:output/@name</hasValue>
             </item>
             <item hasIndex="4" xml:id="output_param_4" outIndex="2" isFixed="false" hasDatatype="autoCompletion" datasource="uom">
                <label xml:lang="it">Unità di misura</label>
@@ -1216,14 +1165,14 @@
          <label xml:lang="it">Longitudine (Est)</label>
          <label xml:lang="en">Longitude (East)</label>
          <help xml:lang="it">Esprime i valori della longitudine (est) dell'ultima posizione assunta dal sensore o della
-            posizione usuale dove viene mantenuto il sensore quando non è in
-            funzione (es. può essere la posizione del proprietario del sensore).
-            Nel caso di sensori fissi sarà indicata la posizione reale del
-            sensore. Deve essere espressa in gradi decimali (es. 12.337) nel sistema
-            di riferimento scelto</help>
+                posizione usuale dove viene mantenuto il sensore quando non è in
+                funzione (es. può essere la posizione del proprietario del sensore).
+                Nel caso di sensori fissi sarà indicata la posizione reale del
+                sensore. Deve essere espressa in gradi decimali (es. 12.337) nel sistema
+                di riferimento scelto</help>
          <help xml:lang="en">Longitude (East) of the last position assumed by the sensor or the position where it is held when not operating (e.g., the location of the owner). In the case of fixed sensors it
-            refers to the actual position of the sensor. The value must be given in
-            the chosen reference system and in decimal degrees (ex. 12.337) </help>
+                refers to the actual position of the sensor. The value must be given in
+                the chosen reference system and in decimal degrees (ex. 12.337) </help>
          <hasRoot>/swes:InsertSensor/swes:procedureDescription/sml:PhysicalSystem/sml:position/swe:Vector</hasRoot>
          <produces>
             <item hasIndex="1" xml:id="easting_1" isFixed="true" hasDatatype="string">
@@ -1257,14 +1206,14 @@
          <label xml:lang="it">Latitudine (Nord)</label>
          <label xml:lang="en">Latitude (North)</label>
          <help xml:lang="it">Esprime i valori della latitudine (nord) dell'ultima posizione assunta dal sensore o della
-            posizione usuale dove viene mantenuto il sensore quando non è in
-            funzione (es. può essere la posizione del proprietario del sensore).
-            Nel caso di sensori fissi sarà indicata la posizione reale del
-            sensore. Deve essere espressa in gradi decimali (es. 45.430) nel sistema
-            di riferimento scelto.</help>
+                posizione usuale dove viene mantenuto il sensore quando non è in
+                funzione (es. può essere la posizione del proprietario del sensore).
+                Nel caso di sensori fissi sarà indicata la posizione reale del
+                sensore. Deve essere espressa in gradi decimali (es. 45.430) nel sistema
+                di riferimento scelto.</help>
          <help xml:lang="en">Latitude (North) of the last position assumed by the sensor or the position where it is held when not operating (e.g., the location of the owner). In the case of fixed sensors it
-            refers to the actual position of the sensor. The value must be given in
-            the chosen reference system and in decimal degrees (ex. 45.430).</help>
+                refers to the actual position of the sensor. The value must be given in
+                the chosen reference system and in decimal degrees (ex. 45.430).</help>
          <hasRoot>/swes:InsertSensor/swes:procedureDescription/sml:PhysicalSystem/sml:position/swe:Vector</hasRoot>
          <produces>
             <item hasIndex="1" xml:id="northing_1" isFixed="true" hasDatatype="string">
@@ -1298,9 +1247,9 @@
          <label xml:lang="it">Altitudine</label>
          <label xml:lang="en">Altitude </label>
          <help xml:lang="it">Inserire il valori in metri dell'
-            sopra il livello del mare della altezza a cui si trova il sensore (es. 2013.13). Nel caso di sistemi mobili si può
-            indicare la quota altimetrica del proprietario del sensore. Nel caso di
-            sensori fissi sarà indicata l'altezza reale del sensore.</help>
+                sopra il livello del mare della altezza a cui si trova il sensore (es. 2013.13). Nel caso di sistemi mobili si può
+                indicare la quota altimetrica del proprietario del sensore. Nel caso di
+                sensori fissi sarà indicata l'altezza reale del sensore.</help>
          <help xml:lang="en">Altitude value in meter above see level (e.g., 210.13 m)In case of mobile systems it can coincide with the owner position altitude; for fixed systems it refers to the actual position altitude.</help>
          <hasRoot>/swes:InsertSensor/swes:procedureDescription/sml:PhysicalSystem/sml:position/swe:Vector</hasRoot>
          <produces>

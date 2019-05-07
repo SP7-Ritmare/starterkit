@@ -3,7 +3,6 @@
 'use strict';
 
 define(function (require, exports) {
-
         var _      = require('underscore'),
         fileTypes  = require('upload/FileTypes'),
         path       = require('upload/path'),
@@ -17,14 +16,11 @@ define(function (require, exports) {
      *  @param {name, files}
      */
     LayerInfo = function (options) {
-
         this.id       = null;
         this.name     = null;
         this.files    = null;
-
         this.type     = null;
         this.main     = null;
-
         this.element  = null;
 
         $.extend(this, options || {});
@@ -65,10 +61,11 @@ define(function (require, exports) {
      */
     LayerInfo.prototype.findFileType = function (file) {
         var i, type, res;
+        var extensions = this.getExtensions();
         $.each(fileTypes, function (name, type) {
-            if (type.isType(file)) {
+            if (type.isType(file, extensions)) {
                 res = {type: type, file: file};
-                return false;
+                // return false;
             }
         });
         return res;
@@ -83,14 +80,19 @@ define(function (require, exports) {
         var self = this;
         $.each(this.files, function (idx, file) {
             var results = self.findFileType(file);
-            // if we find the type of the file, we also find the "main"
-            // file
+
+            // if we find the type of the file, we also find the "main" file
             if (results) {
-                // Avoid assuming the metadata file as main one
-                if (results.type.main == 'xml' && self.main != undefined) {
+                if (results.type.main == 'kml') {
+                   // Assume the kml file always as main one
+                   self.type = results.type;
+                   self.main = results.file;
+                } else if ((results.type.main == 'xml' || results.type.main == 'sld') &&
+                        self.main != undefined) {
+                   // Do not assume the metadata or sld file as main one
                    self.type = self.type;
                    self.main = self.main;
-                } else {
+               } else if ((self.type == undefined) || (self.type != undefined && self.type.main != 'kml')) {
                    self.type = results.type;
                    self.main = results.file;
                 }
@@ -106,18 +108,18 @@ define(function (require, exports) {
      */
     LayerInfo.prototype.collectErrors = function () {
         var errors = [];
-	var mosaic_is_valid = true;
-	var is_granule = $('#' + this.name + '-mosaic').is(':checked');
+        var mosaic_is_valid = true;
+        var is_granule = $('#' + this.name + '-mosaic').is(':checked');
 
         var is_time_enabled = $('#' + this.name + '-timedim').is(':checked');
-	var is_time_valid = is_time_enabled && !$('#' + this.name + '-timedim-value-valid').is(':visible');
+	    var is_time_valid = is_time_enabled && !$('#' + this.name + '-timedim-value-valid').is(':visible');
 
         if (is_granule && is_time_enabled) {
-		mosaic_is_valid = is_time_valid;
-	}
-	if (is_granule && !mosaic_is_valid) {
-		errors.push('The configuration of the file as a Mosaic Granule is not valid, please fix the issue and try again');
-	}
+		    mosaic_is_valid = is_time_valid;
+	    }
+	    if (is_granule && !mosaic_is_valid) {
+		    errors.push('The configuration of the file as a Mosaic Granule is not valid, please fix the issue and try again');
+	    }
 
         if (this.type) {
             errors = this.type.findTypeErrors(this.getExtensions());
@@ -177,7 +179,7 @@ define(function (require, exports) {
         }
 
         if (time_enabled) {
-            time = $('#' + base_name + '-time').is(':checked');
+            time = (this.type && (this.type.main === 'shp' || this.type.main === 'csv'));
             form_data.append('time', time);
         }
         if (mosaic_enabled) {
@@ -263,6 +265,7 @@ define(function (require, exports) {
         form_data.append('charset', $('#charset').val());
         if ($('#id_metadata_upload_form').prop('checked')) {
              form_data.append('metadata_upload_form', true);
+             form_data.append('layer_title', $('#id_layer_title').val());
         }
         if ($('#id_metadata_uploaded_preserve').prop('checked')) {
              form_data.append('metadata_uploaded_preserve', true);
@@ -290,6 +293,7 @@ define(function (require, exports) {
      *  @returns {string}
      */
     LayerInfo.prototype.markError = function (error, status) {
+        var error = (error != undefined ? error : 'Unexpected error!');
         common.logError(error, this.element.find('#status'));
     };
 
@@ -310,30 +314,70 @@ define(function (require, exports) {
     };
 
     LayerInfo.prototype.doResume = function (event) {
+        $(this).text('Done').attr('disabled','disabled');
+        var id = (new Date()).getTime();
+        /* ****
+         * AF: Switching those two below allows to open a new window instead of redirecting
+         *     the active one.
+         * ****/
+	    // var newWin = window.open(window.location.href,
+        //        id, "toolbar=1,scrollbars=1,location=0,statusbar=0,menubar=1,resizable=1,width=1100,height=800,left = 240,top = 100");
         common.make_request({
             url: event.data.url,
             async: true,
             failure: function (resp, status) {
-                self.markError(resp.errors, status);
+                if (resp && resp.errors) {
+                    self.markError(resp.errors, status);
+                } else {
+                    self.markError(gettext('Unexpected Error'), status);
+                }
             },
             success: function (resp, status) {
                 if(resp.url && resp.input_required){
+                    /* ****
+                     * AF: Switching those two below allows to open a new window instead of redirecting
+                     *     the active one.
+                     * ****/
                     window.location = resp.url;
+                    /* newWin.location = resp.url;
+                    newWin.focus(); */
                 }else {
+                    /* ****
+                     * AF: Switching those two below allows to open a new window instead of redirecting
+                     *     the active one.
+                     * ****/
                     window.location = resp.redirect_to;
+                    /* newWin.location = resp.redirect_to;
+                    newWin.focus(); */
                 }
             },
         });
         return false;
     };
 
+    String.prototype.capitalize = function() {
+        return this.charAt(0).toUpperCase() + this.slice(1);
+    };
+
     LayerInfo.prototype.displayUploadedLayerLinks = function(resp) {
         var self = this;
-        var a = '<a href="' + resp.url + '" class="btn btn-success">' + gettext('Layer Info') + '</a>';
+        var resourceType = 'layer';
+        try {
+            resourceType = /^\/(.*)s\/.*/.exec(resp.url)[1];
+        } catch (err) {
+            // pass
+        }
+        var a = '<a href="' + resp.url + '" class="btn btn-success">' + gettext(resourceType.capitalize() + ' Info') + '</a>';
         var b = '<a href="' + resp.url + '#ediclient_container" class="btn btn-warning">' + gettext('Edit INSPIRE') + '</a>';
         var c = '<a href="' + resp.url + '/metadata_upload" class="btn btn-warning">' + gettext('Upload Metadata') + '</a>';
         var d = '<a href="' + resp.url + '/style_upload" class="btn btn-warning">' + gettext('Upload SLD') + '</a>';
         var e = '<a href="' + resp.url.replace(/^\/layers/, '/gs') + '/style/manage" class="btn btn-warning">' + gettext('Manage Styles') + '</a>';
+        if(resourceType != 'layer') {
+            // Only Layers have Metadata and SLD Upload features for the moment
+            c = '';
+            d = '';
+            e = '';
+        }
         if(resp.ogc_backend == 'geonode.qgis_server'){
             // QGIS Server has no manage style interaction.
             d = '';
@@ -346,7 +390,7 @@ define(function (require, exports) {
             }
         }
         self.logStatus({
-            msg: '<p>' + gettext('Your layer was successfully uploaded') + '<br/>' + msg_col + '<br/>' + a + '&nbsp;&nbsp;&nbsp;' + b + '&nbsp;&nbsp;&nbsp;' + c + '&nbsp;&nbsp;&nbsp;' + d + '&nbsp;&nbsp;&nbsp;' + e + '</p>',
+            msg: '<p>' + gettext('Your ' + resourceType +' was successfully updated') + '<br/>' + msg_col + '<br/>' + a + '&nbsp;&nbsp;&nbsp;' + b + '&nbsp;&nbsp;&nbsp;' + c + '&nbsp;&nbsp;&nbsp;' + d + '&nbsp;&nbsp;&nbsp;' + e + '</p>',
             level: 'alert-success',
             empty: 'true'
         });
@@ -398,6 +442,9 @@ define(function (require, exports) {
                         setTimeout(function() {
                             self.doFinal(resp);
                         }, 5000);
+                    } else if (resp.status === 'error') {
+                        self.polling = false;
+                        self.markError(resp.error_msg, resp.status);
                     } else {
                         self.displayUploadedLayerLinks(resp);
                     }
@@ -406,9 +453,17 @@ define(function (require, exports) {
         } else if (resp.status === "incomplete") {
             var id = common.parseQueryString(resp.url).id;
             var element = 'next_step_' + id
-            var a = '<a id="' + element + '" class="btn">Continue</a>';
+            var a = '<a id="' + element + '" class="btn btn-primary" target="_blank">Continue</a>';
+            var msg = '<p>' + gettext('Files are ready to be ingested!')
+
+            if (resp.redirect_to.indexOf('time') !== -1 || resp.url.indexOf('time') !== -1) {
+                msg += '&nbsp;' + gettext('A temporal dimension may be added to this Layer.') + '&nbsp;' + a + '</p>'
+            } else {
+                msg += '&nbsp;' + a + '</p>'
+            }
+
             self.logStatus({
-                msg:'<p>' + gettext('You need to specify more information in order to complete your upload.') + '</p><p>' + gettext('You can continue configuring your layer.') + '</p><p>' + a + '</p>',
+                msg: msg,
                 level: 'alert-success',
                 empty: 'true'
             });
@@ -420,11 +475,15 @@ define(function (require, exports) {
                 level: 'alert-success',
                 empty: 'true'
             });
+        } else if (resp.status === 'error') {
+            self.polling = false;
+            self.markError(resp.error_msg, resp.status);
         } else if (resp.success === true) {
             self.polling = false;
             self.displayUploadedLayerLinks(resp);
         } else {
             self.polling = false;
+            resp.errors = 'Unexpected Error';
             self.logStatus({
                 msg:'<p>' + gettext('Unexpected Error') + '</p>',
                 level: 'alert-error',
@@ -452,7 +511,11 @@ define(function (require, exports) {
                 async: true,
                 failure: function (resp, status) {
                     self.polling = false;
-                    self.markError(resp.errors, status);
+                    if (resp.status && resp.status !== 'success') {
+                        self.markError(resp.error_msg, resp.status);
+                    } else {
+                        self.markError(resp.errors, status);
+                    }
                 },
                 success: function (resp, status) {
                     self.id = resp.id;
@@ -462,6 +525,9 @@ define(function (require, exports) {
                         } else {
                             self.doStep(resp);
                         }
+                    } else if (resp.status === 'error') {
+                        self.polling = false;
+                        self.markError(resp.error_msg, resp.status);
                     } else if (resp.redirect_to.indexOf('/upload/final') > -1) {
                         self.doFinal(resp);
                     } else {
@@ -469,6 +535,9 @@ define(function (require, exports) {
                     }
                 }
             });
+        } else if (resp.success === true && resp.status === 'error') {
+            self.polling = false;
+            self.markError(resp.error_msg, resp.status);
         } else if (resp.success === true && typeof resp.url != 'undefined') {
             self.doFinal(resp);
         } else if (resp.success === true && resp.redirect_to.indexOf('/upload/final') > -1) {

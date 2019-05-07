@@ -55,33 +55,35 @@
                 SELECT ?c ?l ?a                                                         # for EDI autocompletion the convention for variables is c for URI, l for
                                                                                         # localized label, a for backup label, [z language neutral label, u URN]
                 WHERE {
-                    ?c rdf:type skos:Concept.                                           # ?c is the vessel
-                    <http://vocab.nerc.ac.uk/collection/C17/current/> skos:member ?c.   # in NERC collection C17
-                    ?c <http://www.w3.org/2002/07/owl#deprecated> "false".              # restrict to un-deprecated (active?) vessels
+                    SERVICE <http://vocab.nerc.ac.uk/sparql/sparql> {                   # TODO: check why query NVS2 sparql doesn't work if directly invoked. This is the federated version of the query.
+                        ?c rdf:type skos:Concept.                                           # ?c is the vessel
+                        <http://vocab.nerc.ac.uk/collection/C17/current/> skos:member ?c.   # in NERC collection C17
+                        ?c <http://www.w3.org/2002/07/owl#deprecated> "false".              # restrict to un-deprecated (active?) vessels
 
-                    ?c skos:definition ?d.                                              # # Definitions in C17 contain additional semantics expressed in JSON syntax. Issue: we cannot discriminate among vessels and other platforms.
-                                                                                        # # This should be fixed by expressing the same information (e.g. being a vessel or a platform) in appropriate new rdf triples
-                    FILTER(REGEX(str(?d),"vessel","i"))                                 # # To overcome the issue we select vessels we filter concepts looking for the word "vessel" in their description
+                        ?c skos:definition ?d.                                              # # Definitions in C17 contain additional semantics expressed in JSON syntax. Issue: we cannot discriminate among vessels and other platforms.
+                                                                                            # # This should be fixed by expressing the same information (e.g. being a vessel or a platform) in appropriate new rdf triples
+                        FILTER(REGEX(str(?d),"vessel","i"))                                 # # To overcome the issue we select vessels we filter concepts looking for the word "vessel" in their description
 
-                    BIND(REPLACE(str(?d),"\n","PPP") AS ?descsubs)
-                    BIND(REPLACE(?descsubs,".*\"country\": \"(.*?)\"(.*)","$1") AS ?country)                # select the json "country" value via Regular Expression
-                    BIND(REPLACE(?descsubs,".*\"platformclass\": \"(.*?)\"(.*)","$1") AS ?platformclass)    # select the "platformclass"
-                    BIND(REPLACE(?descsubs,".*\"notes\": \"(.*?)\"(.*)","$1") AS ?notes)                    # select the "notes"
-                    BIND(CONCAT("(",?country," - ",?platformclass,")") as ?countryplatformclass)            # concatenate the label with country and platformclass to avoid situations where the same label is used for different vessels
+                        BIND(REPLACE(str(?d),"\n","PPP") AS ?descsubs)
+                        BIND(REPLACE(?descsubs,".*\"country\": \"(.*?)\"(.*)","$1") AS ?country)                # select the json "country" value via Regular Expression
+                        BIND(REPLACE(?descsubs,".*\"platformclass\": \"(.*?)\"(.*)","$1") AS ?platformclass)    # select the "platformclass"
+                        BIND(REPLACE(?descsubs,".*\"notes\": \"(.*?)\"(.*)","$1") AS ?notes)                    # select the "notes"
+                        BIND(CONCAT("(",?country," - ",?platformclass,")") as ?countryplatformclass)            # concatenate the label with country and platformclass to avoid situations where the same label is used for different vessels
 
 
-                    ?c skos:prefLabel ?enlabel.                                         # select only vessels with english prefLabels.
-                    FILTER( LANG(?enlabel) = "en")
+                        ?c skos:prefLabel ?enlabel.                                         # select only vessels with english prefLabels.
+                        FILTER( LANG(?enlabel) = "en")
 
-                    BIND(CONCAT(?enlabel," ",?countryplatformclass) as ?l)
+                        BIND(CONCAT(?enlabel," ",?countryplatformclass) as ?l)
 
-                    FILTER( REGEX( STR(?l), "$search_param", "i") )                     # search not only in prefLabel, but in complete (concatenated) labels showed to the user.
-                    BIND(?notes as ?a)                                                  # no backup label, C17 is english only.
+                        FILTER( REGEX( STR(?l), "$search_param", "i") )                     # search not only in prefLabel, but in complete (concatenated) labels showed to the user.
+                        BIND(?notes as ?a)                                                  # no backup label, C17 is english only.
+                    }
                 }
                 ORDER BY ASC(?l) ASC(?a)
             ]]>
             </query>
-            <url>http://vocab.nerc.ac.uk/sparql/sparql</url>
+            <url>http://fuseki1.get-it.it/directory/sparql</url>
         </singleton>
         <!-- ################################# -->
         <!-- L05 NERC Vocab: device categories -->
@@ -471,7 +473,7 @@
         <!-- Codelists -->
         <codelist xml:id="languages" endpointType="virtuoso">
             <uri>http://inspire-registry.jrc.ec.europa.eu/registers/Languages/items</uri>
-            <url>http://sp7.irea.cnr.it:8891/sparql</url>
+            <url>http://sparql/sparql.get-it.it/sparql</url>
         </codelist>
     </datasources>
 

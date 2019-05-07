@@ -71,3 +71,6 @@ local_settings.py
 \.pytest_cache/
 
 #*.dat
+
+/geosk/static/.components/
+/geosk/static/node_modules/
