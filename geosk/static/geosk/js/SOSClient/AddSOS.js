@@ -50,29 +50,31 @@ gxp.plugins.AddSOS = Ext.extend(gxp.plugins.Tool, {
         //TODO create generic gxp_layerpanel
         var xtype = "gxp_sossourcedialog";
         var output = gxp.plugins.AddSOS.superclass.addOutput.call(this, Ext.apply({
-	    title: this.addText,
+            title: this.addText,
             xtype: "gxp_sossourcedialog",
             target: this.target,
             listeners: {
-                'addfoi':function (config) {
-                    var sourceConfig = {"config":{
-                        "ptype": 'gxp_sossource',
-                        "listeners": {
-                            'beforeload': function(){
-                                this.loadingMask = new Ext.LoadMask(Ext.getBody());
-                                this.loadingMask.show();
-                            },
-                            'loaded': function(config){
-                                this.target.mapPanel.layers.add([config.record]);
-                                this.sosDialog.hide();
-                                this.loadingMask.hide();
-                            },
-                            'failure': function(){
-                                this.loadingMask.hide();
-                            },
-                            'scope': this
+                'addfoi': function(config) {
+                    var sourceConfig = {
+                        "config": {
+                            "ptype": 'gxp_sossource',
+                            "listeners": {
+                                'beforeload': function() {
+                                    this.loadingMask = new Ext.LoadMask(Ext.getBody());
+                                    this.loadingMask.show();
+                                },
+                                'loaded': function(config) {
+                                    this.target.mapPanel.layers.add([config.record]);
+                                    this.sosDialog.hide();
+                                    this.loadingMask.hide();
+                                },
+                                'failure': function() {
+                                    this.loadingMask.hide();
+                                },
+                                'scope': this
+                            }
                         }
-                    }};
+                    };
                     if (config.url) {
                         sourceConfig.config["url"] = config.url;
                     }
@@ -81,19 +83,21 @@ gxp.plugins.AddSOS = Ext.extend(gxp.plugins.Tool, {
                     source.createLayerRecord(config);
                 },
                 scope: this
-	    }
-	}, config));
+            }
+        }, config));
         output.on({
             added: function(cmp) {
                 if (!this.outputTarget) {
                     cmp.on("afterrender", function() {
                         cmp.ownerCt.ownerCt.center();
-                    }, this, {single: true});
+                    }, this, {
+                        single: true
+                    });
                 }
             },
             scope: this
         });
-	this.sosDialog = output;
+        this.sosDialog = output;
         return output;
     }
 

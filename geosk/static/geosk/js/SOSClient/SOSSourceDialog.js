@@ -16,7 +16,6 @@
  *  class = SOSSourceDialog
  *  base_link = `Ext.Container <http://extjs.com/deploy/dev/docs/?class=Ext.Container>`_
  */
-
 Ext.namespace("gxp");
 
 /** api: constructor
@@ -63,39 +62,39 @@ gxp.SOSSourceDialog = Ext.extend(Ext.Container, {
         this.addEvents("addfoi");
 
         if (!this.sosServices) {
-            this.sosServices  = [
-		[this.addLocalSOSText, '/observations/sos/kvp'],
-		['SOS ISMAR', 'http://david.ve.ismar.cnr.it/52nSOSv3_WAR/sos?'],
-		['SOS LTER', 'http://sp7.irea.cnr.it/tomcat/SOS32/sos'],
-		['SOS ISE', 'http://sos.ise.cnr.it/sos?'],
-		['SOS ISE BIO', 'http://sos.ise.cnr.it/biology/sos?'],
-		['SOS ISE CHEM', 'http://sos.ise.cnr.it/chemistry/sos?'],
+            this.sosServices = [
+                [this.addLocalSOSText, '/observations/sos/kvp'],
+                ['SOS ISMAR', 'http://david.ve.ismar.cnr.it/52nSOSv3_WAR/sos?'],
+                ['SOS LTER', 'http://sp7.irea.cnr.it/tomcat/SOS32/sos'],
+                ['SOS ISE', 'http://sos.ise.cnr.it/sos?'],
+                ['SOS ISE BIO', 'http://sos.ise.cnr.it/biology/sos?'],
+                ['SOS ISE CHEM', 'http://sos.ise.cnr.it/chemistry/sos?'],
                 [this.addSOSText, '']
             ];
         }
 
         var sosStore = new Ext.data.ArrayStore({
             fields: ['name', 'url'],
-            data : this.sosServices
+            data: this.sosServices
         });
 
         var sourceTypeSelect = new Ext.form.ComboBox({
             store: sosStore,
             fieldLabel: this.sosTypeText,
-            displayField:'name',
-            valueField:'url',
+            displayField: 'name',
+            valueField: 'url',
             typeAhead: true,
             width: 180,
             mode: 'local',
             triggerAction: 'all',
             emptyText: this.emptyText,
-            selectOnFocus:true,
+            selectOnFocus: true,
             listeners: {
                 "select": function(choice) {
                     if (choice.value == '') {
                         urlTextField.show();
                         // symbolizerField.show();
-			symbolizerField.hide();
+                        symbolizerField.hide();
                     } else {
                         urlTextField.hide();
                         urlTextField.setValue(choice.value)
@@ -118,7 +117,9 @@ gxp.SOSSourceDialog = Ext.extend(Ext.Container, {
 
 
         var symbolizerField = new gxp.PointSymbolizer({
-            bodyStyle: {padding: "10px"},
+            bodyStyle: {
+                padding: "10px"
+            },
             width: 280,
             border: false,
             hidden: true,
@@ -126,7 +127,10 @@ gxp.SOSSourceDialog = Ext.extend(Ext.Container, {
             defaults: {
                 labelWidth: 70
             },
-            symbolizer: {pointGraphics: "circle", pointRadius: "5"}
+            symbolizer: {
+                pointGraphics: "circle",
+                pointRadius: "5"
+            }
         });
 
 
@@ -136,7 +140,7 @@ gxp.SOSSourceDialog = Ext.extend(Ext.Container, {
             cfg.pointGraphics = this.pointGraphics;
         }
 
-        var submitButton =  new Ext.Button({
+        var submitButton = new Ext.Button({
             text: this.addFOISText,
             iconCls: "gxp-icon-addsos",
             disabled: true,
