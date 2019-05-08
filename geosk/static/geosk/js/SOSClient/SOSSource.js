@@ -96,6 +96,8 @@ gxp.plugins.SOSSource = Ext.extend(gxp.plugins.LayerSource, {
 
                 var formatConfig = "format" in config ? config.format : this.format;
 
+                layer.mergeNewParams = function(params) {};
+
                 var data = {
                     layer: layer,
                     //title: config.name,
