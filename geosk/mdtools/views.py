@@ -46,13 +46,13 @@ def get_data_api(request, format='json'):
 
     #f=LayerForm(model_to_dict(l), prefix='layer')
 
-
     data['keywords'] = r.keyword_csv
+    data['regions'] = [reg.name for reg in r.regions.all()] if r.regions else []
     # data_prefix = {"layer-%s" % k: v for k, v in data.items()}
 
     results = {
         'data': data
-        }
+    }
     return HttpResponse(json.dumps(results, cls=DjangoJSONEncoder), mimetype="application/json")
 
 def get_ubuntu_release():

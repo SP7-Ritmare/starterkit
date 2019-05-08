@@ -5,7 +5,6 @@ import requests
 from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
-from django.template import RequestContext
 from geosk import settings as geosk_settings
 from lxml import etree
 
@@ -21,9 +20,9 @@ def browse(request):
     cap['capabilities_url'] = cat.get_capabilities_url()
     cap['public_capabilities_url'] = geosk_settings.SOS_PUBLIC_CAPABILITIES_URL
     return render_to_response('osk/osk_list.html',
-                              RequestContext(request, {'cap': cap,
-                                                       'sensors': sensors
-                                                       }))
+                              {'cap': cap,
+                               'sensors': sensors
+                              })
 
 
 def get_capabilities(request):

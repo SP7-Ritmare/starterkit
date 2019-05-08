@@ -29,7 +29,7 @@ $("#searchTemplate").select2({
     placeholder: 'Search...',
     width: 'element',     
     ajax: {
-        url: '/api/layers',
+        url: '/api/{{ resource.class_name.lower }}s',
         data: function(term,page){
             page = (page - 1) * 10;
             return {
@@ -61,7 +61,7 @@ $('#import-metadata-import').on('click', function (e) {
     	url: '{% url "mdtools_getdata" %}',
     	type: "POST",
     	data: { 
-    	    rtype : item.object._type,
+    	    rtype : '{{ resource.class_name.lower }}',
     	    id: item.object.id
     	},
     	success: function(rdata) {

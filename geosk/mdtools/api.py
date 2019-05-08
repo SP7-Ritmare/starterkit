@@ -10,7 +10,6 @@ from owslib.iso import MD_Metadata, CI_ResponsibleParty, util, namespaces
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
-from django.template import RequestContext
 from django.core.serializers.json import DjangoJSONEncoder
 from django.core.urlresolvers import reverse
 from django.utils.safestring import mark_safe
@@ -130,11 +129,11 @@ def rndteditor(request, layername):
     js_queryStringValues = json.dumps(queryStringValues)
     return render_to_response(
         'mdtools/rndt.html',
-        RequestContext(request, {
-                'layername': layername,
-                'queryStringValues': mark_safe(js_queryStringValues)
-                })
-        )
+        {
+            'layername': layername,
+            'queryStringValues': mark_safe(js_queryStringValues)
+        })
+        
 
 def _ediml2rndt(ediml):
     # if SkRegistration.objects.get_current() is None:
@@ -235,7 +234,7 @@ def importediml(request, template='mdtools/upload_metadata.html'):
     else:
         form = UploadMetadataFileForm()
     return render_to_response(template,
-                              RequestContext(request, {'form': form}))
+                              {'form': form})
 
 def importrndt(request, template='mdtools/upload_metadata.html'):
     if request.method == 'POST':
@@ -253,7 +252,7 @@ def importrndt(request, template='mdtools/upload_metadata.html'):
     else:
         form = UploadMetadataFileForm()
     return render_to_response(template,
-                              RequestContext(request, {'form': form}))
+                              {'form': form})
 
 def _parse_metadata(xml):
     try:
