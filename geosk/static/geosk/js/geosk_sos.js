@@ -2403,7 +2403,7 @@
 // http://stackoverflow.com/questions/15029462/exporting-sdk2-grid-to-csv
 GridExporter = Ext.extend(Object, {
     dateFormat : 'Y-m-d g:i',
-    
+
     exportGrid: function(grid) {
         if (Ext.isIE) {
             this._ieToExcel(grid);
@@ -2522,7 +2522,7 @@ GridExporter = Ext.extend(Object, {
         if (window.ActiveXObject){
             var  xlApp, xlBook;
             try {
-                xlApp = new ActiveXObject("Excel.Application"); 
+                xlApp = new ActiveXObject("Excel.Application");
                 xlBook = xlApp.Workbooks.Add();
             } catch (e) {
                 Ext.Msg.alert('Error', 'For the export to work in IE, you have to enable a security setting called "Initialize and script ActiveX control not marked as safe" from Internet Options -> Security -> Custom level..."');
@@ -2531,10 +2531,10 @@ GridExporter = Ext.extend(Object, {
 
             xlBook.worksheets("Sheet1").activate;
             var XlSheet = xlBook.activeSheet;
-            xlApp.visible = true; 
+            xlApp.visible = true;
 
             this._ieGetGridData(grid, XlSheet);
-            XlSheet.columns.autofit; 
+            XlSheet.columns.autofit;
         }
     }
 });
@@ -2633,90 +2633,105 @@ OpenLayers.SOSClient = OpenLayers.Class({
         this.events = new OpenLayers.Events(this);
         var params = {'service': 'SOS', 'request': 'GetCapabilities', 'acceptVersions': '1.0.0'};
         var paramString = OpenLayers.Util.getParameterString(params);
-        url = OpenLayers.Util.urlAppend(this.url, paramString);
+        var baseUrl = this.url;
+        if (this.getLastPart(baseUrl) != 'kvp') {
+            baseUrl += "/kvp";
+        }
+        url = OpenLayers.Util.urlAppend(baseUrl, paramString);
+        if (!url.startsWith('/')) {
+            url = encodeURIComponent(url);
+        }
+
         OpenLayers.Request.GET({url: url,
                                 success: this.parseSOSCaps,
                                 failure: this.onFailure,
                                 scope: this
                                });
     },
+
     onFailure: function(){
         this.events.triggerEvent("failure");
     },
+
+    getLastPart: function (url) {
+       var parts = url.split("/");
+       return (url.lastIndexOf('/') !== url.length - 1 ? parts[parts.length - 1] : parts[parts.length - 2]);
+    },
+
     getRandomColor: function () {
         var colorIndex;
         var color;
         var colors = ['#33a02c', '#1f78b4', '#b2df8a', '#a6cee3', '#fb9a99', '#e31a1c', '#fdbf6f', '#ff7f00', '#cab2d6' ,'#6a3d9a', '#ffff99', '#b15928'];
-	// warning: global variable
-	// if(sosColorsIndex  === 'undefined'){
-	if(typeof sosColorsIndex == 'undefined'){
-	    sosColorsIndex = 0;
-	}
-	colorIndex = sosColorsIndex;
-	if(colorIndex < colors.length){
-	    color = colors[colorIndex];
-	} else {
-	    var letters = '0123456789ABCDEF'.split('');
-	    color = '#';
-	    for (var i = 0; i < 6; i++) {
-		color += letters[Math.round(Math.random() * 15)];
+	    // warning: global variable
+	    // if(sosColorsIndex  === 'undefined'){
+	    if(typeof sosColorsIndex == 'undefined'){
+	        sosColorsIndex = 0;
 	    }
-	}
-	sosColorsIndex += 1;
-	return color;
-    },
-    createLayer: function(){
-	//console.log(this);
-	this.layer = new OpenLayers.Layer.Vector(this.SOSCapabilities.serviceIdentification.title, {
-            styleMap: new OpenLayers.StyleMap({
-		"default": new OpenLayers.Style({},{
-		    rules: [
-			new OpenLayers.Rule({
-			    'name': 'base',
-			    'title': 'FOI',
-			    symbolizer: {
-				graphicName:"circle", pointRadius:6, fillOpacity:0.8, fillColor: this.getRandomColor()
-				//'pointRadius': 10,
-				//'externalGraphic': 'http://cigno.ve.ismar.cnr.it/static/cigno/img/sos_marker.png',
-			    }
-			})
-		    ]
-                })
-            }),
-            strategies: [new OpenLayers.Strategy.Fixed()],
-            protocol: new OpenLayers.Protocol.SOS({
-                formatOptions: {internalProjection: new OpenLayers.Projection('EPSG:4326')},
-                //url: this.url,
-                // url: this.urlPOST,
-		url: this.getURL('GetFeatureOfInterest', 'post', 'application/xml'),
-                fois: this.getFois()
-            }),
-            projection: new OpenLayers.Projection("EPSG:4326")
-            // displayInLayerSwitcher: false
-        });
-	return this.layer
+	    colorIndex = sosColorsIndex;
+	    if(colorIndex < colors.length){
+	        color = colors[colorIndex];
+	    } else {
+	        var letters = '0123456789ABCDEF'.split('');
+	        color = '#';
+	        for (var i = 0; i < 6; i++) {
+		        color += letters[Math.round(Math.random() * 15)];
+	        }
+    	}
+    	sosColorsIndex += 1;
+    	return color;
+        },
+        createLayer: function(){
+    	//console.log(this);
+    	this.layer = new OpenLayers.Layer.Vector(this.SOSCapabilities.serviceIdentification.title, {
+                styleMap: new OpenLayers.StyleMap({
+    		"default": new OpenLayers.Style({},{
+    		    rules: [
+    			new OpenLayers.Rule({
+    			    'name': 'base',
+    			    'title': 'FOI',
+    			    symbolizer: {
+    				graphicName:"circle", pointRadius:6, fillOpacity:0.8, fillColor: this.getRandomColor()
+    				//'pointRadius': 10,
+    				//'externalGraphic': 'http://cigno.ve.ismar.cnr.it/static/cigno/img/sos_marker.png',
+    			    }
+    			})
+    		    ]
+                    })
+                }),
+                strategies: [new OpenLayers.Strategy.Fixed()],
+                protocol: new OpenLayers.Protocol.SOS({
+                    formatOptions: {internalProjection: new OpenLayers.Projection('EPSG:4326')},
+                    //url: this.url,
+                    // url: this.urlPOST,
+    		url: this.getURL('GetFeatureOfInterest', 'post', 'application/xml'),
+                    fois: this.getFois()
+                }),
+                projection: new OpenLayers.Projection("EPSG:4326")
+                // displayInLayerSwitcher: false
+            });
+    	return this.layer
     },
 
     getURL: function(operation, method, contentType){
-	var elements = this.SOSCapabilities.operationsMetadata[operation].dcp.http[method];
-	for(var index = 0; index < elements.length; ++index){
-	    var el = elements[index];
-	    if (typeof el.constraints === 'undefined'){
-		return el.url;
-	    } else {
-		if(el.constraints['Content-Type'].allowedValues[contentType] === true){
-		    return el.url;
-		}
-	    }
-	}
-	return elements[0].url;
+    	var elements = this.SOSCapabilities.operationsMetadata[operation].dcp.http[method];
+    	for(var index = 0; index < elements.length; ++index){
+    	    var el = elements[index];
+    	    if (typeof el.constraints === 'undefined'){
+    		return el.url;
+    	    } else {
+    		if(el.constraints['Content-Type'].allowedValues[contentType] === true){
+    		    return el.url;
+    		}
+    	    }
+    	}
+    	return elements[0].url;
     },
 
     parseSOSCaps: function(response) {
         // cache capabilities for future use
         this.SOSCapabilities = this.capsformat.read(response.responseXML || response.responseText);
-	//console.log(this.SOSCapabilities.operationsMetadata.GetFeatureOfInterest.dcp.http.post[0].url);
-	// non lancio piu' queste funzioni perche' ora controlla tutto il gxp_source
+    	//console.log(this.SOSCapabilities.operationsMetadata.GetFeatureOfInterest.dcp.http.post[0].url);
+    	// non lancio piu' queste funzioni perche' ora controlla tutto il gxp_source
         // this.map.addLayer(this.createLayer());
         // this.ctrl = new OpenLayers.Control.SelectFeature(this.layer,
         //                               {scope: this, onSelect: this.onFeatureSelect});
@@ -2732,14 +2747,16 @@ OpenLayers.SOSClient = OpenLayers.Class({
     getFois: function() {
         var result = [];
         this.offeringCount = 0;
-	//console.log(this.SOSCapabilities);
-        for (var name in this.SOSCapabilities.contents.offeringList) {
-            var offering = this.SOSCapabilities.contents.offeringList[name];
-            this.offeringCount++;
-            for (var i=0, len=offering.featureOfInterestIds.length; i<len; i++) {
-                var foi = offering.featureOfInterestIds[i];
-                if (OpenLayers.Util.indexOf(result, foi) === -1) {
-                    result.push(foi);
+	    //console.log(this.SOSCapabilities);
+        if (this.SOSCapabilities.contents) {
+            for (var name in this.SOSCapabilities.contents.offeringList) {
+                var offering = this.SOSCapabilities.contents.offeringList[name];
+                this.offeringCount++;
+                for (var i=0, len=offering.featureOfInterestIds.length; i<len; i++) {
+                    var foi = offering.featureOfInterestIds[i];
+                    if (OpenLayers.Util.indexOf(result, foi) === -1) {
+                        result.push(foi);
+                    }
                 }
             }
         }
@@ -2747,19 +2764,23 @@ OpenLayers.SOSClient = OpenLayers.Class({
     },
 
     getTitleForObservedProperty: function(property) {
-        for (var name in this.SOSCapabilities.contents.offeringList) {
-            var offering = this.SOSCapabilities.contents.offeringList[name];
-            if (offering.observedProperties[0] === property) {
-                return offering.name;
+        if (this.SOSCapabilities.contents) {
+            for (var name in this.SOSCapabilities.contents.offeringList) {
+                var offering = this.SOSCapabilities.contents.offeringList[name];
+                if (offering.observedProperties[0] === property) {
+                    return offering.name;
+                }
             }
         }
     },
 
     getNameForObservedProperty: function(property) {
-        for (var name in this.SOSCapabilities.contents.offeringList) {
-            var offering = this.SOSCapabilities.contents.offeringList[name];
-            if (offering.observedProperties[0] === property) {
-                return name;
+        if (this.SOSCapabilities.contents) {
+            for (var name in this.SOSCapabilities.contents.offeringList) {
+                var offering = this.SOSCapabilities.contents.offeringList[name];
+                if (offering.observedProperties[0] === property) {
+                    return name;
+                }
             }
         }
     },
@@ -2808,7 +2829,6 @@ OpenLayers.SOSClient = OpenLayers.Class({
         return timeperiod;
     },
 
-
     getResponseFormat: function(){
         if (!this.responseFormat) {
             for (format in this.SOSCapabilities.operationsMetadata.GetObservation.parameters.responseFormat.allowedValues) {
@@ -2822,26 +2842,26 @@ OpenLayers.SOSClient = OpenLayers.Class({
     },
 
     getOfferingsByFoi: function(foi){
-	var foiId = foi.attributes.id;
-	var offerings = {};
-        for (var name in this.SOSCapabilities.contents.offeringList) {
-	    // console.log(foi);
-            var offering = this.SOSCapabilities.contents.offeringList[name];
-	    // console.log(offering.featureOfInterestIds);
-
-            // test foi in offeringList
-            if(offering.featureOfInterestIds.indexOf(foiId) !== -1){
-                //problema nel loop degli array all'interno del writers perche' Ext modifica l'array base dj js ( Ext Array.prototype.indexOf)
-                //trasformo l'array in un dictionary
-                // var observedProperties = {};
-                // offering.observedProperties.forEach(function(val, i) {
-                // observedProperties[i]=val;
-		//});
-
-		offerings[name] = offering;
+	    var foiId = foi.attributes.id;
+	    var offerings = {};
+        if (this.SOSCapabilities.contents) {
+            for (var name in this.SOSCapabilities.contents.offeringList) {
+    	        // console.log(foi);
+                var offering = this.SOSCapabilities.contents.offeringList[name];
+    	        // console.log(offering.featureOfInterestIds);
+                // test foi in offeringList
+                if(offering.featureOfInterestIds.indexOf(foiId) !== -1){
+                    //problema nel loop degli array all'interno del writers perche' Ext modifica l'array base dj js ( Ext Array.prototype.indexOf)
+                    //trasformo l'array in un dictionary
+                    // var observedProperties = {};
+                    // offering.observedProperties.forEach(function(val, i) {
+                    // observedProperties[i]=val;
+    		        //});
+    		        offerings[name] = offering;
+                }
             }
         }
-	return offerings;
+	    return offerings;
     },
 
     onFeatureSelect: function(feature) {
@@ -2856,56 +2876,55 @@ OpenLayers.SOSClient = OpenLayers.Class({
     },
 
     getObservation: function(foiId, offering_id, observedProperty_id, begin, end, onSuccess){
-        var offering = this.SOSCapabilities.contents.offeringList[offering_id];
-        //c'e' un problema con array e extjs: vedi commento piu' avanti
-        var observedProperties = {};
-	// doesn't work in IE
-        // offering.observedProperties.forEach(function(val, i) {
-        //     observedProperties[i]=val;
-        // });
-	//
-	// non funziona nenanche questo in alcuni casi -> prendo solo la prima
-        // for(var i=0; i< offering.observedProperties.length; i++) {
-	//    observedProperties[i] = offering.observedProperties[i];
-	//}
-	//if(offering.observedProperties.length>0){
-	//  var observedProperties = {0: offering.observedProperties[0]}
-        //}
+        if (this.SOSCapabilities.contents) {
+            var offering = this.SOSCapabilities.contents.offeringList[offering_id];
+            //c'e' un problema con array e extjs: vedi commento piu' avanti
+            var observedProperties = {};
+        	// doesn't work in IE
+                // offering.observedProperties.forEach(function(val, i) {
+                //     observedProperties[i]=val;
+                // });
+        	//
+        	// non funziona nenanche questo in alcuni casi -> prendo solo la prima
+                // for(var i=0; i< offering.observedProperties.length; i++) {
+        	//    observedProperties[i] = offering.observedProperties[i];
+        	//}
+        	//if(offering.observedProperties.length>0){
+        	//  var observedProperties = {0: offering.observedProperties[0]}
+                //}
 
-	// ora e' passato come parametro alla funzione
-	var observedProperties = {0: observedProperty_id}
+        	// ora e' passato come parametro alla funzione
+        	var observedProperties = {0: observedProperty_id}
 
-	var xmlRequest = this.getObservationRequest(foiId, offering_id, observedProperties, begin,end, this.resultModel);
-        OpenLayers.Request.POST({
-            // url: this.sosClient.urlPOST,
-	    url: this.getURL('GetObservation', 'post', 'application/xml'),
-            scope: this,
-            success: function(response) {
-		//console.log(response.responseText);
-		//check for exceptions
-		var xmlReader = new OpenLayers.Format.XML();
-		var doc = xmlReader.read(response.responseText);
-		if(doc && doc.documentElement.tagName == "ows:ExceptionReport"){
-		    var els = doc.documentElement.getElementsByTagName('ExceptionText');
-		    if(els.length > 0 && els[0].textContent.indexOf("om:Measurement") > -1){
-			this.resultModel = null;
-			// this.chartReload(); //TODO lanciare automaticamente il reload
-		    }
-		}
-		var output = this.obsformat.read(response.responseXML || response.responseText);
-		//console.log(output);
-		onSuccess(offering, output);
-	    },
-
-            failure: function(response) {
-                ("No data for charts...");
-            },
-            data: xmlRequest,
-            headers: {'X-CSRFToken': Ext.util.Cookies.get('csrftoken')}
-        });
+        	var xmlRequest = this.getObservationRequest(foiId, offering_id, observedProperties, begin,end, this.resultModel);
+            OpenLayers.Request.POST({
+                // url: this.sosClient.urlPOST,
+    	        url: this.getURL('GetObservation', 'post', 'application/xml'),
+                scope: this,
+                success: function(response) {
+            		//console.log(response.responseText);
+            		//check for exceptions
+            		var xmlReader = new OpenLayers.Format.XML();
+            		var doc = xmlReader.read(response.responseText);
+            		if(doc && doc.documentElement.tagName == "ows:ExceptionReport"){
+            		    var els = doc.documentElement.getElementsByTagName('ExceptionText');
+            		    if(els.length > 0 && els[0].textContent.indexOf("om:Measurement") > -1){
+            			this.resultModel = null;
+            			// this.chartReload(); //TODO lanciare automaticamente il reload
+            		    }
+            		}
+            		var output = this.obsformat.read(response.responseXML || response.responseText);
+            		//console.log(output);
+            		onSuccess(offering, output);
+        	    },
+                failure: function(response) {
+                    ("No data for charts...");
+                },
+                data: xmlRequest,
+                headers: {'X-CSRFToken': Ext.util.Cookies.get('csrftoken')}
+            });
+        }
     },
-
-
 
     /**
      *
@@ -2917,7 +2936,7 @@ OpenLayers.SOSClient = OpenLayers.Class({
      *
      */
     CLASS_NAME: "OpenLayers.SOSClient"
-});
+  });
 
     PlotDataStore = Ext.extend(Ext.util.Observable, {
 	constructor: function(config){
@@ -3498,7 +3517,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
 					checked: true,
 					group: 'theme',
 					text: 'Manual',
-					icon: 'images/chart_line.png',
+					icon: 'img/chart_line.png',
 					listeners: {
 					    "click": function(){
 						this.enableRealTime(false);
@@ -3509,7 +3528,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
 					checked: false,
 					group: 'theme',
 					text: 'Real-time',
-					icon: 'images/chart_curve.png',
+					icon: 'img/chart_curve.png',
 					listeners: {
 					    "click": function() {
 						this.enableRealTime(true);
@@ -3527,7 +3546,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
 					checked: true,
 					group: 'theme',
 					text: 'Line & points',
-					icon: 'images/chart_line.png',
+					icon: 'img/chart_line.png',
 					listeners: {
 					    "click": function(){
 						this.chartOptions['series']['lines']['show'] = true;
@@ -3540,7 +3559,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
 					checked: false,
 					group: 'theme',
 					text: 'Line',
-					icon: 'images/chart_curve.png',
+					icon: 'img/chart_curve.png',
 					listeners: {
 					    "click": function(){
 						this.chartOptions['series']['lines']['show'] = true;
@@ -3553,7 +3572,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
 					checked: false,
 					group: 'theme',
 					text: 'Points',
-					icon: 'images/chart_point.png',
+					icon: 'img/chart_point.png',
 					listeners: {
 					    "click": function(){
 						this.chartOptions['series']['lines']['show'] = false;
@@ -3606,7 +3625,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
 	                    }
 			},{
                             text: 'Reload',
-                            icon: 'images/arrow_refresh.png',
+                            icon: 'img/arrow_refresh.png',
                             listeners: {
 		                "click": this.chartReload,
 				scope: this
@@ -3656,7 +3675,7 @@ FoiExplorer = Ext.extend(Ext.Window, {
 			items: [{
                             text: 'Download',
 			    // style: {padding: '15px'},
-                            // icon: 'images/arrow_refresh.png',
+                            // icon: 'img/arrow_refresh.png',
                             listeners: {
 		                "click": this.download,
 				scope: this
@@ -3761,6 +3780,7 @@ gxp.plugins.AddSOS = Ext.extend(gxp.plugins.Tool, {
         }]);
         return actions;
     },
+
     addOutput: function(config) {
         config = config || {};
         //TODO create generic gxp_layerpanel
@@ -3883,12 +3903,12 @@ gxp.SOSSourceDialog = Ext.extend(Ext.Container, {
 
         if (!this.sosServices) {
             this.sosServices  = [
-		[this.addLocalSOSText, '/observations/sos/kvp'],
-		['SOS ISMAR', 'http://david.ve.ismar.cnr.it/52nSOSv3_WAR/sos?'],
-		['SOS LTER', 'http://sp7.irea.cnr.it/tomcat/SOS32/sos'],
-		['SOS ISE', 'http://sos.ise.cnr.it/sos?'],
-		['SOS ISE BIO', 'http://sos.ise.cnr.it/biology/sos?'],
-		['SOS ISE CHEM', 'http://sos.ise.cnr.it/chemistry/sos?'],
+                [this.addLocalSOSText, '/observations/sos/kvp'],
+                ['SOS ISMAR', 'http://david.ve.ismar.cnr.it/52nSOSv3_WAR/sos?'],
+                ['SOS LTER', 'http://sp7.irea.cnr.it/tomcat/SOS32/sos'],
+                ['SOS ISE', 'http://sos.ise.cnr.it/sos?'],
+                ['SOS ISE BIO', 'http://sos.ise.cnr.it/biology/sos?'],
+                ['SOS ISE CHEM', 'http://sos.ise.cnr.it/chemistry/sos?'],
                 [this.addSOSText, '']
             ];
         }
@@ -3914,7 +3934,7 @@ gxp.SOSSourceDialog = Ext.extend(Ext.Container, {
                     if (choice.value == '') {
                         urlTextField.show();
                         // symbolizerField.show();
-			symbolizerField.hide();
+			            symbolizerField.hide();
                     } else {
                         urlTextField.hide();
                         urlTextField.setValue(choice.value)
@@ -3961,7 +3981,6 @@ gxp.SOSSourceDialog = Ext.extend(Ext.Container, {
             disabled: true,
             handler: function() {
                 var config = {};
-
                 config.url = urlTextField.getValue();
                 var symbolizer = symbolizerField.symbolizer;
                 config.defaultStyle = {};
@@ -3974,7 +3993,6 @@ gxp.SOSSourceDialog = Ext.extend(Ext.Container, {
                 });
 
                 this.fireEvent("addfoi", config);
-
             },
             scope: this
         });
@@ -4013,8 +4031,6 @@ gxp.SOSSourceDialog = Ext.extend(Ext.Container, {
         gxp.FeedSourceDialog.superclass.initComponent.call(this);
 
     },
-
-
 
     /** private: property[urlRegExp]
      *  `RegExp`
@@ -4098,7 +4114,7 @@ gxp.plugins.SOSSource = Ext.extend(gxp.plugins.LayerSource, {
     createLayerRecord:function (config) {
         var record;
         this.fireEvent("beforeload", {'record': record});
-	this.sosClient = new OpenLayers.SOSClient({map: null, url: this.url});
+	    this.sosClient = new OpenLayers.SOSClient({map: null, url: this.url});
         this.sosClient.events.on({
             'loaded': function(){
                 var layer = this.sosClient.createLayer();
@@ -4123,6 +4139,10 @@ gxp.plugins.SOSSource = Ext.extend(gxp.plugins.LayerSource, {
 
                 var formatConfig = "format" in config ? config.format : this.format;
 
+                layer.mergeNewParams = function(params) {
+
+                };
+
                 var data = {
                     layer:layer,
                     //title: config.name,
@@ -4140,6 +4160,7 @@ gxp.plugins.SOSSource = Ext.extend(gxp.plugins.LayerSource, {
 
 
                 record = new Record(data, layer.id);
+
                 this.fireEvent("loaded", {'record': record});
             },
             'failure': function(){
@@ -4321,7 +4342,7 @@ gxp.plugins.SOSGetFeatureInfo =  Ext.extend(gxp.plugins.Tool,{
                         },
                         scope: this
                     });
-		    
+
                     this.target.mapPanel.map.addControl(this.target.selectControl);
                 }
             }
@@ -4389,3 +4410,4 @@ GeoExt.Lang.add("it", {
         emptyText: "Seleziona una risorsa"
     }
 });
+
