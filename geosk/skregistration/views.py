@@ -8,7 +8,7 @@ from django.conf import settings
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.sites.models import Site
 from django.forms.models import model_to_dict
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from geonode.utils import _get_basic_auth_info, http_client, json_response
 from geosk.mdtools.models import ServicesMetadata
 from models import SkRegistration
@@ -29,7 +29,7 @@ def registration(request, template='skregistration/registration.html'):
         status = 'missing-metadata'
         services_metadata = None
 
-    return render_to_response(template, {
+    return render(request, template, {
         'SETTINGS_SITENAME': getattr(settings, 'SITENAME', 'GeoNode'),
         'SETTINGS_SITEURL':  getattr(settings, 'SITEURL'),
         'status': status,
