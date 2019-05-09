@@ -603,7 +603,7 @@ def _prepare_monitoring_fixture():
         {
             "fields": {
                 "name": "local-geonode",
-                "url": "",
+                "url": "http://{0}/".format(pub_ip),
                 "notes": "",
                 "last_check": d,
                 "active": True,
@@ -617,7 +617,7 @@ def _prepare_monitoring_fixture():
         {
             "fields": {
                 "name": "local-system-geonode",
-                "url": "http://geonode:80/",
+                "url": "http://{0}/".format(pub_ip),
                 "notes": "",
                 "last_check": d,
                 "active": True,
