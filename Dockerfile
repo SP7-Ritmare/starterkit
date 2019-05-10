@@ -32,6 +32,12 @@ RUN apt-get update && apt-get install -y geoip-bin
 COPY . /usr/src/app/
 WORKDIR /usr/src/app
 
+RUN apt-get update && apt-get -y install cron
+COPY monitoring-cron /etc/cron.d/monitoring-cron
+RUN chmod 0644 /etc/cron.d/monitoring-cron
+RUN crontab /etc/cron.d/monitoring-cron
+RUN touch /var/log/cron.log
+
 COPY wait-for-databases.sh /usr/bin/wait-for-databases
 RUN chmod +x /usr/bin/wait-for-databases
 RUN chmod +x /usr/src/app/tasks.py \

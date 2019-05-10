@@ -36,18 +36,23 @@ def update(ctx):
     db_url = _update_db_connstring()
     geodb_url = _update_geodb_connstring()
     envs = {
+        "geonode_docker_host": "{0}".format(socket.gethostbyname('geonode')),
         "public_fqdn": "{0}:{1}".format(pub_ip, pub_port),
         "public_host": "{0}".format(pub_ip),
         "dburl": db_url,
         "geodburl": geodb_url,
         "override_fn": "$HOME/.override_env"
     }
+    ctx.run("echo export MONITORING_HOST_NAME=\
+{geonode_docker_host} >> {override_fn}".format(**envs), pty=True)
+    ctx.run("echo export MONITORING_SERVICE_NAME=\
+local-geoserver >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export GEOSERVER_PUBLIC_LOCATION=\
 http://{public_fqdn}/geoserver/ >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export SITEURL=\
 http://{public_fqdn}/ >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export ALLOWED_HOSTS=\
-\"\\\"['{public_fqdn}', '{public_host}', 'django', 'geonode',]\\\"\" \
+\"\\\"['{geonode_docker_host}', '{public_fqdn}', '{public_host}', '127.0.0.1', 'django', 'geonode']\\\"\" \
 >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export DATABASE_URL=\
 {dburl} >> {override_fn}".format(**envs), pty=True)
@@ -219,7 +224,7 @@ def _localsettings():
 
 
 def _geonode_public_host_ip():
-    gn_pub_hostip = os.getenv('GEONODE_LB_HOST_IP', '')
+    gn_pub_hostip = os.getenv('GEONODE_LB_HOST_IP', None)
     if not gn_pub_hostip:
         gn_pub_hostip = _docker_host_ip()
     return gn_pub_hostip
@@ -592,9 +597,7 @@ def _prepare_monitoring_fixture():
         {
             "fields": {
                 "active": True,
-                "ip": "{0}".format(
-                    socket.gethostbyname('geonode')
-                ),
+                "ip": "{0}".format(socket.gethostbyname('geonode')),
                 "name": "geonode"
             },
             "model": "monitoring.host",
@@ -603,7 +606,7 @@ def _prepare_monitoring_fixture():
         {
             "fields": {
                 "name": "local-geonode",
-                "url": "http://{0}/".format(pub_ip),
+                "url": "http://{0}/".format(socket.gethostbyname('geonode')),
                 "notes": "",
                 "last_check": d,
                 "active": True,
@@ -617,7 +620,7 @@ def _prepare_monitoring_fixture():
         {
             "fields": {
                 "name": "local-system-geonode",
-                "url": "http://{0}/".format(pub_ip),
+                "url": "http://{0}/".format(socket.gethostbyname('geonode')),
                 "notes": "",
                 "last_check": d,
                 "active": True,
@@ -631,7 +634,7 @@ def _prepare_monitoring_fixture():
         {
             "fields": {
                 "name": "local-geoserver",
-                "url": "http://{0}:80/geoserver/".format(pub_ip),
+                "url": "http://{0}/geoserver/".format(socket.gethostbyname('geonode')),
                 "notes": "",
                 "last_check": d,
                 "active": True,
