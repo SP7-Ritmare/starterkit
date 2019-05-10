@@ -405,10 +405,10 @@ if MONITORING_ENABLED:
     MIDDLEWARE_CLASSES += ('geonode.contrib.monitoring.middleware.MonitoringMiddleware',)
     MONITORING_CONFIG = None
     if os.getenv('DOCKER_ENV'):
-        MONITORING_HOST_NAME = 'geonode'
+        MONITORING_HOST_NAME = os.getenv("MONITORING_HOST_NAME", 'geonode')
     else:
-        MONITORING_HOST_NAME = 'localhost'
-    MONITORING_SERVICE_NAME = 'local-geonode'
+        MONITORING_HOST_NAME = os.getenv("MONITORING_HOST_NAME", 'localhost')
+    MONITORING_SERVICE_NAME = os.getenv("MONITORING_SERVICE_NAME", 'local-geonode')
 
 GEOIP_PATH = os.path.join(os.path.dirname(__file__), '..', 'GeoLiteCity.dat')
 

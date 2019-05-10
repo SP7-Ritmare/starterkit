@@ -1,2 +1,2 @@
-*/5 * * * * DJANGO_SETTINGS_MODULE=geosk.settings /usr/local/bin/python /usr/src/app/manage.py collect_metrics -n -t xml >> /var/log/cron.log 2>&1
+*/5 * * * * . $HOME/.override_env; /usr/local/bin/python /usr/src/app/manage.py collect_metrics -n -t xml >> /var/log/cron.log 2>&1
 # An empty line is required at the end of this file for a valid cron file.

@@ -2,6 +2,7 @@ import json
 import logging
 import os
 import re
+import time
 import datetime
 import docker
 import socket
@@ -35,7 +36,16 @@ def update(ctx):
     print "Public PORT is {0}".format(pub_port)
     db_url = _update_db_connstring()
     geodb_url = _update_geodb_connstring()
+    service_ready = False
+    while not service_ready:
+        try:
+            socket.gethostbyname('geonode')
+            service_ready = True
+        except BaseException:
+            time.sleep(10)
+
     envs = {
+        "local_settings": "{0}".format(_localsettings())
         "geonode_docker_host": "{0}".format(socket.gethostbyname('geonode')),
         "public_fqdn": "{0}:{1}".format(pub_ip, pub_port),
         "public_host": "{0}".format(pub_ip),
@@ -43,10 +53,12 @@ def update(ctx):
         "geodburl": geodb_url,
         "override_fn": "$HOME/.override_env"
     }
+    ctx.run("echo export DJANGO_SETTINGS_MODULE=\
+{local_settings} >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export MONITORING_HOST_NAME=\
 {geonode_docker_host} >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export MONITORING_SERVICE_NAME=\
-local-geoserver >> {override_fn}".format(**envs), pty=True)
+local-geonode >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export GEOSERVER_PUBLIC_LOCATION=\
 http://{public_fqdn}/geoserver/ >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export SITEURL=\
