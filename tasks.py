@@ -45,7 +45,7 @@ def update(ctx):
             time.sleep(10)
 
     envs = {
-        "local_settings": "{0}".format(_localsettings())
+        "local_settings": "{0}".format(_localsettings()),
         "geonode_docker_host": "{0}".format(socket.gethostbyname('geonode')),
         "public_fqdn": "{0}:{1}".format(pub_ip, pub_port),
         "public_host": "{0}".format(pub_ip),
@@ -631,7 +631,7 @@ def _prepare_monitoring_fixture():
         },
         {
             "fields": {
-                "name": "local-system-geonode",
+                "name": "localhost-hostgeonode",
                 "url": "http://{0}/".format(socket.gethostbyname('geonode')),
                 "notes": "",
                 "last_check": d,
@@ -645,7 +645,21 @@ def _prepare_monitoring_fixture():
         },
         {
             "fields": {
-                "name": "local-geoserver",
+                "name": "localhost-hostgeoserver",
+                "url": "http://{0}/geoserver/".format(socket.gethostbyname('geonode')),
+                "notes": "",
+                "last_check": d,
+                "active": True,
+                "host": 1,
+                "check_interval": "00:01:00",
+                "service_type": 4
+            },
+            "model": "monitoring.service",
+            "pk": 3
+        },
+        {
+            "fields": {
+                "name": "defaukt-geoserver",
                 "url": "http://{0}/geoserver/".format(socket.gethostbyname('geonode')),
                 "notes": "",
                 "last_check": d,
@@ -655,7 +669,7 @@ def _prepare_monitoring_fixture():
                 "service_type": 2
             },
             "model": "monitoring.service",
-            "pk": 3
+            "pk": 4
         }
     ]
     with open('/tmp/default_monitoring_apps_docker.json', 'w') as fixturefile:
