@@ -131,17 +131,6 @@ TEMPLATES[0]['OPTIONS']['loaders'] = loaders
 TEMPLATES[0]['OPTIONS']['builtins'] = builtins
 TEMPLATES[0].pop('APP_DIRS', None)
 
-CLIENT_RESULTS_LIMIT = 20
-API_LIMIT_PER_PAGE = 1000
-FREETEXT_KEYWORDS_READONLY = False
-RESOURCE_PUBLISHING = False
-ADMIN_MODERATE_UPLOADS = False
-GROUP_PRIVATE_RESOURCES = False
-GROUP_MANDATORY_RESOURCES = False
-MODIFY_TOPICCATEGORY = True
-USER_MESSAGES_ALLOW_MULTIPLE_RECIPIENTS = True
-DISPLAY_WMS_LINKS = True
-
 # prevent signing up by default
 ACCOUNT_OPEN_SIGNUP = True
 ACCOUNT_EMAIL_REQUIRED = True
@@ -213,67 +202,6 @@ if os.getenv('DOCKER_ENV'):
 # Default preview library
 LAYER_PREVIEW_LIBRARY = 'geoext'
 #GEONODE_CLIENT_HOOKSET = "geonode.client.hooksets.LeafletHookSet"
-
-# LAYER_PREVIEW_LIBRARY = 'leaflet'
-LEAFLET_CONFIG = {
-    'TILES': [
-        # Find tiles at:
-        # http://leaflet-extras.github.io/leaflet-providers/preview/
-
-        # Map Quest
-        ('Map Quest',
-         'http://otile4.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png',
-         'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> '
-         '&mdash; Map data &copy; '
-         '<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'),
-        # Stamen toner lite.
-        # ('Watercolor',
-        #  'http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.png',
-        #  'Map tiles by <a href="http://stamen.com">Stamen Design</a>, \
-        #  <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; \
-        #  <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, \
-        #  <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'),
-        # ('Toner Lite',
-        #  'http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png',
-        #  'Map tiles by <a href="http://stamen.com">Stamen Design</a>, \
-        #  <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; \
-        #  <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, \
-        #  <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'),
-    ],
-    'PLUGINS': {
-        'esri-leaflet': {
-            'js': 'lib/js/esri-leaflet.js',
-            'auto-include': True,
-        },
-        'leaflet-fullscreen': {
-            'css': 'lib/css/leaflet.fullscreen.css',
-            'js': 'js/Leaflet.fullscreen.min.js',
-            'auto-include': True,
-        },
-    },
-    'SRID': 3857,
-    'RESET_VIEW': False
-}
-
-
-# default map projection
-# Note: If set to EPSG:4326, then only EPSG:4326 basemaps will work.
-DEFAULT_MAP_CRS = "EPSG:3857"
-
-# Where should newly created maps be focused?
-DEFAULT_MAP_CENTER = (0, 0)
-
-# How tightly zoomed should newly created maps be?
-# 0 = entire world;
-# maximum zoom is between 12 and 15 (for Google Maps, coverage varies by area)
-DEFAULT_MAP_ZOOM = 0
-
-ALT_OSM_BASEMAPS = os.environ.get('ALT_OSM_BASEMAPS', False)
-CARTODB_BASEMAPS = os.environ.get('CARTODB_BASEMAPS', False)
-STAMEN_BASEMAPS = os.environ.get('STAMEN_BASEMAPS', False)
-THUNDERFOREST_BASEMAPS = os.environ.get('THUNDERFOREST_BASEMAPS', False)
-MAPBOX_ACCESS_TOKEN = os.environ.get('MAPBOX_ACCESS_TOKEN', '')
-BING_API_KEY = os.environ.get('BING_API_KEY', None)
 
 MAP_BASELAYERS = [{
     "source": {"ptype": "gxp_olsource"},
@@ -379,36 +307,12 @@ if 'geonode.geoserver' in INSTALLED_APPS:
     MAP_BASELAYERS = [LOCAL_GEOSERVER]
     MAP_BASELAYERS.extend(baselayers)
 
-# notification settings
-NOTIFICATION_ENABLED = True
-
-# notifications backends
-_EMAIL_BACKEND = "pinax.notifications.backends.email.EmailBackend"
-PINAX_NOTIFICATIONS_BACKENDS = [
-    ("email", _EMAIL_BACKEND),
-]
-
-# Queue non-blocking notifications.
-PINAX_NOTIFICATIONS_QUEUE_ALL = False
-PINAX_NOTIFICATIONS_LOCK_WAIT_TIMEOUT = -1
-
-# pinax.notifications
-# or notification
-NOTIFICATIONS_MODULE = 'pinax.notifications'
-
-CORS_ORIGIN_ALLOW_ALL = True
-
-MONITORING_ENABLED = True
 # add following lines to your local settings to enable monitoring
 if MONITORING_ENABLED:
-    INSTALLED_APPS += ('geonode.contrib.monitoring',)
-    MIDDLEWARE_CLASSES += ('geonode.contrib.monitoring.middleware.MonitoringMiddleware',)
-    MONITORING_CONFIG = None
     if os.getenv('DOCKER_ENV'):
         MONITORING_HOST_NAME = os.getenv("MONITORING_HOST_NAME", 'geonode')
     else:
         MONITORING_HOST_NAME = os.getenv("MONITORING_HOST_NAME", 'localhost')
-    MONITORING_SERVICE_NAME = os.getenv("MONITORING_SERVICE_NAME", 'local-geonode')
 
 GEOIP_PATH = os.path.join(os.path.dirname(__file__), '..')
 

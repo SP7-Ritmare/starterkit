@@ -51,10 +51,13 @@ def update(ctx):
         "public_host": "{0}".format(pub_ip),
         "dburl": db_url,
         "geodburl": geodb_url,
+        "monitoring": os.environ['MONITORING_ENABLED'],
         "override_fn": "$HOME/.override_env"
     }
     ctx.run("echo export DJANGO_SETTINGS_MODULE=\
 {local_settings} >> {override_fn}".format(**envs), pty=True)
+    ctx.run("echo export MONITORING_ENABLED=\
+{monitoring} >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export MONITORING_HOST_NAME=\
 {geonode_docker_host} >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export MONITORING_SERVICE_NAME=\
@@ -105,12 +108,8 @@ def migrations(ctx):
     ctx.run("django-admin.py migrate --noinput --settings={0}".format(
         "geonode.settings"
     ), pty=True)
-    ctx.run("django-admin.py makemigrations --settings={0}".format(
-        _localsettings()
-    ), pty=True)
-    ctx.run("django-admin.py migrate --noinput --settings={0}".format(
-        _localsettings()
-    ), pty=True)
+    ctx.run(". $HOME/.override_env; django-admin.py makemigrations", pty=True)
+    ctx.run(". $HOME/.override_env; django-admin.py migrate --noinput", pty=True)
 
 
 @task
@@ -124,8 +123,6 @@ def prepare(ctx):
     _prepare_site_fixture()
     ctx.run("rm -rf /tmp/apikey_docker.json", pty=True)
     _prepare_apikey_fixture()
-    ctx.run("rm -rf /tmp/default_monitoring_apps_docker.json", pty=True)
-    _prepare_monitoring_fixture()
 
 
 @task
@@ -138,20 +135,18 @@ def fixtures(ctx):
     ctx.run("django-admin.py loaddata initial_data.json \
 --settings={0}".format("geonode.settings"), pty=True)
     ctx.run("django-admin.py loaddata /tmp/sites_docker.json \
---settings={0}".format("geosk.settings"), pty=True)
+--settings={0}".format(_localsettings()), pty=True)
     ctx.run("django-admin.py loaddata /tmp/mdtools_services_metadata_docker.json \
---settings={0}".format("geosk.settings"), pty=True)
+--settings={0}".format(_localsettings()), pty=True)
     ctx.run("django-admin.py loaddata /tmp/apikey_docker.json \
---settings={0}".format("geosk.settings"), pty=True)
-    ctx.run("django-admin.py loaddata /tmp/default_monitoring_apps_docker.json \
---settings={0}".format("geosk.settings"), pty=True)
+--settings={0}".format(_localsettings()), pty=True)
 
 
 @task
 def collectstatic(ctx):
     print "**************************fixtures********************************"
     ctx.run("django-admin.py collectstatic \
---settings={0}".format("geosk.settings"), pty=True)
+--settings={0}".format(_localsettings()), pty=True)
 
 
 @task
@@ -161,17 +156,26 @@ def geoserverfixture(ctx):
 
 
 @task
+def monitoringfixture(ctx):
+    print "*****************monitoring fixture********************************"
+    ctx.run("rm -rf /tmp/default_monitoring_apps_docker.json", pty=True)
+    _prepare_monitoring_fixture()
+    ctx.run("django-admin.py loaddata /tmp/default_monitoring_apps_docker.json \
+--settings={0}".format(_localsettings()), pty=True)
+
+
+@task
 def updategeoip(ctx):
     print "**************************update geoip********************************"
     ctx.run("django-admin.py updategeoip \
-    --settings={0}".format("geosk.settings"), pty=True)
+    --settings={0}".format(_localsettings()), pty=True)
 
 
 @task
 def collectmetrics(ctx):
     print "************************collect metrics******************************"
     ctx.run("python -W ignore manage.py collect_metrics  \
-    --settings={0} -n -t xml".format("geosk.settings"), pty=True)
+    --settings={0} -n -t xml".format(_localsettings()), pty=True)
 
 
 def _docker_host_ip():
@@ -659,7 +663,7 @@ def _prepare_monitoring_fixture():
         },
         {
             "fields": {
-                "name": "defaukt-geoserver",
+                "name": "default-geoserver",
                 "url": "http://{0}/geoserver/".format(socket.gethostbyname('geonode')),
                 "notes": "",
                 "last_check": d,

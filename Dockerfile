@@ -49,6 +49,4 @@ RUN pip install pip --upgrade
 RUN pip install --upgrade --no-cache-dir --src /usr/src -r requirements.txt
 RUN pip install --upgrade -e .
 
-# EXPOSE 8000
-# CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 ENTRYPOINT service cron restart && /usr/src/app/entrypoint.sh

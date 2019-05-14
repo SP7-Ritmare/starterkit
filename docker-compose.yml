@@ -82,9 +82,7 @@ services:
         org.geonode.component: celery
         org.geonode.instance.name: geonode
     depends_on:
-      - db
-      - elasticsearch
-      - rabbitmq
+      - django
     command: celery worker --app=geosk.celeryapp:app -B -l INFO
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock

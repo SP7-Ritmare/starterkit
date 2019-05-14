@@ -11,6 +11,7 @@ echo GEODATABASE_URL=$GEODATABASE_URL
 echo SITEURL=$SITEURL
 echo ALLOWED_HOSTS=$ALLOWED_HOSTS
 echo GEOSERVER_PUBLIC_LOCATION=$GEOSERVER_PUBLIC_LOCATION
+echo MONITORING_ENABLED=$MONITORING_ENABLED
 echo MONITORING_HOST_NAME=$MONITORING_HOST_NAME
 echo MONITORING_SERVICE_NAME=$MONITORING_SERVICE_NAME
 
@@ -54,6 +55,8 @@ else
         echo "waitforgeoserver task done"
         /usr/local/bin/invoke geoserverfixture >> /usr/src/app/invoke.log
         echo "geoserverfixture task done"
+        /usr/local/bin/invoke monitoringfixture >> /usr/src/app/invoke.log
+        echo "monitoringfixture task done"
         echo "Executing UWSGI server $cmd for Production"
 
     fi
