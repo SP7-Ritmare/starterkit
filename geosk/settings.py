@@ -410,7 +410,7 @@ if MONITORING_ENABLED:
         MONITORING_HOST_NAME = os.getenv("MONITORING_HOST_NAME", 'localhost')
     MONITORING_SERVICE_NAME = os.getenv("MONITORING_SERVICE_NAME", 'local-geonode')
 
-GEOIP_PATH = os.path.join(os.path.dirname(__file__), '..', 'GeoLiteCity.dat')
+GEOIP_PATH = os.path.join(os.path.dirname(__file__), '..')
 
 LOGGING = {
     'version': 1,
