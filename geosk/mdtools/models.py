@@ -59,9 +59,9 @@ class ResponsiblePartyScope(models.Model):
 
 
 class MdExtension(models.Model):
-    resource     = AutoOneToOneField(ResourceBase, primary_key=True)
+    resource     = AutoOneToOneField(ResourceBase, primary_key=True, on_delete=models.DO_NOTHING)
     elements_xml = models.TextField(null=True, blank=True)
-    ediversion = models.CharField(max_length=100, null=True, blank=True)
+    ediversion   = models.CharField(max_length=100, null=True, blank=True)
     rndt_xml     = models.TextField(null=True, blank=True)
     fileid       = models.IntegerField(null=True, blank=True)
 
@@ -88,7 +88,7 @@ class MdExtension(models.Model):
 class MultiContactRole(models.Model):
     resource = models.ForeignKey(MdExtension)
     contact  = models.ForeignKey(Profile)
-    #role     = models.ForeignKey(Role)
+    #role    = models.ForeignKey(Role)
     scope    = models.ForeignKey(ResponsiblePartyScope)
 
 
@@ -189,3 +189,15 @@ class ServicesMetadata(models.Model):
         super(ServicesMetadata, self).delete()
         global SERVICE_METADATA_CACHE
         SERVICE_METADATA_CACHE = None
+
+
+def mdextension_pre_delete(instance, *args, **kwargs):
+    print(" ------------------------------------------ mdextension_pre_delete")
+    md_exts = MdExtension.objects.filter(resource=instance)
+    for _m in md_exts:
+        # _m.resource = None
+        _m.contacts.all().delete()
+        _m.delete()
+
+
+models.signals.pre_delete.connect(mdextension_pre_delete, sender=ResourceBase)

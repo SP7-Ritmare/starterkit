@@ -65,7 +65,7 @@ services:
       - db
       - elasticsearch
       - rabbitmq
-    command: django-admin.py runserver 0.0.0.0:8000 --settings=geosk.settings
+    # command: django-admin.py runserver 0.0.0.0:8000 --settings=geosk.settings
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     env_file:
@@ -83,7 +83,7 @@ services:
         org.geonode.instance.name: geonode
     depends_on:
       - django
-    command: celery worker --app=geosk.celeryapp:app -B -l INFO
+    # command: celery worker --app=geosk.celeryapp:app -B -l INFO
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     env_file:
