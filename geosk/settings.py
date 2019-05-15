@@ -161,6 +161,10 @@ if os.getenv('DOCKER_ENV'):
         DATABASES[os.getenv('DEFAULT_BACKEND_DATASTORE')] = dj_database_url.parse(
             GEODATABASE_URL, conn_max_age=600
         )
+        if 'OPTIONS' not in DATABASES[os.getenv('DEFAULT_BACKEND_DATASTORE')]:
+            DATABASES[os.getenv('DEFAULT_BACKEND_DATASTORE')]['OPTIONS'] = {}
+        DATABASES[os.getenv('DEFAULT_BACKEND_DATASTORE')]['CONN_TOUT'] = 20
+        DATABASES[os.getenv('DEFAULT_BACKEND_DATASTORE')]['OPTIONS']['connect_timeout'] = 20
 
     # Override OGC server config if docker is production
     OGC_SERVER = {
