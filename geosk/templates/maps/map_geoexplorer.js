@@ -1,6 +1,7 @@
 {% include "geoext/ext_header.html" %}
 {% include "geoext/app_header.html" %}
 {% include "geonode/geo_header.html" %}
+{% load static from staticfiles %}
 <style type="text/css">
 #aboutbutton {
     display: none;
