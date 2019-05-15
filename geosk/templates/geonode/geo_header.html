@@ -1,24 +1,28 @@
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}geoexplorer/externals/GeoExt/resources/css/geoext-all.css?v={{ VERSION }}" />
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}geoexplorer/externals/GeoExt/resources/css/gxtheme-gray.css?v={{ VERSION }}">
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}geoexplorer/theme/ux/colorpicker/color-picker.ux.css?v={{ VERSION }}" />
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}geoexplorer/externals/PrintPreview/resources/css/printpreview.css?v={{ VERSION }}" />
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}geoexplorer/externals/openlayers/theme/default/style.css?v={{ VERSION }}" />
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}geoexplorer/externals/gxp/src/theme/all.css?v={{ VERSION }}" />
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}geoexplorer/theme/app/geoexplorer.css?v={{ VERSION }}" />
-<!--[if IE]><link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}geoexplorer/theme/app/ie.css"/><![endif]-->
+{% load client_lib_tags %}
+{% load static from staticfiles %}
 
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}geosk/css/site_base.css?v={{ VERSION }}" />
+<link rel="stylesheet" type="text/css" href="{% static "geoexplorer/externals/GeoExt/resources/css/geoext-all.css" %}?v={{ VERSION }}" />
+<link rel="stylesheet" type="text/css" href="{% static "geoexplorer/externals/GeoExt/resources/css/gxtheme-gray.css" %}?v={{ VERSION }}">
+<link rel="stylesheet" type="text/css" href="{% static "geoexplorer/theme/ux/colorpicker/color-picker.ux.css" %}?v={{ VERSION }}" />
+<link rel="stylesheet" type="text/css" href="{% static "geoexplorer/externals/PrintPreview/resources/css/printpreview.css" %}?v={{ VERSION }}" />
+<link rel="stylesheet" type="text/css" href="{% static "geoexplorer/externals/openlayers/theme/default/style.css" %}?v={{ VERSION }}" />
+<link rel="stylesheet" type="text/css" href="{% static "geoexplorer/externals/gxp/src/theme/all.css" %}?v={{ VERSION }}" />
+<link rel="stylesheet" type="text/css" href="{% static "geoexplorer/theme/app/geoexplorer.css" %}?v={{ VERSION }}" />
+<!--[if IE]><link rel="stylesheet" type="text/css" href="{% static "geoexplorer/theme/app/ie.css" %}"/><![endif]-->
 
-<script src="{{STATIC_URL}}geoexplorer/script/GeoExplorer.js?v={{ VERSION }}" type="text/javascript"></script>
-<script src="{{STATIC_URL}}geosk/js/openlayers_sos.js" type="text/javascript"></script>
-<script src="{{STATIC_URL}}geosk/js/gxp_extra.js" type="text/javascript"></script>
-<script src="{{STATIC_URL}}geosk/js/geosk_sos.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="{% static "geosk/css/site_base.css" %}?v={{ VERSION }}" />
+
+<script src="{% static "geoexplorer/script/GeoExplorer.js" %}?v={{ VERSION }}" type="text/javascript"></script>
+<script src="{% static "geosk/js/openlayers_sos.js" %}" type="text/javascript"></script>
+<script src="{% static "geosk/js/gxp_extra.js" %}" type="text/javascript"></script>
+<script src="{% static "geosk/js/geosk_sos.js" %}" type="text/javascript"></script>
 
 <script type="text/javascript">
-OpenLayers.ImgPath = "{{ STATIC_URL }}geoexplorer/externals/openlayers/theme/default/img";
+OpenLayers.ImgPath = "{% static "geoexplorer/externals/openlayers/theme/default/img" %}";
+OpenLayers.Util.onImageLoadErrorColor = 1;
 OpenLayers.Util.onImageLoadErrorColor = 'transparent';
 OpenLayers.Util.onImageLoadError = function() {
-    this.src = '{{ STATIC_URL }}geonode/img/light_gray.jpg';
+    this.src = '{% static "geonode/img/light_gray.jpg';
 };
 
 OpenLayers.Request.DEFAULT_CONFIG.headers = {
@@ -30,26 +34,33 @@ OpenLayers.Request.DEFAULT_CONFIG.headers = {
 */
 GeoExplorer.Viewer.prototype.loadConfig = function(config) {
 
-  config.viewerTools.push( {
-    ptype: "gxp_legend",
-    checked: true
-  });
+  try {
+      config.tools.push( {
+        ptype: "gxp_legend",
+        checked: true
+      });
+  } catch(err) {
+      console.log(err);
+  }
+
+  // remove the 3D Viewer if no Google API Key is availbale
+  var google_api_key = '{% google_api_key %}';
+  if(google_api_key.length == 0 || 'None' == google_api_key) {
+    config.viewerTools.splice(10,1);
+  }
 
   config.viewerTools.push( {
     ptype: "gxp_getfeedfeatureinfo",
     checked: true
   });
 
-  /* - TEMPORARLY DISABLED GXPLORER PLAYBACK -
-      config.viewerTools.push({
+  config.viewerTools.push({
       ptype: "gxp_playback",
       checked: true,
       outputTarget: "paneltbar"
-    });
-  */
+  });
 
   // Do not include the layer styler on the map-detail view.
-
   {% if not map %}
     {% if user.is_authenticated %}
       config.viewerTools.splice(5, 0, {
@@ -103,4 +114,4 @@ GeoExplorer.Composer.prototype.loadConfig = function(config) {
     display: none !important;
 }
 </style>
-<script src="{{STATIC_URL}}geosk/js/OpenSeaMapSource.js" type="text/javascript"></script>
+<script src="{% static "geosk/js/OpenSeaMapSource.js" %}" type="text/javascript"></script>
