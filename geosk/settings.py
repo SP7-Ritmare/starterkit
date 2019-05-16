@@ -359,7 +359,7 @@ LOGGING = {
         "pycsw": {
             "handlers": ["console"], "level": "INFO", },
         "geosk": {
-            "handlers": ["console"], "level": "INFO", },
+            "handlers": ["console"], "level": "DEBUG", },
     },
 }
 

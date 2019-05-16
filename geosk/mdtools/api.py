@@ -347,11 +347,16 @@ def _get_or_create_profile(contact):
     if _name is None or _name.strip() == '':
         contact['name'] = _guess_name(_email)
     # some cleaning
-    fields = Profile._meta.get_all_field_names()
-    _defaults= {k:v for k, v in contact.items() if k in fields}
-    del(_defaults['email']) #
+    fields = Profile._meta.get_fields()
+    _defaults = {k:v for k, v in contact.items() if k in fields}
+    if 'email' in _defaults:
+        del(_defaults['email']) #
     # create profile
+    print(" -------------------------------- create profile ")
+    print(_defaults)
+    print(_email)
     profile, is_created = Profile.objects.get_or_create(defaults=_defaults, email=_email, username=_email)
+    print(profile)
     return profile
 
 split_email_regexp = re.compile(r'[ .-_]')
