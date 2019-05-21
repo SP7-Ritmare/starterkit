@@ -44,6 +44,11 @@ RUN chmod +x /usr/bin/wait-for-databases
 RUN chmod +x /usr/src/app/tasks.py \
     && chmod +x /usr/src/app/entrypoint.sh
 
+RUN mkdir -p /usr/src/app/geosk/uploaded
+RUN mkdir -p /usr/src/app/geosk/static_root
+RUN chmod -Rf 775 /usr/src/app/geosk/uploaded
+RUN chmod -Rf 775 /usr/src/app/geosk/static_root
+
 # Upgrade pip
 RUN pip install pip --upgrade
 RUN pip install --upgrade --no-cache-dir --src /usr/src -r requirements.txt

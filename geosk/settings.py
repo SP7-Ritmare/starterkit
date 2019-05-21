@@ -70,11 +70,9 @@ MEDIA_ROOT = os.path.join(LOCAL_ROOT, "uploaded")
 
 # Absolute path to the directory that holds static files like app media.
 # Example: "/home/media/media.lawrence.com/apps/"
-# STATIC_ROOT = os.path.join(LOCAL_ROOT, "static_root")
+STATIC_ROOT = os.path.join(LOCAL_ROOT, "static_root")
 
 # Additional directories which hold static files
-
-
 STATICFILES_DIRS = [os.path.join(LOCAL_ROOT, "static")] + STATICFILES_DIRS
 
 # Note that Django automatically includes the "templates" dir in all the

@@ -50,6 +50,8 @@ else
 
     else
 
+        /usr/local/bin/invoke collectstatic >> /usr/src/app/invoke.log
+        echo "collectstatic task done"
         /usr/local/bin/invoke waitforgeoserver >> /usr/src/app/invoke.log
         echo "waitforgeoserver task done"
         /usr/local/bin/invoke geoserverfixture >> /usr/src/app/invoke.log

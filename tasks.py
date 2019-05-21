@@ -144,8 +144,8 @@ def fixtures(ctx):
 
 @task
 def collectstatic(ctx):
-    print "****************************fixtures*********************************"
-    ctx.run("django-admin.py collectstatic \
+    print "************************static artifacts******************************"
+    ctx.run("django-admin.py collectstatic --noinput \
 --settings={0}".format(_localsettings()), pty=True)
 
 
@@ -697,7 +697,7 @@ def _prepare_admin_fixture(admin_password, admin_email):
     # admin.set_password(admin_password)
     # admin.email = admin_email
     # admin.save()
-    from django.contrib.auth.hashers import make_password, HASHERS
+    from django.contrib.auth.hashers import make_password
     d = datetime.datetime.now()
     mdext_date = d.isoformat()[:23] + "Z"
     default_fixture = [
@@ -707,9 +707,9 @@ def _prepare_admin_fixture(admin_password, admin_email):
         		"email": admin_email,
         		"first_name": "",
         		"groups": [],
-        		"is_active": true,
-        		"is_staff": true,
-        		"is_superuser": true,
+        		"is_active": True,
+        		"is_staff": True,
+        		"is_superuser": True,
         		"last_login": mdext_date,
         		"last_name": "",
         		"password": make_password(admin_password),
