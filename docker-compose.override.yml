@@ -10,8 +10,6 @@ services:
       - '.:/usr/src/app'
     environment:
       - DEBUG=True
-      - ADMIN_PASSWORD=admin
-      - ADMIN_EMAIL=admin@get-it.it
 
   celery:
     build: .
@@ -22,8 +20,6 @@ services:
       - '.:/usr/src/app'
     environment:
       - DEBUG=True
-      - ADMIN_PASSWORD=admin
-      - ADMIN_EMAIL=admin@get-it.it
 
   consumers:
     build: .
