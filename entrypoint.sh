@@ -30,8 +30,6 @@ echo "prepare task done"
 echo "fixture task done"
 /usr/local/bin/invoke updategeoip >> /usr/src/app/invoke.log
 echo "updategeoip task done"
-/usr/local/bin/invoke updateadmin >> /usr/src/app/invoke.log
-echo "updateadmin task done"
 
 cmd="$@"
 
@@ -52,13 +50,16 @@ else
 
     else
 
-        cmd=$UWSGI_CMD
         /usr/local/bin/invoke waitforgeoserver >> /usr/src/app/invoke.log
         echo "waitforgeoserver task done"
         /usr/local/bin/invoke geoserverfixture >> /usr/src/app/invoke.log
         echo "geoserverfixture task done"
         /usr/local/bin/invoke monitoringfixture >> /usr/src/app/invoke.log
         echo "monitoringfixture task done"
+        /usr/local/bin/invoke updateadmin >> /usr/src/app/invoke.log
+        echo "updateadmin task done"
+
+        cmd=$UWSGI_CMD
         echo "Executing UWSGI server $cmd for Production"
 
     fi

@@ -174,7 +174,10 @@ def updategeoip(ctx):
 @task
 def updateadmin(ctx):
     print "***********************update admin details**************************"
-    _admin_info_provision(os.environ.get('ADMIN_PASSWORD', None), os.environ.get('ADMIN_EMAIL', None))
+    ctx.run("rm -rf /tmp/django_admin_docker.json", pty=True)
+    _prepare_admin_fixture(os.environ.get('ADMIN_PASSWORD', None), os.environ.get('ADMIN_EMAIL', None))
+    ctx.run("django-admin.py loaddata /tmp/django_admin_docker.json \
+--settings={0}".format(_localsettings()), pty=True)
 
 
 @task
@@ -407,12 +410,14 @@ def _prepare_apikey_fixture():
         "pyxW5djJ7XsjeFUXduAsGpR4xMGUwpeBGQRqTeT3"
     )
     print "Tastypie apikey is {0}".format(api_key)
+    d = datetime.datetime.now()
+    mdext_date = d.isoformat()[:23] + "Z"
     default_fixture = [
         {
             "fields": {
                 "user": 1000,
                 "key": api_key,
-                "created": "2018-06-28T14:54:51Z"
+                "created": mdext_date
             },
             "model": "tastypie.apikey",
             "pk": 1
@@ -440,14 +445,6 @@ def _rest_api_availability(url):
     else:
         print "GeoServer API are available!"
         return True
-
-
-def _admin_info_provision(admin_password, admin_email):
-    from django.contrib.auth import get_user_model
-    admin = get_user_model().objects.get(username="admin")
-    admin.set_password(admin_password)
-    admin.email = admin_email
-    admin.save()
 
 
 def _geoserver_info_provision(url):
@@ -691,4 +688,37 @@ def _prepare_monitoring_fixture():
         }
     ]
     with open('/tmp/default_monitoring_apps_docker.json', 'w') as fixturefile:
+        json.dump(default_fixture, fixturefile)
+
+
+def _prepare_admin_fixture(admin_password, admin_email):
+    # from django.contrib.auth import get_user_model
+    # admin = get_user_model().objects.get(username="admin")
+    # admin.set_password(admin_password)
+    # admin.email = admin_email
+    # admin.save()
+    from django.contrib.auth.hashers import make_password, HASHERS
+    d = datetime.datetime.now()
+    mdext_date = d.isoformat()[:23] + "Z"
+    default_fixture = [
+        {
+        	"fields": {
+        		"date_joined": mdext_date,
+        		"email": admin_email,
+        		"first_name": "",
+        		"groups": [],
+        		"is_active": true,
+        		"is_staff": true,
+        		"is_superuser": true,
+        		"last_login": mdext_date,
+        		"last_name": "",
+        		"password": make_password(admin_password),
+        		"user_permissions": [],
+        		"username": "admin"
+        	},
+        	"model": "people.Profile",
+        	"pk": 1000
+        }
+    ]
+    with open('/tmp/django_admin_docker.json', 'w') as fixturefile:
         json.dump(default_fixture, fixturefile)
