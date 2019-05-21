@@ -30,6 +30,8 @@ echo "prepare task done"
 echo "fixture task done"
 /usr/local/bin/invoke updategeoip >> /usr/src/app/invoke.log
 echo "updategeoip task done"
+/usr/local/bin/invoke updateadmin >> /usr/src/app/invoke.log
+echo "updateadmin task done"
 
 cmd="$@"
 

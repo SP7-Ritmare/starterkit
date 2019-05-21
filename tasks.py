@@ -14,13 +14,13 @@ BOOTSTRAP_IMAGE_CHEIP = 'codenvy/che-ip:nightly'
 
 @task
 def waitfordbs(ctx):
-    print "**************************databases*******************************"
+    print "***************************databases*********************************"
     ctx.run("/usr/bin/wait-for-databases {0}".format('db'), pty=True)
 
 
 @task
 def waitforgeoserver(ctx):
-    print "**************************geoserver*******************************"
+    print "****************************geoserver********************************"
     while not _rest_api_availability(os.environ['GEOSERVER_LOCATION'] + 'rest'):
         print ("Wait for GeoServer API availability...")
     print "GeoServer is available for HTTP calls!"
@@ -28,7 +28,7 @@ def waitforgeoserver(ctx):
 
 @task
 def update(ctx):
-    print "***************************initial*********************************"
+    print "*****************************initial*********************************"
     ctx.run("env", pty=True)
     pub_ip = _geonode_public_host_ip()
     print "Public Hostname or IP is {0}".format(pub_ip)
@@ -80,7 +80,7 @@ http://{public_fqdn}/ >> {override_fn}".format(**envs), pty=True)
         )
     )
     ctx.run("source $HOME/.override_env", pty=True)
-    print "****************************final**********************************"
+    print "******************************final**********************************"
     ctx.run("env", pty=True)
 
 
@@ -101,7 +101,7 @@ http://{public_fqdn}/ >> {override_fn}".format(**envs), pty=True)
 
 @task
 def migrations(ctx):
-    print "**************************migrations*******************************"
+    print "****************************migrations*******************************"
     ctx.run("django-admin.py makemigrations --settings={0}".format(
         "geonode.settings"
     ), pty=True)
@@ -114,7 +114,7 @@ def migrations(ctx):
 
 @task
 def prepare(ctx):
-    print "**********************prepare fixture***************************"
+    print "*************************prepare fixture*****************************"
     ctx.run("rm -rf /tmp/default_oauth_apps_docker.json", pty=True)
     _prepare_oauth_fixture()
     ctx.run("rm -rf /tmp/mdtools_services_metadata_docker.json", pty=True)
@@ -127,7 +127,7 @@ def prepare(ctx):
 
 @task
 def fixtures(ctx):
-    print "**************************fixtures********************************"
+    print "****************************fixtures*********************************"
     ctx.run("django-admin.py loaddata sample_admin \
 --settings={0}".format("geonode.settings"), pty=True)
     ctx.run("django-admin.py loaddata /tmp/default_oauth_apps_docker.json \
@@ -144,20 +144,20 @@ def fixtures(ctx):
 
 @task
 def collectstatic(ctx):
-    print "**************************fixtures********************************"
+    print "****************************fixtures*********************************"
     ctx.run("django-admin.py collectstatic \
 --settings={0}".format(_localsettings()), pty=True)
 
 
 @task
 def geoserverfixture(ctx):
-    print "*****************geoserver fixture********************************"
+    print "********************geoserver fixture********************************"
     _geoserver_info_provision(os.environ['GEOSERVER_LOCATION'] + "rest/")
 
 
 @task
 def monitoringfixture(ctx):
-    print "*****************monitoring fixture********************************"
+    print "*******************monitoring fixture********************************"
     ctx.run("rm -rf /tmp/default_monitoring_apps_docker.json", pty=True)
     _prepare_monitoring_fixture()
     ctx.run("django-admin.py loaddata /tmp/default_monitoring_apps_docker.json \
@@ -166,9 +166,15 @@ def monitoringfixture(ctx):
 
 @task
 def updategeoip(ctx):
-    print "**************************update geoip********************************"
+    print "**************************update geoip*******************************"
     ctx.run("django-admin.py updategeoip \
     --settings={0}".format(_localsettings()), pty=True)
+
+
+@task
+def updateadmin(ctx):
+    print "***********************update admin details**************************"
+    _admin_info_provision(os.environ.get('ADMIN_PASSWORD', None), os.environ.get('ADMIN_EMAIL', None))
 
 
 @task
@@ -434,6 +440,14 @@ def _rest_api_availability(url):
     else:
         print "GeoServer API are available!"
         return True
+
+
+def _admin_info_provision(admin_password, admin_email):
+    from django.contrib.auth import get_user_model
+    admin = get_user_model().objects.get(username="admin")
+    admin.set_password(admin_password)
+    admin.email = admin_email
+    admin.save()
 
 
 def _geoserver_info_provision(url):
