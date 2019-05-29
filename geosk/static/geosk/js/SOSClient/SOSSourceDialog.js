@@ -147,7 +147,7 @@ gxp.SOSSourceDialog = Ext.extend(Ext.Container, {
             handler: function() {
                 var config = {};
 
-                config.url = urlTextField.getValue();
+                config.url = urlTextField.getValue().split(/[?#]/)[0];
                 var symbolizer = symbolizerField.symbolizer;
                 config.defaultStyle = {};
                 config.selectStyle = {};
