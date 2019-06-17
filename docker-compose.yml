@@ -32,28 +32,8 @@ services:
     env_file:
       - ./scripts/docker/env/production/dbsos.env
 
-  elasticsearch:
-    image: ireami/elasticsearch
-    restart: unless-stopped
-    container_name: elasticsearch4${COMPOSE_PROJECT_NAME}
-    stdin_open: true
-    # tty: true
-    labels:
-        org.geonode.component: elasticsearch
-        org.geonode.instance.name: geonode
-
-  rabbitmq:
-    image: rabbitmq
-    restart: unless-stopped
-    container_name: rabbitmq4${COMPOSE_PROJECT_NAME}
-    stdin_open: true
-    # tty: true
-    labels:
-        org.geonode.component: rabbitmq
-        org.geonode.instance.name: geonode
-
   django:
-    image: geobeyond/starterkit:2.7.x
+    image: get-it/starterkit:2.10
     restart: unless-stopped
     container_name: django4${COMPOSE_PROJECT_NAME}
     stdin_open: true
@@ -63,70 +43,12 @@ services:
         org.geonode.instance.name: geonode
     depends_on:
       - db
-      - elasticsearch
-      - rabbitmq
     # command: django-admin.py runserver 0.0.0.0:8000 --settings=geosk.settings
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     env_file:
       - ./scripts/docker/env/production/django.env
       - ./scripts/docker/env/production/sos.env
-
-  celery:
-    image: geobeyond/starterkit:2.7.x
-    restart: unless-stopped
-    container_name: celery4${COMPOSE_PROJECT_NAME}
-    stdin_open: true
-    # tty: true
-    labels:
-        org.geonode.component: celery
-        org.geonode.instance.name: geonode
-    depends_on:
-      - django
-    # command: celery worker --app=geosk.celeryapp:app -B -l INFO
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    env_file:
-      - ./scripts/docker/env/production/celery.env
-      - ./scripts/docker/env/production/sos.env
-
-  consumers:
-    image: geobeyond/starterkit:2.7.x
-    restart: unless-stopped
-    container_name: consumers4${COMPOSE_PROJECT_NAME}
-    stdin_open: true
-    # tty: true
-    labels:
-        org.geonode.component: consumers
-        org.geonode.instance.name: geonode
-    depends_on:
-      - rabbitmq
-      - db
-      - elasticsearch
-    command: python manage.py runmessaging
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    env_file:
-      - ./scripts/docker/env/production/django.env
-      - ./scripts/docker/env/production/sos.env
-
-  cron:
-    image: geobeyond/cron:2.7.x
-    restart: unless-stopped
-    container_name: cron4${COMPOSE_PROJECT_NAME}
-    stdin_open: true
-    # tty: true
-    labels:
-        org.geonode.component: cron
-        org.geonode.instance.name: geonode
-    depends_on:
-      - db
-      - geonode
-    command: cron -f && tail -f /var/log/cron.log
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    env_file:
-      - ./scripts/docker/env/production/cron.env
 
   geoserver:
     image: geonode/geoserver:2.14.x

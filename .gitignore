@@ -59,12 +59,10 @@ target/
 
 # Downstream Project
 downloaded/
-geoserver/
 uploaded/
 static_root/
 development.db
 development.db-journal
-local_settings.py
 
 \.vscode/
 

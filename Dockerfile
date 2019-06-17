@@ -1,4 +1,4 @@
-FROM python:2.7.14-stretch
+FROM python:2.7.16-stretch
 MAINTAINER Starterkit development team
 
 RUN mkdir -p /usr/src/app
@@ -9,13 +9,13 @@ RUN apt-get update && apt-get install -y \
 		gettext \
 		postgresql-client libpq-dev \
 		sqlite3 \
-                python-gdal python-psycopg2 \
-                python-imaging python-lxml \
-                python-dev libgdal-dev \
-                python-ldap \
-                libmemcached-dev libsasl2-dev zlib1g-dev \
-                python-pylibmc \
-                uwsgi uwsgi-plugin-python \
+        python-gdal python-psycopg2 \
+        python-imaging python-lxml \
+        python-dev libgdal-dev \
+        python-ldap \
+        libmemcached-dev libsasl2-dev zlib1g-dev \
+        python-pylibmc \
+        uwsgi uwsgi-plugin-python \
 	--no-install-recommends && rm -rf /var/lib/apt/lists/*
 
 RUN GDAL_VERSION=`gdal-config --version` \

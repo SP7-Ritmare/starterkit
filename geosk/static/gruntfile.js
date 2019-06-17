@@ -3,6 +3,20 @@ module.exports = function(grunt) {
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+
+        jshint: {
+            // files to lint
+            files: ['gruntfile.js'],
+            // configure JSHint (see http://www.jshint.com/docs/)
+            options: {
+                globals: {
+                    jQuery: true,
+                    console: true,
+                    module: true
+                }
+            }
+        },
+
         concat: {
             gxp_extr: {
                 src: [
@@ -41,8 +55,8 @@ module.exports = function(grunt) {
                     'geosk/js/SOSClient/SOSSourceDialog.js',
                     'geosk/js/SOSClient/SOSSource.js',
                     'geosk/js/SOSClient/SOSGetFeatureInfo.js',
-                    'geosk/js/SOSClient/locale/it.js'
-                    //'geosk/js/SOSClient/utils.js'
+                    'geosk/js/SOSClient/locale/it.js',
+                    'geosk/js/SOSClient/utils.js'
                 ],
                 dest: 'geosk/js/geosk_sos.js'
             },
@@ -74,6 +88,7 @@ module.exports = function(grunt) {
                 ]
             }
         },
+
         processhtml: {
             options: {
                 data: {
@@ -86,15 +101,18 @@ module.exports = function(grunt) {
                 }
             }
         },
+
         useminPrepare: {
             html: '.components/EDI-NG_client/INSPIRE_dataset.html',
             options: {
                 dest: 'EDI-NG_client'
             }
         },
+
         usemin:{
             html:['EDI-NG_client/INSPIRE_dataset.html']
         },
+
         copy:{
             html: {
                 expand: true,
@@ -111,7 +129,6 @@ module.exports = function(grunt) {
         }
     });
 
-
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-copy');
@@ -123,7 +140,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-processhtml');
     grunt.loadNpmTasks('grunt-usemin');
     grunt.loadNpmTasks('grunt-filerev');
-
 
     // Default task(s).
     grunt.registerTask('default',[

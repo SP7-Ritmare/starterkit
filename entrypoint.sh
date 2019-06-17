@@ -16,7 +16,6 @@ echo MONITORING_HOST_NAME=$MONITORING_HOST_NAME
 echo MONITORING_SERVICE_NAME=$MONITORING_SERVICE_NAME
 
 /usr/local/bin/invoke waitfordbs >> /usr/src/app/invoke.log
-
 echo "waitfordbs task done"
 
 # see issue https://github.com/celery/celery/issues/3200

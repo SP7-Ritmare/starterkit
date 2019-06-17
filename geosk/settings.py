@@ -94,7 +94,6 @@ INSTALLED_APPS = (
     #  'geosk.search',
     #  'geosk.patches',
     'geosk.skregistration',
-
     'overextends',  # https://github.com/stephenmcd/django-overextends
     'rosetta',
     'grappelli.dashboard',
@@ -197,116 +196,6 @@ if os.getenv('DOCKER_ENV'):
             'POOL_CONNECTIONS': int(os.getenv('OGC_REQUEST_POOL_CONNECTIONS', '10')),
         }
     }
-
-# MAPs and Backgrounds
-
-# Default preview library
-LAYER_PREVIEW_LIBRARY = 'geoext'
-#GEONODE_CLIENT_HOOKSET = "geonode.client.hooksets.LeafletHookSet"
-
-MAP_BASELAYERS = [{
-    "source": {"ptype": "gxp_olsource"},
-    "type": "OpenLayers.Layer",
-    "args": ["No background"],
-    "name": "background",
-    "visibility": False,
-    "fixed": True,
-    "group":"background"
-}, {
-    "source": {"ptype": "gxp_osmsource"},
-    "type": "OpenLayers.Layer.OSM",
-    "title": "OpenStreetMap",
-    "name": "mapnik",
-    "attribution": "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors",
-    "visibility": True,
-    "wrapDateLine": True,
-    "fixed": True,
-    "group": "background"
-}]
-
-'''
-{
-    "source": {"ptype": "gxp_olsource"},
-    "type": "OpenLayers.Layer.XYZ",
-    "title": "UNESCO",
-    "args": ["UNESCO", "http://en.unesco.org/tiles/${z}/${x}/${y}.png"],
-    "wrapDateLine": True,
-    "name": "background",
-    "attribution": "&copy; UNESCO",
-    "visibility": False,
-    "fixed": True,
-    "group": "background"
-}, {
-    "source": {"ptype": "gxp_olsource"},
-    "type": "OpenLayers.Layer.XYZ",
-    "title": "UNESCO GEODATA",
-    "args": ["UNESCO GEODATA", "http://en.unesco.org/tiles/geodata/${z}/${x}/${y}.png"],
-    "name": "background",
-    "attribution": "&copy; UNESCO",
-    "visibility": False,
-    "wrapDateLine": True,
-    "fixed": True,
-    "group": "background"
-}, {
-    "source": {"ptype": "gxp_olsource"},
-    "type": "OpenLayers.Layer.XYZ",
-    "title": "Humanitarian OpenStreetMap",
-    "args": ["Humanitarian OpenStreetMap", "http://a.tile.openstreetmap.fr/hot/${z}/${x}/${y}.png"],
-    "name": "background",
-    "attribution": "&copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>, Tiles courtesy of <a href='http://hot.openstreetmap.org/' target='_blank'>Humanitarian OpenStreetMap Team</a>",
-    "visibility": False,
-    "wrapDateLine": True,
-    "fixed": True,
-    "group": "background"
-    # }, {
-    #     "source": {"ptype": "gxp_olsource"},
-    #     "type": "OpenLayers.Layer.XYZ",
-    #     "title": "MapBox Satellite Streets",
-    #     "args": ["MapBox Satellite Streets", "http://api.mapbox.com/styles/v1/mapbox/satellite-streets-v9/tiles/${z}/${x}/${y}?access_token="+MAPBOX_ACCESS_TOKEN],
-    #     "name": "background",
-    #     "attribution": "&copy; <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> &copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <a href='https://www.mapbox.com/feedback/' target='_blank'>Improve this map</a>",
-    #     "visibility": False,
-    #     "wrapDateLine": True,
-    #     "fixed": True,
-    #     "group":"background"
-    # }, {
-    #     "source": {"ptype": "gxp_olsource"},
-    #     "type": "OpenLayers.Layer.XYZ",
-    #     "title": "MapBox Streets",
-    #     "args": ["MapBox Streets", "http://api.mapbox.com/styles/v1/mapbox/streets-v9/tiles/${z}/${x}/${y}?access_token="+MAPBOX_ACCESS_TOKEN],
-    #     "name": "background",
-    #     "attribution": "&copy; <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> &copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <a href='https://www.mapbox.com/feedback/' target='_blank'>Improve this map</a>",
-    #     "visibility": False,
-    #     "wrapDateLine": True,
-    #     "fixed": True,
-    #     "group":"background"
-},
-'''
-
-if BING_API_KEY:
-    BASEMAP = {
-        'source': {
-            'ptype': 'gxp_bingsource',
-            'apiKey': BING_API_KEY
-        },
-        'name': 'AerialWithLabels',
-        'fixed': True,
-        'visibility': False,
-        'group': 'background'
-    }
-    MAP_BASELAYERS.append(BASEMAP)
-
-if 'geonode.geoserver' in INSTALLED_APPS:
-    LOCAL_GEOSERVER = {
-        "source": {
-            "ptype": "gxp_wmscsource",
-            "url": OGC_SERVER['default']['PUBLIC_LOCATION'] + "wms",
-            "restUrl": "/gs/rest"
-        }
-    }
-    baselayers = MAP_BASELAYERS
-    MAP_BASELAYERS = [LOCAL_GEOSERVER]
-    MAP_BASELAYERS.extend(baselayers)
 
 # add following lines to your local settings to enable monitoring
 if MONITORING_ENABLED:

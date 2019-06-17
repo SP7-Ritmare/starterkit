@@ -51,7 +51,8 @@ def update(ctx):
         "public_host": "{0}".format(pub_ip),
         "dburl": db_url,
         "geodburl": geodb_url,
-        "monitoring": os.environ['MONITORING_ENABLED'],
+        "monitoring": os.environ.get('MONITORING_ENABLED', False),
+        "gs_admin_pwd": os.environ.get('GEOSERVER_ADMIN_PASSWORD', 'geoserver'),
         "override_fn": "$HOME/.override_env"
     }
     ctx.run("echo export DJANGO_SETTINGS_MODULE=\
@@ -64,6 +65,8 @@ def update(ctx):
 local-geonode >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export GEOSERVER_PUBLIC_LOCATION=\
 http://{public_fqdn}/geoserver/ >> {override_fn}".format(**envs), pty=True)
+    ctx.run("echo export GEOSERVER_ADMIN_PASSWORD=\
+{gs_admin_pwd} >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export SITEURL=\
 http://{public_fqdn}/ >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export ALLOWED_HOSTS=\
@@ -102,13 +105,17 @@ http://{public_fqdn}/ >> {override_fn}".format(**envs), pty=True)
 @task
 def migrations(ctx):
     print "****************************migrations*******************************"
+    print " 1. django-admin.py makemigrations --settings=geonode.settings"
     ctx.run("django-admin.py makemigrations --settings={0}".format(
         "geonode.settings"
     ), pty=True)
+    print " 2. django-admin.py migrate --noinput --settings=geonode.settings"
     ctx.run("django-admin.py migrate --noinput --settings={0}".format(
         "geonode.settings"
     ), pty=True)
+    print " 3. . $HOME/.override_env; django-admin.py makemigrations"
     ctx.run(". $HOME/.override_env; django-admin.py makemigrations", pty=True)
+    print " 4. . $HOME/.override_env; django-admin.py migrate --noinput"
     ctx.run(". $HOME/.override_env; django-admin.py migrate --noinput", pty=True)
 
 
@@ -448,11 +455,12 @@ def _rest_api_availability(url):
 
 
 def _geoserver_info_provision(url):
+    from django.conf import settings
     from geoserver.catalog import Catalog
     from geosk.mdtools.geoserver_extra import Settings
     cat = Catalog(url,
-        username="admin",
-        password="geoserver"
+        username=settings.OGC_SERVER_DEFAULT_USER,
+        password=settings.OGC_SERVER_DEFAULT_PASSWORD
     )
     gs_settings = Settings(cat)
     print "GeoServer service url is {0}".format(cat.service_url)
