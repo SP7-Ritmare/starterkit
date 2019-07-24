@@ -101,7 +101,7 @@ services:
       - "80:80"
 
   data-dir-conf:
-    image: geonode/geoserver_data:2.14.x
+    image: geonode/geoserver_data:2.14.3
     restart: on-failure
     container_name: gsconf4${COMPOSE_PROJECT_NAME}
     labels:

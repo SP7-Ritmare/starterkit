@@ -1,4 +1,4 @@
--e git+https://github.com/GeoNode/geonode.git@master#egg=geonode
+GeoNode==2.10
 django-overextends
 django-annoying
 django-rosetta==0.9.3
