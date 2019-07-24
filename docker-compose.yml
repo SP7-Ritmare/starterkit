@@ -51,7 +51,8 @@ services:
       - ./scripts/docker/env/production/sos.env
 
   geoserver:
-    image: geonode/geoserver:2.14.x
+    image: get-it/geoserver:2.14.3
+    build: ./geoserver/
     restart: unless-stopped
     container_name: geoserver4${COMPOSE_PROJECT_NAME}
     stdin_open: true
