@@ -20,7 +20,8 @@ RUN apt-get update && apt-get install -y \
 
 RUN GDAL_VERSION=`gdal-config --version` \
     && PYGDAL_VERSION="$(pip install pygdal==$GDAL_VERSION 2>&1 | grep -oP '(?<=: )(.*)(?=\))' | grep -oh $GDAL_VERSION\.[0-9])" \
-    && pip install pygdal==$PYGDAL_VERSION
+    && pip install numpy==1.16.* \
+    && pip install pygdal=="`gdal-config --version`.*"
 
 # fix for known bug in system-wide packages
 RUN ln -fs /usr/lib/python2.7/plat-x86_64-linux-gnu/_sysconfigdata*.py /usr/lib/python2.7/
