@@ -2402,15 +2402,15 @@
 // Derived and simplified from example on bryntum.com
 // http://stackoverflow.com/questions/15029462/exporting-sdk2-grid-to-csv
 GridExporter = Ext.extend(Object, {
-    dateFormat : 'Y-m-d g:i',
-    
+    dateFormat: 'Y-m-d g:i',
+
     exportGrid: function(grid) {
         if (Ext.isIE) {
             this._ieToExcel(grid);
 
         } else {
             var data = this._getCSV(grid);
-	    Mydownload(data, "dowload.csv", "text/csv");
+            Mydownload(data, "dowload.csv", "text/csv");
 
             //window.location = 'data:text/csv;charset=utf8,' + encodeURIComponent(data);
         }
@@ -2453,15 +2453,15 @@ GridExporter = Ext.extend(Object, {
     },
 
     _getFieldTextAndEscape: function(fieldData) {
-        var string  = this._getFieldText(fieldData);
+        var string = this._getFieldText(fieldData);
 
         return this._escapeForCSV(string);
     },
 
-    _getCSV: function (grid) {
-        var cols    = grid.colModel.columns;
-        var store   = grid.store;
-        var data    = '';
+    _getCSV: function(grid) {
+        var cols = grid.colModel.columns;
+        var store = grid.store;
+        var data = '';
 
         var that = this;
         Ext.each(cols, function(col, index) {
@@ -2472,15 +2472,15 @@ GridExporter = Ext.extend(Object, {
         data += "\n";
 
         store.each(function(record) {
-            var entry       = record.data;
+            var entry = record.data;
             Ext.each(cols, function(col, index) {
                 if (col.hidden != true) {
-                    var fieldName   = col.dataIndex;
-                    var text        = entry[fieldName];
+                    var fieldName = col.dataIndex;
+                    var text = entry[fieldName];
                     data += that._getFieldTextAndEscape(text) + ',';
-		    console.log(fieldName);
-		    console.log(text);
-		    console.log(that._getFieldTextAndEscape(text));
+                    console.log(fieldName);
+                    console.log(text);
+                    console.log(that._getFieldTextAndEscape(text));
                 }
             });
             data += "\n";
@@ -2489,40 +2489,40 @@ GridExporter = Ext.extend(Object, {
         return data;
     },
 
-    _ieGetGridData : function(grid, sheet) {
-        var that            = this;
-        var resourceItems   = grid.store.data.items;
-        var cols            = grid.colModel.columns;
+    _ieGetGridData: function(grid, sheet) {
+        var that = this;
+        var resourceItems = grid.store.data.items;
+        var cols = grid.colModel.columns;
 
         Ext.each(cols, function(col, colIndex) {
             if (col.hidden != true) {
                 console.log('header: ', col.header);
-                sheet.cells(1,colIndex + 1).value = col.header;
+                sheet.cells(1, colIndex + 1).value = col.header;
             }
         });
 
         var rowIndex = 2;
         grid.store.each(function(record) {
-            var entry   = record.data;
+            var entry = record.data;
 
             Ext.each(cols, function(col, colIndex) {
                 if (col.hidden != true) {
-                    var fieldName   = col.dataIndex;
-                    var text        = entry[fieldName];
-                    var value       = that._getFieldText(text);
+                    var fieldName = col.dataIndex;
+                    var text = entry[fieldName];
+                    var value = that._getFieldText(text);
 
-                    sheet.cells(rowIndex, colIndex+1).value = value;
+                    sheet.cells(rowIndex, colIndex + 1).value = value;
                 }
             });
             rowIndex++;
         });
     },
 
-    _ieToExcel: function (grid) {
-        if (window.ActiveXObject){
-            var  xlApp, xlBook;
+    _ieToExcel: function(grid) {
+        if (window.ActiveXObject) {
+            var xlApp, xlBook;
             try {
-                xlApp = new ActiveXObject("Excel.Application"); 
+                xlApp = new ActiveXObject("Excel.Application");
                 xlBook = xlApp.Workbooks.Add();
             } catch (e) {
                 Ext.Msg.alert('Error', 'For the export to work in IE, you have to enable a security setting called "Initialize and script ActiveX control not marked as safe" from Internet Options -> Security -> Custom level..."');
@@ -2531,10 +2531,10 @@ GridExporter = Ext.extend(Object, {
 
             xlBook.worksheets("Sheet1").activate;
             var XlSheet = xlBook.activeSheet;
-            xlApp.visible = true; 
+            xlApp.visible = true;
 
             this._ieGetGridData(grid, XlSheet);
-            XlSheet.columns.autofit; 
+            XlSheet.columns.autofit;
         }
     }
 });
@@ -2542,12 +2542,14 @@ GridExporter = Ext.extend(Object, {
 // http://stackoverflow.com/questions/16376161/javascript-set-file-in-download
 function Mydownload(strData, strFileName, strMimeType) {
     var D = document,
-    a = D.createElement("a");
-    strMimeType= strMimeType || "application/octet-stream";
+        a = D.createElement("a");
+    strMimeType = strMimeType || "application/octet-stream";
 
 
     if (navigator.msSaveBlob) { // IE10
-        return navigator.msSaveBlob(new Blob([strData], {type: strMimeType}), strFileName);
+        return navigator.msSaveBlob(new Blob([strData], {
+            type: strMimeType
+        }), strFileName);
     } /* end if(navigator.msSaveBlob) */
 
 
@@ -2567,42 +2569,49 @@ function Mydownload(strData, strFileName, strMimeType) {
     //do iframe dataURL download (old ch+FF):
     var f = D.createElement("iframe");
     D.body.appendChild(f);
-    f.src = "data:" +  strMimeType   + "," + encodeURIComponent(strData);
+    f.src = "data:" + strMimeType + "," + encodeURIComponent(strData);
 
     setTimeout(function() {
         D.body.removeChild(f);
     }, 333);
     return true;
 } /* end download() */
+
 function ValidURL(str) {
-      var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
-  '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
-  '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
-  '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
-  '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
-  '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
-  if(!pattern.test(str)) {
-          return false;
+    var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+        '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+        '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
+    if (!pattern.test(str)) {
+        return false;
 
-  } else {
-          return true;
+    } else {
+        return true;
 
-  }
+    }
 }
 // override read function adding X-CSRFToken header
 OpenLayers.Protocol.SOS.v1_0_0.prototype.read = function(options) {
     options = OpenLayers.Util.extend({}, options);
     OpenLayers.Util.applyDefaults(options, this.options || {});
-    var response = new OpenLayers.Protocol.Response({requestType: "read"});
+    var response = new OpenLayers.Protocol.Response({
+        requestType: "read"
+    });
     var format = this.format;
     var data = OpenLayers.Format.XML.prototype.write.apply(format,
-    	[format.writeNode("sos:GetFeatureOfInterest", {fois: this.fois})]
+        [format.writeNode("sos:GetFeatureOfInterest", {
+            fois: this.fois
+        })]
     );
     response.priv = OpenLayers.Request.POST({
         url: options.url,
         callback: this.createCallback(this.handleRead, response, options),
         data: data,
-        headers: {'X-CSRFToken': Ext.util.Cookies.get('csrftoken')}
+        headers: {
+            'X-CSRFToken': Ext.util.Cookies.get('csrftoken')
+        }
     });
     return response;
 };
@@ -2628,102 +2637,128 @@ OpenLayers.SOSClient = OpenLayers.Class({
     /**
      *
      */
-    initialize: function (options) {
+    initialize: function(options) {
         OpenLayers.Util.extend(this, options);
         this.events = new OpenLayers.Events(this);
-        var params = {'service': 'SOS', 'request': 'GetCapabilities', 'acceptVersions': '1.0.0'};
+        var params = {
+            'service': 'SOS',
+            'request': 'GetCapabilities',
+            'acceptVersions': '1.0.0'
+        };
         var paramString = OpenLayers.Util.getParameterString(params);
-        url = OpenLayers.Util.urlAppend(this.url, paramString);
-        OpenLayers.Request.GET({url: url,
-                                success: this.parseSOSCaps,
-                                failure: this.onFailure,
-                                scope: this
-                               });
+        var baseUrl = this.url;
+        if (this.getLastPart(baseUrl) != 'kvp') {
+            baseUrl += "/kvp";
+        }
+        url = OpenLayers.Util.urlAppend(baseUrl, paramString);
+        if (!url.startsWith('/')) {
+            url = encodeURIComponent(url);
+        }
+
+        OpenLayers.Request.GET({
+            url: url,
+            success: this.parseSOSCaps,
+            failure: this.onFailure,
+            scope: this
+        });
     },
-    onFailure: function(){
+
+    onFailure: function() {
         this.events.triggerEvent("failure");
     },
-    getRandomColor: function () {
+
+    getLastPart: function(url) {
+        var parts = url.split("/");
+        return (url.lastIndexOf('/') !== url.length - 1 ? parts[parts.length - 1] : parts[parts.length - 2]);
+    },
+
+    getRandomColor: function() {
         var colorIndex;
         var color;
-        var colors = ['#33a02c', '#1f78b4', '#b2df8a', '#a6cee3', '#fb9a99', '#e31a1c', '#fdbf6f', '#ff7f00', '#cab2d6' ,'#6a3d9a', '#ffff99', '#b15928'];
-	// warning: global variable
-	// if(sosColorsIndex  === 'undefined'){
-	if(typeof sosColorsIndex == 'undefined'){
-	    sosColorsIndex = 0;
-	}
-	colorIndex = sosColorsIndex;
-	if(colorIndex < colors.length){
-	    color = colors[colorIndex];
-	} else {
-	    var letters = '0123456789ABCDEF'.split('');
-	    color = '#';
-	    for (var i = 0; i < 6; i++) {
-		color += letters[Math.round(Math.random() * 15)];
-	    }
-	}
-	sosColorsIndex += 1;
-	return color;
+        var colors = ['#33a02c', '#1f78b4', '#b2df8a', '#a6cee3', '#fb9a99', '#e31a1c', '#fdbf6f', '#ff7f00', '#cab2d6', '#6a3d9a', '#ffff99', '#b15928'];
+        // warning: global variable
+        // if(sosColorsIndex  === 'undefined'){
+        if (typeof sosColorsIndex == 'undefined') {
+            sosColorsIndex = 0;
+        }
+        colorIndex = sosColorsIndex;
+        if (colorIndex < colors.length) {
+            color = colors[colorIndex];
+        } else {
+            var letters = '0123456789ABCDEF'.split('');
+            color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.round(Math.random() * 15)];
+            }
+        }
+        sosColorsIndex += 1;
+        return color;
     },
-    createLayer: function(){
-	//console.log(this);
-	this.layer = new OpenLayers.Layer.Vector.SOS(this.SOSCapabilities.serviceIdentification.title, {
+    createLayer: function() {
+        //console.log(this);
+        this.layer = new OpenLayers.Layer.Vector(this.SOSCapabilities.serviceIdentification.title, {
             styleMap: new OpenLayers.StyleMap({
-		"default": new OpenLayers.Style({},{
-		    rules: [
-			new OpenLayers.Rule({
-			    'name': 'base',
-			    'title': 'FOI',
-			    symbolizer: {
-				graphicName:"circle", pointRadius:6, fillOpacity:0.8, fillColor: this.getRandomColor()
-				//'pointRadius': 10,
-				//'externalGraphic': 'http://cigno.ve.ismar.cnr.it/static/cigno/img/sos_marker.png',
-			    }
-			})
-		    ]
+                "default": new OpenLayers.Style({}, {
+                    rules: [
+                        new OpenLayers.Rule({
+                            'name': 'base',
+                            'title': 'FOI',
+                            symbolizer: {
+                                graphicName: "circle",
+                                pointRadius: 6,
+                                fillOpacity: 0.8,
+                                fillColor: this.getRandomColor()
+                                //'pointRadius': 10,
+                                //'externalGraphic': 'http://cigno.ve.ismar.cnr.it/static/cigno/img/sos_marker.png',
+                            }
+                        })
+                    ]
                 })
             }),
             strategies: [new OpenLayers.Strategy.Fixed()],
             protocol: new OpenLayers.Protocol.SOS({
-                formatOptions: {internalProjection: new OpenLayers.Projection('EPSG:4326')},
+                formatOptions: {
+                    internalProjection: new OpenLayers.Projection('EPSG:4326')
+                },
                 //url: this.url,
                 // url: this.urlPOST,
-		url: this.getURL('GetFeatureOfInterest', 'post', 'application/xml'),
+                url: this.getURL('GetFeatureOfInterest', 'post', 'application/xml'),
                 fois: this.getFois()
             }),
             projection: new OpenLayers.Projection("EPSG:4326")
             // displayInLayerSwitcher: false
         });
-	return this.layer
+        return this.layer
     },
 
-    getURL: function(operation, method, contentType){
-	var elements = this.SOSCapabilities.operationsMetadata[operation].dcp.http[method];
-	for(var index = 0; index < elements.length; ++index){
-	    var el = elements[index];
-	    if (typeof el.constraints === 'undefined'){
-		return el.url;
-	    } else {
-		if(el.constraints['Content-Type'].allowedValues[contentType] === true){
-		    return el.url;
-		}
-	    }
-	}
-	return elements[0].url;
+    getURL: function(operation, method, contentType) {
+        var elements = this.SOSCapabilities.operationsMetadata[operation].dcp.http[method];
+        for (var index = 0; index < elements.length; ++index) {
+            var el = elements[index];
+            if (typeof el.constraints === 'undefined') {
+                return el.url;
+            } else {
+                if (el.constraints['Content-Type'].allowedValues[contentType] === true) {
+                    return el.url;
+                }
+            }
+        }
+        return elements[0].url;
     },
 
     parseSOSCaps: function(response) {
         // cache capabilities for future use
         this.SOSCapabilities = this.capsformat.read(response.responseXML || response.responseText);
-	//console.log(this.SOSCapabilities.operationsMetadata.GetFeatureOfInterest.dcp.http.post[0].url);
-	// non lancio piu' queste funzioni perche' ora controlla tutto il gxp_source
+        //console.log(this.SOSCapabilities.operationsMetadata.GetFeatureOfInterest.dcp.http.post[0].url);
+        // non lancio piu' queste funzioni perche' ora controlla tutto il gxp_source
         // this.map.addLayer(this.createLayer());
         // this.ctrl = new OpenLayers.Control.SelectFeature(this.layer,
         //                               {scope: this, onSelect: this.onFeatureSelect});
         // this.map.addControl(this.ctrl);
         // this.ctrl.activate();
-        this.events.triggerEvent("loaded",
-                         {"capabilities": this.SOSCapabilities});
+        this.events.triggerEvent("loaded", {
+            "capabilities": this.SOSCapabilities
+        });
     },
 
     /**
@@ -2732,14 +2767,16 @@ OpenLayers.SOSClient = OpenLayers.Class({
     getFois: function() {
         var result = [];
         this.offeringCount = 0;
-	//console.log(this.SOSCapabilities);
-        for (var name in this.SOSCapabilities.contents.offeringList) {
-            var offering = this.SOSCapabilities.contents.offeringList[name];
-            this.offeringCount++;
-            for (var i=0, len=offering.featureOfInterestIds.length; i<len; i++) {
-                var foi = offering.featureOfInterestIds[i];
-                if (OpenLayers.Util.indexOf(result, foi) === -1) {
-                    result.push(foi);
+        //console.log(this.SOSCapabilities);
+        if (this.SOSCapabilities.contents) {
+            for (var name in this.SOSCapabilities.contents.offeringList) {
+                var offering = this.SOSCapabilities.contents.offeringList[name];
+                this.offeringCount++;
+                for (var i = 0, len = offering.featureOfInterestIds.length; i < len; i++) {
+                    var foi = offering.featureOfInterestIds[i];
+                    if (OpenLayers.Util.indexOf(result, foi) === -1) {
+                        result.push(foi);
+                    }
                 }
             }
         }
@@ -2747,39 +2784,45 @@ OpenLayers.SOSClient = OpenLayers.Class({
     },
 
     getTitleForObservedProperty: function(property) {
-        for (var name in this.SOSCapabilities.contents.offeringList) {
-            var offering = this.SOSCapabilities.contents.offeringList[name];
-            if (offering.observedProperties[0] === property) {
-                return offering.name;
+        if (this.SOSCapabilities.contents) {
+            for (var name in this.SOSCapabilities.contents.offeringList) {
+                var offering = this.SOSCapabilities.contents.offeringList[name];
+                if (offering.observedProperties[0] === property) {
+                    return offering.name;
+                }
             }
         }
     },
 
     getNameForObservedProperty: function(property) {
-        for (var name in this.SOSCapabilities.contents.offeringList) {
-            var offering = this.SOSCapabilities.contents.offeringList[name];
-            if (offering.observedProperties[0] === property) {
-                return name;
+        if (this.SOSCapabilities.contents) {
+            for (var name in this.SOSCapabilities.contents.offeringList) {
+                var offering = this.SOSCapabilities.contents.offeringList[name];
+                if (offering.observedProperties[0] === property) {
+                    return name;
+                }
             }
         }
     },
 
     getNameForFoi: function(property) {
         for (var fid in this.layer.features) {
-            if(this.layer.features[fid].attributes.id == property){
-		return this.layer.features[fid].attributes.name;
-	    }
+            if (this.layer.features[fid].attributes.id == property) {
+                return this.layer.features[fid].attributes.name;
+            }
         }
     },
 
-    getObservationRequest: function(foiId, offering_id, observedProperties, begin, end, resultModel){
-	var foi = {objectId: foiId};
+    getObservationRequest: function(foiId, offering_id, observedProperties, begin, end, resultModel) {
+        var foi = {
+            objectId: foiId
+        };
         // get a time range for chart
         var xml = this.obsformat.write({
             eventTime: 'first',
             resultModel: resultModel,
             responseMode: 'inline',
-            procedure: foiId,     // TODO: verificare procedure
+            procedure: foiId, // TODO: verificare procedure
             foi: foi,
             offering: offering_id,
             observedProperties: observedProperties,
@@ -2791,25 +2834,24 @@ OpenLayers.SOSClient = OpenLayers.Class({
         // a little rework due to missing timeperiod in OL-Format
         xml = xml.replace("xmlns:ogc=\"http://www.opengis.net/ogc\"", "xmlns:ogc=\"http://www.opengis.net/ogc\" xmlns:gml=\"http://www.opengis.net/gml\"");
         xml = xml.replace("<eventTime/>", timeperiodXml);
-	return xml;
+        return xml;
     },
 
     getGmlTimeperiod: function(begin, end) {
         var timeperiod = "<eventTime>" +
-                "<ogc:TM_During>" +
-                "<ogc:PropertyName>om:samplingTime</ogc:PropertyName>" +
-                "<gml:TimePeriod>" +
-                "<gml:beginPosition>" + moment(begin).format() + "</gml:beginPosition>" +
-                "<gml:endPosition>" + moment(end).format() + "</gml:endPosition>" +
-                "</gml:TimePeriod>" +
-                "</ogc:TM_During>" +
-                "</eventTime>";
+            "<ogc:TM_During>" +
+            "<ogc:PropertyName>om:samplingTime</ogc:PropertyName>" +
+            "<gml:TimePeriod>" +
+            "<gml:beginPosition>" + moment(begin).format() + "</gml:beginPosition>" +
+            "<gml:endPosition>" + moment(end).format() + "</gml:endPosition>" +
+            "</gml:TimePeriod>" +
+            "</ogc:TM_During>" +
+            "</eventTime>";
 
         return timeperiod;
     },
 
-
-    getResponseFormat: function(){
+    getResponseFormat: function() {
         if (!this.responseFormat) {
             for (format in this.SOSCapabilities.operationsMetadata.GetObservation.parameters.responseFormat.allowedValues) {
                 // look for a text/xml type of format
@@ -2818,100 +2860,103 @@ OpenLayers.SOSClient = OpenLayers.Class({
                 }
             }
         }
-	return this.responseFormat;
+        return this.responseFormat;
     },
 
-    getOfferingsByFoi: function(foi){
-	var foiId = foi.attributes.id;
-	var offerings = {};
-        for (var name in this.SOSCapabilities.contents.offeringList) {
-	    // console.log(foi);
-            var offering = this.SOSCapabilities.contents.offeringList[name];
-	    // console.log(offering.featureOfInterestIds);
-
-            // test foi in offeringList
-            if(offering.featureOfInterestIds.indexOf(foiId) !== -1){
-                //problema nel loop degli array all'interno del writers perche' Ext modifica l'array base dj js ( Ext Array.prototype.indexOf)
-                //trasformo l'array in un dictionary
-                // var observedProperties = {};
-                // offering.observedProperties.forEach(function(val, i) {
-                // observedProperties[i]=val;
-		//});
-
-		offerings[name] = offering;
+    getOfferingsByFoi: function(foi) {
+        var foiId = foi.attributes.id;
+        var offerings = {};
+        if (this.SOSCapabilities.contents) {
+            for (var name in this.SOSCapabilities.contents.offeringList) {
+                // console.log(foi);
+                var offering = this.SOSCapabilities.contents.offeringList[name];
+                // console.log(offering.featureOfInterestIds);
+                // test foi in offeringList
+                if (offering.featureOfInterestIds.indexOf(foiId) !== -1) {
+                    //problema nel loop degli array all'interno del writers perche' Ext modifica l'array base dj js ( Ext Array.prototype.indexOf)
+                    //trasformo l'array in un dictionary
+                    // var observedProperties = {};
+                    // offering.observedProperties.forEach(function(val, i) {
+                    // observedProperties[i]=val;
+                    //});
+                    offerings[name] = offering;
+                }
             }
         }
-	return offerings;
+        return offerings;
     },
 
     onFeatureSelect: function(feature) {
-	//alert(feature);
-	//console.log(feature);
-	var foiExplorer = new FoiExplorer({sosClient: this,
-					   foi: feature,
-					   title: "SOS details: " + feature.attributes.name
-					  });
+        //alert(feature);
+        //console.log(feature);
+        var foiExplorer = new FoiExplorer({
+            sosClient: this,
+            foi: feature,
+            title: "SOS details: " + feature.attributes.name
+        });
 
         foiExplorer.show();
     },
 
-    getObservation: function(foiId, offering_id, observedProperty_id, begin, end, onSuccess){
-        var offering = this.SOSCapabilities.contents.offeringList[offering_id];
-        //c'e' un problema con array e extjs: vedi commento piu' avanti
-        var observedProperties = {};
-	// doesn't work in IE
-        // offering.observedProperties.forEach(function(val, i) {
-        //     observedProperties[i]=val;
-        // });
-	//
-	// non funziona nenanche questo in alcuni casi -> prendo solo la prima
-        // for(var i=0; i< offering.observedProperties.length; i++) {
-	//    observedProperties[i] = offering.observedProperties[i];
-	//}
-	//if(offering.observedProperties.length>0){
-	//  var observedProperties = {0: offering.observedProperties[0]}
-        //}
+    getObservation: function(foiId, offering_id, observedProperty_id, begin, end, onSuccess) {
+        if (this.SOSCapabilities.contents) {
+            var offering = this.SOSCapabilities.contents.offeringList[offering_id];
+            //c'e' un problema con array e extjs: vedi commento piu' avanti
+            var observedProperties = {};
+            // doesn't work in IE
+            // offering.observedProperties.forEach(function(val, i) {
+            //     observedProperties[i]=val;
+            // });
+            //
+            // non funziona nenanche questo in alcuni casi -> prendo solo la prima
+            // for(var i=0; i< offering.observedProperties.length; i++) {
+            //    observedProperties[i] = offering.observedProperties[i];
+            //}
+            //if(offering.observedProperties.length>0){
+            //  var observedProperties = {0: offering.observedProperties[0]}
+            //}
 
-	// ora e' passato come parametro alla funzione
-	var observedProperties = {0: observedProperty_id}
+            // ora e' passato come parametro alla funzione
+            var observedProperties = {
+                0: observedProperty_id
+            }
 
-	var xmlRequest = this.getObservationRequest(foiId, offering_id, observedProperties, begin,end, this.resultModel);
-        OpenLayers.Request.POST({
-            // url: this.sosClient.urlPOST,
-	    url: this.getURL('GetObservation', 'post', 'application/xml'),
-            scope: this,
-            success: function(response) {
-		//console.log(response.responseText);
-		//check for exceptions
-		var xmlReader = new OpenLayers.Format.XML();
-		var doc = xmlReader.read(response.responseText);
-		if(doc && doc.documentElement.tagName == "ows:ExceptionReport"){
-		    var els = doc.documentElement.getElementsByTagName('ExceptionText');
-		    if(els.length > 0 && els[0].textContent.indexOf("om:Measurement") > -1){
-			this.resultModel = null;
-			// this.chartReload(); //TODO lanciare automaticamente il reload
-		    }
-		}
-		var output = this.obsformat.read(response.responseXML || response.responseText);
-		//console.log(output);
-		onSuccess(offering, output);
-	    },
-
-            failure: function(response) {
-                ("No data for charts...");
-            },
-            data: xmlRequest,
-            headers: {'X-CSRFToken': Ext.util.Cookies.get('csrftoken')}
-        });
+            var xmlRequest = this.getObservationRequest(foiId, offering_id, observedProperties, begin, end, this.resultModel);
+            OpenLayers.Request.POST({
+                // url: this.sosClient.urlPOST,
+                url: this.getURL('GetObservation', 'post', 'application/xml'),
+                scope: this,
+                success: function(response) {
+                    //console.log(response.responseText);
+                    //check for exceptions
+                    var xmlReader = new OpenLayers.Format.XML();
+                    var doc = xmlReader.read(response.responseText);
+                    if (doc && doc.documentElement.tagName == "ows:ExceptionReport") {
+                        var els = doc.documentElement.getElementsByTagName('ExceptionText');
+                        if (els.length > 0 && els[0].textContent.indexOf("om:Measurement") > -1) {
+                            this.resultModel = null;
+                            // this.chartReload(); //TODO lanciare automaticamente il reload
+                        }
+                    }
+                    var output = this.obsformat.read(response.responseXML || response.responseText);
+                    //console.log(output);
+                    onSuccess(offering, output);
+                },
+                failure: function(response) {
+                    ("No data for charts...");
+                },
+                data: xmlRequest,
+                headers: {
+                    'X-CSRFToken': Ext.util.Cookies.get('csrftoken')
+                }
+            });
+        }
     },
-
-
 
     /**
      *
      */
-    destroy: function () {
-    },
+    destroy: function() {},
 
     /**
      *
@@ -2919,49 +2964,49 @@ OpenLayers.SOSClient = OpenLayers.Class({
     CLASS_NAME: "OpenLayers.SOSClient"
 });
 
-    PlotDataStore = Ext.extend(Ext.util.Observable, {
-	constructor: function(config){
-	    this.dataSeries = [];
-            this.name = config.name;
-            this.addEvents({
-		"addSerie" : true,
-		"reload" : true
-            });
+PlotDataStore = Ext.extend(Ext.util.Observable, {
+    constructor: function(config) {
+        this.dataSeries = [];
+        this.name = config.name;
+        this.addEvents({
+            "addSerie": true,
+            "reload": true
+        });
 
-            this.listeners = config.listeners;
+        this.listeners = config.listeners;
 
-            PlotDataStore.superclass.constructor.call(this, config)
-	},
-	addSerie: function(data){
-	    this.dataSeries.push(data);
-	    this.fireEvent('addSerie', this.dataSeries, data);
-	},
-	removeAll: function(){
-	    this.dataSeries = [];
-	    this.fireEvent('reload', this.dataSeries);
-	},
-	removeSerie: function(serie_id){
-            for(var i=0; i< this.dataSeries.length; i++) {
-		if(this.dataSeries[i]['serie_id'] == serie_id){
-		    this.dataSeries.splice(i, 1);
-		}
+        PlotDataStore.superclass.constructor.call(this, config)
+    },
+    addSerie: function(data) {
+        this.dataSeries.push(data);
+        this.fireEvent('addSerie', this.dataSeries, data);
+    },
+    removeAll: function() {
+        this.dataSeries = [];
+        this.fireEvent('reload', this.dataSeries);
+    },
+    removeSerie: function(serie_id) {
+        for (var i = 0; i < this.dataSeries.length; i++) {
+            if (this.dataSeries[i]['serie_id'] == serie_id) {
+                this.dataSeries.splice(i, 1);
             }
-	    this.fireEvent('reload', this.dataSeries);
-	},
-	reload: function(){
-	    this.fireEvent('reload', this.dataSeries);
-	},
-	download: function(){
-	    // console.log(this.dataSeries);
-	    var de = new DataExporter();
-	    de.exportGrid(this.dataSeries);
-	}
+        }
+        this.fireEvent('reload', this.dataSeries);
+    },
+    reload: function() {
+        this.fireEvent('reload', this.dataSeries);
+    },
+    download: function() {
+        // console.log(this.dataSeries);
+        var de = new DataExporter();
+        de.exportGrid(this.dataSeries);
+    }
 
-    });
+});
 
 
 DataExporter = Ext.extend(Object, {
-    dateFormat : 'Y-m-d g:i',
+    dateFormat: 'Y-m-d g:i',
 
     exportGrid: function(grid) {
         if (Ext.isIE) {
@@ -2969,7 +3014,7 @@ DataExporter = Ext.extend(Object, {
 
         } else {
             var data = this._getCSV(grid);
-	    Mydownload(data, "dowload.csv", "text/csv");
+            Mydownload(data, "dowload.csv", "text/csv");
 
             //window.location = 'data:text/csv;charset=utf8,' + encodeURIComponent(data);
         }
@@ -3012,68 +3057,68 @@ DataExporter = Ext.extend(Object, {
     },
 
     _getFieldTextAndEscape: function(fieldData) {
-        var string  = this._getFieldText(fieldData);
+        var string = this._getFieldText(fieldData);
 
         return this._escapeForCSV(string);
     },
 
-    _getCSV: function (grid) {
-        var store   = grid.store;
-        var data    = '';
+    _getCSV: function(grid) {
+        var store = grid.store;
+        var data = '';
 
         var that = this;
-	var headers = ['offering', 'time', 'value']
+        var headers = ['offering', 'time', 'value']
         Ext.each(headers, function(col, index) {
             data += that._getFieldTextAndEscape(col) + ',';
         });
         data += "\n";
 
         Ext.each(grid, function(serie) {
-	    Ext.each(serie.data, (function(record) {
-		var time = new Date(record[0]).toISOString();
-		var value = record[1];
-		data += that._getFieldTextAndEscape(serie.serie_id) + ',';
-		data += that._getFieldTextAndEscape(time) + ',';
-		data += that._getFieldTextAndEscape(value) + ',';
-		data += "\n";
-	    }));
-	});
+            Ext.each(serie.data, (function(record) {
+                var time = new Date(record[0]).toISOString();
+                var value = record[1];
+                data += that._getFieldTextAndEscape(serie.serie_id) + ',';
+                data += that._getFieldTextAndEscape(time) + ',';
+                data += that._getFieldTextAndEscape(value) + ',';
+                data += "\n";
+            }));
+        });
 
         return data;
     },
 
-    _ieGetGridData : function(grid, sheet) {
-        var that            = this;
-        var resourceItems   = grid.store.data.items;
-        var cols            = grid.colModel.columns;
+    _ieGetGridData: function(grid, sheet) {
+        var that = this;
+        var resourceItems = grid.store.data.items;
+        var cols = grid.colModel.columns;
 
         Ext.each(cols, function(col, colIndex) {
             if (col.hidden != true) {
                 // console.log('header: ', col.header);
-                sheet.cells(1,colIndex + 1).value = col.header;
+                sheet.cells(1, colIndex + 1).value = col.header;
             }
         });
 
         var rowIndex = 2;
         grid.store.each(function(record) {
-            var entry   = record.data;
+            var entry = record.data;
 
             Ext.each(cols, function(col, colIndex) {
                 if (col.hidden != true) {
-                    var fieldName   = col.dataIndex;
-                    var text        = entry[fieldName];
-                    var value       = that._getFieldText(text);
+                    var fieldName = col.dataIndex;
+                    var text = entry[fieldName];
+                    var value = that._getFieldText(text);
 
-                    sheet.cells(rowIndex, colIndex+1).value = value;
+                    sheet.cells(rowIndex, colIndex + 1).value = value;
                 }
             });
             rowIndex++;
         });
     },
 
-    _ieToExcel: function (grid) {
-        if (window.ActiveXObject){
-            var  xlApp, xlBook;
+    _ieToExcel: function(grid) {
+        if (window.ActiveXObject) {
+            var xlApp, xlBook;
             try {
                 xlApp = new ActiveXObject("Excel.Application");
                 xlBook = xlApp.Workbooks.Add();
@@ -3094,80 +3139,92 @@ DataExporter = Ext.extend(Object, {
 
 
 FoiExplorer = Ext.extend(Ext.Window, {
-    constructor: function(config){
-        var today = new Date(), begin = new Date(), end = new Date();
+    constructor: function(config) {
+        var today = new Date(),
+            begin = new Date(),
+            end = new Date();
 
-	this.timeRange = 2;
+        this.timeRange = 2;
 
         begin.setDate(today.getDate() - this.timeRange);
         this.dateRange = [begin, end];
-	this.frequency = 10;
-	this.interval = 3600;
+        this.frequency = 10;
+        this.interval = 3600;
 
-	this.sosClient = config.sosClient;
-	this.foiId = config.foi.attributes.id
+        this.sosClient = config.sosClient;
+        this.foiId = config.foi.attributes.id
 
-	// add listeners
+        // add listeners
         this.addEvents({
             //"addSerie" : true,
             //"removeSerie" : true,
-	    //"reload": true
+            //"reload": true
         });
         this.listeners = config.listeners;
 
-	// configure window
+        // configure window
         this.count = 0;
 
         //reinit
         this.offeringsGridId = Ext.id();
         this.placeholderId = Ext.id();
-	this.manualModeId = Ext.id();
-	this.realtimeModeId = Ext.id();
+        this.manualModeId = Ext.id();
+        this.realtimeModeId = Ext.id();
 
-	var defaultConfig = this.configureSOSWindow();
-	Ext.apply(defaultConfig, config);
-	FoiExplorer.superclass.constructor.call(this, defaultConfig);
-
-
-	// lo creo qui per avere lo scope: this
-	// create stores
-	this.plotDataStore = new PlotDataStore({
-	    listeners: {
-		addSerie: function(dataSeries, data) {
-		    this.drawChart(dataSeries);
-		},
-		reload: function(dataSeries){
-		    this.drawChart(dataSeries);
-		},
-		scope: this
-	    }
-	});
+        var defaultConfig = this.configureSOSWindow();
+        Ext.apply(defaultConfig, config);
+        FoiExplorer.superclass.constructor.call(this, defaultConfig);
 
 
-	//console.log(config.foi);
-	var offerings = this.sosClient.getOfferingsByFoi(config.foi);
-	for (var name in offerings) {
-	    this.addSensorRecord(offerings[name], name);
-	    //console.log(offerings[name].observedProperties);
-	}
+        // lo creo qui per avere lo scope: this
+        // create stores
+        this.plotDataStore = new PlotDataStore({
+            listeners: {
+                addSerie: function(dataSeries, data) {
+                    this.drawChart(dataSeries);
+                },
+                reload: function(dataSeries) {
+                    this.drawChart(dataSeries);
+                },
+                scope: this
+            }
+        });
 
-	this.enableRealTime(false);
+
+        //console.log(config.foi);
+        var offerings = this.sosClient.getOfferingsByFoi(config.foi);
+        for (var name in offerings) {
+            this.addSensorRecord(offerings[name], name);
+            //console.log(offerings[name].observedProperties);
+        }
+
+        this.enableRealTime(false);
 
     },
     plot: null,
     chartOptions: {
         series: {
-            lines: { show: true },
-            points: { show: true, radius: 2 } ,
+            lines: {
+                show: true
+            },
+            points: {
+                show: true,
+                radius: 2
+            },
             stack: false
         },
-        crosshair: { mode: "x" },
+        crosshair: {
+            mode: "x"
+        },
         xaxis: {
             mode: "time",
             timeformat: "%d/%m/%y %H:%M",
             labelAngle: 45
         },
-        grid: { hoverable: true, autoHighlight: false},
+        grid: {
+            hoverable: true,
+            autoHighlight: false
+        },
         zoom: {
             interactive: true
         },
@@ -3178,166 +3235,192 @@ FoiExplorer = Ext.extend(Ext.Window, {
     },
     drawChart: function(dataSeries) {
         var options = this.chartOptions;
-        this.plot = $.plot($("#"+ this.placeholderId), dataSeries, options);
+        this.plot = $.plot($("#" + this.placeholderId), dataSeries, options);
         this.initLegends();
         this.initPanZoom();
     },
     chartMask: null,
-    onDeselectOffering: function(sm, rowIndex, record ){
-	this.plotDataStore.removeSerie(record.data.name);
+    onDeselectOffering: function(sm, rowIndex, record) {
+        this.plotDataStore.removeSerie(record.data.name);
     },
-    onSelectOffering: function(sm, rowIndex, record ){
+    onSelectOffering: function(sm, rowIndex, record) {
         var offering_id = record.data.name;
-	var observedProperty_id = record.data.observedProperty;
-	var observedProperty_label = record.data.observedPropertyLabel;
-	var begin;
-	var end;
-	if(!this.realTime){
+        var observedProperty_id = record.data.observedProperty;
+        var observedProperty_label = record.data.observedPropertyLabel;
+        var begin;
+        var end;
+        if (!this.realTime) {
             begin = this.dateRange[0];
             end = this.dateRange[1];
-	} else {
+        } else {
             var now = new Date();
-	    begin = new Date();
-	    end = new Date();
+            begin = new Date();
+            end = new Date();
             begin.setTime(now.getTime() - this.interval * 1000);
-	}
+        }
 
-	//console.log(moment(begin).format());
-	//console.log(moment(end).format());
+        //console.log(moment(begin).format());
+        //console.log(moment(end).format());
 
-        if(! this.chartMask) this.chartMask = new Ext.LoadMask(Ext.get(this.placeholderId));
+        if (!this.chartMask) this.chartMask = new Ext.LoadMask(Ext.get(this.placeholderId));
         this.chartMask.show();
 
-	var plotDataStore = this.plotDataStore;
-	this.sosClient.getObservation(this.foiId, offering_id, observedProperty_id, begin,end,
-				      function(offering, output){
-					  var rows = [];
-                                          var uom = "-";
-					  if (output.measurements.length > 0) {
-					      // a look-up object for different time formats
-					      var timeMap = {};
-					      for(var i=0; i<output.measurements.length; i++) {
-						  var timePos = output.measurements[i].samplingTime.timeInstant.timePosition;
-						  var timePosObj = new Date(timePos);
-						  var timestamp = timePosObj.getTime();
-						  rows.push([timestamp, parseFloat(output.measurements[i].result.value)]);
-					      }
+        var plotDataStore = this.plotDataStore;
+        this.sosClient.getObservation(this.foiId, offering_id, observedProperty_id, begin, end,
+            function(offering, output) {
+                var rows = [];
+                var uom = "-";
+                if (output.measurements.length > 0) {
+                    // a look-up object for different time formats
+                    var timeMap = {};
+                    for (var i = 0; i < output.measurements.length; i++) {
+                        var timePos = output.measurements[i].samplingTime.timeInstant.timePosition;
+                        var timePosObj = new Date(timePos);
+                        var timestamp = timePosObj.getTime();
+                        rows.push([timestamp, parseFloat(output.measurements[i].result.value)]);
+                    }
 
-                                              // get uom from first record
-                                              if(output.measurements.length > 0){
-                                                  uom = output.measurements[0].result.uom;
-                                              }
+                    // get uom from first record
+                    if (output.measurements.length > 0) {
+                        uom = output.measurements[0].result.uom;
+                    }
 
-					      function sortfunction(a, b){
-						  if(a[0] > b[0]) {
-						      return 1;
-						  }
-						  else {
-						      return -1;
-						  }
-					      }
-					      rows.sort(sortfunction);
-					  }
-					  var label = observedProperty_label + " (" + uom + ") = No Values";
-					  plotDataStore.addSerie({data: rows, label: label, serie_id: offering_id});
-				      });
+                    function sortfunction(a, b) {
+                        if (a[0] > b[0]) {
+                            return 1;
+                        } else {
+                            return -1;
+                        }
+                    }
+                    rows.sort(sortfunction);
+                }
+                var label = observedProperty_label + " (" + uom + ") = No Values";
+                plotDataStore.addSerie({
+                    data: rows,
+                    label: label,
+                    serie_id: offering_id
+                });
+            });
     },
-    chartReload: function(){
-	var grid = Ext.getCmp(this.offeringsGridId);
-	this.plotDataStore.removeAll();
+    chartReload: function() {
+        var grid = Ext.getCmp(this.offeringsGridId);
+        this.plotDataStore.removeAll();
 
-	var selection= grid.getSelectionModel();
-	for(i=0;i < grid.store.getCount();i++){
-            if(selection.isSelected(i)){
-		this.onSelectOffering(1, 1, grid.store.getAt(i));
-	    }
-	}
+        var selection = grid.getSelectionModel();
+        for (i = 0; i < grid.store.getCount(); i++) {
+            if (selection.isSelected(i)) {
+                this.onSelectOffering(1, 1, grid.store.getAt(i));
+            }
+        }
     },
-    download: function(){
-	this.plotDataStore.download();
+    download: function() {
+        this.plotDataStore.download();
     },
-    startRealTime: function(){
-	var inst=this;
-	// verifico che ci sia una frequenza valida, altrimenti resto in ascolto
-	var freq = 1;
-	if(this.frequency > 0){
-	    this.chartReload();
-	    freq = this.frequency;
-	}
-	this.realTimeTimeOut = setTimeout(function(){
-	    inst.startRealTime();
-	}, freq * 1000);
-	//console.log('REALTIME');
+    startRealTime: function() {
+        var inst = this;
+        // verifico che ci sia una frequenza valida, altrimenti resto in ascolto
+        var freq = 1;
+        if (this.frequency > 0) {
+            this.chartReload();
+            freq = this.frequency;
+        }
+        this.realTimeTimeOut = setTimeout(function() {
+            inst.startRealTime();
+        }, freq * 1000);
+        //console.log('REALTIME');
     },
-    stopRealTime: function(){
-	clearTimeout(this.realTimeTimeOut);
-	//console.log('STOP REALTIME');
+    stopRealTime: function() {
+        clearTimeout(this.realTimeTimeOut);
+        //console.log('STOP REALTIME');
     },
-    enableRealTime: function(enable){
-	this.realTime = enable;
-	Ext.getCmp(this.realtimeModeId).setDisabled(!enable);
-	Ext.getCmp(this.manualModeId).setDisabled(enable);
-	if(enable){
-	    this.startRealTime();
-	} else {
-	    this.stopRealTime();
-	}
+    enableRealTime: function(enable) {
+        this.realTime = enable;
+        Ext.getCmp(this.realtimeModeId).setDisabled(!enable);
+        Ext.getCmp(this.manualModeId).setDisabled(enable);
+        if (enable) {
+            this.startRealTime();
+        } else {
+            this.stopRealTime();
+        }
     },
     getFormattedDateFromTimePos: function(timePos) {
-	//console.log(timePos);
-	//console.log(Date.parse(timePos));
+        //console.log(timePos);
+        //console.log(Date.parse(timePos));
         // var date = new Date(Date.parse(timePos));
         // var formattedString = date.format("isoDate") + " " + date.format("isoTime");
 
-	var date = moment(timePos);
-	var a = date.format("YYYY-MM-DD HH:mm");
+        var date = moment(timePos);
+        var a = date.format("YYYY-MM-DD HH:mm");
         return a;
     },
     addSensorRecord: function(offering, name, time, lastvalue) {
         this.count++;
-	for(var i=0; i< offering.observedProperties.length; i++) {
-	    //console.log(i);
+        for (var i = 0; i < offering.observedProperties.length; i++) {
+            //console.log(i);
             //exclude phenomenonTime
-            if(offering.observedProperties[i] == 'http://www.opengis.net/def/property/OGC/0/PhenomenonTime'){
+            if (offering.observedProperties[i] == 'http://www.opengis.net/def/property/OGC/0/PhenomenonTime') {
                 continue;
             }
             observedPropertyLabel = offering.observedProperties[i];
-	    this.offeringsStore.add(
-		this.getSensorRecord({
-		    type: offering.name,
-		    name: name,
-		    observedProperty: offering.observedProperties[i],
-		    observedPropertyLabel: observedPropertyLabel,
-		    time: time,
-		    startPeriod: (offering.time && offering.time.timePeriod) ? this.getFormattedDateFromTimePos(offering.time.timePeriod.beginPosition) : '-',
-		    endPeriod: (offering.time && offering.time.timePeriod) ? this.getFormattedDateFromTimePos(offering.time.timePeriod.endPosition) : '-',
-		    lastvalue: lastvalue
-		})
-	    );
+            this.offeringsStore.add(
+                this.getSensorRecord({
+                    type: offering.name,
+                    name: name,
+                    observedProperty: offering.observedProperties[i],
+                    observedPropertyLabel: observedPropertyLabel,
+                    time: time,
+                    startPeriod: (offering.time && offering.time.timePeriod) ? this.getFormattedDateFromTimePos(offering.time.timePeriod.beginPosition) : '-',
+                    endPeriod: (offering.time && offering.time.timePeriod) ? this.getFormattedDateFromTimePos(offering.time.timePeriod.endPosition) : '-',
+                    lastvalue: lastvalue
+                })
+            );
         };
     },
-    getSensorRecord: function(config){
-	Ext.apply({
-	    type: null,
-	    name: null,
-	    observedProperty: null,
-	    observedPropertyLabel: null,
-	    time: null,
-	    startPeriod: null,
-	    endPeriod: null,
-	    lastvalue: null
-	}, config);
-	var SensorRecord =  Ext.data.Record.create([
-            {name: "type", type: "string"},
-            {name: "name", type: "string"},
-            {name: "observedProperty", type: "string"},
-            {name: "observedPropertyLabel", type: "string"},
-            {name: "time", type: "string"},
-            {name: "startPeriod", type: "string"},
-            {name: "endPeriod", type: "string"},
-            {name: "lastvalue", type: "string"}
-	]);
-	return new SensorRecord({
+    getSensorRecord: function(config) {
+        Ext.apply({
+            type: null,
+            name: null,
+            observedProperty: null,
+            observedPropertyLabel: null,
+            time: null,
+            startPeriod: null,
+            endPeriod: null,
+            lastvalue: null
+        }, config);
+        var SensorRecord = Ext.data.Record.create([{
+                name: "type",
+                type: "string"
+            },
+            {
+                name: "name",
+                type: "string"
+            },
+            {
+                name: "observedProperty",
+                type: "string"
+            },
+            {
+                name: "observedPropertyLabel",
+                type: "string"
+            },
+            {
+                name: "time",
+                type: "string"
+            },
+            {
+                name: "startPeriod",
+                type: "string"
+            },
+            {
+                name: "endPeriod",
+                type: "string"
+            },
+            {
+                name: "lastvalue",
+                type: "string"
+            }
+        ]);
+        return new SensorRecord({
             type: config.type,
             name: config.name,
             observedProperty: config.observedProperty,
@@ -3350,34 +3433,34 @@ FoiExplorer = Ext.extend(Ext.Window, {
     },
 
     // chart's functions
-    initLegends: function(){
+    initLegends: function() {
         this.legends = $("#" + this.placeholderId + " .legendLabel");
-        this.legends.each(function () {
+        this.legends.each(function() {
             // fix the widths so they don't jump around
             $(this).css('width', $(this).width());
         });
-	var sos = this;
-        $("#"+this.placeholderId).bind("plothover",  function (event, pos, item) {
+        var sos = this;
+        $("#" + this.placeholderId).bind("plothover", function(event, pos, item) {
             sos.latestPosition = pos;
             //if (!sos.updateLegendTimeout){
-	    //sos.updateLegendTimeout = setTimeout(function(){sos.updateLegend();}, 50);
-	    //}
-	    sos.updateLegend();
+            //sos.updateLegendTimeout = setTimeout(function(){sos.updateLegend();}, 50);
+            //}
+            sos.updateLegend();
         });
     },
 
-    initPanZoom: function(){
-	var sos = this;
-        $("#"+this.placeholderId).bind('plotpan', function (event, plot) {
+    initPanZoom: function() {
+        var sos = this;
+        $("#" + this.placeholderId).bind('plotpan', function(event, plot) {
             sos.initLegends();
         });
 
-        $("#"+this.placeholderId).bind('plotzoom', function (event, plot) {
+        $("#" + this.placeholderId).bind('plotzoom', function(event, plot) {
             sos.initLegends();
         });
 
     },
-    updateLegend: function(){
+    updateLegend: function() {
         this.updateLegendTimeout = null;
         var pos = this.latestPosition;
         var axes = this.plot.getAxes();
@@ -3395,7 +3478,8 @@ FoiExplorer = Ext.extend(Ext.Window, {
                     break;
 
             // now interpolate
-            var y, p1 = series.data[j - 1], p2 = series.data[j];
+            var y, p1 = series.data[j - 1],
+                p2 = series.data[j];
             if (p1 == null)
                 y = p2[1];
             else if (p2 == null)
@@ -3407,46 +3491,61 @@ FoiExplorer = Ext.extend(Ext.Window, {
         }
     },
 
-    configureSOSWindow: function(){
-	this.offeringsStore = new Ext.data.ArrayStore({
+    configureSOSWindow: function() {
+        this.offeringsStore = new Ext.data.ArrayStore({
             // store configs
             // autoDestroy: true,
             // reader configs
             idIndex: 0,
-            fields: [
-		{name: 'type'},
-		{name: 'name'},
-		{name: 'observedProperty'},
-		{name: 'observedPropertyLabel'},
-		{name: 'time'},
-		{name: 'startPeriod'},
-		{name: 'endPeriod'},
-		{name: 'lastvalue'}
+            fields: [{
+                    name: 'type'
+                },
+                {
+                    name: 'name'
+                },
+                {
+                    name: 'observedProperty'
+                },
+                {
+                    name: 'observedPropertyLabel'
+                },
+                {
+                    name: 'time'
+                },
+                {
+                    name: 'startPeriod'
+                },
+                {
+                    name: 'endPeriod'
+                },
+                {
+                    name: 'lastvalue'
+                }
             ]
-	});
-        this.offeringsStore.addListener('add', function(store, records, index){
+        });
+        this.offeringsStore.addListener('add', function(store, records, index) {
             var record = records[0];
             var op = record.get('observedProperty');
-            if(ValidURL(op)){
+            if (ValidURL(op)) {
                 var request = OpenLayers.Request.GET({
                     url: op,
-                    success: function(request){
+                    success: function(request) {
                         var doc = null;
-                        if(!request.responseXML.documentElement) {
+                        if (!request.responseXML.documentElement) {
                             var format = new OpenLayers.Format.XML();
                             doc = format.read(request.responseText);
                         } else {
                             doc = request.responseXML;
                         }
                         var label = doc.getElementsByTagNameNS('http://www.w3.org/2004/02/skos/core#', 'altLabel');
-                        if(label){
+                        if (label) {
                             label = label[0].textContent;
                         }
-                        if(label && label != ''){
+                        if (label && label != '') {
                             record.set('observedPropertyLabel', label);
                         }
                     },
-                    failure: function(request){}
+                    failure: function(request) {}
                 });
             }
         }, this.offeringsStore);
@@ -3455,223 +3554,231 @@ FoiExplorer = Ext.extend(Ext.Window, {
             width: 1000,
             height: 350,
             layout: 'border',
-	    cls: 'sos-window',
-	    defaults: {
-		collapsible: true,
-		split: true
-		//bodyStyle: 'padding:15px'
-	    },
-            items: [
-		{
-		    title: 'Metadata',
-		    region: 'west',
-		    minSize: 150,
-		    width: 300,
-		    bodyStyle: 'padding: 5px',
-		    html: '<p><b>Service: </b>' + this.sosClient.SOSCapabilities.serviceIdentification.title + '</p>'
-			+ '<p><b>Abstract: </b> ' + this.sosClient.SOSCapabilities.serviceIdentification.abstract + '</p>'
-			+ '<p><b>Provider: </b> ' + this.sosClient.SOSCapabilities.serviceProvider.providerName + '</p>'
-			+ '<p><b>Foi: </b> ' + this.sosClient.getNameForFoi(this.foiId) + '</p>'
-		},
-		{
+            cls: 'sos-window',
+            defaults: {
+                collapsible: true,
+                split: true
+                //bodyStyle: 'padding:15px'
+            },
+            items: [{
+                    title: 'Metadata',
+                    region: 'west',
+                    minSize: 150,
+                    width: 300,
+                    bodyStyle: 'padding: 5px',
+                    html: '<p><b>Service: </b>' + this.sosClient.SOSCapabilities.serviceIdentification.title + '</p>' +
+                        '<p><b>Abstract: </b> ' + this.sosClient.SOSCapabilities.serviceIdentification.abstract + '</p>' +
+                        '<p><b>Provider: </b> ' + this.sosClient.SOSCapabilities.serviceProvider.providerName + '</p>' +
+                        '<p><b>Foi: </b> ' + this.sosClient.getNameForFoi(this.foiId) + '</p>'
+                },
+                {
                     xtype: 'panel',
                     title: 'Observations',
                     //iconCls: 'chart_curve',
                     html: "<div id='" + this.placeholderId + "' class='chart'></div>",
                     //padding: '3 3 3 3',
-		    region: 'south',
-		    height: 150,
-		    minSize: 150,
-		    //maxSize: 250,
-		    //cmargins: '5 0 0 0',
-		    tbar: [{
-			xtype:'buttongroup',
-			title: 'Settings',
-			defaults: {
-			    scale: 'medium'
-			},
-			items: [{
-			    text: 'Mode',
-			    menu: {        // <-- submenu by nested config object
-				items: [
-				    {
-					checked: true,
-					group: 'theme',
-					text: 'Manual',
-					icon: 'images/chart_line.png',
-					listeners: {
-					    "click": function(){
-						this.enableRealTime(false);
-					    },
-					    scope: this
-					}
-				    }, {
-					checked: false,
-					group: 'theme',
-					text: 'Real-time',
-					icon: 'images/chart_curve.png',
-					listeners: {
-					    "click": function() {
-						this.enableRealTime(true);
-					    },
-					    scope: this
-					}
-				    }
-				]
-			    }
-			},{
-			    text: 'Style',
-			    menu: {        // <-- submenu by nested config object
-				items: [
-				    {
-					checked: true,
-					group: 'theme',
-					text: 'Line & points',
-					icon: 'images/chart_line.png',
-					listeners: {
-					    "click": function(){
-						this.chartOptions['series']['lines']['show'] = true;
-						this.chartOptions['series']['points']['show'] = true;
-						this.plotDataStore.reload();
-					    },
-					    scope: this
-					}
-				    }, {
-					checked: false,
-					group: 'theme',
-					text: 'Line',
-					icon: 'images/chart_curve.png',
-					listeners: {
-					    "click": function(){
-						this.chartOptions['series']['lines']['show'] = true;
-						this.chartOptions['series']['points']['show'] = false;
-						this.plotDataStore.reload();
-					    },
-					    scope: this
-					}
-				    }, {
-					checked: false,
-					group: 'theme',
-					text: 'Points',
-					icon: 'images/chart_point.png',
-					listeners: {
-					    "click": function(){
-						this.chartOptions['series']['lines']['show'] = false;
-						this.chartOptions['series']['points']['show'] = true;
-						this.plotDataStore.reload();
-					    },
-					    scope: this
-					}
-				    }
-				]
-			    }
-			}]
-		    }, {
-			id: this.manualModeId,
-			xtype: 'buttongroup',
-			title: 'Manual',
-			items: [{
+                    region: 'south',
+                    height: 150,
+                    minSize: 150,
+                    //maxSize: 250,
+                    //cmargins: '5 0 0 0',
+                    tbar: [{
+                        xtype: 'buttongroup',
+                        title: 'Settings',
+                        defaults: {
+                            scale: 'medium'
+                        },
+                        items: [{
+                            text: 'Mode',
+                            menu: { // <-- submenu by nested config object
+                                items: [{
+                                    checked: true,
+                                    group: 'theme',
+                                    text: 'Manual',
+                                    icon: 'img/chart_line.png',
+                                    listeners: {
+                                        "click": function() {
+                                            this.enableRealTime(false);
+                                        },
+                                        scope: this
+                                    }
+                                }, {
+                                    checked: false,
+                                    group: 'theme',
+                                    text: 'Real-time',
+                                    icon: 'img/chart_curve.png',
+                                    listeners: {
+                                        "click": function() {
+                                            this.enableRealTime(true);
+                                        },
+                                        scope: this
+                                    }
+                                }]
+                            }
+                        }, {
+                            text: 'Style',
+                            menu: { // <-- submenu by nested config object
+                                items: [{
+                                    checked: true,
+                                    group: 'theme',
+                                    text: 'Line & points',
+                                    icon: 'img/chart_line.png',
+                                    listeners: {
+                                        "click": function() {
+                                            this.chartOptions['series']['lines']['show'] = true;
+                                            this.chartOptions['series']['points']['show'] = true;
+                                            this.plotDataStore.reload();
+                                        },
+                                        scope: this
+                                    }
+                                }, {
+                                    checked: false,
+                                    group: 'theme',
+                                    text: 'Line',
+                                    icon: 'img/chart_curve.png',
+                                    listeners: {
+                                        "click": function() {
+                                            this.chartOptions['series']['lines']['show'] = true;
+                                            this.chartOptions['series']['points']['show'] = false;
+                                            this.plotDataStore.reload();
+                                        },
+                                        scope: this
+                                    }
+                                }, {
+                                    checked: false,
+                                    group: 'theme',
+                                    text: 'Points',
+                                    icon: 'img/chart_point.png',
+                                    listeners: {
+                                        "click": function() {
+                                            this.chartOptions['series']['lines']['show'] = false;
+                                            this.chartOptions['series']['points']['show'] = true;
+                                            this.plotDataStore.reload();
+                                        },
+                                        scope: this
+                                    }
+                                }]
+                            }
+                        }]
+                    }, {
+                        id: this.manualModeId,
+                        xtype: 'buttongroup',
+                        title: 'Manual',
+                        items: [{
                             xtype: 'label',
-			    html:'Start date'
-			},{
+                            html: 'Start date'
+                        }, {
                             xtype: 'datefield',
                             value: this.dateRange[0],
-			    format: 'd/m/Y',
-			    width: 100,
+                            format: 'd/m/Y',
+                            width: 100,
                             listeners: {
-		                "valid": function(field){
-                                    this.dateRange[0] =  field.getValue();
-                                    if(this.dateRange[0]){
-					this.dateRange[0].setHours(0,0,0,0);
+                                "valid": function(field) {
+                                    this.dateRange[0] = field.getValue();
+                                    if (this.dateRange[0]) {
+                                        this.dateRange[0].setHours(0, 0, 0, 0);
                                     }
-		                },
-				scope: this
-	                    }
-			},{
+                                },
+                                scope: this
+                            }
+                        }, {
                             xtype: 'label',
-			    html:'End date'
-			},{
+                            html: 'End date'
+                        }, {
                             xtype: 'datefield',
                             value: this.dateRange[1],
-			    format: 'd/m/Y',
-			    width: 100,
+                            format: 'd/m/Y',
+                            width: 100,
                             listeners: {
-		                "valid": function(field){
+                                "valid": function(field) {
                                     this.dateRange[1] = field.getValue();
-                                    if(this.dateRange[1]){
-					this.dateRange[1].setHours(23,59,59,99);
+                                    if (this.dateRange[1]) {
+                                        this.dateRange[1].setHours(23, 59, 59, 99);
                                     }
-		                },
-				scope: this
-	                    }
-			},{
+                                },
+                                scope: this
+                            }
+                        }, {
                             text: 'Reload',
-                            icon: 'images/arrow_refresh.png',
+                            icon: 'img/arrow_refresh.png',
                             listeners: {
-		                "click": this.chartReload,
-				scope: this
-	                    }
-			}]
-		    },{
-			id: this.realtimeModeId,
-			xtype:'buttongroup',
-			title: 'Real-time',
-			items: [{
+                                "click": this.chartReload,
+                                scope: this
+                            }
+                        }]
+                    }, {
+                        id: this.realtimeModeId,
+                        xtype: 'buttongroup',
+                        title: 'Real-time',
+                        items: [{
                             xtype: 'label',
-			    html:'Freq. (sec)'
-			},{
-			    xtype: 'numberfield',
-			    value: this.frequency,
-			    maxLength: 5,
-			    width: 60,
-			    autoCreate: {tag: 'input', type: 'text', size: '7', autocomplete:'off', maxlength: '5'},
+                            html: 'Freq. (sec)'
+                        }, {
+                            xtype: 'numberfield',
+                            value: this.frequency,
+                            maxLength: 5,
+                            width: 60,
+                            autoCreate: {
+                                tag: 'input',
+                                type: 'text',
+                                size: '7',
+                                autocomplete: 'off',
+                                maxlength: '5'
+                            },
                             listeners: {
-		                "valid": function(field){
+                                "valid": function(field) {
                                     this.frequency = field.getValue();
-		                },
-				scope: this
-	                    }
-			},{
+                                },
+                                scope: this
+                            }
+                        }, {
                             xtype: 'label',
-			    html:'Interval (sec)'
-			},{
-			    xtype: 'numberfield',
-			    value: this.interval,
-			    maxLength: 5,
-			    width: 60,
-			    autoCreate: {tag: 'input', type: 'text', size: '7', autocomplete:'off', maxlength: '5'},
+                            html: 'Interval (sec)'
+                        }, {
+                            xtype: 'numberfield',
+                            value: this.interval,
+                            maxLength: 5,
+                            width: 60,
+                            autoCreate: {
+                                tag: 'input',
+                                type: 'text',
+                                size: '7',
+                                autocomplete: 'off',
+                                maxlength: '5'
+                            },
                             listeners: {
-		                "valid": function(field){
+                                "valid": function(field) {
                                     this.interval = field.getValue();
-		                },
-				scope: this
-	                    }
-			}]
-		    },{
-			xtype:'buttongroup',
-			title: 'Download',
-			defaults: {
-			    scale: 'medium'
-			},
-			items: [{
+                                },
+                                scope: this
+                            }
+                        }]
+                    }, {
+                        xtype: 'buttongroup',
+                        title: 'Download',
+                        defaults: {
+                            scale: 'medium'
+                        },
+                        items: [{
                             text: 'Download',
-			    // style: {padding: '15px'},
-                            // icon: 'images/arrow_refresh.png',
+                            // style: {padding: '15px'},
+                            // icon: 'img/arrow_refresh.png',
                             listeners: {
-		                "click": this.download,
-				scope: this
-	                    }
-			}]
-		    }],
-                    tbaraaa:[
-			'-',' ','-',' ','-',,'-']
-		},
+                                "click": this.download,
+                                scope: this
+                            }
+                        }]
+                    }],
+                    tbaraaa: [
+                        '-', ' ', '-', ' ', '-', , '-'
+                    ]
+                },
                 {
                     xtype: 'grid',
-		    id: this.offeringsGridId,
-		    title: 'Offerings',
+                    id: this.offeringsGridId,
+                    title: 'Offerings',
                     region: 'center',
-            	    //bodyStyle: {"padding": "1px"},
+                    //bodyStyle: {"padding": "1px"},
                     //split: true,
                     store: this.offeringsStore,
                     colModel: new Ext.grid.ColumnModel({
@@ -3681,15 +3788,24 @@ FoiExplorer = Ext.extend(Ext.Window, {
                         },
                         columns: [
                             //{id: 'type', header: 'Type', dataIndex: 'type'},
-			    {header: 'Observed property', dataIndex: 'observedPropertyLabel'},
-                            {header: 'Start', dataIndex: 'startPeriod'},
-                            {header: 'End', dataIndex: 'endPeriod'}//,
+                            {
+                                header: 'Observed property',
+                                dataIndex: 'observedPropertyLabel'
+                            },
+                            {
+                                header: 'Start',
+                                dataIndex: 'startPeriod'
+                            },
+                            {
+                                header: 'End',
+                                dataIndex: 'endPeriod'
+                            } //,
                             //{header: 'Time', dataIndex: 'time'},
                             //{header: 'Last Value', dataIndex: 'lastvalue'}
                         ]
                     }),
                     sm: new Ext.grid.RowSelectionModel({
-                        singleSelect:false,
+                        singleSelect: false,
                         listeners: {
                             'rowselect': this.onSelectOffering,
                             'rowdeselect': this.onDeselectOffering,
@@ -3707,8 +3823,10 @@ FoiExplorer = Ext.extend(Ext.Window, {
             autoScroll: true,
             buttons: [{
                 text: "OK",
-                handler: function() { this.close(); },
-		scope: this
+                handler: function() {
+                    this.close();
+                },
+                scope: this
             }]
         }
     }
@@ -3766,29 +3884,31 @@ gxp.plugins.AddSOS = Ext.extend(gxp.plugins.Tool, {
         //TODO create generic gxp_layerpanel
         var xtype = "gxp_sossourcedialog";
         var output = gxp.plugins.AddSOS.superclass.addOutput.call(this, Ext.apply({
-	    title: this.addText,
+            title: this.addText,
             xtype: "gxp_sossourcedialog",
             target: this.target,
             listeners: {
-                'addfoi':function (config) {
-                    var sourceConfig = {"config":{
-                        "ptype": 'gxp_sossource',
-                        "listeners": {
-                            'beforeload': function(){
-                                this.loadingMask = new Ext.LoadMask(Ext.getBody());
-                                this.loadingMask.show();
-                            },
-                            'loaded': function(config){
-                                this.target.mapPanel.layers.add([config.record]);
-                                this.sosDialog.hide();
-                                this.loadingMask.hide();
-                            },
-                            'failure': function(){
-                                this.loadingMask.hide();
-                            },
-                            'scope': this
+                'addfoi': function(config) {
+                    var sourceConfig = {
+                        "config": {
+                            "ptype": 'gxp_sossource',
+                            "listeners": {
+                                'beforeload': function() {
+                                    this.loadingMask = new Ext.LoadMask(Ext.getBody());
+                                    this.loadingMask.show();
+                                },
+                                'loaded': function(config) {
+                                    this.target.mapPanel.layers.add([config.record]);
+                                    this.sosDialog.hide();
+                                    this.loadingMask.hide();
+                                },
+                                'failure': function() {
+                                    this.loadingMask.hide();
+                                },
+                                'scope': this
+                            }
                         }
-                    }};
+                    };
                     if (config.url) {
                         sourceConfig.config["url"] = config.url;
                     }
@@ -3797,19 +3917,21 @@ gxp.plugins.AddSOS = Ext.extend(gxp.plugins.Tool, {
                     source.createLayerRecord(config);
                 },
                 scope: this
-	    }
-	}, config));
+            }
+        }, config));
         output.on({
             added: function(cmp) {
                 if (!this.outputTarget) {
                     cmp.on("afterrender", function() {
                         cmp.ownerCt.ownerCt.center();
-                    }, this, {single: true});
+                    }, this, {
+                        single: true
+                    });
                 }
             },
             scope: this
         });
-	this.sosDialog = output;
+        this.sosDialog = output;
         return output;
     }
 
@@ -3835,7 +3957,6 @@ Ext.preg(gxp.plugins.AddSOS.prototype.ptype, gxp.plugins.AddSOS);
  *  class = SOSSourceDialog
  *  base_link = `Ext.Container <http://extjs.com/deploy/dev/docs/?class=Ext.Container>`_
  */
-
 Ext.namespace("gxp");
 
 /** api: constructor
@@ -3882,39 +4003,39 @@ gxp.SOSSourceDialog = Ext.extend(Ext.Container, {
         this.addEvents("addfoi");
 
         if (!this.sosServices) {
-            this.sosServices  = [
-		[this.addLocalSOSText, '/observations/sos/kvp'],
-		['SOS ISMAR', 'http://david.ve.ismar.cnr.it/52nSOSv3_WAR/sos?'],
-		['SOS LTER', 'http://sp7.irea.cnr.it/tomcat/SOS32/sos'],
-		['SOS ISE', 'http://sos.ise.cnr.it/sos?'],
-		['SOS ISE BIO', 'http://sos.ise.cnr.it/biology/sos?'],
-		['SOS ISE CHEM', 'http://sos.ise.cnr.it/chemistry/sos?'],
+            this.sosServices = [
+                [this.addLocalSOSText, '/observations/sos/kvp'],
+                ['SOS ISMAR', 'http://david.ve.ismar.cnr.it/52nSOSv3_WAR/sos?'],
+                ['SOS LTER', 'http://sp7.irea.cnr.it/tomcat/SOS32/sos'],
+                ['SOS ISE', 'http://sos.ise.cnr.it/sos?'],
+                ['SOS ISE BIO', 'http://sos.ise.cnr.it/biology/sos?'],
+                ['SOS ISE CHEM', 'http://sos.ise.cnr.it/chemistry/sos?'],
                 [this.addSOSText, '']
             ];
         }
 
         var sosStore = new Ext.data.ArrayStore({
             fields: ['name', 'url'],
-            data : this.sosServices
+            data: this.sosServices
         });
 
         var sourceTypeSelect = new Ext.form.ComboBox({
             store: sosStore,
             fieldLabel: this.sosTypeText,
-            displayField:'name',
-            valueField:'url',
+            displayField: 'name',
+            valueField: 'url',
             typeAhead: true,
             width: 180,
             mode: 'local',
             triggerAction: 'all',
             emptyText: this.emptyText,
-            selectOnFocus:true,
+            selectOnFocus: true,
             listeners: {
                 "select": function(choice) {
                     if (choice.value == '') {
                         urlTextField.show();
                         // symbolizerField.show();
-			symbolizerField.hide();
+                        symbolizerField.hide();
                     } else {
                         urlTextField.hide();
                         urlTextField.setValue(choice.value)
@@ -3937,7 +4058,9 @@ gxp.SOSSourceDialog = Ext.extend(Ext.Container, {
 
 
         var symbolizerField = new gxp.PointSymbolizer({
-            bodyStyle: {padding: "10px"},
+            bodyStyle: {
+                padding: "10px"
+            },
             width: 280,
             border: false,
             hidden: true,
@@ -3945,7 +4068,10 @@ gxp.SOSSourceDialog = Ext.extend(Ext.Container, {
             defaults: {
                 labelWidth: 70
             },
-            symbolizer: {pointGraphics: "circle", pointRadius: "5"}
+            symbolizer: {
+                pointGraphics: "circle",
+                pointRadius: "5"
+            }
         });
 
 
@@ -3955,14 +4081,14 @@ gxp.SOSSourceDialog = Ext.extend(Ext.Container, {
             cfg.pointGraphics = this.pointGraphics;
         }
 
-        var submitButton =  new Ext.Button({
+        var submitButton = new Ext.Button({
             text: this.addFOISText,
             iconCls: "gxp-icon-addsos",
             disabled: true,
             handler: function() {
                 var config = {};
 
-                config.url = urlTextField.getValue();
+                config.url = urlTextField.getValue().split(/[?#]/)[0];
                 var symbolizer = symbolizerField.symbolizer;
                 config.defaultStyle = {};
                 config.selectStyle = {};
@@ -4062,7 +4188,7 @@ Ext.namespace("gxp.plugins");
 gxp.plugins.SOSSource = Ext.extend(gxp.plugins.LayerSource, {
 
     /** api: ptype = gxp_feedsource **/
-    ptype:'gxp_sossource',
+    ptype: 'gxp_sossource',
 
     /** api: config[url]
      * ``String`` URL  for GeoRSS feed
@@ -4071,17 +4197,17 @@ gxp.plugins.SOSSource = Ext.extend(gxp.plugins.LayerSource, {
     /** api: config[title]
      * ``String`` Title for source
      **/
-    title:'SOS Source',
+    title: 'SOS Source',
 
     /** api: config[format]
      * ``String`` Default format of vector layer
      **/
-    format:'OpenLayers.Format.XML',
+    format: 'OpenLayers.Format.XML',
 
     /** api: config[popupFormat]
      *  ``String``  XTemplate string for feature info popup
      */
-    popupTemplate:'<a target="_blank" href="{link}">{description}</a>',
+    popupTemplate: '<a target="_blank" href="{link}">{description}</a>',
 
 
     /** api: config[fixed]
@@ -4095,12 +4221,17 @@ gxp.plugins.SOSSource = Ext.extend(gxp.plugins.LayerSource, {
      *
      *  Create a layer record given the config.
      */
-    createLayerRecord:function (config) {
+    createLayerRecord: function(config) {
         var record;
-        this.fireEvent("beforeload", {'record': record});
-	this.sosClient = new OpenLayers.SOSClient({map: null, url: this.url});
+        this.fireEvent("beforeload", {
+            'record': record
+        });
+        this.sosClient = new OpenLayers.SOSClient({
+            map: null,
+            url: this.url
+        });
         this.sosClient.events.on({
-            'loaded': function(){
+            'loaded': function() {
                 var layer = this.sosClient.createLayer();
 
                 //configure the popup balloons for feed items
@@ -4109,40 +4240,71 @@ gxp.plugins.SOSSource = Ext.extend(gxp.plugins.LayerSource, {
                 // create a layer record for this layer
                 var Record = GeoExt.data.LayerRecord.create([
                     //{name: "title", type: "string"},
-                    {name:"name", type:"string"},
-                    {name:"source", type:"string"},
-                    {name:"group", type:"string"},
-                    {name:"fixed", type:"boolean"},
-                    {name:"selected", type:"boolean"},
-                    {name:"visibility", type:"boolean"},
-                    {name:"format", type:"string"},
-                    {name:"defaultStyle"},
-                    {name:"selectStyle"},
-                    {name:"params"}
+                    {
+                        name: "name",
+                        type: "string"
+                    },
+                    {
+                        name: "source",
+                        type: "string"
+                    },
+                    {
+                        name: "group",
+                        type: "string"
+                    },
+                    {
+                        name: "fixed",
+                        type: "boolean"
+                    },
+                    {
+                        name: "selected",
+                        type: "boolean"
+                    },
+                    {
+                        name: "visibility",
+                        type: "boolean"
+                    },
+                    {
+                        name: "format",
+                        type: "string"
+                    },
+                    {
+                        name: "defaultStyle"
+                    },
+                    {
+                        name: "selectStyle"
+                    },
+                    {
+                        name: "params"
+                    }
                 ]);
 
                 var formatConfig = "format" in config ? config.format : this.format;
 
+                layer.mergeNewParams = function(params) {};
+
                 var data = {
-                    layer:layer,
+                    layer: layer,
                     //title: config.name,
-                    name:config.name,
-                    source:config.source,
-                    group:config.group,
-                    fixed:("fixed" in config) ? config.fixed : false,
-                    selected:("selected" in config) ? config.selected : false,
-                    params:("params" in config) ? config.params : {},
-                    visibility:("visibility" in config) ? config.visibility : false,
+                    name: config.name,
+                    source: config.source,
+                    group: config.group,
+                    fixed: ("fixed" in config) ? config.fixed : false,
+                    selected: ("selected" in config) ? config.selected : false,
+                    params: ("params" in config) ? config.params : {},
+                    visibility: ("visibility" in config) ? config.visibility : false,
                     format: formatConfig instanceof String ? formatConfig : null,
-                    defaultStyle:("defaultStyle" in config) ? config.defaultStyle : {},
-                    selectStyle:("selectStyle" in config) ? config.selectStyle : {}
+                    defaultStyle: ("defaultStyle" in config) ? config.defaultStyle : {},
+                    selectStyle: ("selectStyle" in config) ? config.selectStyle : {}
                 };
 
 
                 record = new Record(data, layer.id);
-                this.fireEvent("loaded", {'record': record});
+                this.fireEvent("loaded", {
+                    'record': record
+                });
             },
-            'failure': function(){
+            'failure': function() {
                 this.fireEvent("failure");
             },
             scope: this
@@ -4156,21 +4318,21 @@ gxp.plugins.SOSSource = Ext.extend(gxp.plugins.LayerSource, {
      *
      *  Create a config object that can be used to recreate the given record.
      */
-    getConfigForRecord:function (record) {
+    getConfigForRecord: function(record) {
         // get general config
         var config = gxp.plugins.SOSSource.superclass.getConfigForRecord.apply(this, arguments);
         // add config specific to this source
         return Ext.apply(config, {
             //title: record.get("name"),
-            name:record.get("name"),
-            group:record.get("group"),
-            fixed:record.get("fixed"),
-            selected:record.get("selected"),
-            params:record.get("params"),
-            visibility:record.getLayer().getVisibility(),
-            format:record.get("format"),
-            defaultStyle:record.getLayer().styleMap["styles"]["default"]["defaultStyle"],
-            selectStyle:record.getLayer().styleMap["styles"]["select"]["defaultStyle"]
+            name: record.get("name"),
+            group: record.get("group"),
+            fixed: record.get("fixed"),
+            selected: record.get("selected"),
+            params: record.get("params"),
+            visibility: record.getLayer().getVisibility(),
+            format: record.get("format"),
+            defaultStyle: record.getLayer().styleMap["styles"]["default"]["defaultStyle"],
+            selectStyle: record.getLayer().styleMap["styles"]["select"]["defaultStyle"]
         });
     },
 
@@ -4179,7 +4341,7 @@ gxp.plugins.SOSSource = Ext.extend(gxp.plugins.LayerSource, {
      *  :returns: ``OpenLayers.Format``
      * Create an instance of the layer's format class and return it
      */
-    getFormat:function (config) {
+    getFormat: function(config) {
         // get class based on rssFormat in config
         var Class = window;
         var formatConfig = ("format" in config) ? config.format : this.format;
@@ -4197,7 +4359,7 @@ gxp.plugins.SOSSource = Ext.extend(gxp.plugins.LayerSource, {
             if (Class && Class.prototype && Class.prototype.initialize) {
 
                 // create a constructor for the given layer format
-                var Constructor = function () {
+                var Constructor = function() {
                     // this only works for args that can be serialized as JSON
                     Class.prototype.initialize.apply(this);
                 };
@@ -4216,12 +4378,12 @@ gxp.plugins.SOSSource = Ext.extend(gxp.plugins.LayerSource, {
      *  :arg config:  ``Object``  The vector layer
      * Configure a popup to display information on selected feed item.
      */
-    configureInfoPopup:function (layer) {
+    configureInfoPopup: function(layer) {
         // var tpl = new Ext.XTemplate(this.popupTemplate);
         layer.events.on({
-            "featureselected": 	function (featureObject) {
+            "featureselected": function(featureObject) {
                 var feature = featureObject.feature;
-		this.sosClient.onFeatureSelect(feature);
+                this.sosClient.onFeatureSelect(feature);
 
                 // var feature = featureObject.feature;
                 // var pos = feature.geometry;
@@ -4238,12 +4400,12 @@ gxp.plugins.SOSSource = Ext.extend(gxp.plugins.LayerSource, {
                 //     this.target.selectControl.popup.show();
                 // }
             },
-            "featureunselected":function () {
+            "featureunselected": function() {
                 if (this.target.selectControl && this.target.selectControl.popup) {
                     this.target.selectControl.popup.close();
                 }
             },
-            scope:this
+            scope: this
         });
     },
 
@@ -4252,10 +4414,22 @@ gxp.plugins.SOSSource = Ext.extend(gxp.plugins.LayerSource, {
      *  :returns: ``OpenLayers.StyleMap``
      * Return a style map containing default and select styles
      */
-    getStyleMap:function (config) {
+    getStyleMap: function(config) {
         return new OpenLayers.StyleMap({
-            "default":new OpenLayers.Style("defaultStyle" in config ? config.defaultStyle : {graphicName:"circle", pointRadius:5, fillOpacity:0.7, fillColor:'Red'}, {title:config.name}),
-            "select":new OpenLayers.Style("selectStyle" in config ? config.selectStyle : {graphicName:"circle", pointRadius:10, fillOpacity:1.0, fillColor:"Yellow"})
+            "default": new OpenLayers.Style("defaultStyle" in config ? config.defaultStyle : {
+                graphicName: "circle",
+                pointRadius: 5,
+                fillOpacity: 0.7,
+                fillColor: 'Red'
+            }, {
+                title: config.name
+            }),
+            "select": new OpenLayers.Style("selectStyle" in config ? config.selectStyle : {
+                graphicName: "circle",
+                pointRadius: 10,
+                fillOpacity: 1.0,
+                fillColor: "Yellow"
+            })
         });
     }
 
@@ -4264,7 +4438,7 @@ Ext.preg(gxp.plugins.SOSSource.prototype.ptype, gxp.plugins.SOSSource);
 
 Ext.namespace("gxp.plugins");
 
-gxp.plugins.SOSGetFeatureInfo =  Ext.extend(gxp.plugins.Tool,{
+gxp.plugins.SOSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 
     /** api: ptype = gxp_getsosfeatureinfo */
     ptype: "gxp_getsosfeatureinfo",
@@ -4285,19 +4459,18 @@ gxp.plugins.SOSGetFeatureInfo =  Ext.extend(gxp.plugins.Tool,{
      * Adds a geoRSS layer to the SelectControl
      *
      */
-    addLayer: function(store, records, index){
-        for (var i = 0,  ii = records.length; i < ii; ++i) {
+    addLayer: function(store, records, index) {
+        for (var i = 0, ii = records.length; i < ii; ++i) {
             var record = records[i];
             var source = this.target.getSource(record);
             var layer = record.getLayer();
-            if (source  instanceof gxp.plugins.SOSSource) {
+            if (source instanceof gxp.plugins.SOSSource) {
                 //Create a SelectFeature control & add layer to it.
                 if (this.target.selectControl == null) {
                     this.target.selectControl = new OpenLayers.Control.SelectFeature(layer, {
                         clickout: true,
                         listeners: {
-                            'clickoutFeature': function () {
-                            }
+                            'clickoutFeature': function() {}
                         },
                         scope: this
                     });
@@ -4305,23 +4478,22 @@ gxp.plugins.SOSGetFeatureInfo =  Ext.extend(gxp.plugins.Tool,{
                     this.target.mapPanel.map.addControl(this.target.selectControl);
 
                 } else {
-		    // non e' sufficiente, -> rimuovo e riaggiungo il controllo
-		    // riga aggiunta per rimuovere il controllo
+                    // non e' sufficiente, -> rimuovo e riaggiungo il controllo
+                    // riga aggiunta per rimuovere il controllo
                     this.target.mapPanel.map.removeControl(this.target.selectControl);
                     var currentLayers = this.target.selectControl.layers ? this.target.selectControl.layers :
                         (this.target.selectControl.layer ? [this.target.selectControl.layer] : []);
                     currentLayers.push(layer);
                     this.target.selectControl.setLayer(currentLayers);
-		    // rifaccio il control e lo riaggiungo
+                    // rifaccio il control e lo riaggiungo
                     this.target.selectControl = new OpenLayers.Control.SelectFeature(currentLayers, {
                         clickout: true,
                         listeners: {
-                            'clickoutFeature': function () {
-                            }
+                            'clickoutFeature': function() {}
                         },
                         scope: this
                     });
-		    
+
                     this.target.mapPanel.map.addControl(this.target.selectControl);
                 }
             }
@@ -4339,32 +4511,31 @@ gxp.plugins.SOSGetFeatureInfo =  Ext.extend(gxp.plugins.Tool,{
      * If this is not done, the layer will remain on the map even after the record is deleted.
      *
      */
-    removeLayer:  function(store, records, index){
-    	if (!records.length) {
-    		records = [records];
-    	}
-    	for (var i = 0,  ii = records.length; i < ii; ++i) {
-    		var layer = records[i].getLayer();
-    		var selectControl = this.target.selectControl;
-    		//SelectControl might have layers array or single layer object
-    		if (selectControl != null) {
-    			if (selectControl.layers){
-    				for (var x = 0; x < selectControl.layers.length; x++)
-    				{
-    					var selectLayer = selectControl.layers[x];
-    					var selectLayers = selectControl.layers;
-    					if (selectLayer.id === layer.id) {
-    						selectLayers.splice(x,1);
-    						selectControl.setLayer(selectLayers);
-    					}
-    				}
-    			} else if (selectControl.layer != null) {
-    				if (layer.id === selectControl.layer.id) {
-    					selectControl.setLayer([]);
-    				}
-    			}
-    		}
-    	}
+    removeLayer: function(store, records, index) {
+        if (!records.length) {
+            records = [records];
+        }
+        for (var i = 0, ii = records.length; i < ii; ++i) {
+            var layer = records[i].getLayer();
+            var selectControl = this.target.selectControl;
+            //SelectControl might have layers array or single layer object
+            if (selectControl != null) {
+                if (selectControl.layers) {
+                    for (var x = 0; x < selectControl.layers.length; x++) {
+                        var selectLayer = selectControl.layers[x];
+                        var selectLayers = selectControl.layers;
+                        if (selectLayer.id === layer.id) {
+                            selectLayers.splice(x, 1);
+                            selectControl.setLayer(selectLayers);
+                        }
+                    }
+                } else if (selectControl.layer != null) {
+                    if (layer.id === selectControl.layer.id) {
+                        selectControl.setLayer([]);
+                    }
+                }
+            }
+        }
     }
 
 
@@ -4389,3 +4560,130 @@ GeoExt.Lang.add("it", {
         emptyText: "Seleziona una risorsa"
     }
 });
+
+/*
+ * Date Format 1.2.3
+ * (c) 2007-2009 Steven Levithan <stevenlevithan.com>
+ * MIT license
+ *
+ * Includes enhancements by Scott Trenda <scott.trenda.net>
+ * and Kris Kowal <cixar.com/~kris.kowal/>
+ *
+ * Accepts a date, a mask, or a date and a mask.
+ * Returns a formatted version of the given date.
+ * The date defaults to the current date/time.
+ * The mask defaults to dateFormat.masks.default.
+ */
+var dateFormat = function() {
+    var token = /d{1,4}|m{1,4}|yy(?:yy)?|([HhMsTt])\1?|[LloSZ]|"[^"]*"|'[^']*'/g,
+        timezone = /\b(?:[PMCEA][SDP]T|(?:Pacific|Mountain|Central|Eastern|Atlantic) (?:Standard|Daylight|Prevailing) Time|(?:GMT|UTC)(?:[-+]\d{4})?)\b/g,
+        timezoneClip = /[^-+\dA-Z]/g,
+        pad = function(val, len) {
+            val = String(val);
+            len = len || 2;
+            while (val.length < len) val = "0" + val;
+            return val;
+        };
+
+    // Regexes and supporting functions are cached through closure
+    return function(date, mask, utc) {
+        //console.log(date);
+        //alert(date);
+        var dF = dateFormat;
+
+        // You can't provide utc if you skip other args (use the "UTC:" mask prefix)
+        if (arguments.length == 1 && Object.prototype.toString.call(date) == "[object String]" && !/\d/.test(date)) {
+            mask = date;
+            date = undefined;
+        }
+
+        // Passing date through Date applies Date.parse, if necessary
+        date = date ? new Date(date) : new Date;
+        if (isNaN(date)) throw SyntaxError("invalid date");
+
+        mask = String(dF.masks[mask] || mask || dF.masks["default"]);
+
+        // Allow setting the utc argument via the mask
+        if (mask.slice(0, 4) == "UTC:") {
+            mask = mask.slice(4);
+            utc = true;
+        }
+
+        var _ = utc ? "getUTC" : "get",
+            d = date[_ + "Date"](),
+            D = date[_ + "Day"](),
+            m = date[_ + "Month"](),
+            y = date[_ + "FullYear"](),
+            H = date[_ + "Hours"](),
+            M = date[_ + "Minutes"](),
+            s = date[_ + "Seconds"](),
+            L = date[_ + "Milliseconds"](),
+            o = utc ? 0 : date.getTimezoneOffset(),
+            flags = {
+                d: d,
+                dd: pad(d),
+                ddd: dF.i18n.dayNames[D],
+                dddd: dF.i18n.dayNames[D + 7],
+                m: m + 1,
+                mm: pad(m + 1),
+                mmm: dF.i18n.monthNames[m],
+                mmmm: dF.i18n.monthNames[m + 12],
+                yy: String(y).slice(2),
+                yyyy: y,
+                h: H % 12 || 12,
+                hh: pad(H % 12 || 12),
+                H: H,
+                HH: pad(H),
+                M: M,
+                MM: pad(M),
+                s: s,
+                ss: pad(s),
+                l: pad(L, 3),
+                L: pad(L > 99 ? Math.round(L / 10) : L),
+                t: H < 12 ? "a" : "p",
+                tt: H < 12 ? "am" : "pm",
+                T: H < 12 ? "A" : "P",
+                TT: H < 12 ? "AM" : "PM",
+                Z: utc ? "UTC" : (String(date).match(timezone) || [""]).pop().replace(timezoneClip, ""),
+                o: (o > 0 ? "-" : "+") + pad(Math.floor(Math.abs(o) / 60) * 100 + Math.abs(o) % 60, 4),
+                S: ["th", "st", "nd", "rd"][d % 10 > 3 ? 0 : (d % 100 - d % 10 != 10) * d % 10]
+            };
+
+        return mask.replace(token, function($0) {
+            return $0 in flags ? flags[$0] : $0.slice(1, $0.length - 1);
+        });
+    };
+}();
+
+// Some common format strings
+dateFormat.masks = {
+    "default": "ddd mmm dd yyyy HH:MM:ss",
+    shortDate: "m/d/yy",
+    mediumDate: "mmm d, yyyy",
+    longDate: "mmmm d, yyyy",
+    fullDate: "dddd, mmmm d, yyyy",
+    shortTime: "h:MM TT",
+    mediumTime: "h:MM:ss TT",
+    longTime: "h:MM:ss TT Z",
+    isoDate: "yyyy-mm-dd",
+    isoTime: "HH:MM:ss",
+    isoDateTime: "yyyy-mm-dd'T'HH:MM:ss",
+    isoUtcDateTime: "UTC:yyyy-mm-dd'T'HH:MM:ss'Z'"
+};
+
+// Internationalization strings
+dateFormat.i18n = {
+    dayNames: [
+        "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat",
+        "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+    ],
+    monthNames: [
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+        "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
+    ]
+};
+
+// For convenience...
+Date.prototype.format = function(mask, utc) {
+    return dateFormat(this, mask, utc);
+};

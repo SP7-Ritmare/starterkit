@@ -27,6 +27,18 @@ from shutil import copyfile
 from setuptools import find_packages, setup
 from setuptools.command.install import install
 
+try:  # for pip >= 10
+    from pip._internal.req import parse_requirements
+    from pip._internal.download import PipSession
+except ImportError:  # for pip <= 9.0.3
+    from pip.req import parse_requirements
+    from pip.download import PipSession
+
+# Parse requirements.txt to get the list of dependencies
+inst_req = parse_requirements('requirements.txt',
+                              session=PipSession())
+REQUIREMENTS = [str(r.req) for r in inst_req]
+
 
 class PostInstallCommand(install):
     def run(self):
@@ -90,21 +102,9 @@ setup(
     ],
     keywords="StarterKit GeoNode Django sensors SOS",
     packages=find_packages(),
-    install_requires=[
-        "django-overextends",
-        "django-annoying",
-        "django-rosetta==0.7.6",
-        "django-grappelli==2.4.10",
-        "djproxy",
-        "simplejson",
-        "Django==1.8.18",  # required by GeoNode 2.4
-        # "owslib==0.10.3",
-        "django-analytical==1.0.0",
-        "django-taggit-templatetags",
-        "geonode==2.7.5.dev20180302104813",
-    ],
+    install_requires=REQUIREMENTS,
     dependency_links=[
-        "git+https://github.com/GeoNode/geonode.git@2.7.x#egg=geonode-2.7.x"
+        "git+https://github.com/GeoNode/geonode.git@master#egg=geonode"
     ],
     #
     include_package_data=True,

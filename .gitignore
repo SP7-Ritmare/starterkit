@@ -59,15 +59,16 @@ target/
 
 # Downstream Project
 downloaded/
-geoserver/
 uploaded/
 static_root/
 development.db
 development.db-journal
-local_settings.py
 
 \.vscode/
 
 \.pytest_cache/
 
 #*.dat
+
+/geosk/static/.components/
+/geosk/static/node_modules/

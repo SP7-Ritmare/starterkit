@@ -31,8 +31,8 @@ def get_data_api(request, format='json'):
     if request.method not in ('GET','POST'):
         return HttpResponse(status=405)
 
-    rtype = request.REQUEST.get('rtype')
-    id = request.REQUEST.get('id')
+    rtype = request.POST.get('rtype')
+    id = request.POST.get('id')
 
     if rtype == 'layer':
         r = Layer.objects.get(pk=id)
@@ -46,13 +46,13 @@ def get_data_api(request, format='json'):
 
     #f=LayerForm(model_to_dict(l), prefix='layer')
 
-
     data['keywords'] = r.keyword_csv
+    data['regions'] = [reg.name for reg in r.regions.all()] if r.regions else []
     # data_prefix = {"layer-%s" % k: v for k, v in data.items()}
 
     results = {
         'data': data
-        }
+    }
     return HttpResponse(json.dumps(results, cls=DjangoJSONEncoder), mimetype="application/json")
 
 def get_ubuntu_release():

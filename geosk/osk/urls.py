@@ -1,28 +1,27 @@
 from __future__ import absolute_import
 
-from django.conf.urls import patterns, url
-
+from django.conf.urls import url
 from .api import UploadView
+from . import api, views
 
-urlpatterns = patterns(
-    '',
+
+urlpatterns = [
     # osk
-    url(r'^$', 'geosk.osk.views.browse', name="osk_browse"),
-    url(r'^registration$', 'geosk.osk.api.sensormleditor', name="osk_registration"),
+    url(r'^$', views.browse, name="osk_browse"),
+    url(r'^registration$', api.sensormleditor, name="osk_registration"),
     url(r'^upload$', UploadView.as_view(), name="osk_upload"),
-    url(r'^deletesensor$', 'geosk.osk.api.deletesensor', name="osk_deletesensor"),
+    url(r'^deletesensor$', api.deletesensor, name="osk_deletesensor"),
     # url(r'^sensorml$', TemplateView.as_view(template_name='osk/sensorml.html'), name="osk_sensorml"),
     # sensors
-    url(r'^sensor/cap/$', 'geosk.osk.views.get_capabilities', name="get_capabilities"),
-    url(r'^sensor/ds/$', 'geosk.osk.views.describe_sensor', name="osk_describe_sensor"),
+    url(r'^sensor/cap/$', views.get_capabilities, name="get_capabilities"),
+    url(r'^sensor/ds/$', views.describe_sensor, name="osk_describe_sensor"),
     # edi
     url(r'^postMetadata$',
-        'geosk.osk.api.sensormlproxy', name='sensormlproxy'),
+        api.sensormlproxy, name='sensormlproxy'),
     url(r'^lastediml$',
-        'geosk.osk.api.lastediml', name='lastediml'),
+        api.lastediml, name='lastediml'),
     url(r'^lastsensorml$',
-        'geosk.osk.api.lastsensorml', name='lastsensorml'),
+        api.lastsensorml, name='lastsensorml'),
     # new API EdiProxy
-    url(r'^ediproxy/importmd$', 'geosk.osk.api.ediproxy_importmd', name='osk_ediproxy_importmd'),
-
-)
+    url(r'^ediproxy/importmd$', api.ediproxy_importmd, name='osk_ediproxy_importmd'),
+]

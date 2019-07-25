@@ -160,18 +160,18 @@
             <xsl:if test="show">
                 <xsl:attribute name="show"><xsl:value-of select="show" /></xsl:attribute>
             </xsl:if>
-            <xsl:for-each select="help">
-                <xsl:if test=". != ''">
-                    <xsl:copy-of select="." />
-                </xsl:if>
-            </xsl:for-each>
-            <xsl:copy-of select="hasPath" />
             <xsl:if test="hasValue">
                 <xsl:copy-of select="hasValue" />
             </xsl:if>
             <xsl:if test="defaultValue">
                 <xsl:copy-of select="defaultValue" />
             </xsl:if>
+            <xsl:for-each select="help">
+                <xsl:if test=". != ''">
+                    <xsl:copy-of select="." />
+                </xsl:if>
+            </xsl:for-each>
+            <xsl:copy-of select="hasPath" />
             <xsl:apply-templates select="westLongitude" />
             <xsl:apply-templates select="eastLongitude" />
             <xsl:apply-templates select="northLatitude" />

@@ -10,8 +10,7 @@ from owslib.util import nspath_eval
 
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
-from django.template import RequestContext
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings
 from django.core.serializers.json import DjangoJSONEncoder
@@ -48,9 +47,9 @@ def deletesensor(request, template='osk/osk_deletesensor.html'):
         if (request.method == 'GET'):
             procedure = request.GET['procedure']
 
-            return render_to_response(template,RequestContext(request, {
+            return render(request, template, {
                 "procedure": procedure
-            }))
+            })
         if (request.method == 'POST'):
             procedure = request.POST['procedure']
 
@@ -113,11 +112,12 @@ def sensormleditor(request):
     queryStringValues['parameters'] = json.dumps(pars, cls=DjangoJSONEncoder)
 
     js_queryStringValues = json.dumps(queryStringValues)
-    return render_to_response(
+    return render(
+        request,
         'osk/osk_registration.html',
-        RequestContext(request, {
-                'queryStringValues': mark_safe(js_queryStringValues)
-                })
+        {
+            'queryStringValues': mark_safe(js_queryStringValues)
+        }
         )
 
 def _get_register_sensor(xml):

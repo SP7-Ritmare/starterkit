@@ -2,6 +2,7 @@ import json
 import logging
 import os
 import re
+import time
 import datetime
 import docker
 import socket
@@ -13,13 +14,13 @@ BOOTSTRAP_IMAGE_CHEIP = 'codenvy/che-ip:nightly'
 
 @task
 def waitfordbs(ctx):
-    print "**************************databases*******************************"
+    print "***************************databases*********************************"
     ctx.run("/usr/bin/wait-for-databases {0}".format('db'), pty=True)
 
 
 @task
 def waitforgeoserver(ctx):
-    print "**************************geoserver*******************************"
+    print "****************************geoserver********************************"
     while not _rest_api_availability(os.environ['GEOSERVER_LOCATION'] + 'rest'):
         print ("Wait for GeoServer API availability...")
     print "GeoServer is available for HTTP calls!"
@@ -27,7 +28,7 @@ def waitforgeoserver(ctx):
 
 @task
 def update(ctx):
-    print "***************************initial*********************************"
+    print "*****************************initial*********************************"
     ctx.run("env", pty=True)
     pub_ip = _geonode_public_host_ip()
     print "Public Hostname or IP is {0}".format(pub_ip)
@@ -35,19 +36,41 @@ def update(ctx):
     print "Public PORT is {0}".format(pub_port)
     db_url = _update_db_connstring()
     geodb_url = _update_geodb_connstring()
+    service_ready = False
+    while not service_ready:
+        try:
+            socket.gethostbyname('geonode')
+            service_ready = True
+        except BaseException:
+            time.sleep(10)
+
     envs = {
+        "local_settings": "{0}".format(_localsettings()),
+        "geonode_docker_host": "{0}".format(socket.gethostbyname('geonode')),
         "public_fqdn": "{0}:{1}".format(pub_ip, pub_port),
         "public_host": "{0}".format(pub_ip),
         "dburl": db_url,
         "geodburl": geodb_url,
+        "monitoring": os.environ.get('MONITORING_ENABLED', False),
+        "gs_admin_pwd": os.environ.get('GEOSERVER_ADMIN_PASSWORD', 'geoserver'),
         "override_fn": "$HOME/.override_env"
     }
+    ctx.run("echo export DJANGO_SETTINGS_MODULE=\
+{local_settings} >> {override_fn}".format(**envs), pty=True)
+    ctx.run("echo export MONITORING_ENABLED=\
+{monitoring} >> {override_fn}".format(**envs), pty=True)
+    ctx.run("echo export MONITORING_HOST_NAME=\
+{geonode_docker_host} >> {override_fn}".format(**envs), pty=True)
+    ctx.run("echo export MONITORING_SERVICE_NAME=\
+local-geonode >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export GEOSERVER_PUBLIC_LOCATION=\
 http://{public_fqdn}/geoserver/ >> {override_fn}".format(**envs), pty=True)
+    ctx.run("echo export GEOSERVER_ADMIN_PASSWORD=\
+{gs_admin_pwd} >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export SITEURL=\
 http://{public_fqdn}/ >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export ALLOWED_HOSTS=\
-\"\\\"['{public_fqdn}', '{public_host}', 'django', 'geonode',]\\\"\" \
+\"\\\"['{geonode_docker_host}', '{public_fqdn}', '{public_host}', '127.0.0.1', 'django', 'geonode']\\\"\" \
 >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export DATABASE_URL=\
 {dburl} >> {override_fn}".format(**envs), pty=True)
@@ -60,7 +83,7 @@ http://{public_fqdn}/ >> {override_fn}".format(**envs), pty=True)
         )
     )
     ctx.run("source $HOME/.override_env", pty=True)
-    print "****************************final**********************************"
+    print "******************************final**********************************"
     ctx.run("env", pty=True)
 
 
@@ -81,24 +104,24 @@ http://{public_fqdn}/ >> {override_fn}".format(**envs), pty=True)
 
 @task
 def migrations(ctx):
-    print "**************************migrations*******************************"
+    print "****************************migrations*******************************"
+    print " 1. django-admin.py makemigrations --settings=geonode.settings"
     ctx.run("django-admin.py makemigrations --settings={0}".format(
         "geonode.settings"
     ), pty=True)
+    print " 2. django-admin.py migrate --noinput --settings=geonode.settings"
     ctx.run("django-admin.py migrate --noinput --settings={0}".format(
         "geonode.settings"
     ), pty=True)
-    ctx.run("django-admin.py makemigrations --settings={0}".format(
-        _localsettings()
-    ), pty=True)
-    ctx.run("django-admin.py migrate --noinput --settings={0}".format(
-        _localsettings()
-    ), pty=True)
+    print " 3. . $HOME/.override_env; django-admin.py makemigrations"
+    ctx.run(". $HOME/.override_env; django-admin.py makemigrations", pty=True)
+    print " 4. . $HOME/.override_env; django-admin.py migrate --noinput"
+    ctx.run(". $HOME/.override_env; django-admin.py migrate --noinput", pty=True)
 
 
 @task
 def prepare(ctx):
-    print "**********************prepare fixture***************************"
+    print "*************************prepare fixture*****************************"
     ctx.run("rm -rf /tmp/default_oauth_apps_docker.json", pty=True)
     _prepare_oauth_fixture()
     ctx.run("rm -rf /tmp/mdtools_services_metadata_docker.json", pty=True)
@@ -107,13 +130,11 @@ def prepare(ctx):
     _prepare_site_fixture()
     ctx.run("rm -rf /tmp/apikey_docker.json", pty=True)
     _prepare_apikey_fixture()
-    ctx.run("rm -rf /tmp/default_monitoring_apps_docker.json", pty=True)
-    _prepare_monitoring_fixture()
 
 
 @task
 def fixtures(ctx):
-    print "**************************fixtures********************************"
+    print "****************************fixtures*********************************"
     ctx.run("django-admin.py loaddata sample_admin \
 --settings={0}".format("geonode.settings"), pty=True)
     ctx.run("django-admin.py loaddata /tmp/default_oauth_apps_docker.json \
@@ -121,40 +142,56 @@ def fixtures(ctx):
     ctx.run("django-admin.py loaddata initial_data.json \
 --settings={0}".format("geonode.settings"), pty=True)
     ctx.run("django-admin.py loaddata /tmp/sites_docker.json \
---settings={0}".format("geosk.settings"), pty=True)
+--settings={0}".format(_localsettings()), pty=True)
     ctx.run("django-admin.py loaddata /tmp/mdtools_services_metadata_docker.json \
---settings={0}".format("geosk.settings"), pty=True)
+--settings={0}".format(_localsettings()), pty=True)
     ctx.run("django-admin.py loaddata /tmp/apikey_docker.json \
---settings={0}".format("geosk.settings"), pty=True)
-    ctx.run("django-admin.py loaddata /tmp/default_monitoring_apps_docker.json \
---settings={0}".format("geosk.settings"), pty=True)
+--settings={0}".format(_localsettings()), pty=True)
 
 
 @task
 def collectstatic(ctx):
-    print "**************************fixtures********************************"
-    ctx.run("django-admin.py collectstatic \
---settings={0}".format("geosk.settings"), pty=True)
+    print "************************static artifacts******************************"
+    ctx.run("django-admin.py collectstatic --noinput \
+--settings={0}".format(_localsettings()), pty=True)
 
 
 @task
 def geoserverfixture(ctx):
-    print "*****************geoserver fixture********************************"
+    print "********************geoserver fixture********************************"
     _geoserver_info_provision(os.environ['GEOSERVER_LOCATION'] + "rest/")
 
 
 @task
+def monitoringfixture(ctx):
+    print "*******************monitoring fixture********************************"
+    ctx.run("rm -rf /tmp/default_monitoring_apps_docker.json", pty=True)
+    _prepare_monitoring_fixture()
+    ctx.run("django-admin.py loaddata /tmp/default_monitoring_apps_docker.json \
+--settings={0}".format(_localsettings()), pty=True)
+
+
+@task
 def updategeoip(ctx):
-    print "**************************update geoip********************************"
+    print "**************************update geoip*******************************"
     ctx.run("django-admin.py updategeoip \
-    --settings={0}".format("geosk.settings"), pty=True)
+    --settings={0}".format(_localsettings()), pty=True)
+
+
+@task
+def updateadmin(ctx):
+    print "***********************update admin details**************************"
+    ctx.run("rm -rf /tmp/django_admin_docker.json", pty=True)
+    _prepare_admin_fixture(os.environ.get('ADMIN_PASSWORD', None), os.environ.get('ADMIN_EMAIL', None))
+    ctx.run("django-admin.py loaddata /tmp/django_admin_docker.json \
+--settings={0}".format(_localsettings()), pty=True)
 
 
 @task
 def collectmetrics(ctx):
     print "************************collect metrics******************************"
     ctx.run("python -W ignore manage.py collect_metrics  \
-    --settings={0} -n -t xml".format("geosk.settings"), pty=True)
+    --settings={0} -n -t xml".format(_localsettings()), pty=True)
 
 
 def _docker_host_ip():
@@ -219,7 +256,7 @@ def _localsettings():
 
 
 def _geonode_public_host_ip():
-    gn_pub_hostip = os.getenv('GEONODE_LB_HOST_IP', '')
+    gn_pub_hostip = os.getenv('GEONODE_LB_HOST_IP', None)
     if not gn_pub_hostip:
         gn_pub_hostip = _docker_host_ip()
     return gn_pub_hostip
@@ -246,6 +283,9 @@ def _prepare_oauth_fixture():
             "pk": 1001,
             "fields": {
                 "skip_authorization": True,
+                "created": "2018-05-31T10:00:31.661Z",
+                "updated": "2018-05-31T11:30:31.245Z",
+                "algorithm": "RS256",
                 "redirect_uris": "http://{0}:{1}/geoserver/index.html".format(
                     pub_ip, pub_port
                 ),
@@ -338,7 +378,7 @@ def _prepare_service_metadata_fixture():
                 "contact_name": contact_name,
                 "node_keywords": node_keywords
             },
-            "model": "mdtools.servicesmetadata",
+            "model": "geosk_mdtools.servicesmetadata",
             "pk": 1
         }
     ]
@@ -377,12 +417,14 @@ def _prepare_apikey_fixture():
         "pyxW5djJ7XsjeFUXduAsGpR4xMGUwpeBGQRqTeT3"
     )
     print "Tastypie apikey is {0}".format(api_key)
+    d = datetime.datetime.now()
+    mdext_date = d.isoformat()[:23] + "Z"
     default_fixture = [
         {
             "fields": {
                 "user": 1000,
                 "key": api_key,
-                "created": "2018-06-28T14:54:51Z"
+                "created": mdext_date
             },
             "model": "tastypie.apikey",
             "pk": 1
@@ -413,11 +455,12 @@ def _rest_api_availability(url):
 
 
 def _geoserver_info_provision(url):
+    from django.conf import settings
     from geoserver.catalog import Catalog
     from geosk.mdtools.geoserver_extra import Settings
     cat = Catalog(url,
-        username="admin",
-        password="geoserver"
+        username=settings.OGC_SERVER_DEFAULT_USER,
+        password=settings.OGC_SERVER_DEFAULT_PASSWORD
     )
     gs_settings = Settings(cat)
     print "GeoServer service url is {0}".format(cat.service_url)
@@ -589,9 +632,7 @@ def _prepare_monitoring_fixture():
         {
             "fields": {
                 "active": True,
-                "ip": "{0}".format(
-                    socket.gethostbyname('geonode')
-                ),
+                "ip": "{0}".format(socket.gethostbyname('geonode')),
                 "name": "geonode"
             },
             "model": "monitoring.host",
@@ -600,7 +641,7 @@ def _prepare_monitoring_fixture():
         {
             "fields": {
                 "name": "local-geonode",
-                "url": "",
+                "url": "http://{0}/".format(socket.gethostbyname('geonode')),
                 "notes": "",
                 "last_check": d,
                 "active": True,
@@ -613,8 +654,8 @@ def _prepare_monitoring_fixture():
         },
         {
             "fields": {
-                "name": "local-system-geonode",
-                "url": "http://geonode:80/",
+                "name": "localhost-hostgeonode",
+                "url": "http://{0}/".format(socket.gethostbyname('geonode')),
                 "notes": "",
                 "last_check": d,
                 "active": True,
@@ -627,8 +668,22 @@ def _prepare_monitoring_fixture():
         },
         {
             "fields": {
-                "name": "local-geoserver",
-                "url": "http://{0}:80/geoserver/".format(pub_ip),
+                "name": "localhost-hostgeoserver",
+                "url": "http://{0}/geoserver/".format(socket.gethostbyname('geonode')),
+                "notes": "",
+                "last_check": d,
+                "active": True,
+                "host": 1,
+                "check_interval": "00:01:00",
+                "service_type": 4
+            },
+            "model": "monitoring.service",
+            "pk": 3
+        },
+        {
+            "fields": {
+                "name": "default-geoserver",
+                "url": "http://{0}/geoserver/".format(socket.gethostbyname('geonode')),
                 "notes": "",
                 "last_check": d,
                 "active": True,
@@ -637,8 +692,41 @@ def _prepare_monitoring_fixture():
                 "service_type": 2
             },
             "model": "monitoring.service",
-            "pk": 3
+            "pk": 4
         }
     ]
     with open('/tmp/default_monitoring_apps_docker.json', 'w') as fixturefile:
+        json.dump(default_fixture, fixturefile)
+
+
+def _prepare_admin_fixture(admin_password, admin_email):
+    # from django.contrib.auth import get_user_model
+    # admin = get_user_model().objects.get(username="admin")
+    # admin.set_password(admin_password)
+    # admin.email = admin_email
+    # admin.save()
+    from django.contrib.auth.hashers import make_password
+    d = datetime.datetime.now()
+    mdext_date = d.isoformat()[:23] + "Z"
+    default_fixture = [
+        {
+        	"fields": {
+        		"date_joined": mdext_date,
+        		"email": admin_email,
+        		"first_name": "",
+        		"groups": [],
+        		"is_active": True,
+        		"is_staff": True,
+        		"is_superuser": True,
+        		"last_login": mdext_date,
+        		"last_name": "",
+        		"password": make_password(admin_password),
+        		"user_permissions": [],
+        		"username": "admin"
+        	},
+        	"model": "people.Profile",
+        	"pk": 1000
+        }
+    ]
+    with open('/tmp/django_admin_docker.json', 'w') as fixturefile:
         json.dump(default_fixture, fixturefile)

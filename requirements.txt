@@ -1,9 +1,9 @@
-# -e git+https://github.com/GeoNode/geonode.git@2.7.x#egg=geonode
+GeoNode==2.10
 django-overextends
 django-annoying
-django-rosetta==0.7.6
-django-grappelli==2.9.1
+django-rosetta==0.9.3
+django-grappelli==2.12.3
 djproxy
 simplejson
-django-analytical==1.0.0
-django-taggit-templatetags
+django-analytical==2.5.0
+django-taggit-templatetags2

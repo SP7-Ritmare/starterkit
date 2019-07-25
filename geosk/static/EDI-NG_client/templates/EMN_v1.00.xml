@@ -173,7 +173,6 @@
                                 ?c skos:inScheme <http://inspire.ec.europa.eu/codelist/MediaValue> .
                                 ?c skos:prefLabel ?l.
                             }
-                            FILTER( REGEX( STR(?l), "$search_param", "i") )
                         }
                         ORDER BY ASC(?l)
                 
@@ -219,14 +218,13 @@
                 
                     PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
                     SELECT *
-                    WHERE {
-                    {
-                    ?c skos:inScheme <http://inspire.ec.europa.eu/codelist/LegislationLevelValue> .
-                        ?c skos:prefLabel ?l.
+                        WHERE {
+                            {
+                                ?c skos:inScheme <http://inspire.ec.europa.eu/codelist/LegislationLevelValue> .
+                                ?c skos:prefLabel ?l.
+                            }
                         }
-                        FILTER( REGEX( STR(?l), "$search_param", "i") )
-                        }
-                        ORDER BY ASC(?l)
+                    ORDER BY ASC(?l)
                 
             ]]></query>
             <url>http://fuseki1.get-it.it/EFcodeList/query</url>
@@ -281,7 +279,6 @@
                                     ?root (skos:narrower*) ?c.
                                     ?c skos:prefLabel ?l.
                                 }
-                                FILTER( REGEX( STR(?l), "$search_param", "i") )
                             }
                         }
                     }
@@ -442,7 +439,7 @@
             <help xml:lang="en">Plain text description of additional information not fitting in other attributes.</help>
             <help xml:lang="it"></help>
             <produces>
-                <item hasIndex="1" xml:id="description_1" isFixed="false" hasDatatype="string">
+                <item hasIndex="1" xml:id="description_1" isFixed="false" hasDatatype="text">
                     <hasPath>ef:additionalDescription</hasPath>
                 </item>
             </produces>
@@ -463,7 +460,7 @@
             <help xml:lang="en"/>
             <help xml:lang="it"/>
             <produces>
-                <item hasIndex="1" xml:id="mediaMon_1" isFixed="false" hasDatatype="autoCompletion" datasource="mediaMonotoring">
+                <item hasIndex="1" xml:id="mediaMon_1" isFixed="false" hasDatatype="codelist" datasource="mediaMonotoring">
                     <hasPath>ef:mediaMonitored</hasPath>
                 </item>
                 <item hasIndex="2" xml:id="mediaMon_2" isFixed="true" hasDatatype="select" datasource="mediaMonotoring" field="c">
@@ -653,7 +650,7 @@
             <label xml:lang="it">Descrizione</label>
             <help xml:lang="it">Motivo per cui il AbstractMonitoringObject è stato creato. Aggiungere un testo per descrivere lo scopo</help>
             <produces>
-                <item hasIndex="1" xml:id="purpose_1" isFixed="false" hasDatatype="autoCompletion" datasource="purposeOfCollection">
+                <item hasIndex="1" xml:id="purpose_1" isFixed="false" hasDatatype="codelist" datasource="purposeOfCollection">
                     <hasPath>ef:purpose</hasPath>
                 </item>
                 <item hasIndex="2" xml:id="purpose_2" isFixed="true" hasDatatype="select" datasource="purposeOfCollection" field="c">
@@ -677,12 +674,12 @@
         <label xml:lang="it">Elemento di livello superiore</label>
         <element isMandatory="false" isMultiple="true" xml:id="broader">
             <hasRoot>/ef:EnvironmentalMonitoringNetwork</hasRoot>
+            <label xml:lang="en">Broader URL</label>
+            <help xml:lang="en">A link pointing to a broader AbstractMonitoringObject (a higher level in a hierarchical structure). The association has additional properties as defined in the association class Hierarchy.</help>
+            <label xml:lang="it">URL dell'elemento broader</label>
+            <help xml:lang="it"></help>
             <produces>
                 <item hasDatatype="URL" hasIndex="1" xml:id="broader_1" isFixed="false">
-                    <label xml:lang="en">Broader URL</label>
-                    <help xml:lang="en">A link pointing to a broader AbstractMonitoringObject (a higher level in a hierarchical structure). The association has additional properties as defined in the association class Hierarchy.</help>
-                    <label xml:lang="it">URL dell'elemento broader</label>
-                    <help xml:lang="it"></help>
                     <hasPath>ef:broader/@xlink:href</hasPath>
                 </item>
                 <!--<!-\- TODO: ??? -\->
@@ -716,12 +713,12 @@
         <label xml:lang="it">Elemento di livello inferiore</label>
         <element isMandatory="false" isMultiple="true" xml:id="narrower">
             <hasRoot>/ef:EnvironmentalMonitoringNetwork</hasRoot>
+            <label xml:lang="en">Narrower URL</label>
+            <help xml:lang="en">A link pointing to narrower AbstractMonitoringObject(s) (a lower level in a hierarchical structure). The association has additional properties as defined in the association class Hierarchy.</help>
+            <label xml:lang="it">URL dell'elemento broader</label>
+            <help xml:lang="it"></help>
             <produces>
                 <item hasDatatype="URL" hasIndex="1" xml:id="narrower_1" isFixed="false">
-                    <label xml:lang="en">Narrower URL</label>
-                    <help xml:lang="en">A link pointing to narrower AbstractMonitoringObject(s) (a lower level in a hierarchical structure). The association has additional properties as defined in the association class Hierarchy.</help>
-                    <label xml:lang="it">URL dell'elemento broader</label>
-                    <help xml:lang="it"></help>
                     <hasPath>ef:narrower/@xlink:href</hasPath>
                 </item>
                 <!--<!-\- TODO: ??? -\->
@@ -775,12 +772,12 @@
         <label xml:lang="it">Coinvolto</label>
         <element isMandatory="false" isMultiple="true" xml:id="involvedIn">
             <hasRoot>/ef:EnvironmentalMonitoringNetwork</hasRoot>
+            <label xml:lang="en">URL of Activity</label>
+            <help xml:lang="en">EnvironmentalMonitoringActivity(s) in which the AbstractMonitoringFeature is involved.</help>
+            <label xml:lang="it">URL dell'attività</label>
+            <help xml:lang="it"></help>
             <produces>
                 <item hasDatatype="URL" hasIndex="1" xml:id="involvedIn_1" isFixed="false">
-                    <label xml:lang="en">URL of Activity</label>
-                    <help xml:lang="en">EnvironmentalMonitoringActivity(s) in which the AbstractMonitoringFeature is involved.</help>
-                    <label xml:lang="it">URL dell'attività</label>
-                    <help xml:lang="it"></help>
                     <hasPath>ef:involvedIn/@xlink:href</hasPath>
                 </item>
             </produces>
@@ -800,7 +797,7 @@
             <help xml:lang="en">Level of legal organisation the EnvironmentalMonitoringNetwork is affiliated with.</help>
             <help xml:lang="it"/>
             <produces>
-                <item hasDatatype="autoCompletion" hasIndex="1" xml:id="organisationLevel_1" isFixed="false"
+                <item hasDatatype="codelist" hasIndex="1" xml:id="organisationLevel_1" isFixed="false"
                     datasource="organiLevel">
                     <hasPath>ef:organisationLevel</hasPath>
                 </item>

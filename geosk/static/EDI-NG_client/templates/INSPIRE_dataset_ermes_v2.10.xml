@@ -6,7 +6,7 @@
     </languageSelection>
     <!-- <metadataEndpoint>https://adamassoft.it/jbossTest/edi/</metadataEndpoint> -->
     <metadataEndpoint>http://sp7.irea.cnr.it/jboss/edi/</metadataEndpoint>
-    <sparqlEndpoint>http://sp7.irea.cnr.it:8891/sparql</sparqlEndpoint>
+    <sparqlEndpoint>http://sparql/sparql.get-it.it/sparql</sparqlEndpoint>
     <requiresAuthentication>false</requiresAuthentication>
     <requiresValidation>true</requiresValidation>
     <baseDocument>

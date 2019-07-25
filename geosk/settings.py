@@ -70,11 +70,9 @@ MEDIA_ROOT = os.path.join(LOCAL_ROOT, "uploaded")
 
 # Absolute path to the directory that holds static files like app media.
 # Example: "/home/media/media.lawrence.com/apps/"
-# STATIC_ROOT = os.path.join(LOCAL_ROOT, "static_root")
+STATIC_ROOT = os.path.join(LOCAL_ROOT, "static_root")
 
 # Additional directories which hold static files
-
-
 STATICFILES_DIRS = [os.path.join(LOCAL_ROOT, "static")] + STATICFILES_DIRS
 
 # Note that Django automatically includes the "templates" dir in all the
@@ -88,7 +86,8 @@ STATICFILES_DIRS = [os.path.join(LOCAL_ROOT, "static")] + STATICFILES_DIRS
 INSTALLED_APPS = (
     # GeoSK
     # 'geosk.rndt',
-    #  'geosk.demo',
+    # 'geosk.demo',
+    # 'geosk',
     'geosk.osk',
     'geosk.mdtools',
     'geosk.geoskbase',
@@ -100,76 +99,8 @@ INSTALLED_APPS = (
     'grappelli.dashboard',
     'grappelli',
     'analytical',
-    'taggit_templatetags',
+    'taggit_templatetags2',
 ) + INSTALLED_APPS
-
-# INSTALLED_APPS = (
-#     # GeoSK
-#     # 'geosk.rndt',
-#     'geosk.demo',
-#     'geosk.osk',
-#     'geosk.mdtools',
-#     'geosk.geoskbase',
-#     'geosk.search',
-#     'geosk.patches',
-#     'geosk.skregistration',
-#     'overextends', # https://github.com/stephenmcd/django-overextends
-#     'rosetta',
-#     'grappelli.dashboard',
-#     'grappelli',
-
-#     # Apps bundled with Django
-#     'django.contrib.auth',
-#     'django.contrib.contenttypes',
-#     'django.contrib.sessions',
-#     'django.contrib.sites',
-#     'django.contrib.admin',
-#     'django.contrib.sitemaps',
-#     'django.contrib.staticfiles',
-#     'django.contrib.messages',
-#     'django.contrib.humanize',
-
-#     # Third party apps
-#     'analytical',
-
-#     # Utility
-#     'pagination',
-#     'taggit',
-#     'taggit_templatetags',
-#     'south',
-#     'friendlytagloader',
-#     'geoexplorer',
-#     'django_extensions',
-
-#     # Theme
-#     "pinax_theme_bootstrap_account",
-#     "pinax_theme_bootstrap",
-#     'django_forms_bootstrap',
-
-#     # Social
-#     'account',
-#     'avatar',
-#     'dialogos',
-#     'agon_ratings',
-#     'notification',
-#     'announcements',
-#     'actstream',
-#     'user_messages',
-
-#     # GeoNode internal apps
-#     'geonode.people',
-#     'geonode.base',
-#     'geonode.layers',
-#     'geonode.upload',
-#     'geonode.maps',
-#     'geonode.proxy',
-#     'geonode.security',
-#    # 'geonode.search',
-#     'geonode.social',
-#     'geonode.catalogue',
-#     'geonode.documents',
-
-# )
 
 # Location of url mappings
 ROOT_URLCONF = os.getenv('ROOT_URLCONF', '{}.urls'.format(PROJECT_NAME))
@@ -186,22 +117,16 @@ LOCALE_PATHS = (
 ) + LOCALE_PATHS
 
 TEMPLATES[0]['DIRS'].insert(0, os.path.join(LOCAL_ROOT, "templates"))
-loaders = TEMPLATES[0]['OPTIONS'].get('loaders') or [
-    'django.template.loaders.filesystem.Loader', 'django.template.loaders.app_directories.Loader']
-# loaders.insert(0, 'apptemplates.Loader')
-TEMPLATES[0]['OPTIONS']['loaders'] = loaders
-TEMPLATES[0].pop('APP_DIRS', None)
 
-CLIENT_RESULTS_LIMIT = 20
-API_LIMIT_PER_PAGE = 1000
-FREETEXT_KEYWORDS_READONLY = False
-RESOURCE_PUBLISHING = False
-ADMIN_MODERATE_UPLOADS = False
-GROUP_PRIVATE_RESOURCES = False
-GROUP_MANDATORY_RESOURCES = True
-MODIFY_TOPICCATEGORY = True
-USER_MESSAGES_ALLOW_MULTIPLE_RECIPIENTS = True
-DISPLAY_WMS_LINKS = True
+loaders = TEMPLATES[0]['OPTIONS'].get('loaders') or [
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+]
+builtins = ['overextends.templatetags.overextends_tags',]
+
+TEMPLATES[0]['OPTIONS']['loaders'] = loaders
+TEMPLATES[0]['OPTIONS']['builtins'] = builtins
+TEMPLATES[0].pop('APP_DIRS', None)
 
 # prevent signing up by default
 ACCOUNT_OPEN_SIGNUP = True
@@ -212,62 +137,16 @@ ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = True
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 ACCOUNT_APPROVAL_REQUIRED = True
 
-SOCIALACCOUNT_ADAPTER = 'geonode.people.adapters.SocialAccountAdapter'
-
-SOCIALACCOUNT_AUTO_SIGNUP = False
-
-# Uncomment this to enable Linkedin and Facebook login
-# INSTALLED_APPS += (
-#     'allauth.socialaccount.providers.linkedin_oauth2',
-#     'allauth.socialaccount.providers.facebook',
-# )
-
-SOCIALACCOUNT_PROVIDERS = {
-    'linkedin_oauth2': {
-        'SCOPE': [
-            'r_emailaddress',
-            'r_basicprofile',
-        ],
-        'PROFILE_FIELDS': [
-            'emailAddress',
-            'firstName',
-            'headline',
-            'id',
-            'industry',
-            'lastName',
-            'pictureUrl',
-            'positions',
-            'publicProfileUrl',
-            'location',
-            'specialties',
-            'summary',
-        ]
-    },
-    'facebook': {
-        'METHOD': 'oauth2',
-        'SCOPE': [
-            'email',
-            'public_profile',
-        ],
-        'FIELDS': [
-            'id',
-            'email',
-            'name',
-            'first_name',
-            'last_name',
-            'verified',
-            'locale',
-            'timezone',
-            'link',
-            'gender',
-        ]
-    },
-}
-
-SOCIALACCOUNT_PROFILE_EXTRACTORS = {
-    "facebook": "geonode.people.profileextractors.FacebookExtractor",
-    "linkedin_oauth2": "geonode.people.profileextractors.LinkedInExtractor",
-}
+# security settings
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
+CSRF_COOKIE_HTTPONLY = False
+X_FRAME_OPTIONS = 'ALLOW-FROM %s' % SITEURL
+SECURE_CONTENT_TYPE_NOSNIFF = False
+SECURE_BROWSER_XSS_FILTER = False
+SECURE_SSL_REDIRECT = False
+SECURE_HSTS_SECONDS = 3600
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 if os.getenv('DOCKER_ENV'):
 
@@ -277,8 +156,11 @@ if os.getenv('DOCKER_ENV'):
                                     'postgis://\
     geonode_data:geonode_data@localhost:5432/geonode_data')
         DATABASES[os.getenv('DEFAULT_BACKEND_DATASTORE')] = dj_database_url.parse(
-            GEODATABASE_URL, conn_max_age=600
+            GEODATABASE_URL, conn_max_age=300
         )
+        if 'OPTIONS' not in DATABASES[os.getenv('DEFAULT_BACKEND_DATASTORE')]:
+            DATABASES[os.getenv('DEFAULT_BACKEND_DATASTORE')]['OPTIONS'] = {}
+        DATABASES[os.getenv('DEFAULT_BACKEND_DATASTORE')]['CONN_TOUT'] = 300
 
     # Override OGC server config if docker is production
     OGC_SERVER = {
@@ -287,6 +169,7 @@ if os.getenv('DOCKER_ENV'):
             'LOCATION': GEOSERVER_LOCATION,
             'LOGIN_ENDPOINT': 'j_spring_oauth2_geonode_login',
             'LOGOUT_ENDPOINT': 'j_spring_oauth2_geonode_logout',
+            'WEB_UI_LOCATION': GEOSERVER_WEB_UI_LOCATION,
             # PUBLIC_LOCATION needs to be kept like this because in dev mode
             # the proxy won't work and the integration tests will fail
             # the entire block has to be overridden in the local_settings
@@ -297,7 +180,6 @@ if os.getenv('DOCKER_ENV'):
             'PRINT_NG_ENABLED': True,
             'GEONODE_SECURITY_ENABLED': True,
             'GEOFENCE_SECURITY_ENABLED': GEOFENCE_SECURITY_ENABLED,
-            'GEOGIG_ENABLED': False,
             'WMST_ENABLED': False,
             'BACKEND_WRITE_ENABLED': True,
             'WPS_ENABLED': False,
@@ -306,217 +188,23 @@ if os.getenv('DOCKER_ENV'):
             # Set to name of database in DATABASES dictionary to enable
             # 'datastore',
             'DATASTORE': os.getenv('DEFAULT_BACKEND_DATASTORE', ''),
-            'PG_GEOGIG': False,
             # 'CACHE': ".cache"  # local cache file to for HTTP requests
-            'TIMEOUT': 10  # number of seconds to allow for HTTP requests
+            'TIMEOUT': int(os.getenv('OGC_REQUEST_TIMEOUT', '5')),
+            'MAX_RETRIES': int(os.getenv('OGC_REQUEST_MAX_RETRIES', '5')),
+            'BACKOFF_FACTOR': float(os.getenv('OGC_REQUEST_BACKOFF_FACTOR', '0.3')),
+            'POOL_MAXSIZE': int(os.getenv('OGC_REQUEST_POOL_MAXSIZE', '10')),
+            'POOL_CONNECTIONS': int(os.getenv('OGC_REQUEST_POOL_CONNECTIONS', '10')),
         }
     }
 
-# MAPs and Backgrounds
-
-# Default preview library
-LAYER_PREVIEW_LIBRARY = 'geoext'
-#GEONODE_CLIENT_HOOKSET = "geonode.client.hooksets.LeafletHookSet"
-
-# LAYER_PREVIEW_LIBRARY = 'leaflet'
-LEAFLET_CONFIG = {
-    'TILES': [
-        # Find tiles at:
-        # http://leaflet-extras.github.io/leaflet-providers/preview/
-
-        # Map Quest
-        ('Map Quest',
-         'http://otile4.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png',
-         'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> '
-         '&mdash; Map data &copy; '
-         '<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'),
-        # Stamen toner lite.
-        # ('Watercolor',
-        #  'http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.png',
-        #  'Map tiles by <a href="http://stamen.com">Stamen Design</a>, \
-        #  <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; \
-        #  <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, \
-        #  <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'),
-        # ('Toner Lite',
-        #  'http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png',
-        #  'Map tiles by <a href="http://stamen.com">Stamen Design</a>, \
-        #  <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; \
-        #  <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, \
-        #  <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'),
-    ],
-    'PLUGINS': {
-        'esri-leaflet': {
-            'js': 'lib/js/esri-leaflet.js',
-            'auto-include': True,
-        },
-        'leaflet-fullscreen': {
-            'css': 'lib/css/leaflet.fullscreen.css',
-            'js': 'js/Leaflet.fullscreen.min.js',
-            'auto-include': True,
-        },
-    },
-    'SRID': 3857,
-    'RESET_VIEW': False
-}
-
-
-# default map projection
-# Note: If set to EPSG:4326, then only EPSG:4326 basemaps will work.
-DEFAULT_MAP_CRS = "EPSG:3857"
-
-# Where should newly created maps be focused?
-DEFAULT_MAP_CENTER = (0, 0)
-
-# How tightly zoomed should newly created maps be?
-# 0 = entire world;
-# maximum zoom is between 12 and 15 (for Google Maps, coverage varies by area)
-DEFAULT_MAP_ZOOM = 0
-
-ALT_OSM_BASEMAPS = os.environ.get('ALT_OSM_BASEMAPS', False)
-CARTODB_BASEMAPS = os.environ.get('CARTODB_BASEMAPS', False)
-STAMEN_BASEMAPS = os.environ.get('STAMEN_BASEMAPS', False)
-THUNDERFOREST_BASEMAPS = os.environ.get('THUNDERFOREST_BASEMAPS', False)
-MAPBOX_ACCESS_TOKEN = os.environ.get('MAPBOX_ACCESS_TOKEN', '')
-BING_API_KEY = os.environ.get('BING_API_KEY', None)
-
-MAP_BASELAYERS = [{
-    "source": {"ptype": "gxp_olsource"},
-    "type": "OpenLayers.Layer",
-    "args": ["No background"],
-    "name": "background",
-    "visibility": False,
-    "fixed": True,
-    "group":"background"
-}, {
-    "source": {"ptype": "gxp_osmsource"},
-    "type": "OpenLayers.Layer.OSM",
-    "title": "OpenStreetMap",
-    "name": "mapnik",
-    "attribution": "&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors",
-    "visibility": True,
-    "wrapDateLine": True,
-    "fixed": True,
-    "group": "background"
-}]
-
-'''
-{
-    "source": {"ptype": "gxp_olsource"},
-    "type": "OpenLayers.Layer.XYZ",
-    "title": "UNESCO",
-    "args": ["UNESCO", "http://en.unesco.org/tiles/${z}/${x}/${y}.png"],
-    "wrapDateLine": True,
-    "name": "background",
-    "attribution": "&copy; UNESCO",
-    "visibility": False,
-    "fixed": True,
-    "group": "background"
-}, {
-    "source": {"ptype": "gxp_olsource"},
-    "type": "OpenLayers.Layer.XYZ",
-    "title": "UNESCO GEODATA",
-    "args": ["UNESCO GEODATA", "http://en.unesco.org/tiles/geodata/${z}/${x}/${y}.png"],
-    "name": "background",
-    "attribution": "&copy; UNESCO",
-    "visibility": False,
-    "wrapDateLine": True,
-    "fixed": True,
-    "group": "background"
-}, {
-    "source": {"ptype": "gxp_olsource"},
-    "type": "OpenLayers.Layer.XYZ",
-    "title": "Humanitarian OpenStreetMap",
-    "args": ["Humanitarian OpenStreetMap", "http://a.tile.openstreetmap.fr/hot/${z}/${x}/${y}.png"],
-    "name": "background",
-    "attribution": "&copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a>, Tiles courtesy of <a href='http://hot.openstreetmap.org/' target='_blank'>Humanitarian OpenStreetMap Team</a>",
-    "visibility": False,
-    "wrapDateLine": True,
-    "fixed": True,
-    "group": "background"
-    # }, {
-    #     "source": {"ptype": "gxp_olsource"},
-    #     "type": "OpenLayers.Layer.XYZ",
-    #     "title": "MapBox Satellite Streets",
-    #     "args": ["MapBox Satellite Streets", "http://api.mapbox.com/styles/v1/mapbox/satellite-streets-v9/tiles/${z}/${x}/${y}?access_token="+MAPBOX_ACCESS_TOKEN],
-    #     "name": "background",
-    #     "attribution": "&copy; <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> &copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <a href='https://www.mapbox.com/feedback/' target='_blank'>Improve this map</a>",
-    #     "visibility": False,
-    #     "wrapDateLine": True,
-    #     "fixed": True,
-    #     "group":"background"
-    # }, {
-    #     "source": {"ptype": "gxp_olsource"},
-    #     "type": "OpenLayers.Layer.XYZ",
-    #     "title": "MapBox Streets",
-    #     "args": ["MapBox Streets", "http://api.mapbox.com/styles/v1/mapbox/streets-v9/tiles/${z}/${x}/${y}?access_token="+MAPBOX_ACCESS_TOKEN],
-    #     "name": "background",
-    #     "attribution": "&copy; <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> &copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <a href='https://www.mapbox.com/feedback/' target='_blank'>Improve this map</a>",
-    #     "visibility": False,
-    #     "wrapDateLine": True,
-    #     "fixed": True,
-    #     "group":"background"
-},
-'''
-
-if BING_API_KEY:
-    BASEMAP = {
-        'source': {
-            'ptype': 'gxp_bingsource',
-            'apiKey': BING_API_KEY
-        },
-        'name': 'AerialWithLabels',
-        'fixed': True,
-        'visibility': False,
-        'group': 'background'
-    }
-    MAP_BASELAYERS.append(BASEMAP)
-
-if 'geonode.geoserver' in INSTALLED_APPS:
-    LOCAL_GEOSERVER = {
-        "source": {
-            "ptype": "gxp_wmscsource",
-            "url": OGC_SERVER['default']['PUBLIC_LOCATION'] + "wms",
-            "restUrl": "/gs/rest"
-        }
-    }
-    baselayers = MAP_BASELAYERS
-    MAP_BASELAYERS = [LOCAL_GEOSERVER]
-    MAP_BASELAYERS.extend(baselayers)
-
-# notification settings
-NOTIFICATION_ENABLED = True
-
-# notifications backends
-_EMAIL_BACKEND = "pinax.notifications.backends.email.EmailBackend"
-PINAX_NOTIFICATIONS_BACKENDS = [
-    ("email", _EMAIL_BACKEND),
-]
-
-# Queue non-blocking notifications.
-PINAX_NOTIFICATIONS_QUEUE_ALL = False
-PINAX_NOTIFICATIONS_LOCK_WAIT_TIMEOUT = -1
-
-# pinax.notifications
-# or notification
-NOTIFICATIONS_MODULE = 'pinax.notifications'
-
-CORS_ORIGIN_ALLOW_ALL = True
-
-MONITORING_ENABLED = True
 # add following lines to your local settings to enable monitoring
 if MONITORING_ENABLED:
-    INSTALLED_APPS += ('geonode.contrib.monitoring',)
-    MIDDLEWARE_CLASSES += ('geonode.contrib.monitoring.middleware.MonitoringMiddleware',)
-    MONITORING_CONFIG = None
     if os.getenv('DOCKER_ENV'):
-        MONITORING_HOST_NAME = 'geonode'
+        MONITORING_HOST_NAME = os.getenv("MONITORING_HOST_NAME", 'geonode')
     else:
-        MONITORING_HOST_NAME = 'localhost'
-    MONITORING_SERVICE_NAME = 'local-geonode'
+        MONITORING_HOST_NAME = os.getenv("MONITORING_HOST_NAME", 'localhost')
 
-INSTALLED_APPS += ('geonode.contrib.ows_api',)
-
-GEOIP_PATH = os.path.join(os.path.dirname(__file__), '..', 'GeoLiteCity.dat')
+GEOIP_PATH = os.path.join(os.path.dirname(__file__), '..')
 
 LOGGING = {
     'version': 1,
@@ -536,10 +224,6 @@ LOGGING = {
         }
     },
     'handlers': {
-        'null': {
-            'level': 'INFO',
-            'class': 'django.utils.log.NullHandler',
-        },
         'console': {
             'level': 'INFO',
             'class': 'logging.StreamHandler',
@@ -643,7 +327,6 @@ THEME_ACCOUNT_CONTACT_EMAIL = 'help.skritmare@irea.cnr.it'
 ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = True
 REGISTRATION_OPEN = False
 PROXY_ALLOWED_HOSTS = ("*",)
-
 
 # Set default analytical
 PIWIK_DOMAIN_PATH = 'monitor.get-it.it/piwik'

@@ -84,7 +84,7 @@
         <!-- Codelists -->
         <codelist xml:id="languages" endpointType="virtuoso">
             <uri>http://inspire-registry.jrc.ec.europa.eu/registers/Languages/items</uri>
-            <url>http://sp7.irea.cnr.it:8891/sparql</url>
+            <url>http://sparql/sparql.get-it.it/sparql</url>
         </codelist>
     </datasources>
 

@@ -74,7 +74,7 @@
       <uri>http://inspire-registry.jrc.ec.europa.eu/registers/Languages/items</uri>
       <endpointType>virtuoso</endpointType>
       <type>virtuosoCodelist</type>
-      <url>http://sp7.irea.cnr.it:8891/sparql</url>
+      <url>http://sparql/sparql.get-it.it/sparql</url>
     </datasource>
     <datasource>
       <id>scopes</id>

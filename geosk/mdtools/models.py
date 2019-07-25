@@ -58,24 +58,17 @@ class ResponsiblePartyScope(models.Model):
         return self.get_value_display()
 
 
-class MultiContactRole(models.Model):
-    resource = models.ForeignKey('MdExtension')
-    contact  = models.ForeignKey(Profile)
-    #role     = models.ForeignKey(Role)
-    scope    = models.ForeignKey(ResponsiblePartyScope)
-
-
 class MdExtension(models.Model):
-    resource     = AutoOneToOneField(ResourceBase, primary_key=True)
+    resource     = AutoOneToOneField(ResourceBase, primary_key=True, on_delete=models.DO_NOTHING)
     elements_xml = models.TextField(null=True, blank=True)
-    ediversion = models.CharField(max_length=100, null=True, blank=True)
+    ediversion   = models.CharField(max_length=100, null=True, blank=True)
     rndt_xml     = models.TextField(null=True, blank=True)
     fileid       = models.IntegerField(null=True, blank=True)
 
     md_language  = models.CharField(_('language'), max_length=3, choices=ALL_LANGUAGES, default='ita', help_text=_('language used for metadata'))
     md_date      = models.DateTimeField(_('metadata date'), default = datetime.now, help_text=_('metadata date'))
 
-    contacts     = models.ManyToManyField(Profile, through='MultiContactRole')
+    contacts     = models.ManyToManyField(Profile, through='geosk_mdtools.MultiContactRole')
 
     @property
     def ediml_referencesystem(self):
@@ -90,6 +83,14 @@ class MdExtension(models.Model):
         if self.rndt_xml and self.rndt_xml !='':
             return self.rndt_xml.replace('<?xml version="1.0" encoding="UTF-8"?>','')
         return None
+
+
+class MultiContactRole(models.Model):
+    resource = models.ForeignKey(MdExtension)
+    contact  = models.ForeignKey(Profile)
+    #role    = models.ForeignKey(Role)
+    scope    = models.ForeignKey(ResponsiblePartyScope)
+
 
 @property
 def completeness(self):
@@ -188,3 +189,11 @@ class ServicesMetadata(models.Model):
         super(ServicesMetadata, self).delete()
         global SERVICE_METADATA_CACHE
         SERVICE_METADATA_CACHE = None
+
+
+def mdextension_pre_delete(instance, *args, **kwargs):
+    print(" ------------------------------------------ mdextension_pre_delete")
+    instance.mdextension.delete()
+
+
+models.signals.pre_delete.connect(mdextension_pre_delete, sender=ResourceBase)

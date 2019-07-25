@@ -9,8 +9,7 @@ from email.utils import parseaddr
 from owslib.iso import MD_Metadata, CI_ResponsibleParty, util, namespaces
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render_to_response
-from django.template import RequestContext
+from django.shortcuts import render
 from django.core.serializers.json import DjangoJSONEncoder
 from django.core.urlresolvers import reverse
 from django.utils.safestring import mark_safe
@@ -128,13 +127,14 @@ def rndteditor(request, layername):
     queryStringValues['parameters'] = json.dumps(pars, cls=DjangoJSONEncoder)
 
     js_queryStringValues = json.dumps(queryStringValues)
-    return render_to_response(
+    return render(
+        request,
         'mdtools/rndt.html',
-        RequestContext(request, {
-                'layername': layername,
-                'queryStringValues': mark_safe(js_queryStringValues)
-                })
-        )
+        {
+            'layername': layername,
+            'queryStringValues': mark_safe(js_queryStringValues)
+        })
+        
 
 def _ediml2rndt(ediml):
     # if SkRegistration.objects.get_current() is None:
@@ -234,8 +234,8 @@ def importediml(request, template='mdtools/upload_metadata.html'):
 
     else:
         form = UploadMetadataFileForm()
-    return render_to_response(template,
-                              RequestContext(request, {'form': form}))
+    return render(request, template, {'form': form})
+
 
 def importrndt(request, template='mdtools/upload_metadata.html'):
     if request.method == 'POST':
@@ -252,8 +252,8 @@ def importrndt(request, template='mdtools/upload_metadata.html'):
 
     else:
         form = UploadMetadataFileForm()
-    return render_to_response(template,
-                              RequestContext(request, {'form': form}))
+    return render(request, template, {'form': form})
+
 
 def _parse_metadata(xml):
     try:
@@ -347,11 +347,16 @@ def _get_or_create_profile(contact):
     if _name is None or _name.strip() == '':
         contact['name'] = _guess_name(_email)
     # some cleaning
-    fields = Profile._meta.get_all_field_names()
-    _defaults= {k:v for k, v in contact.items() if k in fields}
-    del(_defaults['email']) #
+    fields = Profile._meta.get_fields()
+    _defaults = {k:v for k, v in contact.items() if k in fields}
+    if 'email' in _defaults:
+        del(_defaults['email']) #
     # create profile
+    print(" -------------------------------- create profile ")
+    print(_defaults)
+    print(_email)
     profile, is_created = Profile.objects.get_or_create(defaults=_defaults, email=_email, username=_email)
+    print(profile)
     return profile
 
 split_email_regexp = re.compile(r'[ .-_]')

@@ -11,9 +11,11 @@ echo GEODATABASE_URL=$GEODATABASE_URL
 echo SITEURL=$SITEURL
 echo ALLOWED_HOSTS=$ALLOWED_HOSTS
 echo GEOSERVER_PUBLIC_LOCATION=$GEOSERVER_PUBLIC_LOCATION
+echo MONITORING_ENABLED=$MONITORING_ENABLED
+echo MONITORING_HOST_NAME=$MONITORING_HOST_NAME
+echo MONITORING_SERVICE_NAME=$MONITORING_SERVICE_NAME
 
 /usr/local/bin/invoke waitfordbs >> /usr/src/app/invoke.log
-
 echo "waitfordbs task done"
 
 # see issue https://github.com/celery/celery/issues/3200
@@ -23,10 +25,6 @@ echo "waitfordbs task done"
 echo "migrations task done"
 /usr/local/bin/invoke prepare >> /usr/src/app/invoke.log
 echo "prepare task done"
-/usr/local/bin/invoke fixtures >> /usr/src/app/invoke.log
-echo "fixture task done"
-/usr/local/bin/invoke updategeoip >> /usr/src/app/invoke.log
-echo "updategeoip task done"
 
 cmd="$@"
 
@@ -47,11 +45,22 @@ else
 
     else
 
-        cmd=$UWSGI_CMD
+        /usr/local/bin/invoke fixtures >> /usr/src/app/invoke.log
+        echo "fixture task done"
+        /usr/local/bin/invoke updategeoip >> /usr/src/app/invoke.log
+        echo "updategeoip task done"
+        /usr/local/bin/invoke collectstatic >> /usr/src/app/invoke.log
+        echo "collectstatic task done"
         /usr/local/bin/invoke waitforgeoserver >> /usr/src/app/invoke.log
         echo "waitforgeoserver task done"
         /usr/local/bin/invoke geoserverfixture >> /usr/src/app/invoke.log
         echo "geoserverfixture task done"
+        /usr/local/bin/invoke monitoringfixture >> /usr/src/app/invoke.log
+        echo "monitoringfixture task done"
+        /usr/local/bin/invoke updateadmin >> /usr/src/app/invoke.log
+        echo "updateadmin task done"
+
+        cmd=$UWSGI_CMD
         echo "Executing UWSGI server $cmd for Production"
 
     fi

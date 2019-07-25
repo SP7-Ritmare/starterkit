@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 # patch https://github.com/GeoNode/geonode/commit/2832fc1959e50fa7034b03eaa79e83e8e7e475e1
 from geonode.layers import views as layers_views
-from geonode.layers.views import _resolve_layer, _PERMISSION_MSG_MODIFY, Layer, render_to_response, RequestContext, logger, HttpResponseRedirect, reverse
+from geonode.layers.views import _resolve_layer, _PERMISSION_MSG_MODIFY, Layer, render, logger, HttpResponseRedirect, reverse
 from geoserver.catalog import FailedRequestError
 from geonode.geoserver.helpers import set_styles
 from django.utils.datastructures import MultiValueDictKeyError
@@ -30,15 +30,15 @@ def layer_style_manage(req, layername):
                 layer_styles.append(style.name)
 
             # Render the form
-            return render_to_response(
+            return render(
+                req,
                 'layers/layer_style_manage.html',
-                RequestContext(req, {
+                {
                     "layer": layer,
                     "gs_styles": gs_styles,
                     "layer_styles": layer_styles,
                     "default_style": layer.default_style.name
-                    }
-                )
+                }
             )
         except (FailedRequestError, EnvironmentError) as e:
             msg = ('Could not connect to geoserver at "%s"'
@@ -47,13 +47,13 @@ def layer_style_manage(req, layername):
             )
             logger.warn(msg, e)
             # If geoserver is not online, return an error
-            return render_to_response(
+            return render(
+                req,
                 'layers/layer_style_manage.html',
-                RequestContext(req, {
+                {
                     "layer": layer,
                     "error": msg
-                    }
-                )
+                }
             )
     elif req.method == 'POST':
         try:
@@ -78,13 +78,13 @@ def layer_style_manage(req, layername):
             msg = ('Error Saving Styles for Layer "%s"'  % (layer.name)
             )
             logger.warn(msg, e)
-            return render_to_response(
+            return render(
+                req,
                 'layers/layer_style_manage.html',
-                RequestContext(req, {
+                {
                     "layer": layer,
                     "error": msg
-                    }
-                )
+                }
             )
 
 

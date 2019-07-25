@@ -22,6 +22,8 @@ import os
 # __version__ = (1, 3, 17, 'final', 0)
 __version__ = (1, 3, 18, 'final', 0)
 
+default_app_config = "geosk.apps.AppConfig"
+
 class UnregisteredSKException(Exception):
     pass
 
