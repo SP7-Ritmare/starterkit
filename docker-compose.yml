@@ -18,7 +18,7 @@ services:
 
   dbsos:
     image: get-it/dbsos-postgis:9.5
-    build: ./docker/sos-starterkit-database/
+    build: ./docker/sos-starterkit-database/starterkit-postgres/
     restart: unless-stopped
     container_name: dbsos4${COMPOSE_PROJECT_NAME}
     stdin_open: true
