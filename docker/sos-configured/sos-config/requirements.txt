@@ -1,0 +1,4 @@
+docker==2.7.0
+invoke
+dataset
+bcrypt

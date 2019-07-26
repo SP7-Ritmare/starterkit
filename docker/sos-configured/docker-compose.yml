@@ -1,0 +1,19 @@
+version: '2'
+services:
+  sos-solar-postgres:
+    image: 52north/sos-solar-postgres:4.3.8
+    ports:
+      - 5432:5432
+    expose:
+      - 5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=sos
+  sos-configured:
+    build: .
+    image: 52north/sos-configured:4.4.2
+    ports:
+      - 8080:8080
+    links:
+      - sos-solar-postgres:postgres

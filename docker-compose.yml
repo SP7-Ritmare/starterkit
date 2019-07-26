@@ -17,7 +17,8 @@ services:
       - ./scripts/docker/env/production/db.env
 
   dbsos:
-    image: geobeyond/dbsos-postgis:9.5
+    image: get-it/dbsos-postgis:9.5
+    build: ./docker/sos-starterkit-database/
     restart: unless-stopped
     container_name: dbsos4${COMPOSE_PROJECT_NAME}
     stdin_open: true
@@ -52,7 +53,7 @@ services:
 
   geoserver:
     image: get-it/geoserver:2.14.3
-    build: ./geoserver/
+    build: ./docker/geoserver/
     restart: unless-stopped
     container_name: geoserver4${COMPOSE_PROJECT_NAME}
     stdin_open: true
@@ -69,7 +70,8 @@ services:
       - ./scripts/docker/env/production/geoserver.env
 
   sos:
-    image: geobeyond/sos-configured:4.4.2
+    image: get-it/sos-configured:4.4.2
+    build: ./docker/sos-configured/
     restart: unless-stopped
     container_name: sos4${COMPOSE_PROJECT_NAME}
     stdin_open: true
@@ -85,7 +87,8 @@ services:
       - ./scripts/docker/env/production/sos.env
 
   geonode:
-    image: geobeyond/nginx:sos
+    image: get-it/nginx:sos
+    build: ./docker/sos-nginx/
     restart: unless-stopped
     container_name: nginx4${COMPOSE_PROJECT_NAME}
     stdin_open: true

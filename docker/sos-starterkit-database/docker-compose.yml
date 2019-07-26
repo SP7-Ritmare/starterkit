@@ -1,0 +1,7 @@
+version: '2'
+
+services:
+  postgresdb:
+    build: starterkit-postgres/
+    expose:
+      - 5432
