@@ -1,0 +1,71 @@
+uwsgi_intercept_errors on;
+
+upstream geoserver_proxy {
+    server localhost:8080;
+}
+
+# Expires map
+map $sent_http_content_type $expires {
+    default                    off;
+    text/html                  epoch;
+    text/css                   max;
+    application/javascript     max;
+    ~image/                    max;
+}
+
+server{
+
+  listen 80;
+  index index.html index.htm;
+  root   /usr/share/nginx/html;
+
+  location /geoserver {
+      proxy_pass http://geoserver:8080/geoserver;
+
+      proxy_redirect        off;
+      proxy_set_header      Host $host;
+      proxy_set_header      X-Real-IP $remote_addr;
+      client_max_body_size  1000M;
+  }
+
+  location /observations {
+      proxy_pass http://sos:8080/observations;
+
+      proxy_redirect        off;
+      proxy_set_header      X-Forwarded-Host $host;
+      proxy_set_header      X-Forwarded-Server $host;
+      proxy_set_header      X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header      Host $host;
+      proxy_set_header      X-Real-IP $remote_addr;
+  }
+
+  location /{
+      proxy_pass http://django:8000;
+
+      if ($request_method = OPTIONS) {
+        add_header Access-Control-Allow-Methods "GET, POST, PUT, PATCH, OPTIONS";
+        add_header Access-Control-Allow-Headers "Authorization, Content-Type, Accept";
+        add_header Access-Control-Allow-Credentials true;
+        add_header Content-Length 0;
+        add_header Content-Type text/plain;
+        add_header Access-Control-Max-Age 1728000;
+        return 200;
+      }
+
+      client_max_body_size 100M;
+      client_body_buffer_size 128K;
+      add_header Access-Control-Allow-Credentials false;
+      add_header Access-Control-Allow-Headers "Content-Type, Accept, Authorization, Origin, User-Agent";
+      add_header Access-Control-Allow-Methods "GET, POST, PUT, PATCH, OPTIONS";
+      proxy_set_header X-Forwarded-Protocol $scheme;
+      proxy_connect_timeout       600;
+      proxy_send_timeout          600;
+      proxy_read_timeout          600;
+      send_timeout                600;
+      proxy_redirect     off;
+      proxy_set_header   Host $host;
+      proxy_set_header   X-Real-IP $remote_addr;
+      proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header   X-Forwarded-Host $server_name;
+  }
+}

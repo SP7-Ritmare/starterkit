@@ -2,7 +2,7 @@ version: '2.2'
 services:
 
   db:
-    image: geonode/postgis:9.6
+    image: geonode/postgis:11
     restart: unless-stopped
     container_name: db4${COMPOSE_PROJECT_NAME}
     stdin_open: true
@@ -17,7 +17,8 @@ services:
       - ./scripts/docker/env/production/db.env
 
   dbsos:
-    image: geobeyond/dbsos-postgis:9.5
+    image: get-it/dbsos-postgis:9.5
+    build: ./docker/sos-starterkit-database/starterkit-postgres/
     restart: unless-stopped
     container_name: dbsos4${COMPOSE_PROJECT_NAME}
     stdin_open: true
@@ -51,8 +52,8 @@ services:
       - ./scripts/docker/env/production/sos.env
 
   geoserver:
-    image: get-it/geoserver:2.14.3
-    build: ./geoserver/
+    image: get-it/geoserver:2.15.2
+    build: ./docker/geoserver/
     restart: unless-stopped
     container_name: geoserver4${COMPOSE_PROJECT_NAME}
     stdin_open: true
@@ -69,7 +70,8 @@ services:
       - ./scripts/docker/env/production/geoserver.env
 
   sos:
-    image: geobeyond/sos-configured:4.4.2
+    image: get-it/sos-configured:4.4.2
+    build: ./docker/sos-configured/
     restart: unless-stopped
     container_name: sos4${COMPOSE_PROJECT_NAME}
     stdin_open: true
@@ -85,7 +87,8 @@ services:
       - ./scripts/docker/env/production/sos.env
 
   geonode:
-    image: geobeyond/nginx:sos
+    image: get-it/nginx:sos
+    build: ./docker/sos-nginx/
     restart: unless-stopped
     container_name: nginx4${COMPOSE_PROJECT_NAME}
     stdin_open: true
@@ -97,11 +100,13 @@ services:
       - django
       - geoserver
       - sos
+    volumes:
+      - nginx-confd:/etc/nginx/sites-enabled
     ports:
       - "80:80"
 
   data-dir-conf:
-    image: geonode/geoserver_data:2.14.3
+    image: geonode/geoserver_data:2.15.2
     restart: on-failure
     container_name: gsconf4${COMPOSE_PROJECT_NAME}
     labels:
@@ -113,6 +118,8 @@ services:
 
 volumes:
 
+  nginx-confd:
+    name: ${COMPOSE_PROJECT_NAME}-nginxconfd
   geoserver-data-dir:
     name: ${COMPOSE_PROJECT_NAME}-gsdatadir
   dbdata:
