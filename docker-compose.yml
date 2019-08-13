@@ -52,7 +52,7 @@ services:
       - ./scripts/docker/env/production/sos.env
 
   geoserver:
-    image: get-it/geoserver:2.14.3
+    image: get-it/geoserver:2.15.2
     build: ./docker/geoserver/
     restart: unless-stopped
     container_name: geoserver4${COMPOSE_PROJECT_NAME}
@@ -100,11 +100,13 @@ services:
       - django
       - geoserver
       - sos
+    volumes:
+      - nginx-confd:/etc/nginx/sites-enabled
     ports:
       - "80:80"
 
   data-dir-conf:
-    image: geonode/geoserver_data:2.14.3
+    image: geonode/geoserver_data:2.15.2
     restart: on-failure
     container_name: gsconf4${COMPOSE_PROJECT_NAME}
     labels:
@@ -116,6 +118,8 @@ services:
 
 volumes:
 
+  nginx-confd:
+    name: ${COMPOSE_PROJECT_NAME}-nginxconfd
   geoserver-data-dir:
     name: ${COMPOSE_PROJECT_NAME}-gsdatadir
   dbdata:
