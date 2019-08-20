@@ -19,6 +19,27 @@ RUN cd /usr/local/tomcat/webapps \
 
 VOLUME $GEOSERVER_DATA_DIR
 
+# added by simonelanucara https://github.com/simonelanucara
+# Optionally add JAI, ImageIO and Marlin Render for improved Geoserver performance
+WORKDIR /tmp
+ARG JAI_IMAGEIO=true
+RUN if [ "$JAI_IMAGEIO" = true ]; then \
+    wget http://download.java.net/media/jai/builds/release/1_1_3/jai-1_1_3-lib-linux-amd64.tar.gz && \
+    wget http://download.java.net/media/jai-imageio/builds/release/1.1/jai_imageio-1_1-lib-linux-amd64.tar.gz && \
+    wget https://github.com/bourgesl/marlin-renderer/releases/download/v0_9_3/marlin-0.9.3-Unsafe.jar && \
+    gunzip -c jai-1_1_3-lib-linux-amd64.tar.gz | tar xf - && \
+    gunzip -c jai_imageio-1_1-lib-linux-amd64.tar.gz | tar xf - && \
+    mv /tmp/jai-1_1_3/lib/*.jar $JAVA_HOME/lib/ext/ && \
+    mv /tmp/jai-1_1_3/lib/*.so $JAVA_HOME/lib/amd64/ && \
+    mv /tmp/jai_imageio-1_1/lib/*.jar $JAVA_HOME/lib/ext/ && \
+    mv /tmp/jai_imageio-1_1/lib/*.so $JAVA_HOME/lib/amd64/ && \
+    mv /tmp/marlin-0.9.3-Unsafe.jar /usr/local/tomcat/webapps/geoserver/WEB-INF/lib/ && \
+    rm /tmp/jai-1_1_3-lib-linux-amd64.tar.gz && \
+    rm -r /tmp/jai-1_1_3 && \
+    rm /tmp/jai_imageio-1_1-lib-linux-amd64.tar.gz && \
+    rm -r /tmp/jai_imageio-1_1; \
+    fi
+
 ###########docker host###############
 # Set DOCKERHOST variable if DOCKER_HOST exists
 ARG DOCKERHOST=${DOCKERHOST}
