@@ -192,8 +192,9 @@ class ServicesMetadata(models.Model):
 
 
 def mdextension_pre_delete(instance, *args, **kwargs):
-    print(" ------------------------------------------ mdextension_pre_delete")
     instance.mdextension.delete()
+    instance.mdextension = None
+    MdExtension.objects.filter(resource_id=instance.id).delete()
 
 
 models.signals.pre_delete.connect(mdextension_pre_delete, sender=ResourceBase)
