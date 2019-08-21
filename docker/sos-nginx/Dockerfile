@@ -1,5 +1,15 @@
-FROM nginx
-MAINTAINER Alessio Fabiani <alessio.fabiani@geo-solutions.it>
+FROM nginx:1.17.2-alpine
 
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY geonode /etc/nginx/sites-enabled/
+RUN apk add --no-cache openssl inotify-tools
+
+WORKDIR /etc/nginx/
+
+ADD nginx.conf.envsubst nginx.https.available.conf.envsubst ./
+ADD geonode.conf ./sites-enabled/
+
+ADD docker-autoreload.sh docker-entrypoint.sh /
+ENTRYPOINT ["/docker-entrypoint.sh"]
+RUN chmod +x /docker-autoreload.sh
+RUN chmod +x /docker-entrypoint.sh
+
+CMD ["nginx", "-g", "daemon off;"]

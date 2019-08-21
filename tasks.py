@@ -46,12 +46,16 @@ def update(ctx):
 
     envs = {
         "local_settings": "{0}".format(_localsettings()),
+        "siteurl": os.environ.get('SITEURL',
+                                  'http://{0}:{1}/'.format(pub_ip, pub_port)),
         "geonode_docker_host": "{0}".format(socket.gethostbyname('geonode')),
         "public_fqdn": "{0}:{1}".format(pub_ip, pub_port),
         "public_host": "{0}".format(pub_ip),
         "dburl": db_url,
         "geodburl": geodb_url,
         "monitoring": os.environ.get('MONITORING_ENABLED', False),
+        "gs_pub_loc": os.environ.get('GEOSERVER_PUBLIC_LOCATION',
+                                     'http://{0}:{1}/geoserver/'.format(pub_ip, pub_port)),
         "gs_admin_pwd": os.environ.get('GEOSERVER_ADMIN_PASSWORD', 'geoserver'),
         "override_fn": "$HOME/.override_env"
     }
@@ -64,11 +68,11 @@ def update(ctx):
     ctx.run("echo export MONITORING_SERVICE_NAME=\
 local-geonode >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export GEOSERVER_PUBLIC_LOCATION=\
-http://{public_fqdn}/geoserver/ >> {override_fn}".format(**envs), pty=True)
+{gs_pub_loc} >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export GEOSERVER_ADMIN_PASSWORD=\
 {gs_admin_pwd} >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export SITEURL=\
-http://{public_fqdn}/ >> {override_fn}".format(**envs), pty=True)
+{siteurl} >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export ALLOWED_HOSTS=\
 \"\\\"['{geonode_docker_host}', '{public_fqdn}', '{public_host}', '127.0.0.1', 'django', 'geonode']\\\"\" \
 >> {override_fn}".format(**envs), pty=True)
@@ -76,6 +80,14 @@ http://{public_fqdn}/ >> {override_fn}".format(**envs), pty=True)
 {dburl} >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export GEODATABASE_URL=\
 {geodburl} >> {override_fn}".format(**envs), pty=True)
+    ctx.run("echo export LOGIN_URL=\
+{siteurl}account/login/ >> {override_fn}".format(**envs), pty=True)
+    ctx.run("echo export LOGOUT_URL=\
+{siteurl}account/logout/ >> {override_fn}".format(**envs), pty=True)
+    ctx.run("echo export LOGIN_REDIRECT_URL=\
+{siteurl} >> {override_fn}".format(**envs), pty=True)
+    ctx.run("echo export LOGOUT_REDIRECT_URL=\
+{siteurl} >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export PYCSW=\
 \"\\\"{0}\\\"\" >> {override_fn}".format(
             _pycsw_info_provision(),

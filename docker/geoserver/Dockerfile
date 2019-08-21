@@ -19,6 +19,15 @@ RUN cd /usr/local/tomcat/webapps \
 
 VOLUME $GEOSERVER_DATA_DIR
 
+# added by simonelanucara https://github.com/simonelanucara
+# Optionally add JAI, ImageIO and Marlin Render for improved Geoserver performance
+WORKDIR /tmp
+ARG JAI_IMAGEIO=true
+RUN if [ "$JAI_IMAGEIO" = true ]; then \
+    wget https://github.com/bourgesl/marlin-renderer/releases/download/v0_9_3/marlin-0.9.3-Unsafe.jar && \
+    mv /tmp/marlin-0.9.3-Unsafe.jar /usr/local/tomcat/webapps/geoserver/WEB-INF/lib/ && \
+    fi
+
 ###########docker host###############
 # Set DOCKERHOST variable if DOCKER_HOST exists
 ARG DOCKERHOST=${DOCKERHOST}

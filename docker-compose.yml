@@ -89,7 +89,7 @@ services:
   geonode:
     image: get-it/nginx:sos
     build: ./docker/sos-nginx/
-    restart: unless-stopped
+    restart: on-failure
     container_name: nginx4${COMPOSE_PROJECT_NAME}
     stdin_open: true
     # tty: true
@@ -100,10 +100,24 @@ services:
       - django
       - geoserver
       - sos
-    volumes:
-      - nginx-confd:/etc/nginx/sites-enabled
     ports:
       - "80:80"
+      - "443:443"
+    volumes:
+      - nginx-confd:/etc/nginx
+      - nginx-certificates:/geonode-certificates
+    env_file:
+      - ./scripts/docker/env/production/nginx.env
+
+  # Gets and installs letsencrypt certificates
+  letsencrypt:
+    image: get-it/letsencrypt:latest
+    build: ./docker/letsencrypt/
+    restart: on-failure
+    volumes:
+      - nginx-certificates:/geonode-certificates/
+    env_file:
+      - ./scripts/docker/env/production/nginx.env
 
   data-dir-conf:
     image: geonode/geoserver_data:2.15.2
@@ -120,6 +134,8 @@ volumes:
 
   nginx-confd:
     name: ${COMPOSE_PROJECT_NAME}-nginxconfd
+  nginx-certificates:
+    name: ${COMPOSE_PROJECT_NAME}-nginxcerts
   geoserver-data-dir:
     name: ${COMPOSE_PROJECT_NAME}-gsdatadir
   dbdata:

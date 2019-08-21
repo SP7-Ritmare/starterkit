@@ -1,6 +1,7 @@
 version: '2.2'
 
 services:
+
   django:
     build: .
     # Loading the app is defined here to allow for
