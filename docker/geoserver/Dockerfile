@@ -25,7 +25,7 @@ WORKDIR /tmp
 ARG JAI_IMAGEIO=true
 RUN if [ "$JAI_IMAGEIO" = true ]; then \
     wget https://github.com/bourgesl/marlin-renderer/releases/download/v0_9_3/marlin-0.9.3-Unsafe.jar && \
-    mv /tmp/marlin-0.9.3-Unsafe.jar /usr/local/tomcat/webapps/geoserver/WEB-INF/lib/ && \
+    mv /tmp/marlin-0.9.3-Unsafe.jar /usr/local/tomcat/webapps/geoserver/WEB-INF/lib/ ; \
     fi
 
 ###########docker host###############
