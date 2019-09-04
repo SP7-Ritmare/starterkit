@@ -11,8 +11,7 @@ ENV GEOSERVER_DATA_DIR="/geoserver_data/data"
 # Download and install GeoServer
 #
 RUN cd /usr/local/tomcat/webapps \
-    && wget --no-check-certificate --progress=bar:force:noscroll \
-    https://build.geo-solutions.it/geonode/geoserver/latest/geoserver-${GEOSERVER_VERSION}.war \
+    && wget --no-check-certificate --progress=bar:force:noscroll https://build.geo-solutions.it/geonode/geoserver/latest/geoserver-${GEOSERVER_VERSION}.war \
     && unzip -q geoserver-${GEOSERVER_VERSION}.war -d geoserver \
     && rm geoserver-${GEOSERVER_VERSION}.war \
     && mkdir -p $GEOSERVER_DATA_DIR
@@ -25,7 +24,7 @@ WORKDIR /tmp
 ARG JAI_IMAGEIO=true
 RUN if [ "$JAI_IMAGEIO" = true ]; then \
     wget https://github.com/bourgesl/marlin-renderer/releases/download/v0_9_3/marlin-0.9.3-Unsafe.jar && \
-    mv /tmp/marlin-0.9.3-Unsafe.jar /usr/local/tomcat/webapps/geoserver/WEB-INF/lib/ && \
+    mv /tmp/marlin-0.9.3-Unsafe.jar /usr/local/tomcat/webapps/geoserver/WEB-INF/lib/ ; \
     fi
 
 ###########docker host###############
