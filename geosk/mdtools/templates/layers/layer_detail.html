@@ -678,7 +678,6 @@
         {% endif %}
       </ul>
     </li>
-    {% endif %}
 
     {% if GEONODE_SECURITY_ENABLED %}
     {% if "change_resourcebase_permissions" in perms_list %}
@@ -1007,7 +1006,8 @@
       {% if show_popup %}
         $('#download-layer').modal('toggle');
       {% endif %}
-    </script>
+
+  </script>
 
     {% if GEONODE_SECURITY_ENABLED %}
     {% include "_permissions_form_js.html" %}
