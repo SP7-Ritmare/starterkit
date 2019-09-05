@@ -17,7 +17,18 @@ test ! -d "$auth_conf_target" && echo "Target directory $auth_conf_target does n
 
 # for debugging
 echo -e "NGINX_BASE_URL=${NGINX_BASE_URL}\n"
-SUBSTITUTION_URL="http://${DOCKER_HOST_IP}:${PUBLIC_PORT}"
+if [ "$PUBLIC_PORT" == "443" ]; then
+    SUBSTITUTION_URL="https://${DOCKER_HOST_IP}"
+    if [ "$PUBLIC_PORT" != "443" ]; then
+        SUBSTITUTION_URL="https://${DOCKER_HOST_IP}:${PUBLIC_PORT}"
+    fi
+else
+    SUBSTITUTION_URL="http://${DOCKER_HOST_IP}"
+    if [ "$PUBLIC_PORT" != "80" ]; then
+        SUBSTITUTION_URL="http://${DOCKER_HOST_IP}:${PUBLIC_PORT}"
+    fi
+fi
+
 echo -e "SUBSTITUTION_URL=$SUBSTITUTION_URL\n"
 echo -e "auth_conf_source=$auth_conf_source\n"
 echo -e "auth_conf_target=$auth_conf_target\n"
@@ -48,19 +59,14 @@ do
 
     # Setting new substituted value
     case $i in
-        
         proxyBaseUrl )
             if [ ${GEONODE_LB_HOST_IP} ]
             then
-
                 echo "DEBUG: Editing '$auth_conf_source' for tagname <$i> and replacing its value with '$SUBSTITUTION_URL'"
                 newvalue=`echo -ne "$tagvalue" | sed -re "s@http://localhost(:8.*0)@$SUBSTITUTION_URL@"`
-            
             else
-
                 echo "DEBUG: Editing '$auth_conf_source' for tagname <$i> and replacing its value with '$NGINX_BASE_URL'"
                 newvalue=`echo -ne "$tagvalue" | sed -re "s@http://localhost(:8.*0)@$NGINX_BASE_URL@"`
-
             fi;;
         accessTokenUri | checkTokenEndpointUrl | baseUrl )
             echo "DEBUG: Editing '$auth_conf_source' for tagname <$i> and replacing its value with '$NGINX_BASE_URL'"

@@ -45,18 +45,14 @@ fi
 # control the value of NGINX_BASE_URL variable
 if [ -z `echo ${NGINX_BASE_URL} | sed 's/http:\/\/\([^:]*\).*/\1/'` ]
 then
-
     echo "NGINX_BASE_URL is empty so I'll use the static nginx hostname \n" >> /usr/local/tomcat/tmp/set_geoserver_auth.log
     # echo export NGINX_BASE_URL=`python /usr/local/tomcat/tmp/get_nginxhost_ip.py` >> /root/.override_env
     # TODO rework get_nginxhost_ip to get URL with static hostname from nginx service name
     # + exposed port of that container i.e. http://geonode:80
     echo export NGINX_BASE_URL=http://geonode:80 >> /root/.override_env
     echo "The calculated value is now NGINX_BASE_URL='$NGINX_BASE_URL' \n" >> /usr/local/tomcat/tmp/set_geoserver_auth.log
-
 else
-
     echo "NGINX_BASE_URL is filled so I'll leave the found value '$NGINX_BASE_URL' \n" >> /usr/local/tomcat/tmp/set_geoserver_auth.log
-
 fi
 
 # set basic tagname

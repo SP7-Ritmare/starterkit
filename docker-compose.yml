@@ -45,8 +45,6 @@ services:
     depends_on:
       - db
     # command: django-admin.py runserver 0.0.0.0:8000 --settings=geosk.settings
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
     env_file:
       - ./scripts/docker/env/production/django.env
       - ./scripts/docker/env/production/sos.env
@@ -64,7 +62,6 @@ services:
     depends_on:
       - db
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
       - geoserver-data-dir:/geoserver_data/data
     env_file:
       - ./scripts/docker/env/production/geoserver.env
@@ -81,8 +78,6 @@ services:
         org.geonode.instance.name: geonode
     depends_on:
       - dbsos
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
     env_file:
       - ./scripts/docker/env/production/sos.env
 

@@ -26,9 +26,7 @@ server {
     }
 
     # Redirect to https
-    # location / {
-    #    return 302 https://$HTTPS_HOST$request_uri; # TODO : we should use 301 (permanent redirect, but not practical for debug)
-    # }
-
-    include sites-enabled/*.conf;
+    location / {
+       return 302 https://$HTTPS_HOST$request_uri; # TODO : we should use 301 (permanent redirect, but not practical for debug)
+    }
 }

@@ -31,7 +31,7 @@ console.log("loading whoami from: "+ baseUrlSK+"/whoami"+(baseUrlSK==="test")?".
 var whoami=JSON.parse($.ajax({
     type:"get",
     url: baseUrlSK+"/whoami"+((baseUrlSK==="test")?".js":""),
-    async:false,
+    async: false,
     dataType: "application/json"
 }).responseText);
 

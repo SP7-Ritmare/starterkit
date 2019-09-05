@@ -3,256 +3,566 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# Opros <anto.opro@gmail.com>, 2013
-# Opros <anto.opro@gmail.com>, 2013
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Alessandro Fanna <alex@rospus.org>, 2015
+# Antonio <anto.opro@gmail.com>, 2013
+# ingenieroariel <ingenieroariel@gmail.com>, 2014
+# ingenieroariel <ingenieroariel@gmail.com>, 2014
+# Antonio <anto.opro@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: GeoNode\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-21 05:55-0500\n"
-"PO-Revision-Date: 2013-09-05 02:20+0000\n"
-"Last-Translator: geonode <geonode-transifex@opengeo.org>\n"
-"Language-Team: Italian (http://www.transifex.com/projects/p/geonode/language/"
+"POT-Creation-Date: 2019-04-26 18:05+0200\n"
+"PO-Revision-Date: 2018-05-17 18:12+0200\n"
+"Last-Translator: Julien Collaer <julien.collaer@opengeode.be>\n"
+"Language-Team: Italian (http://www.transifex.com/geonode/geonode/language/"
 "it/)\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.0.6\n"
 
-#: _locale_external/geonode/static/geonode/js/extjs/GeoNode.js:72
-msgid "Add user..."
-msgstr "Aggiungi utente..."
+#: geonode/static/geonode/js/search/search.js:522
+msgid "Enter your text here ..."
+msgstr "Inserisci qui il tuo testo ..."
 
-#: _locale_external/geonode/static/geonode/js/extjs/GeoNode.js:72
-msgid "Who can view and download this data?"
-msgstr "Chi può visualizzare e scaricare questo dato?"
+#: geonode/static/geonode/js/search/search.js:564
+msgid "Enter your region here ..."
+msgstr "Inserisci qui la tua regione ..."
 
-#: _locale_external/geonode/static/geonode/js/extjs/GeoNode.js:72
-msgid "Anyone"
-msgstr "Chiunque"
+#: geonode/static/geonode/js/upload/FileType.js:50
+#, javascript-format
+msgid "Missing a %s file, which is required"
+msgstr "Manca un file %s, che è richiesto"
 
-#: _locale_external/geonode/static/geonode/js/extjs/GeoNode.js:72
-msgid "Any registered user"
-msgstr "Qualsiasi utente registrato"
+#: geonode/static/geonode/js/upload/FileTypes.js:7
+msgid "ESRI Shapefile"
+msgstr "File di forma ESRI"
 
-#: _locale_external/geonode/static/geonode/js/extjs/GeoNode.js:72
-msgid "Only users who can edit"
-msgstr "Solo gli utenti che possono editare"
+#: geonode/static/geonode/js/upload/FileTypes.js:13
+msgid "ASCII Text File"
+msgstr "ASCII Text File"
 
-#: _locale_external/geonode/static/geonode/js/extjs/GeoNode.js:72
-msgid "Who can edit this data?"
-msgstr "Chi può editare questo dato?"
+#: geonode/static/geonode/js/upload/FileTypes.js:18
+#: geonode/static/geonode/js/upload/FileTypes.js:23
+msgid "GeoTIFF"
+msgstr "GeoTIFF"
 
-#: _locale_external/geonode/static/geonode/js/extjs/GeoNode.js:72
-msgid "Only the following users or groups:"
-msgstr "Solo i seguenti utenti o gruppi:"
+#: geonode/static/geonode/js/upload/FileTypes.js:29
+msgid "Comma Separated Value"
+msgstr "File con valori separati da virgola"
 
-#: _locale_external/geonode/static/geonode/js/extjs/GeoNode.js:72
-msgid "Who can manage and edit this data?"
-msgstr "Chi può gestire e modificare questo dato?"
+#: geonode/static/geonode/js/upload/FileTypes.js:34
+msgid "Google Earth KML"
+msgstr "KML di Google Earth"
 
-#: _locale_external/geonode/templates/lang.js:9
-#: _locale_external/geonode/templates/lang.js:236
+#: geonode/static/geonode/js/upload/FileTypes.js:39
+msgid "Google Earth KML with a GroundOverlay"
+msgstr "Google Earth KML with a GroundOverlay"
+
+#: geonode/static/geonode/js/upload/FileTypes.js:45
+msgid "Google Earth KMZ"
+msgstr "Google Earth KMZ"
+
+#: geonode/static/geonode/js/upload/FileTypes.js:50
+msgid "GeoJSON"
+msgstr "GeoJSON"
+
+#: geonode/static/geonode/js/upload/FileTypes.js:55
+msgid "Zip Archive"
+msgstr "Archivio Zip"
+
+#: geonode/static/geonode/js/upload/FileTypes.js:61
+msgid "ERDAS Imagine"
+msgstr "ERDAS Imagine"
+
+#: geonode/static/geonode/js/upload/FileTypes.js:66
+#: geonode/static/geonode/js/upload/FileTypes.js:71
+msgid "National Imagery Transmission Format"
+msgstr "National Imagery Transmission Format"
+
+#: geonode/static/geonode/js/upload/FileTypes.js:77
+msgid "Controlled Image Base-1 Meter"
+msgstr "Controlled Image Base-1 Meter"
+
+#: geonode/static/geonode/js/upload/FileTypes.js:84
+msgid "Controlled Image Base-5 Meter"
+msgstr "Controlled Image Base-5 Meter"
+
+#: geonode/static/geonode/js/upload/FileTypes.js:91
+msgid "Controlled Image Base-10 Meter"
+msgstr "Controlled Image Base-10 Meter"
+
+#: geonode/static/geonode/js/upload/FileTypes.js:98
+msgid "CADRG-Global Navigation Chart"
+msgstr "CADRG-Global Navigation Chart"
+
+#: geonode/static/geonode/js/upload/FileTypes.js:105
+msgid "CADRG-Jet Navigation Chart"
+msgstr "CADRG-Jet Navigation Chart"
+
+#: geonode/static/geonode/js/upload/FileTypes.js:112
+msgid "CADRG-Operational Navigation Chart"
+msgstr "CADRG-Operational Navigation Chart"
+
+#: geonode/static/geonode/js/upload/FileTypes.js:119
+msgid "CADRG-Tactical Pilotage Chart"
+msgstr "CADRG-Tactical Pilotage Chart"
+
+#: geonode/static/geonode/js/upload/FileTypes.js:126
+msgid "CADRG-Joint Operations Graphic"
+msgstr "CADRG-Joint Operations Graphic"
+
+#: geonode/static/geonode/js/upload/FileTypes.js:133
+msgid "CADRG-Topographic Line Map 100K"
+msgstr "CADRG-Topographic Line Map 100K"
+
+#: geonode/static/geonode/js/upload/FileTypes.js:140
+msgid "CADRG-Topographic Line Map 50K"
+msgstr "CADRG-Topographic Line Map 50K"
+
+#: geonode/static/geonode/js/upload/FileTypes.js:147
+msgid "JPEG2000"
+msgstr "JPEG2000"
+
+#: geonode/static/geonode/js/upload/FileTypes.js:152
+msgid "MrSID-Multi-resolution Seamless Image Database"
+msgstr "MrSID-Multi-resolution Seamless Image Database"
+
+#: geonode/static/geonode/js/upload/FileTypes.js:157
+msgid "XML Metadata File"
+msgstr "File di metadati XML"
+
+#: geonode/static/geonode/js/upload/FileTypes.js:163
+msgid "Style Layer Descriptor"
+msgstr "Style Layer Descriptor"
+
+#: geonode/static/geonode/js/upload/FileTypes.js:169
+msgid "JPEG"
+msgstr "JPEG"
+
+#: geonode/static/geonode/js/upload/FileTypes.js:174
+msgid "PNG"
+msgstr "PNG"
+
+#: geonode/static/geonode/js/upload/FileTypes.js:179
+msgid "GIF"
+msgstr "GIF"
+
+#: geonode/static/geonode/js/upload/LayerInfo.js:332
+#: geonode/static/geonode/js/upload/LayerInfo.js:488
+#: geonode/static/geonode/js/upload/LayerInfo.js:585
+msgid "Unexpected Error"
+msgstr "Errore imprevisto"
+
+#: geonode/static/geonode/js/upload/LayerInfo.js:370
+msgid " Info"
+msgstr " Info"
+
+#: geonode/static/geonode/js/upload/LayerInfo.js:371
+msgid "Edit Metadata"
+msgstr "Modifica metadati"
+
+#: geonode/static/geonode/js/upload/LayerInfo.js:372
+msgid "Upload Metadata"
+msgstr "Carica i metadati"
+
+#: geonode/static/geonode/js/upload/LayerInfo.js:373
+msgid "Upload SLD"
+msgstr "Carica SLD"
+
+#: geonode/static/geonode/js/upload/LayerInfo.js:374
+msgid "Manage Styles"
+msgstr "Gestisci Stili"
+
+#: geonode/static/geonode/js/upload/LayerInfo.js:387
+msgid "The column %1 was renamed to %2 <br/>"
+msgstr "La colonna %1 è stata rinominata in %2 <br/>"
+
+#: geonode/static/geonode/js/upload/LayerInfo.js:393
+msgid "Your "
+msgstr "Vostro "
+
+#: geonode/static/geonode/js/upload/LayerInfo.js:422
+msgid "Performing Final GeoServer Config Step"
+msgstr "Esecuzione finale GeoServer Config Passo"
+
+#: geonode/static/geonode/js/upload/LayerInfo.js:437
+#: geonode/static/geonode/js/upload/LayerInfo.js:474
+msgid "You need to specify more information in order to complete your upload"
+msgstr ""
+"È necessario specificare ulteriori informazioni al fine di completare il "
+"caricamento"
+
+#: geonode/static/geonode/js/upload/LayerInfo.js:457
+msgid "Files are ready to be ingested!"
+msgstr "File pronti per l'ingestione!"
+
+#: geonode/static/geonode/js/upload/LayerInfo.js:460
+msgid "A temporal dimension may be added to this Layer."
+msgstr "Una dimensione temporale può essere aggiunta a questo livello."
+
+#: geonode/static/geonode/js/upload/LayerInfo.js:504
+msgid "Performing GeoServer Config Step"
+msgstr "Esecuzione GeoServer Config Passo"
+
+#: geonode/static/geonode/js/upload/LayerInfo.js:592
+msgid "Layer files uploaded, configuring in GeoServer"
+msgstr "File di layer caricati, configurando in GeoServer"
+
+#: geonode/static/geonode/js/upload/LayerInfo.js:743
+msgid "Remove"
+msgstr "Elimina"
+
+#: geonode/static/geonode/js/upload/upload.js:125
+#, javascript-format
+msgid "The file %s is an unsupported file type, please select another file."
+msgstr ""
+"Il file %s è un tipo di file non supportato, per favore seleziona un altro "
+"file."
+
+#: geonode/static/geonode/js/upload/upload.js:285
+msgid ""
+"You are trying to upload an incomplete set of files or not all mandatory "
+"options have been validated.\n"
+"\n"
+"Please check for errors in the form!"
+msgstr ""
+"Stai tentando di caricare un set di file incompleto o non tutte le opzioni "
+"obbligatorie sono state convalidate.\n"
+"\n"
+"Si prega di verificare gli errori nel modulo!"
+
+#: geonode/templates/lang.js:9 geonode/templates/lang.js:61
+#: geonode/templates/lang.js:294
 msgid "Cancel"
 msgstr "Annulla"
 
-#: _locale_external/geonode/templates/lang.js:10
+#: geonode/templates/lang.js:10 geonode/templates/lang.js:66
 msgid "Save as Copy"
 msgstr "Salva come copia"
 
-#: _locale_external/geonode/templates/lang.js:11
+#: geonode/templates/lang.js:11
 msgid "About this Map"
-msgstr "Riguardo a questa vista"
+msgstr "Riguardo a questa mappa"
 
-#: _locale_external/geonode/templates/lang.js:12
-#: _locale_external/geonode/templates/lang.js:96
-#: _locale_external/geonode/templates/lang.js:165
+#: geonode/templates/lang.js:12 geonode/templates/lang.js:143
+#: geonode/templates/lang.js:212
 msgid "Abstract"
 msgstr "Abstract"
 
-#: _locale_external/geonode/templates/lang.js:13
+#: geonode/templates/lang.js:13 geonode/templates/lang.js:30
+#: geonode/templates/lang.js:67 geonode/templates/lang.js:96
 msgid "Save"
 msgstr "Salva"
 
-#: _locale_external/geonode/templates/lang.js:14
-#: _locale_external/geonode/templates/lang.js:100
-#: _locale_external/geonode/templates/lang.js:109
-#: _locale_external/geonode/templates/lang.js:162
-#: _locale_external/geonode/templates/lang.js:184
-#: _locale_external/geonode/templates/lang.js:219
+#: geonode/templates/lang.js:14 geonode/templates/lang.js:72
+#: geonode/templates/lang.js:147 geonode/templates/lang.js:156
+#: geonode/templates/lang.js:209 geonode/templates/lang.js:231
+#: geonode/templates/lang.js:276
 msgid "Title"
 msgstr "Titolo"
 
-#: _locale_external/geonode/templates/lang.js:20
+#: geonode/templates/lang.js:20 geonode/templates/lang.js:37
 msgid "Connection Error"
 msgstr "Errore di connessione"
 
-#: _locale_external/geonode/templates/lang.js:21
+#: geonode/templates/lang.js:21 geonode/templates/lang.js:38
 msgid "The server returned an error"
 msgstr "Il server ha risposto con un errore"
 
-#: _locale_external/geonode/templates/lang.js:22
+#: geonode/templates/lang.js:22 geonode/templates/lang.js:39
 msgid "Details..."
 msgstr "Dettagli..."
 
-#: _locale_external/geonode/templates/lang.js:28
-#: _locale_external/geonode/templates/lang.js:31
+#: geonode/templates/lang.js:28 geonode/templates/lang.js:34
+#: geonode/templates/lang.js:279
 msgid "Add Layers"
 msgstr "Aggiungi layer"
 
-#: _locale_external/geonode/templates/lang.js:29
+#: geonode/templates/lang.js:29
+msgid "Add ArcGIS REST Server"
+msgstr ""
+
+#: geonode/templates/lang.js:31 geonode/templates/lang.js:90
+msgid "Link"
+msgstr ""
+
+#: geonode/templates/lang.js:32
 msgid "Area"
 msgstr "Area"
 
-#: _locale_external/geonode/templates/lang.js:30
+#: geonode/templates/lang.js:33
 msgid "Background"
 msgstr "Sfondo"
 
-#: _locale_external/geonode/templates/lang.js:32
+#: geonode/templates/lang.js:35
 msgid "Done"
 msgstr "Fatto"
 
-#: _locale_external/geonode/templates/lang.js:33
+#: geonode/templates/lang.js:36
 msgid "Available Layers"
 msgstr "Layer disponibili"
 
-#: _locale_external/geonode/templates/lang.js:35
-#: _locale_external/geonode/templates/lang.js:121
+#: geonode/templates/lang.js:40
+#, fuzzy
+#| msgid "Add Layers"
+msgid "Add feeds"
+msgstr "Aggiungi layer"
+
+#: geonode/templates/lang.js:41
+msgid "Flickr"
+msgstr ""
+
+#: geonode/templates/lang.js:42
+#, fuzzy
+#| msgid "Google Earth KML"
+msgid "Google Earth"
+msgstr "KML di Google Earth"
+
+#: geonode/templates/lang.js:43
+#, fuzzy
+#| msgid ""
+#| "Your map is ready to be published to the web!  Simply copy the following "
+#| "HTML to embed the map in your website:"
+msgid ""
+"<p>Your map is ready to be published to the web! </p><p> Simply copy the "
+"following HTML to embed the map in your website: </p>"
+msgstr ""
+"La tua mappa è pronta per essere pubblicata sul Web! Copia semplicemente il "
+"seguente codice HTML per includere la mappa nel tuo sito web:"
+
+#: geonode/templates/lang.js:44 geonode/templates/lang.js:168
 msgid "Height"
 msgstr "Altezza"
 
-#: _locale_external/geonode/templates/lang.js:36
+#: geonode/templates/lang.js:45
+msgid "Help"
+msgstr ""
+
+#: geonode/templates/lang.js:46
 msgid "Get Feature Info"
 msgstr "Ottieni informazioni sulla feature"
 
-#: _locale_external/geonode/templates/lang.js:37
-#: _locale_external/geonode/templates/lang.js:122
+#: geonode/templates/lang.js:47
+msgid "About"
+msgstr ""
+
+#: geonode/templates/lang.js:48
+#, fuzzy
+#| msgid "About this Map"
+msgid "About us"
+msgstr "Riguardo a questa mappa"
+
+#: geonode/templates/lang.js:49 geonode/templates/lang.js:169
 msgid "Large"
 msgstr "Grande"
 
-#: _locale_external/geonode/templates/lang.js:38
+#: geonode/templates/lang.js:50
 msgid "or add a new server."
 msgstr "o aggiungi un nuovo server."
 
-#: _locale_external/geonode/templates/lang.js:39
+#: geonode/templates/lang.js:51
 msgid "Map Layers"
-msgstr "Tematismi della vista"
+msgstr "Tematismi della mappa"
 
-#: _locale_external/geonode/templates/lang.js:40
+#: geonode/templates/lang.js:52
+#, fuzzy
+#| msgid "Upload Metadata"
+msgid "Upload your own data"
+msgstr "Carica i metadati"
+
+#: geonode/templates/lang.js:53
 msgid "View available data from:"
 msgstr "Visualizza dati disponbili da:"
 
-#: _locale_external/geonode/templates/lang.js:41
+#: geonode/templates/lang.js:54
 msgid "Data"
 msgstr "Dato"
 
-#: _locale_external/geonode/templates/lang.js:42
+#: geonode/templates/lang.js:55
 msgid "Layers"
 msgstr "Tematismi"
 
-#: _locale_external/geonode/templates/lang.js:43
+#: geonode/templates/lang.js:56
 msgid "Legend"
 msgstr "Legenda"
 
-#: _locale_external/geonode/templates/lang.js:44
+#: geonode/templates/lang.js:57
 msgid "Length"
 msgstr "Lunghezza"
 
-#: _locale_external/geonode/templates/lang.js:45
+#: geonode/templates/lang.js:58
 msgid "Loading Map..."
-msgstr "Caricamento della vista..."
+msgstr "Caricamento della mappa..."
 
-#: _locale_external/geonode/templates/lang.js:46
-#: _locale_external/geonode/templates/lang.js:123
+#: geonode/templates/lang.js:59 geonode/templates/lang.js:170
 msgid "Map Size"
-msgstr "Dimensioni della vista"
+msgstr "Dimensioni della mappa"
 
-#: _locale_external/geonode/templates/lang.js:47
+#: geonode/templates/lang.js:60
 msgid "Measure"
 msgstr "Misura"
 
-#: _locale_external/geonode/templates/lang.js:48
-#: _locale_external/geonode/templates/lang.js:97
-#: _locale_external/geonode/templates/lang.js:163
+#: geonode/templates/lang.js:62
+msgid "Warning"
+msgstr ""
+
+#: geonode/templates/lang.js:63
+msgid ""
+"You now have %n layers in your map.  With more than %max layers you may "
+"experience problems with layer ordering, info balloon display, and general "
+"performance. "
+msgstr ""
+
+#: geonode/templates/lang.js:64 geonode/templates/lang.js:144
+#: geonode/templates/lang.js:210
 msgid "Contact"
 msgstr "Contatto"
 
-#: _locale_external/geonode/templates/lang.js:49
-#: _locale_external/geonode/templates/lang.js:55
+#: geonode/templates/lang.js:65 geonode/templates/lang.js:85
 msgid "Permalink"
 msgstr "Permalink"
 
-#: _locale_external/geonode/templates/lang.js:50
-#: _locale_external/geonode/templates/lang.js:124
+#: geonode/templates/lang.js:68
+msgid "Copy"
+msgstr ""
+
+#: geonode/templates/lang.js:69
+#, fuzzy
+#| msgid "About this Map"
+msgid "About this Map View"
+msgstr "Riguardo a questa mappa"
+
+#: geonode/templates/lang.js:70
+msgid "Abstract (brief description)"
+msgstr ""
+
+#: geonode/templates/lang.js:71
+msgid "Introduction (tell visitors more about your map view)"
+msgstr ""
+
+#: geonode/templates/lang.js:73
+msgid "UserUrl"
+msgstr ""
+
+#: geonode/templates/lang.js:74 geonode/templates/lang.js:171
 msgid "Mini"
 msgstr "Mini"
 
-#: _locale_external/geonode/templates/lang.js:51
-msgid "Pan Map"
-msgstr "Pan della vista"
+#: geonode/templates/lang.js:75
+#, fuzzy
+#| msgid "Add Layers"
+msgid "Add Category"
+msgstr "Aggiungi layer"
 
-#: _locale_external/geonode/templates/lang.js:52
+#: geonode/templates/lang.js:76
+msgid " Add a new category to the layer tree"
+msgstr ""
+
+#: geonode/templates/lang.js:77
+msgid " Rename Category"
+msgstr ""
+
+#: geonode/templates/lang.js:78
+msgid " Rename this category"
+msgstr ""
+
+#: geonode/templates/lang.js:79
+#, fuzzy
+#| msgid "Remove Layer"
+msgid " Remove Category"
+msgstr "Rimuovi il layer"
+
+#: geonode/templates/lang.js:80
+msgid " Remove this category and layers"
+msgstr ""
+
+#: geonode/templates/lang.js:81
+msgid "Pan Map"
+msgstr "Pan della mappa"
+
+#: geonode/templates/lang.js:82
 msgid "Zoom to Next Extent"
 msgstr "Zoom all'Estensione Seguente"
 
-#: _locale_external/geonode/templates/lang.js:53
+#: geonode/templates/lang.js:83
 msgid "Zoom to Previous Extent"
 msgstr "Zoom all'Estensione Precedente"
 
-#: _locale_external/geonode/templates/lang.js:54
+#: geonode/templates/lang.js:84
 msgid "This map has not yet been saved."
-msgstr "Questa vista non è stata ancora salvata."
+msgstr "Questa mappa non è stata ancora salvata."
 
-#: _locale_external/geonode/templates/lang.js:56
-#: _locale_external/geonode/templates/lang.js:125
+#: geonode/templates/lang.js:86 geonode/templates/lang.js:172
 msgid "Premium"
 msgstr "Premium"
 
-#: _locale_external/geonode/templates/lang.js:57
+#: geonode/templates/lang.js:87
 msgid "Print Map"
-msgstr "Stampa Vista"
+msgstr "Stampa Mappa"
 
-#: _locale_external/geonode/templates/lang.js:58
+#: geonode/templates/lang.js:88
 msgid "Print Preview"
 msgstr "Anteprima di Stampa"
 
-#: _locale_external/geonode/templates/lang.js:59
+#: geonode/templates/lang.js:89
 msgid "Properties"
 msgstr "Proprietà"
 
-#: _locale_external/geonode/templates/lang.js:60
-#: _locale_external/geonode/templates/lang.js:126
+#: geonode/templates/lang.js:91 geonode/templates/lang.js:173
 msgid "Publish Map"
-msgstr "Puppblica la Vista"
+msgstr "Puppblica la Mappa"
 
-#: _locale_external/geonode/templates/lang.js:61
-#: _locale_external/geonode/templates/lang.js:62
+#: geonode/templates/lang.js:92 geonode/templates/lang.js:93
 msgid "Remove Layer"
 msgstr "Rimuovi il layer"
 
-#: _locale_external/geonode/templates/lang.js:63
+#: geonode/templates/lang.js:94
 msgid "Sorry, your map could not be saved."
-msgstr "Mi spiace, la vista non può essere salvata."
+msgstr "Mi spiace, la mappa non può essere salvata."
 
-#: _locale_external/geonode/templates/lang.js:64
+#: geonode/templates/lang.js:95
 msgid "Error While Saving"
 msgstr "Errore durante il salvataggio"
 
-#: _locale_external/geonode/templates/lang.js:65
+#: geonode/templates/lang.js:97
 msgid "Save Map"
-msgstr "Salva la vista"
+msgstr "Salva la mappa"
 
-#: _locale_external/geonode/templates/lang.js:66
+#: geonode/templates/lang.js:98
 msgid "You must be logged in to save this map."
-msgstr "Devi essere registrato per salvare questa vista."
+msgstr "Devi essere registrato per salvare questa mappa."
 
-#: _locale_external/geonode/templates/lang.js:67
-#: _locale_external/geonode/templates/lang.js:128
+#: geonode/templates/lang.js:99 geonode/templates/lang.js:175
 msgid "Small"
 msgstr "Piccola"
 
-#: _locale_external/geonode/templates/lang.js:68
+#: geonode/templates/lang.js:100
+#, fuzzy
+#| msgid "Map Layers"
+msgid " Share Layer"
+msgstr "Tematismi della mappa"
+
+#: geonode/templates/lang.js:101
 msgid ""
 "Error contacting server.\n"
 " Please check the url and try again."
@@ -260,564 +570,656 @@ msgstr ""
 "Errore nella connessione con il server.\n"
 "Per favore, verifica l'URL e prova ancora."
 
-#: _locale_external/geonode/templates/lang.js:69
+#: geonode/templates/lang.js:102
 msgid "Layer Properties"
 msgstr "Proprietà del layer"
 
-#: _locale_external/geonode/templates/lang.js:70
+#: geonode/templates/lang.js:103
 msgid "Change layer format and style"
 msgstr "Modifica il formato e lo stile del layer"
 
-#: _locale_external/geonode/templates/lang.js:71
+#: geonode/templates/lang.js:104
 msgid "Edit Styles"
 msgstr "Modifica gli stili"
 
-#: _locale_external/geonode/templates/lang.js:72
+#: geonode/templates/lang.js:105
 msgid "Edit layer styles"
 msgstr "Modifica gli stili del layer"
 
-#: _locale_external/geonode/templates/lang.js:73
+#: geonode/templates/lang.js:106
 msgid "Switch to Google Earth 3D Viewer"
 msgstr "Cambiare in Google Earth Viewer 3D"
 
-#: _locale_external/geonode/templates/lang.js:74
+#: geonode/templates/lang.js:107
 msgid ""
 "The map that you are trying to load does not exist.  Creating a new map "
 "instead."
 msgstr ""
-"La vista che stai cercando di caricare non esiste. Crea una nuova vista."
+"La mappa che stai cercando di caricare non esiste. Crea una nuova mappa."
 
-#: _locale_external/geonode/templates/lang.js:75
+#: geonode/templates/lang.js:108
 msgid "Unknown Map"
-msgstr "Vista sconosciuta"
+msgstr "Mappa sconosciuta"
 
-#: _locale_external/geonode/templates/lang.js:76
-#: _locale_external/geonode/templates/lang.js:129
+#: geonode/templates/lang.js:109
+#, fuzzy
+#| msgid "Selected Layers"
+msgid "Unsupported Layers"
+msgstr "Layer selezionati"
+
+#: geonode/templates/lang.js:110
+msgid "The following layers cannot be printed:"
+msgstr ""
+
+#: geonode/templates/lang.js:111 geonode/templates/lang.js:176
 msgid "Width"
 msgstr "Larghezza"
 
-#: _locale_external/geonode/templates/lang.js:77
+#: geonode/templates/lang.js:112
 msgid "Zoom In"
 msgstr "Ingrandisci"
 
-#: _locale_external/geonode/templates/lang.js:78
+#: geonode/templates/lang.js:113
 msgid "Zoom Out"
 msgstr "Diminuisci"
 
-#: _locale_external/geonode/templates/lang.js:79
+#: geonode/templates/lang.js:114
 msgid "Zoom level"
 msgstr "Livello di zoom"
 
-#: _locale_external/geonode/templates/lang.js:80
+#: geonode/templates/lang.js:115
 msgid "Zoom Level"
 msgstr "Livello di zoom"
 
-#: _locale_external/geonode/templates/lang.js:81
+#: geonode/templates/lang.js:116
 msgid "Zoom to Layer Extent"
 msgstr "Zoom all'estensione del layer"
 
-#: _locale_external/geonode/templates/lang.js:82
+#: geonode/templates/lang.js:117
 msgid "Zoom to Visible Extent"
 msgstr "Zoom all'estensione visibile"
 
-#: _locale_external/geonode/templates/lang.js:88
+#: geonode/templates/lang.js:118
+msgid "Picasa"
+msgstr ""
+
+#: geonode/templates/lang.js:119
+msgid "YouTube"
+msgstr ""
+
+#: geonode/templates/lang.js:120
+msgid "Harvard Geospatial Library"
+msgstr ""
+
+#: geonode/templates/lang.js:121
+#, fuzzy
+#| msgid "Upload SLD"
+msgid "Upload Layer"
+msgstr "Carica SLD"
+
+#: geonode/templates/lang.js:122
+#, fuzzy
+#| msgid "Create Map"
+msgid "Create Layer"
+msgstr "Crea Mappa"
+
+#: geonode/templates/lang.js:123
+#, fuzzy
+#| msgid "Selected Layers"
+msgid "Rectify Layer"
+msgstr "Layer selezionati"
+
+#: geonode/templates/lang.js:124
+msgid "Submit a Map Service"
+msgstr ""
+
+#: geonode/templates/lang.js:125 geonode/templates/lang.js:219
+#: geonode/templates/lang.js:240
+msgid "Search"
+msgstr "Cerca"
+
+#: geonode/templates/lang.js:126
+msgid "External Data"
+msgstr ""
+
+#: geonode/templates/lang.js:127
+msgid "If you leave this page, unsaved changes will be lost."
+msgstr ""
+
+#: geonode/templates/lang.js:128
+msgid "Center for Geographic Analysis"
+msgstr ""
+
+#: geonode/templates/lang.js:129
+msgid "Bigdata and AMAP Innovation Team"
+msgstr ""
+
+#: geonode/templates/lang.js:135
 msgid "Zoom Level {zoom}"
 msgstr "Livello di zoom {zoom}"
 
-#: _locale_external/geonode/templates/lang.js:94
+#: geonode/templates/lang.js:141
 msgid "Create Map"
-msgstr "Crea Vista"
+msgstr "Crea Mappa"
 
-#: _locale_external/geonode/templates/lang.js:95
+#: geonode/templates/lang.js:142
 msgid "Export Map"
-msgstr "Esporta vista "
+msgstr "Esporta mappa"
 
-#: _locale_external/geonode/templates/lang.js:98
+#: geonode/templates/lang.js:145
 msgid "Map"
-msgstr "Vista"
+msgstr "Mappa"
 
-#: _locale_external/geonode/templates/lang.js:99
-#: _locale_external/geonode/templates/lang.js:166
+#: geonode/templates/lang.js:146 geonode/templates/lang.js:213
 msgid "View this Map"
-msgstr "Visualizza questa vista"
+msgstr "Visualizza questa mappa"
 
-#: _locale_external/geonode/templates/lang.js:101
+#: geonode/templates/lang.js:148
 msgid "Open Map"
-msgstr "Apri vista"
+msgstr "Apri mappa"
 
-#: _locale_external/geonode/templates/lang.js:107
-#: _locale_external/geonode/templates/lang.js:183
-#: static/upload_observations/js/gettext_statements.js:16
+#: geonode/templates/lang.js:154 geonode/templates/lang.js:230
 msgid "Name"
 msgstr "Nome"
 
-#: _locale_external/geonode/templates/lang.js:108
+#: geonode/templates/lang.js:155
 msgid "Queryable"
 msgstr "Interrogabile"
 
-#: _locale_external/geonode/templates/lang.js:115
+#: geonode/templates/lang.js:162
 msgid "No background"
 msgstr "Nessuno sfondo"
 
-#: _locale_external/geonode/templates/lang.js:127
+#: geonode/templates/lang.js:174
 msgid ""
 "Your map is ready to be published to the web!  Simply copy the following "
 "HTML to embed the map in your website:"
 msgstr ""
-"La tua vista è pronta per essere pubblicata sul Web! Copia semplicemente il "
-"seguente codice HTML per includere la vista nel tuo sito web:"
+"La tua mappa è pronta per essere pubblicata sul Web! Copia semplicemente il "
+"seguente codice HTML per includere la mappa nel tuo sito web:"
 
-#: _locale_external/geonode/templates/lang.js:136
-#: _locale_external/geonode/templates/lang.js:202
+#: geonode/templates/lang.js:183 geonode/templates/lang.js:259
 msgid "Abstract:"
 msgstr "Abstract:"
 
-#: _locale_external/geonode/templates/lang.js:137
-#: _locale_external/geonode/templates/lang.js:204
+#: geonode/templates/lang.js:184 geonode/templates/lang.js:261
 msgid "No attribution information is provided for this layer."
 msgstr "Nessuna attribuzione è fornita per questo layer."
 
-#: _locale_external/geonode/templates/lang.js:138
-#: _locale_external/geonode/templates/lang.js:205
+#: geonode/templates/lang.js:185 geonode/templates/lang.js:262
 msgid "Provided by:"
 msgstr "Fornito da:"
 
-#: _locale_external/geonode/templates/lang.js:139
-#: _locale_external/geonode/templates/lang.js:206
+#: geonode/templates/lang.js:186 geonode/templates/lang.js:263
 msgid "Download:"
 msgstr "Scarica:"
 
-#: _locale_external/geonode/templates/lang.js:140
-#: _locale_external/geonode/templates/lang.js:208
+#: geonode/templates/lang.js:187 geonode/templates/lang.js:265
 msgid "No keywords are listed for this layer."
 msgstr "Nessuna parola chiave elencata per questo layer."
 
-#: _locale_external/geonode/templates/lang.js:141
-#: _locale_external/geonode/templates/lang.js:209
+#: geonode/templates/lang.js:188 geonode/templates/lang.js:266
 msgid "Keywords:"
 msgstr "Parole chiave:"
 
-#: _locale_external/geonode/templates/lang.js:142
-#: _locale_external/geonode/templates/lang.js:210
+#: geonode/templates/lang.js:189 geonode/templates/lang.js:267
 msgid "No metadata URLs are defined for this layer."
 msgstr "Nessun link ai metadati è definito per questo layer."
 
-#: _locale_external/geonode/templates/lang.js:143
-#: _locale_external/geonode/templates/lang.js:211
+#: geonode/templates/lang.js:190 geonode/templates/lang.js:268
 msgid "Metadata Links:"
 msgstr "Link ai metadati:"
 
-#: _locale_external/geonode/templates/lang.js:149
+#: geonode/templates/lang.js:196
 msgid "Paper size:"
 msgstr "Formato di pagina:"
 
-#: _locale_external/geonode/templates/lang.js:150
+#: geonode/templates/lang.js:197
 msgid "Resolution:"
 msgstr "Risoluzione:"
 
-#: _locale_external/geonode/templates/lang.js:151
+#: geonode/templates/lang.js:198
 msgid "Print"
 msgstr "Stampa"
 
-#: _locale_external/geonode/templates/lang.js:152
+#: geonode/templates/lang.js:199
 msgid "Enter map title here."
 msgstr "Inserisci qui il titolo."
 
-#: _locale_external/geonode/templates/lang.js:153
+#: geonode/templates/lang.js:200
 msgid "Include legend?"
 msgstr "Includi legenda?"
 
-#: _locale_external/geonode/templates/lang.js:154
+#: geonode/templates/lang.js:201
 msgid "Enter comments here."
 msgstr "Scrivi qui i commenti."
 
-#: _locale_external/geonode/templates/lang.js:155
+#: geonode/templates/lang.js:202
 msgid "Creating PDF..."
 msgstr "Creo PDF ..."
 
-#: _locale_external/geonode/templates/lang.js:164
+#: geonode/templates/lang.js:211
 msgid "Last Modified"
 msgstr "Ultimo modificato"
 
-#: _locale_external/geonode/templates/lang.js:167
-#: _locale_external/geonode/templates/lang.js:188
+#: geonode/templates/lang.js:214 geonode/templates/lang.js:235
 msgid "Prev"
 msgstr "Precedente"
 
-#: _locale_external/geonode/templates/lang.js:168
-#: _locale_external/geonode/templates/lang.js:189
+#: geonode/templates/lang.js:215 geonode/templates/lang.js:236
 msgid "Next"
 msgstr "Prossimo"
 
-#: _locale_external/geonode/templates/lang.js:169
-#: _locale_external/geonode/templates/lang.js:190
+#: geonode/templates/lang.js:216 geonode/templates/lang.js:237
 msgid "of"
 msgstr "di"
 
-#: _locale_external/geonode/templates/lang.js:170
-#: _locale_external/geonode/templates/lang.js:191
+#: geonode/templates/lang.js:217 geonode/templates/lang.js:238
 msgid "Your search did not match any items."
 msgstr "La tua ricerca non ha prodotto risultati."
 
-#: _locale_external/geonode/templates/lang.js:171
+#: geonode/templates/lang.js:218
 msgid "Search Maps"
-msgstr "Cerca Viste"
+msgstr "Cerca Mappe"
 
-#: _locale_external/geonode/templates/lang.js:172
-#: _locale_external/geonode/templates/lang.js:192
-msgid "Search"
-msgstr "Cerca"
-
-#: _locale_external/geonode/templates/lang.js:173
-#: _locale_external/geonode/templates/lang.js:193
+#: geonode/templates/lang.js:220
 msgid "Showing"
 msgstr "Visualizzo"
 
-#: _locale_external/geonode/templates/lang.js:174
+#: geonode/templates/lang.js:221
 msgid "Loading"
 msgstr "Carico"
 
-#: _locale_external/geonode/templates/lang.js:175
-#: _locale_external/geonode/templates/lang.js:195
+#: geonode/templates/lang.js:222 geonode/templates/lang.js:243
 msgid "permalink"
 msgstr "permalink"
 
-#: _locale_external/geonode/templates/lang.js:182
+#: geonode/templates/lang.js:229
 msgid "Select"
 msgstr "Seleziona"
 
-#: _locale_external/geonode/templates/lang.js:185
+#: geonode/templates/lang.js:232
 msgid "Select:"
 msgstr "Seleziona:"
 
-#: _locale_external/geonode/templates/lang.js:186
+#: geonode/templates/lang.js:233
 msgid "All"
 msgstr "Tutti"
 
-#: _locale_external/geonode/templates/lang.js:187
+#: geonode/templates/lang.js:234
 msgid "None"
 msgstr "Nessuno"
 
-#: _locale_external/geonode/templates/lang.js:194
+#: geonode/templates/lang.js:239
+#, fuzzy
+#| msgid "Keywords:"
+msgid "Keyword"
+msgstr "Parole chiave:"
+
+#: geonode/templates/lang.js:241
+#, fuzzy
+#| msgid "Showing"
+msgid "Showing..."
+msgstr "Visualizzo"
+
+#: geonode/templates/lang.js:242
 msgid "Loading..."
 msgstr "Carico ..."
 
-#: _locale_external/geonode/templates/lang.js:196
+#: geonode/templates/lang.js:244
 msgid "You do not have permission to view this data"
 msgstr "Non hai i permessi per visualizzare questo dato"
 
-#: _locale_external/geonode/templates/lang.js:197
+#: geonode/templates/lang.js:245
 msgid "This data is stored on a remote server"
 msgstr "Questo dato è memorizzato su un server remoto"
 
-#: _locale_external/geonode/templates/lang.js:203
+#: geonode/templates/lang.js:246
+msgid "Invalid Query"
+msgstr ""
+
+#: geonode/templates/lang.js:247
+msgid "You need to specify a search term"
+msgstr ""
+
+#: geonode/templates/lang.js:248 geonode/templates/lang.js:250
+msgid "Source"
+msgstr ""
+
+#: geonode/templates/lang.js:249
+#, fuzzy
+#| msgid "Data"
+msgid "Data Type"
+msgstr "Dato"
+
+#: geonode/templates/lang.js:251
+msgid "Date"
+msgstr ""
+
+#: geonode/templates/lang.js:252
+msgid "from year"
+msgstr ""
+
+#: geonode/templates/lang.js:253
+msgid "to year"
+msgstr ""
+
+#: geonode/templates/lang.js:254
+msgid "Reset"
+msgstr ""
+
+#: geonode/templates/lang.js:260
 msgid "No abstract is provided for this layer."
 msgstr "Nessuna abstract è stato fornito per questo layer."
 
-#: _locale_external/geonode/templates/lang.js:207
+#: geonode/templates/lang.js:264
 msgid "No download URLs are definied for this layer."
-msgstr "Nessuna URL per il download è stata definita per questo layer"
+msgstr "Nessuna URL per il download è stata definita per questo layer."
 
-#: _locale_external/geonode/templates/lang.js:217
+#: geonode/templates/lang.js:269
+msgid "Click here for more information about this layer."
+msgstr ""
+
+#: geonode/templates/lang.js:274
 msgid "Selected Layers"
 msgstr "Layer selezionati"
 
-#: _locale_external/geonode/templates/lang.js:218
+#: geonode/templates/lang.js:275
 msgid "No Layers Selected"
 msgstr "Nessun layer seleionato"
 
-#: _locale_external/geonode/templates/lang.js:220
+#: geonode/templates/lang.js:277
 msgid "Clear Selected"
 msgstr "Pulisci i selezionati"
 
-#: _locale_external/geonode/templates/lang.js:221
+#: geonode/templates/lang.js:278
 msgid "Clear All"
 msgstr "Pulisci tutto"
 
-#: _locale_external/geonode/templates/lang.js:227
+#: geonode/templates/lang.js:285
 msgid "Operation Failed"
 msgstr "Operazione fallita"
 
-#: _locale_external/geonode/templates/lang.js:228
+#: geonode/templates/lang.js:286
 msgid "No layers are currently selected."
-msgstr "Nessun layer è attualmente selezionato"
+msgstr "Nessun layer è attualmente selezionato."
 
-#: _locale_external/geonode/templates/lang.js:235
+#: geonode/templates/lang.js:293
 msgid "Downloading..."
 msgstr "Scarico ..."
 
-#: _locale_external/geonode/templates/lang.js:237
+#: geonode/templates/lang.js:295
 msgid "Please wait"
 msgstr "Per favore, attendi"
 
-#: static/geosk/js/cookieconsent.js:1
-msgid ""
-"We use cookies to ensure that we give you the best experience on our "
-"website. If you continue without changing your settings, we'll assume that "
-"you are happy to receive all cookies from this website."
-msgstr ""
-"Questo Sito utilizza cookie di funzionalità. Chiudendo questo banner o "
-"accedendo a un qualunque elemento del Sito acconsenti all'uso dei cookie."
+#~ msgid "emitReadable"
+#~ msgstr "emitReadable"
 
-#: static/geosk/js/cookieconsent.js:2
-msgid "Got it!"
-msgstr ""
+#~ msgid "emit readable"
+#~ msgstr "emit readable"
 
-#: static/geosk/js/cookieconsent.js:2
-msgid "More info"
-msgstr "Ulteriori informazioni"
+#~ msgid "maybeReadMore read 0"
+#~ msgstr "maybeReadMore read 0"
 
-#: static/geosk/js/cookieconsent.js:2
-msgid "http://www.get-it.it/cookiepolicy-en.html"
-msgstr "http://www.get-it.it/cookiepolicy-it.html"
+#~ msgid "pipeOnDrain"
+#~ msgstr "pipeOnDrain"
 
-#: static/upload_observations/js/gettext_statements.js:9
-msgid "Select Procedure"
-msgstr "Seleziona sensore"
+#~ msgid "readable nexttick read 0"
+#~ msgstr "readable nexttick read 0"
 
-#: static/upload_observations/js/gettext_statements.js:10
-msgid "Select Location"
-msgstr "Seleziona posizione"
+#~ msgid "resume read 0"
+#~ msgstr "resume read 0"
 
-#: static/upload_observations/js/gettext_statements.js:11
-msgid "Insert observations"
-msgstr "Inserisci osservazioni"
+#~ msgid "flow"
+#~ msgstr "flusso"
 
-#: static/upload_observations/js/gettext_statements.js:12
-msgid "Select a Procedure/Sensor"
-msgstr "Seleziona procedura/sensore"
+#~ msgid "read"
+#~ msgstr "letto"
 
-#: static/upload_observations/js/gettext_statements.js:13
-msgid ""
-"A sensor, system, method, algorithm or instrument which may be used in "
-"making an Observation (which may be described using SensorML)"
-msgstr "Un sensore, sistema, metodo, algoritmo o strumento utilizzabile per effettuare osservazioni (descrvibile eventualmente usando SensorML)"
+#~ msgid "read: emitReadable"
+#~ msgstr "read: emitReadable"
 
-#: static/upload_observations/js/gettext_statements.js:14
-msgid ""
-"Select one of the available \"Features of Interest\" or create a new one"
-msgstr "Seleziona uno degli Oggetti di Interesse disponibili o creane uno nuovo"
+#~ msgid "need readable"
+#~ msgstr "need readable"
 
-#: static/upload_observations/js/gettext_statements.js:15
-msgid ""
-"In the first instance the Feature Of Interest (and the Sampling Feature) "
-"describe the geographical location of the target of the Observation, but "
-"more generally a Feature Of Interest is an abstraction of real world "
-"phenomena (thing, species, person, event, geographic place, etc.)."
-msgstr "L'Oggetto di Interesse (Feature of Interest), insieme all'Oggetto Campione (Sampling Feature), descrive qui la posizione geografica dell'oggetto dell'osservazione, ma più in generale un Oggetto di Interesse è un'astrazione di un fenomeno del mondo reale (cosa, specie, persona, evento, luogo geografico)"
+#~ msgid "length less than watermark"
+#~ msgstr "length less than watermark"
 
-#: static/upload_observations/js/gettext_statements.js:17
-msgid "A descriptive name for the Feature Of Interest"
-msgstr "Un nome descrittivo per l'Oggetto di Interesse"
+#~ msgid "reading or ended"
+#~ msgstr "reading or ended"
 
-#: static/upload_observations/js/gettext_statements.js:18
-msgid "Sampling point"
-msgstr "Punto di campionamento"
+#~ msgid "do read"
+#~ msgstr "do read"
 
-#: static/upload_observations/js/gettext_statements.js:19
-msgid "Sampling Point"
-msgstr "Punto di campionamento"
+#~ msgid "onunpipe"
+#~ msgstr "onunpipe"
 
-#: static/upload_observations/js/gettext_statements.js:20
-msgid "The sampling position"
-msgstr "Posizione puntuale del campionamento"
+#~ msgid "onend"
+#~ msgstr "onend"
 
-#: static/upload_observations/js/gettext_statements.js:21
-msgid "Sampled Feature (URI)"
-msgstr "URI dell'oggetto geografico campionato (sampled feature)"
+#~ msgid "cleanup"
+#~ msgstr "cancellazione"
 
-#: static/upload_observations/js/gettext_statements.js:22
-msgid ""
-"Is the feature of the Sampling Feature, providing the ultimate context for "
-"the Observation. A Sampling Feature provides the direct context for the "
-"specific Observation (spatial, specimen etc.)."
-msgstr "E' l'Oggetto (geografico) Campionato (sampled feature). L'osservazione è invece effettuata su un secondo oggetto detto Oggetto Campione (sampling feature)."
+#~ msgid "ondata"
+#~ msgstr "ondata"
 
-#: static/upload_observations/js/gettext_statements.js:23
-msgid "Action"
-msgstr "Azione"
+#~ msgid "false write response, pause"
+#~ msgstr "false write response, pause"
 
-#: static/upload_observations/js/gettext_statements.js:24
-msgid "Lat."
-msgstr "Lat."
+#~| msgid "Connection Error"
+#~ msgid "onerror"
+#~ msgstr "onerror"
 
-#: static/upload_observations/js/gettext_statements.js:25
-msgid "Lon."
-msgstr "Lon."
+#~ msgid "onfinish"
+#~ msgstr "onfinish"
 
-#: static/upload_observations/js/gettext_statements.js:26
-msgid "SRS"
-msgstr "SRS"
+#~ msgid "unpipe"
+#~ msgstr "unpipe"
 
-#: static/upload_observations/js/gettext_statements.js:27
-msgid ""
-"You can use the map to choose (by left click) a Sampled Feature from the "
-"local WFS (activate the WFS layers with the layers control in the map)"
-msgstr "Puoi usare la mappa per scegliere (tasto sinistro) l'Oggetto Campionato dal WFS locale (per attivare i layer WFS usa il controllo in alto a sinistra sulla mappa)"
+#~ msgid "pipe count=%d opts=%j"
+#~ msgstr "pipe count=%d opts=%j"
 
-#: static/upload_observations/js/gettext_statements.js:28
-#: static/upload_observations/js/insertObservationPage.js:1205
-msgid "Use"
-msgstr "Usa"
+#~ msgid "pipe resume"
+#~ msgstr "pipe resume"
 
-#: static/upload_observations/js/gettext_statements.js:29
-msgid "Tips"
-msgstr "Suggerimenti"
+#~ msgid "resume"
+#~ msgstr "resume"
 
-#: static/upload_observations/js/gettext_statements.js:30
-msgid ""
-"You can input the coordinates for a new feature right clicking on the map"
-msgstr "Puoi inserire le coordinate per un nuovo punto di campionamento facendo click con il tasto destro sulla mappa"
+#~ msgid "call pause flowing=%j"
+#~ msgstr "call pause flowing=%j"
 
-#: static/upload_observations/js/gettext_statements.js:31
-msgid ""
-"You can use the map to choose (by left click) a Sampled Feature from the "
-"local WFS"
-msgstr "Puoi usare la mappa per scegliere (tasto sinistro) l'Oggetto Campionato da uno dei layer del WFS locale"
+#~ msgid "pause"
+#~ msgstr "pause"
 
-#: static/upload_observations/js/gettext_statements.js:32
-msgid ""
-"Features of Interest already inserted for the chosen Sensor/Procedure are "
-"displayed on the map. Click their marker to obtain more info"
-msgstr "I punti di campionamento relativi agli Oggetti di Interesse precedentemente inseriti per la procedura/sensore selezionata sono mostrati sulla mappa. Per ottenerne informazioni fare click sul loro segnaposto"
+#~ msgid "wrapped end"
+#~ msgstr "wrapped end"
 
-#: static/upload_observations/js/gettext_statements.js:33
-msgid "Use the control layer on the map to show/hide layers"
-msgstr "Usa lo strumento di controllo presente sulla mappa per nascondere o mostrare i layer"
+#~ msgid "wrapped data"
+#~ msgstr "wrapped data"
 
-#: static/upload_observations/js/gettext_statements.js:34
-msgid "Insert data"
-msgstr "Inserisci i dati"
+#~ msgid "wrapped _read"
+#~ msgstr "wrapped _read"
 
-#: static/upload_observations/js/gettext_statements.js:35
-msgid ""
-"Fill in the data manually or paste them from a spreadsheet, without "
-"headings.\n"
-"\t\t      \t\t\t\t\tPlease check the order of columns here proposed.\n"
-"\t\t      \t\t\t\t\t"
-msgstr "Inserisci i dati manualmente o fai copia-incolla da un foglio di calcolo  senza copiare la riga di intestazione (per i copia-incolla verifica prima la corrispondenza con l'ordine delle colonne proposte in questa pagina!)"
+#~ msgid "Only one File at a time can be uploaded!"
+#~ msgstr "È possibile caricare solo un file alla volta!"
 
-#: static/upload_observations/js/gettext_statements.js:36
-msgid "Show accepted date-time formats."
-msgstr "Mostra i formati di data e ora accettati"
+#~ msgid "<iframe frameborder='0' width='0' height='0'/>"
+#~ msgstr "<iframe frameborder='0' width='0' height='0'/>"
 
-#: static/upload_observations/js/gettext_statements.js:37
-msgid "REMARK - accepted date-time formats."
-msgstr "NOTA BENE: formati di data e ora accettati"
+#~ msgid "<script>"
+#~ msgstr "<script>"
 
-#: static/upload_observations/js/gettext_statements.js:38
-msgid ""
-"Timestamp fields (date and time) like \"phenomenon time\" or \"result time\" "
-"require values expressed in ISO 8601 format. The table in this page admits "
-"also date and time time values in one of the following formats"
-msgstr "Campi di data e ora come \"istante del fenomeno\" o \"istante del risultato\" richiedono valori espressi in formato ISO 8601. La tabella in questa pagina ammette anche i formati di data e ora seguenti"
+#~ msgid "<div>"
+#~ msgstr "<div>"
 
-#: static/upload_observations/js/gettext_statements.js:39
-msgid ""
-" that will be automatically converted in the standard format. The use of "
-"different timestamps formats could lead to unexpected errors. Please check "
-"the conversion before submitting your data."
-msgstr "che verranno automaticamente convertiti nel formato standard. L'uso di formati diversi da quelli indicati potrebbe condurre ad errori inattesi. Si prega di verificare la conversione automatica prima salvare i dati."
+#~ msgid "Your layer was successfully uploaded"
+#~ msgstr "Il tuo livello è stato caricato con successo"
 
-#: static/upload_observations/js/gettext_statements.js:40
-msgid "save data"
-msgstr "Salva i dati"
+#~ msgid ""
+#~ "You need to specify more information in order to complete your upload."
+#~ msgstr ""
+#~ "È necessario specificare ulteriori informazioni per completare il "
+#~ "caricamento."
 
-#: static/upload_observations/js/gettext_statements.js:41
-msgid "ResultTime"
-msgstr "Istante del Risultato (Result Time)"
+#~ msgid "You can continue configuring your layer."
+#~ msgstr "È possibile continuare a configurare il tuo livello."
 
-#: static/upload_observations/js/gettext_statements.js:42
-msgid ""
-"Please check the result time (i.e. the time when the result became "
-"available). Change it if different from the last phenomenonTime (default)."
-msgstr "Si prega di verificare l'istante del risultato (ossia: l'istante in cui il risultato è diventato disponibile): dopo l'inserimento delle osservazioni esso viene automaticamente compilato copiando l'ultimo istante del fenomeno. Se le osservazioni inserite necessitano di distinguere il momento del fenomeno dal momento in cui i valori delle osservazioni si sono resi disponibili (per esempio in seguito a un'analisi di laboratorio) è possibile cambiare tale valore."
+#~ msgid "Available %s"
+#~ msgstr "Available %s"
 
-#: static/upload_observations/js/gettext_statements.js:43
-msgid "reset table"
-msgstr "Cancella la tabella"
+#~ msgid ""
+#~ "This is the list of available %s. You may choose some by selecting them "
+#~ "in the box below and then clicking the \"Choose\" arrow between the two "
+#~ "boxes."
+#~ msgstr ""
+#~ "This is the list of available %s. You may choose some by selecting them "
+#~ "in the box below and then clicking the \"Choose\" arrow between the two "
+#~ "boxes."
 
-#: static/upload_observations/js/gettext_statements.js:44
-msgid "Procedure/Sensor"
-msgstr "Procedura/Sensore"
+#~ msgid "Type into this box to filter down the list of available %s."
+#~ msgstr "Type into this box to filter down the list of available %s."
 
-#: static/upload_observations/js/gettext_statements.js:45
-msgid "Feature of Interest"
-msgstr "Oggetto di Interesse"
+#~ msgid "Filter"
+#~ msgstr "Filter"
 
-#: static/upload_observations/js/gettext_statements.js:46
-msgid "Sampled Feature"
-msgstr "Oggetto Campionato"
+#~ msgid "Choose all"
+#~ msgstr "Choose all"
 
-#: static/upload_observations/js/gettext_statements.js:47
-#: static/upload_observations/js/insertObservationPage.js:1265
-msgid "Available Features of Interest<br/>for the current procedure"
-msgstr "Oggetti di Interesse precedentemente inseriti per la procedura selezionata"
+#~ msgid "Click to choose all %s at once."
+#~ msgstr "Click to choose all %s at once."
 
-#: static/upload_observations/js/gettext_statements.js:48
-#: static/upload_observations/js/insertObservationPage.js:1213
-msgid "Set this as the sampling position<br/> for the new feature"
-msgstr "Imposta questa come posizione di campionamento<br/> per un nuovo Oggetto di Interesse"
+#~ msgid "Choose"
+#~ msgstr "Choose"
 
-#: static/upload_observations/js/gettext_statements.js:49
-#: static/upload_observations/js/insertObservationPage.js:1345
-msgid "Use this as the sampled feature"
-msgstr "Usa questo come Oggetto Campionato"
+#~ msgid "Chosen %s"
+#~ msgstr "Chosen %s"
 
-#: static/upload_observations/js/gettext_statements.js:50
-msgid "Legend - Fields definition"
-msgstr "Legenda - definizione dei campi"
+#~ msgid ""
+#~ "This is the list of chosen %s. You may remove some by selecting them in "
+#~ "the box below and then clicking the \"Remove\" arrow between the two "
+#~ "boxes."
+#~ msgstr ""
+#~ "This is the list of chosen %s. You may remove some by selecting them in "
+#~ "the box below and then clicking the \"Remove\" arrow between the two "
+#~ "boxes."
 
-#: static/upload_observations/js/gettext_statements.js:51
-msgid "Quantity"
-msgstr "Quantità"
+#~ msgid "Remove all"
+#~ msgstr "Remove all"
 
-#: static/upload_observations/js/gettext_statements.js:52
-msgid "Date and Time"
-msgstr "Data e Ora"
+#~ msgid "Click to remove all chosen %s at once."
+#~ msgstr "Click to remove all chosen %s at once."
 
-#: static/upload_observations/js/gettext_statements.js:53
-msgid "Unit of measure"
-msgstr "Unità di Misura"
+#~ msgid "%(sel)s of %(cnt)s selected"
+#~ msgid_plural "%(sel)s of %(cnt)s selected"
+#~ msgstr[0] "94d7ef36d54e81afde607d8fd121772b_pl_0"
+#~ msgstr[1] "94d7ef36d54e81afde607d8fd121772b_pl_1"
 
-#: static/upload_observations/js/insertObservationPage.js:421
-msgid "Exception inserting results into SOS endpoint: "
-msgstr "Eccezione durante l'inserimento nel SOS"
+#~ msgid ""
+#~ "You have unsaved changes on individual editable fields. If you run an "
+#~ "action, your unsaved changes will be lost."
+#~ msgstr ""
+#~ "You have unsaved changes on individual editable fields. If you run an "
+#~ "action, your unsaved changes will be lost."
 
-#: static/upload_observations/js/insertObservationPage.js:427
-#: static/upload_observations/js/insertObservationPage.js:1008
-msgid "Observations inserted"
-msgstr "Osservazioni inserite"
+#~ msgid ""
+#~ "You have selected an action, but you haven't saved your changes to "
+#~ "individual fields yet. Please click OK to save. You'll need to re-run the "
+#~ "action."
+#~ msgstr ""
+#~ "You have selected an action, but you haven't saved your changes to "
+#~ "individual fields yet. Please click OK to save. You'll need to re-run the "
+#~ "action."
 
-#: static/upload_observations/js/insertObservationPage.js:497
-msgid "To create a new feature of interest you must fill in all the fields"
-msgstr "Per creare un nuovo Oggetto di Interesse vanno inseriti tutti i campi"
+#~ msgid ""
+#~ "You have selected an action, and you haven't made any changes on "
+#~ "individual fields. You're probably looking for the Go button rather than "
+#~ "the Save button."
+#~ msgstr ""
+#~ "You have selected an action, and you haven't made any changes on "
+#~ "individual fields. You're probably looking for the Go button rather than "
+#~ "the Save button."
 
-#: static/upload_observations/js/insertObservationPage.js:736
-msgid "Please select a location first."
-msgstr "Prima si prega di inserire una posizione"
+#~ msgid ""
+#~ "January February March April May June July August September October "
+#~ "November December"
+#~ msgstr ""
+#~ "January February March April May June July August September October "
+#~ "November December"
 
-#: static/upload_observations/js/insertObservationPage.js:894
-msgid "Exception inserting results for "
-msgstr "Errore durante l'inserimento dei valori per"
+#~ msgid "S M T W T F S"
+#~ msgstr "S M T W T F S"
 
-#: static/upload_observations/js/insertObservationPage.js:894
-msgid " into SOS endpoint: "
-msgstr " nel server SOS"
+#~ msgid "Show"
+#~ msgstr "Show"
 
-#: static/upload_observations/js/insertObservationPage.js:1016
-msgid "Some exception occurred inserting results into SOS endpoint."
-msgstr "Si è verificato un errore durante l'inserimento dei valori nel SOS"
+#~ msgid "Hide"
+#~ msgstr "Hide"
 
-#: static/upload_observations/js/insertObservationPage.js:1020
-msgid "Only the following columns were successfully inserted:"
-msgstr "Solo le seguenti colonne sono state correttamente inserite:"
+#~ msgid "Now"
+#~ msgstr "Now"
 
-#: static/upload_observations/js/insertObservationPage.js:1022
-msgid "Please correct the errors, if possible, and retry, or reset the table."
-msgstr "Si prega di correggere gli errori, se possibile, e di riprovare o altrimenti di resettare la tabella"
+#~ msgid "Clock"
+#~ msgstr "Clock"
 
-#: static/upload_observations/js/insertObservationPage.js:1457
-#: static/upload_observations/js/insertObservationPage.js:1458
-msgid "Please select one procedure first"
-msgstr "Prima si prega di selezionare un sensore"
+#~ msgid "Choose a time"
+#~ msgstr "Choose a time"
+
+#~ msgid "Midnight"
+#~ msgstr "Midnight"
+
+#~ msgid "6 a.m."
+#~ msgstr "6 a.m."
+
+#~ msgid "Noon"
+#~ msgstr "Noon"
+
+#~ msgid "Today"
+#~ msgstr "Today"
+
+#~ msgid "Calendar"
+#~ msgstr "Calendar"
+
+#~ msgid "Yesterday"
+#~ msgstr "Yesterday"
+
+#~ msgid "Tomorrow"
+#~ msgstr "Tomorrow"
+
+#~ msgid "Add user..."
+#~ msgstr "Add user..."
+
+#~ msgid "Who can view and download this data?"
+#~ msgstr "Who can view and download this data?"
+
+#~ msgid "Anyone"
+#~ msgstr "Anyone"
+
+#~ msgid "Any registered user"
+#~ msgstr "Any registered user"
+
+#~ msgid "Only users who can edit"
+#~ msgstr "Only users who can edit"
+
+#~ msgid "Who can edit this data?"
+#~ msgstr "Who can edit this data?"
+
+#~ msgid "Only the following users or groups:"
+#~ msgstr "Only the following users or groups:"
+
+#~ msgid "Who can manage and edit this data?"
+#~ msgstr "Who can manage and edit this data?"
+
+#~ msgid "GeoTiff File"
+#~ msgstr "GeoTiff File"
+
+#~ msgid "Comma Separated File"
+#~ msgstr "Comma Separated File"
+
+#~ msgid "Zip Archives"
+#~ msgstr "Zip Archives"
+
+#~ msgid "You are uploading an incomplete set of files."
+#~ msgstr "You are uploading an incomplete set of files."
+
+#~ msgid "No error message supplied"
+#~ msgstr "No error message supplied"

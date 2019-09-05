@@ -7,6 +7,7 @@ import datetime
 import docker
 import socket
 
+from urlparse import urlparse
 from invoke import run, task
 
 BOOTSTRAP_IMAGE_CHEIP = 'codenvy/che-ip:nightly'
@@ -47,7 +48,7 @@ def update(ctx):
     envs = {
         "local_settings": "{0}".format(_localsettings()),
         "siteurl": os.environ.get('SITEURL',
-                                  'http://{0}:{1}/'.format(pub_ip, pub_port)),
+                                  'http://{0}:{1}/'.format(pub_ip, pub_port) if pub_port else 'http://{0}/'.format(pub_ip)),
         "geonode_docker_host": "{0}".format(socket.gethostbyname('geonode')),
         "public_fqdn": "{0}:{1}".format(pub_ip, pub_port),
         "public_host": "{0}".format(pub_ip),
@@ -55,7 +56,7 @@ def update(ctx):
         "geodburl": geodb_url,
         "monitoring": os.environ.get('MONITORING_ENABLED', False),
         "gs_pub_loc": os.environ.get('GEOSERVER_PUBLIC_LOCATION',
-                                     'http://{0}:{1}/geoserver/'.format(pub_ip, pub_port)),
+                                     'http://{0}:{1}/geoserver/'.format(pub_ip, pub_port) if pub_port else 'http://{0}/geoserver/'.format(pub_ip)),
         "gs_admin_pwd": os.environ.get('GEOSERVER_ADMIN_PASSWORD', 'geoserver'),
         "override_fn": "$HOME/.override_env"
     }
@@ -281,10 +282,14 @@ def _geonode_public_port():
             'nginx',
             os.getenv('GEONODE_INSTANCE_NAME', 'starterkit')
         )
+    elif gn_pub_port in ('80', '443'):
+        gn_pub_port = None
     return gn_pub_port
 
 
 def _prepare_oauth_fixture():
+    upurl = urlparse(os.environ['SITEURL'])
+    net_scheme = upurl.scheme
     pub_ip = _geonode_public_host_ip()
     print "Public Hostname or IP is {0}".format(pub_ip)
     pub_port = _geonode_public_port()
@@ -298,9 +303,7 @@ def _prepare_oauth_fixture():
                 "created": "2018-05-31T10:00:31.661Z",
                 "updated": "2018-05-31T11:30:31.245Z",
                 "algorithm": "RS256",
-                "redirect_uris": "http://{0}:{1}/geoserver/index.html".format(
-                    pub_ip, pub_port
-                ),
+                "redirect_uris": "{0}://{1}:{2}/geoserver/index.html".format(net_scheme, pub_ip, pub_port) if pub_port else "{0}://{1}/geoserver/index.html".format(net_scheme, pub_ip),
                 "name": "GeoServer",
                 "authorization_grant_type": "authorization-code",
                 "client_type": "confidential",
@@ -452,9 +455,8 @@ def _prepare_apikey_fixture():
 def _rest_api_availability(url):
     import requests
     try:
-        r = response = requests.request('get', url)
+        r = requests.request('get', url, verify=False)
         r.raise_for_status()  # Raises a HTTPError if the status is 4xx, 5xxx
-
     except (requests.exceptions.ConnectionError, requests.exceptions.Timeout) as e:
         print "GeoServer connection error is {0}".format(e)
         return False
@@ -634,6 +636,8 @@ def _pycsw_info_provision():
     return PYCSW
 
 def _prepare_monitoring_fixture():
+    upurl = urlparse(os.environ['SITEURL'])
+    net_scheme = upurl.scheme
     pub_ip = _geonode_public_host_ip()
     print "Public Hostname or IP is {0}".format(pub_ip)
     pub_port = _geonode_public_port()
@@ -644,7 +648,7 @@ def _prepare_monitoring_fixture():
         {
             "fields": {
                 "active": True,
-                "ip": "{0}".format(socket.gethostbyname('geonode')),
+                "ip": "{0}".format(os.environ['MONITORING_HOST_NAME']),
                 "name": "geonode"
             },
             "model": "monitoring.host",
@@ -653,7 +657,7 @@ def _prepare_monitoring_fixture():
         {
             "fields": {
                 "name": "local-geonode",
-                "url": "http://{0}/".format(socket.gethostbyname('geonode')),
+                "url": "{0}://{1}/".format(net_scheme, os.environ['MONITORING_HOST_NAME']),
                 "notes": "",
                 "last_check": d,
                 "active": True,
@@ -667,7 +671,7 @@ def _prepare_monitoring_fixture():
         {
             "fields": {
                 "name": "localhost-hostgeonode",
-                "url": "http://{0}/".format(socket.gethostbyname('geonode')),
+                "url": "{0}://{1}/".format(net_scheme, os.environ['MONITORING_HOST_NAME']),
                 "notes": "",
                 "last_check": d,
                 "active": True,
@@ -681,7 +685,7 @@ def _prepare_monitoring_fixture():
         {
             "fields": {
                 "name": "localhost-hostgeoserver",
-                "url": "http://{0}/geoserver/".format(socket.gethostbyname('geonode')),
+                "url": "{0}://{1}/geoserver/".format(net_scheme, os.environ['MONITORING_HOST_NAME']),
                 "notes": "",
                 "last_check": d,
                 "active": True,
@@ -695,7 +699,7 @@ def _prepare_monitoring_fixture():
         {
             "fields": {
                 "name": "default-geoserver",
-                "url": "http://{0}/geoserver/".format(socket.gethostbyname('geonode')),
+                "url": "{0}://{1}/geoserver/".format(net_scheme, os.environ['MONITORING_HOST_NAME']),
                 "notes": "",
                 "last_check": d,
                 "active": True,
