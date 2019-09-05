@@ -558,7 +558,7 @@ define(function (require, exports) {
         $.ajax({
             url: form_target,
             async: true,
-            // mode: "queue",
+            mode: "queue",
             type: "POST",
             data: form_data,
             processData: false,

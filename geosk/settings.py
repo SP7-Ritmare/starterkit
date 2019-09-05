@@ -156,26 +156,26 @@ if os.getenv('DOCKER_ENV'):
                                     'postgis://\
     geonode_data:geonode_data@localhost:5432/geonode_data')
         DATABASES[os.getenv('DEFAULT_BACKEND_DATASTORE')] = dj_database_url.parse(
-            GEODATABASE_URL, conn_max_age=5
+            GEODATABASE_URL, conn_max_age=60
         )
         if 'OPTIONS' not in DATABASES[os.getenv('DEFAULT_BACKEND_DATASTORE')]:
             DATABASES[os.getenv('DEFAULT_BACKEND_DATASTORE')]['OPTIONS'] = {}
-        DATABASES[os.getenv('DEFAULT_BACKEND_DATASTORE')]['CONN_TOUT'] = 5
+        DATABASES[os.getenv('DEFAULT_BACKEND_DATASTORE')]['CONN_TOUT'] = 60
         DATABASES[os.getenv('DEFAULT_BACKEND_DATASTORE')]['OPTIONS'] = {
-            'connect_timeout': 5,
+            'connect_timeout': 60,
         }
 
     if 'CONN_MAX_AGE' in DATABASES['default']:
-        DATABASES['default']['CONN_MAX_AGE'] = 5
+        DATABASES['default']['CONN_MAX_AGE'] = 60
 
     if 'CONN_TOUT' in DATABASES['default']:
-        DATABASES['default']['CONN_TOUT'] = 5
+        DATABASES['default']['CONN_TOUT'] = 60
 
     if 'OPTIONS' not in DATABASES['default']:
         DATABASES['default']['OPTIONS'] = {}
 
     DATABASES['default']['OPTIONS'].update({
-        'connect_timeout': 5,
+        'connect_timeout': 60,
     })
 
     # Override OGC server config if docker is production
