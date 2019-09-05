@@ -324,7 +324,7 @@ define(function (require, exports) {
         //        id, "toolbar=1,scrollbars=1,location=0,statusbar=0,menubar=1,resizable=1,width=1100,height=800,left = 240,top = 100");
         common.make_request({
             url: event.data.url,
-            async: true,
+            async: false,
             failure: function (resp, status) {
                 if (resp && resp.errors) {
                     self.markError(resp.errors, status);
@@ -416,7 +416,7 @@ define(function (require, exports) {
         if (resp.hasOwnProperty('redirect_to') && resp.redirect_to.indexOf('/upload/final') > -1) {
             common.make_request({
                 url: resp.redirect_to,
-                async: true,
+                async: false,
                 beforeSend: function() {
                     self.logStatus({
                         msg: '<p>' + gettext('Performing Final GeoServer Config Step') + '<img class="pull-right" src="/static/geonode/img/loading.gif"></p>',
@@ -508,7 +508,7 @@ define(function (require, exports) {
         if (resp.success === true && resp.status === 'incomplete') {
             common.make_request({
                 url: updateUrl(resp.redirect_to, 'force_ajax', 'true'),
-                async: true,
+                async: false,
                 failure: function (resp, status) {
                     self.polling = false;
                     if (resp.status && resp.status !== 'success') {
@@ -557,7 +557,7 @@ define(function (require, exports) {
 
         $.ajax({
             url: form_target,
-            async: true,
+            async: false,
             mode: "queue",
             type: "POST",
             data: form_data,
