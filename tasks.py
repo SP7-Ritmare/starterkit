@@ -48,7 +48,7 @@ def update(ctx):
     envs = {
         "local_settings": "{0}".format(_localsettings()),
         "siteurl": os.environ.get('SITEURL',
-                                  'http://{0}:{1}/'.format(pub_ip, pub_port)),
+                                  'http://{0}:{1}/'.format(pub_ip, pub_port) if pub_port else 'http://{0}/'.format(pub_ip)),
         "geonode_docker_host": "{0}".format(socket.gethostbyname('geonode')),
         "public_fqdn": "{0}:{1}".format(pub_ip, pub_port),
         "public_host": "{0}".format(pub_ip),
@@ -56,7 +56,7 @@ def update(ctx):
         "geodburl": geodb_url,
         "monitoring": os.environ.get('MONITORING_ENABLED', False),
         "gs_pub_loc": os.environ.get('GEOSERVER_PUBLIC_LOCATION',
-                                     'http://{0}:{1}/geoserver/'.format(pub_ip, pub_port)),
+                                     'http://{0}:{1}/geoserver/'.format(pub_ip, pub_port) if pub_port else 'http://{0}/geoserver/'.format(pub_ip)),
         "gs_admin_pwd": os.environ.get('GEOSERVER_ADMIN_PASSWORD', 'geoserver'),
         "override_fn": "$HOME/.override_env"
     }
@@ -282,6 +282,8 @@ def _geonode_public_port():
             'nginx',
             os.getenv('GEONODE_INSTANCE_NAME', 'starterkit')
         )
+    elif gn_pub_port in ('80', '443'):
+        gn_pub_port = None
     return gn_pub_port
 
 
@@ -301,9 +303,7 @@ def _prepare_oauth_fixture():
                 "created": "2018-05-31T10:00:31.661Z",
                 "updated": "2018-05-31T11:30:31.245Z",
                 "algorithm": "RS256",
-                "redirect_uris": "{0}://{1}:{2}/geoserver/index.html".format(
-                    net_scheme, pub_ip, pub_port
-                ),
+                "redirect_uris": "{0}://{1}:{2}/geoserver/index.html".format(net_scheme, pub_ip, pub_port) if pub_port else "{0}://{1}/geoserver/index.html".format(net_scheme, pub_ip),
                 "name": "GeoServer",
                 "authorization_grant_type": "authorization-code",
                 "client_type": "confidential",
