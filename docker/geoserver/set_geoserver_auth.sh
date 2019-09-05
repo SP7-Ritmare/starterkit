@@ -17,7 +17,12 @@ test ! -d "$auth_conf_target" && echo "Target directory $auth_conf_target does n
 
 # for debugging
 echo -e "NGINX_BASE_URL=${NGINX_BASE_URL}\n"
-SUBSTITUTION_URL="http://${DOCKER_HOST_IP}:${PUBLIC_PORT}"
+if [ "$PUBLIC_PORT" == "443" ]; then
+    SUBSTITUTION_URL="https://${DOCKER_HOST_IP}:${PUBLIC_PORT}"
+else
+    SUBSTITUTION_URL="http://${DOCKER_HOST_IP}:${PUBLIC_PORT}"
+fi
+
 echo -e "SUBSTITUTION_URL=$SUBSTITUTION_URL\n"
 echo -e "auth_conf_source=$auth_conf_source\n"
 echo -e "auth_conf_target=$auth_conf_target\n"
