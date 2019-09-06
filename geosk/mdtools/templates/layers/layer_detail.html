@@ -25,9 +25,9 @@
   {% if preview == 'geoext' %}
     {% include "geoext/layers/layer_geoext_map.html" %}
   {% elif preview == 'OL3' %}
-    {% include "layers/layer_ol3_map.html" %}
+    {% include "geoext/layers/layer_ol3_map.html" %}
   {% elif preview == 'react' %}
-		{% include 'geonode-client/layer_map.html' %}
+    {% include 'geonode-client/layer_map.html' %}
   {% else %}
     {% include "layers/layer_leaflet_map.html" %}
   {% endif %}
@@ -87,7 +87,7 @@
             <form method="GET" action="{% url "layer_detail" resource.layer.service_typename %}">
                 {% csrf_token %}
                 <input type="text" id="filter" name="filter" style="witdh:400px"/>&nbsp;<input type="submit" value='{% trans "Filter Granules" %}'/>
-                <br/>
+                </br>
                 {% if filter %}
                 <strong>{% trans "Active Filter:" %}</strong> <em>{{ filter }}</em>
                 {% endif %}
@@ -111,8 +111,8 @@
                     <td>{% if feature.properties.time %}{{ feature.properties.time }}{% endif %}</td>
                     <!-- td>{% if feature.properties.elevation %}{{ feature.properties.elevation }}{% endif %}</td -->
                     <td>
-                        <a class="btn btn-xs" href="#" onclick="doPreview('{{ resource.service_typename }}', '{{ feature.id }}', '{{ granules.crs.properties.name }}', '{{ feature.geometry.coordinates }}', {% if feature.properties.time %}'{{ feature.properties.time }}'{% else %}null{% endif %});"><img alt="{% trans "Granule Preview" %}" title="{% trans "Granule Preview" %}" src="{% static 'lib/img/map_go.png' %}"/></a>
-                        <a class="btn btn-xs" href="{% url "layer_granule_remove" feature.id resource.service_typename %}"><img alt="{% trans "Granule Remove" %}" title="{% trans "Granule Remove" %}" src="{% static 'lib/img/cancel-on.png' %}"/></a>
+                        <a class="btn btn-xs" href="#" onclick="doPreview('{{ resource.service_typename }}', '{{ feature.id }}', '{{ granules.crs.properties.name }}', '{{ feature.geometry.coordinates }}', {% if feature.properties.time %}'{{ feature.properties.time }}'{% else %}null{% endif %});"><img alt="Granule Preview" title="Granule Preview" src="/static/lib/img/map_go.png"/></a>
+                        <a class="btn btn-xs" href="{% url "layer_granule_remove" feature.id resource.service_typename %}"><img alt="Granule Remove" title="Granule Remove" src="/static/lib/img/cancel-on.png"/></a>
                         <script language="Javascript">
                             function doPreview(layer_name, feature_id, srs, the_geom, time) {
                                 var map = app.mapPanel.map;
@@ -128,19 +128,15 @@
                                         else {
                                             map.layers[ll].mergeNewParams({"CQL_FILTER" : "IN ('" + feature_id + "')"});
                                         }
-
                                         map.layers[ll].addOptions({
                                             singleTile: true
                                         });
-
                                         bbox = JSON.parse(the_geom);
                                         bbox = new OpenLayers.Bounds(bbox[0][0][0],bbox[0][0][1],bbox[0][2][0],bbox[0][2][1]).transform(srs, map.projection);
-
                                         //map.maxExtent = bbox;
                                         //map.restrictedExtent = bbox;
                                         map.maxExtent = new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34);
                                         map.restrictedExtent = map.maxExtent;
-
                                         map.zoomToExtent(bbox);
                                     }
                                 }
