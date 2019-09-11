@@ -5,6 +5,7 @@ import logging
 import pycsw
 import subprocess
 import re
+from urlparse import urlparse
 
 from django.conf import settings
 from django.http import HttpResponse, JsonResponse
@@ -136,7 +137,9 @@ def whoami(request, format='json'):
         services_metadata = ServicesMetadata.objects.all()[0]
         _md = model_to_dict(services_metadata)
         domain = Site.objects.all()[0].domain
-        _md['uri'] = 'http://%s' % domain
+        upurl = urlparse(os.environ['SITEURL'])
+        net_scheme = upurl.scheme
+        _md['uri'] = '%s://%s' % (net_scheme, domain)
         _md['sk_domain_name'] = domain
         # TODO sistemare
         _md['endpoint_SOS_url'] = settings.SITEURL + 'observations/sos'
