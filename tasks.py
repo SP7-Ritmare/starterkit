@@ -55,6 +55,7 @@ def update(ctx):
         "dburl": db_url,
         "geodburl": geodb_url,
         "monitoring": os.environ.get('MONITORING_ENABLED', False),
+        "monitoring_data_ttl": os.environ.get('MONITORING_DATA_TTL', 7),
         "gs_pub_loc": os.environ.get('GEOSERVER_PUBLIC_LOCATION',
                                      'http://{0}:{1}/geoserver/'.format(pub_ip, pub_port) if pub_port else 'http://{0}/geoserver/'.format(pub_ip)),
         "gs_admin_pwd": os.environ.get('GEOSERVER_ADMIN_PASSWORD', 'geoserver'),
@@ -68,6 +69,8 @@ def update(ctx):
 {geonode_docker_host} >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export MONITORING_SERVICE_NAME=\
 local-geonode >> {override_fn}".format(**envs), pty=True)
+    ctx.run("echo export MONITORING_DATA_TTL=\
+{monitoring_data_ttl} >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export GEOSERVER_PUBLIC_LOCATION=\
 {gs_pub_loc} >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export GEOSERVER_ADMIN_PASSWORD=\

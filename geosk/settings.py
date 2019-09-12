@@ -285,7 +285,6 @@ METADATA_DEFAULT_VALUES = {
     'regions': ['ITA']
 }
 
-
 DEFAULT_TOPICCATEGORY = METADATA_DEFAULT_VALUES['category']
 
 # rosetta
@@ -353,3 +352,88 @@ PROXY_ALLOWED_HOSTS = ("*",)
 
 # Set default analytical
 PIWIK_DOMAIN_PATH = 'monitor.get-it.it/piwik'
+
+# MIDDLEWARE_CLASSES += ('geosk.middleware.LoginRequiredMiddleware',)
+
+#LOGIN_EXEMPT_URLS = [
+#    'gdpr/'
+#]
+
+# Add additional paths (as regular expressions) that don't require
+# authentication.
+# - authorized exempt urls needed for oauth when GeoNode is set to lockdown
+AUTH_EXEMPT_URLS = (
+    #r'^/?$',
+    '/o/*',
+    '/gs/*',
+    '/account/*',
+    '/static/*',
+    '/api/o/*',
+    '/api/roles',
+    '/api/adminRole',
+    '/api/users',
+    '/api/layers',
+    '/gdpr/*'
+)
+
+MAP_BASELAYERS = [{
+        "source": {"ptype": "gxp_olsource"},
+        "type": "OpenLayers.Layer",
+        "args": ["No background"],
+        "name": "background",
+        "visibility": False,
+        "fixed": True,
+        "group":"background"
+    },
+    {
+        "source": {"ptype": "gxp_osmsource"},
+        "type": "OpenLayers.Layer.OSM",
+        "name": "mapnik",
+        "visibility": True,
+        "fixed": True,
+        "group": "background"
+    }]
+
+if GEONODE_CLIENT_LAYER_PREVIEW_LIBRARY == 'geoext':
+    GEONODE_CLIENT_HOOKSET = os.getenv('GEONODE_CLIENT_HOOKSET', 'geonode.client.hooksets.GeoExtHookSet')
+
+    if 'geoexplorer' not in INSTALLED_APPS:
+        INSTALLED_APPS += ('geoexplorer', )
+
+    if GOOGLE_API_KEY:
+        BASEMAP = {
+            'source': {
+                 'ptype': 'gxp_googlesource',
+                 'apiKey': GOOGLE_API_KEY
+            },
+            'name': 'SATELLITE',
+            'fixed': True,
+            'visibility': False,
+            'group': 'background'
+        }
+        MAP_BASELAYERS.append(BASEMAP)
+
+    if BING_API_KEY:
+        BASEMAP = {
+            'source': {
+                'ptype': 'gxp_bingsource',
+                'apiKey': BING_API_KEY
+            },
+            'name': 'AerialWithLabels',
+            'fixed': True,
+            'visibility': True,
+            'group': 'background'
+        }
+        MAP_BASELAYERS.append(BASEMAP)
+
+    if USE_GEOSERVER:
+        LOCAL_GEOSERVER = {
+            "source": {
+                "ptype": "gxp_wmscsource",
+                "url": OGC_SERVER['default']['PUBLIC_LOCATION'] + "wms",
+                "restUrl": "/gs/rest"
+            }
+        }
+        baselayers = MAP_BASELAYERS
+        MAP_BASELAYERS = [LOCAL_GEOSERVER]
+        MAP_BASELAYERS.extend(baselayers)
