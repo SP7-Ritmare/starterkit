@@ -118,7 +118,7 @@
                               {% if sensor.isvalid %}
                                 <a href="{% url "osk_upload" %}?procedureId={{ sensor.id }}" class="btn btn-mini  btn-success">{% trans "Upload observations" %}</a>
                                 <a href="{{ sensor.id }}" download="{{ sensor.id }}" target="_blank" data-toggle="modal" class="btn btn-mini btn-success">Download SensorML</a>
-                                <a href="../observations/service?service=SOS&version=2.0.0&request=GetObservation&procedure={{ sensor.id }}" class="btn btn-mini  btn-success">{% trans "Download observations" %}</a>
+                                <a href="../observations/service?service=SOS&version=2.0.0&request=GetObservation&MergeObservationsIntoDataArray=true&procedure={{ sensor.id }}" class="btn btn-mini  btn-success">{% trans "Download observations" %}</a>
                               {% endif %}
                               <a href="{% url "osk_deletesensor" %}?procedure={{ sensor.id }}" class="btn btn-mini btn-danger">{% trans "Delete sensor" %}</a>
                             {% endif %}
