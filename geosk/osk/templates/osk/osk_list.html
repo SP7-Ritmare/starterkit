@@ -112,14 +112,15 @@
                     <div class="btn-toolbar">
                         <div class="btn-group">
                             {% if sensor.isvalid %}
-                            <a href="{% url "osk_describe_sensor" %}?format={{ 'text/html'|urlencode }}&sensor_id={{sensor.id|urlencode }}" target="_blank" data-toggle="modal" class="btn btn-mini btn-default">{% trans "Sensor details" %}</a>
-                            <a href="{{ sensor.id }}" download="{{ sensor.id }}" target="_blank" data-toggle="modal" class="btn btn-mini btn-default">download SensorML XML</a>
+                              <a href="{% url "osk_describe_sensor" %}?format={{ 'text/html'|urlencode }}&sensor_id={{sensor.id|urlencode }}" target="_blank" data-toggle="modal" class="btn btn-mini btn-primary">{% trans "Sensor details" %}</a>
                             {% endif %}
                             {% if perms.osk.admin_sos %}
-                            {% if sensor.isvalid %}
-                            <a href="{% url "osk_upload" %}?procedureId={{ sensor.id }}" class="btn btn-mini  btn-default">{% trans "Upload observations" %}</a>
-                            {% endif %}
-                            <a href="{% url "osk_deletesensor" %}?procedure={{ sensor.id }}" class="btn btn-mini btn-primary">{% trans "Delete sensor" %}</a>
+                              {% if sensor.isvalid %}
+                                <a href="{% url "osk_upload" %}?procedureId={{ sensor.id }}" class="btn btn-mini  btn-success">{% trans "Upload observations" %}</a>
+                                <a href="{{ sensor.id }}" download="{{ sensor.id }}" target="_blank" data-toggle="modal" class="btn btn-mini btn-success">Download SensorML</a>
+                                <a href="../observations/service?service=SOS&version=2.0.0&request=GetObservation&procedure={{ sensor.id }}" class="btn btn-mini  btn-success">{% trans "Download observations" %}</a>
+                              {% endif %}
+                              <a href="{% url "osk_deletesensor" %}?procedure={{ sensor.id }}" class="btn btn-mini btn-danger">{% trans "Delete sensor" %}</a>
                             {% endif %}
                         </div>
                     </div>
