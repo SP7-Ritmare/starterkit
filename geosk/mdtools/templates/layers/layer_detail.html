@@ -1032,7 +1032,7 @@
             'eastlon': {{ resource.bbox_x1|stringformat:"f" }},
             'southlat': {{ resource.bbox_y0|stringformat:"f" }},
             'northlat': {{ resource.bbox_y1|stringformat:"f" }},
-            'referencesystem': '{{ resource.mdextension.ediml_referencesystem  }}',
+            'referencesystem': 'http://www.opengis.net/def/crs/EPSG/0/{{ resource.mdextension.ediml_referencesystem  }}',
             // additional informations
             'user_username': '{{ request.user.username }}',
             'user_email': '{{ request.user.email }}',
