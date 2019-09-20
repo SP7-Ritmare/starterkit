@@ -31,4 +31,7 @@ RUN pip install pip==9.0.3 \
     && chmod +x /tmp/entrypoint.sh \
     && chmod +x /tmp/tasks.py
 
+# NetCDF library for get observation
+RUN apt-get install -y libnetcdf-dev libnetcdff-dev
+
 CMD ["/tmp/entrypoint.sh"]
