@@ -26,8 +26,8 @@ RUN if [ "$JAI_IMAGEIO" = true ]; then \
     # NetCDF plugin
     wget https://build.geoserver.org/geoserver/2.15.x/ext-2019-10-06/geoserver-2.15-SNAPSHOT-netcdf-out-plugin.zip && \
     wget https://build.geoserver.org/geoserver/2.15.x/ext-2019-10-06/geoserver-2.15-SNAPSHOT-netcdf-plugin.zip && \
-    unzip geoserver-2.15.2-netcdf-out-plugin.zip  && \
-    unzip -o geoserver-2.15.2-netcdf-plugin.zip  && \
+    unzip geoserver-2.15-netcdf-out-plugin.zip  && \
+    unzip -o geoserver-2.15-netcdf-plugin.zip  && \
     mv *.jar /usr/local/tomcat/webapps/geoserver/WEB-INF/lib/ && \
     # marlin plugin
     wget https://github.com/bourgesl/marlin-renderer/releases/download/v0_9_3/marlin-0.9.3-Unsafe.jar && \
