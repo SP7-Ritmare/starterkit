@@ -24,8 +24,8 @@ WORKDIR /tmp
 ARG JAI_IMAGEIO=true
 RUN if [ "$JAI_IMAGEIO" = true ]; then \
     # NetCDF plugin
-    wget https://datapacket.dl.sourceforge.net/project/geoserver/GeoServer/2.15.2/extensions/geoserver-2.15.2-netcdf-out-plugin.zip && \
-    wget https://datapacket.dl.sourceforge.net/project/geoserver/GeoServer/2.15.2/extensions/geoserver-2.15.2-netcdf-plugin.zip && \
+    wget https://build.geoserver.org/geoserver/2.15.x/ext-2019-10-06/geoserver-2.15-SNAPSHOT-netcdf-out-plugin.zip && \
+    wget https://build.geoserver.org/geoserver/2.15.x/ext-2019-10-06/geoserver-2.15-SNAPSHOT-netcdf-plugin.zip && \
     unzip geoserver-2.15.2-netcdf-out-plugin.zip  && \
     unzip -o geoserver-2.15.2-netcdf-plugin.zip  && \
     mv *.jar /usr/local/tomcat/webapps/geoserver/WEB-INF/lib/ && \
