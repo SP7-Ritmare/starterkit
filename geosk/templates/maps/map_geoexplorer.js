@@ -198,6 +198,9 @@ Ext.onReady(function() {
                            extent = OpenLayers.Bounds.fromArray(bbox);
                        }
                    }
+                   if (extent != undefined) {
+                       map.zoomToExtent(extent);
+                   }
                 }
             },
            'save': function(obj_id) {
