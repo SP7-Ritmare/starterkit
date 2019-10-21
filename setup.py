@@ -103,7 +103,7 @@ setup(
     packages=find_packages(),
     install_requires=REQUIREMENTS,
     dependency_links=[
-        "git+https://github.com/GeoNode/geonode.git@master#egg=geonode"
+        "git+https://github.com/SP7-Ritmare/geonode.git@2.10.1#egg=geonode"
     ],
     include_package_data=True,
     setup_requires=["setuptools_git >= 0.3", ],
