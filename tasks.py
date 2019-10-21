@@ -1,3 +1,4 @@
+import ast
 import json
 import logging
 import os
@@ -15,7 +16,7 @@ BOOTSTRAP_IMAGE_CHEIP = 'codenvy/che-ip:nightly'
 
 @task
 def waitfordbs(ctx):
-    print "***************************databases*********************************"
+    print "**************************databases*******************************"
     ctx.run("/usr/bin/wait-for-databases {0}".format('db'), pty=True)
 
 
@@ -29,7 +30,7 @@ def waitforgeoserver(ctx):
 
 @task
 def update(ctx):
-    print "*****************************initial*********************************"
+    print "***************************initial*********************************"
     ctx.run("env", pty=True)
     pub_ip = _geonode_public_host_ip()
     print "Public Hostname or IP is {0}".format(pub_ip)
@@ -45,6 +46,7 @@ def update(ctx):
         except BaseException:
             time.sleep(10)
 
+    override_env = "$HOME/.override_env"
     envs = {
         "local_settings": "{0}".format(_localsettings()),
         "siteurl": os.environ.get('SITEURL',
@@ -59,8 +61,16 @@ def update(ctx):
         "gs_pub_loc": os.environ.get('GEOSERVER_PUBLIC_LOCATION',
                                      'http://{0}:{1}/geoserver/'.format(pub_ip, pub_port) if pub_port else 'http://{0}/geoserver/'.format(pub_ip)),
         "gs_admin_pwd": os.environ.get('GEOSERVER_ADMIN_PASSWORD', 'geoserver'),
-        "override_fn": "$HOME/.override_env"
+        "override_fn": override_env
     }
+    try:
+        current_allowed = ast.literal_eval(os.getenv('ALLOWED_HOSTS') or \
+                                           "['{public_fqdn}', '{public_host}', 'localhost', 'django',]".format(**envs))
+    except ValueError:
+        current_allowed = []
+    current_allowed.extend(['{}'.format(pub_ip), '{}:{}'.format(pub_ip, pub_port)])
+    allowed_hosts = ['"{}"'.format(c) for c in current_allowed] + ['"geonode"', '"django"']
+
     ctx.run("echo export DJANGO_SETTINGS_MODULE=\
 {local_settings} >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export MONITORING_ENABLED=\
@@ -77,12 +87,12 @@ local-geonode >> {override_fn}".format(**envs), pty=True)
 {gs_admin_pwd} >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export SITEURL=\
 {siteurl} >> {override_fn}".format(**envs), pty=True)
-    ctx.run("echo export ALLOWED_HOSTS=\
-\"\\\"['{geonode_docker_host}', '{public_fqdn}', '{public_host}', '127.0.0.1', 'django', 'geonode']\\\"\" \
->> {override_fn}".format(**envs), pty=True)
-    ctx.run("echo export DATABASE_URL=\
+    ctx.run('echo export ALLOWED_HOSTS="\\"{}\\"" >> {}'.format(allowed_hosts, override_env), pty=True)
+    if not os.environ.get('DATABASE_URL'):
+        ctx.run("echo export DATABASE_URL=\
 {dburl} >> {override_fn}".format(**envs), pty=True)
-    ctx.run("echo export GEODATABASE_URL=\
+    if not os.environ.get('GEODATABASE_URL'):
+        ctx.run("echo export GEODATABASE_URL=\
 {geodburl} >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export LOGIN_URL=\
 {siteurl}account/login/ >> {override_fn}".format(**envs), pty=True)
@@ -98,46 +108,33 @@ local-geonode >> {override_fn}".format(**envs), pty=True)
             **envs
         )
     )
-    ctx.run("source $HOME/.override_env", pty=True)
-    print "******************************final**********************************"
+    ctx.run("source {}".format(override_env), pty=True)
+    print "****************************final**********************************"
     ctx.run("env", pty=True)
-
-
-# see issue https://github.com/celery/celery/issues/3200
-# @task
-# def workaround(ctx):
-#     print "**************************workaround*******************************"
-#     ctx.run("pip uninstall --yes geonode", pty=True)
-#     ctx.run("pip install \
-# git+https://github.com/GeoNode/geonode.git@2.7.x#egg=geonode", pty=True)
-#     ctx.run("pip uninstall --yes billiard", pty=True)
-#     ctx.run("pip install \
-# git+https://github.com/celery/billiard.git#egg=billiard", pty=True)
-#     ctx.run("pip uninstall --yes kombu", pty=True)
-#     ctx.run("pip install \
-# git+https://github.com/celery/kombu.git#egg=kombu", pty=True)
 
 
 @task
 def migrations(ctx):
     print "****************************migrations*******************************"
     print " 1. django-admin.py makemigrations --settings=geonode.settings"
-    ctx.run("django-admin.py makemigrations --settings={0}".format(
+    ctx.run("django-admin.py makemigrations --noinput --settings={0}".format(
         "geonode.settings"
     ), pty=True)
     print " 2. django-admin.py migrate --noinput --settings=geonode.settings"
     ctx.run("django-admin.py migrate --noinput --settings={0}".format(
         "geonode.settings"
     ), pty=True)
-    print " 3. . $HOME/.override_env; django-admin.py makemigrations"
-    ctx.run(". $HOME/.override_env; django-admin.py makemigrations", pty=True)
-    print " 4. . $HOME/.override_env; django-admin.py migrate --noinput"
+    print " 3. . $HOME/.override_env; django-admin.py makemigrations --merge --noinput"
+    ctx.run(". $HOME/.override_env; django-admin.py makemigrations --merge --noinput", pty=True)
+    print " 4. . $HOME/.override_env; django-admin.py makemigrations --noinput"
+    ctx.run(". $HOME/.override_env; django-admin.py makemigrations --noinput", pty=True)
+    print " 5. . $HOME/.override_env; django-admin.py migrate --noinput"
     ctx.run(". $HOME/.override_env; django-admin.py migrate --noinput", pty=True)
 
 
 @task
 def prepare(ctx):
-    print "*************************prepare fixture*****************************"
+    print "**********************prepare fixture***************************"
     ctx.run("rm -rf /tmp/default_oauth_apps_docker.json", pty=True)
     _prepare_oauth_fixture()
     ctx.run("rm -rf /tmp/mdtools_services_metadata_docker.json", pty=True)
@@ -198,7 +195,7 @@ def updategeoip(ctx):
 def updateadmin(ctx):
     print "***********************update admin details**************************"
     ctx.run("rm -rf /tmp/django_admin_docker.json", pty=True)
-    _prepare_admin_fixture(os.environ.get('ADMIN_PASSWORD', None), os.environ.get('ADMIN_EMAIL', None))
+    _prepare_admin_fixture(os.environ.get('ADMIN_PASSWORD', 'admin'), os.environ.get('ADMIN_EMAIL', 'admin@example.org'))
     ctx.run("django-admin.py loaddata /tmp/django_admin_docker.json \
 --settings={0}".format(_localsettings()), pty=True)
 
@@ -209,6 +206,10 @@ def collectmetrics(ctx):
     ctx.run("python -W ignore manage.py collect_metrics  \
     --settings={0} -n -t xml".format(_localsettings()), pty=True)
 
+@task
+def initialized(ctx):
+    print "**************************init file********************************"
+    ctx.run('date > /mnt/volumes/statics/geonode_init.lock')
 
 def _docker_host_ip():
     client = docker.from_env()
@@ -240,7 +241,6 @@ def _container_exposed_port(component, instname):
     for key in json.loads(ports_dict):
         port = re.split('/tcp', key)[0]
     return port
-
 
 def _update_db_connstring():
     user = os.getenv('GEONODE_DATABASE', 'geonode')
@@ -719,11 +719,6 @@ def _prepare_monitoring_fixture():
 
 
 def _prepare_admin_fixture(admin_password, admin_email):
-    # from django.contrib.auth import get_user_model
-    # admin = get_user_model().objects.get(username="admin")
-    # admin.set_password(admin_password)
-    # admin.email = admin_email
-    # admin.save()
     from django.contrib.auth.hashers import make_password
     d = datetime.datetime.now()
     mdext_date = d.isoformat()[:23] + "Z"

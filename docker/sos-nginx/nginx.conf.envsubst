@@ -1,6 +1,8 @@
 # NOTE : $VARIABLES are env variables replaced by entrypoint.sh using envsubst
 # not to be mistaken for nginx variables (also starting with $, but usually lowercase)
 
+worker_processes auto;
+
 events {
 
 }
