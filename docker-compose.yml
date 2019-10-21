@@ -33,39 +33,6 @@ services:
     env_file:
       - ./scripts/docker/env/production/dbsos.env
 
-  django:
-    image: get-it/starterkit:2.10
-    restart: unless-stopped
-    container_name: django4${COMPOSE_PROJECT_NAME}
-    stdin_open: true
-    # tty: true
-    labels:
-        org.geonode.component: django
-        org.geonode.instance.name: geonode
-    depends_on:
-      - db
-    # command: django-admin.py runserver 0.0.0.0:8000 --settings=geosk.settings
-    env_file:
-      - ./scripts/docker/env/production/django.env
-      - ./scripts/docker/env/production/sos.env
-
-  geoserver:
-    image: get-it/geoserver:2.15.2
-    build: ./docker/geoserver/
-    restart: unless-stopped
-    container_name: geoserver4${COMPOSE_PROJECT_NAME}
-    stdin_open: true
-    # tty: true
-    labels:
-        org.geonode.component: geoserver
-        org.geonode.instance.name: geonode
-    depends_on:
-      - db
-    volumes:
-      - geoserver-data-dir:/geoserver_data/data
-    env_file:
-      - ./scripts/docker/env/production/geoserver.env
-
   sos:
     image: get-it/sos-configured:4.4.2
     build: ./docker/sos-configured/
@@ -80,6 +47,44 @@ services:
       - dbsos
     env_file:
       - ./scripts/docker/env/production/sos.env
+
+  geoserver:
+    image: get-it/geoserver:2.15.2
+    build: ./docker/geoserver/
+    restart: unless-stopped
+    container_name: geoserver4${COMPOSE_PROJECT_NAME}
+    stdin_open: true
+    # tty: true
+    labels:
+        org.geonode.component: geoserver
+        org.geonode.instance.name: geonode
+    depends_on:
+      - db
+      - data-dir-conf
+    volumes:
+      - geoserver-data-dir:/geoserver_data/data
+    env_file:
+      - ./scripts/docker/env/production/geoserver.env
+
+  django:
+    image: get-it/starterkit:2.10
+    restart: unless-stopped
+    build: .
+    container_name: django4${COMPOSE_PROJECT_NAME}
+    stdin_open: true
+    # tty: true
+    labels:
+      org.geonode.component: django
+      org.geonode.instance.name: geonode
+    depends_on:
+      - db
+      - data-dir-conf
+    # command: django-admin.py runserver 0.0.0.0:8000 --settings=geosk.settings
+    volumes:
+      - statics:/mnt/volumes/statics
+      - geoserver-data-dir:/geoserver_data/data
+    env_file:
+      - ./scripts/docker/env/production/django.env
 
   geonode:
     image: get-it/nginx:sos
@@ -101,6 +106,7 @@ services:
     volumes:
       - nginx-confd:/etc/nginx
       - nginx-certificates:/geonode-certificates
+      - statics:/mnt/volumes/statics
     env_file:
       - ./scripts/docker/env/production/nginx.env
 
@@ -126,7 +132,8 @@ services:
       - geoserver-data-dir:/geoserver_data/data
 
 volumes:
-
+  statics:
+    name: ${COMPOSE_PROJECT_NAME}-statics
   nginx-confd:
     name: ${COMPOSE_PROJECT_NAME}-nginxconfd
   nginx-certificates:

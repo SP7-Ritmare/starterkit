@@ -83,7 +83,6 @@ with open(os.path.join(here, 'README.md'), encoding='utf-8') as f:
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
-
 setup(
     name='starterkit',
     version=__import__('geosk').get_version(),
@@ -106,7 +105,6 @@ setup(
     dependency_links=[
         "git+https://github.com/GeoNode/geonode.git@master#egg=geonode"
     ],
-    #
     include_package_data=True,
     setup_requires=["setuptools_git >= 0.3", ],
     scripts=['bin/sk',

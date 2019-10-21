@@ -21,4 +21,3 @@ until PGPASSWORD=${GEONODE_GEODATABASE_PASSWORD} psql -h "$host" -U ${GEONODE_GE
 done
 
 >&2 echo "GeoNode databases are up - executing command"
-

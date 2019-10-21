@@ -6,25 +6,19 @@ RUN mkdir -p /usr/src/app
 # This section is borrowed from the official Django image but adds GDAL and others
 RUN apt-get update && apt-get install -y \
 		gcc \
+                zip \
 		gettext \
 		postgresql-client libpq-dev \
 		sqlite3 \
-        python-gdal python-psycopg2 \
-        python-imaging python-lxml \
-        python-dev libgdal-dev \
-        python-ldap \
-        libmemcached-dev libsasl2-dev zlib1g-dev \
-        python-pylibmc \
-        uwsgi uwsgi-plugin-python \
+                python-gdal python-psycopg2 \
+                python-imaging python-lxml \
+                python-dev libgdal-dev \
+                python-ldap \
+                libmemcached-dev libsasl2-dev zlib1g-dev \
+                python-pylibmc \
+                uwsgi uwsgi-plugin-python \
 	--no-install-recommends && rm -rf /var/lib/apt/lists/*
 
-RUN GDAL_VERSION=`gdal-config --version` \
-    && PYGDAL_VERSION="$(pip install pygdal==$GDAL_VERSION 2>&1 | grep -oP '(?<=: )(.*)(?=\))' | grep -oh $GDAL_VERSION\.[0-9])" \
-    && pip install numpy==1.16.* \
-    && pip install pygdal=="`gdal-config --version`.*"
-
-# fix for known bug in system-wide packages
-RUN ln -fs /usr/lib/python2.7/plat-x86_64-linux-gnu/_sysconfigdata*.py /usr/lib/python2.7/
 
 RUN printf "deb http://archive.debian.org/debian/ jessie main\ndeb-src http://archive.debian.org/debian/ jessie main\ndeb http://security.debian.org jessie/updates main\ndeb-src http://security.debian.org jessie/updates main" > /etc/apt/sources.list
 RUN apt-get update && apt-get install -y geoip-bin
@@ -52,7 +46,18 @@ RUN chmod -Rf 775 /usr/src/app/geosk/static_root
 
 # Upgrade pip
 RUN pip install pip --upgrade
+
+# To understand the next section (the need for requirements.txt and setup.py)
+# Please read: https://packaging.python.org/requirements/
+
+# fix for known bug in system-wide packages
+RUN ln -fs /usr/lib/python2.7/plat-x86_64-linux-gnu/_sysconfigdata*.py /usr/lib/python2.7/
+
+# app-specific requirements
 RUN pip install --upgrade --no-cache-dir --src /usr/src -r requirements.txt
 RUN pip install --upgrade -e .
+
+# Install pygdal (after requirements for numpy 1.16)
+RUN pip install pygdal==$(gdal-config --version).*
 
 ENTRYPOINT service cron restart && /usr/src/app/entrypoint.sh

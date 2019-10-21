@@ -10,4 +10,4 @@ services:
     volumes:
       - '.:/usr/src/app'
     environment:
-      - DEBUG=True
+      - DEBUG=False

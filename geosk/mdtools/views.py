@@ -123,11 +123,14 @@ def get_sos_version():
     try:
         version = os.getenv('VERSION_SOS')
         if not version:
-            with open('/var/lib/tomcat7/webapps/observations/version-info.txt') as f:
-                out = f.readlines()
-                for o in out:
-                    if o.find('version =') >= 0:
-                        version = o.split('=')[1]
+            try:
+                with open('/var/lib/tomcat7/webapps/observations/version-info.txt') as f:
+                    out = f.readlines()
+                    for o in out:
+                        if o.find('version =') >= 0:
+                            version = o.split('=')[1]
+            except BaseException:
+                version = ''
     except TypeError:
         version = ''
     return version.strip()

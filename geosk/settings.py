@@ -47,7 +47,7 @@ else:
     ALLOWED_HOSTS = ['localhost', ] if os.getenv('ALLOWED_HOSTS') is None \
         else re.split(r' *[,|:|;] *', os.getenv('ALLOWED_HOSTS'))
 
-PROXY_ALLOWED_HOSTS += ('nominatim.openstreetmap.org',)
+PROXY_ALLOWED_HOSTS += ('spatialreference.org', 'nominatim.openstreetmap.org',)
 
 # AUTH_IP_WHITELIST property limits access to users/groups REST endpoints
 # to only whitelisted IP addresses.
@@ -66,11 +66,11 @@ USE_TZ = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = os.path.join(LOCAL_ROOT, "uploaded")
+MEDIA_ROOT = os.getenv('MEDIA_ROOT', os.path.join(LOCAL_ROOT, "uploaded"))
 
 # Absolute path to the directory that holds static files like app media.
 # Example: "/home/media/media.lawrence.com/apps/"
-STATIC_ROOT = os.path.join(LOCAL_ROOT, "static_root")
+STATIC_ROOT = os.getenv('STATIC_ROOT', os.path.join(LOCAL_ROOT, "static_root"))
 
 # Additional directories which hold static files
 STATICFILES_DIRS = [os.path.join(LOCAL_ROOT, "static")] + STATICFILES_DIRS
