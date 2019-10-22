@@ -104,7 +104,7 @@
                 <![CDATA[
                     PREFIX skos: <http://www.w3.org/2004/02/skos/core#> SELECT * WHERE {
                         SERVICE <http://vocabs.ceh.ac.uk/evn/tbl/sparql> {
-                            GRAPH <urn:x-evn-pub:envthes>{
+                            GRAPH <urn:x-evn-master:envthes>{
                                 {
                                     BIND (<http://vocabs.lter-europe.net/EnvThes/10004> as ?root)
                                     ?root (skos:narrower*) ?narrow.
