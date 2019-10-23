@@ -103,7 +103,7 @@
                         }
                         ORDER BY ASC(?l)
          -->
-         <url>http://fuseki1.get-it.it/directory/sparql</url>
+         <url>/sparql/directory/sparql</url>
       </singleton>
       <singleton xml:id="personS_2" endpointType="virtuoso" triggerItem="resp_1_uri">
          <query><![CDATA[
@@ -149,7 +149,7 @@
                         }
                         LIMIT 1                        
             ]]></query>
-         <url>http://fuseki1.get-it.it/directory/sparql</url>
+         <url>/sparql/directory/sparql</url>
       </singleton>
       <codelist xml:id="inspireTheme" endpointType="virtuoso">
          <uri>http://inspire-registry.jrc.ec.europa.eu/registers/Themes/items</uri>

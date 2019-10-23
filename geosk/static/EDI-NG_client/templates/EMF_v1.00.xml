@@ -101,7 +101,7 @@
                         }
                         ORDER BY ASC(?l)
          -->
-            <url>http://fuseki1.get-it.it/directory/sparql</url>
+            <url>/sparql/directory/sparql</url>
         </sparql>
         <singleton xml:id="info_operator" endpointType="fuseki" triggerItem="responsiblePar_1_uri">
             <query><![CDATA[
@@ -139,7 +139,7 @@
                         LIMIT 1  
                         
             ]]></query>
-            <url>http://fuseki1.get-it.it/directory/sparql</url>
+            <url>/sparql/directory/sparql</url>
         </singleton>
         <sparql xml:id="ILTERBiom" endpointType="envthes">
             <query><![CDATA[
@@ -170,7 +170,7 @@
                     }
                 
             ]]></query>
-            <url>http://fuseki1.get-it.it/EFcodeList/query</url>
+            <url>/sparql/EFcodeList/query</url>
         </sparql>
         <sparql xml:id="mediaMonotoring" endpointType="fuseki">
             <query><![CDATA[
@@ -186,7 +186,7 @@
                         ORDER BY ASC(?l)
                 
             ]]></query>
-            <url>http://fuseki1.get-it.it/EFcodeList/query</url>
+            <url>/sparql/EFcodeList/query</url>
         </sparql>
         <sparql xml:id="measurementRegime" endpointType="fuseki">
             <query><![CDATA[
@@ -202,7 +202,7 @@
                         ORDER BY ASC(?l)
                 
             ]]></query>
-            <url>http://fuseki1.get-it.it/EFcodeList/query</url>
+            <url>/sparql/EFcodeList/query</url>
         </sparql>
         <sparql xml:id="resultAcquisitionSource" endpointType="fuseki">
             <query><![CDATA[
@@ -219,7 +219,7 @@
                         ORDER BY ASC(?l)
                 
             ]]></query>
-            <url>http://fuseki1.get-it.it/EFcodeList/query</url>
+            <url>/sparql/EFcodeList/query</url>
         </sparql>
         <sparql xml:id="organiLevel" endpointType="fuseki">
             <query><![CDATA[
@@ -236,7 +236,7 @@
                         ORDER BY ASC(?l)
                 
             ]]></query>
-            <url>http://fuseki1.get-it.it/EFcodeList/query</url>
+            <url>/sparql/EFcodeList/query</url>
         </sparql>
         <!-- for ef:observingCapability -->
         <sparql xml:id="processType" endpointType="fuseki">
@@ -254,7 +254,7 @@
                         ORDER BY ASC(?l)
                 
             ]]></query>
-            <url>http://fuseki1.get-it.it/directory/sparql</url>
+            <url>/sparql/directory/sparql</url>
         </sparql>
         <!-- for ef:observingCapability -->
         <sparql xml:id="resultNature" endpointType="fuseki">
@@ -272,7 +272,7 @@
                         ORDER BY ASC(?l)
                 
             ]]></query>
-            <url>http://fuseki1.get-it.it/directory/sparql</url>
+            <url>/sparql/directory/sparql</url>
         </sparql>
         <!-- from NERC because INSPIRE codelist is empty -->
         <sparql xml:id="purposeOfCollection" endpointType="fuseki">
@@ -292,7 +292,7 @@
                     }
                 
             ]]></query>
-            <url>http://fuseki1.get-it.it/EFcodeList/query</url>
+            <url>/sparql/EFcodeList/query</url>
         </sparql>       
         <!-- from NERC thesaurus -->
         <sparql xml:id="envDomain" endpointType="fuseki">
@@ -313,7 +313,7 @@
                     }
                 
             ]]></query>
-            <url>http://fuseki1.get-it.it/directory/sparql</url>
+            <url>/sparql/directory/sparql</url>
         </sparql>
         <sparql xml:id="facilityType" endpointType="fuseki">
             <query><![CDATA[
@@ -333,7 +333,7 @@
                     }
                 
             ]]></query>
-            <url>http://fuseki1.get-it.it/directory/sparql</url>
+            <url>/sparql/directory/sparql</url>
         </sparql>
         <sparql xml:id="foundingCategory" endpointType="fuseki">
             <query><![CDATA[
@@ -353,7 +353,7 @@
                     }
                 
             ]]></query>
-            <url>http://fuseki1.get-it.it/directory/sparql</url>
+            <url>/sparql/directory/sparql</url>
         </sparql>
         <sparql xml:id="responsiblePartyRole" endpointType="fuseki">
             <query><![CDATA[
@@ -373,7 +373,7 @@
                     }
                 
             ]]></query>
-            <url>http://fuseki1.get-it.it/directory/sparql</url>
+            <url>/sparql/directory/sparql</url>
         </sparql>
         
         <codelist xml:id="EPSG" endpointType="virtuoso">

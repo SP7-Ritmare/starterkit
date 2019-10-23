@@ -1,15 +1,14 @@
+from django.conf import settings
 from django.http import Http404, HttpResponseForbidden
 from djproxy.views import HttpProxy
-from django.conf import settings
 from django.utils.decorators import classonlymethod
 
 
 class ObservationsProxy(HttpProxy):
-    # TODO move to settings
-    base_url = 'http://localhost:8080/observations/'
+    base_url = settings.REVERSE_PROXY_SOS
     reverse_urls = [
-        ('/observations/', 'http://localhost:8080/observations/')
-        ]
+        ('/observations/', settings.REVERSE_PROXY_SOS)
+    ]
 
     @classonlymethod
     def as_view(cls, **initkwargs):
@@ -32,3 +31,15 @@ class ObservationsProxy(HttpProxy):
             return True
         return False
 
+
+class SparqlProxy(HttpProxy):
+    base_url = settings.REVERSE_PROXY_SPARQL
+    reverse_urls = [
+        ('/sparql/', settings.REVERSE_PROXY_SPARQL)
+    ]
+
+    @classonlymethod
+    def as_view(cls, **initkwargs):
+        view = super(SparqlProxy, cls).as_view(**initkwargs)
+        view.csrf_exempt = True
+        return view

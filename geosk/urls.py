@@ -2,7 +2,9 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.views.generic import TemplateView
 from geonode.urls import urlpatterns
-from geosk.osk.proxy import ObservationsProxy
+from geosk.osk.proxy import (
+    ObservationsProxy,
+    SparqlProxy)
 
 from geosk.mdtools import api, views as mdtools_views
 
@@ -63,7 +65,11 @@ geoskurlpatterns = [
     url(r'^observations/(?P<url>.*)$',
         ObservationsProxy.as_view(),
         name='observations'
-        ),
+    ),
+    url(r'^sparql/(?P<url>.*)$',
+        SparqlProxy.as_view(),
+        name='sparql'
+    ),
 
     # mdtools views
     url(r'^mdtools/',

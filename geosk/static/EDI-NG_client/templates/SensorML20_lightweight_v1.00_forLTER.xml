@@ -189,7 +189,7 @@
                         ORDER BY ASC(?l)                        
                         ]]>
             </query>
-            <url>http://fuseki1.get-it.it/manufacturers/sparql</url>
+            <url>/sparql/manufacturers/sparql</url>
             <type> sparql </type>
         </datasource>
         <datasource>
@@ -243,7 +243,7 @@
                         ]]>
             </query>
             <triggerItem>manuf_name_3_uri</triggerItem>
-            <!--url>http://fuseki1.get-it.it/manufacturers/sparql</url-->
+            <!--url>/sparql/manufacturers/sparql</url-->
             <type>sparql</type>
         </datasource>
         <datasource>
