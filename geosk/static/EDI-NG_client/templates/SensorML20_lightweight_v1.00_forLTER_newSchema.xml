@@ -3,8 +3,8 @@
    <settings>
       <userInterfaceLanguage xml:lang="it"/>
       <metadataLanguage selectionItem="ling_md_1"/>
-      <metadataEndpoint>http://edi.get-it.it/</metadataEndpoint>
-      <sparqlEndpoint>http://sparql.get-it.it</sparqlEndpoint>
+      <metadataEndpoint>/metadata/</metadataEndpoint>
+      <sparqlEndpoint>/sparql/</sparqlEndpoint>
       <requiresValidation>true</requiresValidation>
       <baseDocument><![CDATA[
             
@@ -66,7 +66,7 @@
    <datasources>
       <codelist xml:id="languages" endpointType="virtuoso">
          <uri>http://inspire-registry.jrc.ec.europa.eu/registers/Languages/items</uri>
-         <url>http://sparql/sparql.get-it.it/sparql</url>
+         <url>/sparql</url>
       </codelist>
       <sparql xml:id="outputs" endpointType="EnvThes">
          <query><![CDATA[
@@ -85,7 +85,7 @@
                     }
                 
             ]]></query>
-         <url>http://sdi.adamassoft.it/proxy/?proxyTo=http://vocabs.ceh.ac.uk/evn/tbl/sparql</url>
+         <url>/vocabs/evn/tbl/sparql</url>
       </sparql>
       <singleton xml:id="outputsS" endpointType="EnvThes" triggerItem="output_param_1_uri">
          <query><![CDATA[
@@ -95,7 +95,7 @@
                     }
                 
             ]]></query>
-         <url>http://sdi.adamassoft.it/proxy/?proxyTo=http://vocabs.ceh.ac.uk/evn/tbl/sparql</url>
+         <url>/vocabs/evn/tbl/sparql</url>
       </singleton>
       <!--sparql xml:id="outputs" endpointType="virtuoso">
          <query><![CDATA[
@@ -149,7 +149,7 @@
                     SELECT ?c ?l ?a
                     WHERE {
                     ?c rdf:type skos:Concept.
-                    <http://vocab.nerc.ac.uk/collection/P10/current/> skos:member ?c.
+                    <https://vocab.nerc.ac.uk/collection/P10/current/> skos:member ?c.
                     OPTIONAL {
                     ?c skos:prefLabel ?l.
                     FILTER( LANG(?l) = "en")
@@ -163,7 +163,7 @@
                     ORDER BY ASC(?l) ASC(?a)
                     
             ]]></query>
-         <url>http://vocab.nerc.ac.uk/sparql/sparql</url>
+         <url>/vocabs/edg/tbl/sparql</url>
       </sparql>
       <singleton xml:id="manufacturers" endpointType="fuseki1">
          <query><![CDATA[
@@ -180,7 +180,7 @@
                         ORDER BY ASC(?l)                        
                         
             ]]></query>
-         <url>http://fuseki1.get-it.it/manufacturers/sparql</url>
+         <url>/fuseki/manufacturers/sparql</url>
       </singleton>
       <singleton xml:id="info_manufacturers" endpointType="fuseki1" triggerItem="manuf_name_3_uri">
          <query><![CDATA[
@@ -229,7 +229,7 @@
                         }
                         
             ]]></query>
-         <url>http://fuseki1.get-it.it/manufacturers/sparql</url>
+         <url>/fuseki/manufacturers/sparql</url>
       </singleton>
       <sparql xml:id="intended_applications" endpointType="virtuoso">
          <query><![CDATA[
@@ -263,7 +263,7 @@
                         SELECT ?c ?l ?a ?urn
                         WHERE { 
                           ?c rdf:type skos:Concept.
-                          ?c skos:inScheme <http://vocab.nerc.ac.uk/collection/L05/current/>.
+                          ?c skos:inScheme <https://vocab.nerc.ac.uk/collection/L05/current/>.
                           OPTIONAL {
                             ?c skos:notation ?urn.
                           }
@@ -335,7 +335,7 @@
                         }
                         ORDER BY ASC(?l)
          -->
-         <url>http://fuseki1.get-it.it/directory/sparql</url>
+         <url>/fuseki/directory/sparql</url>
       </singleton>
       <singleton xml:id="info_owner" endpointType="fuseki1" triggerItem="owner_1_uri">
          <query><![CDATA[
@@ -381,7 +381,7 @@
                         }
                         LIMIT 1                        
             ]]></query>
-         <url>http://fuseki1.get-it.it/directory/sparql</url>
+         <url>/fuseki/directory/sparql</url>
       </singleton>
       <sparql xml:id="operators" endpointType="fuseki1">
          <query><![CDATA[
@@ -411,7 +411,7 @@
                         }
                         ORDER BY ASC(?l)
          -->
-         <url>http://fuseki1.get-it.it/directory/sparql</url>
+         <url>/fuseki/directory/sparql</url>
       </sparql>
       <singleton xml:id="info_operator" endpointType="fuseki1" triggerItem="operator_1_uri">
          <query><![CDATA[
@@ -459,7 +459,7 @@
                         LIMIT 1  
                         
             ]]></query>
-         <url>http://fuseki1.get-it.it/directory/sparql</url>
+         <url>/fuseki/directory/sparql</url>
       </singleton>
       <sparql xml:id="parameters" endpointType="virtuoso">
          <query><![CDATA[
@@ -496,7 +496,7 @@
          <uri>http://www.rndt.gov.it/codelists/MD_ReferenceSystemCode/items</uri>
       </codelist>
       <codelist xml:id="deployment_role" endpointType="virtuoso">
-         <uri>http://vocab.nerc.ac.uk/collection/L19/current/</uri>
+         <uri>https://vocab.nerc.ac.uk/collection/L19/current/</uri>
       </codelist>
       <codelist xml:id="physical_quantity" endpointType="virtuoso">
          <uri>http://sp7.irea.cnr.it/rdfdata/sensors/phys_props/items</uri>
@@ -614,7 +614,7 @@
             </item>
          </produces>
       </element>
-      <element xml:id="mod_number" isMandatory="false" isMultiple="false">
+      <element xml:id="mod_number" isMandatory="true" isMultiple="false">
          <label xml:lang="it">Modello</label>
          <label xml:lang="en">Model</label>
          <help xml:lang="it">Indicare, se presente, il modello del sensore, del sistema di sensori o della piattaforma.</help>
@@ -634,7 +634,7 @@
             </item>
          </produces>
       </element>
-      <element xml:id="serial_num" isMandatory="false" isMultiple="false">
+      <element xml:id="serial_num" isMandatory="true" isMultiple="false">
          <label xml:lang="it">Numero seriale</label>
          <label xml:lang="en">Serial Number</label>
          <help xml:lang="it">Indicare il numero seriale, se presente, del sensore, del sistema di sensori o della piattaforma.</help>
@@ -1193,7 +1193,7 @@
             </item>
             <item hasIndex="5" xml:id="easting_5" isFixed="true" hasDatatype="string">
                <hasPath>swe:coordinate/swe:Quantity/swe:uom/@xlink:href</hasPath>
-               <hasValue>http://vocab.nerc.ac.uk/collection/P06/current/UAAA/</hasValue>
+               <hasValue>https://vocab.nerc.ac.uk/collection/P06/current/UAAA/</hasValue>
             </item>
             <item hasIndex="6" xml:id="easting_6" isFixed="false" hasDatatype="string">
                <label xml:lang="it">Valore (decimi di grado)</label>
@@ -1234,7 +1234,7 @@
             </item>
             <item hasIndex="5" xml:id="northing_5" isFixed="true" hasDatatype="string">
                <hasPath>swe:coordinate/swe:Quantity/swe:uom/@xlink:href</hasPath>
-               <hasValue>http://vocab.nerc.ac.uk/collection/P06/current/UAAA/</hasValue>
+               <hasValue>https://vocab.nerc.ac.uk/collection/P06/current/UAAA/</hasValue>
             </item>
             <item hasIndex="6" xml:id="northing_6" isFixed="false" hasDatatype="string">
                <label xml:lang="it">Valore (decimi di grado)</label>
@@ -1271,7 +1271,7 @@
             </item>
             <item hasIndex="5" xml:id="altitude_5" isFixed="true" hasDatatype="string">
                <hasPath>swe:coordinate/swe:Quantity/swe:uom/@xlink:href</hasPath>
-               <hasValue>http://vocab.nerc.ac.uk/collection/P06/current/ULAA/</hasValue>
+               <hasValue>https://vocab.nerc.ac.uk/collection/P06/current/ULAA/</hasValue>
             </item>
             <item hasIndex="6" xml:id="altitude_6" isFixed="false" hasDatatype="string">
                <label xml:lang="it">Valore (in metri)</label>

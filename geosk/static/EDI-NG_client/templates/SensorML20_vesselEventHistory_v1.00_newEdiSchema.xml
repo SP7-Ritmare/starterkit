@@ -4,8 +4,8 @@
     <settings>
         <userInterfaceLanguage xml:lang="en"/>
         <!--<metadataLanguage selectionItem="ling_md_1"/>-->
-        <metadataEndpoint>http://edidemo.get-it.it/edi/</metadataEndpoint>
-        <sparqlEndpoint>http://sparql.get-it.it</sparqlEndpoint>
+        <metadataEndpoint>/metadata/</metadataEndpoint>
+        <sparqlEndpoint>/sparql/</sparqlEndpoint>
         <requiresValidation>true</requiresValidation>
         <baseDocument><![CDATA[
             
@@ -45,7 +45,7 @@
                     SELECT ?c ?l ?a
                     WHERE {
                     ?c rdf:type skos:Concept.
-                    <http://vocab.nerc.ac.uk/collection/L22/current/> skos:member ?c.
+                    <https://vocab.nerc.ac.uk/collection/L22/current/> skos:member ?c.
                     OPTIONAL {
                     ?c skos:prefLabel ?l.
                     FILTER( LANG(?l) = "en")
@@ -58,7 +58,7 @@
                     }
                     ORDER BY ASC(?l) ASC(?a)
             ]]></query>
-            <url>http://vocab.nerc.ac.uk/sparql/sparql</url>
+            <url>/vocabs/edg/tbl/sparql</url>
         </singleton>
         <sparql xml:id="parameters" endpointType="nercFuseki">
             <query><![CDATA[
@@ -67,7 +67,7 @@
                     SELECT ?c ?l ?a
                     WHERE {
                     ?c rdf:type skos:Concept.
-                    <http://vocab.nerc.ac.uk/collection/P01/current/> skos:member ?c.
+                    <https://vocab.nerc.ac.uk/collection/P01/current/> skos:member ?c.
                     OPTIONAL {
                     ?c skos:prefLabel ?l.
                     FILTER( LANG(?l) = "en")
@@ -84,7 +84,7 @@
         <!-- Codelists -->
         <codelist xml:id="languages" endpointType="virtuoso">
             <uri>http://inspire-registry.jrc.ec.europa.eu/registers/Languages/items</uri>
-            <url>http://sparql/sparql.get-it.it/sparql</url>
+            <url>/sparql</url>
         </codelist>
     </datasources>
     

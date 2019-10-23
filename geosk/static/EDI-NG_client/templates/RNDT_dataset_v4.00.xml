@@ -4,8 +4,8 @@
     <languageSelection>
       <byItem>ling_md_1</byItem>
     </languageSelection>
-    <metadataEndpoint>http://edi.get-it.it/</metadataEndpoint>
-    <sparqlEndpoint>http://sparql.get-it.it</sparqlEndpoint>
+    <metadataEndpoint>/metadata/</metadataEndpoint>
+    <sparqlEndpoint>/sparql/</sparqlEndpoint>
     <requiresAuthentication>false</requiresAuthentication>
     <requiresValidation>false</requiresValidation>
     <baseDocument>
@@ -74,7 +74,7 @@
       <uri>http://inspire-registry.jrc.ec.europa.eu/registers/Languages/items</uri>
       <endpointType>virtuoso</endpointType>
       <type>virtuosoCodelist</type>
-      <url>http://sparql/sparql.get-it.it/sparql</url>
+      <url>/sparql</url>
     </datasource>
     <datasource>
       <id>scopes</id>
@@ -282,7 +282,7 @@
         ]]>
       </query>
       <searchItem>keyw_voc_contr_1</searchItem>
-      <url>http://vocab.nerc.ac.uk/sparql/sparql</url>
+      <url>/vocabs/edg/tbl/sparql</url>
       <endpointType>fuseki</endpointType>
       <type>
         sparql
@@ -343,7 +343,7 @@
         PREFIX dct: <http://purl.org/dc/terms/>
         SELECT ?l ?date
         WHERE {
-          ?voc skos:member <http://vocab.nerc.ac.uk/collection/P01/current/GA2CFS01/> .
+          ?voc skos:member <https://vocab.nerc.ac.uk/collection/P01/current/GA2CFS01/> .
           OPTIONAL {
             ?voc skos:prefLabel ?l .
           }
@@ -355,7 +355,7 @@
         -->
       </query>
       <triggerItem>keyw_voc_contr_1_uri</triggerItem>
-      <url>http://vocab.nerc.ac.uk/sparql/sparql</url>
+      <url>/vocabs/edg/tbl/sparql</url>
       <endpointType>fuseki</endpointType>
       <type>
         sparql

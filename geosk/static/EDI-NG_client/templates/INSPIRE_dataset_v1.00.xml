@@ -4,8 +4,8 @@
     <languageSelection>
       <byItem>ling_md_1</byItem>
     </languageSelection>
-    <metadataEndpoint>http://edi.get-it.it/</metadataEndpoint>
-    <sparqlEndpoint>http://sparql.get-it.it</sparqlEndpoint>
+    <metadataEndpoint>/metadata/</metadataEndpoint>
+    <sparqlEndpoint>/sparql/</sparqlEndpoint>
     <requiresAuthentication>false</requiresAuthentication>
     <requiresValidation>true</requiresValidation>
     <baseDocument>

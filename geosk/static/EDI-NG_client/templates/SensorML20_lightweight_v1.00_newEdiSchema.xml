@@ -3,8 +3,8 @@
     <settings>
         <userInterfaceLanguage xml:lang="en"/>
         <metadataLanguage selectionItem="ling_md_1"/>
-        <metadataEndpoint>http://edidemo.get-it.it/edi/</metadataEndpoint>
-        <sparqlEndpoint>http://sparql.get-it.it</sparqlEndpoint>
+        <metadataEndpoint>/metadata/</metadataEndpoint>
+        <sparqlEndpoint>/sparql/</sparqlEndpoint>
         <requiresValidation>true</requiresValidation>
         <baseDocument><![CDATA[
 
@@ -42,7 +42,7 @@
     <datasources>
         <codelist xml:id="languages" endpointType="virtuoso">
             <uri>http://inspire-registry.jrc.ec.europa.eu/registers/Languages/items</uri>
-            <url>http://sparql/sparql.get-it.it/sparql</url>
+            <url>/sparql</url>
         </codelist>
         <sparql xml:id="keywords" endpointType="virtuoso">
             <query><![CDATA[
@@ -183,7 +183,7 @@
                         SELECT ?c ?l ?a ?urn
                         WHERE {
                           ?c rdf:type skos:Concept.
-                          ?c skos:inScheme <http://vocab.nerc.ac.uk/collection/L05/current/>.
+                          ?c skos:inScheme <https://vocab.nerc.ac.uk/collection/L05/current/>.
                           OPTIONAL {
                             ?c skos:notation ?urn.
                           }
@@ -414,7 +414,7 @@ LIMIT 1
             <uri>http://www.rndt.gov.it/codelists/MD_ReferenceSystemCode/items</uri>
         </codelist>
         <codelist xml:id="deployment_role" endpointType="virtuoso">
-            <uri>http://vocab.nerc.ac.uk/collection/L19/current/</uri>
+            <uri>https://vocab.nerc.ac.uk/collection/L19/current/</uri>
         </codelist>
         <codelist xml:id="physical_quantity" endpointType="virtuoso">
             <uri>http://sp7.irea.cnr.it/rdfdata/sensors/phys_props/items</uri>
@@ -1140,7 +1140,7 @@ LIMIT 1
                 </item>
                 <item hasIndex="5" xml:id="easting_5" isFixed="true" hasDatatype="string">
                     <hasPath>swe:coordinate/swe:Quantity/swe:uom/@xlink:href</hasPath>
-                    <hasValue>http://vocab.nerc.ac.uk/collection/P06/current/UAAA/</hasValue>
+                    <hasValue>https://vocab.nerc.ac.uk/collection/P06/current/UAAA/</hasValue>
                 </item>
                 <item hasIndex="6" xml:id="easting_6" isFixed="false" hasDatatype="string">
                     <label xml:lang="it">Valore (decimi di grado)</label>
@@ -1181,7 +1181,7 @@ LIMIT 1
                 </item>
                 <item hasIndex="5" xml:id="northing_5" isFixed="true" hasDatatype="string">
                     <hasPath>swe:coordinate/swe:Quantity/swe:uom/@xlink:href</hasPath>
-                    <hasValue>http://vocab.nerc.ac.uk/collection/P06/current/UAAA/</hasValue>
+                    <hasValue>https://vocab.nerc.ac.uk/collection/P06/current/UAAA/</hasValue>
                 </item>
                 <item hasIndex="6" xml:id="northing_6" isFixed="false" hasDatatype="string">
                     <label xml:lang="it">Valore (decimi di grado)</label>
@@ -1218,7 +1218,7 @@ LIMIT 1
                 </item>
                 <item hasIndex="5" xml:id="altitude_5" isFixed="true" hasDatatype="string">
                     <hasPath>swe:coordinate/swe:Quantity/swe:uom/@xlink:href</hasPath>
-                    <hasValue>http://vocab.nerc.ac.uk/collection/P06/current/ULAA/</hasValue>
+                    <hasValue>https://vocab.nerc.ac.uk/collection/P06/current/ULAA/</hasValue>
                 </item>
                 <item hasIndex="6" xml:id="altitude_6" isFixed="false" hasDatatype="string">
                     <label xml:lang="it">Valore (in metri)</label>

@@ -5,8 +5,8 @@
       <byItem>ling_md_1</byItem>
     </languageSelection>
     <!-- <metadataEndpoint>https://adamassoft.it/jbossTest/edi/</metadataEndpoint> -->
-    <metadataEndpoint>http://sp7.irea.cnr.it/jboss/edi/</metadataEndpoint>
-    <sparqlEndpoint>http://sparql/sparql.get-it.it/sparql</sparqlEndpoint>
+    <metadataEndpoint>/metadata/</metadataEndpoint>
+    <sparqlEndpoint>/sparql/sparql</sparqlEndpoint>
     <requiresAuthentication>false</requiresAuthentication>
     <requiresValidation>true</requiresValidation>
     <baseDocument>

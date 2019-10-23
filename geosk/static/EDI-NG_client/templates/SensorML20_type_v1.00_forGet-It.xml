@@ -14,8 +14,8 @@
         <languageSelection>
             <byItem>ling_md_1</byItem>
         </languageSelection>
-        <metadataEndpoint>http://sp7.irea.cnr.it/tomcat2/edi/</metadataEndpoint>
-        <sparqlEndpoint>http://sparql.get-it.it</sparqlEndpoint>
+        <metadataEndpoint>/metadata/</metadataEndpoint>
+        <sparqlEndpoint>/sparql/</sparqlEndpoint>
         <requiresAuthentication>false</requiresAuthentication>
         <requiresValidation>true</requiresValidation>
 
@@ -83,7 +83,7 @@
             <uri>http://inspire-registry.jrc.ec.europa.eu/registers/Languages/items</uri>
             <endpointType>virtuoso</endpointType>
             <type>virtuosoCodelist</type>
-            <url>http://sparql/sparql.get-it.it/sparql</url>
+            <url>/sparql</url>
         </datasource>
         <datasource>
             <id>keywords</id>
@@ -149,7 +149,7 @@
                     SELECT ?c ?l ?a
                     WHERE {
                     ?c rdf:type skos:Concept.
-                    <http://vocab.nerc.ac.uk/collection/P10/current/> skos:member ?c.
+                    <https://vocab.nerc.ac.uk/collection/P10/current/> skos:member ?c.
                     OPTIONAL {
                     ?c skos:prefLabel ?l.
                     FILTER( LANG(?l) = "en")
@@ -276,7 +276,7 @@
                         SELECT ?c ?l ?a ?urn
                         WHERE { 
                           ?c rdf:type skos:Concept.
-                          ?c skos:inScheme <http://vocab.nerc.ac.uk/collection/L05/current/>.
+                          ?c skos:inScheme <https://vocab.nerc.ac.uk/collection/L05/current/>.
                           OPTIONAL {
                             ?c skos:notation ?urn.
                           }
@@ -504,7 +504,7 @@
         </datasource>
         <datasource>
             <id>deployment_role</id>
-            <uri>http://vocab.nerc.ac.uk/collection/L19/current/</uri>
+            <uri>https://vocab.nerc.ac.uk/collection/L19/current/</uri>
             <endpointType>virtuoso</endpointType>
             <type>virtuosoCodelist</type>
         </datasource>
@@ -1524,7 +1524,7 @@
                     <hasPath>swe:coordinate/swe:Quantity/swe:uom/@xlink:href</hasPath>
                     <isFixed>true</isFixed>
                     <hasDatatype>string</hasDatatype>
-                    <hasValue>http://vocab.nerc.ac.uk/collection/P06/current/UAAA/</hasValue>
+                    <hasValue>https://vocab.nerc.ac.uk/collection/P06/current/UAAA/</hasValue>
                 </item> 
                 <item>
                     <hasIndex>6</hasIndex>
@@ -1587,7 +1587,7 @@
                     <hasPath>swe:coordinate/swe:Quantity/swe:uom/@xlink:href</hasPath>
                     <isFixed>true</isFixed>
                     <hasDatatype>string</hasDatatype>
-                    <hasValue>http://vocab.nerc.ac.uk/collection/P06/current/UAAA/</hasValue>
+                    <hasValue>https://vocab.nerc.ac.uk/collection/P06/current/UAAA/</hasValue>
                 </item> 
                 <item>
                     <hasIndex>6</hasIndex>
@@ -1646,7 +1646,7 @@
                     <hasPath>swe:coordinate/swe:Quantity/swe:uom/@xlink:href</hasPath>
                     <isFixed>true</isFixed>
                     <hasDatatype>string</hasDatatype>
-                    <hasValue>http://vocab.nerc.ac.uk/collection/P06/current/ULAA/</hasValue>
+                    <hasValue>https://vocab.nerc.ac.uk/collection/P06/current/ULAA/</hasValue>
                 </item> 
                 <item>
                     <hasIndex>6</hasIndex>

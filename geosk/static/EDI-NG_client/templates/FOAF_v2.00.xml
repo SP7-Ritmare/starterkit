@@ -5,8 +5,8 @@
     <languageSelection>
       <byItem>ling_md_1</byItem>
     </languageSelection>
-    <metadataEndpoint>https://sp7.irea.cnr.it/tomcat2/EDI-T/</metadataEndpoint>
-    <sparqlEndpoint>http://sparql/sparql.get-it.it/sparql</sparqlEndpoint>
+    <metadataEndpoint>/metadata/</metadataEndpoint>
+    <sparqlEndpoint>/sparql/sparql</sparqlEndpoint>
     <requiresAuthentication>false</requiresAuthentication>
     <requiresValidation>false</requiresValidation>
     <baseDocument>

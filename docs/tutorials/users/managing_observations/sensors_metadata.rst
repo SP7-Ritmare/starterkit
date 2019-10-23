@@ -13,11 +13,11 @@ SensorML provides a definition language that supports all details of sensors and
 Sensor meta-data creation has been performed by GET-IT metadata editor, called `EDI <http://edidemo.get-it.it>`_, which allows ease and friendly instrument registration (SensorML editing version v1.0 and v2.0) through graphical user interfaces (GUI)
 and auto completion facilities linked to vocabularies. Some sections of SensorML have been borrowed from the terms present in RDF, in order to harmonize and semantically enrich the metadata. In particular for the SensorML templates implemented in the EDI:
 
-* Parameters: `P01 <http://vocab.nerc.ac.uk/collection/P01/current>`_ and `P02 <http://vocab.nerc.ac.uk/collection/P02/current>`_ `NERC vocabularies <http://vocab.nerc.ac.uk/>`_ or `EnvThes <http://vocabs.ceh.ac.uk/evn/tbl/envthes.evn>`_
+* Parameters: `P01 <https://vocab.nerc.ac.uk/collection/P01/current>`_ and `P02 <https://vocab.nerc.ac.uk/collection/P02/current>`_ `NERC vocabularies <https://vocab.nerc.ac.uk/>`_ or `EnvThes <http://vocabs.ceh.ac.uk/evn/tbl/envthes.evn>`_
 
-* Units of measure: `P06 <http://vocab.nerc.ac.uk/collection/P06/current>`_ NERC vocabulary or EnvThes
+* Units of measure: `P06 <https://vocab.nerc.ac.uk/collection/P06/current>`_ NERC vocabulary or EnvThes
 
-* Sensor types: `P07 <http://vocab.nerc.ac.uk/collection/P07/current>`_ NERC vocabulary
+* Sensor types: `P07 <https://vocab.nerc.ac.uk/collection/P07/current>`_ NERC vocabulary
 
 * Manufacturers: FOAF (`Friends Of A Friend <http://www.foaf-project.org>`_) graph version of `Esonet Yellow Pages <http://www.esonetyellowpages.com/>`_.
 

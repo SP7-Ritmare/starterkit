@@ -360,15 +360,15 @@ ritmaresk.utils.namingConvention = (function () {
             };
             /*
              <sp7:P_array xmlns:sp7="http://sp7.irea.cnr.it/sp7">
-             <sp7:field name="TemperatureOfTheWaterColumn" type="swe:Quantity" definition="http://vocab.nerc.ac.uk/collection/P02/current/TEMP/" uom_code="degC">
+             <sp7:field name="TemperatureOfTheWaterColumn" type="swe:Quantity" definition="https://vocab.nerc.ac.uk/collection/P02/current/TEMP/" uom_code="degC">
              <sp7:values>
              </sp7:values>
              </sp7:field>
-             <sp7:field name="SeaLevel" type="swe:Quantity" definition="http://vocab.nerc.ac.uk/collection/P02/current/ASLV/" uom_code="m">
+             <sp7:field name="SeaLevel" type="swe:Quantity" definition="https://vocab.nerc.ac.uk/collection/P02/current/ASLV/" uom_code="m">
              <sp7:values>2007-11-23T10:00:00@0.5#2007-11-23T11:00:00@0.1#2007-11-23T12:00:00@0.2#2007-11-23T13:00:00@0.3#2007-11-23T14:00:00@0.4#2007-11-23T15:00:00@0.1
              </sp7:values>
              </sp7:field>
-             <sp7:field name="notInThisProcedure" type="swe:Quantity" definition="http://vocab.nerc.ac.uk/collection/P02/current/FAKE/" uom_code="m">
+             <sp7:field name="notInThisProcedure" type="swe:Quantity" definition="https://vocab.nerc.ac.uk/collection/P02/current/FAKE/" uom_code="m">
              <sp7:values>2007-11-23T10:00:00@0.5#2007-11-23T11:00:00@0.1#2007-11-23T12:00:00@0.2#2007-11-23T13:00:00@0.3#2007-11-23T14:00:00@0.4#2007-11-23T15:00:00@0.1
              </sp7:values>
              </sp7:field>

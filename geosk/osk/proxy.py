@@ -43,3 +43,42 @@ class SparqlProxy(HttpProxy):
         view = super(SparqlProxy, cls).as_view(**initkwargs)
         view.csrf_exempt = True
         return view
+
+
+class FusekiProxy(HttpProxy):
+    base_url = settings.REVERSE_PROXY_FUSEKI
+    reverse_urls = [
+        ('/fuseki/', settings.REVERSE_PROXY_FUSEKI)
+    ]
+
+    @classonlymethod
+    def as_view(cls, **initkwargs):
+        view = super(FusekiProxy, cls).as_view(**initkwargs)
+        view.csrf_exempt = True
+        return view
+
+
+class VocabsProxy(HttpProxy):
+    base_url = settings.REVERSE_PROXY_VOCABS
+    reverse_urls = [
+        ('/vocabs/', settings.REVERSE_PROXY_VOCABS)
+    ]
+
+    @classonlymethod
+    def as_view(cls, **initkwargs):
+        view = super(VocabsProxy, cls).as_view(**initkwargs)
+        view.csrf_exempt = True
+        return view
+
+
+class MetadataProxy(HttpProxy):
+    base_url = settings.REVERSE_PROXY_METADATA
+    reverse_urls = [
+        ('/metadata/', settings.REVERSE_PROXY_METADATA)
+    ]
+
+    @classonlymethod
+    def as_view(cls, **initkwargs):
+        view = super(MetadataProxy, cls).as_view(**initkwargs)
+        view.csrf_exempt = True
+        return view
