@@ -103,11 +103,11 @@
             <query>
                 <![CDATA[
                     PREFIX skos: <http://www.w3.org/2004/02/skos/core#> SELECT * WHERE {
-                        SERVICE <http://vocabs.ceh.ac.uk/evn/tbl/sparql> {
-                            GRAPH <urn:x-evn-master:envthes>{
+                        #SERVICE <http://vocabs.ceh.ac.uk/evn/tbl/sparql> {
+                            GRAPH <urn:x-evn-master:EnvThes>{
                                 {
-                                    BIND (<http://vocabs.lter-europe.net/EnvThes/10004> as ?root)
-                                    ?root (skos:narrower*) ?narrow.
+                                    BIND (<http://vocabs.lter-europe.net/EnvThes/20935> as ?root)
+                                    ?c (skos:broader*) ?root.
                                     ?narrow skos:prefLabel ?l.
                                 }
                                 FILTER( REGEX( STR(?l), "$search_param", "i") )
@@ -127,10 +127,10 @@
                 <![CDATA[
                     PREFIX skos: <http://www.w3.org/2004/02/skos/core#> SELECT * WHERE {
                         SERVICE <http://vocabs.ceh.ac.uk/evn/tbl/sparql> {
-                            GRAPH <urn:x-evn-pub:envthes>{
+                            GRAPH <urn:x-evn-pub:EnvThes>{
                                 {
-                                    BIND (<http://vocabs.lter-europe.net/EnvThes/10004> as ?root)
-                                    ?root (skos:narrower*) ?narrow.
+                                    BIND (<http://vocabs.lter-europe.net/EnvThes/20935> as ?root)
+                                    ?c (skos:broader*) ?root.
                                     ?narrow skos:prefLabel ?l.
                                 }
                                 FILTER( REGEX( STR(?l), "$search_param", "i") )
