@@ -189,10 +189,12 @@ def ediproxy_importmd(request):
     # if SkRegistration.objects.get_current() is None:
     #    return json_response(errors='You must register the GET-IT before save a Metadata',
     #                         status=500)
+    generatedXml = request.POST.get('generatedXml')
+    if not generatedXml:
+        return json_response(exception="No sensor data has been found", status=500)
     insertsensor = request.POST.get('generatedXml').encode('utf8')
     ediml = request.POST.get('ediml').encode('utf8')
     edimlid = request.POST.get('edimlid')
-
     headers = {
         'Accept': 'application/xml',
         'Content-Type': 'application/xml',
@@ -200,13 +202,13 @@ def ediproxy_importmd(request):
     }
     sos_response = requests.post(
         settings.SOS_SERVER['default']['LOCATION'] + '/pox',
-        data=insertsensor,  headers=headers,
+        data=insertsensor,
+        headers=headers,
         verify=False
-        )
-
-
+    )
     if sos_response.status_code == 200:
-        tr = etree.fromstring(sos_response.content)
+        _content = sos_response.content
+        tr = etree.fromstring(_content)
         if tr.tag == nspath_eval("ows110:ExceptionReport", namespaces):
             return json_response(exception=sos_response.text.encode('utf8'), status=500)
 
