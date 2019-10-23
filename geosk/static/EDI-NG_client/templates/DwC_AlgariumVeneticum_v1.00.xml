@@ -78,7 +78,7 @@
                       }
                       ORDER BY ASC(?locality)
             ]]></query>
-            <url>/sparql/LWItaToponyms/query</url>
+            <url>http://fuseki1.get-it.it/LWItaToponyms/query</url>
         </sparql>
         <singleton xml:id="geonameS" endpointType="fuseki" triggerItem="locality_1_uri">
             <query><![CDATA[
@@ -126,7 +126,7 @@
                       ORDER BY ASC(?locality)
                       
             ]]></query>
-            <url>/sparql/LWItaToponyms/query</url>
+            <url>http://fuseki1.get-it.it/LWItaToponyms/query</url>
         </singleton>
         <sparql xml:id="institution" endpointType="virtuoso">
             <query><![CDATA[
@@ -170,7 +170,7 @@
                                     } ORDER BY ASC(?a) ASC(?l)
                 ]]>
             </query>
-            <url>/sparql/CCLicenses/query</url>
+            <url>http://fuseki1.get-it.it/CCLicenses/query</url>
         </sparql>
         <sparql xml:id="taxonomy" endpointType="fuseki">
             <query><![CDATA[
@@ -192,7 +192,7 @@
                     }
                     ORDER BY ASC(?c)
                 ]]></query>
-            <url>/sparql/taxonconcept/query</url>
+            <url>http://fuseki1.get-it.it/taxonconcept/query</url>
         </sparql>
         <singleton xml:id="taxonomyS" endpointType="fuseki" triggerItem="taxon_1_uri">
             <!--<query><![CDATA[
@@ -249,7 +249,7 @@
                     }
                     #ORDER BY ASC(?sciname)
                 ]]></query>
-            <url>/sparql/taxonconcept/query</url>
+            <url>http://fuseki1.get-it.it/taxonconcept/query</url>
         </singleton>
     </datasources>
 

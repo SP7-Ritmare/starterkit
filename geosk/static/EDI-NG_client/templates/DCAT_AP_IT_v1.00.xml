@@ -69,7 +69,7 @@
         </codelist>
         <codelist endpointType="fuseki" xml:id="license">
             <uri>http://inspire.ec.europa.eu/codeList/license</uri>
-            <url>/sparql</url>
+            <url>http://fuseki1.get-it.it</url>
         </codelist>
         <!-- TO DO: verify the endpoint (URL) and enpointType, eventually add in the endpointTypes -->
         <sparql xml:id="keywordFromContrVoc" endpointType="virtuoso">
@@ -107,7 +107,7 @@
                         ORDER BY ASC(?l)
                         
             ]]></query>
-            <url>/sparql/directory/sparql</url>
+            <url>http://fuseki1.get-it.it/directory/sparql</url>
         </sparql>
         <!-- TO DO: change -->
         <singleton xml:id="info_contact" endpointType="fuseki" triggerItem="contact_1_uri">
@@ -123,7 +123,7 @@
                         LIMIT 1
 
             ]]></query>
-            <url>/sparql/directory/sparql</url>
+            <url>http://fuseki1.get-it.it/directory/sparql</url>
         </singleton>
     </datasources>
 

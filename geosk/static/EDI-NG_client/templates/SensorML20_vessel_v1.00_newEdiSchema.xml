@@ -83,7 +83,7 @@
                 ORDER BY ASC(?l) ASC(?a)
             ]]>
             </query>
-            <url>/sparql/directory/sparql</url>
+            <url>http://fuseki1.get-it.it/directory/sparql</url>
         </singleton>
         <!-- ################################# -->
         <!-- L05 NERC Vocab: device categories -->

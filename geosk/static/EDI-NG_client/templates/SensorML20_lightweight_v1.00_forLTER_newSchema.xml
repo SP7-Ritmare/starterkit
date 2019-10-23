@@ -180,7 +180,7 @@
                         ORDER BY ASC(?l)                        
                         
             ]]></query>
-         <url>/sparql/manufacturers/sparql</url>
+         <url>http://fuseki1.get-it.it/manufacturers/sparql</url>
       </singleton>
       <singleton xml:id="info_manufacturers" endpointType="fuseki1" triggerItem="manuf_name_3_uri">
          <query><![CDATA[
@@ -229,7 +229,7 @@
                         }
                         
             ]]></query>
-         <url>/sparql/manufacturers/sparql</url>
+         <url>http://fuseki1.get-it.it/manufacturers/sparql</url>
       </singleton>
       <sparql xml:id="intended_applications" endpointType="virtuoso">
          <query><![CDATA[
@@ -335,7 +335,7 @@
                         }
                         ORDER BY ASC(?l)
          -->
-         <url>/sparql/directory/sparql</url>
+         <url>http://fuseki1.get-it.it/directory/sparql</url>
       </singleton>
       <singleton xml:id="info_owner" endpointType="fuseki1" triggerItem="owner_1_uri">
          <query><![CDATA[
@@ -381,7 +381,7 @@
                         }
                         LIMIT 1                        
             ]]></query>
-         <url>/sparql/directory/sparql</url>
+         <url>http://fuseki1.get-it.it/directory/sparql</url>
       </singleton>
       <sparql xml:id="operators" endpointType="fuseki1">
          <query><![CDATA[
@@ -411,7 +411,7 @@
                         }
                         ORDER BY ASC(?l)
          -->
-         <url>/sparql/directory/sparql</url>
+         <url>http://fuseki1.get-it.it/directory/sparql</url>
       </sparql>
       <singleton xml:id="info_operator" endpointType="fuseki1" triggerItem="operator_1_uri">
          <query><![CDATA[
@@ -459,7 +459,7 @@
                         LIMIT 1  
                         
             ]]></query>
-         <url>/sparql/directory/sparql</url>
+         <url>http://fuseki1.get-it.it/directory/sparql</url>
       </singleton>
       <sparql xml:id="parameters" endpointType="virtuoso">
          <query><![CDATA[

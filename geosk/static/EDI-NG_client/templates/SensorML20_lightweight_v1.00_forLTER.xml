@@ -189,7 +189,7 @@
                         ORDER BY ASC(?l)                        
                         ]]>
             </query>
-            <url>/sparql/manufacturers/sparql</url>
+            <url>http://fuseki1.get-it.it/manufacturers/sparql</url>
             <type> sparql </type>
         </datasource>
         <datasource>
