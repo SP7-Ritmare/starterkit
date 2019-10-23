@@ -158,10 +158,10 @@
                 
                     PREFIX skos: <http://www.w3.org/2004/02/skos/core#> SELECT * WHERE {
                         SERVICE <http://vocabs.ceh.ac.uk/evn/tbl/sparql> {
-                            GRAPH <urn:x-evn-master:envthes>{
+                            GRAPH <urn:x-evn-master:EnvThes>{
                                 {
-                                    BIND (<http://vocabs.lter-europe.net/EnvThes/10004> as ?root)
-                                    ?root (skos:narrower*) ?c.
+                                    BIND (<http://vocabs.lter-europe.net/EnvThes/20935> as ?root)
+                                    ?c (skos:broader*) ?root.
                                     ?c skos:prefLabel ?l.
                                 }
                                 FILTER( REGEX( STR(?l), "$search_param", "i") )
@@ -281,10 +281,10 @@
                     PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
                     SELECT * WHERE {
                         SERVICE <http://onto.nerc.ac.uk/evn/tbl/sparql> {
-                            GRAPH <urn:x-evn-master:ef>{
+                            GRAPH <urn:x-evn-master:EF>{
                                 {
                                     BIND (<http://onto.nerc.ac.uk/EF/purposeOfCollection> as ?root)
-                                    ?root (skos:narrower*) ?c.
+                                    ?c (skos:broader*) ?root.
                                     ?c skos:prefLabel ?l.
                                 }
                             }
