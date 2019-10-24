@@ -71,6 +71,19 @@ class VocabsProxy(HttpProxy):
         return view
 
 
+class NercProxy(HttpProxy):
+    base_url = settings.REVERSE_PROXY_NERC
+    reverse_urls = [
+        ('/nerc/', settings.REVERSE_PROXY_NERC)
+    ]
+
+    @classonlymethod
+    def as_view(cls, **initkwargs):
+        view = super(NercProxy, cls).as_view(**initkwargs)
+        view.csrf_exempt = True
+        return view
+
+
 class MetadataProxy(HttpProxy):
     base_url = settings.REVERSE_PROXY_METADATA
     reverse_urls = [

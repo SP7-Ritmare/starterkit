@@ -206,7 +206,7 @@ Si può usare quello? (dubito: non ha la struttura adeguata a o&m 2). Ma quello 
 								
 								<!-- esempio di risultato:
 								<swe:field name="Temperature of the water column">
-								    <swe:Quantity definition="https://vocab.nerc.ac.uk/collection/P02/current/TEMP/">
+								    <swe:Quantity definition="http://vocab.nerc.ac.uk/collection/P02/current/TEMP/">
 								        <swe:uom code="degC"/>
 								    </swe:Quantity>
 								</swe:field>

@@ -343,7 +343,7 @@
         PREFIX dct: <http://purl.org/dc/terms/>
         SELECT ?l ?date
         WHERE {
-          ?voc skos:member <https://vocab.nerc.ac.uk/collection/P01/current/GA2CFS01/> .
+          ?voc skos:member <http://vocab.nerc.ac.uk/collection/P01/current/GA2CFS01/> .
           OPTIONAL {
             ?voc skos:prefLabel ?l .
           }

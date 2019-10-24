@@ -75,10 +75,11 @@ ritmaresk.XsltTransformer = (function () {
             */
             console.log("loadingXMLDoc: "+urlOrPath);
             xhttp.open("GET", urlOrPath, async);
-            //xhttp.setRequestHeader ("Accept", "text/xml");
-            if(overrideMimeTypeToXml)xhttp.overrideMimeType("application/xml; charset=UTF-8");
+            // xhttp.setRequestHeader ("Accept", "text/xml");
+            if(overrideMimeTypeToXml) xhttp.overrideMimeType("application/xml; charset=UTF-8");
             xhttp.send();
-            return xhttp.responseXML;
+            var content = xhttp.responseXML !== null ? xhttp.responseXML : $.parseXML(xhttp.response);
+            return content;
         };
 
         /**

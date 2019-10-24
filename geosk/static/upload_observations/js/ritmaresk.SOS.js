@@ -470,7 +470,7 @@ ritmaresk.Sos = (function () {	//sk sos endpoint url example = http://sk.sp7.ire
 /*
  sos.urlGetCapabilities();
  var offering="offering:http://sp7.irea.cnr.it/procedure/PuntaSaluteCanalGrande/observations",
- observedProperty="https://vocab.nerc.ac.uk/collection/P02/current/ASLV/",
+ observedProperty="http://vocab.nerc.ac.uk/collection/P02/current/ASLV/",
  procedure="http://sp7.irea.cnr.it/procedure/PuntaSaluteCanalGrande";
 
  sos.urlGetResultTemplate(offering,observedProperty);
@@ -502,9 +502,9 @@ ritmaresk.Sos = (function () {	//sk sos endpoint url example = http://sk.sp7.ire
  &version=2.0.0
  &request=GetResultTemplate
  &offering=offering:http://sp7.irea.cnr.it/procedure/PuntaSaluteCanalGrande/observations
- &observedProperty=https://vocab.nerc.ac.uk/collection/P02/current/ASLV/
+ &observedProperty=http://vocab.nerc.ac.uk/collection/P02/current/ASLV/
 
- xsltproc ResultStructure_From_GetResultTemplate_json.xsl "http://10.0.0.7:8080/MareeVe/sos/kvp?service=SOS&version=2.0.0&request=GetResultTemplate&offering=offering:http://sp7.irea.cnr.it/procedure/PuntaSaluteCanalGrande/observations&observedProperty=https://vocab.nerc.ac.uk/collection/P02/current/ASLV/"
+ xsltproc ResultStructure_From_GetResultTemplate_json.xsl "http://10.0.0.7:8080/MareeVe/sos/kvp?service=SOS&version=2.0.0&request=GetResultTemplate&offering=offering:http://sp7.irea.cnr.it/procedure/PuntaSaluteCanalGrande/observations&observedProperty=http://vocab.nerc.ac.uk/collection/P02/current/ASLV/"
 
  */
 

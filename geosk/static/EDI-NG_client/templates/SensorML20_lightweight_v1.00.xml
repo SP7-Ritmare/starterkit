@@ -73,7 +73,7 @@
                     SELECT ?c ?l ?a
                     WHERE {
                     ?c rdf:type skos:Concept.
-                    <https://vocab.nerc.ac.uk/collection/P10/current/> skos:member ?c.
+                    <http://vocab.nerc.ac.uk/collection/P10/current/> skos:member ?c.
                     OPTIONAL {
                     ?c skos:prefLabel ?l.
                     FILTER( LANG(?l) = "en")
@@ -264,7 +264,7 @@
                         SELECT ?c ?l ?a ?urn
                         WHERE { 
                           ?c rdf:type skos:Concept.
-                          ?c skos:inScheme <https://vocab.nerc.ac.uk/collection/L05/current/>.
+                          ?c skos:inScheme <http://vocab.nerc.ac.uk/collection/L05/current/>.
                           OPTIONAL {
                             ?c skos:notation ?urn.
                           }
@@ -456,7 +456,7 @@ LIMIT 1
         </datasource>
         <datasource>
             <id>deployment_role</id>
-            <uri>https://vocab.nerc.ac.uk/collection/L19/current/</uri>
+            <uri>http://vocab.nerc.ac.uk/collection/L19/current/</uri>
             <endpointType>virtuoso</endpointType>
             <type>virtuosoCodelist</type>
         </datasource>
@@ -1882,7 +1882,7 @@ LIMIT 1
                     <hasPath>swe:coordinate/swe:Quantity/swe:uom/@xlink:href</hasPath>
                     <isFixed>true</isFixed>
                     <hasDatatype>string</hasDatatype>
-                    <hasValue>https://vocab.nerc.ac.uk/collection/P06/current/UAAA/</hasValue>
+                    <hasValue>http://vocab.nerc.ac.uk/collection/P06/current/UAAA/</hasValue>
                 </item> 
                 <item>
                     <hasIndex>6</hasIndex>
@@ -1945,7 +1945,7 @@ LIMIT 1
                     <hasPath>swe:coordinate/swe:Quantity/swe:uom/@xlink:href</hasPath>
                     <isFixed>true</isFixed>
                     <hasDatatype>string</hasDatatype>
-                    <hasValue>https://vocab.nerc.ac.uk/collection/P06/current/UAAA/</hasValue>
+                    <hasValue>http://vocab.nerc.ac.uk/collection/P06/current/UAAA/</hasValue>
                 </item> 
                 <item>
                     <hasIndex>6</hasIndex>
@@ -2004,7 +2004,7 @@ LIMIT 1
                     <hasPath>swe:coordinate/swe:Quantity/swe:uom/@xlink:href</hasPath>
                     <isFixed>true</isFixed>
                     <hasDatatype>string</hasDatatype>
-                    <hasValue>https://vocab.nerc.ac.uk/collection/P06/current/ULAA/</hasValue>
+                    <hasValue>http://vocab.nerc.ac.uk/collection/P06/current/ULAA/</hasValue>
                 </item> 
                 <item>
                     <hasIndex>6</hasIndex>

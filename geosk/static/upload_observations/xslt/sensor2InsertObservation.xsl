@@ -171,7 +171,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                                 <xsl:if test="@name!='phenomenonTime'">
                                     <!-- esempio di risultato:
                                     <swe:field name="Temperature of the water column">
-                                        <swe:Quantity definition="https://vocab.nerc.ac.uk/collection/P02/current/TEMP/">
+                                        <swe:Quantity definition="http://vocab.nerc.ac.uk/collection/P02/current/TEMP/">
                                             <swe:uom code="degC"/>
                                         </swe:Quantity>
                                     </swe:field>

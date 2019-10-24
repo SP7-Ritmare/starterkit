@@ -45,7 +45,7 @@
                     SELECT ?c ?l ?a
                     WHERE {
                     ?c rdf:type skos:Concept.
-                    <https://vocab.nerc.ac.uk/collection/L22/current/> skos:member ?c.
+                    <http://vocab.nerc.ac.uk/collection/L22/current/> skos:member ?c.
                     OPTIONAL {
                     ?c skos:prefLabel ?l.
                     FILTER( LANG(?l) = "en")
@@ -67,7 +67,7 @@
                     SELECT ?c ?l ?a
                     WHERE {
                     ?c rdf:type skos:Concept.
-                    <https://vocab.nerc.ac.uk/collection/P01/current/> skos:member ?c.
+                    <http://vocab.nerc.ac.uk/collection/P01/current/> skos:member ?c.
                     OPTIONAL {
                     ?c skos:prefLabel ?l.
                     FILTER( LANG(?l) = "en")

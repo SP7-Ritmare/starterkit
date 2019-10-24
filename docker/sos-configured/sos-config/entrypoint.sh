@@ -10,7 +10,7 @@ source $HOME/.override_env
 
 echo "updatedb task done"
 
-if [ ${IS_FIRST_START} = "true" ]
+if [ ${IS_FIRST_START} = "true" ]  || [ ${IS_FIRST_START} = "True" ]
 then
 
     /usr/local/bin/invoke updatedbsos >> /tmp/invoke.log
