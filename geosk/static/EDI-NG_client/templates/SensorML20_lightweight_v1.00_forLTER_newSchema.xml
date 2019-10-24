@@ -614,7 +614,7 @@
             </item>
          </produces>
       </element>
-      <element xml:id="mod_number" isMandatory="false" isMultiple="false">
+      <element xml:id="mod_number" isMandatory="true" isMultiple="false">
          <label xml:lang="it">Modello</label>
          <label xml:lang="en">Model</label>
          <help xml:lang="it">Indicare, se presente, il modello del sensore, del sistema di sensori o della piattaforma.</help>
@@ -634,7 +634,7 @@
             </item>
          </produces>
       </element>
-      <element xml:id="serial_num" isMandatory="false" isMultiple="false">
+      <element xml:id="serial_num" isMandatory="true" isMultiple="false">
          <label xml:lang="it">Numero seriale</label>
          <label xml:lang="en">Serial Number</label>
          <help xml:lang="it">Indicare il numero seriale, se presente, del sensore, del sistema di sensori o della piattaforma.</help>
