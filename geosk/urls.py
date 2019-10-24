@@ -7,6 +7,7 @@ from geosk.osk.proxy import (
     SparqlProxy,
     FusekiProxy,
     VocabsProxy,
+    NercProxy,
     MetadataProxy)
 
 from geosk.mdtools import api, views as mdtools_views
@@ -80,6 +81,10 @@ geoskurlpatterns = [
     url(r'^vocabs/(?P<url>.*)$',
         VocabsProxy.as_view(),
         name='vocabs'
+    ),
+    url(r'^nerc/(?P<url>.*)$',
+        NercProxy.as_view(),
+        name='nerc'
     ),
     url(r'^metadata/(?P<url>.*)$',
         MetadataProxy.as_view(),

@@ -85,17 +85,17 @@
                     }
                 
             ]]></query>
-         <url>/vocabs/evn/tbl/sparql</url>
+         <url>https://sdi.adamassoft.it/proxy/?proxyTo=http://vocabs.ceh.ac.uk/evn/tbl/sparql</url>
       </sparql>
       <singleton xml:id="outputsS" endpointType="EnvThes" triggerItem="output_param_1_uri">
          <query><![CDATA[
                 
-                    PREFIX skos: <http://www.w3.org/2004/02/skos/core#> SELECT ?root WHERE {
-                                    BIND (<$search_param> as ?root)
+                    PREFIX skos: <http://www.w3.org/2004/02/skos/core#> SELECT ?c WHERE {
+                                    BIND (<$search_param> as ?c)
                     }
                 
             ]]></query>
-         <url>/vocabs/evn/tbl/sparql</url>
+         <url>https://sdi.adamassoft.it/proxy/?proxyTo=http://vocabs.ceh.ac.uk/evn/tbl/sparql</url>
       </singleton>
       <!--sparql xml:id="outputs" endpointType="virtuoso">
          <query><![CDATA[
@@ -149,7 +149,7 @@
                     SELECT ?c ?l ?a
                     WHERE {
                     ?c rdf:type skos:Concept.
-                    <https://vocab.nerc.ac.uk/collection/P10/current/> skos:member ?c.
+                    <http://vocab.nerc.ac.uk/collection/P10/current/> skos:member ?c.
                     OPTIONAL {
                     ?c skos:prefLabel ?l.
                     FILTER( LANG(?l) = "en")
@@ -163,7 +163,7 @@
                     ORDER BY ASC(?l) ASC(?a)
                     
             ]]></query>
-         <url>/vocabs/edg/tbl/sparql</url>
+         <url>/nerc/sparql/sparql</url>
       </sparql>
       <singleton xml:id="manufacturers" endpointType="fuseki1">
          <query><![CDATA[
@@ -263,7 +263,7 @@
                         SELECT ?c ?l ?a ?urn
                         WHERE { 
                           ?c rdf:type skos:Concept.
-                          ?c skos:inScheme <https://vocab.nerc.ac.uk/collection/L05/current/>.
+                          ?c skos:inScheme <http://vocab.nerc.ac.uk/collection/L05/current/>.
                           OPTIONAL {
                             ?c skos:notation ?urn.
                           }
@@ -496,7 +496,7 @@
          <uri>http://www.rndt.gov.it/codelists/MD_ReferenceSystemCode/items</uri>
       </codelist>
       <codelist xml:id="deployment_role" endpointType="virtuoso">
-         <uri>https://vocab.nerc.ac.uk/collection/L19/current/</uri>
+         <uri>http://vocab.nerc.ac.uk/collection/L19/current/</uri>
       </codelist>
       <codelist xml:id="physical_quantity" endpointType="virtuoso">
          <uri>http://sp7.irea.cnr.it/rdfdata/sensors/phys_props/items</uri>
@@ -1193,7 +1193,7 @@
             </item>
             <item hasIndex="5" xml:id="easting_5" isFixed="true" hasDatatype="string">
                <hasPath>swe:coordinate/swe:Quantity/swe:uom/@xlink:href</hasPath>
-               <hasValue>https://vocab.nerc.ac.uk/collection/P06/current/UAAA/</hasValue>
+               <hasValue>http://vocab.nerc.ac.uk/collection/P06/current/UAAA/</hasValue>
             </item>
             <item hasIndex="6" xml:id="easting_6" isFixed="false" hasDatatype="string">
                <label xml:lang="it">Valore (decimi di grado)</label>
@@ -1234,7 +1234,7 @@
             </item>
             <item hasIndex="5" xml:id="northing_5" isFixed="true" hasDatatype="string">
                <hasPath>swe:coordinate/swe:Quantity/swe:uom/@xlink:href</hasPath>
-               <hasValue>https://vocab.nerc.ac.uk/collection/P06/current/UAAA/</hasValue>
+               <hasValue>http://vocab.nerc.ac.uk/collection/P06/current/UAAA/</hasValue>
             </item>
             <item hasIndex="6" xml:id="northing_6" isFixed="false" hasDatatype="string">
                <label xml:lang="it">Valore (decimi di grado)</label>
@@ -1271,7 +1271,7 @@
             </item>
             <item hasIndex="5" xml:id="altitude_5" isFixed="true" hasDatatype="string">
                <hasPath>swe:coordinate/swe:Quantity/swe:uom/@xlink:href</hasPath>
-               <hasValue>https://vocab.nerc.ac.uk/collection/P06/current/ULAA/</hasValue>
+               <hasValue>http://vocab.nerc.ac.uk/collection/P06/current/ULAA/</hasValue>
             </item>
             <item hasIndex="6" xml:id="altitude_6" isFixed="false" hasDatatype="string">
                <label xml:lang="it">Valore (in metri)</label>

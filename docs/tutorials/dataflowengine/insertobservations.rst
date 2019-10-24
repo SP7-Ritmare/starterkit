@@ -42,7 +42,7 @@ The use of XML language ensures a complete OGC-SWE compliance. Below an example 
 
                 <om:procedure xlink:href="https://www.website.org/procedure/procedureType_B" xlink:arcrole="http://www.website.org/2.0/sensors"/>
 
-                <om:observedProperty xlink:href="https://vocab.nerc.ac.uk/collection/P02/current/ASLV/"/>
+                <om:observedProperty xlink:href="http://vocab.nerc.ac.uk/collection/P02/current/ASLV/"/>
 
                 <om:featureOfInterest>
                     <sams:SF_SpatialSamplingFeature gml:id="sample_o1">
@@ -72,7 +72,7 @@ The use of XML language ensures a complete OGC-SWE compliance. Below an example 
                 <om:phenomenonTime xlink:href="#phenomenonTime_o1"/>
                 <om:resultTime xlink:href="#phenomenonTime_o1"/>
                 <om:procedure xlink:href="https://www.website.org/procedure/procedureType_B" xlink:arcrole="http://www.website.org/2.0/sensors"/>
-                <om:observedProperty xlink:href="https://vocab.nerc.ac.uk/collection/P02/current/ASLV/"/>
+                <om:observedProperty xlink:href="http://vocab.nerc.ac.uk/collection/P02/current/ASLV/"/>
                 <om:featureOfInterest xlink:href="#sample_o1"/>
                 <om:result xsi:type="xs:integer">0.12</om:result>
             </om:OM_Observation>
@@ -86,7 +86,7 @@ The use of XML language ensures a complete OGC-SWE compliance. Below an example 
                 <om:phenomenonTime xlink:href="#phenomenonTime_o1"/>
                 <om:resultTime xlink:href="#phenomenonTime_o1"/>
                 <om:procedure xlink:href="https://www.website.org/procedure/procedureType_B" xlink:arcrole="http://www.website.org/2.0/sensors"/>
-                <om:observedProperty xlink:href="https://vocab.nerc.ac.uk/collection/P02/current/ASLV/"/>
+                <om:observedProperty xlink:href="http://vocab.nerc.ac.uk/collection/P02/current/ASLV/"/>
                 <om:featureOfInterest xlink:href="#sample_o1"/>
 
                 <!-- example of data array -->
@@ -105,7 +105,7 @@ The use of XML language ensures a complete OGC-SWE compliance. Below an example 
                                 </swe:Time>
                             </swe:field>
                             <swe:field name="ASLV">
-                                <swe:Quantity definition="https://vocab.nerc.ac.uk/collection/P02/current/ASLV/">
+                                <swe:Quantity definition="http://vocab.nerc.ac.uk/collection/P02/current/ASLV/">
                                     <swe:uom code="m"/>
                                 </swe:Quantity>
                             </swe:field>
@@ -153,7 +153,7 @@ insertResultTemplate
                         <om:phenomenonTime nilReason="template"/>
                         <om:resultTime nilReason="template"/>
                         <om:procedure xlink:href="https://www.website.org/procedure/procedureType_B"/>
-                        <om:observedProperty xlink:href="https://vocab.nerc.ac.uk/collection/P02/current/ASLV/"/>
+                        <om:observedProperty xlink:href="http://vocab.nerc.ac.uk/collection/P02/current/ASLV/"/>
                         <om:featureOfInterest>
                             <sams:SF_SpatialSamplingFeature gml:id="sample_o1">
                                 <gml:identifier codeSpace="">http://www.website.org/sensors/SSF/SSF_b</gml:identifier>
@@ -180,7 +180,7 @@ insertResultTemplate
                             </swe:Time>
                         </swe:field>
                         <swe:field name="ASLV">
-                            <swe:Quantity definition="https://vocab.nerc.ac.uk/collection/P02/current/ASLV/">
+                            <swe:Quantity definition="http://vocab.nerc.ac.uk/collection/P02/current/ASLV/">
                                 <swe:uom code="m"/>
                             </swe:Quantity>
                         </swe:field>
@@ -240,7 +240,7 @@ Otherwise the SOS server integrated within GET-IT allows to use JSON for sending
             'codespace': 'http://www.opengis.net/def/nil/OGC/0/unknown',
             'value': 'record410549'
         },
-        'observedProperty': u'https://vocab.nerc.ac.uk/collection/P02/current/ASLV/',
+        'observedProperty': u'http://vocab.nerc.ac.uk/collection/P02/current/ASLV/',
         'phenomenonTime': '2015-01-12T11:40:00+00:00',
         'procedure': u'http://sp7.irea.cnr.it/sensors/mareesk.irea.cnr.it/procedure/SIAPMICROS/DA9000/noSerialNumberDeclared/20140723044959616_PuntaSaluteCanaleGiudecca',
         'result': {

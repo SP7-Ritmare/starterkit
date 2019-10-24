@@ -55,9 +55,9 @@
                 SELECT ?c ?l ?a                                                         # for EDI autocompletion the convention for variables is c for URI, l for
                                                                                         # localized label, a for backup label, [z language neutral label, u URN]
                 WHERE {
-                    SERVICE <https://vocab.nerc.ac.uk/sparql/sparql> {                   # TODO: check why query NVS2 sparql doesn't work if directly invoked. This is the federated version of the query.
+                    SERVICE <http://vocab.nerc.ac.uk/sparql/sparql> {                   # TODO: check why query NVS2 sparql doesn't work if directly invoked. This is the federated version of the query.
                         ?c rdf:type skos:Concept.                                           # ?c is the vessel
-                        <https://vocab.nerc.ac.uk/collection/C17/current/> skos:member ?c.   # in NERC collection C17
+                        <http://vocab.nerc.ac.uk/collection/C17/current/> skos:member ?c.   # in NERC collection C17
                         ?c <http://www.w3.org/2002/07/owl#deprecated> "false".              # restrict to un-deprecated (active?) vessels
 
                         ?c skos:definition ?d.                                              # # Definitions in C17 contain additional semantics expressed in JSON syntax. Issue: we cannot discriminate among vessels and other platforms.
@@ -96,7 +96,7 @@
                     SELECT ?c ?l ?a
                     WHERE {
                         ?c rdf:type skos:Concept.
-                        <https://vocab.nerc.ac.uk/collection/L05/current/> skos:member ?c.
+                        <http://vocab.nerc.ac.uk/collection/L05/current/> skos:member ?c.
                         OPTIONAL {
                             ?c skos:prefLabel ?l.
                             FILTER( LANG(?l) = "en")
@@ -123,8 +123,8 @@
                     SELECT ?c ?l ?a
                         WHERE {
                             ?c rdf:type skos:Concept;
-                                skos:broader <https://vocab.nerc.ac.uk/collection/L06/current/3Z/>.
-                            <https://vocab.nerc.ac.uk/collection/L06/current/> skos:member ?c.
+                                skos:broader <http://vocab.nerc.ac.uk/collection/L06/current/3Z/>.
+                            <http://vocab.nerc.ac.uk/collection/L06/current/> skos:member ?c.
                             OPTIONAL {
                                 ?c skos:prefLabel ?l.
                                 FILTER( LANG(?l) = "en")
@@ -151,7 +151,7 @@
                       SELECT ?c ?l ?a
                       WHERE {
                           ?c rdf:type skos:Concept.
-                          <https://vocab.nerc.ac.uk/collection/W01/current/> skos:member ?c.
+                          <http://vocab.nerc.ac.uk/collection/W01/current/> skos:member ?c.
                           OPTIONAL {
                               ?c skos:prefLabel ?l.
                               FILTER( LANG(?l) = "en")
@@ -177,7 +177,7 @@
                       SELECT ?c ?l ?a
                       WHERE {
                       ?c rdf:type skos:Concept.
-                      <https://vocab.nerc.ac.uk/collection/P06/current/> skos:member ?c.
+                      <http://vocab.nerc.ac.uk/collection/P06/current/> skos:member ?c.
                       OPTIONAL {
                       ?c skos:prefLabel ?l.
                       FILTER( LANG(?l) = "en")
@@ -206,7 +206,7 @@
                       SELECT ?c ?l ?a
                       WHERE {
                           ?c rdf:type skos:Concept.
-                          <https://vocab.nerc.ac.uk/collection/P01/current/> skos:member ?c.
+                          <http://vocab.nerc.ac.uk/collection/P01/current/> skos:member ?c.
                           OPTIONAL {
                               ?c skos:prefLabel ?l.
                               FILTER( LANG(?l) = "en")
@@ -535,7 +535,7 @@
                 <item hasDatatype="function" hasIndex="7" xml:id="system_name_7" isFixed="true">
                     <hasPath>@gml:id</hasPath>
                     <hasValue>concat('ID_', substring-after(gml:identifier/text(),
-                        'ID_https://vocab.nerc.ac.uk/collection/C17/current/'))
+                        'ID_http://vocab.nerc.ac.uk/collection/C17/current/'))
                     </hasValue>
                 </item>
                 <item hasDatatype="function" hasIndex="8" xml:id="system_name_8" isFixed="true">
@@ -621,7 +621,7 @@
             <produces>
                 <item hasIndex="1" xml:id="builder_name_1" isFixed="true" hasDatatype="string">
                     <hasPath>sml:identifier/sml:Term/@definition</hasPath>
-                    <hasValue>https://vocab.nerc.ac.uk/collection/C17/current/32WW/</hasValue>
+                    <hasValue>http://vocab.nerc.ac.uk/collection/C17/current/32WW/</hasValue>
                 </item>
                 <item hasIndex="2" xml:id="builder_name_2" isFixed="true" hasDatatype="string">
                     <hasPath>sml:identifier/sml:Term/sml:label</hasPath>
@@ -752,7 +752,7 @@
                 <!-- Physical property: Length -->
                 <item hasIndex="1" xml:id="phyPropLenght_1" isFixed="true" hasDatatype="string">
                     <hasPath> swe:field[@name='Length']/swe:Quantity/@definition </hasPath>
-                    <hasValue>https://vocab.nerc.ac.uk/collection/W01/current/016/</hasValue>
+                    <hasValue>http://vocab.nerc.ac.uk/collection/W01/current/016/</hasValue>
                 </item>
                 <item hasIndex="2" xml:id="phyPropLenght_2" isFixed="true" hasDatatype="string">
                     <hasPath>swe:field[@name='Length']/swe:Quantity/swe:uom/@code</hasPath>
@@ -760,7 +760,7 @@
                 </item>
                 <item hasIndex="3" xml:id="phyPropLenght_3" isFixed="true" hasDatatype="string">
                     <hasPath> swe:field[@name='Length']/swe:Quantity/swe:uom/@xlink:href </hasPath>
-                    <hasValue>https://vocab.nerc.ac.uk/collection/P06/current/ULAA</hasValue>
+                    <hasValue>http://vocab.nerc.ac.uk/collection/P06/current/ULAA</hasValue>
                 </item>
                 <item hasIndex="4" xml:id="phyPropLenght_4" isFixed="false" hasDatatype="string">
                     <label xml:lang="it">Lunghezza in metri</label>
@@ -777,7 +777,7 @@
                 <!-- Physical property: Beam -->
                 <item hasIndex="1" xml:id="phyPropBeam_1" isFixed="true" hasDatatype="string">
                     <hasPath>swe:field[@name='Beam']/swe:Quantity/@definition</hasPath>
-                    <hasValue>https://vocab.nerc.ac.uk/collection/W01/current/018/</hasValue>
+                    <hasValue>http://vocab.nerc.ac.uk/collection/W01/current/018/</hasValue>
                 </item>
                 <item hasIndex="2" xml:id="phyPropBeam_2" isFixed="true" hasDatatype="string">
                     <hasPath> swe:field[@name='Beam']/swe:Quantity/swe:uom/@code </hasPath>
@@ -785,7 +785,7 @@
                 </item>
                 <item hasIndex="3" xml:id="phyPropBeam_3" isFixed="true" hasDatatype="string">
                     <hasPath>swe:field[@name='Beam']/swe:Quantity/swe:uom/@xlink:href</hasPath>
-                    <hasValue>https://vocab.nerc.ac.uk/collection/P06/current/ULAA</hasValue>
+                    <hasValue>http://vocab.nerc.ac.uk/collection/P06/current/ULAA</hasValue>
                 </item>
                 <item hasIndex="4" xml:id="phyPropBeam_4" isFixed="false" hasDatatype="string">
                     <label xml:lang="it">Luce in metri</label>
@@ -802,7 +802,7 @@
                 <!-- Physical property: Design Draft -->
                 <item hasIndex="1" xml:id="phyPropDesignDraft_1" isFixed="true" hasDatatype="string">
                     <hasPath>swe:field[@name='Design_Draft']/swe:Quantity/@definition </hasPath>
-                    <hasValue>https://vocab.nerc.ac.uk/collection/W01/current/019/</hasValue>
+                    <hasValue>http://vocab.nerc.ac.uk/collection/W01/current/019/</hasValue>
                 </item>
                 <item hasIndex="2" xml:id="phyPropDesignDraft_2" isFixed="true" hasDatatype="string">
                     <hasPath>swe:field[@name='Design_Draft']/swe:Quantity/swe:uom/@code</hasPath>
@@ -810,7 +810,7 @@
                 </item>
                 <item hasIndex="3" xml:id="phyPropDesignDraft_3" isFixed="true" hasDatatype="string">
                     <hasPath>swe:field[@name='Design_Draft']/swe:Quantity/swe:uom/@xlink:href </hasPath>
-                    <hasValue>https://vocab.nerc.ac.uk/collection/P06/current/ULAA</hasValue>
+                    <hasValue>http://vocab.nerc.ac.uk/collection/P06/current/ULAA</hasValue>
                 </item>
                 <item hasIndex="4" xml:id="phyPropDesignDraft_4" isFixed="false"
                     hasDatatype="string">
@@ -839,7 +839,7 @@
                 <item hasIndex="3" xml:id="phyPropGrossTonnage_3" isFixed="true"
                     hasDatatype="string">
                     <hasPath>swe:field[@name='Gross_Tonnage']/swe:Quantity/swe:uom/@xlink:href </hasPath>
-                    <hasValue>https://vocab.nerc.ac.uk/collection/P06/current/UUUU</hasValue>
+                    <hasValue>http://vocab.nerc.ac.uk/collection/P06/current/UUUU</hasValue>
                 </item>
                 <item hasIndex="4" xml:id="phyPropGrossTonnage_4" isFixed="false"
                     hasDatatype="string">
@@ -929,7 +929,7 @@
             <produces>
                 <item hasIndex="1" xml:id="generalCapab_1" isFixed="true" hasDatatype="string">
                     <hasPath>@definition</hasPath>
-                    <hasValue>https://vocab.nerc.ac.uk/collection/W01/current/020/</hasValue>
+                    <hasValue>http://vocab.nerc.ac.uk/collection/W01/current/020/</hasValue>
                 </item>
             </produces>
         </element>
@@ -946,7 +946,7 @@
                 <item hasDatatype="string" hasIndex="1" xml:id="generalCapabMaximumEndurance_1"
                     isFixed="true">
                     <hasPath>swe:field[@name='Maximum_Endurance']/swe:Quantity/@definition</hasPath>
-                    <hasValue>https://vocab.nerc.ac.uk/collection/W01/current/021/</hasValue>
+                    <hasValue>http://vocab.nerc.ac.uk/collection/W01/current/021/</hasValue>
                 </item>
                 <item hasDatatype="string" hasIndex="2" xml:id="generalCapabMaximumEndurance_2"
                     isFixed="true">
@@ -956,7 +956,7 @@
                 <item hasDatatype="string" hasIndex="3" xml:id="generalCapabMaximumEndurance_3"
                     isFixed="true">
                     <hasPath>swe:field[@name='Maximum_Endurance']/swe:Quantity/swe:uom/@xlink:href</hasPath>
-                    <hasValue>https://vocab.nerc.ac.uk/collection/P06/current/UTAA</hasValue>
+                    <hasValue>http://vocab.nerc.ac.uk/collection/P06/current/UTAA</hasValue>
                 </item>
                 <item hasDatatype="string" hasIndex="4" xml:id="generalCapabMaximumEndurance_4"
                     isFixed="false">
@@ -980,7 +980,7 @@
                 <item hasDatatype="string" hasIndex="1" xml:id="generalCapabMaximumWorkingSpeed_1"
                     isFixed="true">
                     <hasPath>swe:field[@name='Maximum_Working_Speed']/swe:Quantity/@definition</hasPath>
-                    <hasValue>https://vocab.nerc.ac.uk/collection/W01/current/022/</hasValue>
+                    <hasValue>http://vocab.nerc.ac.uk/collection/W01/current/022/</hasValue>
                 </item>
                 <item hasDatatype="string" hasIndex="2" xml:id="generalCapabMaximumWorkingSpeed_2"
                     isFixed="true">
@@ -990,7 +990,7 @@
                 <item hasDatatype="string" hasIndex="3" xml:id="generalCapabMaximumWorkingSpeed_3"
                     isFixed="true">
                     <hasPath>swe:field[@name='Maximum_Working_Speed']/swe:Quantity/swe:uom/@xlink:href</hasPath>
-                    <hasValue>https://vocab.nerc.ac.uk/collection/P06/current/UKNT</hasValue>
+                    <hasValue>http://vocab.nerc.ac.uk/collection/P06/current/UKNT</hasValue>
                 </item>
                 <item hasDatatype="string" hasIndex="4" xml:id="generalCapabMaximumWorkingSpeed_4"
                     isFixed="false">
@@ -1092,7 +1092,7 @@
                 <item hasIndex="1" xml:id="manufacturer_1" outIndex="1" isFixed="true"
                     hasDatatype="string">
                     <hasPath>@xlink:arcrole</hasPath>
-                    <hasValue>https://vocab.nerc.ac.uk/collection/C17/current/32WW/</hasValue>
+                    <hasValue>http://vocab.nerc.ac.uk/collection/C17/current/32WW/</hasValue>
                 </item>
                 <item hasIndex="2" xml:id="manufacturer_2" outIndex="2" field="l" isFixed="false"
                     hasDatatype="select" datasource="manufacturers">
@@ -1275,7 +1275,7 @@
                 <item hasIndex="12" xml:id="owner_12" outIndex="12" isLanguageNeutral="true"
                     isFixed="true" hasDatatype="codelist" datasource="roleCodes">
                     <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode</hasPath>
-                    <defaultValue>https://vocab.nerc.ac.uk/collection/G04/current/003 </defaultValue>
+                    <defaultValue>http://vocab.nerc.ac.uk/collection/G04/current/003 </defaultValue>
                 </item>
                 <item hasIndex="13" xml:id="owner_13" outIndex="13" isFixed="true" hasDatatype="ref">
                     <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode/@codeListValue</hasPath>
@@ -1381,7 +1381,7 @@
                 <item hasIndex="11" xml:id="operator_11" outIndex="11" isLanguageNeutral="true"
                     isFixed="true" hasDatatype="codelist" datasource="roleCodes">
                     <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:role/gmd:CI_RoleCode</hasPath>
-                    <defaultValue>https://vocab.nerc.ac.uk/collection/G04/current/007 </defaultValue>
+                    <defaultValue>http://vocab.nerc.ac.uk/collection/G04/current/007 </defaultValue>
                 </item>
                 <item hasIndex="12" xml:id="operator_12" outIndex="12" isFixed="true"
                     hasDatatype="ref">
@@ -1582,7 +1582,7 @@
                 </item>
                 <item hasDatatype="string" hasIndex="2" xml:id="timeStamp_2" isFixed="true">
                     <hasPath>swe:field[@name='Time_Stamp']/swe:Time/swe:uom/@xlink:href</hasPath>
-                    <hasValue>https://vocab.nerc.ac.uk/collection/P01/current/DTUT8601</hasValue>
+                    <hasValue>http://vocab.nerc.ac.uk/collection/P01/current/DTUT8601</hasValue>
                 </item>
             </produces>
         </element>
@@ -1592,7 +1592,7 @@
             <produces>
                 <item hasDatatype="string" hasIndex="1" xml:id="positionLat_1" isFixed="true">
                     <hasPath>swe:field[@name='Position']/swe:DataRecord/swe:field[@name='Latitude']/swe:Quantity/@definition</hasPath>
-                    <hasValue>https://vocab.nerc.ac.uk/collection/P01/current/ALATGP01/</hasValue>
+                    <hasValue>http://vocab.nerc.ac.uk/collection/P01/current/ALATGP01/</hasValue>
                 </item>
                 <item hasDatatype="string" hasIndex="2" xml:id="positionLat_2" isFixed="true">
                     <hasPath>swe:field[@name='Position']/swe:DataRecord/swe:field[@name='Latitude']/swe:Quantity/@axisID</hasPath>
@@ -1604,7 +1604,7 @@
                 </item>
                 <item hasDatatype="string" hasIndex="4" xml:id="positionLat_4" isFixed="true">
                     <hasPath>swe:field[@name='Position']/swe:DataRecord/swe:field[@name='Latitude']/swe:Quantity/swe:uom/@xlink:href</hasPath>
-                    <hasValue>https://vocab.nerc.ac.uk/collection/P06/current/UAAA/</hasValue>
+                    <hasValue>http://vocab.nerc.ac.uk/collection/P06/current/UAAA/</hasValue>
                 </item>
             </produces>
         </element>
@@ -1615,7 +1615,7 @@
             <produces>
                 <item hasDatatype="string" hasIndex="1" xml:id="positionLon_1" isFixed="true">
                     <hasPath>swe:field[@name='Position']/swe:DataRecord/swe:field[@name='Longitude']/swe:Quantity/@definition</hasPath>
-                    <hasValue>https://vocab.nerc.ac.uk/collection/P01/current/ALONGP01/</hasValue>
+                    <hasValue>http://vocab.nerc.ac.uk/collection/P01/current/ALONGP01/</hasValue>
                 </item>
                 <item hasDatatype="string" hasIndex="2" xml:id="positionLon_2" isFixed="true">
                     <hasPath>swe:field[@name='Position']/swe:DataRecord/swe:field[@name='Longitude']/swe:Quantity/@axisID</hasPath>
@@ -1627,7 +1627,7 @@
                 </item>
                 <item hasDatatype="string" hasIndex="4" xml:id="positionLon_4" isFixed="true">
                     <hasPath>swe:field[@name='Position']/swe:DataRecord/swe:field[@name='Longitude']/swe:Quantity/swe:uom/@xlink:href</hasPath>
-                    <hasValue>https://vocab.nerc.ac.uk/collection/P06/current/UAAA/</hasValue>
+                    <hasValue>http://vocab.nerc.ac.uk/collection/P06/current/UAAA/</hasValue>
                 </item>
             </produces>
         </element>-->
@@ -1637,7 +1637,7 @@
             <produces>
                 <item hasDatatype="string" hasIndex="1" xml:id="positionCourse_1" isFixed="true">
                     <hasPath>swe:field[@name='Course']/swe:Quantity/@definition</hasPath>
-                    <hasValue>https://vocab.nerc.ac.uk/collection/P01/current/APDASD01</hasValue>
+                    <hasValue>http://vocab.nerc.ac.uk/collection/P01/current/APDASD01</hasValue>
                 </item>
                 <item hasDatatype="string" hasIndex="2" xml:id="positionCourse_2" isFixed="true">
                     <hasPath>swe:field[@name='Course']/swe:Quantity/@axisID</hasPath>
@@ -1649,7 +1649,7 @@
                 </item>
                 <item hasDatatype="string" hasIndex="4" xml:id="positionCourse_4" isFixed="true">
                     <hasPath>swe:field[@name='Course']/swe:Quantity/swe:uom/@xlink:href</hasPath>
-                    <hasValue>https://vocab.nerc.ac.uk/collection/P06/current/UAAA</hasValue>
+                    <hasValue>http://vocab.nerc.ac.uk/collection/P06/current/UAAA</hasValue>
                 </item>
             </produces>
         </element>
@@ -1659,7 +1659,7 @@
             <produces>
                 <item hasDatatype="string" hasIndex="1" xml:id="positionSpeed_1" isFixed="true">
                     <hasPath>swe:field[@name='Speed']/swe:Quantity/@definition</hasPath>
-                    <hasValue>https://vocab.nerc.ac.uk/collection/P01/current/APSAWW01</hasValue>
+                    <hasValue>http://vocab.nerc.ac.uk/collection/P01/current/APSAWW01</hasValue>
                 </item>
                 <item hasDatatype="string" hasIndex="2" xml:id="positionSpeed_2" isFixed="true">
                     <hasPath>swe:field[@name='Speed']/swe:Quantity/@axisID</hasPath>
@@ -1671,7 +1671,7 @@
                 </item>
                 <item hasDatatype="string" hasIndex="4" xml:id="positionSpeed_4" isFixed="true">
                     <hasPath>swe:field[@name='Speed']/swe:Quantity/swe:uom/@xlink:href</hasPath>
-                    <hasValue>https://vocab.nerc.ac.uk/collection/P06/current/UKNT</hasValue>
+                    <hasValue>http://vocab.nerc.ac.uk/collection/P06/current/UKNT</hasValue>
                 </item>
             </produces>
         </element>
@@ -1681,7 +1681,7 @@
             <produces>
                 <item hasDatatype="string" hasIndex="1" xml:id="positionDepth_1" isFixed="true">
                     <hasPath>swe:field[@name='Depth']/swe:Quantity/@definition</hasPath>
-                    <hasValue>https://vocab.nerc.ac.uk/collection/P01/current/ADEPZZ01</hasValue>
+                    <hasValue>http://vocab.nerc.ac.uk/collection/P01/current/ADEPZZ01</hasValue>
                 </item>
                 <item hasDatatype="string" hasIndex="2" xml:id="positionDepth_2" isFixed="true">
                     <hasPath>swe:field[@name='Depth']/swe:Quantity/@axisID</hasPath>
@@ -1693,7 +1693,7 @@
                 </item>
                 <item hasDatatype="string" hasIndex="4" xml:id="positionDepth_4" isFixed="true">
                     <hasPath>swe:field[@name='Depth']/swe:Quantity/swe:uom/@xlink:href</hasPath>
-                    <hasValue>https://vocab.nerc.ac.uk/collection/P06/current/ULAA</hasValue>
+                    <hasValue>http://vocab.nerc.ac.uk/collection/P06/current/ULAA</hasValue>
                 </item>
             </produces>
         </element>
@@ -1703,7 +1703,7 @@
             <produces>
                 <item hasDatatype="string" hasIndex="1" xml:id="positionCog_1" isFixed="true">
                     <hasPath>swe:field[@name='Cog']/swe:Quantity/@definition</hasPath>
-                    <hasValue>https://vocab.nerc.ac.uk/collection/P01/current/APDASD01</hasValue>
+                    <hasValue>http://vocab.nerc.ac.uk/collection/P01/current/APDASD01</hasValue>
                 </item>
                 <item hasDatatype="string" hasIndex="2" xml:id="positionCog_2" isFixed="true">
                     <hasPath>swe:field[@name='Cog']/swe:Quantity/@axisID</hasPath>
@@ -1715,7 +1715,7 @@
                 </item>
                 <item hasDatatype="string" hasIndex="4" xml:id="positionCog_4" isFixed="true">
                     <hasPath>swe:field[@name='Cog']/swe:Quantity/swe:uom/@xlink:href</hasPath>
-                    <hasValue>https://vocab.nerc.ac.uk/collection/P06/current/UAAA</hasValue>
+                    <hasValue>http://vocab.nerc.ac.uk/collection/P06/current/UAAA</hasValue>
                 </item>
             </produces>
         </element>
@@ -1725,7 +1725,7 @@
             <produces>
                 <item hasDatatype="string" hasIndex="1" xml:id="positionSog_1" isFixed="true">
                     <hasPath>swe:field[@name='Sog']/swe:Quantity/@definition</hasPath>
-                    <hasValue>https://vocab.nerc.ac.uk/collection/P01/current/APSAGP01</hasValue>
+                    <hasValue>http://vocab.nerc.ac.uk/collection/P01/current/APSAGP01</hasValue>
                 </item>
                 <item hasDatatype="string" hasIndex="2" xml:id="positionSog_2" isFixed="true">
                     <hasPath>swe:field[@name='Sog']/swe:Quantity/@axisID</hasPath>
@@ -1737,7 +1737,7 @@
                 </item>
                 <item hasDatatype="string" hasIndex="4" xml:id="positionSog_4" isFixed="true">
                     <hasPath>swe:field[@name='Sog']/swe:Quantity/swe:uom/@xlink:href</hasPath>
-                    <hasValue>https://vocab.nerc.ac.uk/collection/P06/current/UKNT</hasValue>
+                    <hasValue>http://vocab.nerc.ac.uk/collection/P06/current/UKNT</hasValue>
                 </item>
             </produces>
         </element>
