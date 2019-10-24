@@ -1236,7 +1236,7 @@
                         <tbody>
                             <tr>
                                 <th>
-                                    <a href="{concat('https://', substring-before(substring-after($currentProcedure, 'http://sp7.irea.cnr.it/sensors/'), '/procedure'), '/sensors/sensor/ds/?format=text/html&amp;sensor_id=', $currentProcedure)}"
+                                    <a href="{concat('http://', substring-before(substring-after($currentProcedure, 'http://sp7.irea.cnr.it/sensors/'), '/procedure'), '/sensors/sensor/ds/?format=text/html&amp;sensor_id=', $currentProcedure)}"
                                        target="_blank">
                                         <xsl:value-of select="$componentDoc//gml:name"/>
                                     </a>
@@ -1274,7 +1274,7 @@
                         <tbody>
                             <tr>
                                 <th>
-                                    <a href="{concat('https://', substring-before(substring-after($currentProcedure, 'http://sp7.irea.cnr.it/sensors/'), '/procedure'), '/sensors/sensor/ds/?format=text/html&amp;sensor_id=', $currentProcedure)}"
+                                    <a href="{concat('http://', substring-before(substring-after($currentProcedure, 'http://sp7.irea.cnr.it/sensors/'), '/procedure'), '/sensors/sensor/ds/?format=text/html&amp;sensor_id=', $currentProcedure)}"
                                        target="_blank">
                                         <xsl:value-of select="$componentDoc//gml:name"/>
                                     </a>

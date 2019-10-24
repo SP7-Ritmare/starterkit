@@ -85,7 +85,7 @@
                     }
                 
             ]]></query>
-         <url>https://sdi.adamassoft.it/proxy/?proxyTo=http://vocabs.ceh.ac.uk/evn/tbl/sparql</url>
+         <url>/adamassoft_proxy/?proxyTo=http://vocabs.ceh.ac.uk/evn/tbl/sparql</url>
       </sparql>
       <singleton xml:id="outputsS" endpointType="EnvThes" triggerItem="output_param_1_uri">
          <query><![CDATA[
@@ -95,7 +95,7 @@
                     }
                 
             ]]></query>
-         <url>https://sdi.adamassoft.it/proxy/?proxyTo=http://vocabs.ceh.ac.uk/evn/tbl/sparql</url>
+         <url>/adamassoft_proxy/?proxyTo=http://vocabs.ceh.ac.uk/evn/tbl/sparql</url>
       </singleton>
       <!--sparql xml:id="outputs" endpointType="virtuoso">
          <query><![CDATA[

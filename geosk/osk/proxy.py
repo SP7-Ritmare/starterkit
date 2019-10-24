@@ -95,3 +95,16 @@ class MetadataProxy(HttpProxy):
         view = super(MetadataProxy, cls).as_view(**initkwargs)
         view.csrf_exempt = True
         return view
+
+
+class AdamassoftProxy(HttpProxy):
+    base_url = settings.REVERSE_PROXY_ADAMASOFT
+    reverse_urls = [
+        ('/adamassoft_proxy/', settings.REVERSE_PROXY_ADAMASOFT)
+    ]
+
+    @classonlymethod
+    def as_view(cls, **initkwargs):
+        view = super(AdamassoftProxy, cls).as_view(**initkwargs)
+        view.csrf_exempt = True
+        return view

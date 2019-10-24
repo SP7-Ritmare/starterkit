@@ -117,7 +117,7 @@
                 ]]>
             </query>
             <type>sparql</type>
-            <url>/vocabs/evn/tbl/sparql</url>
+            <url>/adamassoft_proxy/?proxyTo=http://vocabs.ceh.ac.uk/evn/tbl/sparql</url>
         </datasource>
         <datasource>
             <id>outputsS</id>
@@ -141,7 +141,7 @@
             </query>
             <triggerItem>output_param_1_uri</triggerItem>
             <type>sparql</type>
-            <url>/vocabs/evn/tbl/sparql</url>
+            <url>/adamassoft_proxy/?proxyTo=http://vocabs.ceh.ac.uk/evn/tbl/sparql</url>
         </datasource>
         <datasource>
             <id>sensorType</id>

@@ -8,7 +8,8 @@ from geosk.osk.proxy import (
     FusekiProxy,
     VocabsProxy,
     NercProxy,
-    MetadataProxy)
+    MetadataProxy,
+    AdamassoftProxy)
 
 from geosk.mdtools import api, views as mdtools_views
 
@@ -89,6 +90,10 @@ geoskurlpatterns = [
     url(r'^metadata/(?P<url>.*)$',
         MetadataProxy.as_view(),
         name='metadata'
+    ),
+    url(r'^adamassoft_proxy/(?P<url>.*)$',
+        AdamassoftProxy.as_view(),
+        name='adamassoft_proxy'
     ),
 
     # mdtools views

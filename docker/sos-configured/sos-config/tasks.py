@@ -40,9 +40,9 @@ def update(ctx):
 {public_schema}://{public_fqdn}/observations/sos >> {override_fn}".format(
         **envs
     ), pty=True)
-    ctx.run("echo export SOS_ADMIN_PASSWORD='{hashed_pwd}' >> {override_fn}".format(
-        **envs
-    ), pty=True)
+    # ctx.run("echo export SOS_ADMIN_PASSWORD='{hashed_pwd}' >> {override_fn}".format(
+    #     **envs
+    # ), pty=True)
 
 
 @task
@@ -134,16 +134,12 @@ def _geonode_public_port():
 
 
 def _sos_admin_pwd(pwd):
-    hashed = bcrypt.hashpw(pwd, bcrypt.gensalt())
+    hashed = bcrypt.hashpw(pwd, bcrypt.gensalt(rounds=10, prefix=b"2a"))
     if bcrypt.checkpw(pwd, hashed):
-        print("Initial input password {0} matches!").format(
-            pwd
-        )
+        print("Initial input password {0} matches!").format(pwd)
         return hashed
     else:
-        print("Initial input password {0} Does not Match :(").format(
-            pwd
-        )
+        print("Initial input password {0} Does not Match :(").format(pwd)
         raise EnvironmentError
 
 

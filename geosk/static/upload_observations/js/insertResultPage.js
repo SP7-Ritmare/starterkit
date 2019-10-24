@@ -217,7 +217,7 @@ var
 
 					if(res.ExceptionReport){
 						notifyUser("Exception inserting results into SOS endpoint: "+res.ExceptionReport.text);		
-						console.exception("Results not inserted");			
+						// console.exception("Results not inserted");			
 					}
 
 					else{
@@ -238,7 +238,7 @@ var
 					res=res.response;
 					if(res.ExceptionReport){
 						notifyUser("Exception inserting result template to SOS endpoint: "+res.ExceptionReport.text);
-						console.exception("Template not inserted");
+						// console.exception("Template not inserted");
 					}
 					else if(res.InsertResultTemplateResponse && res.InsertResultTemplateResponse.acceptedTemplate){
 						var warnMsg;
