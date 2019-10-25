@@ -14,6 +14,7 @@ services:
       - dbdata:/var/lib/postgresql/data
       - dbbackups:/pg_backups
     env_file:
+      - .env
       - ./scripts/docker/env/production/db.env
 
   dbsos:
@@ -31,6 +32,7 @@ services:
     volumes:
       - dbsosdata:/dbsosdata
     env_file:
+      - .env
       - ./scripts/docker/env/production/dbsos.env
 
   sos:
@@ -46,6 +48,7 @@ services:
     depends_on:
       - dbsos
     env_file:
+      - .env
       - ./scripts/docker/env/production/sos.env
 
   geoserver:
@@ -64,6 +67,7 @@ services:
     volumes:
       - geoserver-data-dir:/geoserver_data/data
     env_file:
+      - .env
       - ./scripts/docker/env/production/geoserver.env
 
   django:
@@ -84,6 +88,7 @@ services:
       - statics:/mnt/volumes/statics
       - geoserver-data-dir:/geoserver_data/data
     env_file:
+      - .env
       - ./scripts/docker/env/production/django.env
 
   geonode:
@@ -108,6 +113,7 @@ services:
       - nginx-certificates:/geonode-certificates
       - statics:/mnt/volumes/statics
     env_file:
+      - .env
       - ./scripts/docker/env/production/nginx.env
 
   # Gets and installs letsencrypt certificates
@@ -118,6 +124,7 @@ services:
     volumes:
       - nginx-certificates:/geonode-certificates/
     env_file:
+      - .env
       - ./scripts/docker/env/production/nginx.env
 
   data-dir-conf:
