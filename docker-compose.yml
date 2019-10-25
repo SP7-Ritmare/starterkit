@@ -15,7 +15,6 @@ services:
       - dbbackups:/pg_backups
     env_file:
       - .env
-      - ./scripts/docker/env/production/db.env
 
   dbsos:
     image: get-it/dbsos-postgis:9.5
@@ -33,7 +32,6 @@ services:
       - dbsosdata:/dbsosdata
     env_file:
       - .env
-      - ./scripts/docker/env/production/dbsos.env
 
   sos:
     image: get-it/sos-configured:4.4.2
