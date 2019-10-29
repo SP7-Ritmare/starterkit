@@ -13,8 +13,7 @@ services:
     volumes:
       - dbdata:/var/lib/postgresql/data
       - dbbackups:/pg_backups
-    env_file:
-      - .env
+    env_file: .env
 
   dbsos:
     image: get-it/dbsos-postgis:9.5
@@ -30,8 +29,7 @@ services:
     #   - 5432:5432
     volumes:
       - dbsosdata:/dbsosdata
-    env_file:
-      - .env
+    env_file: .env
 
   sos:
     image: get-it/sos-configured:4.4.2
