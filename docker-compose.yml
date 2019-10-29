@@ -43,9 +43,7 @@ services:
         org.geonode.instance.name: geonode
     depends_on:
       - dbsos
-    env_file:
-      - .env
-      - ./scripts/docker/env/production/sos.env
+    env_file: .env
 
   geoserver:
     image: get-it/geoserver:2.15.2
