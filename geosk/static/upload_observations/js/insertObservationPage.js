@@ -419,7 +419,7 @@ var callback = {
 
             if (res.ExceptionReport) {
                 notifyUser(gettext("Exception inserting results into SOS endpoint: ") + res.ExceptionReport.text);
-                console.exception("Results not inserted");
+                // console.exception("Results not inserted");
             }
 
             else {
@@ -893,7 +893,7 @@ function performInsertSplittedObservationsWorkflow() {
                 if (res.ExceptionReport) {
                     jqXHR.additionalInfo.exceptionReport = gettext("Exception inserting results for ") + jqXHR.additionalInfo.tableHeader + gettext(" into SOS endpoint: ") + res.ExceptionReport.text;
                     //notifyUser(gettext("Exception inserting results into SOS endpoint: ") + res.ExceptionReport.text);
-                    console.exception("Results not inserted for column: " + jqXHR.additionalInfo.tableColIndex);
+                    // console.exception("Results not inserted for column: " + jqXHR.additionalInfo.tableColIndex);
                     jqXHR.additionalInfo.state = "failed";
                 }
 

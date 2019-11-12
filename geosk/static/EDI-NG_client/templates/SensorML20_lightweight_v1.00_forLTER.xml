@@ -14,8 +14,8 @@
         <languageSelection>
             <byItem>ling_md_1</byItem>
         </languageSelection>
-        <metadataEndpoint>http://edi.get-it.it/</metadataEndpoint>
-        <sparqlEndpoint>http://sparql.get-it.it</sparqlEndpoint>
+        <metadataEndpoint>/metadata/</metadataEndpoint>
+        <sparqlEndpoint>/sparql/</sparqlEndpoint>
         <requiresAuthentication>false</requiresAuthentication>
         <requiresValidation>true</requiresValidation>
 
@@ -94,7 +94,7 @@
             <uri>http://inspire-registry.jrc.ec.europa.eu/registers/Languages/items</uri>
             <endpointType>virtuoso</endpointType>
             <type>virtuosoCodelist</type>
-            <url>http://sparql/sparql.get-it.it/sparql</url>
+            <url>/sparql</url>
         </datasource>
         <datasource>
             <id>outputs</id>
@@ -117,7 +117,7 @@
                 ]]>
             </query>
             <type>sparql</type>
-            <url>http://sdi.adamassoft.it/proxy/?proxyTo=http://vocabs.ceh.ac.uk/evn/tbl/sparql</url>
+            <url>/adamassoft_proxy/?proxyTo=http://vocabs.ceh.ac.uk/evn/tbl/sparql</url>
         </datasource>
         <datasource>
             <id>outputsS</id>
@@ -141,7 +141,7 @@
             </query>
             <triggerItem>output_param_1_uri</triggerItem>
             <type>sparql</type>
-            <url>http://sdi.adamassoft.it/proxy/?proxyTo=http://vocabs.ceh.ac.uk/evn/tbl/sparql</url>
+            <url>/adamassoft_proxy/?proxyTo=http://vocabs.ceh.ac.uk/evn/tbl/sparql</url>
         </datasource>
         <datasource>
             <id>sensorType</id>
@@ -167,7 +167,7 @@
                     ORDER BY ASC(?l) ASC(?a)
                     ]]>
             </query>
-            <url>http://vocab.nerc.ac.uk/sparql/sparql</url>
+            <url>/vocabs/edg/tbl/sparql</url>
             <endpointType>fuseki1</endpointType>
             <type>sparql</type>
         </datasource>
@@ -189,7 +189,7 @@
                         ORDER BY ASC(?l)                        
                         ]]>
             </query>
-            <url>http://fuseki1.get-it.it/manufacturers/sparql</url>
+            <url>/fuseki/manufacturers/sparql</url>
             <type> sparql </type>
         </datasource>
         <datasource>

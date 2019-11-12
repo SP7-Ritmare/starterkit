@@ -4,7 +4,12 @@ from django.views.generic import TemplateView
 from geonode.urls import urlpatterns
 from geosk.osk.proxy import (
     ObservationsProxy,
-    SparqlProxy)
+    SparqlProxy,
+    FusekiProxy,
+    VocabsProxy,
+    NercProxy,
+    MetadataProxy,
+    AdamassoftProxy)
 
 from geosk.mdtools import api, views as mdtools_views
 
@@ -69,6 +74,26 @@ geoskurlpatterns = [
     url(r'^sparql/(?P<url>.*)$',
         SparqlProxy.as_view(),
         name='sparql'
+    ),
+    url(r'^fuseki/(?P<url>.*)$',
+        FusekiProxy.as_view(),
+        name='fuseki'
+    ),
+    url(r'^vocabs/(?P<url>.*)$',
+        VocabsProxy.as_view(),
+        name='vocabs'
+    ),
+    url(r'^nerc/(?P<url>.*)$',
+        NercProxy.as_view(),
+        name='nerc'
+    ),
+    url(r'^metadata/(?P<url>.*)$',
+        MetadataProxy.as_view(),
+        name='metadata'
+    ),
+    url(r'^adamassoft_proxy/(?P<url>.*)$',
+        AdamassoftProxy.as_view(),
+        name='adamassoft_proxy'
     ),
 
     # mdtools views

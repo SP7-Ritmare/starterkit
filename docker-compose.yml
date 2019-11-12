@@ -13,8 +13,7 @@ services:
     volumes:
       - dbdata:/var/lib/postgresql/data
       - dbbackups:/pg_backups
-    env_file:
-      - ./scripts/docker/env/production/db.env
+    env_file: .env
 
   dbsos:
     image: get-it/dbsos-postgis:9.5
@@ -30,8 +29,7 @@ services:
     #   - 5432:5432
     volumes:
       - dbsosdata:/dbsosdata
-    env_file:
-      - ./scripts/docker/env/production/dbsos.env
+    env_file: .env
 
   sos:
     image: get-it/sos-configured:4.4.2
@@ -45,8 +43,7 @@ services:
         org.geonode.instance.name: geonode
     depends_on:
       - dbsos
-    env_file:
-      - ./scripts/docker/env/production/sos.env
+    env_file: .env
 
   geoserver:
     image: get-it/geoserver:2.15.2
@@ -64,6 +61,7 @@ services:
     volumes:
       - geoserver-data-dir:/geoserver_data/data
     env_file:
+      - .env
       - ./scripts/docker/env/production/geoserver.env
 
   django:
@@ -84,6 +82,7 @@ services:
       - statics:/mnt/volumes/statics
       - geoserver-data-dir:/geoserver_data/data
     env_file:
+      - .env
       - ./scripts/docker/env/production/django.env
 
   geonode:
@@ -108,6 +107,7 @@ services:
       - nginx-certificates:/geonode-certificates
       - statics:/mnt/volumes/statics
     env_file:
+      - .env
       - ./scripts/docker/env/production/nginx.env
 
   # Gets and installs letsencrypt certificates
@@ -118,6 +118,7 @@ services:
     volumes:
       - nginx-certificates:/geonode-certificates/
     env_file:
+      - .env
       - ./scripts/docker/env/production/nginx.env
 
   data-dir-conf:

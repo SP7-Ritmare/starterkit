@@ -28,20 +28,21 @@ def update(ctx):
     )
     print "Admin SOS password bcrypt hashed is {0}".format(adminsos_pwd)
     envs = {
-        "public_fqdn": "{0}:{1}".format(pub_ip, pub_port),
+        "public_schema": "https" if pub_port == 443 else "http",
+        "public_fqdn": "{0}".format(pub_ip),
         "public_host": "{0}".format(pub_ip),
         "hashed_pwd": "{0}".format(adminsos_pwd),
         "override_fn": "$HOME/.override_env"
     }
     ctx.run("echo export GEOSERVER_PUBLIC_LOCATION=\
-http://{public_fqdn}/geoserver/ >> {override_fn}".format(**envs), pty=True)
+{public_schema}://{public_fqdn}/geoserver/ >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export SERVICE_SOSURL=\
-http://{public_fqdn}/observations/sos >> {override_fn}".format(
+{public_schema}://{public_fqdn}/observations/sos >> {override_fn}".format(
         **envs
     ), pty=True)
-#    ctx.run("echo export SOS_ADMIN_PASSWORD='{hashed_pwd}' >> {override_fn}".format(
-#        **envs
-#    ), pty=True)
+    # ctx.run("echo export SOS_ADMIN_PASSWORD='{hashed_pwd}' >> {override_fn}".format(
+    #     **envs
+    # ), pty=True)
 
 
 @task
@@ -116,33 +117,29 @@ def _container_exposed_port(component, instname):
 
 
 def _geonode_public_host_ip():
-    gn_pub_hostip = os.getenv("GEONODE_LB_HOST_IP", "")
+    gn_pub_hostip = os.getenv("GEONODE_LB_HOST_IP", "localhost")
     if not gn_pub_hostip:
         gn_pub_hostip = _docker_host_ip()
     return gn_pub_hostip
 
 
 def _geonode_public_port():
-    gn_pub_port = os.getenv("GEONODE_LB_PORT", "")
+    gn_pub_port = os.getenv("GEONODE_LB_PORT", 80)
     if not gn_pub_port:
         gn_pub_port = _container_exposed_port(
             "nginx",
             os.getenv("GEONODE_INSTANCE_NAME", "starterkit")
         )
-    return gn_pub_port
+    return int(gn_pub_port)
 
 
 def _sos_admin_pwd(pwd):
-    hashed = bcrypt.hashpw(pwd, bcrypt.gensalt())
+    hashed = bcrypt.hashpw(pwd, bcrypt.gensalt(rounds=10, prefix=b"2a"))
     if bcrypt.checkpw(pwd, hashed):
-        print("Initial input password {0} matches!").format(
-            pwd
-        )
+        print("Initial input password {0} matches!").format(pwd)
         return hashed
     else:
-        print("Initial input password {0} Does not Match :(").format(
-            pwd
-        )
+        print("Initial input password {0} Does not Match :(").format(pwd)
         raise EnvironmentError
 
 
@@ -161,19 +158,18 @@ def _prepare_dict_identifiers():
     print "Public Hostname or IP is {0}".format(pub_ip)
     pub_port = _geonode_public_port()
     print "Public PORT is {0}".format(pub_port)
-    # updated_pwd = os.environ['SOS_ADMIN_PASSWORD']
-    # print "SOS Admin password is {0}".format(updated_pwd)
+    updated_pwd = _sos_admin_pwd(
+        os.getenv(
+            "SOS_ADMIN_PASSWORD",
+            "password"
+        )
+    )
+    print "SOS Admin password is {0}".format(updated_pwd)
 
     default_administrator_user = {
         "id": 1,
-        "username": os.getenv(
-            "SOS_ADMIN_USERNAME",
-            "admin"
-        ),
-        "password": os.getenv(
-            "SOS_ADMIN_PASSWORD",
-            "$2a$10$vbp9aXCDMP/fXwEsqe/1.eon44mMdUyC4ub2JfOrkPfaer5ciLOly"
-        )
+        "username": os.getenv("SOS_ADMIN_USERNAME", "admin"),
+        "password": updated_pwd
     }
 
     string_settings_identifiers = {

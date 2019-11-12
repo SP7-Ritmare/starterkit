@@ -51,7 +51,12 @@ PROXY_ALLOWED_HOSTS += ('spatialreference.org', 'nominatim.openstreetmap.org',)
 
 # Internal Proxy URLs
 REVERSE_PROXY_SOS = 'http://localhost:8080/observations/'
-REVERSE_PROXY_SPARQL = '/sparql/'
+REVERSE_PROXY_SPARQL = 'http://sparql.get-it.it/'
+REVERSE_PROXY_FUSEKI = 'http://fuseki1.get-it.it/'
+REVERSE_PROXY_VOCABS = 'http://vocabs.ceh.ac.uk/'
+REVERSE_PROXY_NERC = 'http://vocab.nerc.ac.uk/'
+REVERSE_PROXY_METADATA = 'http://edi.get-it.it/'
+REVERSE_PROXY_ADAMASOFT = 'http://sdi.adamassoft.it/proxy/'
 
 # AUTH_IP_WHITELIST property limits access to users/groups REST endpoints
 # to only whitelisted IP addresses.
@@ -339,8 +344,7 @@ SOS_SERVER = {
         'KVP_LOCATION': SOS_PRIVATE_URL + '/kvp',
         'POX_LOCATION': SOS_PRIVATE_URL + '/pox',
         'VERSION': '2.0.0',
-        'TRANSACTIONAL_AUTHORIZATION_TOKEN\
-': SOS_TRANSACTIONAL_AUTHORIZATION_TOKEN,
+        'TRANSACTIONAL_AUTHORIZATION_TOKEN': SOS_TRANSACTIONAL_AUTHORIZATION_TOKEN,
         'USER': None,
         'PASSWORD': None,
     }

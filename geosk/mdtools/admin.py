@@ -201,7 +201,6 @@ def set_sensors_configuration(instance):
         'serviceIdentification.accessConstraints': 'None',  # TODO
         'serviceIdentification.fees': 'None',  # TODO
         'serviceIdentification.serviceType': 'OGC:SOS',
-        #
         'misc.defaultOfferingPrefix': 'offering:',
         'misc.defaultProcedurePrefix': "http://sp7.irea.cnr.it/sensors/%s/procedure/" % Site.objects.get_current().domain,
         'misc.defaultObservablePropertyPrefix':  "http://sp7.irea.cnr.it/sensors/%s/observableProperty/" % Site.objects.get_current().domain,
