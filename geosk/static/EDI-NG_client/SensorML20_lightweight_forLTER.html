@@ -20,7 +20,7 @@
         }
         $(document).ready(function() {
             // ediml.setPostCallbackError(pippo);
-            edi.loadLocalTemplate("SensorML20_lightweight", "1.00_forLTER_newSchema", onTemplateLoaded);
+            edi.loadLocalTemplate("SensorML20_lightweight", "1.00_forLTER_newSchema_withProxy", onTemplateLoaded);
             $("#ediml").hide();
             $("#sendMetadata").click(ediml.post);
         });
