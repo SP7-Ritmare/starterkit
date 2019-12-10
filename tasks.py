@@ -30,7 +30,7 @@ def waitforgeoserver(ctx):
 
 @task
 def update(ctx):
-    print "***************************initial*********************************"
+    print "***************************setting env*********************************"
     ctx.run("env", pty=True)
     pub_ip = _geonode_public_host_ip()
     print "Public Hostname or IP is {0}".format(pub_ip)
@@ -47,6 +47,11 @@ def update(ctx):
             time.sleep(10)
 
     override_env = "$HOME/.override_env"
+    if os.path.exists(override_env):
+        os.remove(override_env)
+    else:
+        print("Can not delete the %s file as it doesn't exists" % override_env)
+
     envs = {
         "local_settings": "{0}".format(_localsettings()),
         "siteurl": os.environ.get('SITEURL',
