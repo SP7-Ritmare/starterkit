@@ -1,5 +1,5 @@
 # GeoNode==2.10
--e git+https://github.com/SP7-Ritmare/geonode.git@2.10.1#egg=GeoNode
+-e git+https://github.com/SP7-Ritmare/geonode.git@2.10.x#egg=GeoNode
 django-overextends
 django-annoying
 django-rosetta==0.9.3
