@@ -667,23 +667,6 @@ if GEONODE_CLIENT_LAYER_PREVIEW_LIBRARY == 'mapstore':
             "group": "background",
             "thumbURL": "https://stamen-tiles-d.a.ssl.fastly.net/toner/0/0/0.png",
             "visibility": False
-        },
-        {
-            "type": "osm",
-            "title": "Open Street Map",
-            "name": "mapnik",
-            "source": "osm",
-            "group": "background",
-            "visibility": False
-        },
-        {
-            "type": "tileprovider",
-            "title": "OpenTopoMap",
-            "provider": "OpenTopoMap",
-            "name": "OpenTopoMap",
-            "source": "OpenTopoMap",
-            "group": "background",
-            "visibility": False
         }
     ]
 
@@ -743,7 +726,7 @@ if GEONODE_CLIENT_LAYER_PREVIEW_LIBRARY == 'mapstore':
             "source": "streets-v11",
             "thumbURL": "https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/6/33/23?access_token=%s" % MAPBOX_ACCESS_TOKEN,
             "group": "background",
-            "visibility": True
+            "visibility": False if BING_API_KEY else True
         }
         MAPSTORE_BASELAYERS = MAPSTORE_BASELAYERS + [MAPBOX_BASEMAPS, ]
 
@@ -757,6 +740,23 @@ if GEONODE_CLIENT_LAYER_PREVIEW_LIBRARY == 'mapstore':
             "url": "https://maps.geo-solutions.it/geoserver/wms",
             "group": "background",
             "thumbURL": "%sstatic/mapstorestyle/img/s2cloudless-s2cloudless.png" % SITEURL,
+            "visibility": False
+        },
+        {
+            "type": "osm",
+            "title": "Open Street Map",
+            "name": "mapnik",
+            "source": "osm",
+            "group": "background",
+            "visibility": False if (BING_API_KEY or MAPBOX_ACCESS_TOKEN) else True
+        },
+        {
+            "type": "tileprovider",
+            "title": "OpenTopoMap",
+            "provider": "OpenTopoMap",
+            "name": "OpenTopoMap",
+            "source": "OpenTopoMap",
+            "group": "background",
             "visibility": False
         },
         {
