@@ -47,7 +47,7 @@ else:
     ALLOWED_HOSTS = ['localhost', ] if os.getenv('ALLOWED_HOSTS') is None \
         else re.split(r' *[,|:|;] *', os.getenv('ALLOWED_HOSTS'))
 
-PROXY_ALLOWED_HOSTS += ('spatialreference.org', 'nominatim.openstreetmap.org',)
+PROXY_ALLOWED_HOSTS += ('spatialreference.org', 'nominatim.openstreetmap.org', 'dev.openlayers.org')
 
 # Internal Proxy URLs
 REVERSE_PROXY_SOS = 'http://localhost:8080/observations/'
@@ -136,15 +136,6 @@ builtins = ['overextends.templatetags.overextends_tags',]
 TEMPLATES[0]['OPTIONS']['loaders'] = loaders
 TEMPLATES[0]['OPTIONS']['builtins'] = builtins
 TEMPLATES[0].pop('APP_DIRS', None)
-
-# prevent signing up by default
-ACCOUNT_OPEN_SIGNUP = True
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = 'optional'
-ACCOUNT_EMAIL_CONFIRMATION_EMAIL = True
-ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = True
-ACCOUNT_CONFIRM_EMAIL_ON_GET = True
-ACCOUNT_APPROVAL_REQUIRED = True
 
 # Login and logout urls override
 LOGIN_URL = os.getenv('LOGIN_URL', '{}account/login/'.format(SITEURL))
