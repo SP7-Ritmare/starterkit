@@ -1,8 +1,17 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% load i18n avatar_tags %}
+{% load static from staticfiles %}
+
 {% block extra_head %}
       <link href="{{ STATIC_URL }}css/site_base.css" rel="stylesheet"/>
+      <link href="{{ STATIC_URL }}css/custom.css" rel="stylesheet"/>
       <link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon.ico">
+
+    <script>
+        var siteUrl = '{{ SITEURL }}'.replace(/\/?$/, '/');
+        var staticUrl = '{% static '' %}';
+    </script>
 {% endblock %}
 {% block extra_tab %}
 <li id="nav_osk">
