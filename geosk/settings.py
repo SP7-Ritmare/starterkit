@@ -630,6 +630,23 @@ if GEONODE_CLIENT_LAYER_PREVIEW_LIBRARY == 'mapstore':
 
     DEFAULT_MS2_BACKGROUNDS = [
         {
+            "type": "osm",
+            "title": "Open Street Map",
+            "name": "mapnik",
+            "source": "osm",
+            "group": "background",
+            "visibility": True
+        },
+        {
+            "type": "tileprovider",
+            "title": "OpenTopoMap",
+            "provider": "OpenTopoMap",
+            "name": "OpenTopoMap",
+            "source": "OpenTopoMap",
+            "group": "background",
+            "visibility": False
+        },
+        {
             "type": "tileprovider",
             "title": "Stamen Watercolor",
             "provider": "Stamen.Watercolor",
@@ -731,23 +748,6 @@ if GEONODE_CLIENT_LAYER_PREVIEW_LIBRARY == 'mapstore':
             "url": "https://maps.geo-solutions.it/geoserver/wms",
             "group": "background",
             "thumbURL": "%sstatic/mapstorestyle/img/s2cloudless-s2cloudless.png" % SITEURL,
-            "visibility": False
-        },
-        {
-            "type": "osm",
-            "title": "Open Street Map",
-            "name": "mapnik",
-            "source": "osm",
-            "group": "background",
-            "visibility": False if (BING_API_KEY or MAPBOX_ACCESS_TOKEN) else True
-        },
-        {
-            "type": "tileprovider",
-            "title": "OpenTopoMap",
-            "provider": "OpenTopoMap",
-            "name": "OpenTopoMap",
-            "source": "OpenTopoMap",
-            "group": "background",
             "visibility": False
         },
         {
