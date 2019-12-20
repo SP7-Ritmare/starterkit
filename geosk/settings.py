@@ -226,8 +226,8 @@ if MONITORING_ENABLED:
         MONITORING_HOST_NAME = os.getenv("MONITORING_HOST_NAME", 'geonode')
     else:
         MONITORING_HOST_NAME = os.getenv("MONITORING_HOST_NAME", 'localhost')
-
-GEOIP_PATH = os.path.join(os.path.dirname(__file__), '..')
+		
+GEOIP_PATH = os.getenv('GEOIP_PATH', os.path.join(PROJECT_ROOT, 'GeoIPCities.dat'))
 
 LOGGING = {
     'version': 1,
@@ -372,6 +372,7 @@ AUTH_EXEMPT_URLS = (
     '/api/adminRole',
     '/api/users',
     '/api/layers',
+    '/monitoring',
     '/gdpr/*'
 )
 
