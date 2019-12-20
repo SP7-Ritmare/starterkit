@@ -6,10 +6,13 @@ FROM python:2.7.16-slim-stretch
 MAINTAINER Starterkit development team
 
 # Install system dependencies
+RUN mkdir -p /usr/share/man/man1; mkdir -p /usr/share/man/man7
 RUN echo "Updating apt-get" && \
         apt-get update && \
         echo "Installing build dependencies" && \
-        apt-get install -y gcc make libc-dev musl-dev libpcre3 libpcre3-dev g++ && \
+        apt-get install -y git gcc make libc-dev musl-dev libpcre3 libpcre3-dev g++ && \
+        echo "Installing database dependencies" && \
+        apt-get install -y postgresql-client libpq-dev sqlite3 && \
         echo "Installing Pillow dependencies" && \
         # RUN apt-get install -y NOTHING ?? It was probably added in other packages... ALPINE needed jpeg-dev zlib-dev && \
         echo "Installing GDAL dependencies" && \
@@ -17,7 +20,7 @@ RUN echo "Updating apt-get" && \
         echo "Installing Psycopg2 dependencies" && \
         # RUN apt-get install -y NOTHING ?? It was probably added in other packages... ALPINE needed postgresql-dev && \
         echo "Installing other dependencies" && \
-        apt-get install -y libxml2-dev libxslt-dev && \
+        apt-get install -y libxml2-dev libxslt-dev gettext zip libmemcached-dev libsasl2-dev zlib1g-dev && \
         echo "Installing GeoIP dependencies" && \
         apt-get install -y geoip-bin geoip-database && \
         echo "Installing healthceck dependencies" && \
@@ -36,6 +39,9 @@ RUN pip install celery==4.1.0 # see https://github.com/GeoNode/geonode/pull/3714
 RUN mkdir -p /usr/src/app
 COPY . /usr/src/app/
 WORKDIR /usr/src/app
+
+RUN mkdir -p /var/log/uwsgi/app/
+RUN touch /var/log/uwsgi/app/geosk.log
 
 RUN apt-get update && apt-get -y install cron
 COPY monitoring-cron /etc/cron.d/monitoring-cron

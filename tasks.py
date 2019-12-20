@@ -62,6 +62,8 @@ def update(ctx):
         "dburl": db_url,
         "geodburl": geodb_url,
         "monitoring": os.environ.get('MONITORING_ENABLED', False),
+        "monitoring_host_name": os.environ.get('MONITORING_HOST_NAME', 'geonode'),
+        "monitoring_service_name": os.environ.get('MONITORING_SERVICE_NAME', 'local-geonode'),
         "monitoring_data_ttl": os.environ.get('MONITORING_DATA_TTL', 7),
         "gs_pub_loc": os.environ.get('GEOSERVER_PUBLIC_LOCATION',
                                      'http://{0}:{1}/geoserver/'.format(pub_ip, pub_port) if pub_port else 'http://{0}/geoserver/'.format(pub_ip)),
@@ -81,9 +83,9 @@ def update(ctx):
     ctx.run("echo export MONITORING_ENABLED=\
 {monitoring} >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export MONITORING_HOST_NAME=\
-{geonode_docker_host} >> {override_fn}".format(**envs), pty=True)
+{monitoring_host_name} >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export MONITORING_SERVICE_NAME=\
-local-geonode >> {override_fn}".format(**envs), pty=True)
+{monitoring_service_name} >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export MONITORING_DATA_TTL=\
 {monitoring_data_ttl} >> {override_fn}".format(**envs), pty=True)
     ctx.run("echo export GEOSERVER_PUBLIC_LOCATION=\
@@ -185,8 +187,11 @@ def monitoringfixture(ctx):
     print "*******************monitoring fixture********************************"
     ctx.run("rm -rf /tmp/default_monitoring_apps_docker.json", pty=True)
     _prepare_monitoring_fixture()
-    ctx.run("django-admin.py loaddata /tmp/default_monitoring_apps_docker.json \
+    try:
+        ctx.run("django-admin.py loaddata /tmp/default_monitoring_apps_docker.json \
 --settings={0}".format(_localsettings()), pty=True)
+    except BaseException as e:
+        print "ERROR installing monitoring fixture: " + str(e)
 
 
 @task
@@ -643,9 +648,11 @@ def _pycsw_info_provision():
     }
     return PYCSW
 
+
 def _prepare_monitoring_fixture():
     upurl = urlparse(os.environ['SITEURL'])
     net_scheme = upurl.scheme
+    net_loc = upurl.netloc
     pub_ip = _geonode_public_host_ip()
     print "Public Hostname or IP is {0}".format(pub_ip)
     pub_port = _geonode_public_port()
@@ -656,16 +663,16 @@ def _prepare_monitoring_fixture():
         {
             "fields": {
                 "active": True,
-                "ip": "{0}".format(os.environ['MONITORING_HOST_NAME']),
-                "name": "geonode"
+                "ip": "{0}".format(socket.gethostbyname('geonode')),
+                "name": "{0}".format(os.environ['MONITORING_HOST_NAME'])
             },
             "model": "monitoring.host",
             "pk": 1
         },
         {
             "fields": {
-                "name": "local-geonode",
-                "url": "{0}://{1}/".format(net_scheme, os.environ['MONITORING_HOST_NAME']),
+                "name": "{0}".format(os.environ['MONITORING_SERVICE_NAME']),
+                "url": "{0}://{1}/".format(net_scheme, net_loc),
                 "notes": "",
                 "last_check": d,
                 "active": True,
@@ -678,8 +685,8 @@ def _prepare_monitoring_fixture():
         },
         {
             "fields": {
-                "name": "localhost-hostgeonode",
-                "url": "{0}://{1}/".format(net_scheme, os.environ['MONITORING_HOST_NAME']),
+                "name": "hostgeonode",
+                "url": "{0}://{1}/".format(net_scheme, net_loc),
                 "notes": "",
                 "last_check": d,
                 "active": True,
@@ -692,8 +699,8 @@ def _prepare_monitoring_fixture():
         },
         {
             "fields": {
-                "name": "localhost-hostgeoserver",
-                "url": "{0}://{1}/geoserver/".format(net_scheme, os.environ['MONITORING_HOST_NAME']),
+                "name": "hostgeoserver",
+                "url": "{0}".format(os.environ['GEOSERVER_PUBLIC_LOCATION']),
                 "notes": "",
                 "last_check": d,
                 "active": True,
@@ -706,8 +713,8 @@ def _prepare_monitoring_fixture():
         },
         {
             "fields": {
-                "name": "default-geoserver",
-                "url": "{0}://{1}/geoserver/".format(net_scheme, os.environ['MONITORING_HOST_NAME']),
+                "name": "local-geoserver",
+                "url": "{0}".format(os.environ['GEOSERVER_PUBLIC_LOCATION']),
                 "notes": "",
                 "last_check": d,
                 "active": True,
