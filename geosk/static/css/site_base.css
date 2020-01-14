@@ -4,3 +4,28 @@
     background: transparent url("../img/logo1_200px.png") no-repeat scroll 10px 2px;
     background-size: contain;
  }
+
+ nav a.dropdown-toggle {
+     text-transform: uppercase;
+ }
+
+ nav a.avatar {
+     text-transform: lowercase;
+ }
+
+ .custom-text h4 a {
+     color: #fff;
+ }
+
+ .no-margin-right {
+     margin-right: 0px !important;
+ }
+
+#ms-container {
+    position: absolute;
+    top: 98px;
+    bottom: 0px;
+    width: 100%;
+    z-index: 1029;
+    background-color: white;
+}

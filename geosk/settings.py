@@ -268,6 +268,8 @@ LOGGING = {
             "handlers": ["console"], "level": "INFO", },
         "pycsw": {
             "handlers": ["console"], "level": "INFO", },
+        "mapstore2_adapter": {
+            "handlers": ["console"], "level": "DEBUG", },
         "geosk": {
             "handlers": ["console"], "level": "DEBUG", },
     },
@@ -402,23 +404,7 @@ GOOGLE_API_KEY = os.environ.get('GOOGLE_API_KEY', None)
 GEONODE_CLIENT_LAYER_PREVIEW_LIBRARY = os.getenv(
     'GEONODE_CLIENT_LAYER_PREVIEW_LIBRARY', 'mapstore')
 
-MAP_BASELAYERS = [{
-    "source": {"ptype": "gxp_olsource"},
-    "type": "OpenLayers.Layer",
-    "args": ["No background"],
-    "name": "background",
-    "visibility": False,
-    "fixed": True,
-    "group":"background"
-},
-    {
-        "source": {"ptype": "gxp_osmsource"},
-        "type": "OpenLayers.Layer.OSM",
-        "name": "mapnik",
-        "visibility": True,
-        "fixed": True,
-        "group": "background"
-}]
+MAP_BASELAYERS = [{}]
 
 """
 To enable the GeoExt based Client:
@@ -433,6 +419,24 @@ if GEONODE_CLIENT_LAYER_PREVIEW_LIBRARY == 'geoext':
 
     if 'geoexplorer' not in INSTALLED_APPS:
         INSTALLED_APPS += ('geoexplorer', )
+
+    MAP_BASELAYERS += [{
+            "source": {"ptype": "gxp_olsource"},
+            "type": "OpenLayers.Layer",
+            "args": ["No background"],
+            "name": "background",
+            "visibility": False,
+            "fixed": True,
+            "group": "background"
+        },
+        {
+            "source": {"ptype": "gxp_osmsource"},
+            "type": "OpenLayers.Layer.OSM",
+            "name": "mapnik",
+            "visibility": True,
+            "fixed": True,
+            "group": "background"
+        }]
 
     # MAP_BASELAYERS += [
     # {
@@ -718,6 +722,14 @@ if GEONODE_CLIENT_LAYER_PREVIEW_LIBRARY == 'mapstore':
                 "group": "background",
                 "apiKey": "{{apiKey}}",
                 "thumbURL": "%sstatic/mapstorestyle/img/bing_canvas_dark.png" % SITEURL,
+                "visibility": False
+            },
+            {
+                "type": "osm",
+                "title": "Open Street Map",
+                "name": "mapnik",
+                "source": "osm",
+                "group": "background",
                 "visibility": False
             }
         ]
