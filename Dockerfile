@@ -1,31 +1,47 @@
-FROM python:2.7.16-stretch
+# TODO : use python:2.7.13-alpine3.6 to make this lighter ( it is what we use for letsencryipt as well)
+# But it seems it's not possible for now because alpine only has geos 3.6 which is not supported by django 1.8
+# (probably because of https://code.djangoproject.com/ticket/28441)
+
+FROM python:2.7.16-slim-stretch
 MAINTAINER Starterkit development team
 
+# Install system dependencies
+RUN mkdir -p /usr/share/man/man1; mkdir -p /usr/share/man/man7
+RUN echo "Updating apt-get" && \
+        apt-get update && \
+        echo "Installing build dependencies" && \
+        apt-get install -y git gcc make libc-dev musl-dev libpcre3 libpcre3-dev g++ && \
+        echo "Installing database dependencies" && \
+        apt-get install -y postgresql-client libpq-dev sqlite3 && \
+        echo "Installing Pillow dependencies" && \
+        # RUN apt-get install -y NOTHING ?? It was probably added in other packages... ALPINE needed jpeg-dev zlib-dev && \
+        echo "Installing GDAL dependencies" && \
+        apt-get install -y libgeos-dev libgdal-dev && \
+        echo "Installing Psycopg2 dependencies" && \
+        # RUN apt-get install -y NOTHING ?? It was probably added in other packages... ALPINE needed postgresql-dev && \
+        echo "Installing other dependencies" && \
+        apt-get install -y libxml2-dev libxslt-dev gettext zip libmemcached-dev libsasl2-dev zlib1g-dev && \
+        echo "Installing GeoIP dependencies" && \
+        apt-get install -y geoip-bin geoip-database && \
+        echo "Installing healthceck dependencies" && \
+        apt-get install -y curl && \
+        echo "Python server" && \
+        pip install uwsgi && \
+        echo "Removing build dependencies and cleaning up" && \
+        # TODO : cleanup apt-get with something like apt-get -y --purge autoremove gcc make libc-dev musl-dev libpcre3 libpcre3-dev g++ && \
+        rm -rf /var/lib/apt/lists/* && \
+        rm -rf ~/.cache/pip
+
+# Install python dependencies
+RUN echo "Geonode python dependencies"
+RUN pip install celery==4.1.0 # see https://github.com/GeoNode/geonode/pull/3714
+
 RUN mkdir -p /usr/src/app
-
-# This section is borrowed from the official Django image but adds GDAL and others
-RUN apt-get update && apt-get install -y \
-		gcc \
-                zip \
-		gettext \
-		postgresql-client libpq-dev \
-		sqlite3 \
-                python-gdal python-psycopg2 \
-                python-imaging python-lxml \
-                python-dev libgdal-dev \
-                python-ldap \
-                libmemcached-dev libsasl2-dev zlib1g-dev \
-                python-pylibmc \
-                uwsgi uwsgi-plugin-python \
-	--no-install-recommends && rm -rf /var/lib/apt/lists/*
-
-
-RUN printf "deb http://archive.debian.org/debian/ jessie main\ndeb-src http://archive.debian.org/debian/ jessie main\ndeb http://security.debian.org jessie/updates main\ndeb-src http://security.debian.org jessie/updates main" > /etc/apt/sources.list
-RUN apt-get update && apt-get install -y geoip-bin
-
-# add bower and grunt command
 COPY . /usr/src/app/
 WORKDIR /usr/src/app
+
+RUN mkdir -p /var/log/uwsgi/app/
+RUN touch /var/log/uwsgi/app/geosk.log
 
 RUN apt-get update && apt-get -y install cron
 COPY monitoring-cron /etc/cron.d/monitoring-cron

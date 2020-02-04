@@ -4,9 +4,9 @@
 
 define(function (require, exports) {
         var _      = require('underscore'),
-        fileTypes  = require('upload/FileTypes'),
-        path       = require('upload/path'),
-        common     = require('upload/common'),
+        fileTypes  = require('./FileTypes'),
+        path       = require('./path'),
+        common     = require('./common'),
         LayerInfo;
 
     /** Creates an instance of a LayerInfo
@@ -170,7 +170,7 @@ define(function (require, exports) {
         if (!form_data) {
             form_data = new FormData();
         }
-        // this should be generate from the permission widget
+        // this should be generated from the permission widget
         if (typeof permissionsString == 'undefined'){
             perm = {}
         }
@@ -609,9 +609,25 @@ define(function (require, exports) {
                 if(jqXHR.status === 500 || jqXHR.status === 0 || jqXHR.readyState === 0){
                   self.markError('Server Error: ' + jqXHR.statusText + gettext('<br>Please check your network connection. In case of Layer Upload make sure GeoServer is running and accepting connections.'));
                 } else if (jqXHR.status === 400 || jqXHR.status === 404) {
-                  self.markError('Client Error: ' + jqXHR.statusText + gettext('<br>Bad request or URL not found.'));
+                  if (jqXHR.responseJSON !== undefined && jqXHR.responseJSON !== null) {
+                      if (jqXHR.responseJSON.errors !== undefined) {
+                          self.markError(jqXHR.statusText + gettext('<br>' + jqXHR.responseJSON.errors));
+                      }
+                  } else if (jqXHR.responseText !== undefined && jqXHR.responseText !== null) {
+                      self.markError(jqXHR.statusText + gettext('<br>' + jqXHR.responseText));
+                  } else {
+                      self.markError(jqXHR.statusText + gettext('<br>Bad request or URL not found.'));
+                  }
                 } else {
-                  self.markError(gettext('Unexpected Error'));
+                  if (jqXHR.responseJSON !== undefined && jqXHR.responseJSON !== null) {
+                      if (jqXHR.responseJSON.errors !== undefined) {
+                          self.markError(jqXHR.statusText + gettext('<br>' + jqXHR.responseJSON.errors));
+                      }
+                  } else if (jqXHR.responseText !== undefined && jqXHR.responseText !== null) {
+                      self.markError(jqXHR.statusText + gettext('<br>' + jqXHR.responseText));
+                  } else {
+                      self.markError(jqXHR.statusText + gettext('<br>Unknown.'));
+                  }
                 }
 
                 callback(array);

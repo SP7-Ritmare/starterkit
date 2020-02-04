@@ -1,0 +1,49 @@
+{% extends "geonode_base.html" %}
+{% load i18n %}
+{% load static from staticfiles %}
+
+{% block title %} {% trans "Monitoring & Analytics" %} - {{ block.super }} {% endblock %}
+
+{% block header %}
+    {{ block.super }}
+    <style>
+        div#container {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow: auto;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            position: relative;
+            height: 100%;
+            max-width: none;
+        }
+        div#monitoring {
+            position: relative;
+            margin-top: 100px;
+        }
+    </style>
+{% endblock %}
+
+{% block body_class %}monitoring{% endblock %}
+
+{% block extra_script %}
+
+{{ block.super }}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(document.body).append(
+          '<script src="{% static "monitoring/bundle.js" %}"'+ '>'+'</s'+'cript>'
+        );
+    })
+</script>
+
+{% endblock %}
+
+    {% block monitoring %}
+        <div id="spinner">
+          <div class="spinner"></div>
+        </div>
+        <div id="monitoring"></div>
+    {% endblock %}

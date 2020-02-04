@@ -33,39 +33,41 @@ echo DOCKER_ENV=$DOCKER_ENV
 
 if [ -z ${DOCKER_ENV} ] || [ ${DOCKER_ENV} = "development" ]
 then
-
     echo "Executing standard Django server $cmd for Development"
-
 else
-
     if [ ${IS_CELERY} = "true" ]  || [ ${IS_CELERY} = "True" ]
     then
-
         cmd=$CELERY_CMD
         echo "Executing Celery server $cmd for Production"
-
     else
-
-        /usr/local/bin/invoke fixtures >> /usr/src/app/invoke.log
-        echo "fixture task done"
-        /usr/local/bin/invoke updategeoip >> /usr/src/app/invoke.log
-        echo "updategeoip task done"
-        /usr/local/bin/invoke collectstatic >> /usr/src/app/invoke.log
-        echo "collectstatic task done"
-        /usr/local/bin/invoke waitforgeoserver >> /usr/src/app/invoke.log
-        echo "waitforgeoserver task done"
-        /usr/local/bin/invoke geoserverfixture >> /usr/src/app/invoke.log
-        echo "geoserverfixture task done"
-        /usr/local/bin/invoke monitoringfixture >> /usr/src/app/invoke.log
-        echo "monitoringfixture task done"
-        /usr/local/bin/invoke updateadmin >> /usr/src/app/invoke.log
-        echo "updateadmin task done"
-
+        if [ ${IS_FIRST_START} = "true" ] || [ ${IS_FIRST_START} = "True" ] || [ ${FORCE_REINIT} = "true" ] || [ ${FORCE_REINIT} = "True" ]
+        then
+            /usr/local/bin/invoke fixtures >> /usr/src/app/invoke.log
+            echo "fixture task done"
+            /usr/local/bin/invoke updategeoip >> /usr/src/app/invoke.log
+            echo "updategeoip task done"
+            /usr/local/bin/invoke collectstatic >> /usr/src/app/invoke.log
+            echo "collectstatic task done"
+            /usr/local/bin/invoke waitforgeoserver >> /usr/src/app/invoke.log
+            echo "waitforgeoserver task done"
+            /usr/local/bin/invoke geoserverfixture >> /usr/src/app/invoke.log
+            echo "geoserverfixture task done"
+            /usr/local/bin/invoke monitoringfixture >> /usr/src/app/invoke.log
+            echo "monitoringfixture task done"
+            /usr/local/bin/invoke updateadmin >> /usr/src/app/invoke.log
+            echo "updateadmin task done"
+        else
+            /usr/local/bin/invoke collectstatic >> /usr/src/app/invoke.log
+            echo "collectstatic task done"
+            /usr/local/bin/invoke waitforgeoserver >> /usr/src/app/invoke.log
+            echo "waitforgeoserver task done"
+            /usr/local/bin/invoke geoserverfixture >> /usr/src/app/invoke.log
+            /usr/local/bin/invoke updateadmin >> /usr/src/app/invoke.log
+            echo "updateadmin task done"
+        fi
         cmd=$UWSGI_CMD
         echo "Executing UWSGI server $cmd for Production"
-
     fi
-
 fi
 echo 'got command ${cmd}'
 exec $cmd
