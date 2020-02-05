@@ -8,7 +8,12 @@ import datetime
 import docker
 import socket
 
-from urlparse import urlparse
+try:
+    from urllib.parse import urlparse
+    from urllib.request import urlopen, Request
+except ImportError:
+    from urllib2 import urlopen, Request
+    from urlparse import urlparse
 from invoke import run, task
 
 BOOTSTRAP_IMAGE_CHEIP = 'codenvy/che-ip:nightly'
@@ -16,26 +21,26 @@ BOOTSTRAP_IMAGE_CHEIP = 'codenvy/che-ip:nightly'
 
 @task
 def waitfordbs(ctx):
-    print "**************************databases*******************************"
+    print("**************************databases*******************************")
     ctx.run("/usr/bin/wait-for-databases {0}".format('db'), pty=True)
 
 
 @task
 def waitforgeoserver(ctx):
-    print "****************************geoserver********************************"
+    print("****************************geoserver********************************")
     while not _rest_api_availability(os.environ['GEOSERVER_LOCATION'] + 'rest'):
         print ("Wait for GeoServer API availability...")
-    print "GeoServer is available for HTTP calls!"
+    print("GeoServer is available for HTTP calls!")
 
 
 @task
 def update(ctx):
-    print "***************************setting env*********************************"
+    print("***************************setting env*********************************")
     ctx.run("env", pty=True)
     pub_ip = _geonode_public_host_ip()
-    print "Public Hostname or IP is {0}".format(pub_ip)
+    print("Public Hostname or IP is {0}".format(pub_ip))
     pub_port = _geonode_public_port()
-    print "Public PORT is {0}".format(pub_port)
+    print("Public PORT is {0}".format(pub_port))
     db_url = _update_db_connstring()
     geodb_url = _update_geodb_connstring()
     service_ready = False
@@ -142,14 +147,14 @@ def update(ctx):
             **envs
         )
     )
-    ctx.run("source {}".format(override_env), pty=True)
-    print "****************************final**********************************"
+    ctx.run("source %s" % override_env, pty=True)
+    print("****************************finalize env**********************************")
     ctx.run("env", pty=True)
 
 
 @task
 def migrations(ctx):
-    print "****************************migrations*******************************"
+    print("**************************migrations*******************************")
     print " 1. django-admin.py makemigrations --settings=geonode.settings"
     ctx.run("django-admin.py makemigrations --noinput --settings={0}".format(
         "geonode.settings"
@@ -168,7 +173,7 @@ def migrations(ctx):
 
 @task
 def prepare(ctx):
-    print "**********************prepare fixture***************************"
+    print("**********************prepare fixture***************************")
     ctx.run("rm -rf /tmp/default_oauth_apps_docker.json", pty=True)
     _prepare_oauth_fixture()
     ctx.run("rm -rf /tmp/mdtools_services_metadata_docker.json", pty=True)
@@ -181,7 +186,7 @@ def prepare(ctx):
 
 @task
 def fixtures(ctx):
-    print "****************************fixtures*********************************"
+    print("**************************fixtures********************************")
     ctx.run("django-admin.py loaddata sample_admin \
 --settings={0}".format("geonode.settings"), pty=True)
     ctx.run("django-admin.py loaddata /tmp/default_oauth_apps_docker.json \
@@ -198,39 +203,39 @@ def fixtures(ctx):
 
 @task
 def collectstatic(ctx):
-    print "************************static artifacts******************************"
+    print("************************static artifacts******************************")
     ctx.run("django-admin.py collectstatic --noinput \
 --settings={0}".format(_localsettings()), pty=True)
 
 
 @task
 def geoserverfixture(ctx):
-    print "********************geoserver fixture********************************"
+    print("********************geoserver fixture********************************")
     _geoserver_info_provision(os.environ['GEOSERVER_LOCATION'] + "rest/")
 
 
 @task
 def monitoringfixture(ctx):
-    print "*******************monitoring fixture********************************"
+    print("*******************monitoring fixture********************************")
     ctx.run("rm -rf /tmp/default_monitoring_apps_docker.json", pty=True)
     _prepare_monitoring_fixture()
     try:
         ctx.run("django-admin.py loaddata /tmp/default_monitoring_apps_docker.json \
 --settings={0}".format(_localsettings()), pty=True)
     except BaseException as e:
-        print "ERROR installing monitoring fixture: " + str(e)
+        print("ERROR installing monitoring fixture: " + str(e))
 
 
 @task
 def updategeoip(ctx):
-    print "**************************update geoip*******************************"
+    print("**************************update geoip*******************************")
     ctx.run("django-admin.py updategeoip \
     --settings={0}".format(_localsettings()), pty=True)
 
 
 @task
 def updateadmin(ctx):
-    print "***********************update admin details**************************"
+    print("***********************update admin details**************************")
     ctx.run("rm -rf /tmp/django_admin_docker.json", pty=True)
     _prepare_admin_fixture(os.environ.get('ADMIN_PASSWORD', 'admin'), os.environ.get('ADMIN_EMAIL', 'admin@example.org'))
     ctx.run("django-admin.py loaddata /tmp/django_admin_docker.json \
@@ -239,13 +244,13 @@ def updateadmin(ctx):
 
 @task
 def collectmetrics(ctx):
-    print "************************collect metrics******************************"
+    print("************************collect metrics******************************")
     ctx.run("python -W ignore manage.py collect_metrics  \
     --settings={0} -n -t xml".format(_localsettings()), pty=True)
 
 @task
 def initialized(ctx):
-    print "**************************init file********************************"
+    print("**************************init file********************************")
     ctx.run('date > /mnt/volumes/statics/geonode_init.lock')
 
 def _docker_host_ip():
@@ -331,9 +336,9 @@ def _prepare_oauth_fixture():
     upurl = urlparse(os.environ['SITEURL'])
     net_scheme = upurl.scheme
     pub_ip = _geonode_public_host_ip()
-    print "Public Hostname or IP is {0}".format(pub_ip)
+    print("Public Hostname or IP is {0}".format(pub_ip))
     pub_port = _geonode_public_port()
-    print "Public PORT is {0}".format(pub_port)
+    print("Public PORT is {0}".format(pub_port))
     default_fixture = [
         {
             "model": "oauth2_provider.application",
