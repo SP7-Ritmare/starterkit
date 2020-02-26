@@ -16,8 +16,7 @@ services:
     env_file: .env
 
   dbsos:
-    image: get-it/dbsos-postgis:9.5
-    build: ./docker/sos-starterkit-database/starterkit-postgres/
+    image: cnrireami/getit:dbsos-postgis-9.5
     restart: unless-stopped
     container_name: dbsos4${COMPOSE_PROJECT_NAME}
     stdin_open: true
@@ -32,8 +31,7 @@ services:
     env_file: .env
 
   sos:
-    image: get-it/sos-configured:4.4.2
-    build: ./docker/sos-configured/
+    image: cnrireami/getit:sos-configured-4.4.2
     restart: unless-stopped
     container_name: sos4${COMPOSE_PROJECT_NAME}
     stdin_open: true
@@ -46,8 +44,7 @@ services:
     env_file: .env
 
   geoserver:
-    image: get-it/geoserver:2.15.2
-    build: ./docker/geoserver/
+    image: cnrireami/getit:geoserver-2.15.4 
     restart: unless-stopped
     container_name: geoserver4${COMPOSE_PROJECT_NAME}
     stdin_open: true
@@ -65,9 +62,8 @@ services:
       - ./scripts/docker/env/production/geoserver.env
 
   django:
-    image: get-it/starterkit:2.10
+    image: cnrireami/getit:starterkit-2.10.3 
     restart: unless-stopped
-    build: .
     container_name: django4${COMPOSE_PROJECT_NAME}
     stdin_open: true
     # tty: true
@@ -86,8 +82,7 @@ services:
       - ./scripts/docker/env/production/django.env
 
   geonode:
-    image: get-it/nginx:sos
-    build: ./docker/sos-nginx/
+    image: cnrireami/getit:nginx-sos 
     restart: on-failure
     container_name: nginx4${COMPOSE_PROJECT_NAME}
     stdin_open: true
@@ -112,8 +107,7 @@ services:
 
   # Gets and installs letsencrypt certificates
   letsencrypt:
-    image: get-it/letsencrypt:latest
-    build: ./docker/letsencrypt/
+    image: cnrireami/getit:letsencrypt-2.10.3
     restart: on-failure
     volumes:
       - nginx-certificates:/geonode-certificates/
@@ -122,7 +116,7 @@ services:
       - ./scripts/docker/env/production/nginx.env
 
   data-dir-conf:
-    image: geonode/geoserver_data:2.15.2
+    image: geonode/geoserver_data:2.15.4
     restart: on-failure
     container_name: gsconf4${COMPOSE_PROJECT_NAME}
     labels:

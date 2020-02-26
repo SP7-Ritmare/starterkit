@@ -2,6 +2,7 @@ version: '2'
 
 services:
   postgresdb:
+    image: cnrireami/getit:dbsos-postgis-9.5
     build: starterkit-postgres/
     expose:
       - 5432

@@ -1,4 +1,4 @@
-FROM geobeyond/sos:4.4.2
+FROM cnrireami/getit:sos-4.4.2
 MAINTAINER Starterkit development team
 
 # Project: https://github.com/52North/sos
