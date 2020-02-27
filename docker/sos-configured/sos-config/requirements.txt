@@ -1,4 +1,4 @@
 docker==2.7.0
-invoke
-dataset
-bcrypt
+invoke==1.4.1
+dataset==1.1.2
+bcrypt==3.1.7

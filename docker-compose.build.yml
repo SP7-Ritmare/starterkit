@@ -1,0 +1,21 @@
+version: '2.2'
+services:
+
+  dbsos:
+    build: ./docker/sos-starterkit-database/starterkit-postgres/
+
+  sos:
+    build: ./docker/sos-configured/
+
+  geoserver:
+    build: ./docker/geoserver/
+
+  django:
+    build: .
+
+  geonode:
+    build: ./docker/sos-nginx/
+
+  letsencrypt:
+    build: ./docker/letsencrypt/
+
