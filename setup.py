@@ -27,19 +27,21 @@ from shutil import copyfile
 from setuptools import find_packages, setup
 from setuptools.command.install import install
 
-try:
-    # pip >=20
-    from pip._internal.network.session import PipSession
+try:  # for pip >= 10
     from pip._internal.req import parse_requirements
-except ImportError:
     try:
-        # 10.0.0 <= pip <= 19.3.1
         from pip._internal.download import PipSession
-        from pip._internal.req import parse_requirements
-    except ImportError:
-        # pip <= 9.0.3
-        from pip.download import PipSession
+        pip_session = PipSession()
+    except ImportError:  # for pip >= 20
+        from pip._internal.network.session import PipSession
+        pip_session = PipSession()
+except ImportError:  # for pip <= 9.0.3
+    try:
         from pip.req import parse_requirements
+        from pip.download import PipSession
+        pip_session = PipSession()
+    except ImportError:  # backup in case of further pip changes
+        pip_session = 'hack'
 
 # Parse requirements.txt to get the list of dependencies
 inst_req = parse_requirements('requirements.txt',
