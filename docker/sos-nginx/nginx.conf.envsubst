@@ -30,8 +30,8 @@ http {
 
     # Default server closes the connection (we can connect use only HTTP_HOST and HTTPS HOST)
     server {
-        listen          80 default_server;
-        listen          443;
+        listen          $HTTP_PORT default_server;
+        listen          $HTTPS_HOST;
         server_name     _;
         return          444;
     }
