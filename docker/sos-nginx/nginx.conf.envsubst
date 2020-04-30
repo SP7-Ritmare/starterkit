@@ -28,10 +28,10 @@ http {
         include sites-enabled/*.conf;
     }
 
-    # Default server closes the connection (we can connect use only HTTP_HOST and HTTPS HOST)
+    # Default server closes the connection (we can connect only using HTTP_HOST and HTTPS_HOST)
     server {
         listen          $HTTP_PORT default_server;
-        listen          $HTTPS_HOST;
+        listen          $HTTPS_PORT;
         server_name     _;
         return          444;
     }
