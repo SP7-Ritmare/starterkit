@@ -61,7 +61,7 @@ RUN chmod -Rf 775 /usr/src/app/geosk/uploaded
 RUN chmod -Rf 775 /usr/src/app/geosk/static_root
 
 # Upgrade pip
-RUN pip install pip --upgrade
+RUN pip install pip==20.1
 
 # To understand the next section (the need for requirements.txt and setup.py)
 # Please read: https://packaging.python.org/requirements/
