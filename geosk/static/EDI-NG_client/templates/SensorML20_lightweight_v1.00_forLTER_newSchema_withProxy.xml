@@ -1177,7 +1177,7 @@
                     <help xml:lang="en">Measured parameter. Start typing the first three letters to obtain suggested autocompletion from controlled vocabularies.</help>
                     <hasPath>sml:output/@name</hasPath>
                 </item>
-                <item hasIndex="2" xml:id="output_param_2" outIndex="6" field="root" isFixed="true" hasDatatype="select" datasource="outputsS">
+                <item hasIndex="2" xml:id="output_param_2" outIndex="6" field="c" isFixed="true" hasDatatype="select" datasource="outputsS">
                     <hasPath>sml:output/swe:Quantity/@definition</hasPath>
                     <!--hasValue>sml:output/@name</hasValue-->
                 </item>
