@@ -776,3 +776,20 @@ if GEONODE_CLIENT_LAYER_PREVIEW_LIBRARY == 'mapstore':
     ]
 
 # -- END Client Hooksets Setup
+
+# -- read email settings from env
+EMAIL_ENABLE = ast.literal_eval(os.getenv('EMAIL_ENABLE', 'False'))
+
+if EMAIL_ENABLE:
+    EMAIL_BACKEND = os.getenv('DJANGO_EMAIL_BACKEND',
+                              default='django.core.mail.backends.smtp.EmailBackend')
+    EMAIL_HOST = os.getenv('DJANGO_EMAIL_HOST', 'localhost')
+    EMAIL_PORT = os.getenv('DJANGO_EMAIL_PORT', 25)
+    EMAIL_HOST_USER = os.getenv('DJANGO_EMAIL_HOST_USER', '')
+    EMAIL_HOST_PASSWORD = os.getenv('DJANGO_EMAIL_HOST_PASSWORD', '')
+    EMAIL_USE_TLS = ast.literal_eval(os.getenv('DJANGO_EMAIL_USE_TLS', 'False'))
+    EMAIL_USE_SSL = ast.literal_eval(os.getenv('DJANGO_EMAIL_USE_SSL', 'False'))
+    DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'GeoNode <no-reply@geonode.org>')
+else:
+    EMAIL_BACKEND = os.getenv('DJANGO_EMAIL_BACKEND',
+                              default='django.core.mail.backends.console.EmailBackend')
