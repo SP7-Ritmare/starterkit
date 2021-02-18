@@ -104,6 +104,11 @@ services:
     env_file:
       - .env
       - ./scripts/docker/env/production/nginx.env
+    # In order, under certain circumstances, when running in a Local Area Network, to make django and SOS communicate
+    # it is necessary to specify the following "extra_hosts" setting, and to set the variable DOCKER_HOST_IP in the .env 
+    # with the LAN ip of the docker host
+    #extra_hosts:
+    #  - ${GEONODE_LB_HOST_IP}:${DOCKER_HOST_IP}
 
   # Gets and installs letsencrypt certificates
   letsencrypt:
