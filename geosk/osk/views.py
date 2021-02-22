@@ -51,15 +51,16 @@ def describe_sensor(request):
     if output_format == 'text/xml':
         return HttpResponse(xml, content_type='application/xml')
     elif output_format == 'text/html':
-        r = requests.get(
-            'http://sp7.irea.cnr.it/jboss/MDService/rest/sensor2html_v2.xsl?version=3.00')
-        if r.status_code == 200:
-            xslt = etree.fromstring(r.text.encode(
-                'utf8'), etree.XMLParser(no_network=False))
-        else:
-            xsl_file = os.path.join(
-                os.path.dirname(__file__), 'sensor2html_v2.xsl')
-            xslt = etree.parse(xsl_file)
+        # r = requests.get(
+            # 'http://sp7.irea.cnr.it/jboss/MDService/rest/sensor2html_v2.xsl?version=3.00'
+            # 'http://www.get-it.it/objects/sensors/xslt/sensor2html_v2.xsl')
+        #if r.status_code == 200:
+        #    xslt = etree.fromstring(r.text.encode(
+        #        'utf8'), etree.XMLParser(no_network=False))
+        #else:
+        xsl_file = os.path.join(
+            os.path.dirname(__file__), 'sensor2html_v2.xsl')
+        xslt = etree.parse(xsl_file)
 
         transform = etree.XSLT(xslt)
         dom = etree.fromstring(xml, etree.XMLParser(no_network=False))
