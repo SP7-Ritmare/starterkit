@@ -24,17 +24,24 @@ services:
     labels:
         org.geonode.component: dbsos
         org.geonode.instance.name: geonode
-    # ports:
-    #   - 5432:5432
+    ports:
+      - 5432:5432
     volumes:
       - dbsosdata:/dbsosdata
     env_file: .env
 
   sos:
-    image: cnrireami/getit:sos-configured-4.4.2
+    # image: cnrireami/getit:sos-configured-4.4.2
+    image: 52north/sos:5
     restart: unless-stopped
     container_name: sos4${COMPOSE_PROJECT_NAME}
     stdin_open: true
+    ports:
+      - 8080:8080
+    volumes:
+      - "./sos-config:/etc/sos"
+    environment:
+      JAVA_OPTIONS: -Xdebug -agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n
     # tty: true
     labels:
         org.geonode.component: sos
@@ -42,6 +49,8 @@ services:
     depends_on:
       - dbsos
     env_file: .env
+    extra_hosts:
+      - ${GEONODE_LB_HOST_IP}:${DOCKER_HOST_IP}
 
   geoserver:
     image: cnrireami/getit:geoserver-2.15.4 
