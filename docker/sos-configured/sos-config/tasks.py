@@ -14,24 +14,24 @@ BOOTSTRAP_IMAGE_CHEIP = "codenvy/che-ip:nightly"
 
 @task
 def update(ctx):
-    print "***************************initial*********************************"
+    print("***************************initial*********************************")
     ctx.run("env", pty=True)
     pub_ip = _geonode_public_host_ip()
-    print "Public Hostname or IP is {0}".format(pub_ip)
+    print(f"Public Hostname or IP is {pub_ip}")
     pub_port = _geonode_public_port()
-    print "Public PORT is {0}".format(pub_port)
+    print(f"Public PORT is {pub_port}")
     adminsos_pwd = _sos_admin_pwd(
         os.getenv(
             "SOS_ADMIN_PASSWORD",
             "password"
         )
     )
-    print "Admin SOS password bcrypt hashed is {0}".format(adminsos_pwd)
+    print(f"Admin SOS password bcrypt hashed is {adminsos_pwd}")
     envs = {
         "public_schema": "https" if pub_port == 443 else "http",
-        "public_fqdn": "{0}".format(pub_ip),
-        "public_host": "{0}".format(pub_ip),
-        "hashed_pwd": "{0}".format(adminsos_pwd),
+        "public_fqdn": f"{pub_ip}",
+        "public_host": f"{pub_ip}",
+        "hashed_pwd": f"{adminsos_pwd}",
         "override_fn": "$HOME/.override_env"
     }
     ctx.run("echo export GEOSERVER_PUBLIC_LOCATION=\
@@ -47,7 +47,7 @@ def update(ctx):
 
 @task
 def updatedb(ctx):
-    print "********************update configuration*************************"
+    print("********************update configuration*************************")
     ctx.run("cp -rup $CATALINA_HOME/webapps/observations/configuration.db \
 $CATALINA_HOME/webapps/observations/configuration.db.backup", pty=True)
     _prepare_configuration_database()
@@ -90,14 +90,10 @@ def _docker_host_ip():
                                     network_mode="host"
                                     ).split("\n")
     if len(ip_list) > 1:
-        print("Docker daemon is running on more than one \
-address {0}".format(ip_list))
-        print("Only the first address:{0} will be returned!".format(
-            ip_list[0]
-        ))
+        print(f"Docker daemon is running on more than one address {ip_list}")
+        print(f"Only the first address:{ip_list[0]} will be returned!")
     else:
-        print("Docker daemon is running at the following \
-address {0}".format(ip_list[0]))
+        print(f"Docker daemon is running at the following address {ip_list[0]}")
     return ip_list[0]
 
 
@@ -106,10 +102,10 @@ def _container_exposed_port(component, instname):
     ports_dict = json.dumps(
         [c.attrs["Config"]["ExposedPorts"] for c in client.containers.list(
             filters={
-                "label": "org.geonode.component={0}".format(component),
+                "label": f"org.geonode.component={component}",
                 "status": "running"
             }
-        ) if "{0}".format(instname) in c.name][0]
+        ) if f"{instname}" in c.name][0]
     )
     for key in json.loads(ports_dict):
         port = re.split("/tcp", key)[0]
@@ -140,7 +136,7 @@ def _sos_admin_pwd(pwd):
         return hashed
     else:
         print("Initial input password {0} Does not Match :(").format(pwd)
-        raise EnvironmentError
+        raise OSError
 
 
 def _str2int(string):
@@ -155,16 +151,16 @@ def _str2int(string):
 def _prepare_dict_identifiers():
 
     pub_ip = _geonode_public_host_ip()
-    print "Public Hostname or IP is {0}".format(pub_ip)
+    print(f"Public Hostname or IP is {pub_ip}")
     pub_port = _geonode_public_port()
-    print "Public PORT is {0}".format(pub_port)
+    print(f"Public PORT is {pub_port}")
     updated_pwd = _sos_admin_pwd(
         os.getenv(
             "SOS_ADMIN_PASSWORD",
             "password"
         )
     )
-    print "SOS Admin password is {0}".format(updated_pwd)
+    print(f"SOS Admin password is {updated_pwd}")
 
     default_administrator_user = {
         "id": 1,
@@ -281,13 +277,7 @@ def _prepare_configuration_database():
 
     try:
         db = dataset.connect(
-            'sqlite:///' + os.path.join(
-                os.path.join(
-                    os.environ['CATALINA_HOME'],
-                    'webapps/observations'
-                ),
-                'configuration.db'
-            )
+            f"sqlite:///{os.path.join(os.path.join(os.environ['CATALINA_HOME'], 'webapps/observations'), 'configuration.db')}"
         )
         tb_administrator_user = db['administrator_user']
         # treat strings dict as tuple to filter and update records

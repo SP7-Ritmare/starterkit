@@ -1,1 +1,0 @@
-* * * * * python /root/docker_collectmetrics.py >> /var/log/cron.log 2>&1

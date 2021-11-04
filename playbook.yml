@@ -7,10 +7,10 @@
     server_name: 0.0.0.0
     deploy_user: ubuntu
     code_repository: https://github.com/-----/{{ project_name }}.git" # e.g., "https://github.com/GeoNode/{{ project_name }}.git"
-    branch_name: master
+    branch_name: 3.3.x
     virtualenv_dir: "/home/ubuntu/.venvs"
     site_url: "http://localhost:8000/" # The public url of the GeoNode instance
-    geoserver_url: "http://build.geonode.org/geoserver/latest/geoserver-2.15.2.war" # geoserver_url should match what is found in dev_config.yml
+    geoserver_url: "https://artifacts.geonode.org/geoserver/2.19.x/geoserver.war" # geoserver_url should match what is found in dev_config.yml
     pg_max_connections: 100
     pg_shared_buffers: 128MB
     tomcat_xms: "1024M"
@@ -22,7 +22,7 @@
     - name: Install python for Ansible
       become: yes
       become_user: root
-      raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+      raw: test -e /usr/bin/python || (apt -y update && apt install -y python3-minimal)
     - name: 'Reconfigue Locales'
       become: yes
       become_user: root
