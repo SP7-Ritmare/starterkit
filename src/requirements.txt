@@ -8,7 +8,7 @@ nltk==3.6.5
 pandas==1.3.4
 rosetta==0.3
 djproxy==2.3.6
-django-grappelli==2.15.3
+django-grappelli==2.15.1
 django-overextends
 django-annoying
 django-analytical

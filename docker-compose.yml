@@ -17,6 +17,8 @@ x-common-django:
     - tmp:/tmp
 
 
+services:
+
   # Our custom django application. It includes Geonode.
   django:
     << : *default-common-django
@@ -25,7 +27,7 @@ x-common-django:
       dockerfile: Dockerfile
     container_name: django4${COMPOSE_PROJECT_NAME}
     healthcheck:
-      test: "curl --fail --silent --write-out 'HTTP CODE : %{http_code}\n' --output /dev/null http://127.0.0.1:8001/"
+      test: "curl --fail --silent --write-out 'HTTP CODE : %{http_code}\n' --output /dev/null http://127.0.0.1:8000/"
       interval: 60s
       timeout: 10s
       retries: 1
@@ -38,7 +40,7 @@ x-common-django:
   # Celery worker that executes celery tasks created by Django.
   celery:
     << : *default-common-django
-    image: ${COMPOSE_PROJECT_NAME}_django:latest
+    image: cnrireami/getit:starterkit-3.3.0
     container_name: celery4${COMPOSE_PROJECT_NAME}
     depends_on:
       - django
@@ -50,7 +52,7 @@ x-common-django:
   # Nginx is serving django static and media files and proxies to django and geonode
   geonode:
     image: cnrireami/getit:nginx-sos-3.3.0
-    build: ./docker/nginx/
+    build: ./docker/sos-nginx/
     container_name: nginx4${COMPOSE_PROJECT_NAME}
     environment:
       - HTTPS_HOST=${HTTPS_HOST}
@@ -73,7 +75,6 @@ x-common-django:
     restart: on-failure
     env_file:
       - .env
-      - ./scripts/docker/env/production/nginx.env
     # In order, under certain circumstances, when running in a Local Area Network, to make django and SOS communicate
     # it is necessary to specify the following "extra_hosts" setting, and to set the variable DOCKER_HOST_IP in the .env 
     # with the LAN ip of the docker host
