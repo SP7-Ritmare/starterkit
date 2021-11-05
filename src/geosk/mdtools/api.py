@@ -47,7 +47,7 @@ def get_datetype(ita):
         'publication': 'pubblicazione',
         'revision': 'revisione'
     }
-    for neutral, dt in DATETYPE.iteritems():
+    for neutral, dt in DATETYPE.items():
         if dt.lower() == ita.lower() or neutral.lower() == ita.lower():
             return neutral
     return None
@@ -75,7 +75,7 @@ def get_topic_category(ita):
         'structure': 'Strutture',
         'transportation': 'Trasporti'
     }
-    for neutral, tc in TOPIC_CATEGORY.iteritems():
+    for neutral, tc in TOPIC_CATEGORY.items():
         if tc.lower() == ita.lower() or neutral.lower() == ita.lower():
             return neutral
     return None

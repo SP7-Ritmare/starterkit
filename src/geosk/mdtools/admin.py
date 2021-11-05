@@ -210,12 +210,12 @@ def set_sensors_configuration(instance):
         'service.sosUrl': settings.SOS_URL,
     }
 
-    for k, v in configuration_strings.iteritems():
+    for k, v in configuration_strings.items():
         el = StringSettings.objects.using('sensors').get(identifier=k)
         el.value = getval(v)
         el.save()
 
-    for k, v in configuration_uri.iteritems():
+    for k, v in configuration_uri.items():
         el = UriSettings.objects.using('sensors').get(identifier=k)
         el.value = getval(v)
         el.save()
