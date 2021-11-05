@@ -153,7 +153,8 @@ services:
     #   - 5432:5432
     volumes:
       - dbsosdata:/dbsosdata
-    env_file: .env
+    env_file:
+      - .env
 
   sos:
     image: cnrireami/getit:sos-configured-4.4.2

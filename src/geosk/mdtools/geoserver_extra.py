@@ -19,20 +19,20 @@ class Settings:
     def _get_contact(self):
         return self.catalog.get_json(self.contact_url)
 
-    def update_contact(self, json):
+    def update_contact(self, json_data):
         headers = {"Content-Type": "application/json"}
         self.catalog.http_request(
-            self.contact_url, method="PUT", data=json.dumps(json), headers=headers)
+            self.contact_url, method="PUT", data=json.dumps(json_data), headers=headers)
 
     def service_url(self, service):
         assert service in ('wms', 'wfs', 'wcs'), "Unknow service type"
         return build_url(self.catalog.service_url,
                          ['services', service, "settings.json"])
 
-    def update_service(self, service, json):
+    def update_service(self, service, json_data):
         headers = {"Content-Type": "application/json"}
         self.catalog.http_request(
-            self.service_url(service), method="PUT", data=json.dumps(json), headers=headers)
+            self.service_url(service), method="PUT", data=json.dumps(json_data), headers=headers)
 
     def get_service_config(self, service):
         response = self.catalog.http_request(
