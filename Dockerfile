@@ -1,56 +1,62 @@
-# TODO : use python:2.7.13-alpine3.6 to make this lighter ( it is what we use for letsencryipt as well)
-# But it seems it's not possible for now because alpine only has geos 3.6 which is not supported by django 1.8
-# (probably because of https://code.djangoproject.com/ticket/28441)
-
-FROM python:2.7.16-slim-stretch
-MAINTAINER Starterkit development team
-
-# Install system dependencies
-RUN mkdir -p /usr/share/man/man1; mkdir -p /usr/share/man/man7
-RUN echo "Updating apt-get" && \
-        apt-get update && \
-        echo "Installing build dependencies" && \
-        apt-get install -y git gcc make libc-dev musl-dev libpcre3 libpcre3-dev g++ && \
-        echo "Installing database dependencies" && \
-        apt-get install -y postgresql-client libpq-dev sqlite3 && \
-        echo "Installing Pillow dependencies" && \
-        # RUN apt-get install -y NOTHING ?? It was probably added in other packages... ALPINE needed jpeg-dev zlib-dev && \
-        echo "Installing GDAL dependencies" && \
-        apt-get install -y libgeos-dev libgdal-dev && \
-        echo "Installing Psycopg2 dependencies" && \
-        # RUN apt-get install -y NOTHING ?? It was probably added in other packages... ALPINE needed postgresql-dev && \
-        echo "Installing other dependencies" && \
-        apt-get install -y libxml2-dev libxslt-dev gettext zip libmemcached-dev libsasl2-dev zlib1g-dev && \
-        echo "Installing GeoIP dependencies" && \
-        apt-get install -y geoip-bin geoip-database && \
-        echo "Installing healthceck dependencies" && \
-        apt-get install -y curl && \
-        echo "Python server" && \
-        pip install uwsgi && \
-        echo "Removing build dependencies and cleaning up" && \
-        # TODO : cleanup apt-get with something like apt-get -y --purge autoremove gcc make libc-dev musl-dev libpcre3 libpcre3-dev g++ && \
-        rm -rf /var/lib/apt/lists/* && \
-        rm -rf ~/.cache/pip
-
-# Install python dependencies
-RUN echo "Geonode python dependencies"
-RUN pip install celery==4.1.0 # see https://github.com/GeoNode/geonode/pull/3714
+FROM python:3.8.9-buster
+LABEL Starterkit development team
 
 RUN mkdir -p /usr/src/app
-COPY . /usr/src/app/
+
+# Enable postgresql-client-13
+RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main" | tee /etc/apt/sources.list.d/pgdg.list
+RUN echo "deb http://deb.debian.org/debian/ stable main contrib non-free" | tee /etc/apt/sources.list.d/debian.list
+RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+
+# To get GDAL 3.2.1 to fix this issue https://github.com/OSGeo/gdal/issues/1692
+# TODO: The following line should be removed if base image upgraded to Bullseye
+RUN echo "deb http://deb.debian.org/debian/ bullseye main contrib non-free" | tee /etc/apt/sources.list.d/debian.list
+
+# This section is borrowed from the official Django image but adds GDAL and others
+RUN apt-get update && apt-get install -y \
+    libgdal-dev libpq-dev libxml2-dev \
+    libxml2 libxslt1-dev zlib1g-dev libjpeg-dev \
+    libmemcached-dev libldap2-dev libsasl2-dev libffi-dev
+
+RUN apt-get update && apt-get install -y \
+    gcc zip gettext geoip-bin cron \
+    postgresql-client-13 \
+    sqlite3 spatialite-bin libsqlite3-mod-spatialite \
+    python3-dev python3-gdal python3-psycopg2 python3-ldap \
+    python3-pip python3-pil python3-lxml python3-pylibmc \
+    uwsgi uwsgi-plugin-python3 \
+    firefox-esr \
+    --no-install-recommends && rm -rf /var/lib/apt/lists/*
+
+# Prepraing dependencies
+RUN apt-get update && apt-get install -y devscripts build-essential debhelper pkg-kde-tools sharutils
+# RUN git clone https://salsa.debian.org/debian-gis-team/proj.git /tmp/proj
+# RUN cd /tmp/proj && debuild -i -us -uc -b && dpkg -i ../*.deb
+
+# Install pip packages
+RUN pip install pip --upgrade \
+    && pip install pygdal==$(gdal-config --version).* \
+        flower==0.9.4
+
+# Activate "memcached"
+RUN apt install -y memcached
+RUN pip install pylibmc \
+    && pip install sherlock
+
+# add bower and grunt command
+COPY src /usr/src/app/
 WORKDIR /usr/src/app
 
 RUN mkdir -p /var/log/uwsgi/app/
 RUN touch /var/log/uwsgi/app/geosk.log
 
-RUN apt-get update && apt-get -y install cron
-COPY monitoring-cron /etc/cron.d/monitoring-cron
+COPY src/monitoring-cron /etc/cron.d/monitoring-cron
 RUN chmod 0644 /etc/cron.d/monitoring-cron
 RUN crontab /etc/cron.d/monitoring-cron
 RUN touch /var/log/cron.log
 RUN service cron start
 
-COPY wait-for-databases.sh /usr/bin/wait-for-databases
+COPY src/wait-for-databases.sh /usr/bin/wait-for-databases
 RUN chmod +x /usr/bin/wait-for-databases
 RUN chmod +x /usr/src/app/tasks.py \
     && chmod +x /usr/src/app/entrypoint.sh
@@ -60,20 +66,23 @@ RUN mkdir -p /usr/src/app/geosk/static_root
 RUN chmod -Rf 775 /usr/src/app/geosk/uploaded
 RUN chmod -Rf 775 /usr/src/app/geosk/static_root
 
-# Upgrade pip
-RUN pip install pip==20.1
+COPY src/celery.sh /usr/bin/celery-commands
+RUN chmod +x /usr/bin/celery-commands
 
-# To understand the next section (the need for requirements.txt and setup.py)
-# Please read: https://packaging.python.org/requirements/
+COPY src/celery-cmd /usr/bin/celery-cmd
+RUN chmod +x /usr/bin/celery-cmd
 
-# fix for known bug in system-wide packages
-RUN ln -fs /usr/lib/python2.7/plat-x86_64-linux-gnu/_sysconfigdata*.py /usr/lib/python2.7/
+# Install "geonode-contribs" apps
+RUN cd /usr/src; git clone https://github.com/GeoNode/geonode-contribs.git -b master
+# Install logstash and centralized dashboard dependencies
+RUN cd /usr/src/geonode-contribs/geonode-logstash; pip install --upgrade  -e . \
+    cd /usr/src/geonode-contribs/ldap; pip install --upgrade  -e .
 
-# app-specific requirements
-RUN pip install --upgrade --no-cache-dir --src /usr/src -r requirements.txt
-RUN pip install --upgrade -e .
+RUN pip install --upgrade --no-cache-dir  --src /usr/src -r requirements.txt
+RUN pip install --upgrade  -e .
 
-# Install pygdal (after requirements for numpy 1.16)
-RUN pip install pygdal==$(gdal-config --version).*
+# Export ports
+EXPOSE 8000
 
-ENTRYPOINT service cron restart && /usr/src/app/entrypoint.sh
+# We provide no command or entrypoint as this image can be used to serve the django project or run celery tasks
+# ENTRYPOINT /usr/src/app/entrypoint.sh

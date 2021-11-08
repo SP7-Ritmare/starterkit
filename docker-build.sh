@@ -1,1 +1,1 @@
-docker-compose -f docker-compose.yml -f docker-compose.build.yml build --no-cache
+docker-compose build --no-cache; docker-compose stop; docker-compose up -d; docker system prune -a

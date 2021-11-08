@@ -65,6 +65,8 @@ development.db-journal
 \.pytest_cache/
 
 #*.dat
-
+.env
 /geosk/static/.components/
 /geosk/static/node_modules/
+
+/.env

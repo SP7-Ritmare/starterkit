@@ -1,0 +1,15 @@
+# The row below allow docker-compose to build images even if 
+# geonode-mapstore-client-3.3.0 is a broken dependency. Can be deleted once geonode-mapstore-client
+# 3.3.0 will be available 
+-e git+https://github.com/GeoNode/geonode-mapstore-client.git@3.3.x#egg=django_geonode_mapstore_client
+-e git+https://github.com/GeoNode/geonode.git@3.3.x#egg=GeoNode
+scipy==1.7.1
+nltk==3.6.5
+pandas==1.3.4
+rosetta==0.3
+djproxy==2.3.6
+django-grappelli==2.15.1
+django-overextends
+django-annoying
+django-analytical
+django-taggit-templatetags2
