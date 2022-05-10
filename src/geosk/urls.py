@@ -15,6 +15,25 @@ from geosk.osk.proxy import (
 from geosk.mdtools import api, views as mdtools_views
 
 
+url_already_injected = any(
+    [
+        'geonode_sos.sensors.urls' in x.urlconf_name.__name__
+        for x in urlpatterns
+        if hasattr(x, 'urlconf_name') and not isinstance(x.urlconf_name, list)
+    ]
+)
+
+if not url_already_injected:
+    urlpatterns.insert(
+        0, url(r"^layers/", include("geosk.geonode_sos.sensors.layer_urls")),
+    )
+    urlpatterns.insert(
+        1, url(r"^services/", include("geosk.geonode_sos.sensors.service_urls")),
+    )
+    urlpatterns.insert(
+        2, url(r"^api/", include("geosk.geonode_sos.api.urls")),
+    )
+
 geoskurlpatterns = [
     # whoami
     url(r'^whoami$',

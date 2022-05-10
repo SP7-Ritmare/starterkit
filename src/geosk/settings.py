@@ -398,3 +398,22 @@ if EMAIL_ENABLE:
 else:
     EMAIL_BACKEND = os.getenv('DJANGO_EMAIL_BACKEND',
                               default='django.core.mail.backends.console.EmailBackend')
+
+
+
+############################################
+#           SOS CONFIGURATION              #
+############################################
+INSTALLED_APPS += ('geosk.geonode_sos','dynamic_models',)
+
+SERVICES_TYPE_MODULES = ["geosk.geonode_sos.sos_handler.HandlerDescriptor"]
+
+DATABASE_ROUTERS = ["geosk.geonode_sos.router.DatastoreRouter"]
+
+DYNAMIC_MODELS = {
+    "USE_APP_LABEL": "geonode_sos_foi"
+}
+
+############################################
+#      END SOS CONFIGURATION              #
+############################################

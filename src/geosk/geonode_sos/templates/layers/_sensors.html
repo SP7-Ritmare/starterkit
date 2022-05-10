@@ -1,0 +1,26 @@
+{% load i18n %}
+{% load static %}
+{% load floppyforms %}
+
+
+<li class="list-group-item">
+    <h4>{% trans "Service Provider" %}</h4>
+    <div>
+        {% with resource.layer.remote_service.serviceprovider_set.first as provider %}
+        <i class="glyphicon glyphicon-user"></i>{{provider.name}}<br>
+        <i class="glyphicon glyphicon-link"></i>{{provider.site}}<br>
+        <i class="glyphicon glyphicon-envelope"></i><a href="mailto:{{provider.email}}">{{provider.email}}</a><br>
+        <i class="glyphicon glyphicon-phone"></i>{{provider.phone}}<br>
+        {% endwith %}
+    </div>
+    <div>
+    {% for el in resource.sensorresponsible_set.all %}
+        <h4>{{el.role|title}}</h4>
+        <i class="glyphicon glyphicon-user"></i>{{el.name}}<br>
+        <i class="glyphicon glyphicon-envelope"></i><a href="mailto:{{el.mail}}">{{el.mail}}</a><br>
+        <i class="glyphicon glyphicon-phone"></i>{{el.phone}}<br>
+        <i class="glyphicon glyphicon-globe"></i>{{el.city}} {{el.postal_code}}, {{el.country}}
+    {% endfor %}
+    </div>
+    
+</li>
