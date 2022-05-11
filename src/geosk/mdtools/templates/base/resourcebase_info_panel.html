@@ -2,31 +2,31 @@
 
 <article class="description tab-pane active" id="info">
   <ul class="unstyled wide">
-  {% if resourcebase.title%}
+  {% if resource.title%}
     <li>
       <strong>{% trans "Title" %}:</strong>
-      {{ resourcebase.title }}
+      {{ resource.title }}
     </li>
   {% endif %}
 
-  {% if resourcebase.abstract %}
+  {% if resource.abstract %}
     <li>
       <strong>{% trans "Abstract" %}:</strong>
-      {{ resourcebase.abstract|escape|urlize|linebreaks|safe }}
+      {{ resource.abstract|escape|urlize|linebreaks|safe }}
     </li>
   {% endif %}
 
-  {% if resourcebase.date %}
+  {% if resource.date %}
     <li>
-      <strong>{% trans resourcebase.date_type|title %} {% trans "Date" %}:</strong>
-      {{ resourcebase.date }}
+      <strong>{% trans resource.date_type|title %} {% trans "Date" %}:</strong>
+      {{ resource.date }}
     </li>
   {% endif %}
 
-  {% if resourcebase.display_type %}
+  {% if resource.display_type %}
     <li>
       <strong>{% trans "Type" %}:</strong>
-      {{ resourcebase.display_type }}
+      {{ resource.display_type }}
     </li>
   {% endif %}
 
