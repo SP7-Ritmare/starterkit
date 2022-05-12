@@ -35,13 +35,3 @@ Stefano Menegon, Alessandro Oggioni, Paolo Tagliolato, Martina Zilioli, Simone L
 }
 ```
 * Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
-
-
-## Migrations
-
-To let the app works properly, is needed to run the migration in both database: default and datastore. To do that, is enough to run:
-
-```
-python manage.py migrate
-python manage.py migrate --database datastore
-```
