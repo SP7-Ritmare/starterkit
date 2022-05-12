@@ -35,3 +35,18 @@ Stefano Menegon, Alessandro Oggioni, Paolo Tagliolato, Martina Zilioli, Simone L
 }
 ```
 * Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+
+## Custom entrypoint
+
+The SOS module rely on table present into the "datastore" db. To let the application work properly, the entrypoint has been changed to achive this.
+
+During the Django set-up, the migration are applied on both databases automatically
+
+## Migrations
+
+To let the app works properly (if is not run with docker), is needed to run the migration in both database: default and datastore. To do that, is enough to run:
+
+```
+python manage.py migrate
+python manage.py migrate --database datastore
+```
