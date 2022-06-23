@@ -13,6 +13,10 @@
      text-transform: lowercase;
  }
 
+ nav.filter ul li {
+     word-break:break-all;
+ }
+
  .custom-text h4 a {
      color: #fff;
  }
