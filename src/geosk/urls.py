@@ -107,11 +107,14 @@ geoskurlpatterns = [
         include('geosk.skregistration.urls')
         ),
 
-    # OSK views
+    # SOS Plugin Iframe view
+    url(r'^sosclient/',
+        include('geosk.sos_client.urls')
+        ),
+
     url(r'^sensors/',
         include('geosk.osk.urls')
         ),
-
     # Demo data
     # Demo
     url(r'^demo/',

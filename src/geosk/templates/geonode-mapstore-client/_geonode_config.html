@@ -1,0 +1,29 @@
+
+{% extends "geonode-mapstore-client/_geonode_config.html" %}
+{% block override_local_config %}
+<script>
+    window.__GEONODE_CONFIG__.overrideLocalConfig = function(localConfig, _) {
+        // ensure that the extension dev endpoint does not use proxy for development purposes
+        localConfig.proxyUrl.useCORS.push('http://localhost:8082/extension');
+        localConfig.proxyUrl.autoDetectCORS = true;
+
+        // add SOSPlugin plugin to all needed pages
+        localConfig.plugins.map_view.push({ 
+            "name": "SOSPlugin", // this must not be changed
+            "cfg": {
+                "iframeSrc": "/sosclient/", 
+                "supportedOrigin": "*",
+                "modalTitle": ""
+            } });
+        localConfig.plugins.map_edit.push({
+            "name": "SOSPlugin", // this must not be changed
+            "cfg": {
+                "iframeSrc": "/sosclient/", 
+                "supportedOrigin": "*", 
+                "modalTitle": ""
+                
+            } });
+        return localConfig;
+    };
+</script>
+{% endblock %}

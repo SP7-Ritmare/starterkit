@@ -1,0 +1,20 @@
+{
+    "locale": "de-DE",
+    "messages": {
+        "extension": {
+            "message": "Message!"
+        },
+        "geoskViewer": {
+            "sensorCatalogue": "Katalog Sensoren",
+            "SearchSensors": "Sensoren suchen",
+            "sosCatalogEntriesNoResults": "Keine Sensoren gefunden",
+            "modalTitle": "Merkmale von Interesse",
+            "noFeaturesFound": "Keine Funktionen gefunden",
+            "error": "Fehler",
+            "noFOIsForLayer": "Feature-Info für den ausgewählten Layer konnte nicht abgerufen werden.",
+            "noSOSInfo": "Für diesen Punkt sind keine SOS-Informationen verfügbar.",
+            "actionFailed": "Aktion konnte nicht ausgeführt werden",
+            "search": "Suche"
+        }
+    }
+}

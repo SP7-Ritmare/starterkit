@@ -1,0 +1,50 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "description": "mapstore extension",
+  "eslintConfig": {
+    "extends": [
+      "@mapstore/eslint-config-mapstore"
+    ],
+    "parserOptions": {
+      "babelOptions": {
+        "configFile": "./node_modules/mapstore/build/babel.config.js"
+      }
+    },
+    "globals": {
+      "__MAPSTORE_PROJECT_CONFIG__": false,
+      "__MAPSTORE_EXTENSION_CONFIG__": false
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.5%",
+      "not dead",
+      "not op_mini all",
+      "not IE 11",
+      "not UCAndroid 12.12"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "scripts": {
+    "compile": "mapstore-project compile extension && node ./postCompile.js",
+    "lint": "eslint js --ext .jsx,.js",
+    "start": "mapstore-project start extension",
+    "test": "mapstore-project test extension",
+    "test:watch": "mapstore-project test:watch extension"
+  },
+  "devDependencies": {
+    "@mapstore/project": "1.0.22"
+  },
+  "dependencies": {
+    "mapstore": "git+https://github.com/geosolutions-it/MapStore2.git#2022.01.xx",
+    "react-rnd": "^10.3.7"
+  },
+  "mapstore": {
+    "extensionName": "SOSPlugin"
+  }
+}
