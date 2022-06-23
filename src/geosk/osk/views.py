@@ -1,28 +1,15 @@
 import os
 
-import requests
-
-from django.conf import settings
 from django.http import HttpResponse
-from django.shortcuts import render
-from geosk import settings as geosk_settings
+from django.shortcuts import redirect, reverse
+
 from lxml import etree
 
-from . import models, utils
+from . import models
 
 
 def browse(request):
-    cat = models.Sensor.objects.sos_catalog
-    cap = cat.get_capabilities()
-    cap = utils.todict(cap)
-    sensors = cat.get_sensors(full=True)
-
-    cap['capabilities_url'] = cat.get_capabilities_url()
-    cap['public_capabilities_url'] = geosk_settings.SOS_PUBLIC_CAPABILITIES_URL
-    return render(request, 'osk/osk_list.html',
-                  {'cap': cap,
-                   'sensors': sensors
-                   })
+    return redirect(f"{reverse('layer_browse')}?resource_type=sos_sensor")
 
 
 def get_capabilities(request):
