@@ -1911,7 +1911,7 @@ msgstr ""
 
 #: templates/site_base.html:97
 msgid "Explore Sensors"
-msgstr "Esplora sensori"
+msgstr ""
 
 #: templates/site_index.html:46 templates/site_index.html.py:60
 #: templates/site_index.html:78 templates/site_index.html.py:93
