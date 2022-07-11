@@ -1,0 +1,20 @@
+{% load sos_tags %}
+{% load i18n %}
+{% load base_tags %}
+<nav class="filter">
+  <h4><a href="#" class="toggle toggle-nav"><i class="fa fa-chevron-down"></i>{% trans header %}</a></h4>
+  <ul class="nav" id="types">
+        {% facets as facets %}
+        {% get_sos_facet facets request as facets_items %}
+        {% for facet, count in facets_items.items %}
+        {% if count > 0 %}
+        <li>
+            <a id="{{ facet }}" data-value="{{ facet }}" data-filter={% if facet in GEONODE_APPS_INSTALLED %}app_type__in{% elif facet == 'sos_sensor' %}resource_type__in{% else %}{{ filter }}{% endif %} ng-click="multiple_choice_listener($event)">
+                {{ facet|get_facet_title_with_sos|title }}
+                <span class="badge pull-right">{{ count }}</span>
+            </a>
+        </li>
+        {% endif %}
+        {% endfor %}
+  </ul>
+</nav>
