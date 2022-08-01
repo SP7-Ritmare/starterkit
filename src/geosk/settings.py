@@ -402,11 +402,11 @@ else:
 ############################################
 #           SOS CONFIGURATION              #
 ############################################
-INSTALLED_APPS += ('geonode_sos', 'dynamic_models', 'geosk.sos_client',)
+INSTALLED_APPS += ('geosk.geonode_sos', 'dynamic_models', 'geosk.sos_client',)
 
-SERVICES_TYPE_MODULES = ["geonode_sos.sos_handler.HandlerDescriptor"]
+SERVICES_TYPE_MODULES = ["geosk.geonode_sos.sos_handler.HandlerDescriptor"]
 
-DATABASE_ROUTERS = ["geonode_sos.router.DatastoreRouter"]
+DATABASE_ROUTERS = ["geosk.geonode_sos.router.DatastoreRouter"]
 
 DYNAMIC_MODELS = {
     "USE_APP_LABEL": "geonode_sos_foi"
