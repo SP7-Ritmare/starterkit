@@ -10,19 +10,10 @@
         // add SOSPlugin plugin to all needed pages
         localConfig.plugins.map_view.push({ 
             "name": "SOSPlugin", // this must not be changed
-            "cfg": {
-                "iframeSrc": "/sosclient/", 
-                "supportedOrigin": "*",
-                "modalTitle": ""
-            } });
+            "cfg": {{ SOS_CLIENT_IFRAME_CONFIG|safe }} });
         localConfig.plugins.map_edit.push({
             "name": "SOSPlugin", // this must not be changed
-            "cfg": {
-                "iframeSrc": "/sosclient/", 
-                "supportedOrigin": "*", 
-                "modalTitle": ""
-                
-            } });
+            "cfg": {{ SOS_CLIENT_IFRAME_CONFIG|safe }} });
         return localConfig;
     };
 </script>

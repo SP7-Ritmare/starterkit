@@ -411,7 +411,12 @@ DATABASE_ROUTERS = ["geosk.geonode_sos.router.DatastoreRouter"]
 DYNAMIC_MODELS = {
     "USE_APP_LABEL": "geonode_sos_foi"
 }
-
+SOS_CLIENT_IFRAME_CONFIG = {
+    "iframeSrc": os.getenv('SOS_CLIENT_IFRAME_SRC', "/sosclient/"),
+    "supportedOrigin":  os.getenv('SOS_CLIENT_IFRAME_SUPPORTED_ORIGIN',"*"),
+    "modalTitle":  os.getenv('SOS_CLIENT_IFRAME_MODAL_TITLE',""),
+    #"basePath": "http://localhost:8080"
+}
 ############################################
 #            END SOS CONFIGURATION         #
 ############################################ 

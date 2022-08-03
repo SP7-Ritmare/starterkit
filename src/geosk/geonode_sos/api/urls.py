@@ -27,5 +27,5 @@ router.register(r"fois", FeatureOfInterestViewSet, "fois")
 router.register(r"observable_properties", SOSObservablePropertyViewSet, "observable")
 
 urlpatterns = [
-    url(r"^api/v2/sos/", include(router.urls)),
+    url(r"^sos/", include(router.urls)),
 ]

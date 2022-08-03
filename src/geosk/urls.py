@@ -31,7 +31,7 @@ if not url_already_injected:
         1, url(r"^services/", include("geosk.geonode_sos.sensors.service_urls")),
     )
     urlpatterns.insert(
-        2, url(r"^api/", include("geosk.geonode_sos.api.urls")),
+        2, url(r"^api/v2/", include("geosk.geonode_sos.api.urls")),
     )
 
 geoskurlpatterns = [
