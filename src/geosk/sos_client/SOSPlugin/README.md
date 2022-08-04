@@ -1,45 +1,17 @@
-# Customizations avaiable for the extension.
+# Configurations avaiable for the extension.
 
-A configuration file has been included at
+The following environmental variables can be configured:
 
-```cmd
-src/geosk/templates/geonode_mapstore_client/_geonode_config.html
-```
+- `SOS_CLIENT_IFRAME_SRC` (`IFrameSrs`):
+    This is the url to the external applcation to be viewed in the modal iframe
 
-The following customizations can be made on the extension:
-
-- IFrameSrs:
-    This is the url to the fois applcation to be viewed in the modal iframe
-
-- supportedOrigin:
+- `SOS_CLIENT_IFRAME_SUPPORTED_ORIGIN` (`targetOrigin`):
     The `targetOrigin` used inside the `postMessage` (see https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage#targetorigin)
 
-- modalTitle:
+- `SOS_CLIENT_IFRAME_MODAL_TITLE` (`modalTitle`):
     This is the title of the FOIs modal which displays the iframe. By default, the title is 'Features Of Interest' (in the language selected). It can be changed to any suitable title, however, there would be no translations available for the customized title.
 
-- basePath:
-    The url for geoserver to be used in the FOIs modal's getFeatureInfo request. By default, it is assumed that geoserver is served on the same domain as your geonode instance. Therefore a relative url for geoserver is used. Howerver, in cases where geoserver is running on a different domain, the bathPath config may be changed to the required domain.
+- `SOS_CLIENT_GEOSERVER_BASE_PATH` (`basePath`):
+    The url for Geoserver to be used in the FOIs modal's getFeatureInfo request. By default, it is assumed that Geoserver is served on the same domain as your geonode instance. Therefore **GEOOSERVER_PUBLIC_LOCATION** is used. Howerver, in cases where Geoserver is running on a different domain, the bathPath config may be changed to the required domain.
 
-
-## Example Customization
-
-This is an example to show new values provided to the extention config
-
-```javascript
-localConfig.plugins.map_view.push({ 
-    "name": "SOSPlugin", // this must not be changed
-    "cfg": {
-        "iframeSrc": "https://example.com/fois-application", 
-        "supportedOrigin": "https://example.com",
-        "modalTitle": "Sample Title",
-        "basePath": "https://example-geoserver-domain.com"
-} });
-localConfig.plugins.map_edit.push({
-    "name": "SOSPlugin", // this must not be changed
-    "cfg": {
-        "iframeSrc": "https://example.com/fois-application", 
-        "supportedOrigin": "http://localhost:5500", 
-        "modalTitle": "Sample Title",
-        "basePath": "https://example-geoserver-domain.com"
-} });
-```
+These variables populate the `SOS_CLIENT_IFRAME_CONFIG` dictionary inside the `geosk` settings module. 

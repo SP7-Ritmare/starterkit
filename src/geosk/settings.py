@@ -415,7 +415,7 @@ SOS_CLIENT_IFRAME_CONFIG = {
     "iframeSrc": os.getenv('SOS_CLIENT_IFRAME_SRC', "/sosclient/"),
     "supportedOrigin":  os.getenv('SOS_CLIENT_IFRAME_SUPPORTED_ORIGIN',"*"),
     "modalTitle":  os.getenv('SOS_CLIENT_IFRAME_MODAL_TITLE',""),
-    #"basePath": "http://localhost:8080"
+    "basePath": os.getenv('SOS_CLIENT_GEOSERVER_BASE_PATH',GEOSERVER_PUBLIC_LOCATION[:-1]),
 }
 ############################################
 #            END SOS CONFIGURATION         #
