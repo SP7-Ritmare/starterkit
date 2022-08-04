@@ -19,9 +19,43 @@
       {% endwith %}
     {% endwith %}
   {% endwith %}
+  <div id="ediclient_container" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h1>Register Sensor</h1>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-block alert-info hide">
+                    <h4 class="alert-heading loading-message"></h4>
+                    <div class="progress progress-striped active">
+                        <div class="bar" style="width: 100%;"></div>
+                    </div>
+                </div>
+                <div class="alert alert-block alert-error hide">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <h4 class="alert-heading">Oh snap! You got an error!</h4>
+                    <p class="error-message"></p>
+                </div>
+                <iframe id="ediclient_container_iframe" name="ediclient_container_iframe" src="" style="zoom:0.60" width="99.6%" height="90%" frameborder="0"></iframe>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                <button id="save_metadata_btn" data-loading-text="Saving..." class="btn btn-primary">Register</button>
+            </div>
+        </div> <!-- /modal-content-->
+    </div> <!-- /modal-dialog-->
+</div>
+{% endblock %}
+
+{% block extra_head %}
+      {{ block.super }}
+      <link href="{{ STATIC_URL }}geosk/css/site_base.css" rel="stylesheet"/>
 {% endblock %}
 
 {% block extra_script %}
+<script src="{{STATIC_URL}}geosk/js/EdiProxy.js" type="text/javascript"></script>
 {{ block.super }}
   <script type="text/javascript">
       {% if HAYSTACK_SEARCH %}
@@ -38,4 +72,44 @@
   {% if GEONODE_SECURITY_ENABLED %}
   {% include "_permissions_form_js.html" %}
   {% endif %}
+  <script>
+    {% get_current_language as  LANGUAGE_CODE %}
+    var ediml_current_language = '{{ LANGUAGE_CODE }}';
+    var ediml_client_url = "{{ STATIC_URL }}EDI-NG_client/SensorML20_lightweight_forLTER.html?";
+    var ediml_proxy_url = '{% url "osk_ediproxy_importmd" %}';
+    var ediml_edimlId = '';
+
+    var parameters;
+    if(parseInt(ediml_edimlId)){
+        parameters['edit'] = ediml_edimlId
+    } else {
+        _parameters = {
+            'user_username': '{{ request.user.username }}',
+            'user_email': '{{ request.user.email }}',
+            'user_profile_organization': '{{ request.user.get_profile.organization }}',
+            'user_profile_email': '{{ request.user.get_profile.email }}',
+            'user_groups': '{% for g in request.user.groups.all %}{% if not forloop.first %}, {% else  %}{% endif %}{{g.name }}{% endfor %}'
+        };
+        parameters = {'parameters': JSON.stringify(_parameters)}
+    }
+
+    var ediProxyConfig = {
+        id_open_btn: 'open_ediclient_btn',
+        id_container: 'ediclient_container',
+        ediml_client_url: ediml_client_url,
+        ediml_proxy_url: ediml_proxy_url,
+        ediml_current_language: ediml_current_language,
+        parameters: parameters,
+        redirect_url: location.pathname
+    }
+
+    var ediProxy = new EdiProxy(ediProxyConfig);
+
+    //open modal
+    var hash = window.location.hash
+    if(hash=='#ediclient_container'){
+        $(hash).modal('show');
+    }
+
+</script>
 {% endblock extra_script %}
