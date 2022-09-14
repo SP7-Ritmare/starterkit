@@ -17,6 +17,10 @@
     <swes:procedureDescriptionFormat>http://www.opengis.net/sensorml/2.0</swes:procedureDescriptionFormat>
     <swes:procedureDescription>
 
+       <sml:PhysicalSystem>
+
+       </sml:PhysicalSystem>
+
     </swes:procedureDescription>
     <!-- multiple values possible -->
     <swes:observableProperty></swes:observableProperty>
@@ -34,7 +38,7 @@
         ]]></baseDocument>
         <xsltChain>
 
-		<xslt>http://sp7.irea.cnr.it/jboss/MDService/rest/SensorML20_lightweight_forLTER.xsl?version=1.00</xslt>
+            <xslt>http://sp7.irea.cnr.it/jboss/MDService/rest/SensorML20_lightweight_forLTER.xsl?version=1.00</xslt>
 
         </xsltChain>
     </settings>
@@ -67,9 +71,10 @@
         <sparql xml:id="outputs" endpointType="EnvThes">
             <query><![CDATA[
 
-                    PREFIX skos: <http://www.w3.org/2004/02/skos/core#> SELECT * WHERE {
-                        SERVICE <http://vocabs.ceh.ac.uk/evn/tbl/sparql> {
-                            GRAPH <urn:x-evn-master:EnvThes>{
+                    PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+                    SELECT * WHERE {
+                        SERVICE <http://vocabs.lter-europe.net/fuseki/skosmos/query> {
+                            GRAPH <http://vocabs.lter-europe.net/EnvThes/>{
                                 {
                                     BIND (<http://vocabs.lter-europe.net/EnvThes/20935> as ?root)
                                     ?c (skos:broader*) ?root.
@@ -81,7 +86,7 @@
                     }
 
             ]]></query>
-            <url>/adamassoft_proxy/?proxyTo=http://vocabs.ceh.ac.uk/evn/tbl/sparql</url>
+            <url>/adamassoft_proxy/?proxyTo=http://vocabs.lter-europe.net/fuseki/skosmos/query</url>
         </sparql>
         <singleton xml:id="outputsS" endpointType="EnvThes" triggerItem="output_param_1_uri">
             <query><![CDATA[
@@ -91,7 +96,7 @@
                     }
 
             ]]></query>
-            <url>/adamassoft_proxy/?proxyTo=http://vocabs.ceh.ac.uk/evn/tbl/sparql</url>
+            <url>/adamassoft_proxy/?proxyTo=http://vocabs.lter-europe.net/fuseki/skosmos/query</url>
         </singleton>
         <!--sparql xml:id="outputs" endpointType="virtuoso">
            <query><![CDATA[
@@ -530,45 +535,45 @@
                 CTP Recorder, ecc.).</help>
             <help xml:lang="en">Name assigned to identify the physical system. It should be short, while it is
                 not its description; it could coincide with the name given by the manufacturer.</help>
-	    <hasRoot>/swes:InsertSensor/swes:procedureDescription</hasRoot>
+            <hasRoot>/swes:InsertSensor/swes:procedureDescription/sml:PhysicalSystem</hasRoot>
             <produces>
                 <item hasIndex="1" xml:id="system_name_1" outIndex="2" isFixed="false" hasDatatype="string">
-			<hasPath>sml:PhysicalSystem/TheName</hasPath>
+                    <hasPath>TheName</hasPath>
                 </item>
                 <item hasIndex="3" xml:id="system_name_3" outIndex="3" isFixed="true" hasDatatype="function">
-			<hasPath>sml:PhysicalSystem/@gml:id</hasPath>
-			<hasValue>concat('ID_', translate(translate(sml:PhysicalSystem/TheName/text(),'`~!@#$%^*()-_=+[]{}\|;:°§£€¨„Ω®™æøåß∂ƒ∞∆ªº¬∑†©√∫˜µπ',''), ' ', '_'))</hasValue>
+                    <hasPath>@gml:id</hasPath>
+                    <hasValue>concat('ID_', translate(translate(TheName/text(),'`~!@#$%^*()-_=+[]{}\|;:°§£€¨„Ω®™æøåß∂ƒ∞∆ªº¬∑†©√∫˜µπ',''), ' ', '_'))</hasValue>
                 </item>
                 <item hasIndex="2" xml:id="system_name_2" outIndex="1" isFixed="false" hasDatatype="text">
                     <label xml:lang="it">Descrizione sistema di sensori</label>
                     <label xml:lang="en">Description of the physical system</label>
                     <help xml:lang="it">Contiene una descrizione testuale del sistema di sensori o della piattaforma nel suo complesso.</help>
                     <help xml:lang="en">Brief description of the sensor, of the system or of the platform as a whole.</help>
-		    <hasPath>sml:PhysicalSystem/gml:description</hasPath>
+                    <hasPath>gml:description</hasPath>
                 </item>
                 <item hasIndex="5" xml:id="system_name_5" outIndex="5" isFixed="true" hasDatatype="string">
-			<hasPath>sml:PhysicalSystem/gml:identifier/@codeSpace</hasPath>
+                    <hasPath>gml:identifier/@codeSpace</hasPath>
                     <hasValue>uniqueID</hasValue>
                 </item>
                 <item hasIndex="4" xml:id="system_name_4" outIndex="6" isFixed="true" hasDatatype="ref">
-			<hasPath>sml:PhysicalSystem/gml:name</hasPath>
-			<hasValue>sml:PhysicalSystem/TheName</hasValue>
+                    <hasPath>gml:name</hasPath>
+                    <hasValue>TheName</hasValue>
                 </item>
                 <item hasIndex="6" xml:id="system_name_6" outIndex="3" isFixed="true" hasDatatype="sensorID">
-			<hasPath>sml:PhysicalSystem/gml:identifier</hasPath>
+                    <hasPath>gml:identifier</hasPath>
                     <hasValue>auto</hasValue>
                 </item>
                 <item hasIndex="7" xml:id="system_name_7" outIndex="7" isFixed="true" hasDatatype="string">
-			<hasPath>sml:PhysicalSystem/sml:identification/sml:IdentifierList/sml:identifier/sml:Term/@definition</hasPath>
+                    <hasPath>sml:identification/sml:IdentifierList/sml:identifier/sml:Term/@definition</hasPath>
                     <hasValue>http://mmisw.org/ont/ioos/definition/longName</hasValue>
                 </item>
                 <item hasIndex="8" xml:id="system_name_8" outIndex="8" isFixed="true" hasDatatype="string">
-			<hasPath>sml:PhysicalSystem/sml:identification/sml:IdentifierList/sml:identifier/sml:Term/sml:label</hasPath>
+                    <hasPath>sml:identification/sml:IdentifierList/sml:identifier/sml:Term/sml:label</hasPath>
                     <hasValue>long name</hasValue>
                 </item>
                 <item hasIndex="9" xml:id="system_name_9" outIndex="9" isFixed="true" hasDatatype="ref">
-			<hasPath>sml:PhysicalSystem/sml:identification/sml:IdentifierList/sml:identifier/sml:Term/sml:value</hasPath>
-                    <hasValue>sml:PhysicalSystem/gml:description</hasValue>
+                    <hasPath>sml:identification/sml:IdentifierList/sml:identifier/sml:Term/sml:value</hasPath>
+                    <hasValue>gml:description</hasValue>
                 </item>
             </produces>
         </element>
@@ -592,7 +597,7 @@
     <group xml:id="system_ids">
         <label xml:lang="it">Identificazione</label>
         <label xml:lang="en">Identification of the system</label>
-        <element xml:id="manuf_name" isMandatory="true" isMultiple="false">
+        <element xml:id="manuf_name" isMandatory="false" isMultiple="false">
             <label xml:lang="it">Denominazione del produttore (se non trovi il nome aggiungine uno seguendo questo &lt;a href="http://processing.get-it.it/shiny/private/insertRDFManuf/" target="_blank"&gt;link&lt;/a&gt;)</label>
             <label xml:lang="en">Manufacturer name (if you don't find the name please add new following this &lt;a href="http://processing.get-it.it/shiny/private/insertRDFManuf/" target="_blank"&gt;link&lt;/a&gt;)</label>
             <help xml:lang="it">Indicare la denominazione del produttore del sensore, del sistema di sensori o della piattaforma. Iniziare a digitare tre lettere per ottenere dei suggerimenti da un elenco precompilato di produttori.</help>
@@ -773,10 +778,10 @@
             <help xml:lang="it">Viene indicato se il sistema è attivo o disattivato.
                 Spuntare la casella nel caso di sistema attivo</help>
             <help xml:lang="en">Tick the box if the system is on, otherwise it is off.</help>
-            <hasRoot>/swes:InsertSensor/swes:procedureDescription/sml:PhysicalSystem/sml:capabilities[@name='specification']/sml:CapabilityList</hasRoot>
+            <hasRoot>/swes:InsertSensor/swes:procedureDescription/sml:PhysicalSystem/sml:capabilities[@name='specification']/sml:CapabilityList/sml:capability[@name='insitu']/swe:Boolean[@definition='insitu']</hasRoot>
             <produces>
                 <item hasIndex="1" xml:id="status_capab_1" isFixed="false" hasDatatype="boolean">
-	            <hasPath>sml:capability[@name='insitu']/swe:Boolean[@definition='insitu']/swe:value</hasPath>
+                    <hasPath>swe:value</hasPath>
                     <hasValue>false</hasValue>
                 </item>
             </produces>
@@ -787,10 +792,10 @@
             <help xml:lang="it">Viene indicato se il sistema è mobile o fisso. Spuntare la
                 casella nel caso si tratti di sistema mobile</help>
             <help xml:lang="en">Tick the box if the system is mobile, otherwise it is fixed.</help>
-            <hasRoot>/swes:InsertSensor/swes:procedureDescription/sml:PhysicalSystem/sml:capabilities[@name='specification']/sml:CapabilityList</hasRoot>
+            <hasRoot>/swes:InsertSensor/swes:procedureDescription/sml:PhysicalSystem/sml:capabilities[@name='specification']/sml:CapabilityList/sml:capability[@name='mobile']/swe:Boolean[@definition='mobile']</hasRoot>
             <produces>
                 <item hasIndex="1" xml:id="mobility_capab_1" isFixed="false" hasDatatype="boolean">
-		    <hasPath>sml:capability[@name='mobile']/swe:Boolean[@definition='mobile']/swe:value</hasPath>
+                    <hasPath>swe:value</hasPath>
                     <hasValue>false</hasValue>
                 </item>
             </produces>
@@ -816,62 +821,62 @@
     <group xml:id="rel_contacts">
         <label xml:lang="it">Punti di contatto</label>
         <label xml:lang="en">Relevant Contacts</label>
-        <element xml:id="manufacturer" isMandatory="true" isMultiple="false">
+        <element xml:id="manufacturer" isMandatory="false" isMultiple="false">
             <label xml:lang="it">Informazioni sul produttore</label>
             <label xml:lang="en">Manufacturer</label>
             <help xml:lang="it">Contatti del produttore; queste informazioni vengono autocompilate se il produttore del sistema/sensore/piattaforma, figura tra quelli presenti nelle liste di anagrafiche precompilate (già utilizzate campo ‘Denominazione del produttore’ nella sezione ‘Identificazione’).</help>
             <help xml:lang="en">Manufacturer contact information; autocompletion is performed if the manufacturer of the system (sensor or platform) is present in our repository (in this case has been already recognised in the field ‘Manufacturer Name’ in the  ‘Identification of the system’ section).</help>
-            <hasRoot>/swes:InsertSensor/swes:procedureDescription/sml:PhysicalSystem/sml:contacts/sml:ContactList</hasRoot>
+            <hasRoot>/swes:InsertSensor/swes:procedureDescription/sml:PhysicalSystem/sml:contacts/sml:ContactList/sml:contact</hasRoot>
             <produces>
                 <item hasIndex="1" xml:id="manufacturer_1" outIndex="1" isFixed="true" hasDatatype="string">
-			<hasPath>sml:contact/@xlink:arcrole</hasPath>
+                    <hasPath>@xlink:arcrole</hasPath>
                     <hasValue>http://mmisw.org/ont/ioos/definition/manufacturerName</hasValue>
                 </item>
                 <item hasIndex="2" xml:id="manufacturer_2" outIndex="2" field="l" isFixed="true" hasDatatype="select" datasource="manufacturers">
-			<hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString</hasPath>
+                    <hasPath>gmd:CI_ResponsibleParty/gmd:organisationName/gco:CharacterString</hasPath>
                 </item>
                 <item hasIndex="3" xml:id="manufacturer_3" outIndex="3" field="phone" isFixed="false" hasDatatype="select" datasource="info_manufacturers">
                     <label xml:lang="it">Telefono produttore</label>
                     <label xml:lang="en">Manufacturer phone number</label>
-		    <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone/gmd:voice/gco:CharacterString</hasPath>
+                    <hasPath>gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:phone/gmd:CI_Telephone/gmd:voice/gco:CharacterString</hasPath>
                 </item>
                 <item hasIndex="4" xml:id="manufacturer_4" outIndex="4" field="addr" isFixed="false" hasDatatype="select" datasource="info_manufacturers">
                     <label xml:lang="it">Indirizzo produttore</label>
                     <label xml:lang="en">Manufacturer address</label>
-		    <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:deliveryPoint/gco:CharacterString</hasPath>
+                    <hasPath>gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:deliveryPoint/gco:CharacterString</hasPath>
                 </item>
                 <item hasIndex="5" xml:id="manufacturer_5" outIndex="5" field="town" isFixed="false" hasDatatype="select" datasource="info_manufacturers">
-                    <label xml:lang="it">Città produttore</label>
+                    <label xml:lang="it">Cittàproduttore</label>
                     <label xml:lang="en">Manufacturer city</label>
-		    <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:city/gco:CharacterString</hasPath>
+                    <hasPath>gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:city/gco:CharacterString</hasPath>
                 </item>
                 <item hasIndex="6" xml:id="manufacturer_6" outIndex="6" field="region" isFixed="false" hasDatatype="select" datasource="info_manufacturers">
                     <label xml:lang="it">Area amministrativa produttore</label>
                     <label xml:lang="en">Manufacturer administrative area</label>
-		    <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:administrativeArea/gco:CharacterString</hasPath>
+                    <hasPath>gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:administrativeArea/gco:CharacterString</hasPath>
                 </item>
                 <item hasIndex="7" xml:id="manufacturer_7" outIndex="7" field="postcode" isFixed="false" hasDatatype="select" datasource="info_manufacturers">
                     <label xml:lang="it">CAP produttore</label>
                     <label xml:lang="en">Manufacturer Postal code</label>
-		    <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:postalCode/gco:CharacterString</hasPath>
+                    <hasPath>gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:postalCode/gco:CharacterString</hasPath>
                 </item>
                 <item hasIndex="8" xml:id="manufacturer_8" outIndex="8" field="country" isFixed="false" hasDatatype="select" datasource="info_manufacturers">
                     <label xml:lang="it">Nazione produttore</label>
                     <label xml:lang="en">Manufacturer country</label>
-		    <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:country/gco:CharacterString</hasPath>
+                    <hasPath>gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:country/gco:CharacterString</hasPath>
                 </item>
                 <item hasIndex="9" xml:id="manufacturer_9" outIndex="9" field="email" isFixed="false" hasDatatype="select" datasource="info_manufacturers">
                     <label xml:lang="it">E-mail produttore</label>
                     <label xml:lang="en">Manufacturer e-mail address</label>
-		    <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:electronicMailAddress/gco:CharacterString</hasPath>
+                    <hasPath>gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:electronicMailAddress/gco:CharacterString</hasPath>
                 </item>
                 <item hasIndex="10" xml:id="manufacturer_10" outIndex="10" field="homepage" isFixed="false" hasDatatype="select" datasource="info_manufacturers">
                     <label xml:lang="it">Sito web produttore</label>
                     <label xml:lang="en">Manufacturer web site</label>
-		    <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:onlineResource/gmd:CI_OnlineResource/gmd:linkage/gmd:URL</hasPath>
+                    <hasPath>gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:onlineResource/gmd:CI_OnlineResource/gmd:linkage/gmd:URL</hasPath>
                 </item>
                 <item hasIndex="11" xml:id="manufacturer_11" outIndex="11" isFixed="true" hasDatatype="string">
-			<hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:role/@gco:nilReason</hasPath>
+                    <hasPath>gmd:CI_ResponsibleParty/gmd:role/@gco:nilReason</hasPath>
                     <hasValue>inapplicable</hasValue>
                 </item>
             </produces>
@@ -969,7 +974,7 @@
                 <item hasIndex="3" xml:id="operator_3" outIndex="2" isFixed="true" hasDatatype="select" datasource="info_operator" field="pidPers">
                     <hasPath>sml:contact/@xlink:href</hasPath>
                 </item>
-		<item hasIndex="4" xml:id="operator_4" outIndex="3" field="fullname" isFixed="false" hasDatatype="select" datasource="info_operator">
+                <item hasIndex="4" xml:id="operator_4" outIndex="3" field="fullname" isFixed="false" hasDatatype="select" datasource="info_operator">
                     <label xml:lang="it">Nome proprietario</label>
                     <label xml:lang="en">Owner name</label>
                     <hasPath>sml:contact/gmd:CI_ResponsibleParty/gmd:individualName/gco:CharacterString</hasPath>
@@ -1124,21 +1129,21 @@
             <label xml:lang="en">Feature Of Interest</label>
             <help xml:lang="it">Aggiungere o un URL di un layer geografico, spostarsi sulla parte layer e copiare il valore del layer scelto (es. http://getit.lteritalia.it/layers/geonode:it22_001_a), oppure un URL che caratterizzi il con testo in cui si sta effettuando l'osservazione con il sensore</help>
             <help xml:lang="en">Add geographic layer URL, navigate to the layer and copy the value of the selected layer (eg http://getit.lteritalia.it/layers/geonode:it22_001_a). Or a URL that characterizes the context of the observation</help>
-            <hasRoot>/swes:InsertSensor/swes:procedureDescription/sml:PhysicalSystem/sml:featuresOfInterest</hasRoot>
+            <hasRoot>/swes:InsertSensor/swes:procedureDescription/sml:PhysicalSystem/sml:featuresOfInterest/sml:FeatureList</hasRoot>
             <produces>
-                <item hasIndex="1" xml:id="foi_1" isFixed="true" hasDatatype="string">
-		    <hasPath>sml:FeatureList/@definition</hasPath>
+                <item hasIndex="1" isFixed="true" hasDatatype="string">
+                    <hasPath>@definition</hasPath>
                     <hasValue>http://www.opengis.net/def/featureOfInterest/identifier</hasValue>
                 </item>
-                <item hasIndex="2" xml:id="foi_2" isFixed="false" hasDatatype="string">
+                <item hasIndex="2" isFixed="false" hasDatatype="string">
                     <label xml:lang="en">Label of feature of interest</label>
                     <label xml:lang="it">Nome del contesto di interesse</label>
-		    <hasPath>sml:FeatureList/swe:label</hasPath>
+                    <hasPath>swe:label</hasPath>
                 </item>
-                <item hasIndex="3" xml:id="foi_3" isFixed="false" hasDatatype="URL">
+                <item hasIndex="3" isFixed="false" hasDatatype="URL">
                     <label xml:lang="en">Link to the feature of interest</label>
                     <label xml:lang="it">Link al contesto di interesse</label>
-		    <hasPath>sml:FeatureList/sml:feature/@xlink:href</hasPath>
+                    <hasPath>sml:feature/@xlink:href</hasPath>
                 </item>
             </produces>
         </element>
