@@ -55,7 +55,7 @@ REVERSE_PROXY_SPARQL = 'http://sparql.get-it.it/'
 REVERSE_PROXY_FUSEKI = 'http://fuseki1.get-it.it/'
 REVERSE_PROXY_VOCABS = 'http://vocabs.ceh.ac.uk/'
 REVERSE_PROXY_NERC = 'http://vocab.nerc.ac.uk/'
-REVERSE_PROXY_METADATA = 'http://edi.get-it.it/'
+REVERSE_PROXY_METADATA = 'http://ediserver.get-it.it/'
 REVERSE_PROXY_ADAMASOFT = 'http://sdi.adamassoft.it/proxy/'
 
 # AUTH_IP_WHITELIST property limits access to users/groups REST endpoints
