@@ -21,7 +21,7 @@
       ]]>
     </baseDocument>
     <xsltChain>
-      <xslt>http://static.get-it.it/stylesheet_1.xsl%3fversion=1.00</xslt>
+      <xslt>http://static.get-it.it/stylesheet_1.xsl?version=1.00</xslt>
     </xsltChain>
   </settings>
   <endpointTypes>
