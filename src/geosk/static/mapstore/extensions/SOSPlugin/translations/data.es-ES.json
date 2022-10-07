@@ -1,0 +1,20 @@
+{
+    "locale": "es-ES",
+    "messages": {
+        "extension": {
+            "message": "Message!"
+        },
+        "geoskViewer": {
+            "sensorCatalogue": "Catálogo de sensores",
+            "SearchSensors": "Sensores de búsqueda",
+            "sosCatalogEntriesNoResults": "No se encontraron sensores",
+            "modalTitle": "Características de interés",
+            "noFeaturesFound": "No se encontraron características",
+            "error": "Error",
+            "noFOIsForLayer": "No se pudo obtener la información de la entidad para la capa seleccionada.",
+            "noSOSInfo": "No hay información SOS disponible para este punto.",
+            "actionFailed": "No se pudo realizar la acción",
+            "search": "Búsqueda"
+        }
+    }
+}

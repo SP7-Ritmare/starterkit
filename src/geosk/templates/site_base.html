@@ -19,6 +19,7 @@
   {% if user.is_authenticated %}
   <ul class="dropdown-menu">
     <li><a href="{% url "osk_browse" %}?limit={{ CLIENT_RESULTS_LIMIT }}">{% trans "Explore Sensors" %}</a></li>
+    <li><a href="{% url "osk_upload" %}">{% trans "Upload Observations" %}</a></li>
     {% if perms.osk.admin_sos %}
     <li><a href="{% url "osk_browse" %}#ediclient_container">{% trans "Register a new  Sensor" %}</a></li>
     {% endif %}

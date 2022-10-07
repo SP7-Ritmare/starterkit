@@ -1,0 +1,20 @@
+{
+    "locale": "fr-FR",
+    "messages": {
+        "extension": {
+            "message": "Message!"
+        },
+        "geoskViewer": {
+            "sensorCatalogue": "Catalogue de capteurs",
+            "SearchSensors": "Capteurs de recherche",
+            "sosCatalogEntriesNoResults": "Aucun capteur trouvé",
+            "modalTitle": "Caractéristiques d'intérêt",
+            "noFeaturesFound": "Aucune fonctionnalité trouvée",
+            "error": "Erreur",
+            "noFOIsForLayer": "Impossible d'obtenir les informations sur les fonctionnalités pour la couche sélectionnée.",
+            "noSOSInfo": "Aucune information SOS n'est disponible pour ce point.",
+            "actionFailed": "Impossible d'effectuer l'action",
+            "search": "Chercher"
+        }
+    }
+}

@@ -2100,6 +2100,10 @@ msgstr "Sensori"
 msgid "Explore sensors"
 msgstr "Esplora Sensori"
 
+
+msgid "Sensors found"
+msgstr "Sensori trovati"
+
 #: templates/site_index.html:79
 msgid ""
 "Data is available for browsing, aggregating and styling to generate maps "

@@ -398,3 +398,25 @@ if EMAIL_ENABLE:
 else:
     EMAIL_BACKEND = os.getenv('DJANGO_EMAIL_BACKEND',
                               default='django.core.mail.backends.console.EmailBackend')
+
+############################################
+#           SOS CONFIGURATION              #
+############################################
+INSTALLED_APPS += ('geosk.geonode_sos', 'dynamic_models', 'geosk.sos_client',)
+
+SERVICES_TYPE_MODULES = ["geosk.geonode_sos.sos_handler.HandlerDescriptor"]
+
+DATABASE_ROUTERS = ["geosk.geonode_sos.router.DatastoreRouter"]
+
+DYNAMIC_MODELS = {
+    "USE_APP_LABEL": "geonode_sos_foi"
+}
+SOS_CLIENT_IFRAME_CONFIG = {
+    "iframeSrc": os.getenv('SOS_CLIENT_IFRAME_SRC', "/sosclient/"),
+    "supportedOrigin":  os.getenv('SOS_CLIENT_IFRAME_SUPPORTED_ORIGIN',"*"),
+    "modalTitle":  os.getenv('SOS_CLIENT_IFRAME_MODAL_TITLE',""),
+    "basePath": os.getenv('SOS_CLIENT_GEOSERVER_BASE_PATH',GEOSERVER_PUBLIC_LOCATION[:-1]),
+}
+############################################
+#            END SOS CONFIGURATION         #
+############################################ 

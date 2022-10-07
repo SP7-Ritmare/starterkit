@@ -1,0 +1,7 @@
+{
+    "SOSPlugin": {
+        "bundle": "SOSPlugin/index.js",
+        "assets": "SOSPlugin/assets",
+        "translations": "SOSPlugin/translations"
+    }
+}

@@ -10,6 +10,7 @@ ENV GEOSERVER_DATA_DIR="/geoserver_data/data"
 #
 # Download and install GeoServer
 #
+RUN apt update && apt install wget -y && apt install unzip -y
 RUN cd /usr/local/tomcat/webapps \
     && wget --no-check-certificate --progress=bar:force:noscroll https://artifacts.geonode.org/geoserver/${GEOSERVER_VERSION}/geoserver.war -O geoserver.war \
     && unzip -q geoserver.war -d geoserver \
@@ -91,7 +92,7 @@ RUN apt-get update \
     && chmod +x /usr/local/tomcat/tmp/set_geoserver_auth.sh \
     && chmod +x /usr/local/tomcat/tmp/setup_auth.sh \
     && chmod +x /usr/local/tomcat/tmp/entrypoint.sh \
-    && pip3 install pip==9.0.3 \
+    && pip3 install pip==22.0.2 \
     && pip3 install -r requirements.txt \
     && chmod +x /usr/local/tomcat/tmp/get_dockerhost_ip.py \
     && chmod +x /usr/local/tomcat/tmp/get_nginxhost_ip.py
