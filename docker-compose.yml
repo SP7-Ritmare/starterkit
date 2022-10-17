@@ -4,7 +4,7 @@ version: '3.4'
 x-common-django:
   &default-common-django
   image: cnrireami/getit:starterkit-3.3.0
-  restart: on-failure
+  restart: unless-stopped
   env_file:
     - .env
   volumes:
@@ -14,7 +14,6 @@ x-common-django:
     - backup-restore:/backup_restore
     - data:/data
     - tmp:/tmp
-
 
 services:
 
@@ -26,7 +25,7 @@ services:
       dockerfile: Dockerfile
     container_name: django4${COMPOSE_PROJECT_NAME}
     healthcheck:
-      test: "curl --fail --silent --write-out 'HTTP CODE : %{http_code}\n' --output /dev/null http://127.0.0.1:8000/"
+      test: "curl --fail --silent --write-out 'HTTP CODE : %{http_code}\n' --output /dev/null http://127.0.0.1:8001/"
       interval: 60s
       timeout: 10s
       retries: 1
@@ -50,7 +49,7 @@ services:
 
   # Nginx is serving django static and media files and proxies to django and geonode
   geonode:
-    image: cnrireami/getit:nginx-sos-3.3.0
+    image: cnrireami/getit:nginx-sos-3.3.3
     build: ./docker/sos-nginx/
     container_name: nginx4${COMPOSE_PROJECT_NAME}
     environment:
@@ -71,7 +70,7 @@ services:
       - nginx-confd:/etc/nginx
       - nginx-certificates:/geonode-certificates
       - statics:/mnt/volumes/statics
-    restart: on-failure
+    restart: unless-stopped
     env_file:
       - .env
     # In order, under certain circumstances, when running in a Local Area Network, to make django and SOS communicate
@@ -82,7 +81,7 @@ services:
 
   # Gets and installs letsencrypt certificates
   letsencrypt:
-    image: cnrireami/getit:letsencrypt-3.3.0
+    image: cnrireami/getit:letsencrypt-3.3.3
     build: ./docker/letsencrypt/
     container_name: letsencrypt4${COMPOSE_PROJECT_NAME}
     environment:
@@ -92,13 +91,12 @@ services:
       - LETSENCRYPT_MODE=${LETSENCRYPT_MODE}
     volumes:
       - nginx-certificates:/geonode-certificates
-    restart: on-failure
+    restart: unless-stopped
     env_file:
       - .env
-      
   # Geoserver backend
   geoserver:
-    image: cnrireami/getit:geoserver-2.19.x
+    image: cnrireami/getit:geoserver-2.19.6
     build: ./docker/geoserver/
     container_name: geoserver4${COMPOSE_PROJECT_NAME}
     healthcheck:
@@ -107,26 +105,25 @@ services:
       timeout: 10s
       retries: 1
       start_period: 60s
-    depends_on:
-      - db
-      - data-dir-conf
+    env_file:
+      - .env
     volumes:
       - statics:/mnt/volumes/statics
       - geoserver-data-dir:/geoserver_data/data
       - backup-restore:/backup_restore
       - data:/data
       - tmp:/tmp
-    restart: on-failure
-    env_file:
-      - .env
+    restart: unless-stopped
+    depends_on:
+      - db
+      - data-dir-conf
 
   data-dir-conf:
-    image: geonode/geoserver_data:2.19.x
+    image: geonode/geoserver_data:2.19.6
     container_name: gsconf4${COMPOSE_PROJECT_NAME}
     command: /bin/true
     volumes:
       - geoserver-data-dir:/geoserver_data/data
-    restart: on-failure
 
   # PostGIS database.
   db:
@@ -173,7 +170,7 @@ services:
     container_name: rabbitmq4${COMPOSE_PROJECT_NAME}
     volumes:
       - rabbitmq:/var/lib/rabbitmq
-    restart: on-failure
+    restart: unless-stopped
 
   jenkins:
     image: jenkins/jenkins:lts
@@ -191,7 +188,7 @@ services:
       - data:/data
     environment:
       - 'JENKINS_OPTS=--httpPort=${JENKINS_HTTP_PORT} --httpsPort=${JENKINS_HTTPS_PORT} --prefix=/jenkins'
-
+    restart: unless-stopped
 volumes:
   jenkins_data:
     driver: local

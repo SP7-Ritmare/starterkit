@@ -176,11 +176,8 @@ def update(ctx):
 def migrations(ctx):
     print("**************************migrations*******************************")
     ctx.run(f"python manage.py migrate --noinput --settings={_localsettings()}", pty=True)
-    print("**************************datastore*******************************")
-    ctx.run(f"python manage.py migrate --noinput --database datastore --settings={_localsettings()}", pty=True)
     try:
         ctx.run(f"python manage.py rebuild_index --noinput --settings={_localsettings()}", pty=True)
-        ctx.run(f"python manage.py rebuild_index --noinput --database datastore --settings={_localsettings()}", pty=True)
     except Exception:
         pass
 
@@ -188,8 +185,12 @@ def migrations(ctx):
 @task
 def statics(ctx):
     print("**************************statics*******************************")
-    ctx.run('mkdir -p /mnt/volumes/statics/{static,uploads}')
-    ctx.run(f"python manage.py collectstatic --noinput --settings={_localsettings()}", pty=True)
+    try:
+        ctx.run('mkdir -p /mnt/volumes/statics/{static,uploads}')
+        ctx.run(f"python manage.py collectstatic --noinput --settings={_localsettings()}", pty=True)
+    except Exception:
+        import traceback
+        traceback.print_exc()
 
 
 @task

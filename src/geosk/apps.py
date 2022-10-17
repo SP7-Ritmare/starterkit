@@ -38,5 +38,6 @@ class AppConfig(BaseAppConfig):
     label = "geosk"
 
     def ready(self):
-        super().ready()
+        super(AppConfig, self).ready()
         run_setup_hooks()
+

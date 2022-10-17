@@ -27,12 +27,14 @@ IPAddress'] for c in client.containers.list() if c.status in 'running'
             ipaddr = item[1]
 
     try:
-        os.environ["NGINX_BASE_URL"] = f"http://{ipaddr}:80"
-        nginx_base_url = f"http://{ipaddr}:80"
+        os.environ["NGINX_BASE_URL"] = "http://" + ipaddr + ":" + "80"
+        nginx_base_url = "http://{}:80".format(ipaddr)
     except NameError as er:
-        logging.info(f"NGINX container is not running maybe exited! Runningcontainers are:{containers}")
+        logging.info("NGINX container is not running maybe exited! Running\
+containers are:{0}".format(containers))
 except KeyError as ke:
-    logging.info(f"There has been a problem with the dockernetwork which has raised the following exception: {ke}")
+    logging.info("There has been a problem with the docker\
+network which has raised the following exception: {0}".format(ke))
 else:
     # nginx_base_url = None
     pass

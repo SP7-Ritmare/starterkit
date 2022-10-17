@@ -22,8 +22,12 @@ import os
 import re
 import ast
 
-from urllib.parse import urlparse, urlunparse
-from urllib.request import urlopen, Request
+try:
+    from urllib.parse import urlparse, urlunparse
+    from urllib.request import urlopen, Request
+except ImportError:
+    from urllib2 import urlopen, Request
+    from urlparse import urlparse, urlunparse
 # Load more settings from a file called local_settings.py if it exists
 try:
     from geosk.local_settings import *
