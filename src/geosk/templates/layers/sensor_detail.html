@@ -73,7 +73,7 @@
       {% endif %}
         {% include "base/resourcebase_info_panel.html" %}
 
-        {% if not request.user_agent.is_mobile %}
+        {% if not request.user_agent.is_mobile and not resource.resource_type == 'sos_sensor' %}
           {% if USE_GEOSERVER and DISPLAY_WMS_LINKS %}
           <p>
             {% if request.user.is_authenticated and access_token %}
@@ -83,6 +83,9 @@
             {% endif %}
             <i class="fa fa-map"></i> {% trans 'Layer WMS GetCapabilities document' %}</a></p>
           {% endif %}
+        {% endif %}
+        {% if resource.resource_type == 'sos_sensor' %}
+          <p><a href="{{ item.supplemental_information }}"><i class="fa fa-download"></i> {% trans "Download SensorML" %}</a></p>
         {% endif %}
       </article>
       {% if resource.is_mosaic %}
