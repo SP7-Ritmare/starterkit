@@ -73,7 +73,7 @@
       {% endif %}
         {% include "base/resourcebase_info_panel.html" %}
 
-        {% if not request.user_agent.is_mobile %}
+        {% if not request.user_agent.is_mobile and not resource.resource_type == 'sos_sensor' %}
           {% if USE_GEOSERVER and DISPLAY_WMS_LINKS %}
           <p>
             {% if request.user.is_authenticated and access_token %}
@@ -83,6 +83,9 @@
             {% endif %}
             <i class="fa fa-map"></i> {% trans 'Layer WMS GetCapabilities document' %}</a></p>
           {% endif %}
+        {% endif %}
+        {% if resource.resource_type == 'sos_sensor' %}
+          <p><a href="{{ item.supplemental_information }}"><i class="fa fa-download"></i> {% trans "Download SensorML" %}</a></p>
         {% endif %}
       </article>
       {% if resource.is_mosaic %}
@@ -169,12 +172,13 @@
         {% if resource.resource_type == "sos_sensor" %}
               {% for el in resource.layer.metadata.all %}
                   {% if 'http' in el.metadata.definition %}
-                    <label>Label:</label> <a target="_blank" href="{{el.metadata.definition}}">{{el.metadata.field_label}}</a><br>
+                    <label>{% trans "Label" %}:</label> <a target="_blank" href="{{el.metadata.definition}}">{{el.metadata.field_label}}</a><br>
+                    <label>{% trans "Definition" %}:</label> {{el.metadata.definition}}<br>
                   {% else %}
-                    <label>Label:</label> {{el.metadata.field_label}}<br>
-                    <label>Definition:</label> {{el.metadata.definition}}<br>
+                    <label>{% trans "Label" %}:</label> {{el.metadata.field_label}}<br>
+                    <label>{% trans "Definition" %}:</label> {{el.metadata.definition}}<br>
                   {% endif %}
-                  <label>Unit of misure:</label> {{el.metadata.uom}}<br><br>
+                  <label>{% trans "Unit of measure" %}:</label> {{el.metadata.uom}}<br><br>
               {% endfor %}
         {% endif %}
         {% if resource.is_mosaic %}
