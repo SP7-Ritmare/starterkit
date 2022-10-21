@@ -180,3 +180,14 @@ A:hover {font-size:24; font-weight:bold; color: red;}
 .sos-actions {
   margin-top: 22px;
 }
+
+.sensor-snippet-action-button {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  white-space: normal; 
+  width: 100px; 
+  height: 34px;
+  line-height: 1;
+  font-size: 1.2rem;
+}

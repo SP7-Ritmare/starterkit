@@ -147,4 +147,9 @@ def delete_dynamic_model(instance, sender, **kwargs):
         logger.error(f"Error during deletion of Dynamic Model schema: {e.args[0]}")
 
 
+def reassign_resource_type(instance, sender, **kwargs):
+    if instance.remote_service is not None and instance.remote_service.type=='SOS':
+        Layer.objects.filter(pk=instance.pk).update(resource_type="sos_sensor")
+
+models.signals.post_save.connect(reassign_resource_type, sender=Layer)
 models.signals.post_delete.connect(delete_dynamic_model, sender=Layer)

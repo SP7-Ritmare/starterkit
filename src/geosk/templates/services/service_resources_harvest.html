@@ -29,6 +29,9 @@
                                 <th>{% if not errored_state %}<input type="checkbox" id="checkAll"/>{% endif %}</th>
                                 <th>{% trans "Id" %}</th>
                                 <th>{% trans "Title" %}</th>
+                                {% if not all_resources %}
+                                <th>{% trans "Abstract" %}</th>
+                                {% endif %}
                             </tr>
 
                             <tr style="background-color: lightgray">
@@ -44,7 +47,6 @@
                                                         class="btn fa fa-filter" style="float:right"/>
                                             </div>
                                         </th>
-
                                     {% else %}
                                         <th/>
                                     {% endif %}
@@ -63,6 +65,9 @@
                                     </td>
                                     <td>{{ resource_meta.id }}</td>
                                     <td>{{ resource_meta.title }}</td>
+                                    {% if resource_meta.abstract %}
+                                    <td>{{ resource_meta.abstract }}</td>
+                                    {% endif %}
                                 </tr>
                             {% endfor %}
                             </tbody>
@@ -79,21 +84,21 @@
                             </div>
                         </div>
                     </form>
-                    {% if all_resources.paginator.num_pages > 1 %}
+                    {% if resources.paginator.num_pages > 1 %}
                         <div class="row">
                             <nav aria-label="importable resources pages">
                                 <ul class="pagination hidden-xs pull-right">
-                                    {% if all_resources.has_previous %}
+                                    {% if resources.has_previous %}
                                         <li><a id="previous" aria-label="{% trans "Previous" %}"
-                                               href="?page={{ all_resources.previous_page_number }}">{% trans "previous" %}</a></li>
+                                               href="?page={{ resources.previous_page_number }}">{% trans "previous" %}</a></li>
                                     {% else %}
                                         <li class="disabled"><a aria-label="{% trans "Previous" %}" href="#">{% trans "previous" %}</a></li>
                                     {% endif %}
                                     <li class="active"><a
-                                            href="#">{{ all_resources.number }}/{{ all_resources.paginator.num_pages }}</a></li>
-                                    {% if all_resources.has_next %}
+                                            href="#">{{ resources.number }}/{{ resources.paginator.num_pages }}</a></li>
+                                    {% if resources.has_next %}
                                         <li><a id="next" aria-label="{% trans "Next" %}"
-                                               href="?page={{ all_resources.next_page_number }}">{% trans "next" %}</a></li>
+                                               href="?page={{ resources.next_page_number }}">{% trans "next" %}</a></li>
                                     {% else %}
                                         <li class="disabled"><a aria-label="{% trans "Next" %}" href="#">{% trans "next" %}</a></li>
                                     {% endif %}

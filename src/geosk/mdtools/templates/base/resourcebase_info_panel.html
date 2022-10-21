@@ -2,66 +2,72 @@
 
 <article class="description tab-pane active" id="info">
   <ul class="unstyled wide">
-  {% if resourcebase.title%}
+  {% if resource.title%}
     <li>
       <strong>{% trans "Title" %}:</strong>
-      {{ resourcebase.title }}
+      {{ resource.title }}
+    </li>
+  {% endif %}
+  {% if resource.resource_type == 'sos_sensor' %}
+    <li>
+      <strong>{% trans "Sensor ID" %}:</strong>
+      {{ resource.supplemental_information }}
     </li>
   {% endif %}
 
-  {% if resourcebase.abstract %}
+  {% if resource.abstract %}
     <li>
       <strong>{% trans "Abstract" %}:</strong>
-      {{ resourcebase.abstract|escape|urlize|linebreaks|safe }}
+      {{ resource.abstract|escape|urlize|linebreaks|safe }}
     </li>
   {% endif %}
 
-  {% if resourcebase.date %}
+  {% if resource.date %}
     <li>
-      <strong>{% trans resourcebase.date_type|title %} {% trans "Date" %}:</strong>
-      {{ resourcebase.date }}
+      <strong>{% trans resource.date_type|title %} {% trans "Date" %}:</strong>
+      {{ resource.date }}
     </li>
   {% endif %}
 
-  {% if resourcebase.display_type %}
+  {% if resource.display_type %}
     <li>
       <strong>{% trans "Type" %}:</strong>
-      {{ resourcebase.display_type }}
+      {{ resource.display_type }}
     </li>
   {% endif %}
 
-  {% if resourcebase.keyword_list %}
+  {% if resource.keyword_list %}
     <li>
       <strong>{% trans "Keywords" %}:</strong>
-      {% for keyword in resourcebase.keyword_list %}
+      {% for keyword in resource.keyword_list %}
         {{ keyword }}
       {% endfor %}
     </li>
   {% endif %}
 
-  {% if resourcebase.category %}
+  {% if resource.category %}
     <li>
       <strong>{% trans "Category" %}:</strong>
-      {{ resourcebase.category }}
+      {{ resource.category }}
     </li>
   {% endif %}
 
-  {% if resourcebase.regions.all %}
+  {% if resource.regions.all %}
    <li>
       <strong>{% trans "Regions" %}:</strong>
-        {{ resourcebase.regions.all|join:", " }}
+        {{ resource.regions.all|join:", " }}
     </li>
   {% endif %}
 
-  {% if resourcebase.license %}
+  {% if resource.license %}
     <li>
       <strong>{% trans "License" %}:</strong>
-      {{ resourcebase.license.name }}
+      {{ resource.license.name }}
     </li>
   {% endif %}
 
-  {% if resourcebase.mdextension %}
-    {% regroup resourcebase.mdextension.multicontactrole_set.all by scope as contacts_list %}
+  {% if resource.mdextension %}
+    {% regroup resource.mdextension.multicontactrole_set.all by scope as contacts_list %}
     {% for scope in contacts_list %}
     <li>
       <strong>{{ scope.grouper }}:</strong>
@@ -75,100 +81,101 @@
     </li>
     {% endfor %}
 
-    {% if resourcebase.owner %}
+    {% if resource.owner %}
     <li>
       <strong>{% trans "GET-IT User" %}:</strong>
-      <a href="{{ resourcebase.owner.get_profile.get_absolute_url }}">{{ resourcebase.owner.username }}</a>
+      <a href="{{ resource.owner.get_profile.get_absolute_url }}">{{ resource.owner.username }}</a>
     </li>
     {% endif %}
 
   {% else %}
-    {% if resourcebase.owner %}
+    {% if resource.owner %}
     <li>
       <strong>{% trans "GET-IT User" %}:</strong>
-      <a href="{{ resourcebase.owner.get_profile.get_absolute_url }}">{{ resourcebase.owner.username }}</a>
+      <a href="{{ resource.owner.get_profile.get_absolute_url }}">{{ resource.owner.username }}</a>
     </li>
     {% endif %}
 
-    {% if resourcebase.poc.user %}
+    {% if resource.poc.user %}
     <li>
       <strong>{% trans "Point of Contact" %}:</strong>
-      <a href="{{ resourcebase.poc.user.get_profile.get_absolute_url }}"> {{ resourcebase.poc.user.username }} </a>
+      <a href="{{ resource.poc.user.get_profile.get_absolute_url }}"> {{ resource.poc.user.username }} </a>
     <li>
       {% endif %}
   {% endif %}
   </ul>
-
+  {% if not resource.resource_type == 'sos_sensor' %}
   <a href="#more" data-toggle="collapse" data-target=".more">{% trans "Show/Hide" %}</a>
 
   <div class="more collapse in">
     <ul class="unstyled wide">
-    {% if resourcebase.maintenance_frequency %}
+    {% if resource.maintenance_frequency %}
       <li>
         <strong>{% trans "Maintenance Frequency" %}:</strong>
-        {{ resourcebase.maintenance_frequency_title }}
+        {{ resource.maintenance_frequency_title }}
       </li>
     {% endif %}
 
-    {% if resourcebase.restriction_code_type or resourcebase.constraints_other %}
+    {% if resource.restriction_code_type or resource.constraints_other %}
       <li>
         <strong>{% trans "Restrictions" %}:</strong>
-        {% if resourcebase.constraints_other %}
-            {{ resourcebase.constraints_other }}
+        {% if resource.constraints_other %}
+            {{ resource.constraints_other }}
         {% else %}
-            {{ resourcebase.restriction_code_type }}
+            {{ resource.restriction_code_type }}
         {% endif %}
       </li>
     {% endif %}
 
-    {% if resourcebase.edition %}
+    {% if resource.edition %}
       <li>
         <strong>{% trans "Edition" %}:</strong>
-        {{ resourcebase.edition}}
+        {{ resource.edition}}
       </li>
     {% endif %}
 
-    {% if resourcebase.purpose %}
+    {% if resource.purpose %}
       <li>
         <strong>{% trans "Purpose" %}:</strong>
-        {{ resourcebase.purpose|escape|urlize|linebreaks|safe }}
+        {{ resource.purpose|escape|urlize|linebreaks|safe }}
       </li>
     {% endif %}
 
-    {% if resourcebase.language %}
+    {% if resource.language %}
       <li>
         <strong>{% trans "Language" %}:</strong>
-        {{ resourcebase.language_title }}
+        {{ resource.language_title }}
       </li>
     {% endif %}
 
-    {% if resourcebase.temporal_extent_start and resourcebase.temporal_extent_end %}
+    {% if resource.temporal_extent_start and resource.temporal_extent_end %}
       <li>
         <strong>{% trans "Temporal Extent" %}:</strong>
-        {{ resourcebase.temporal_extent_start }} - {{ resourcebase.temporal_extent_end }}
+        {{ resource.temporal_extent_start }} - {{ resource.temporal_extent_end }}
       </li>
     {% endif %}
 
-    {% if resourcebase.data_quality_statement %}
+    {% if resource.data_quality_statement %}
       <li>
         <strong>{% trans "Data Quality" %}:</strong>
-        {{ resourcebase.data_quality_statement }}
+        {{ resource.data_quality_statement }}
       </li>
     {% endif %}
 
-    {% if resourcebase.supplemental_information %}
+    {% if resource.supplemental_information %}
       <li>
         <strong>{% trans "Supplemental Information" %}:</strong>
-        {{ resourcebase.supplemental_information|escape|urlize|linebreaks|safe }}
+        {{ resource.supplemental_information|escape|urlize|linebreaks|safe }}
       </li>
     {% endif %}
 
-    {% if resourcebase.spatial_representation_type %}
+    {% if resource.spatial_representation_type %}
       <li>
         <strong>{% trans "Spatial Representation Type" %}:</strong>
-        {{ resourcebase.spatial_representation_type }}
+        {{ resource.spatial_representation_type }}
       </li>
     {% endif %}
     </ul>
   </div>
+  {% endif %}
 </article>
