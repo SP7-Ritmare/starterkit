@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #########################################################################
 #
 # Copyright (C) 2014 StarterKit Development Team
@@ -20,7 +21,7 @@
 import os
 # __version__ = (1, 2, 0, 'alpha', 6)
 # __version__ = (1, 3, 17, 'final', 0)
-__version__ = (1, 3, 19, 'final', 0)
+__version__ = (1, 3, 20, 'final', 0)
 
 
 default_app_config = "geosk.apps.AppConfig"

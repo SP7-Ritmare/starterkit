@@ -4,7 +4,7 @@ LABEL GeoNode Development Team
 #
 # Set GeoServer version and data directory
 #
-ENV GEOSERVER_VERSION=2.19.x
+ENV GEOSERVER_VERSION=2.19.6
 ENV GEOSERVER_DATA_DIR="/geoserver_data/data"
 
 #
@@ -92,7 +92,7 @@ RUN apt-get update \
     && chmod +x /usr/local/tomcat/tmp/set_geoserver_auth.sh \
     && chmod +x /usr/local/tomcat/tmp/setup_auth.sh \
     && chmod +x /usr/local/tomcat/tmp/entrypoint.sh \
-    && pip3 install pip==22.0.2 \
+    && pip3 install pip --upgrade \
     && pip3 install -r requirements.txt \
     && chmod +x /usr/local/tomcat/tmp/get_dockerhost_ip.py \
     && chmod +x /usr/local/tomcat/tmp/get_nginxhost_ip.py

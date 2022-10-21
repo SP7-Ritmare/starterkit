@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #########################################################################
 #
 # Copyright (C) 2017 OSGeo
@@ -17,6 +18,7 @@
 #
 #########################################################################
 
+from __future__ import absolute_import
 
 import os
 from celery import Celery
@@ -36,4 +38,4 @@ app.autodiscover_tasks()
     name='geosk.debug_task',
     queue='default')
 def debug_task(self):
-    print(f"Request: {self.request!r}")
+    print("Request: {!r}".format(self.request))

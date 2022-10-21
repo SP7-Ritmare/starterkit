@@ -64,7 +64,9 @@ def get_ubuntu_release():
         #version = subprocess.check_output(['lsb_release', '-sr'])
     except BaseException:
         version = ''
-    return version.strip().decode()
+    if isinstance(version, (bytes, bytearray)):
+        return version.decode()
+    return version.strip()
 
 
 def get_postgres_version():
