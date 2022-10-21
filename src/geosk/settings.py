@@ -24,6 +24,7 @@ import ast
 
 from urllib.parse import urlparse, urlunparse
 from urllib.request import urlopen, Request
+from schema import Optional
 # Load more settings from a file called local_settings.py if it exists
 try:
     from geosk.local_settings import *
@@ -420,3 +421,17 @@ SOS_CLIENT_IFRAME_CONFIG = {
 ############################################
 #            END SOS CONFIGURATION         #
 ############################################ 
+NEW_SCHEMA = {
+    'layer': {
+        Optional("id"): int,
+        "filter_header": object,
+        "field_name": object,
+        "field_label": object,
+        "field_value": object,
+        Optional("uom"): object,
+        Optional("definition"): object,
+    }
+}
+
+
+EXTRA_METADATA_SCHEMA = {**EXTRA_METADATA_SCHEMA, **NEW_SCHEMA}

@@ -34,12 +34,12 @@
                   <i ng-if="item.store_type == 'dataset'" title="File/Dataset" class="fa fa-newspaper-o fa-1" style="vertical-align:  middle;padding-right: 10px;"></i>
                   <i ng-if="item.store_type == 'map'" title="Map" class="fa fa-map-o fa-1" style="vertical-align:  middle;padding-right: 10px;"></i>
                   <i ng-if="item.store_type == 'geoapp'" title="App" class="fa fa-gears fa-1" style="vertical-align:  middle;padding-right: 10px;"></i>
-                  <a href="{{ item.detail_url }}" {% endverbatim %}{% if 'sos_sensor' in request.GET.values %}class="sensor_title"{% endif %}{% verbatim %}>{{ item.title }} sensor</a>
+                  <a href="{{ item.detail_url }}" {% endverbatim %}{% if 'sos_sensor' in request.GET.values %}class="sensor_title"{% endif %}{% verbatim %}>{{ item.title }}{% endverbatim %}{% if 'sos_sensor' in request.GET.values %} sensor{% endif %}{% verbatim %}</a>
               </h4>
             </div>
             {% endverbatim %}
 
-            {% if not request.user_agent.is_mobile %}
+            {% if not request.user_agent.is_mobile and user.is_authenticated%}
               {% if facet_type == 'layers' %}
               <div class="col-xs-2">
                 <h4>
