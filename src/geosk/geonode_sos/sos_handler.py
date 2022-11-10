@@ -441,22 +441,36 @@ class SosServiceHandler(ServiceHandlerBase):
 
         if not _fois.exists():
             return
+        _bbox = [-180, 180, -90, 90]
+        qs = _fois.first().as_model().objects.all()
+        if qs.exists():
+            qs = qs.aggregate(Extent('geometry'))
+            qs['geometry__extent']
+            _polygon = BBOXHelper.from_xy(
+                [
+                    qs['geometry__extent'][0],
+                    qs['geometry__extent'][2],
+                    qs['geometry__extent'][1],
+                    qs['geometry__extent'][3],
+                ]
+            ).as_polygon()
+            _bbox = qs['geometry__extent']
+        else:
+            _polygon = BBOXHelper.from_xy(
+                [
+                    _bbox[0],
+                    _bbox[2],
+                    _bbox[1],
+                    _bbox[3],
+                ]
+            ).as_polygon()
+            logger.warning("No FOI where found, fallback on default BBOX")
 
-        qs = _fois.first().as_model().objects.aggregate(Extent('geometry'))
-        qs['geometry__extent']
-        _polygon = BBOXHelper.from_xy(
-            [
-                qs['geometry__extent'][0],
-                qs['geometry__extent'][2],
-                qs['geometry__extent'][1],
-                qs['geometry__extent'][3],
-            ]
-        ).as_polygon()
         layer.bbox_polygon = _polygon
         layer.ll_bbox_polygon = _polygon
-        layer.save()
-        return qs['geometry__extent']
-    
+        layer.save()    
+        return _bbox
+
     def _update_thumbnail(self, layer, _bbox):
         from geonode.geoserver.helpers import ogc_server_settings
         locations = [[ogc_server_settings.LOCATION, [layer.alternate], []]]

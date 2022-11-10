@@ -288,7 +288,7 @@ class DescribeSensorParser:
                     "online_resource": self._extract_value(output, ['.//gmd:onlineResource//gmd:URL//gco:CharacterString'], raise_exep=False),
                     "arcrole": arcrole,
                     "role": self._extract_value(output,[ ".//gmd:role//gmd:CI_RoleCode"], raise_exep=False),
-                    "extracted_arcrole": arcrole.split("/")[-1]
+                    "extracted_arcrole": arcrole.split("/")[-1] if arcrole else None
                 }
             )
         return extra
