@@ -29,9 +29,7 @@
                                 <th>{% if not errored_state %}<input type="checkbox" id="checkAll"/>{% endif %}</th>
                                 <th>{% trans "Id" %}</th>
                                 <th>{% trans "Title" %}</th>
-                                {% if not all_resources %}
                                 <th>{% trans "Abstract" %}</th>
-                                {% endif %}
                             </tr>
 
                             <tr style="background-color: lightgray">
@@ -54,6 +52,7 @@
                             </tr>
                             </thead>
                             <tbody>
+                            {% if not all_resources %}
                             {% for resource_meta in resources %}
                                 <tr>
                                     <td>
@@ -70,6 +69,22 @@
                                     {% endif %}
                                 </tr>
                             {% endfor %}
+                            {% else %}
+                            {% for resource_meta in all_resources %}
+                                <tr>
+                                    <td>
+                                        {% if not errored_state %}
+                                            <input {% if resource_meta.id in requested %}checked{% endif %}
+                                                   type="checkbox" name="resource_list"
+                                                   id="option_{{ resource_meta.id }}" value="{{ resource_meta.id }}"/>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ resource_meta.id }}</td>
+                                    <td>{{ resource_meta.title }}</td>
+                                    <td>{{ resource_meta.abstract }}</td>
+                                </tr>
+                            {% endfor %}
+                            {% endif %}
                             </tbody>
                         </table>
 
