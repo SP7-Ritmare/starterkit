@@ -33,6 +33,7 @@ from rest_framework.response import Response
 from dynamic_models.models import ModelSchema
 from rest_framework.decorators import action
 from drf_spectacular.utils import extend_schema
+from rest_framework.exceptions import ParseError
 
 
 class SOSSensorsViewSet(DynamicModelViewSet):
@@ -139,18 +140,38 @@ class FeatureOfInterestViewSet(DynamicModelViewSet):
         _filter = {}
         _model_schema = ModelSchema.objects
 
-        if _filters.get("sensor_id", None) or _qr_filters.get("sensor_id", None):
+        sensor_filter = _filters.get("sensor_id[]", None) or _qr_filters.get("sensor_id[]", None)
+        id_filter = _filters.get("id[]", None) or _qr_filters.get("id[]", None)
+        
+        if id_filter and sensor_filter:
+            _id = id_filter.split(",")
+            sensor = sensor_filter.split(",")
+            if not len(_id) == len(sensor):
+                raise ParseError(detail="Sensor_id and foi_id list must have the same length")
+
+            for pair in zip(_id, sensor):
+                for _model in _model_schema.filter(name=f"resource_{pair[1]}").iterator():
+                    _model_instance = _model.as_model()
+                    if _model_instance.objects.exists():
+                        if not data:
+                            data = _model_instance.objects.filter(id=pair[0])
+                        else:
+                            data = data.union(_model_instance.objects.filter(id=pair[0]))
+
+            return data.order_by("id") if data else []
+
+        elif sensor_filter:
             _resource_names = [
                 f"resource_{_r}"
-                for _r in _filters.get("sensor_id", [])
-                or list(_qr_filters.get("sensor_id", []).split(","))
+                for _r in _filters.get("sensor_id[]", [])
+                or list(_qr_filters.get("sensor_id[]", []).split(","))
             ]
             _model_schema = _model_schema.filter(name__in=_resource_names)
 
-        if _filters.get("id", None) or _qr_filters.get("id", None):
+        if id_filter:
             _filter = {
-                "id__in": _filters.pop("id", {})
-                or list(_qr_filters.get("id", []).split(","))
+                "id__in": _filters.pop("id[]", {})
+                or list(_qr_filters.get("id[]", []).split(","))
             }
 
         for _model in _model_schema.iterator():

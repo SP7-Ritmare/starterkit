@@ -120,6 +120,7 @@ class FeatureOfInterestSerializer(DynamicEphemeralSerializer):
                 "sampled_feature": _foi.sampled_feature,
                 "geom": self._get_geojson(_foi),
                 "procedure": {
+                    "pk": _foi.resource_id,
                     "id": _foi_resource.supplemental_information,
                     "offeringsIDs": _foi_resource.offerings_set.values_list('value', flat=True),
                     "observablePropertiesIDs": [
