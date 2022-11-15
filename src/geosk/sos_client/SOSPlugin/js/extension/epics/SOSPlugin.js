@@ -118,7 +118,7 @@ export const getFOIsFromFeatureInfo = (action$, { getState = () => { } }) =>
                     })
 
                     return (id.length > 0 &&
-                        sensor_id.length > 0) ? Observable.defer(() => getFOIs({ id, sensor_id }))
+                        sensor_id.length > 0) ? Observable.defer(() => getFOIs({ id: [id.join(',')], sensor_id: [sensor_id.join(',')] }))
                             .switchMap((responseData) => {
                                 return Observable.of(
                                     setCoordinates(latlng),
