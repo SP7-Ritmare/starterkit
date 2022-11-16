@@ -38,7 +38,7 @@
     "test:watch": "mapstore-project test:watch extension"
   },
   "devDependencies": {
-    "@mapstore/project": "1.0.22"
+    "@mapstore/project": "1.0.24"
   },
   "dependencies": {
     "mapstore": "git+https://github.com/geosolutions-it/MapStore2.git#2022.01.xx",
