@@ -78,12 +78,12 @@
           {% if 'sos_sensor' in request.GET.values %}
           <div class="btn-toolbar">
             <div class="btn-group">
-                  <a href="{% url "osk_describe_sensor" %}?format={{ 'text/html'|urlencode }}&sensor_id={% verbatim %}{{item.supplemental_information }}{% endverbatim %}" target="_blank" data-toggle="modal" class="sensor-snippet-action-button btn btn-mini btn-primary"><span>{% trans "Sensor details" %}</span></a>
+                  <a ng-if='item.keywords.includes("local")' href="{% url "osk_describe_sensor" %}?format={{ 'text/html'|urlencode }}&sensor_id={% verbatim %}{{item.supplemental_information }}{% endverbatim %}" target="_blank" data-toggle="modal" class="sensor-snippet-action-button btn btn-mini btn-primary"><span>{% trans "Sensor details" %}</span></a>
                 {% if perms.osk.admin_sos %}
-                  <a href="{% url "osk_upload" %}?procedureId={% verbatim %}{{ item.supplemental_information }}{% endverbatim %}" class="sensor-snippet-action-button btn btn-mini  btn-success"><span>{% trans "Upload observations" %}</span></a>
+                  <a ng-if='item.keywords.includes("local")' href="{% url "osk_upload" %}?procedureId={% verbatim %}{{ item.supplemental_information }}{% endverbatim %}" class="sensor-snippet-action-button btn btn-mini  btn-success"><span>{% trans "Upload observations" %}</span></a>
                   <a href="{% verbatim %}{{ item.supplemental_information }}{% endverbatim %}" download="{% verbatim %}{{ item.supplemental_information }}{% endverbatim %}" target="_blank" data-toggle="modal" class="sensor-snippet-action-button btn btn-mini btn-success"><span>{% trans "Download SensorML" %}</span></a>
                   <a href="../observations/service?service=SOS&version=2.0.0&request=GetObservation&MergeObservationsIntoDataArray=true&procedure={% verbatim %}{{ item.supplemental_information }}{% endverbatim %}" class="sensor-snippet-action-button btn btn-mini  btn-success"><span>{% trans "Download observations" %}</span></a>
-                  <a href="{% url "osk_deletesensor" %}?procedure={% verbatim %}{{ item.supplemental_information }}{% endverbatim %}" class="sensor-snippet-action-button btn btn-mini btn-danger"><span>{% trans "Delete sensor" %}</span></a>
+                  <a ng-if='item.keywords.includes("local")' href="{% url "osk_deletesensor" %}?procedure={% verbatim %}{{ item.supplemental_information }}{% endverbatim %}" class="sensor-snippet-action-button btn btn-mini btn-danger"><span>{% trans "Delete sensor" %}</span></a>
                 {% endif %}
             </div>
         </div>
