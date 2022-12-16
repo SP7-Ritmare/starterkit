@@ -20,6 +20,6 @@ VERSION = (0, 0, 3)
 __version__ = ".".join([str(i) for i in VERSION])
 __author__ = "geosolutions-it"
 __email__ = "info@geosolutionsgroup.com"
-__url__ = "https://github.com/GeoNode/geonode-contribs/sos"
+__url__ = "https://github.com/SP7-Ritmare/starterkit/tree/upgrade_3.3.x/src/geosk/geonode_sos"
 __license__ = "GNU General Public License"
 
