@@ -9,7 +9,7 @@
   </div>
   <article ng-repeat="item in results" resource_id="{{ item.id }}" ng-cloak class="ng-cloak">
     {% endverbatim %}
-    <div class="col-lg-12 item-container" {% verbatim %}ng-class="{'sensor-item': item.resource_type=='sos_sensor'}" ng-class="{'snsor-item-local' : item.keywords.includes('local')}"{% endverbatim %}>
+    <div class="col-lg-12 item-container" {% verbatim %} ng-class="{'sensor-item': item.resource_type=='sos_sensor', 'sensor-item-local' : item.keywords.includes('local')}" {% endverbatim %}>
     {% verbatim %}
     
       <div class="col-lg-12">
