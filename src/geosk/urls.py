@@ -1,8 +1,12 @@
-from django.conf import settings
 from django.conf.urls import url, include
 from django.views.generic import TemplateView
+from django.utils.translation import gettext as _
+
 
 from geonode.urls import urlpatterns
+from geonode.api.urls import api as geonode_api
+
+
 from geosk.osk.proxy import (
     ObservationsProxy,
     SparqlProxy,
@@ -11,9 +15,14 @@ from geosk.osk.proxy import (
     NercProxy,
     MetadataProxy,
     AdamassoftProxy)
-
 from geosk.mdtools import api, views as mdtools_views
-  
+from geosk.api import SoSLayerResource
+
+# Register custom API v1 for layers to include additional fields for sensors
+geonode_api.register(SoSLayerResource())
+urlpatterns.insert(
+    0, url(r'', include(geonode_api.urls)),
+)
 
 url_already_injected = any(
     [

@@ -9,7 +9,7 @@
   </div>
   <article ng-repeat="item in results" resource_id="{{ item.id }}" ng-cloak class="ng-cloak">
     {% endverbatim %}
-    <div class="col-lg-12 item-container" {% verbatim %} ng-class="{'sensor-item': item.resource_type=='sos_sensor', 'sensor-item-local' : item.keywords.includes('local')}" {% endverbatim %}>
+    <div class="col-lg-12 item-container" {% verbatim %} ng-class="{'sensor-item': item.resource_type=='sos_sensor', 'sensor-item-local' : item.is_local_sensor}" {% endverbatim %}>
     {% verbatim %}
     
       <div class="col-lg-12">
@@ -59,7 +59,7 @@
             {% endif %}
           </div>
           {% verbatim %}
-          <a ng-if='item.resource_type=="sos_sensor"' href="{{item.supplemental_information}}" style="font-size:12px;word-break:break-all;margin-bottom:5px">{{item.supplemental_information}}</a>
+          <a ng-if='item.resource_type=="sos_sensor"' href="{{item.raw_supplemental_information}}" style="font-size:12px;word-break:break-all;margin-bottom:5px">{{item.raw_supplemental_information}}</a>
           {% endverbatim %}<br>
           <em ng-if="item.store_type == 'remoteStore'">
             <span ng-if="item.online == true"><i class="fa fa-power-off text-success"></i> {% trans "Service is" %} {% trans "online" %}</span>
@@ -77,12 +77,12 @@
           <div ng-if='item.resource_type=="sos_sensor"' class="btn-toolbar">
           {% endverbatim %}
             <div class="btn-group">
-                  <a ng-if='item.keywords.includes("local")' href="{% url "osk_describe_sensor" %}?format={{ 'text/html'|urlencode }}&sensor_id={% verbatim %}{{item.supplemental_information }}{% endverbatim %}" target="_blank" data-toggle="modal" class="sensor-snippet-action-button btn btn-mini btn-primary"><span>{% trans "Sensor details" %}</span></a>
+                  <a ng-if='item.is_local_sensor' href="{% url "osk_describe_sensor" %}?format={{ 'text/html'|urlencode }}&sensor_id={% verbatim %}{{item.raw_supplemental_information }}{% endverbatim %}" target="_blank" data-toggle="modal" class="sensor-snippet-action-button btn btn-mini btn-primary"><span>{% trans "Sensor details" %}</span></a>
                 {% if perms.osk.admin_sos %}
-                  <a ng-if='item.keywords.includes("local")' href="{% url "osk_upload" %}?procedureId={% verbatim %}{{ item.supplemental_information }}{% endverbatim %}" class="sensor-snippet-action-button btn btn-mini  btn-success"><span>{% trans "Upload observations" %}</span></a>
-                  <a href="{% verbatim %}{{ item.supplemental_information }}{% endverbatim %}" download="{% verbatim %}{{ item.supplemental_information }}{% endverbatim %}" target="_blank" data-toggle="modal" class="sensor-snippet-action-button btn btn-mini btn-success"><span>{% trans "Download SensorML" %}</span></a>
-                  <a href="../observations/service?service=SOS&version=2.0.0&request=GetObservation&MergeObservationsIntoDataArray=true&procedure={% verbatim %}{{ item.supplemental_information }}{% endverbatim %}" class="sensor-snippet-action-button btn btn-mini  btn-success"><span>{% trans "Download observations" %}</span></a>
-                  <a ng-if='item.keywords.includes("local")' href="{% url "osk_deletesensor" %}?procedure={% verbatim %}{{ item.supplemental_information }}{% endverbatim %}" class="sensor-snippet-action-button btn btn-mini btn-danger"><span>{% trans "Delete sensor" %}</span></a>
+                  <a ng-if='item.is_local_sensor' href="{% url "osk_upload" %}?procedureId={% verbatim %}{{ item.raw_supplemental_information }}{% endverbatim %}" class="sensor-snippet-action-button btn btn-mini  btn-success"><span>{% trans "Upload observations" %}</span></a>
+                  <a ng-if='item.is_local_sensor' href="{% verbatim %}{{ item.raw_supplemental_information }}{% endverbatim %}" download="{% verbatim %}{{ item.raw_supplemental_information }}{% endverbatim %}" target="_blank" data-toggle="modal" class="sensor-snippet-action-button btn btn-mini btn-success"><span>{% trans "Download SensorML" %}</span></a>
+                  <a ng-if='item.is_local_sensor' href="../observations/service?service=SOS&version=2.0.0&request=GetObservation&MergeObservationsIntoDataArray=true&procedure={% verbatim %}{{ item.raw_supplemental_information }}{% endverbatim %}" class="sensor-snippet-action-button btn btn-mini  btn-success"><span>{% trans "Download observations" %}</span></a>
+                  <a ng-if='item.is_local_sensor' href="{% url "osk_deletesensor" %}?procedure={% verbatim %}{{ item.raw_supplemental_information }}{% endverbatim %}" class="sensor-snippet-action-button btn btn-mini btn-danger"><span>{% trans "Delete sensor" %}</span></a>
                 {% endif %}
             </div>
         </div>

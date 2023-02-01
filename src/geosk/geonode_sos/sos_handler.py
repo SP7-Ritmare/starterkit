@@ -53,6 +53,8 @@ from geonode.thumbs.thumbnails import _generate_thumbnail_name, create_thumbnail
 from geonode.thumbs.utils import clean_bbox
 from geonode.geoserver.security import _update_geofence_rule
 
+from .utils import LOCAL_SENSOR_KEYWORD
+
 logger = logging.getLogger(__name__)
 
 
@@ -87,7 +89,7 @@ class SosServiceHandler(ServiceHandlerBase):
         self.name = slugify(self.url)[:255]
         self.workspace = get_geoserver_cascading_workspace(create=True)
         # Let's create the special 'local' keyword to mark local sensors
-        _ = HierarchicalKeyword.objects.get_or_create(name='local', slug='local')
+        _ = HierarchicalKeyword.objects.get_or_create(name=LOCAL_SENSOR_KEYWORD, slug=LOCAL_SENSOR_KEYWORD)
 
     @property
     def parsed_service(self):
@@ -281,7 +283,7 @@ class SosServiceHandler(ServiceHandlerBase):
         local_sos_urls = [django_settings.SOS_PRIVATE_URL, django_settings.SOS_PUBLIC_URL]
         # We mark the sensor as local with a keyword
         if self.url and self.url in local_sos_urls:
-            payload['keywords'].append('local')
+            payload['keywords'].append(LOCAL_SENSOR_KEYWORD)
         if _resource.bbox:
             payload["bbox_polygon"] = BBOXHelper.from_xy(
                 [

@@ -11,14 +11,14 @@
   {% if resource.resource_type == 'sos_sensor' %}
     <li>
       <strong>{% trans "Sensor ID" %}:</strong>
-      {{ resource.supplemental_information }}
+      <a href="{{ resource.raw_supplemental_information }}" _blank="true">{{ resource.raw_supplemental_information }}</a>
     </li>
   {% endif %}
 
   {% if resource.abstract %}
     <li>
       <strong>{% trans "Abstract" %}:</strong>
-      {{ resource.abstract|escape|urlize|linebreaks|safe }}
+      {{ resource.raw_abstract }}
     </li>
   {% endif %}
 

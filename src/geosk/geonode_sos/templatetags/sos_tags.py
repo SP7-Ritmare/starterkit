@@ -4,6 +4,8 @@ from geonode.layers.models import Layer
 from geonode.security.utils import get_visible_resources
 from geonode.base.templatetags.base_tags import FACETS
 
+from geosk.geonode_sos import utils
+
 register = template.Library()
 
 
@@ -29,3 +31,7 @@ def get_facet_title_with_sos(value):
     elif value == 'sos_sensor':
         return "SOS Sensor"
     return value
+
+@register.simple_tag()
+def is_local_sensor(resource):
+    return utils.is_local_senor(resource)
