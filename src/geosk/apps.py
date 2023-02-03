@@ -2,6 +2,20 @@ import os
 from django.apps import AppConfig as BaseAppConfig
 from django.conf.urls import include, url
 
+from geonode.api.urls import api as geonode_api
+from geonode.api.resourcebase_api import LayerResource
+
+class SoSLayerResource(LayerResource):
+    def format_objects(self, objects):
+        a = 1
+        return super().format_objects(objects)
+
+    def _dehydrate_links(self, bundle, link_types=None):
+        a = 1
+        super()._dehydrate_links( bundle, link_types)
+
+#geonode_api.unregister("layers")
+geonode_api.register(SoSLayerResource())
 
 def run_setup_hooks(*args, **kwargs):
     from django.conf import settings

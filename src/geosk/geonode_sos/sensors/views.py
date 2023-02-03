@@ -114,8 +114,12 @@ def overwrite_harvest_resources_handle_get(request, service, handler):
     except EmptyPage:
         harvestable_resources = paginator.page(paginator.num_pages)
 
-    filter_row = [{}, {"id": 'id-filter', "data_key": "id"},
-                  {"id": 'name-filter', "data_key": "title"},]
+    filter_row = [
+        {},
+        {"id": 'id-filter', "data_key": "id"},
+        {"id": 'name-filter', "data_key": "title"},
+        {"id": 'desc-filter', "data_key": "abstract"}
+    ]
 
     _service_url = [service.service_url]*len(harvestable_resources.object_list)
 

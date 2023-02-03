@@ -224,6 +224,11 @@ def ediproxy_importmd(request):
         sensor.sensorml = insertsensor
         sensor.ediml = ediml
         sensor.save()
+        
+        # TODO trigger the harvesting of the new local sensot (create new harvest job for the local SOS service and run it)
+        # The procedure inside geonode.services.views.harvest_resources_handle_post must be triggered. It creates the HarvestJos
+        # then the geonode.services.tasks.harvest_resource is triggered asynchronously.
+        
         return json_response(body={'success': True, 'redirect': reverse('osk_browse')})
     else:
         return json_response(exception=sos_response.text.encode('utf8'), status=500)

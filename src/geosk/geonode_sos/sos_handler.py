@@ -30,6 +30,7 @@ from django.utils.translation import ugettext as _
 from geonode import settings
 from geonode.base.bbox_utils import BBOXHelper
 from geonode.base.models import ExtraMetadata
+from geonode.base.models import HierarchicalKeyword
 from geonode.geoserver.security import set_geowebcache_invalidate_cache
 from geonode.layers.models import Layer
 from geonode.services.enumerations import HARVESTED
@@ -51,6 +52,8 @@ from geonode.geoserver.security import purge_geofence_layer_rules
 from geonode.thumbs.thumbnails import _generate_thumbnail_name, create_thumbnail_from_locations
 from geonode.thumbs.utils import clean_bbox
 from geonode.geoserver.security import _update_geofence_rule
+
+from .utils import LOCAL_SENSOR_KEYWORD
 
 logger = logging.getLogger(__name__)
 
@@ -85,6 +88,8 @@ class SosServiceHandler(ServiceHandlerBase):
         self.content_response = None
         self.name = slugify(self.url)[:255]
         self.workspace = get_geoserver_cascading_workspace(create=True)
+        # Let's create the special 'local' keyword to mark local sensors
+        _ = HierarchicalKeyword.objects.get_or_create(name=LOCAL_SENSOR_KEYWORD, slug=LOCAL_SENSOR_KEYWORD)
 
     @property
     def parsed_service(self):
@@ -226,7 +231,7 @@ class SosServiceHandler(ServiceHandlerBase):
 
 
     def _create_layer(self, _resource_as_dict: dict, geonode_service) -> Layer:
-        _ = _resource_as_dict.pop("keywords") or []
+        keywords = _resource_as_dict.pop("keywords") or []
         geonode_layer = Layer(
             owner=geonode_service.owner,
             remote_service=geonode_service,
@@ -238,7 +243,7 @@ class SosServiceHandler(ServiceHandlerBase):
         bbox_polygon = geonode_layer.bbox_polygon
         geonode_layer.full_clean()
         geonode_layer.save(notify=True)
-        # geonode_layer.keywords.add(*keywords)
+        geonode_layer.keywords.add(*keywords)
         geonode_layer.set_default_permissions()
         # geonode_layer.extra_metadata.set()
         if bbox_polygon and srid:
@@ -260,7 +265,10 @@ class SosServiceHandler(ServiceHandlerBase):
 
         return geonode_layer
 
+    
+    
     def _from_resource_to_layer(self, _resource):
+        
         payload = {
             "name": _resource.id,
             "store": slugify(self.url)[:255],
@@ -270,8 +278,12 @@ class SosServiceHandler(ServiceHandlerBase):
             "title": _resource.title,
             "abstract": _resource.abstract,
             "srid": _resource.srs,
-            "keywords": [_resource.title]
+            "keywords": []
         }
+        local_sos_urls = [django_settings.SOS_PRIVATE_URL, django_settings.SOS_PUBLIC_URL]
+        # We mark the sensor as local with a keyword
+        if self.url and self.url in local_sos_urls:
+            payload['keywords'].append(LOCAL_SENSOR_KEYWORD)
         if _resource.bbox:
             payload["bbox_polygon"] = BBOXHelper.from_xy(
                 [
