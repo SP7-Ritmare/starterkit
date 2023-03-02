@@ -16,3 +16,5 @@ django-annoying
 django-analytical
 django-taggit-templatetags2
 sos4py==0.3.0
+# Upgrade to fix AttributeError: module 'lib' has no attribute 'OpenSSL_add_all_algorithms'
+cryptography==37.0.4
