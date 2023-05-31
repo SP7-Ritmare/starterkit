@@ -79,88 +79,88 @@ export const resourceToLayerConfig = (resource) => {
     };
 
     switch (ptype) {
-        case GXP_PTYPES.REST_MAP:
-        case GXP_PTYPES.REST_IMG: {
-            const { url: arcgisUrl } =
+    case GXP_PTYPES.REST_MAP:
+    case GXP_PTYPES.REST_IMG: {
+        const { url: arcgisUrl } =
                 links.find(
                     ({ mime, link_type: linkType }) =>
                         mime === 'text/html' && linkType === 'image'
                 ) || {};
-            return {
-                perms,
-                id: `SOS:${uuid()}`,
-                pk,
-                type: 'arcgis',
-                name: alternate.replace('remoteWorkspace:', ''),
-                url: arcgisUrl,
-                ...(bbox && { bbox }),
-                title,
-                visibility: true,
-                extendedParams
-            };
-        }
-        default:
-            const { url: wfsUrl } =
+        return {
+            perms,
+            id: `SOS:${uuid()}`,
+            pk,
+            type: 'arcgis',
+            name: alternate.replace('remoteWorkspace:', ''),
+            url: arcgisUrl,
+            ...(bbox && { bbox }),
+            title,
+            visibility: true,
+            extendedParams
+        };
+    }
+    default:
+        const { url: wfsUrl } =
                 links.find(
                     ({ link_type: linkType }) => linkType === 'OGC:WFS'
                 ) || {};
-            const { url: wmsUrl } =
+        const { url: wmsUrl } =
                 links.find(
                     ({ link_type: linkType }) => linkType === 'OGC:WMS'
                 ) || {};
-            const { url: wmtsUrl } =
+        const { url: wmtsUrl } =
                 links.find(
                     ({ link_type: linkType }) => linkType === 'OGC:WMTS'
                 ) || {};
 
-            const dimensions = [
-                ...(hasTime
-                    ? [
-                          {
-                              name: 'time',
-                              source: {
-                                  type: 'multidim-extension',
-                                  url:
+        const dimensions = [
+            ...(hasTime
+                ? [
+                    {
+                        name: 'time',
+                        source: {
+                            type: 'multidim-extension',
+                            url:
                                       wmtsUrl ||
                                       (wmsUrl || '').split('/geoserver/')[0] +
                                           '/geoserver/gwc/service/wmts'
-                              }
-                          }
-                      ]
-                    : [])
-            ];
+                        }
+                    }
+                ]
+                : [])
+        ];
 
-            const params = wmsUrl && url.parse(wmsUrl, true).query;
-            const { defaultLayerFormat = 'image/png', defaultTileSize = 512 } =
+        const params = wmsUrl && url.parse(wmsUrl, true).query;
+        const { defaultLayerFormat = 'image/png', defaultTileSize = 512 } =
                 getConfigProp('geoNodeSettings') || {};
-            return {
-                perms,
-                id: `SOS:${uuid()}`,
-                pk,
-                type: 'wms',
-                name: alternate,
-                url: wmsUrl || '',
-                format: defaultLayerFormat,
-                ...(wfsUrl && {
-                    search: {
-                        type: 'wfs',
-                        url: wfsUrl
-                    }
-                }),
-                ...(bbox && { bbox }),
-                ...(template && {
-                    featureInfo: {
-                        format: 'TEMPLATE',
-                        template
-                    }
-                }),
-                style: defaultStyleParams?.defaultStyle?.name || '',
-                title,
-                tileSize: defaultTileSize,
-                visibility: true,
-                ...(params && { params }),
-                ...(dimensions.length > 0 && { dimensions }),
-                extendedParams
-            };
+        return {
+            perms,
+            id: `SOS:${uuid()}`,
+            pk,
+            type: 'wms',
+            name: alternate,
+            url: wmsUrl || '',
+            format: defaultLayerFormat,
+            ...(wfsUrl && {
+                search: {
+                    type: 'wfs',
+                    url: wfsUrl
+                }
+            }),
+            ...(bbox && { bbox }),
+            ...(template && {
+                featureInfo: {
+                    format: 'TEMPLATE',
+                    template
+                }
+            }),
+            style: defaultStyleParams?.defaultStyle?.name || '',
+            title,
+            tileSize: defaultTileSize,
+            visibility: true,
+            ...(params && { params }),
+            ...(dimensions.length > 0 && { dimensions }),
+            extendedParams
+        };
     }
 };

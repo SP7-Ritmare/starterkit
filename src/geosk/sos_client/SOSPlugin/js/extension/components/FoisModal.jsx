@@ -16,11 +16,11 @@ import Button from './Button.jsx';
 const FoisModal = forwardRef((props, ref) => {
     const { loading, fois, lat, lng, iframeSrc, supportedOrigin, modalIsOpen, setModalIsOpen, modalTitle } = props;
 
-    const closeModal = () => setModalIsOpen(false)
+    const closeModal = () => setModalIsOpen(false);
 
     useEffect(() => {
         if (fois) {
-            !modalIsOpen && setModalIsOpen(true)
+            !modalIsOpen && setModalIsOpen(true);
             const payload = {
                 payload: {...fois},
                 clickCoordinates: { lat, lng }
@@ -28,7 +28,7 @@ const FoisModal = forwardRef((props, ref) => {
             ref?.current?.contentWindow.postMessage(
                 payload,
                 supportedOrigin
-            )
+            );
         }
     }, [fois]);
 
@@ -40,7 +40,7 @@ const FoisModal = forwardRef((props, ref) => {
                     x: 50,
                     y: 100,
                     width: 800,
-                    height: 400,
+                    height: 400
                 }}
                 minWidth={500}
                 minHeight={190}
@@ -49,7 +49,7 @@ const FoisModal = forwardRef((props, ref) => {
                 <div
                     className="flexible-modal-drag-area"
                 >
-                    <div className='flexible-modal-title'>
+                    <div className="flexible-modal-title">
                         {modalTitle ? <span>{modalTitle}</span> : <Message msgId="geoskViewer.modalTitle" />}
                         {loading && <Spinner />}
                     </div>
@@ -61,7 +61,7 @@ const FoisModal = forwardRef((props, ref) => {
                         <Glyphicon glyph="1-close" />
                     </Button>
                 </div>
-                    <iframe ref={ref} src={iframeSrc} />
+                <iframe ref={ref} src={iframeSrc} />
             </Rnd>
         </div>
     );

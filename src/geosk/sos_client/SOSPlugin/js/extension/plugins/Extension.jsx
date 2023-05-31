@@ -35,7 +35,7 @@ import {
 import geoskSOSPlugin from '@js/extension/reducers/geoskSOSPlugin';
 import SosGFIViewer from '@js/extension/components/SosGFIViewer';
 import { error as errorNotification } from '@mapstore/framework/actions/notifications';
-import { openCloseModal, setBasePath } from '@js/extension/actions/geoskSOSPlugin';
+import { openCloseModal, setBasePath } from '@js/extension/actions/geoskSOSplugin';
 import '@js/extension/assets/style.css';
 
 const FormControl = localizedProps('placeholder')(FormControlRB);
@@ -53,7 +53,6 @@ function InputControl({ onChange, value, ...props }) {
 
 function Extension({
     request,
-    page_size,
     onAdd,
     onClose,
     onZoomTo,
@@ -69,6 +68,7 @@ function Extension({
     });
     const [totalResults, setTotalResults] = useState(0);
 
+    // eslint-disable-next-line camelcase
     const { observable_property, sensor_title } = queryParams;
 
     const scrollContainer = useRef();
@@ -76,6 +76,7 @@ function Extension({
     const [isNextPageAvailable, setIsNextPageAvailable] = useState(false);
     const [q, setQ] = useState('');
     const isMounted = useRef();
+    const updateRequest = useRef();
 
     function initExtension() {
         setLoading(true);
@@ -100,7 +101,6 @@ function Extension({
         }
     });
 
-    const updateRequest = useRef();
     updateRequest.current = (options) => {
         if (!loading && request) {
             if (scrollContainer.current && options.reset) {
@@ -350,7 +350,6 @@ function Extension({
 
 Extension.propTypes = {
     request: PropTypes.func,
-    page_size: PropTypes.number,
     onAdd: PropTypes.func,
     placeholderId: PropTypes.string,
     onClose: PropTypes.func,
@@ -359,7 +358,6 @@ Extension.propTypes = {
 
 Extension.defaultProps = {
     request: getAllSensors,
-    page_size: 4,
     onAdd: () => {},
     placeholderId: 'geoskViewer.SearchSensors',
     onZoomTo: () => {},
@@ -383,12 +381,17 @@ const SOSCatalog = ({
 }) => {
 
     useEffect(() => {
-        onSetBasePath(basePath)
-    }, [basePath])
+        onSetBasePath(basePath);
+    }, [basePath]);
 
     return (
         <div>
             {enabled && <Extension {...props} />}
+            {loading && <style dangerouslySetInnerHTML={{ __html: `
+              #map > div {
+                cursor: wait !important;
+              }
+            `}} />}
             <SosGFIViewer
                 lat={lat}
                 lng={lng}
@@ -426,7 +429,7 @@ const ConnectedExtension = connect(
             lng,
             loading,
             fois,
-            modalIsOpen,
+            modalIsOpen
         })
     ),
     {
@@ -445,7 +448,7 @@ export default {
     reducers: { geoskSOSPlugin },
     epics: {
         closeSensorCatalogOnMapClick,
-        getFOIsFromFeatureInfo,
+        getFOIsFromFeatureInfo
     },
     containers: {
         BurgerMenu: {

@@ -12,7 +12,7 @@ import axios from '@mapstore/framework/libs/ajax';
 import { setControlProperty } from '@mapstore/framework/actions/controls';
 import { setCoordinates, setFois, queryComplete, queryBegan, openCloseModal } from '@js/extension/actions/geoskSOSplugin';
 import { error as errorNotification } from '@mapstore/framework/actions/notifications';
-import { INFO_FORMATS } from '@mapstore/framework/utils/featureInfoUtils';
+import { INFO_FORMATS } from '@mapstore/framework/utils/FeatureInfoUtils';
 import { layersSelector } from '@mapstore/framework/selectors/layers';
 import {
     reproject,
@@ -21,6 +21,7 @@ import {
 import { mapSelector } from '@mapstore/framework/selectors/map';
 import { isNil } from 'lodash';
 import { getFOIs } from '../api';
+import { getCurrentResolution } from '@mapstore/framework/utils/MapUtils';
 
 export const closeSensorCatalogOnMapClick = (action$, store) =>
     action$
@@ -41,6 +42,7 @@ export const getFOIsFromFeatureInfo = (action$, { getState = () => { } }) =>
             return user && sosLayerAvailable.length > 0;
         })
         .switchMap(({ point }) => {
+
             const state = getState();
             const latlng = point.latlng;
 
@@ -70,8 +72,8 @@ export const getFOIsFromFeatureInfo = (action$, { getState = () => { } }) =>
                 null
             );
 
-            const layers = layersSelector(state)?.filter(layer => layer.group !== 'background' && layer.featureInfo?.viewer?.type === 'SosGFIViewer')?.map(layer => layer.name)
- 
+            const layers = layersSelector(state)?.filter(layer => layer.group !== 'background' && layer.featureInfo?.viewer?.type === 'SosGFIViewer')?.map(layer => layer.name);
+
             const basePath = state.geoskSOSPlugin.basePath || '/geoserver/ows';
 
             return Observable.defer(() => axios.get(basePath, {
@@ -111,11 +113,12 @@ export const getFOIsFromFeatureInfo = (action$, { getState = () => { } }) =>
                 .then(data => data.data))
                 .switchMap((res) => {
                     const id = [];
+                    // eslint-disable-next-line camelcase
                     const sensor_id = [];
                     res.features?.forEach(({ properties }) => {
                         id.push(properties.id);
                         sensor_id.push(properties.resource_id);
-                    })
+                    });
 
                     return (id.length > 0 &&
                         sensor_id.length > 0) ? Observable.defer(() => getFOIs({ id: [id.join(',')], sensor_id: [sensor_id.join(',')] }))
@@ -123,24 +126,27 @@ export const getFOIsFromFeatureInfo = (action$, { getState = () => { } }) =>
                                 return Observable.of(
                                     setCoordinates(latlng),
                                     setFois(responseData),
-                                    queryComplete()
-                                )
+                                    queryComplete(),
+                                    openCloseModal(true)
+                                );
                             }) : res.exceptions
-                        ? Observable.of(
-                            errorNotification({
-                                title: 'geoskViewer.error',
-                                message: 'geoskViewer.noFOIsForLayer'
-                            }),
-                            queryComplete()
-                        )
-                        : Observable.of(
-                            setCoordinates(latlng),
-                            queryComplete(),
-                            errorNotification({
-                                title: 'geoskViewer.noFeaturesFound',
-                                message: 'geoskViewer.noSOSInfo'
-                            })
-                        );
+                            ? Observable.of(
+                                errorNotification({
+                                    title: 'geoskViewer.error',
+                                    message: 'geoskViewer.noFOIsForLayer'
+                                }),
+                                queryComplete(),
+                                openCloseModal(false)
+                            )
+                            : Observable.of(
+                                setCoordinates(latlng),
+                                queryComplete(),
+                                errorNotification({
+                                    title: 'geoskViewer.noFeaturesFound',
+                                    message: 'geoskViewer.noSOSInfo'
+                                }),
+                                openCloseModal(false)
+                            );
                 })
                 .catch((error) =>
                     Observable.of(
@@ -152,9 +158,10 @@ export const getFOIsFromFeatureInfo = (action$, { getState = () => { } }) =>
                                 error?.message ||
                                 'geoskViewer.actionFailed'
                         }),
-                        queryComplete()
+                        queryComplete(),
+                        openCloseModal(false)
                     )
-                ).startWith(queryBegan(), openCloseModal(true))
+                ).startWith(queryBegan());
         });
 
 export default {
