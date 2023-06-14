@@ -53,5 +53,5 @@ export const setBasePath = (url) => {
     return {
         type: SET_BASE_PATH,
         url
-    }
-}
+    };
+};

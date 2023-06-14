@@ -9,9 +9,9 @@ import React from 'react';
 import FoisModal from './FoisModal';
 
 const SosGFIViewer = ({ lat, lng, iframeSrc, loading, fois, supportedOrigin, modalIsOpen, onOpenCloseModal, modalTitle }) => {
-    const iframe = React.createRef()
+    const iframe = React.createRef();
 
-    return <FoisModal
+    return (<FoisModal
         lat={lat} lng={lng}
         iframeSrc={iframeSrc}
         loading={loading}
@@ -21,7 +21,7 @@ const SosGFIViewer = ({ lat, lng, iframeSrc, loading, fois, supportedOrigin, mod
         modalIsOpen={modalIsOpen}
         setModalIsOpen={onOpenCloseModal}
         modalTitle={modalTitle}
-    />;
+    />);
 };
 
 export default SosGFIViewer;

@@ -7,7 +7,6 @@
  */
 
 import React, { forwardRef, useState } from 'react';
-import Message from '@mapstore/framework/components/I18N/Message';
 import { Glyphicon } from 'react-bootstrap';
 import Button from '@js/extension/components/Button';
 import FaIcon from '@js/extension/components/FaIcon';
