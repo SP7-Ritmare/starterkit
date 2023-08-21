@@ -78,6 +78,7 @@ class DescribeSensorParser:
         identifiers_paths = [
             ".//sml:identifier/sml:Term[@definition='urn:ogc:def:identifier:OGC:uniqueID']//sml:value",
             ".//sml:identifier/sml:Term[@definition='urn:ogc:def:identifier:OGC:1.0:uniqueID']//sml:value",
+            ".//sml:identifier/sml:Term[@definition='http://vocab.nerc.ac.uk/collection/W07/current/IDEN0008/']//sml:value",
             ".//gml:identifier[@codeSpace='uniqueID']",
             ".//sml:identifier[@name='uniqueID']//sml:value",
         ]
@@ -89,6 +90,7 @@ class DescribeSensorParser:
         title_paths = [
             "sml:identifier[@name='short name']//sml:value",
             ".//sml:identifier/sml:Term[@definition='http://mmisw.org/ont/ioos/definition/shortName']//sml:value",
+            ".//sml:identifier/sml:Term[@definition='http://vocab.nerc.ac.uk/collection/W07/current/IDEN0006/']//sml:value",
             ".//sml:identifier[@name='Short Name']//sml:value",
             ".//sml:identifier/sml:Term[@definition='urn:ogc:def:identifier:OGC:1.0:shortname']//sml:value",
             ".//sml:identifier/sml:Term[@definition='urn:ogc:def:identifier:OGC:1.0:shortName']//sml:value",
@@ -101,6 +103,7 @@ class DescribeSensorParser:
         long_name_paths = [
             "sml:identifier[@name='long name']//sml:value",
             ".//sml:identifier/sml:Term[@definition='http://mmisw.org/ont/ioos/definition/longName']//sml:value",
+            ".//sml:identifier/sml:Term[@definition='http://vocab.nerc.ac.uk/collection/W07/current/IDEN0002/']//sml:value",
             ".//sml:identifier[@name='Long Name']//sml:value",
             ".//sml:identifier/sml:Term[@definition='urn:ogc:def:identifier:OGC:1.0:longname']//sml:value",
             ".//sml:identifier/sml:Term[@definition='urn:ogc:def:identifier:OGC:1.0:longName']//sml:value",

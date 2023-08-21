@@ -407,13 +407,6 @@
     {% endif %}
 
     {% if not request.user_agent.is_mobile %}  
-    {% if is_local_sensor_bool %}
-    <li class="list-group-item">
-      <a href="{% url "layer_metadata_detail" resource.alternate %}">
-        <button class="btn btn-primary btn-md btn-block">{% trans "Sensor Details" %}</button>
-      </a>
-    </li>
-    {% endif %}
     {% endif %}
     {% display_edit_request_button resource request.user perms_list as display_request_button %}
     {% if display_request_button and not request.user_agent.is_mobile %}
@@ -480,9 +473,6 @@
                     {% if layer_type != "raster" and resource.storeType != "remoteStore" %}
                     <a class="btn btn-default btn-block btn-xs" href="{% url "new_map" %}?layer={{resource.service_typename}}&storeType={{resource.storeType}}">{% trans "Edit data" %}</a>
                     {% endif %}
-                  {% endif %}
-                  {% if "delete_resourcebase" in perms_list %}
-                  <a class="btn btn-danger btn-block btn-xs" href="{% url "layer_remove" resource.service_typename %}">{% trans "Remove" %}</a>
                   {% endif %}
                 </div>
                 {% endif %}
