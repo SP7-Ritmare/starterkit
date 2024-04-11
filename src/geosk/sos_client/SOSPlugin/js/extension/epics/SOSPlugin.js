@@ -37,9 +37,7 @@ export const getFOIsFromFeatureInfo = (action$, { getState = () => { } }) =>
         .filter(() => {
             const sosLayerAvailable = layersSelector(getState())?.filter(layer => layer.group !== 'background' && layer.featureInfo?.viewer?.type === 'SosGFIViewer')?.map(layer => layer.name) || [];
 
-            const user = getState()?.security?.user;
-
-            return user && sosLayerAvailable.length > 0;
+            return sosLayerAvailable.length > 0;
         })
         .switchMap(({ point }) => {
 
